@@ -1,36 +1,36 @@
 /**
- * Formata uma frase capitalizando a primeira letra de cada palavra
+ * Formats a sentence by capitalizing the first letter of each word.
  *
- * Esta função pega uma string e transforma a primeira letra de cada palavra
- * em maiúscula, enquanto o restante das letras ficam em minúscula.
- * As palavras são separadas por espaços.
+ * This function takes a string and capitalizes the first letter of each word
+ * while the remaining letters are lowercase.
+ * Words are separated by spaces.
  *
- * @param sentence - A frase a ser formatada
- * @returns A frase formatada com a primeira letra de cada palavra em maiúscula
+ * @param sentence - The sentence to be formatted.
+ * @returns The sentence formatted with the first letter of each word capitalized.
  *
  * @example
  * ```typescript
- * // Exemplo básico
+ * // Basic example
  * formatToCapitalizeFirstWordLetter("hello world");
- * // Retorna: "Hello World"
+ * // Returns: "Hello World"
  *
- * // Com texto em maiúscula
+ * // With capitalized text.
  * formatToCapitalizeFirstWordLetter("HELLO WORLD");
- * // Retorna: "Hello World"
+ * // Returns: "Hello World"
  *
- * // Com texto misturado
- * formatToCapitalizeFirstWordLetter("hELLo WoRLd");
- * // Retorna: "Hello World"
+ * // With mixed text.
+ * formatToCapitalizeFirstWordLetter("hELLO WoRLd"); * // Returns: "Hello World"
  *
- * // Com múltiplas palavras
- * formatToCapitalizeFirstWordLetter("javascript é uma linguagem incrível");
- * // Retorna: "Javascript É Uma Linguagem Incrível"
+ * // With multiple words
+ * formatToCapitalizeFirstWordLetter("javascript is an amazing language");
+ * // Returns: "Javascript is an amazing language"
  *
- * // String vazia
+ * // Empty string
  * formatToCapitalizeFirstWordLetter("");
- * // Retorna: ""
+ * // Returns: ""
  * ```
  */
+
 function formatToCapitalizeFirstWordLetter(sentence: string) {
   const words = sentence.split(" ");
 
