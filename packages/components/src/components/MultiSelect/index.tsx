@@ -85,9 +85,12 @@ function MultiSelect(props: MultiSelectProps) {
   function handleChangeValue(value: string) {
     if (optionHasSelected(value)) {
       setSelectedOptions(selectedOptions.filter((v) => v !== value));
-    } else setSelectedOptions([...selectedOptions, value]);
+      if (onSelect) onSelect(selectedOptions.filter((v) => v !== value));
+    } else {
+      setSelectedOptions([...selectedOptions, value]);
+      if (onSelect) onSelect([...selectedOptions, value]);
+    }
 
-    if (onSelect) onSelect(selectedOptions);
     if (closeOnSelect) handleBlur();
   }
 

@@ -2,6 +2,7 @@
 export { formatDate } from "./formats/formatDate";
 export { formatJsonObject } from "./formats/formatJsonObject";
 export { formatJsonString } from "./formats/formatJsonString";
+export { formatToCapitalizeFirstWordLetter } from "./formats/formatToCapitalizeFirstWordLetter";
 export { formatToCep } from "./formats/formatToCep";
 export { formatToCnpj } from "./formats/formatToCnpj";
 export { formatToCpf } from "./formats/formatToCpf";
