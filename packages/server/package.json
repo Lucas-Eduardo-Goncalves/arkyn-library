@@ -4,6 +4,16 @@
   "author": "Arkyn | Lucas Gonçalves",
   "main": "./dist/bundle.js",
   "module": "./src/index.ts",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "license": "Apache-2.0",
+  "description": "Server-side utilities for projects.",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "bun run clean && bunx tsc --project tsconfig.json",
+    "test": "vitest --config vitest.config.ts",
+    "typecheck": "bunx tsc --project tsconfig.json --noEmit"
+  },
   "dependencies": {
     "@arkyn/shared": "*",
     "zod": ">=3.24.2"
@@ -15,15 +25,5 @@
   },
   "peerDependencies": {
     "@react-router/node": ">=7.6.0"
-  },
-  "description": "Server-side utilities for projects.",
-  "license": "Apache-2.0",
-  "scripts": {
-    "clean": "rm -rf dist",
-    "build": "bun run clean && bunx tsc --project tsconfig.json",
-    "test": "vitest --config vitest.config.ts",
-    "typecheck": "bunx tsc --project tsconfig.json --noEmit"
-  },
-  "type": "module",
-  "types": "./dist/index.d.ts"
+  }
 }
