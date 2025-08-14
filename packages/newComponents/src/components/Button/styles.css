@@ -9,7 +9,7 @@
 
 .arkynButton:hover {
   cursor: pointer;
-  filter: brightness(0.95);
+  filter: brightness(0.9);
 }
 
 html.dark .arkynButton:hover {
@@ -50,7 +50,7 @@ html.dark .arkynButton:hover {
 }
 
 .arkynButton.outline {
-  background-color: rgba(var(--input-background), 1);
+  background-color: var(--card-foreground-primary);
   border-color: var(--border);
 }
 .arkynButton.outline.primary {
@@ -69,6 +69,9 @@ html.dark .arkynButton:hover {
   color: rgba(var(--spotlight-info), 1);
 }
 
+.arkynButton.ghost:hover {
+  filter: brightness(0.8);
+}
 .arkynButton.ghost.primary {
   color: rgba(var(--spotlight-primary), 1);
   background-color: rgba(var(--spotlight-primary), 0.2);
@@ -111,7 +114,7 @@ html.dark .arkynButton:hover {
   font-weight: 600;
   font-size: 14px;
   line-height: 14px;
-  border-radius: var(--rounded-inputs);
+  border-radius: 6px;
   padding: 0px 20px;
   height: 44px;
 }
@@ -124,7 +127,7 @@ html.dark .arkynButton:hover {
   font-weight: 600;
   font-size: 14px;
   line-height: 14px;
-  border-radius: var(--rounded-inputs);
+  border-radius: 6px;
   gap: 16px;
   padding: 0px 16px;
   height: 40px;
@@ -138,7 +141,7 @@ html.dark .arkynButton:hover {
   font-weight: 600;
   font-size: 12px;
   line-height: 12px;
-  border-radius: var(--rounded-inputs);
+  border-radius: 6px;
   padding: 0px 16px;
   height: 32px;
 }
@@ -151,7 +154,7 @@ html.dark .arkynButton:hover {
   font-weight: 600;
   font-size: 10px;
   line-height: 10px;
-  border-radius: calc(var(--rounded-inputs) * 0.6667);
+  border-radius: 4px;
   padding: 0px 16px;
   height: 24px;
 }

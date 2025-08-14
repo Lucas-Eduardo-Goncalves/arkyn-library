@@ -1,11 +1,6 @@
 {
   "name": "@arkyn/shared",
-<<<<<<< HEAD
   "version": "3.0.1-beta.11",
-=======
-  "version": "2.2.15",
-  "author": "Arkyn | Lucas Gonçalves",
->>>>>>> 8491cc1 (chore(packages): update package configurations and tsconfig)
   "main": "./dist/bundle.js",
   "module": "./src/index.ts",
   "type": "module",

@@ -13,39 +13,39 @@ type BadgeProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 /**
- * Componente Badge - usado para exibir rótulos, status e categorizações
+ * Badge component - used to display labels, statuses, and categorizations
  *
- * @param args - Propriedades do componente Badge
- * @param args.size - Tamanho do badge. Padrão: "md"
- * @param args.variant - Variante visual do badge. Padrão: "ghost"
- * @param args.scheme - Esquema de cores do badge. Padrão: "primary"
- * @param args.leftIcon - Ícone opcional a ser exibido à esquerda
- * @param args.rightIcon - Ícone opcional a ser exibido à direita
- * @param args.rest - Outras propriedades HTML válidas para div
+ * @param args - Badge component properties
+ * @param args.size - Badge size. Default: "md"
+ * @param args.variant - Visual variant of the badge. Default: "ghost"
+ * @param args.scheme - Badge color scheme. Default: "primary"
+ * @param args.leftIcon - Optional icon to display on the left
+ * @param args.rightIcon - Optional icon to display on the right
+ * ...Other valid HTML properties for div
  *
- * @returns Elemento JSX do badge
+ * @returns Badge JSX element
  *
  * @example
  * ```tsx
- * // Badge básico
- * <Badge>Novo</Badge>
+ * // Basic badge
+ * <Badge>New</Badge>
  *
- * // Badge com esquema de cores
- * <Badge scheme="success">Aprovado</Badge>
+ * // Badge with color scheme
+ * <Badge scheme="success">Approved</Badge>
  *
- * // Badge com ícones
+ * // Badge with icons
  * <Badge leftIcon={CheckIcon} scheme="success">
- *   Concluído
+ *  Completed
  * </Badge>
  *
- * // Badge personalizado
+ * // Custom badge
  * <Badge
- *   size="lg"
- *   variant="solid"
- *   scheme="warning"
- *   rightIcon={AlertIcon}
+ *  size="lg"
+ *  variant="solid"
+ *  scheme="warning"
+ *  rightIcon={AlertIcon}
  * >
- *   Atenção
+ *  Warning
  * </Badge>
  * ```
  */
@@ -70,7 +70,7 @@ function Badge(args: BadgeProps) {
   return (
     <div className={className.trim()} {...rest}>
       <IconRenderer iconSize={iconSize} Icon={leftIcon} />
-      {children}
+      <p>{children}</p>
       <IconRenderer iconSize={iconSize} Icon={rightIcon} />
     </div>
   );

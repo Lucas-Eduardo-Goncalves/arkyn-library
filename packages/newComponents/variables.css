@@ -1,8 +1,4 @@
 :root {
-  /* border rounded */
-  --rounded-inputs: 6px;
-  --rounded-cards: 8px;
-
   /* background */
   --background: #f1f5f9;
   --background-foreground: #ffffff;
@@ -11,10 +7,7 @@
   --card: #ffffff;
   --card-foreground-primary: #f8fafc;
   --card-foreground-secondary: #f1f5f9;
-  --card-foreground-terceary: #e2e8f0;
-
-  /* input, select, textarea, button (outline), icon button (outline) */
-  --input-background: 248, 250, 252; /* #f8fafc */
+  --card-foreground-third: #e2e8f0;
 
   /* skeleton */
   --skeleton: #f8fafc;
@@ -34,6 +27,7 @@
 
   /* spotlight */
   --spotlight-primary: 17, 109, 220; /* #116ddc */
+  --spotlight-secondary: 248, 250, 252; /* #f8fafc */
   --spotlight-success: 16, 185, 129; /* #10b981 */
   --spotlight-danger: 244, 63, 94; /* #f43f5e */
   --spotlight-info: 14, 165, 233; /* #0ea5e9 */
