@@ -1,11 +1,12 @@
 import { IconButton } from "@components";
 import { Star } from "lucide-react";
+
 import { Box } from "../ui/box";
 import { Row } from "../ui/row";
 
 function IconButtonExamples() {
   return (
-    <Box title="IconButton Examples">
+    <Box title="IconButton">
       <Row>
         <IconButton aria-label="test" icon={Star} />
         <IconButton

@@ -1,11 +1,12 @@
 import { Badge } from "@components";
+import { Star } from "lucide-react";
+
 import { Box } from "../ui/box";
 import { Row } from "../ui/row";
-import { Star } from "lucide-react";
 
 function BadgeExamples() {
   return (
-    <Box title="Badge Examples">
+    <Box title="Badge">
       <Row>
         <Badge>variant - ghost (default)</Badge>
         <Badge variant="outline">variant - outline</Badge>

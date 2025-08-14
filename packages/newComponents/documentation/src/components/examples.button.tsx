@@ -1,11 +1,12 @@
 import { Button } from "@components";
 import { Star } from "lucide-react";
+
 import { Box } from "../ui/box";
 import { Row } from "../ui/row";
 
 function ButtonExamples() {
   return (
-    <Box title="Button Examples">
+    <Box title="Button">
       <Row>
         <Button>variant - ghost (default)</Button>
         <Button variant="outline">variant - outline</Button>

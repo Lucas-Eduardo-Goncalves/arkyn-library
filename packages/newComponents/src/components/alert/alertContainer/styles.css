@@ -1,0 +1,33 @@
+.arkynAlertContainer {
+  display: flex;
+  align-items: start;
+  gap: 16px;
+  padding: 16px;
+
+  border: 1px solid transparent;
+  border-radius: 6px;
+}
+
+.arkynAlertContainer.nonExistsAlertTitle {
+  align-items: center;
+}
+
+.arkynAlertContainer.danger {
+  background: rgba(var(--spotlight-danger), 0.1);
+  border-color: rgba(var(--spotlight-danger), 0.4);
+}
+
+.arkynAlertContainer.success {
+  background: rgba(var(--spotlight-success), 0.1);
+  border-color: rgba(var(--spotlight-success), 0.4);
+}
+
+.arkynAlertContainer.info {
+  background: rgba(var(--spotlight-info), 0.1);
+  border-color: rgba(var(--spotlight-info), 0.4);
+}
+
+.arkynAlertContainer.warning {
+  background: rgba(var(--spotlight-warning), 0.1);
+  border-color: rgba(var(--spotlight-warning), 0.4);
+}
