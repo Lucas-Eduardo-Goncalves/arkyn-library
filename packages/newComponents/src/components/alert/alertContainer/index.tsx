@@ -12,6 +12,41 @@ function useAlertContainer() {
   return useContext(AlertContainerContext);
 }
 
+/**
+ * AlertContainer component - used to display alert messages with different schemas
+ *
+ * @param args - AlertContainer component properties
+ * @param args.schema - Alert color scheme and semantic meaning: "success" | "danger" | "warning" | "info"
+ * ...Other valid HTML properties for div
+ *
+ * @returns AlertContainer JSX element with context provider
+ *
+ * @example
+ * ```tsx
+ * // Basic alert
+ * <AlertContainer schema="info">
+ *   Alert message content
+ * </AlertContainer>
+ *
+ * // Success alert
+ * <AlertContainer schema="success">
+ *   Operation completed successfully!
+ * </AlertContainer>
+ *
+ * // Alert with title
+ * <AlertContainer schema="warning">
+ *   <AlertTitle>Warning</AlertTitle>
+ *   Please check your input data.
+ * </AlertContainer>
+ *
+ * // Danger alert
+ * <AlertContainer schema="danger">
+ *   <AlertTitle>Error</AlertTitle>
+ *   Something went wrong. Please try again.
+ * </AlertContainer>
+ * ```
+ */
+
 function AlertContainer(props: AlertContainerProps) {
   const { schema, children, className: baseClassName, ...rest } = props;
 
