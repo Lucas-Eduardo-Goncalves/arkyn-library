@@ -59,7 +59,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
  * ```
  */
 
-function Button(args: ButtonProps) {
+function Button(props: ButtonProps) {
   const {
     isLoading = false,
     scheme = "primary",
@@ -72,7 +72,7 @@ function Button(args: ButtonProps) {
     className: baseClassName = "",
     children,
     ...rest
-  } = args;
+  } = props;
 
   const iconSizes = { xs: 12, sm: 16, md: 20, lg: 24 };
   const iconSize = iconSizes[size];

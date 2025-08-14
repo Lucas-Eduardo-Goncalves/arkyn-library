@@ -50,7 +50,7 @@ type BadgeProps = HTMLAttributes<HTMLDivElement> & {
  * ```
  */
 
-function Badge(args: BadgeProps) {
+function Badge(props: BadgeProps) {
   const {
     variant = "ghost",
     scheme = "primary",
@@ -60,7 +60,7 @@ function Badge(args: BadgeProps) {
     className: baseClassName = "",
     children,
     ...rest
-  } = args;
+  } = props;
 
   const iconSizes = { md: 12, lg: 14 };
   const iconSize = iconSizes[size];

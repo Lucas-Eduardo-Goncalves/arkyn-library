@@ -1,0 +1,166 @@
+/* BASE */
+.arkynIconButton {
+  background: transparent;
+  border: 1px solid transparent;
+  outline: 1px solid transparent;
+  position: relative;
+  transition: 0.15s all ease-out;
+}
+
+.arkynIconButton:hover {
+  cursor: pointer;
+  filter: brightness(0.9);
+}
+
+html.dark .arkynIconButton:hover {
+  cursor: pointer;
+  filter: brightness(1.2);
+}
+
+.arkynIconButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.arkynIconButtonContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* VARIANTS */
+.arkynIconButton.solid {
+  color: #fff;
+}
+.arkynIconButton.solid.primary {
+  background-color: rgba(var(--spotlight-primary), 1);
+}
+.arkynIconButton.solid.danger {
+  background-color: rgba(var(--spotlight-danger), 1);
+}
+.arkynIconButton.solid.success {
+  background-color: rgba(var(--spotlight-success), 1);
+}
+.arkynIconButton.solid.warning {
+  background-color: rgba(var(--spotlight-warning), 1);
+}
+.arkynIconButton.solid.info {
+  background-color: rgba(var(--spotlight-info), 1);
+}
+
+.arkynIconButton.outline {
+  background-color: var(--card-foreground-primary);
+  border-color: var(--border);
+}
+.arkynIconButton.outline.primary {
+  color: rgba(var(--spotlight-primary), 1);
+}
+.arkynIconButton.outline.danger {
+  color: rgba(var(--spotlight-danger), 1);
+}
+.arkynIconButton.outline.success {
+  color: rgba(var(--spotlight-success), 1);
+}
+.arkynIconButton.outline.warning {
+  color: rgba(var(--spotlight-warning), 1);
+}
+.arkynIconButton.outline.info {
+  color: rgba(var(--spotlight-info), 1);
+}
+
+.arkynIconButton.ghost:hover {
+  filter: brightness(0.8);
+}
+.arkynIconButton.ghost.primary {
+  color: rgba(var(--spotlight-primary), 1);
+  background-color: rgba(var(--spotlight-primary), 0.2);
+}
+.arkynIconButton.ghost.danger {
+  color: rgba(var(--spotlight-danger), 1);
+  background-color: rgba(var(--spotlight-danger), 0.2);
+}
+.arkynIconButton.ghost.success {
+  color: rgba(var(--spotlight-success), 1);
+  background-color: rgba(var(--spotlight-success), 0.2);
+}
+.arkynIconButton.ghost.warning {
+  color: rgba(var(--spotlight-warning), 1);
+  background-color: rgba(var(--spotlight-warning), 0.2);
+}
+.arkynIconButton.ghost.info {
+  color: rgba(var(--spotlight-info), 1);
+  background-color: rgba(var(--spotlight-info), 0.2);
+}
+
+.arkynIconButton.invisible.primary {
+  color: rgba(var(--spotlight-primary), 1);
+}
+.arkynIconButton.invisible.danger {
+  color: rgba(var(--spotlight-danger), 1);
+}
+.arkynIconButton.invisible.success {
+  color: rgba(var(--spotlight-success), 1);
+}
+.arkynIconButton.invisible.warning {
+  color: rgba(var(--spotlight-warning), 1);
+}
+.arkynIconButton.invisible.info {
+  color: rgba(var(--spotlight-info), 1);
+}
+
+/* SIZE */
+.arkynIconButton.lg {
+  border-radius: 6px;
+  height: 44px;
+  width: 44px;
+}
+
+.arkynIconButton.md {
+  border-radius: 6px;
+  height: 40px;
+  width: 40px;
+}
+
+.arkynIconButton.sm {
+  border-radius: 6px;
+  height: 32px;
+  width: 32px;
+}
+
+.arkynIconButton.xs {
+  border-radius: 4px;
+  height: 24px;
+  width: 24px;
+}
+
+/* SPIN */
+.arkynIconButtonSpinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+.arkynIconButtonSpinner > svg {
+  animation: spin 2s linear infinite;
+}
+
+.arkynIconButton.loadingTrue .arkynIconButtonSpinner {
+  opacity: 1;
+}
+.arkynIconButton.loadingTrue .arkynIconButtonContent {
+  opacity: 0;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
