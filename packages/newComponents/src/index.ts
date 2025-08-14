@@ -4,5 +4,6 @@ export { AlertDescription } from "./components/alert/alertDescription";
 export { AlertIcon } from "./components/alert/alertIcon";
 export { AlertTitle } from "./components/alert/alertTitle";
 export { Badge } from "./components/badge";
+export { Divider } from "./components/divider";
 export { Button } from "./components/button";
 export { IconButton } from "./components/iconButton";
