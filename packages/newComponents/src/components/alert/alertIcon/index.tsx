@@ -14,8 +14,9 @@ type AlertIconProps = LucideProps;
 /**
  * AlertIcon component - automatically displays the appropriate icon based on the alert schema
  *
- * @param args - AlertIcon component properties
- * ...Other valid Lucide icon properties
+ * @param props - AlertIcon component properties
+ *
+ * **...Other valid Lucide icon properties**
  *
  * @returns AlertIcon JSX element with schema-specific icon
  *

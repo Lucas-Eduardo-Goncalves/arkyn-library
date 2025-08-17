@@ -15,9 +15,10 @@ function useAlertContainer() {
 /**
  * AlertContainer component - used to display alert messages with different schemas
  *
- * @param args - AlertContainer component properties
- * @param args.schema - Alert color scheme and semantic meaning: "success" | "danger" | "warning" | "info"
- * ...Other valid HTML properties for div
+ * @param props - AlertContainer component properties
+ * @param props.schema - Alert color scheme and semantic meaning: "success" | "danger" | "warning" | "info"
+ *
+ * **...Other valid HTML properties for div**
  *
  * @returns AlertContainer JSX element with context provider
  *

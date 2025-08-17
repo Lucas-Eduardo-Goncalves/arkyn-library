@@ -8,9 +8,10 @@ type DividerProps = HTMLAttributes<HTMLDivElement> & {
 /**
  * Divider component - used to visually separate content sections
  *
- * @param args - Divider component properties
- * @param args.orientation - Divider orientation. Default: "horizontal"
- * ...Other valid HTML properties for div
+ * @param props - Divider component properties
+ * @param props.orientation - Divider orientation. Default: "horizontal"
+ *
+ * **...Other valid HTML properties for div**
  *
  * @returns Divider JSX element
  *

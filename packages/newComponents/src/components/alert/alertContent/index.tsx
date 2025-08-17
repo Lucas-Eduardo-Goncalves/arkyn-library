@@ -6,8 +6,9 @@ type AlertContentProps = HTMLAttributes<HTMLDivElement>;
 /**
  * AlertContent component - used to wrap and style the main content area of alerts
  *
- * @param args - AlertContent component properties
- * ...Other valid HTML properties for div
+ * @param props - AlertContent component properties
+ *
+ * **...Other valid HTML properties for div**
  *
  * @returns AlertContent JSX element
  *

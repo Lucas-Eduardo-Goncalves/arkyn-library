@@ -6,8 +6,9 @@ type AlertTitleProps = HTMLAttributes<HTMLDivElement>;
 /**
  * AlertTitle component - used to display the main title/heading of alerts
  *
- * @param args - AlertTitle component properties
- * ...Other valid HTML properties for div
+ * @param props - AlertTitle component properties
+ *
+ * **...Other valid HTML properties for div**
  *
  * @returns AlertTitle JSX element
  *

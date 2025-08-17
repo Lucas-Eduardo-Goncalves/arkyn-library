@@ -3,6 +3,7 @@ import { BadgeExamples } from "./components/examples.badge";
 import { ButtonExamples } from "./components/examples.button";
 import { DividerExamples } from "./components/examples.divider";
 import { IconButtonExamples } from "./components/examples.iconButton";
+import { SliderExamples } from "./components/examples.slider";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <ButtonExamples />
       <DividerExamples />
       <IconButtonExamples />
+      <SliderExamples />
     </div>
   );
 }

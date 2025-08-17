@@ -17,15 +17,16 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 /**
  * Button component - used for user interactions and form submissions
  *
- * @param args - Button component properties
- * @param args.isLoading - Controls loading state with spinner. Default: false
- * @param args.loadingText - Text to display during loading state
- * @param args.size - Button size. Default: "md"
- * @param args.variant - Visual variant of the button. Default: "solid"
- * @param args.scheme - Button color scheme. Default: "primary"
- * @param args.leftIcon - Optional icon to display on the left
- * @param args.rightIcon - Optional icon to display on the right
- * ...Other valid HTML properties for button
+ * @param props - Button component properties
+ * @param props.isLoading - Controls loading state with spinner. Default: false
+ * @param props.loadingText - Text to display during loading state
+ * @param props.size - Button size. Default: "md"
+ * @param props.variant - Visual variant of the button. Default: "solid"
+ * @param props.scheme - Button color scheme. Default: "primary"
+ * @param props.leftIcon - Optional icon to display on the left
+ * @param props.rightIcon - Optional icon to display on the right
+ *
+ * **...Other valid HTML properties for button**
  *
  * @returns Button JSX element
  *

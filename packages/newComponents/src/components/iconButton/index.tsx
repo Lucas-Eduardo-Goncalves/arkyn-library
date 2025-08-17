@@ -19,14 +19,15 @@ type IconButtonProps = Omit<
 /**
  * IconButton component - compact button that renders only an icon
  *
- * @param args - IconButton component properties
- * @param args.icon - Icon to render inside the button (LucideIcon). Required
- * @param args.aria-label - Accessible label for screen readers. Required
- * @param args.isLoading - Controls loading state with spinner. Default: false
- * @param args.size - Button size. Default: "md"
- * @param args.variant - Visual variant of the button. Default: "solid"
- * @param args.scheme - Button color scheme. Default: "primary"
- * ...Other valid HTML properties for button (children not supported)
+ * @param props - IconButton component properties
+ * @param props.icon - Icon to render inside the button (LucideIcon). Required
+ * @param props.aria-label - Accessible label for screen readers. Required
+ * @param props.isLoading - Controls loading state with spinner. Default: false
+ * @param props.size - Button size. Default: "md"
+ * @param props.variant - Visual variant of the button. Default: "solid"
+ * @param props.scheme - Button color scheme. Default: "primary"
+ *
+ * **...Other valid HTML properties for button element (children not supported)**
  *
  * @returns IconButton JSX element
  *

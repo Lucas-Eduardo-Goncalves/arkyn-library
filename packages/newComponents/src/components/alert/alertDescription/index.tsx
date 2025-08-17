@@ -6,8 +6,9 @@ type AlertDescriptionProps = HTMLAttributes<HTMLDivElement>;
 /**
  * AlertDescription component - used to display additional descriptive text in alerts
  *
- * @param args - AlertDescription component properties
- * ...Other valid HTML properties for div
+ * @param props - AlertDescription component properties
+ *
+ * **...Other valid HTML properties for div**
  *
  * @returns AlertDescription JSX element
  *
