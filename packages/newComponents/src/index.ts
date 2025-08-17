@@ -14,6 +14,7 @@ export { ModalContainer } from "./components/modal/modalContainer";
 export { ModalFooter } from "./components/modal/modalFooter";
 export { ModalHeader } from "./components/modal/modalHeader";
 export { Slider } from "./components/slider";
+export { Tooltip } from "./components/tooltip";
 
 // hooks
 export { useScrollLock } from "./hooks/useScrollLock";

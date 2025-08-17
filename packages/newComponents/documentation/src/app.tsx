@@ -6,6 +6,7 @@ import { DrawerExamples } from "./components/examples.drawer";
 import { IconButtonExamples } from "./components/examples.iconButton";
 import { ModalExamples } from "./components/examples.modal";
 import { SliderExamples } from "./components/examples.slider";
+import { TooltipExamples } from "./components/examples.tooltip";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <IconButtonExamples />
       <ModalExamples />
       <SliderExamples />
+      <TooltipExamples />
     </div>
   );
 }

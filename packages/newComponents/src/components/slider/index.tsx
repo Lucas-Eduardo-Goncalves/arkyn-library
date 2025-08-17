@@ -2,7 +2,7 @@ import { HTMLAttributes, useEffect, useRef, useState } from "react";
 
 import "./styles.css";
 
-type SliderProps = HTMLAttributes<HTMLDivElement> & {
+type SliderProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> & {
   value: number;
   onChange: (value: number) => void;
   disabled?: boolean;
