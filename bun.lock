@@ -16,7 +16,7 @@
     },
     "packages/components": {
       "name": "@arkyn/components",
-      "version": "3.0.1-beta.11",
+      "version": "3.0.1-beta.12",
       "dependencies": {
         "@react-google-maps/api": ">=2.20.6",
         "@react-input/mask": ">=1.2.15",
@@ -81,7 +81,7 @@
     },
     "packages/server": {
       "name": "@arkyn/server",
-      "version": "3.0.1-beta.11",
+      "version": "3.0.1-beta.12",
       "dependencies": {
         "@arkyn/shared": "*",
         "zod": ">=3.24.2",
@@ -97,7 +97,7 @@
     },
     "packages/shared": {
       "name": "@arkyn/shared",
-      "version": "3.0.1-beta.11",
+      "version": "3.0.1-beta.12",
       "dependencies": {
         "uuid": "^10.0.0",
       },
@@ -110,7 +110,7 @@
     },
     "packages/templates": {
       "name": "@arkyn/templates",
-      "version": "3.0.1-beta.11",
+      "version": "3.0.1-beta.12",
       "devDependencies": {
         "@types/uuid": "^10.0.0",
         "bun-types": "latest",
@@ -119,7 +119,7 @@
     },
     "packages/types": {
       "name": "@arkyn/types",
-      "version": "3.0.1-beta.11",
+      "version": "3.0.1-beta.12",
       "dependencies": {
         "@react-google-maps/api": ">=2.20.6",
         "@react-input/mask": ">=1.2.15",
