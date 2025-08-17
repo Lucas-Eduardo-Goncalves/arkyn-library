@@ -10,6 +10,9 @@ export { Divider } from "./components/divider";
 export { DrawerContainer } from "./components/drawer/drawerContainer";
 export { DrawerHeader } from "./components/drawer/drawerHeader";
 export { IconButton } from "./components/iconButton";
+export { ModalContainer } from "./components/modal/modalContainer";
+export { ModalFooter } from "./components/modal/modalFooter";
+export { ModalHeader } from "./components/modal/modalHeader";
 export { Slider } from "./components/slider";
 
 // hooks

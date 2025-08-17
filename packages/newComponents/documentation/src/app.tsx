@@ -4,6 +4,7 @@ import { ButtonExamples } from "./components/examples.button";
 import { DividerExamples } from "./components/examples.divider";
 import { DrawerExamples } from "./components/examples.drawer";
 import { IconButtonExamples } from "./components/examples.iconButton";
+import { ModalExamples } from "./components/examples.modal";
 import { SliderExamples } from "./components/examples.slider";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <DividerExamples />
       <DrawerExamples />
       <IconButtonExamples />
+      <ModalExamples />
       <SliderExamples />
     </div>
   );
