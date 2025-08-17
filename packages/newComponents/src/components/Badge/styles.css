@@ -34,64 +34,112 @@
 }
 
 .arkynBadge.outline.primary {
-  color: rgba(var(--spotlight-primary), 1);
   border-color: rgba(var(--spotlight-primary), 1);
 }
+.arkynBadge.outline.primary p,
+.arkynBadge.outline.primary svg {
+  color: rgba(var(--spotlight-primary), 1);
+}
+.arkynBadge.outline.secondary {
+  border-color: var(--text-muted);
+}
+.arkynBadge.outline.secondary p,
+.arkynBadge.outline.secondary svg {
+  color: var(--text-muted);
+}
 .arkynBadge.outline.danger {
-  color: rgba(var(--spotlight-danger), 1);
   border-color: rgba(var(--spotlight-danger), 1);
 }
+.arkynBadge.outline.danger p,
+.arkynBadge.outline.danger svg {
+  color: rgba(var(--spotlight-danger), 1);
+}
 .arkynBadge.outline.success {
-  color: rgba(var(--spotlight-success), 1);
   border-color: rgba(var(--spotlight-success), 1);
 }
+.arkynBadge.outline.success p,
+.arkynBadge.outline.success svg {
+  color: rgba(var(--spotlight-success), 1);
+}
 .arkynBadge.outline.warning {
-  color: rgba(var(--spotlight-warning), 1);
   border-color: rgba(var(--spotlight-warning), 1);
 }
+.arkynBadge.outline.warning p,
+.arkynBadge.outline.warning svg {
+  color: rgba(var(--spotlight-warning), 1);
+}
 .arkynBadge.outline.info {
-  color: rgba(var(--spotlight-info), 1);
   border-color: rgba(var(--spotlight-info), 1);
+}
+.arkynBadge.outline.info p,
+.arkynBadge.outline.info svg {
+  color: rgba(var(--spotlight-info), 1);
 }
 
 .arkynBadge.ghost.primary {
-  color: rgba(var(--spotlight-primary), 1);
   background-color: rgba(var(--spotlight-primary), 0.2);
 }
+.arkynBadge.ghost.primary p,
+.arkynBadge.ghost.primary svg {
+  color: rgba(var(--spotlight-primary), 1);
+}
+.arkynBadge.ghost.secondary {
+  background-color: rgba(var(--spotlight-secondary), 1);
+}
+.arkynBadge.ghost.secondary p,
+.arkynBadge.ghost.secondary svg {
+  color: var(--text-muted);
+}
 .arkynBadge.ghost.danger {
-  color: rgba(var(--spotlight-danger), 1);
   background-color: rgba(var(--spotlight-danger), 0.2);
 }
+.arkynBadge.ghost.danger p,
+.arkynBadge.ghost.danger svg {
+  color: rgba(var(--spotlight-danger), 1);
+}
 .arkynBadge.ghost.success {
-  color: rgba(var(--spotlight-success), 1);
   background-color: rgba(var(--spotlight-success), 0.2);
 }
+.arkynBadge.ghost.success p,
+.arkynBadge.ghost.success svg {
+  color: rgba(var(--spotlight-success), 1);
+}
 .arkynBadge.ghost.warning {
-  color: rgba(var(--spotlight-warning), 1);
   background-color: rgba(var(--spotlight-warning), 0.2);
 }
+.arkynBadge.ghost.warning p,
+.arkynBadge.ghost.warning svg {
+  color: rgba(var(--spotlight-warning), 1);
+}
 .arkynBadge.ghost.info {
-  color: rgba(var(--spotlight-info), 1);
   background-color: rgba(var(--spotlight-info), 0.2);
+}
+.arkynBadge.ghost.info p,
+.arkynBadge.ghost.info svg {
+  color: rgba(var(--spotlight-info), 1);
 }
 
 /* SIZE */
 .arkynBadge.lg {
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 12px;
-
-  border-radius: calc(var(--rounded-inputs) * 0.6667);
+  border-radius: 12px;
   padding: 0px 16px;
   height: 24px;
 }
 
-.arkynBadge.md {
+.arkynBadge.lg p {
+  line-height: 100%;
   font-weight: 400;
-  font-size: 10px;
-  line-height: 10px;
+  font-size: 12px;
+}
 
-  border-radius: calc(var(--rounded-inputs) * 0.6667);
+.arkynBadge.md {
+  border-radius: 10px;
   padding: 0px 12px;
   height: 20px;
+}
+
+.arkynBadge.md p {
+  line-height: 100%;
+  font-weight: 400;
+  font-size: 10px;
 }

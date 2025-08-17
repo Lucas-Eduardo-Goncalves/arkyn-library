@@ -1,5 +1,5 @@
-/* base css */
-.arkynButton {
+/* BASE */
+.arkynIconButton {
   background: transparent;
   border: 1px solid transparent;
   outline: 1px solid transparent;
@@ -7,195 +7,153 @@
   transition: 0.15s all ease-out;
 }
 
-.arkynButton:hover {
+.arkynIconButton:hover {
   cursor: pointer;
   filter: brightness(0.9);
 }
 
-html.dark .arkynButton:hover {
+html.dark .arkynIconButton:hover {
   cursor: pointer;
   filter: brightness(1.2);
 }
 
-.arkynButton:disabled {
+.arkynIconButton:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
 
-.arkynButton .arkynButtonContent {
+.arkynIconButtonContent {
   display: flex;
   align-items: center;
   justify-content: center;
-  white-space: nowrap;
 }
 
-/* variants */
-.arkynButton.solid {
+/* VARIANTS */
+.arkynIconButton.solid {
   color: #fff;
 }
-.arkynButton.solid.primary {
+.arkynIconButton.solid.primary {
   background-color: rgba(var(--spotlight-primary), 1);
 }
-.arkynButton.solid.danger {
+.arkynIconButton.solid.danger {
   background-color: rgba(var(--spotlight-danger), 1);
 }
-.arkynButton.solid.success {
+.arkynIconButton.solid.success {
   background-color: rgba(var(--spotlight-success), 1);
 }
-.arkynButton.solid.warning {
+.arkynIconButton.solid.warning {
   background-color: rgba(var(--spotlight-warning), 1);
 }
-.arkynButton.solid.info {
+.arkynIconButton.solid.info {
   background-color: rgba(var(--spotlight-info), 1);
 }
 
-.arkynButton.outline {
+.arkynIconButton.outline {
   background-color: var(--card-foreground-primary);
   border-color: var(--border);
 }
-.arkynButton.outline.primary {
+.arkynIconButton.outline.primary {
   color: rgba(var(--spotlight-primary), 1);
 }
-.arkynButton.outline.danger {
+.arkynIconButton.outline.danger {
   color: rgba(var(--spotlight-danger), 1);
 }
-.arkynButton.outline.success {
+.arkynIconButton.outline.success {
   color: rgba(var(--spotlight-success), 1);
 }
-.arkynButton.outline.warning {
+.arkynIconButton.outline.warning {
   color: rgba(var(--spotlight-warning), 1);
 }
-.arkynButton.outline.info {
+.arkynIconButton.outline.info {
   color: rgba(var(--spotlight-info), 1);
 }
 
-.arkynButton.ghost:hover {
+.arkynIconButton.ghost:hover {
   filter: brightness(0.8);
 }
-.arkynButton.ghost.primary {
+.arkynIconButton.ghost.primary {
   color: rgba(var(--spotlight-primary), 1);
   background-color: rgba(var(--spotlight-primary), 0.2);
 }
-.arkynButton.ghost.danger {
+.arkynIconButton.ghost.danger {
   color: rgba(var(--spotlight-danger), 1);
   background-color: rgba(var(--spotlight-danger), 0.2);
 }
-.arkynButton.ghost.success {
+.arkynIconButton.ghost.success {
   color: rgba(var(--spotlight-success), 1);
   background-color: rgba(var(--spotlight-success), 0.2);
 }
-.arkynButton.ghost.warning {
+.arkynIconButton.ghost.warning {
   color: rgba(var(--spotlight-warning), 1);
   background-color: rgba(var(--spotlight-warning), 0.2);
 }
-.arkynButton.ghost.info {
+.arkynIconButton.ghost.info {
   color: rgba(var(--spotlight-info), 1);
   background-color: rgba(var(--spotlight-info), 0.2);
 }
 
-.arkynButton.invisible.primary {
+.arkynIconButton.invisible.primary {
   color: rgba(var(--spotlight-primary), 1);
 }
-.arkynButton.invisible.danger {
+.arkynIconButton.invisible.danger {
   color: rgba(var(--spotlight-danger), 1);
 }
-.arkynButton.invisible.success {
+.arkynIconButton.invisible.success {
   color: rgba(var(--spotlight-success), 1);
 }
-.arkynButton.invisible.warning {
+.arkynIconButton.invisible.warning {
   color: rgba(var(--spotlight-warning), 1);
 }
-.arkynButton.invisible.info {
+.arkynIconButton.invisible.info {
   color: rgba(var(--spotlight-info), 1);
 }
 
-/* sizes */
-.arkynButton.lg {
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 14px;
+/* SIZE */
+.arkynIconButton.lg {
   border-radius: 6px;
-  padding: 0px 20px;
   height: 44px;
-}
-.arkynButton.lg .arkynButtonContent,
-.arkynButton.lg .arkynButtonSpinner {
-  gap: 16px;
+  width: 44px;
 }
 
-.arkynButton.md {
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 14px;
+.arkynIconButton.md {
   border-radius: 6px;
-  gap: 16px;
-  padding: 0px 16px;
   height: 40px;
-}
-.arkynButton.md .arkynButtonContent,
-.arkynButton.md .arkynButtonSpinner {
-  gap: 14px;
+  width: 40px;
 }
 
-.arkynButton.sm {
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 12px;
+.arkynIconButton.sm {
   border-radius: 6px;
-  padding: 0px 16px;
   height: 32px;
-}
-.arkynButton.sm .arkynButtonContent,
-.arkynButton.sm .arkynButtonSpinner {
-  gap: 12px;
+  width: 32px;
 }
 
-.arkynButton.xs {
-  font-weight: 600;
-  font-size: 10px;
-  line-height: 10px;
+.arkynIconButton.xs {
   border-radius: 4px;
-  padding: 0px 16px;
   height: 24px;
-}
-.arkynButton.xs .arkynButtonContent,
-.arkynButton.xs .arkynButtonSpinner {
-  gap: 8px;
+  width: 24px;
 }
 
-/* loader spin */
-.arkynButton .arkynButtonSpinner {
+/* SPIN */
+.arkynIconButtonSpinner {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  white-space: nowrap;
-  opacity: 0;
-}
-
-.arkynButton .arkynButtonSpinner > svg {
-  animation: spin 2s linear infinite;
-}
-
-.arkynButton.loadingTextFalse .arkynButtonSpinner {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-}
-
-.arkynButton.loadingTextTrue .arkynButtonSpinner {
-  max-height: 0px;
-}
-
-.arkynButton.loadingTrue .arkynButtonContent {
   opacity: 0;
-  max-height: 0px;
+}
+.arkynIconButtonSpinner > svg {
+  animation: spin 2s linear infinite;
 }
 
-.arkynButton.loadingTrue .arkynButtonSpinner {
+.arkynIconButton.loadingTrue .arkynIconButtonSpinner {
   opacity: 1;
-  max-height: unset;
+}
+.arkynIconButton.loadingTrue .arkynIconButtonContent {
+  opacity: 0;
 }
 
 @keyframes spin {

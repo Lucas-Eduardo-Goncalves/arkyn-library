@@ -1,5 +1,38 @@
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
+}
+
+*,
+input,
+textarea,
+button {
+  line-height: 130%;
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+}
+
+body {
+  background-color: #ffffff;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+}
+
+.row:not(:last-child) {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
 }
