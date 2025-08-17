@@ -13,4 +13,5 @@ export { IconButton } from "./components/iconButton";
 export { Slider } from "./components/slider";
 
 // hooks
+export { useScrollLock } from "./hooks/useScrollLock";
 export { useSlider } from "./hooks/useSlider";

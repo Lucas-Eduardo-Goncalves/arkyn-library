@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
-
 import { HTMLAttributes } from "react";
+
 import { useDrawer } from "../drawerContext";
 import "./styles.css";
 

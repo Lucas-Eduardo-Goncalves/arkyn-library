@@ -1,6 +1,7 @@
+import { useScrollLock } from "@components";
 import { AnimatePresence, motion } from "framer-motion";
-
 import { HTMLAttributes } from "react";
+
 import { DrawerProvider } from "../drawerContext";
 import "./styles.css";
 
@@ -10,7 +11,7 @@ type DrawerContainerProps = HTMLAttributes<HTMLElement> & {
   orientation?: "left" | "right";
 };
 
-/**
+/**O
  * DrawerContainer component - animated slide-out panel for navigation or content
  *
  * @param props - DrawerContainer component properties
@@ -81,6 +82,8 @@ function DrawerContainer(props: DrawerContainerProps) {
     className: baseClassName,
     ...rest
   } = props;
+
+  useScrollLock(isVisible);
 
   const translateX = orientation === "left" ? "-100%" : "100%";
 
