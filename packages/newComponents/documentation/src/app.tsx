@@ -1,4 +1,5 @@
 import { AlertExamples } from "./components/examples.alert";
+import { AudioPlayerExamples } from "./components/examples.audioPlayer";
 import { BadgeExamples } from "./components/examples.badge";
 import { ButtonExamples } from "./components/examples.button";
 import { DividerExamples } from "./components/examples.divider";
@@ -14,6 +15,7 @@ function App() {
       style={{ display: "flex", flexDirection: "column", gap: 40, padding: 40 }}
     >
       <AlertExamples />
+      <AudioPlayerExamples />
       <BadgeExamples />
       <ButtonExamples />
       <DividerExamples />
