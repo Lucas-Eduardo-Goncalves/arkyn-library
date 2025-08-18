@@ -2,6 +2,7 @@ import { AlertExamples } from "./components/examples.alert";
 import { AudioPlayerExamples } from "./components/examples.audioPlayer";
 import { BadgeExamples } from "./components/examples.badge";
 import { ButtonExamples } from "./components/examples.button";
+import { CardTabExamples } from "./components/examples.cardTab";
 import { DividerExamples } from "./components/examples.divider";
 import { DrawerExamples } from "./components/examples.drawer";
 import { IconButtonExamples } from "./components/examples.iconButton";
@@ -19,6 +20,7 @@ function App() {
       <AudioPlayerExamples />
       <BadgeExamples />
       <ButtonExamples />
+      <CardTabExamples />
       <DividerExamples />
       <DrawerExamples />
       <IconButtonExamples />

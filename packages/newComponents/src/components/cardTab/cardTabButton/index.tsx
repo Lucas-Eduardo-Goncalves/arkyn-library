@@ -1,9 +1,9 @@
 import { ButtonHTMLAttributes, MouseEvent, ReactNode } from "react";
 
-import { useTab } from "../tabContext";
+import { useCardTab } from "../cardTabContext";
 import "./styles.css";
 
-type TabButtonProps = Omit<
+type CardTabButtonProps = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   "children" | "value" | "type"
 > & {
@@ -12,70 +12,70 @@ type TabButtonProps = Omit<
 };
 
 /**
- * TabButton component - used as interactive buttons within a TabContainer for tab navigation
+ * CardTabButton component - used as interactive buttons within a CardTabContainer for tab navigation
  *
- * @param props - TabButton component properties
+ * @param props - CardTabButton component properties
  * @param props.children - Content to display inside the tab button (required)
  * @param props.value - Unique identifier for the tab button (required)
- * @param props.disabled - Whether the button is disabled. Can be overridden by TabContainer's disabled state
+ * @param props.disabled - Whether the button is disabled. Can be overridden by CardTabContainer's disabled state
  *
  * **...Other valid HTML button properties except children, value, and type**
  *
- * @returns TabButton JSX element
+ * @returns CardTabButton JSX element
  *
  * @example
  * ```tsx
- * // Basic tab buttons within TabContainer
- * <TabContainer>
- *   <TabButton value="home">Home</TabButton>
- *   <TabButton value="about">About</TabButton>
- *   <TabButton value="contact">Contact</TabButton>
- * </TabContainer>
+ * // Basic tab buttons within CardTabContainer
+ * <CardTabContainer>
+ *   <CardTabButton value="home">Home</CardTabButton>
+ *   <CardTabButton value="about">About</CardTabButton>
+ *   <CardTabButton value="contact">Contact</CardTabButton>
+ * </CardTabContainer>
  * ```
  *
  * @example
  * ```tsx
  * // Tab button with click handler
- * <TabContainer onChange={(value) => console.log('Tab changed:', value)}>
- *   <TabButton
+ * <CardTabContainer onChange={(value) => console.log('Tab changed:', value)}>
+ *   <CardTabButton
  *     value="profile"
  *     onClick={() => console.log('Profile tab clicked')}
  *   >
  *     Profile
- *   </TabButton>
- *   <TabButton value="settings">Settings</TabButton>
- * </TabContainer>
+ *   </CardTabButton>
+ *   <CardTabButton value="settings">Settings</CardTabButton>
+ * </CardTabContainer>
  * ```
  *
  * @example
  * ```tsx
  * // Disabled tab button
- * <TabContainer>
- *   <TabButton value="available">Available</TabButton>
- *   <TabButton value="coming-soon" disabled>
+ * <CardTabContainer>
+ *   <CardTabButton value="available">Available</CardTabButton>
+ *   <CardTabButton value="coming-soon" disabled>
  *     Coming Soon
- *   </TabButton>
- * </TabContainer>
+ *   </CardTabButton>
+ * </CardTabContainer>
  * ```
  *
  * @example
  * ```tsx
  * // Tab buttons with custom styling and default value
- * <TabContainer defaultValue="dashboard">
- *   <TabButton
+ * <CardTabContainer defaultValue="dashboard">
+ *   <CardTabButton
  *     value="dashboard"
  *     className="custom-tab"
  *     aria-label="Dashboard tab"
  *   >
  *     Dashboard
- *   </TabButton>
- *   <TabButton value="analytics">Analytics</TabButton>
- *   <TabButton value="reports">Reports</TabButton>
- * </TabContainer>
+ *   </CardTabButton>
+ *   <CardTabButton value="analytics">Analytics</CardTabButton>
+ *   <CardTabButton value="reports">Reports</CardTabButton>
+ * </CardTabContainer>
  * ```
  */
 
-function TabButton(props: TabButtonProps) {
+function CardTabButton(props: CardTabButtonProps) {
   const {
     children,
     disabled: rawDisabled = false,
@@ -85,13 +85,13 @@ function TabButton(props: TabButtonProps) {
     ...rest
   } = props;
 
-  const { disabled, currentTab, changeCurrentTab } = useTab();
+  const { disabled, currentTab, changeCurrentTab } = useCardTab();
 
   const isDisabled = disabled || rawDisabled;
 
   const disabledClass = isDisabled ? "isDisabled" : "";
   const activeClass = currentTab === value && value ? "isActive" : "";
-  const className = `arkynTabButton ${disabledClass} ${activeClass} ${baseClassName}`;
+  const className = `arkynCardTabButton ${disabledClass} ${activeClass} ${baseClassName}`;
 
   function handleClick(event: MouseEvent<HTMLButtonElement>) {
     changeCurrentTab(value);
@@ -111,4 +111,4 @@ function TabButton(props: TabButtonProps) {
   );
 }
 
-export { TabButton };
+export { CardTabButton };

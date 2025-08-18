@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext } from "react";
 
-type TabContextProps = {
+type CardTabContextProps = {
   disabled: boolean;
   currentTab: string;
   changeCurrentTab: (tab: string) => void;
@@ -13,16 +13,18 @@ type TabProviderProps = {
   changeCurrentTab: (tab: string) => void;
 };
 
-const TabContext = createContext({} as TabContextProps);
+const CardTabContext = createContext({} as CardTabContextProps);
 
-function useTab() {
-  return useContext(TabContext);
+function useCardTab() {
+  return useContext(CardTabContext);
 }
 
 function TabProvider(props: TabProviderProps) {
   return (
-    <TabContext.Provider value={props}>{props.children}</TabContext.Provider>
+    <CardTabContext.Provider value={props}>
+      {props.children}
+    </CardTabContext.Provider>
   );
 }
 
-export { TabProvider, useTab };
+export { TabProvider, useCardTab };

@@ -7,6 +7,8 @@ export { AlertTitle } from "./components/alert/alertTitle";
 export { AudioPlayer } from "./components/audioPlayer";
 export { Badge } from "./components/badge";
 export { Button } from "./components/button";
+export { CardTabButton } from "./components/cardTab/cardTabButton";
+export { CardTabContainer } from "./components/cardTab/cardTabContainer";
 export { Divider } from "./components/divider";
 export { DrawerContainer } from "./components/drawer/drawerContainer";
 export { DrawerHeader } from "./components/drawer/drawerHeader";
