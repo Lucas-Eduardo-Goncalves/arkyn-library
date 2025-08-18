@@ -30,7 +30,7 @@ type AudioPlayerProps = Omit<
  * @param props.disabled - Whether the audio player is disabled. Default: false
  * @param props.onPlayAudio - Callback function called when audio starts playing
  * @param props.onPauseAudio - Callback function called when audio is paused
- * <br/>
+ *
  * **...Other valid HTML audio properties**
  *
  * @returns AudioPlayer JSX element

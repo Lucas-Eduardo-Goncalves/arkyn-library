@@ -36,16 +36,12 @@ import { useEffect } from "react";
  * }
  * ```
  */
+
 function useScrollLock(isLocked: boolean): void {
   useEffect(() => {
     if (isLocked) {
-      // Salva o valor atual do overflow
       const originalOverflow = document.body.style.overflow;
-
-      // Bloqueia o scroll
       document.body.style.overflow = "hidden";
-
-      // Cleanup: restaura o overflow original quando desbloqueado
       return () => {
         document.body.style.overflow = originalOverflow;
       };
