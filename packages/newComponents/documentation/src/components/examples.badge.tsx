@@ -14,8 +14,8 @@ function BadgeExamples() {
       </Row>
 
       <Row>
-        <Badge>size - md (default)</Badge>
-        <Badge size="lg">size - lg</Badge>
+        <Badge size="md">size - md </Badge>
+        <Badge>size - lg (default)</Badge>
       </Row>
 
       <Row>

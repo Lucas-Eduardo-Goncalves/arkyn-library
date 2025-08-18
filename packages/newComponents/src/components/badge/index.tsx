@@ -16,7 +16,7 @@ type BadgeProps = HTMLAttributes<HTMLDivElement> & {
  * Badge component - used to display labels, statuses, and categorizations
  *
  * @param props - Badge component properties
- * @param props.size - Badge size. Default: "md"
+ * @param props.size - Badge size. Default: "lg"
  * @param props.variant - Visual variant of the badge. Default: "ghost"
  * @param props.scheme - Badge color scheme. Default: "primary"
  * @param props.leftIcon - Optional icon to display on the left
@@ -55,7 +55,7 @@ function Badge(props: BadgeProps) {
   const {
     variant = "ghost",
     scheme = "primary",
-    size = "md",
+    size = "lg",
     leftIcon,
     rightIcon,
     className: baseClassName = "",

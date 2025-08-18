@@ -1,4 +1,4 @@
-import { Tooltip } from "@components";
+import { Badge, Tooltip } from "@components";
 import { Box } from "../ui/box";
 import { Row } from "../ui/row";
 
@@ -7,35 +7,35 @@ function TooltipExamples() {
     <Box title="Tooltip">
       <Row>
         <Tooltip text="Tooltip on top" orientation="top">
-          <p>top</p>
+          <Badge>top</Badge>
         </Tooltip>
 
         <Tooltip text="Tooltip on right" orientation="right">
-          <p>right</p>
+          <Badge>right</Badge>
         </Tooltip>
 
         <Tooltip text="Tooltip on bottom" orientation="bottom">
-          <p>bottom</p>
+          <Badge>bottom</Badge>
         </Tooltip>
 
         <Tooltip text="Tooltip on left" orientation="left">
-          <p>left</p>
+          <Badge>left</Badge>
         </Tooltip>
       </Row>
 
       <Row>
         <Tooltip text="Tooltip on left" orientation="left">
-          <p>oh no... the tooltip does not fit on the left</p>
+          <Badge>oh no... the tooltip does not fit on the left</Badge>
         </Tooltip>
       </Row>
 
       <Row>
         <Tooltip text="md tooltip" orientation="top" size="md">
-          <p>size - md </p>
+          <Badge>size - md </Badge>
         </Tooltip>
 
         <Tooltip text="lg tooltip" orientation="top">
-          <p>size - lg (default)</p>
+          <Badge>size - lg (default)</Badge>
         </Tooltip>
       </Row>
     </Box>
