@@ -7,6 +7,7 @@ import { DividerExamples } from "./components/examples.divider";
 import { DrawerExamples } from "./components/examples.drawer";
 import { IconButtonExamples } from "./components/examples.iconButton";
 import { InputExamples } from "./components/examples.input";
+import { MaskedInputExamples } from "./components/examples.maskedInput";
 import { ModalExamples } from "./components/examples.modal";
 import { SliderExamples } from "./components/examples.slider";
 import { TabExamples } from "./components/examples.tab";
@@ -26,6 +27,7 @@ function App() {
       <DrawerExamples />
       <IconButtonExamples />
       <InputExamples />
+      <MaskedInputExamples />
       <ModalExamples />
       <SliderExamples />
       <TabExamples />

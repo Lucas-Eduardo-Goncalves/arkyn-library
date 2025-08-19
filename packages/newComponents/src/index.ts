@@ -17,6 +17,7 @@ export { FieldLabel } from "./components/fieldLabel";
 export { FieldWrapper } from "./components/fieldWrapper";
 export { IconButton } from "./components/iconButton";
 export { Input } from "./components/input";
+export { MaskedInput } from "./components/maskedInput";
 export { ModalContainer } from "./components/modal/modalContainer";
 export { ModalFooter } from "./components/modal/modalFooter";
 export { ModalHeader } from "./components/modal/modalHeader";
