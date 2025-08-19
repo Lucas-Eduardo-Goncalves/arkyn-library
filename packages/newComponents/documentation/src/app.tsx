@@ -3,6 +3,7 @@ import { AudioPlayerExamples } from "./components/examples.audioPlayer";
 import { BadgeExamples } from "./components/examples.badge";
 import { ButtonExamples } from "./components/examples.button";
 import { CardTabExamples } from "./components/examples.cardTab";
+import { CurrencyInputExamples } from "./components/examples.currencyInput";
 import { DividerExamples } from "./components/examples.divider";
 import { DrawerExamples } from "./components/examples.drawer";
 import { IconButtonExamples } from "./components/examples.iconButton";
@@ -23,6 +24,7 @@ function App() {
       <BadgeExamples />
       <ButtonExamples />
       <CardTabExamples />
+      <CurrencyInputExamples />
       <DividerExamples />
       <DrawerExamples />
       <IconButtonExamples />

@@ -1,0 +1,226 @@
+/* BASE */
+.arkynCurrencyInput {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  padding: 0 16px;
+  gap: 8px;
+  border-radius: 8px;
+
+  border: 1px solid transparent;
+  outline: 1px solid transparent;
+}
+
+.arkynCurrencyInput:hover {
+  cursor: text;
+}
+
+.arkynCurrencyInput input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+
+  line-height: 100%;
+}
+
+.arkynCurrencyInput input {
+  color: var(--text-heading);
+}
+
+.arkynCurrencyInput .prefix,
+.arkynCurrencyInput .suffix {
+  color: var(--text-body);
+  background: var(--border);
+  font-weight: 400;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+
+  line-height: 100%;
+}
+
+.arkynCurrencyInput .prefix {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: calc(8px - 1px) 0 0 calc(8px - 1px);
+  border-right: 1px solid var(--border);
+}
+
+.arkynCurrencyInput .suffix {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 0 calc(8px - 1px) calc(8px - 1px) 0;
+  border-left: 1px solid var(--border);
+}
+
+.arkynCurrencyInput input::placeholder {
+  color: var(--text-muted);
+  line-height: 100%;
+}
+
+.arkynCurrencyInput svg {
+  color: var(--text-muted);
+}
+
+.arkynCurrencyInput.errored svg {
+  color: rgba(var(--spotlight-danger), 1);
+}
+
+.arkynCurrencyInput:not(.opacity).focused svg {
+  color: rgba(var(--spotlight-primary), 1);
+}
+
+.arkynCurrencyInput.opacity {
+  opacity: 0.5;
+}
+
+/* VARIANTS */
+.arkynCurrencyInput.solid {
+  border-color: var(--border);
+  background-color: rgba(var(--spotlight-secondary), 1);
+}
+
+.arkynCurrencyInput.solid.errored {
+  border-color: rgba(var(--spotlight-danger), 1);
+  outline-color: rgba(var(--spotlight-danger), 1);
+}
+
+.arkynCurrencyInput:not(.opacity).solid.focused {
+  border-color: rgba(var(--spotlight-primary), 1);
+  outline-color: rgba(var(--spotlight-primary), 1);
+}
+
+.arkynCurrencyInput.outline {
+  border-color: var(--border);
+}
+
+.arkynCurrencyInput.outline.errored {
+  border-color: rgba(var(--spotlight-danger), 1);
+  outline-color: rgba(var(--spotlight-danger), 1);
+}
+
+.arkynCurrencyInput:not(.opacity).outline.focused {
+  border-color: rgba(var(--spotlight-primary), 1);
+  outline-color: rgba(var(--spotlight-primary), 1);
+}
+
+.arkynCurrencyInput.underline {
+  border-radius: 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: none;
+  border-color: var(--border);
+}
+
+.arkynCurrencyInput.underline .suffix,
+.arkynCurrencyInput.underline .prefix {
+  display: none;
+}
+
+.arkynCurrencyInput.underline::before {
+  content: " ";
+  position: absolute;
+  height: 1px;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  background: transparent;
+}
+
+.arkynCurrencyInput.underline.errored {
+  border-color: rgba(var(--spotlight-danger), 1);
+}
+
+.arkynCurrencyInput.underline.errored::before {
+  background: rgba(var(--spotlight-danger), 1);
+}
+
+.arkynCurrencyInput:not(.opacity).underline.focused {
+  border-color: rgba(var(--spotlight-primary), 1);
+}
+
+.arkynCurrencyInput:not(.opacity).underline.focused::before {
+  background: rgba(var(--spotlight-primary), 1);
+}
+
+/* SIZE */
+.arkynCurrencyInput.md input {
+  min-height: 40px;
+  max-height: 40px;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 400;
+}
+
+.arkynCurrencyInput.md input::placeholder {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.arkynCurrencyInput.md.hasPrefix {
+  padding-left: 60px;
+}
+
+.arkynCurrencyInput.md.hasSuffix {
+  padding-right: 60px;
+}
+
+.arkynCurrencyInput.md .prefix,
+.arkynCurrencyInput.md .suffix {
+  height: 40px;
+  width: 44px;
+  font-size: 14px;
+}
+
+.arkynCurrencyInput.lg input {
+  min-height: 44px;
+  max-height: 44px;
+  line-height: 16px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.arkynCurrencyInput.lg input::placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.arkynCurrencyInput.lg .prefix,
+.arkynCurrencyInput.lg .suffix {
+  height: 44px;
+  width: 48px;
+  font-size: 16px;
+}
+
+.arkynCurrencyInput.lg.hasPrefix {
+  padding-left: 64px;
+}
+
+.arkynCurrencyInput.lg.hasSuffix {
+  padding-right: 64px;
+}
+
+/* SPIN */
+.arkynCurrencyInput .spinner {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

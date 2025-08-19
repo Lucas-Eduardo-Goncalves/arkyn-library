@@ -1,14 +1,18 @@
 import { Loader2, LucideIcon } from "lucide-react";
 import {
+  ChangeEvent,
   InputHTMLAttributes,
+  useEffect,
   useId,
   useRef,
   useState,
   type FocusEvent,
+  type KeyboardEvent,
 } from "react";
 
 import { useForm } from "../../hooks/useForm";
 import { IconRenderer } from "../../services/iconRenderer";
+import { maskValues } from "../../services/maskValues";
 
 import { FieldError } from "../fieldError";
 import { FieldLabel } from "../fieldLabel";
@@ -16,11 +20,43 @@ import { FieldWrapper } from "../fieldWrapper";
 
 import "./style.css";
 
-type InputProps = Omit<
+type Locale =
+  | "USD"
+  | "EUR"
+  | "JPY"
+  | "GBP"
+  | "AUD"
+  | "CAD"
+  | "CHF"
+  | "CNY"
+  | "SEK"
+  | "NZD"
+  | "BRL"
+  | "INR"
+  | "RUB"
+  | "ZAR"
+  | "MXN"
+  | "SGD"
+  | "HKD"
+  | "NOK"
+  | "KRW"
+  | "TRY"
+  | "IDR"
+  | "THB";
+
+type CurrencyInputProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
-  "size" | "prefix" | "name"
+  | "size"
+  | "prefix"
+  | "name"
+  | "type"
+  | "max"
+  | "defaultValue"
+  | "value"
+  | "onChange"
 > & {
   name: string;
+  locale: Locale;
 
   label?: string;
   errorMessage?: string;
@@ -35,13 +71,24 @@ type InputProps = Omit<
 
   leftIcon?: LucideIcon;
   rightIcon?: LucideIcon;
+
+  max?: number;
+  value?: number;
+  defaultValue?: number | null;
+
+  onChange?: (
+    event: ChangeEvent<HTMLInputElement>,
+    originalValue: string,
+    maskedValue: string
+  ) => void;
 };
 
 /**
- * Input component - used for text input fields with support for labels, validation, icons, and loading states
+ * CurrencyInput component - used for currency input fields with automatic formatting based on locale
  *
- * @param props - Input component properties
+ * @param props - CurrencyInput component properties
  * @param props.name - Required field name for form handling
+ * @param props.locale - Currency locale for formatting (e.g., "USD", "EUR", "BRL", etc.)
  * @param props.label - Optional label text to display above the input
  * @param props.errorMessage - Error message to display below the input
  * @param props.isLoading - Controls loading state with spinner. Default: false
@@ -52,55 +99,65 @@ type InputProps = Omit<
  * @param props.showAsterisk - Whether to show asterisk on label for required fields
  * @param props.leftIcon - Optional icon to display on the left side
  * @param props.rightIcon - Optional icon to display on the right side
+ * @param props.max - Maximum allowed value for the currency input
+ * @param props.value - Controlled value (number) for the input
+ * @param props.defaultValue - Default value (number) for uncontrolled usage
+ * @param props.onChange - Callback function called when value changes, receives event, original value and masked value
  *
- * **...Other valid HTML properties for input element**
+ * **...Other valid HTML properties for input element (except type, max, defaultValue, value, onChange)**
  *
- * @returns Input JSX element wrapped in FieldGroup with optional label and error
+ * @returns CurrencyInput JSX element wrapped in FieldGroup with optional label and error
  *
  * @example
  * ```tsx
- * // Basic input
- * <Input name="username" placeholder="Enter username" />
+ * // Basic currency input
+ * <CurrencyInput name="price" locale="USD" placeholder="Enter price" />
  *
- * // Input with label and validation
- * <Input
- *   name="email"
- *   label="Email Address"
- *   type="email"
+ * // Currency input with label and validation
+ * <CurrencyInput
+ *   name="salary"
+ *   locale="BRL"
+ *   label="Monthly Salary"
  *   showAsterisk
- *   errorMessage="Please enter a valid email"
+ *   errorMessage="Please enter a valid amount"
  * />
  *
- * // Input with icons and loading state
- * <Input
- *   name="search"
- *   label="Search"
- *   leftIcon={SearchIcon}
- *   rightIcon={FilterIcon}
+ * // Currency input with icons and loading state
+ * <CurrencyInput
+ *   name="budget"
+ *   locale="EUR"
+ *   label="Budget"
+ *   leftIcon={DollarSignIcon}
+ *   rightIcon={CalculatorIcon}
  *   isLoading
  * />
  *
- * // Input with prefix/suffix
- * <Input
- *   name="website"
- *   label="Website"
- *   prefix="https://"
- *   suffix=".com"
+ * // Currency input with max value and controlled state
+ * <CurrencyInput
+ *   name="limit"
+ *   locale="USD"
+ *   label="Credit Limit"
+ *   max={10000}
+ *   value={creditLimit}
+ *   onChange={(e, original, masked) => setCreditLimit(Number(original))}
  *   variant="outline"
  * />
  *
- * // Large input with underline variant
- * <Input
- *   name="title"
- *   label="Article Title"
+ * // Large currency input with prefix/suffix
+ * <CurrencyInput
+ *   name="investment"
+ *   locale="GBP"
+ *   label="Investment Amount"
  *   size="lg"
  *   variant="underline"
- *   placeholder="Enter article title"
+ *   prefix="£"
+ *   suffix="GBP"
+ *   placeholder="Enter investment amount"
  * />
  * ```
  */
 
-function Input(props: InputProps) {
+function CurrencyInput(props: CurrencyInputProps) {
   const {
     name,
     disabled,
@@ -109,6 +166,11 @@ function Input(props: InputProps) {
     variant = "solid",
     label,
     className: baseClassName = "",
+    value,
+    defaultValue,
+    max,
+    locale,
+    onChange,
     prefix,
     suffix,
     isLoading = false,
@@ -119,7 +181,6 @@ function Input(props: InputProps) {
     errorMessage: baseErrorMessage,
     showAsterisk,
     rightIcon,
-    type = "text",
     size = "md",
     id,
     ...rest
@@ -127,6 +188,8 @@ function Input(props: InputProps) {
 
   const { fieldErrors } = useForm();
   const [isFocused, setIsFocused] = useState(false);
+  const [maskedValue, setMaskedValue] = useState("0");
+
   const inputRef = useRef<HTMLInputElement>(null);
   const inputId = id || useId();
 
@@ -157,17 +220,33 @@ function Input(props: InputProps) {
     if (onBlur) onBlur(e);
   }
 
-  if (type === "hidden") {
-    return (
-      <input
-        style={{ display: "none" }}
-        readOnly
-        type="text"
-        ref={inputRef}
-        {...rest}
-      />
+  const updateValues = (originalValue: string | number) => {
+    const [calculatedValue, calculatedMaskedValue] = maskValues(
+      originalValue,
+      locale
     );
-  }
+
+    if (!max || calculatedValue <= max) {
+      setMaskedValue(calculatedMaskedValue);
+      return [calculatedValue, calculatedMaskedValue];
+    }
+
+    return maskValues(originalValue, locale);
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const [originalValue, maskedValue] = updateValues(event.target.value);
+
+    onChange && onChange(event, String(originalValue), String(maskedValue));
+  };
+
+  useEffect(() => {
+    const currentValue = value || +defaultValue || undefined;
+    const [, maskedValue] = maskValues(currentValue, locale);
+
+    setMaskedValue(maskedValue);
+  }, [locale, defaultValue, value]);
 
   const hasPrefix = !!prefix ? "hasPrefix" : "";
   const hasSuffix = !!suffix ? "hasSuffix" : "";
@@ -175,7 +254,7 @@ function Input(props: InputProps) {
   const opacity = disabled || readOnly || isLoading ? "opacity" : "";
   const focused = isFocused ? "focused" : "";
 
-  const className = `arkynInput ${hasPrefix} ${hasSuffix} ${variant} ${size} ${opacity} ${errored} ${focused} ${baseClassName}`;
+  const className = `arkynCurrencyInput ${hasPrefix} ${hasSuffix} ${variant} ${size} ${opacity} ${errored} ${focused} ${baseClassName}`;
 
   return (
     <FieldWrapper>
@@ -203,12 +282,13 @@ function Input(props: InputProps) {
         <IconRenderer show={!isLoading} icon={leftIcon} iconSize={iconSize} />
 
         <input
+          value={maskedValue}
           disabled={disabled || isLoading}
           readOnly={readOnly}
           ref={inputRef}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          type={type}
+          onChange={handleChange}
           id={inputId}
           {...rest}
         />
@@ -230,4 +310,4 @@ function Input(props: InputProps) {
   );
 }
 
-export { Input };
+export { CurrencyInput };

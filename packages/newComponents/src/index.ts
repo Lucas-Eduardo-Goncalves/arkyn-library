@@ -9,6 +9,7 @@ export { Badge } from "./components/badge";
 export { Button } from "./components/button";
 export { CardTabButton } from "./components/cardTab/cardTabButton";
 export { CardTabContainer } from "./components/cardTab/cardTabContainer";
+export { CurrencyInput } from "./components/currencyInput";
 export { Divider } from "./components/divider";
 export { DrawerContainer } from "./components/drawer/drawerContainer";
 export { DrawerHeader } from "./components/drawer/drawerHeader";

@@ -263,7 +263,6 @@ function MaskedInputExamples() {
           replacement={{ _: /\d/ }}
           placeholder="(11)99999-9999"
           label="Telefone completo:"
-          prefix="+55"
           leftIcon={Phone}
           variant="underline"
         />
