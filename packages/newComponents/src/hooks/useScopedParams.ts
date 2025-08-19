@@ -1,52 +1,61 @@
-import { useLocation } from "react-router";
-
 type ParamsType = Record<string, string | number | boolean | undefined>;
 
 /**
- * useScopedParams hook - used to manage URL search parameters with optional scoping
+ * Utility function to manage URL search parameters with optional scoping.
+ * Provides functionality to get parameters and generate updated search strings
+ * while maintaining existing parameters.
  *
- * @param scope - Optional scope prefix for parameters. Default: ""
+ * @param searchString - The current URL search parameters string (e.g., "page=1&filter=active")
+ * @param scope - Optional scope prefix for parameters. When provided, parameters will be prefixed with "scope:". Default: ""
  *
- * @returns Object containing parameter management functions
- * @returns getParam - Function to get a parameter value by key
- * @returns getScopedSearch - Function to generate search string with updated parameters
+ * @returns Object containing parameter management functions:
+ * @returns getParam - Function to get a parameter value by key (considers scope if provided)
+ * @returns getScopedSearch - Function to generate search string with updated parameters while preserving existing ones
  *
  * @example
  * ```tsx
  * // Basic usage without scope
- * const { getParam, getScopedSearch } = useScopedParams();
+ * const searchString = "page=1&filter=active";
+ * const { getParam, getScopedSearch } = useScopedParams(searchString);
  *
  * // Get a parameter value
- * const userId = getParam('userId'); // Gets 'userId' from URL
+ * const page = getParam('page'); // Returns "1"
+ * const filter = getParam('filter'); // Returns "active"
  *
- * // Generate search string with new parameters
- * const searchString = getScopedSearch({ page: 1, filter: 'active' });
- * // Result: "?page=1&filter=active"
+ * // Generate search string with new/updated parameters
+ * const newSearch = getScopedSearch({ page: 2, sort: 'name' });
+ * // Result: "?page=2&filter=active&sort=name"
  * ```
  *
  * @example
  * ```tsx
  * // Usage with scope
- * const { getParam, getScopedSearch } = useScopedParams('filters');
+ * const searchString = "filters:status=active&filters:category=tech&page=1";
+ * const { getParam, getScopedSearch } = useScopedParams(searchString, 'filters');
  *
  * // Get a scoped parameter value
- * const status = getParam('status'); // Gets 'filters:status' from URL
+ * const status = getParam('status'); // Gets 'filters:status' from URL, returns "active"
+ * const category = getParam('category'); // Gets 'filters:category' from URL, returns "tech"
  *
  * // Generate search string with scoped parameters
- * const searchString = getScopedSearch({
- *   status: 'active',
- *   category: 'tech',
- *   page: undefined // This will remove 'filters:page' from URL
+ * const newSearch = getScopedSearch({
+ *   status: 'inactive',
+ *   category: 'sports',
+ *   price: 100,
+ *   discount: undefined // This will remove 'filters:discount' from URL if it exists
  * });
- * // Result: "?filters:status=active&filters:category=tech"
+ * // Result: "?filters:status=inactive&filters:category=sports&filters:price=100&page=1"
  * ```
  *
  * @example
  * ```tsx
- * // Real-world usage in a filter component
+ * // Real-world usage with React Router
+ * import { useLocation, useNavigate } from 'react-router-dom';
+ *
  * function ProductFilter() {
- *   const { getParam, getScopedSearch } = useScopedParams('product');
+ *   const location = useLocation();
  *   const navigate = useNavigate();
+ *   const { getParam, getScopedSearch } = useScopedParams(location.search, 'product');
  *
  *   const handleFilterChange = (newFilters: Record<string, any>) => {
  *     const searchString = getScopedSearch(newFilters);
@@ -54,12 +63,19 @@ type ParamsType = Record<string, string | number | boolean | undefined>;
  *   };
  *
  *   const currentCategory = getParam('category');
+ *   const currentPrice = getParam('price');
  *
  *   return (
  *     <div>
- *       <p>Current category: {currentCategory}</p>
+ *       <p>Current category: {currentCategory || 'All'}</p>
+ *       <p>Current price filter: {currentPrice || 'None'}</p>
+ *
  *       <button onClick={() => handleFilterChange({ category: 'electronics' })}>
  *         Electronics
+ *       </button>
+ *
+ *       <button onClick={() => handleFilterChange({ category: undefined, price: undefined })}>
+ *         Clear Filters
  *       </button>
  *     </div>
  *   );
@@ -67,9 +83,8 @@ type ParamsType = Record<string, string | number | boolean | undefined>;
  * ```
  */
 
-function useScopedParams(scope: string = "") {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
+function useScopedParams(searchString: string, scope: string = "") {
+  const searchParams = new URLSearchParams(searchString);
   const prefix = scope ? `${scope}:` : "";
 
   const updateSearchParams = (params: ParamsType) => {
