@@ -1,7 +1,7 @@
 import { Loader2, LucideIcon } from "lucide-react";
 import { ButtonHTMLAttributes } from "react";
 
-import { IconRenderer } from "../../services/IconRenderer";
+import { IconRenderer } from "../../services/iconRenderer";
 import "./styles.css";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -93,9 +93,9 @@ function Button(props: ButtonProps) {
       </div>
 
       <div className="arkynButtonContent">
-        <IconRenderer iconSize={iconSize} Icon={leftIcon} />
+        <IconRenderer iconSize={iconSize} icon={leftIcon} />
         {children}
-        <IconRenderer iconSize={iconSize} Icon={rightIcon} />
+        <IconRenderer iconSize={iconSize} icon={rightIcon} />
       </div>
     </button>
   );

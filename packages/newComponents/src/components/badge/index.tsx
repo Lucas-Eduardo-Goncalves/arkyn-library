@@ -1,7 +1,7 @@
 import { LucideIcon } from "lucide-react";
 import { HTMLAttributes } from "react";
 
-import { IconRenderer } from "../../services/IconRenderer";
+import { IconRenderer } from "../../services/iconRenderer";
 import "./styles.css";
 
 type BadgeProps = HTMLAttributes<HTMLDivElement> & {
@@ -70,9 +70,9 @@ function Badge(props: BadgeProps) {
 
   return (
     <div className={className.trim()} {...rest}>
-      <IconRenderer iconSize={iconSize} Icon={leftIcon} />
+      <IconRenderer iconSize={iconSize} icon={leftIcon} />
       <p>{children}</p>
-      <IconRenderer iconSize={iconSize} Icon={rightIcon} />
+      <IconRenderer iconSize={iconSize} icon={rightIcon} />
     </div>
   );
 }
