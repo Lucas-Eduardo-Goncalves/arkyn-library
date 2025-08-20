@@ -27,6 +27,7 @@ export { MultiSelect } from "./components/multiSelect";
 export { RadioBox } from "./components/radio/radioBox";
 export { RadioGroup } from "./components/radio/radioGroup";
 export { Slider } from "./components/slider";
+export { Switch } from "./components/switch";
 export { TabButton } from "./components/tab/tabButton";
 export { TabContainer } from "./components/tab/tabContainer";
 export { Tooltip } from "./components/tooltip";

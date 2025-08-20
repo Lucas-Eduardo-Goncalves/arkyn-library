@@ -1,0 +1,90 @@
+.arkynSwitch {
+  position: relative;
+
+  border: 1px solid transparent;
+  border-radius: 999999px;
+
+  transition: all 0.3s ease-in-out;
+}
+
+.arkynSwitch:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.arkynSwitch::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  border-radius: 50%;
+  background-color: white;
+  transition: all 0.2s;
+  transform: translateX(-2px);
+}
+
+.arkynSwitch.checkedTrue {
+  background-color: rgba(var(--spotlight-primary), 1);
+}
+
+.arkynSwitch.checkedFalse {
+  background-color: var(--border);
+}
+
+.arkynSwitch.checkedTrue::before {
+  transform: translateX(3px);
+}
+
+.arkynSwitch.sm {
+  min-width: 32px;
+  max-width: 32px;
+  min-height: 16px;
+  max-height: 16px;
+}
+
+.arkynSwitch.sm::before {
+  min-height: 10px;
+  max-height: 10px;
+  min-width: 10px;
+  max-width: 10px;
+}
+
+.arkynSwitch.sm.checkedFalse::before {
+  transform: translateX(-13px);
+}
+
+.arkynSwitch.md {
+  min-width: 40px;
+  max-width: 40px;
+  min-height: 20px;
+  max-height: 20px;
+}
+
+.arkynSwitch.md::before {
+  min-height: 14px;
+  max-height: 14px;
+  min-width: 14px;
+  max-width: 14px;
+}
+
+.arkynSwitch.md.checkedFalse::before {
+  transform: translateX(-17px);
+}
+
+.arkynSwitch.lg {
+  min-width: 48px;
+  max-width: 48px;
+  min-height: 24px;
+  max-height: 24px;
+}
+
+.arkynSwitch.lg::before {
+  min-height: 18px;
+  max-height: 18px;
+  min-width: 18px;
+  max-width: 18px;
+}
+
+.arkynSwitch.lg.checkedFalse::before {
+  transform: translateX(-21px);
+}
