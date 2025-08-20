@@ -1,8 +1,8 @@
-import type { Schema } from "zod";
+import type { ZodType } from "zod";
 
 type SuccessResponse<T extends FormParseProps> = {
   success: true;
-  data: T[1] extends Schema<infer U> ? U : never;
+  data: T[1] extends ZodType<infer U> ? U : never;
 };
 
 type ErrorResponse = {
@@ -11,7 +11,7 @@ type ErrorResponse = {
   fieldErrors: { [x: string]: string };
 };
 
-type FormParseProps = [formData: { [k: string]: any }, schema: Schema];
+type FormParseProps = [formData: { [k: string]: any }, schema: ZodType];
 
 type FormParseReturnType<T extends FormParseProps> =
   | SuccessResponse<T>
@@ -64,10 +64,10 @@ function formParse<T extends FormParseProps>([
 
   if (zodResponse.success === false) {
     const errorsObject = Object.fromEntries(
-      zodResponse.error.errors.map((item) => [
-        item.path.join("."),
-        item.message,
-      ])
+      zodResponse.error.issues.map((item) => {
+        console.log(item);
+        return [item.path.join("."), item.message];
+      })
     );
 
     return {
@@ -76,7 +76,10 @@ function formParse<T extends FormParseProps>([
       fields: formData,
     };
   } else {
-    return { success: zodResponse.success, data: zodResponse.data };
+    return {
+      success: zodResponse.success,
+      data: zodResponse.data as T[1] extends ZodType<infer U> ? U : never,
+    };
   }
 }
 

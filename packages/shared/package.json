@@ -19,7 +19,7 @@
   "devDependencies": {
     "@types/uuid": "^10.0.0",
     "bun-types": "latest",
-    "vitest": "^3.1.1",
-    "typescript": "^5.8.3"
+    "vitest": "^3.2.4",
+    "typescript": "^5.9.2"
   }
 }

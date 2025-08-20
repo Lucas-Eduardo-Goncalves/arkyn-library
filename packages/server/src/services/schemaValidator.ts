@@ -1,4 +1,4 @@
-import { Schema, z } from "zod";
+import { ZodType, z } from "zod";
 
 import { ServerError } from "../http/badResponses/serverError";
 import { UnprocessableEntity } from "../http/badResponses/unprocessableEntity";
@@ -15,7 +15,7 @@ function formatErrorMessage(error: z.ZodError) {
   return [title, ...lines].join("\n");
 }
 
-class SchemaValidator<T extends Schema> {
+class SchemaValidator<T extends ZodType> {
   functionName: string;
   callerInfo: string;
 
@@ -29,7 +29,7 @@ class SchemaValidator<T extends Schema> {
     return this.schema.safeParse(data).success;
   }
 
-  safeValidate(data: any): z.SafeParseReturnType<z.infer<T>, z.infer<T>> {
+  safeValidate(data: any): z.ZodSafeParseResult<z.infer<T>> {
     return this.schema.safeParse(data);
   }
 
@@ -59,7 +59,7 @@ class SchemaValidator<T extends Schema> {
       );
     }
 
-    return formParsed.data;
+    return formParsed.data as z.infer<T>;
   }
 }
 

@@ -26,6 +26,10 @@
     "jsx": "react-jsx",
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "module": "ESNext",
-    "target": "ESNext"
+    "target": "ESNext",
+    "paths": {
+      "@components": ["./src/index.ts"],
+      "@components/*": ["./src/*"]
+    }
   }
 }

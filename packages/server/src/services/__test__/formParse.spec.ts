@@ -42,9 +42,7 @@ describe("formParse", () => {
 
   it("should handle missing fields gracefully", () => {
     const schema = z.object({
-      name: z
-        .string({ required_error: "Name is required" })
-        .min(1, "Name is required"),
+      name: z.string({ error: "Name is required" }).min(1, "Name is required"),
       age: z.number().min(18, "Must be at least 18"),
     });
 
