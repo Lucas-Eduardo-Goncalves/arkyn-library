@@ -1,0 +1,23 @@
+# Development files
+src/
+node_modules/
+
+# Config files
+tsconfig.json
+.env*
+
+# Git files
+.git/
+.gitignore
+
+# IDE files
+.vscode/
+.idea/
+
+# Test files
+**/*.test.*
+**/*.spec.*
+
+# Build artifacts (keep only dist/)
+*.log
+*.tmp
