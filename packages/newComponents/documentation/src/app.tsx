@@ -19,6 +19,7 @@ import { TabExamples } from "./components/examples.tab";
 import { TooltipExamples } from "./components/examples.tooltip";
 import { RadioExamples } from "./components/examples.radio";
 import { SwitchExamples } from "./components/examples.switch";
+import { TextareaExamples } from "./components/examples.texarea";
 
 function App() {
   const [selectedOption, setSelectedOption] = useState<string[]>([]);
@@ -42,6 +43,7 @@ function App() {
     { label: "Slider", value: "slider" },
     { label: "Switch", value: "switch" },
     { label: "Tab", value: "tab" },
+    { label: "Textarea", value: "textarea" },
     { label: "Tooltip", value: "tooltip" },
   ];
 
@@ -79,6 +81,7 @@ function App() {
       {showExamples("slider") && <SliderExamples />}
       {showExamples("switch") && <SwitchExamples />}
       {showExamples("tab") && <TabExamples />}
+      {showExamples("textarea") && <TextareaExamples />}
       {showExamples("tooltip") && <TooltipExamples />}
     </div>
   );

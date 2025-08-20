@@ -1,7 +1,9 @@
 import type { TextareaHTMLAttributes } from "react";
 
 type TextareaProps = {
-  isError?: boolean;
+  label?: string;
+  showAsterisk?: boolean;
+  errorMessage?: string;
 
   size?: "md" | "lg";
   variant?: "solid" | "outline";

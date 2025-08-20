@@ -30,6 +30,7 @@ export { Slider } from "./components/slider";
 export { Switch } from "./components/switch";
 export { TabButton } from "./components/tab/tabButton";
 export { TabContainer } from "./components/tab/tabContainer";
+export { Textarea } from "./components/textarea";
 export { Tooltip } from "./components/tooltip";
 
 // hooks
