@@ -59,8 +59,13 @@ function AlertContainer(props: AlertContainerProps) {
       } else if (nodes && typeof nodes === "object" && "type" in nodes) {
         if (nodes.type === AlertTitle) {
           found = true;
-        } else if (nodes.props && nodes.props.children) {
-          searchForAlertTitle(nodes.props.children);
+        } else if (
+          nodes.props &&
+          typeof nodes.props === "object" &&
+          nodes.props !== null &&
+          "children" in nodes.props
+        ) {
+          searchForAlertTitle((nodes.props as any).children);
         }
       }
     };
