@@ -1,0 +1,50 @@
+.arkynPhoneInputCountryOption {
+  display: flex;
+  align-items: center;
+
+  font-weight: 400;
+  line-height: 21.79px;
+
+  color: var(--text-body);
+  user-select: none;
+  gap: 10px;
+}
+.arkynPhoneInputCountryOption > span {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21.79px;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+.arkynPhoneInputCountryOption.md {
+  font-size: 14px;
+  padding: 8px 16px;
+}
+.arkynPhoneInputCountryOption.lg {
+  font-size: 16px;
+  padding: 8px 16px;
+}
+.arkynPhoneInputCountryOption .flag {
+  max-height: 20px;
+  max-width: 30px;
+  border-radius: 4px;
+}
+.arkynPhoneInputCountryOption .check {
+  margin-left: auto;
+  display: none;
+  height: 20px;
+  width: 20px;
+  color: rgba(var(--spotlight-primary), 1);
+}
+.arkynPhoneInputCountryOption:hover {
+  cursor: pointer;
+  background-color: var(--card-foreground-primary);
+}
+.arkynPhoneInputCountryOption.active {
+  font-weight: 600;
+  color: var(--text-heading);
+  background-color: var(--card-foreground-primary);
+}
+.arkynPhoneInputCountryOption.active svg {
+  display: unset;
+}

@@ -1,0 +1,59 @@
+/* BASE CSS */
+.arkynPhoneInputContainer {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+
+  padding: 0 16px;
+  gap: 8px;
+  border-radius: 6px;
+
+  border: 1px solid transparent;
+  outline: 1px solid transparent;
+
+  min-height: 40px;
+  max-height: 40px;
+}
+.arkynPhoneInputContainer:hover {
+  cursor: text;
+}
+.arkynPhoneInputContainer.opacity {
+  opacity: 0.5;
+}
+
+/* VARIANTS */
+.arkynPhoneInputContainer.solid {
+  border-color: var(--border);
+  background-color: rgba(var(--input-background), 1);
+}
+.arkynPhoneInputContainer.solid.errored {
+  border-color: rgba(var(--spotlight-danger), 1);
+  outline-color: rgba(var(--spotlight-danger), 1);
+}
+.arkynPhoneInputContainer:not(.opacity).solid.focused {
+  border-color: rgba(var(--spotlight-primary), 1);
+  outline-color: rgba(var(--spotlight-primary), 1);
+}
+.arkynPhoneInputContainer.outline {
+  border-color: var(--border);
+}
+.arkynPhoneInputContainer.outline.errored {
+  border-color: rgba(var(--spotlight-danger), 1);
+  outline-color: rgba(var(--spotlight-danger), 1);
+}
+.arkynPhoneInputContainer:not(.opacity).outline.focused {
+  border-color: rgba(var(--spotlight-primary), 1);
+  outline-color: rgba(var(--spotlight-primary), 1);
+}
+
+/* SIZE */
+.arkynPhoneInputContainer.md {
+  min-height: 42px;
+  max-height: 42px;
+}
+.arkynPhoneInputContainer.lg {
+  min-height: 46px;
+  max-height: 46px;
+}

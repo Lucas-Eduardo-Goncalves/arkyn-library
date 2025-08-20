@@ -20,6 +20,7 @@ import { TooltipExamples } from "./components/examples.tooltip";
 import { RadioExamples } from "./components/examples.radio";
 import { SwitchExamples } from "./components/examples.switch";
 import { TextareaExamples } from "./components/examples.texarea";
+import { PhoneInputExamples } from "./components/examples.phoneInput";
 
 function App() {
   const [selectedOption, setSelectedOption] = useState<string[]>([]);
@@ -39,6 +40,7 @@ function App() {
     { label: "MaskedInput", value: "masked-input" },
     { label: "Modal", value: "modal" },
     { label: "MultiSelect", value: "multi-select" },
+    { label: "PhoneInput", value: "phone-input" },
     { label: "Radio", value: "radio" },
     { label: "Slider", value: "slider" },
     { label: "Switch", value: "switch" },
@@ -77,6 +79,7 @@ function App() {
       {showExamples("masked-input") && <MaskedInputExamples />}
       {showExamples("modal") && <ModalExamples />}
       {showExamples("multi-select") && <MultiSelectExamples />}
+      {showExamples("phone-input") && <PhoneInputExamples />}
       {showExamples("radio") && <RadioExamples />}
       {showExamples("slider") && <SliderExamples />}
       {showExamples("switch") && <SwitchExamples />}

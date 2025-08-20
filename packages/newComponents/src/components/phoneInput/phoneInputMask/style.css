@@ -1,0 +1,36 @@
+.phoneInputMask {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  margin-left: 8px;
+}
+
+/* SIZE */
+.phoneInputMask.md {
+  min-height: 40px;
+  max-height: 40px;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 400;
+}
+
+.phoneInputMask.md::placeholder {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.phoneInputMask.lg {
+  min-height: 44px;
+  max-height: 44px;
+  line-height: 16px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.phoneInputMask.lg::placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+}

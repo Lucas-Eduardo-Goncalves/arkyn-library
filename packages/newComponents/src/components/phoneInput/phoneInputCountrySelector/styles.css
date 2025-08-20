@@ -1,0 +1,26 @@
+.phoneInputSelectCountry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  min-width: 58px;
+}
+
+.phoneInputSelectCountry .flag {
+  max-height: 20px;
+  max-width: 30px;
+  border-radius: 4px;
+}
+
+.phoneInputSelectCountry .chevronDown {
+  min-height: 12px;
+  max-height: 12px;
+  min-width: 12px;
+  max-width: 12px;
+  color: var(--text-muted);
+}
+
+.phoneInputSelectCountry > .arkynDivider {
+  min-width: 1px;
+  min-height: 20px;
+}
