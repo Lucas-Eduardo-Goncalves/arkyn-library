@@ -21,7 +21,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 16px;
-  gap: 16px;
+  gap: 32px;
   border: 1px solid var(--border);
   border-radius: 8px;
   width: 100%;
@@ -33,6 +33,6 @@ body {
 }
 
 .row:not(:last-child) {
-  padding-bottom: 16px;
+  padding-bottom: 32px;
   border-bottom: 1px solid var(--border);
 }

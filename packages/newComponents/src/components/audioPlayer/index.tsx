@@ -1,7 +1,7 @@
-import { useSlider } from "@components";
 import { Pause, Play } from "lucide-react";
 import { AudioHTMLAttributes, useEffect, useRef, useState } from "react";
 
+import { useSlider } from "../../hooks/useSlider";
 import { Slider } from "../slider";
 import "./styles.css";
 

@@ -24,6 +24,8 @@ export { ModalContainer } from "./components/modal/modalContainer";
 export { ModalFooter } from "./components/modal/modalFooter";
 export { ModalHeader } from "./components/modal/modalHeader";
 export { MultiSelect } from "./components/multiSelect";
+export { RadioBox } from "./components/radio/radioBox";
+export { RadioGroup } from "./components/radio/radioGroup";
 export { Slider } from "./components/slider";
 export { TabButton } from "./components/tab/tabButton";
 export { TabContainer } from "./components/tab/tabContainer";

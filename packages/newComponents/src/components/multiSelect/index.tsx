@@ -1,9 +1,9 @@
 import { LucideIcon } from "lucide-react";
-import { FocusEvent, useEffect, useId, useRef, useState } from "react";
+import { FocusEvent, useId, useRef, useState } from "react";
 
 import { useForm } from "../../hooks/useForm";
+import { IconRenderer } from "../../services/iconRenderer";
 
-import { IconRenderer } from "@components/services/iconRenderer";
 import { FieldError } from "../fieldError";
 import { FieldLabel } from "../fieldLabel";
 import { FieldWrapper } from "../fieldWrapper";

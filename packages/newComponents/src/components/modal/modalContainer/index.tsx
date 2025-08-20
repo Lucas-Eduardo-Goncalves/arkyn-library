@@ -1,7 +1,7 @@
-import { useScrollLock } from "@components";
 import { AnimatePresence, motion } from "framer-motion";
 import { HTMLAttributes } from "react";
 
+import { useScrollLock } from "../../../hooks/useScrollLock";
 import { ModalProvider } from "../modalContext";
 import "./styles.css";
 

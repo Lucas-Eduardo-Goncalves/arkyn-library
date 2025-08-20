@@ -1,0 +1,95 @@
+.arkynRadioBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: var(--text-body);
+  font-size: 14px;
+  line-height: 19.07px;
+}
+
+.arkynRadioBox > button {
+  position: relative;
+  background-color: rgba(var(--spotlight-secondary), 1);
+
+  border: 2px solid var(--border);
+  border-radius: 99999px;
+}
+
+.arkynRadioBox > button:not(:disabled):hover {
+  cursor: pointer;
+}
+
+.arkynRadioBox.checkedTrue > button {
+  border-color: rgba(var(--spotlight-primary), 1);
+}
+
+.arkynRadioBox.errorTrue > button {
+  border-color: rgba(var(--spotlight-danger), 1);
+}
+
+.arkynRadioBox.checkedTrue > button::before {
+  content: "  ";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 99999px;
+  background-color: rgba(var(--spotlight-primary), 1);
+}
+
+.arkynRadioBox.sm > button {
+  min-height: 20px;
+  min-width: 20px;
+
+  max-height: 20px;
+  max-width: 20px;
+}
+
+.arkynRadioBox.md > button {
+  min-height: 24px;
+  min-width: 24px;
+
+  max-height: 24px;
+  max-width: 24px;
+}
+
+.arkynRadioBox.lg > button {
+  min-height: 24px;
+  min-width: 24px;
+
+  max-height: 24px;
+  max-width: 24px;
+}
+
+.arkynRadioBox.checkedTrue.sm > button::before {
+  min-height: 10px;
+  min-width: 10px;
+
+  max-height: 10px;
+  max-width: 10px;
+}
+
+.arkynRadioBox.checkedTrue.md > button::before {
+  min-height: 12px;
+  min-width: 12px;
+
+  max-height: 12px;
+  max-width: 12px;
+}
+
+.arkynRadioBox.checkedTrue.lg > button::before {
+  min-height: 12px;
+  min-width: 12px;
+
+  max-height: 12px;
+  max-width: 12px;
+}
+
+.arkynRadioBox.disabledTrue {
+  opacity: 0.5;
+}
+
+.arkynRadioBox.disabledTrue > button {
+  cursor: not-allowed;
+}
