@@ -1,9 +1,11 @@
 import { MultiSelect } from "@components";
+import { useState } from "react";
 import { AlertExamples } from "./components/examples.alert";
 import { AudioPlayerExamples } from "./components/examples.audioPlayer";
 import { BadgeExamples } from "./components/examples.badge";
 import { ButtonExamples } from "./components/examples.button";
 import { CardTabExamples } from "./components/examples.cardTab";
+import { CheckboxExamples } from "./components/examples.checkbox";
 import { CurrencyInputExamples } from "./components/examples.currencyInput";
 import { DividerExamples } from "./components/examples.divider";
 import { DrawerExamples } from "./components/examples.drawer";
@@ -11,12 +13,10 @@ import { IconButtonExamples } from "./components/examples.iconButton";
 import { InputExamples } from "./components/examples.input";
 import { MaskedInputExamples } from "./components/examples.maskedInput";
 import { ModalExamples } from "./components/examples.modal";
+import { MultiSelectExamples } from "./components/examples.multiSelect";
 import { SliderExamples } from "./components/examples.slider";
 import { TabExamples } from "./components/examples.tab";
 import { TooltipExamples } from "./components/examples.tooltip";
-import { useState } from "react";
-import { Row } from "./ui/row";
-import { MultiSelectExamples } from "./components/examples.multiSelect";
 
 function App() {
   const [selectedOption, setSelectedOption] = useState<string[]>([]);
@@ -27,6 +27,7 @@ function App() {
     { label: "Badge", value: "badge" },
     { label: "Button", value: "button" },
     { label: "CardTab", value: "card-tab" },
+    { label: "Checkbox", value: "checkbox" },
     { label: "CurrencyInput", value: "currency-input" },
     { label: "Divider", value: "divider" },
     { label: "Drawer", value: "drawer" },
@@ -61,6 +62,7 @@ function App() {
       {showExamples("badge") && <BadgeExamples />}
       {showExamples("button") && <ButtonExamples />}
       {showExamples("card-tab") && <CardTabExamples />}
+      {showExamples("checkbox") && <CheckboxExamples />}
       {showExamples("currency-input") && <CurrencyInputExamples />}
       {showExamples("divider") && <DividerExamples />}
       {showExamples("drawer") && <DrawerExamples />}
