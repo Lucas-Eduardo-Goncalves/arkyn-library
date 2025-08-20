@@ -1,13 +1,17 @@
 {
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/.server/**/*.ts",
-    "**/.server/**/*.tsx",
-    "**/.client/**/*.ts",
-    "**/.client/**/*.tsx"
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "documentation/**/*",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "**/*.config.ts",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
   ],
-  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "outDir": "./dist",
     "composite": false,

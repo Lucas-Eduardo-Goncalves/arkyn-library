@@ -2,7 +2,7 @@
   "name": "@arkyn/components",
   "version": "3.0.1-beta.21",
   "main": "./dist/bundle.js",
-  "types": "./dist/src/index.d.ts",
+  "types": "./dist/index.d.ts",
   "type": "module",
   "private": false,
   "license": "Apache-2.0",

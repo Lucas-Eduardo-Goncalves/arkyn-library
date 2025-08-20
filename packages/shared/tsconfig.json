@@ -15,6 +15,13 @@
     "types": ["bun-types"],
     "verbatimModuleSyntax": true
   },
-  "exclude": ["dist", "node_modules", "**/__test__"],
-  "include": ["src/**/*.ts", "src/**/*.ts"]
+  "exclude": [
+    "dist",
+    "node_modules",
+    "**/__test__/**/*",
+    "**/*.test.*",
+    "**/*.spec.*",
+    "vitest.config.ts"
+  ],
+  "include": ["src/**/*.ts"]
 }

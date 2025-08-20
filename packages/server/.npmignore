@@ -1,0 +1,28 @@
+# Development files
+src/
+node_modules/
+
+# Config files
+tsconfig.json
+vitest.config.ts
+.env*
+
+# Git files
+.git/
+.gitignore
+
+# IDE files
+.vscode/
+.idea/
+
+# Test files
+**/*.test.*
+**/*.spec.*
+**/__test__/
+
+# Build artifacts (keep only dist/)
+*.log
+*.tmp
+
+# Documentation (if any)
+README.md

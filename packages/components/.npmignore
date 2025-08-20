@@ -1,0 +1,29 @@
+# Development files
+src/
+documentation/
+node_modules/
+
+# Config files
+tsconfig.json
+vite.config.ts
+vitest.config.ts
+.env*
+
+# Development dependencies
+variables.css
+
+# Git files
+.git/
+.gitignore
+
+# IDE files
+.vscode/
+.idea/
+
+# Test files
+**/*.test.*
+**/*.spec.*
+
+# Build artifacts (keep only dist/)
+*.log
+*.tmp
