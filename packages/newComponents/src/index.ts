@@ -22,6 +22,7 @@ export { MaskedInput } from "./components/maskedInput";
 export { ModalContainer } from "./components/modal/modalContainer";
 export { ModalFooter } from "./components/modal/modalFooter";
 export { ModalHeader } from "./components/modal/modalHeader";
+export { MultiSelect } from "./components/multiSelect";
 export { Slider } from "./components/slider";
 export { TabButton } from "./components/tab/tabButton";
 export { TabContainer } from "./components/tab/tabContainer";

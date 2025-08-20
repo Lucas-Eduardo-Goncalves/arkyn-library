@@ -1,0 +1,44 @@
+.arkynMultiSelectMark {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  border-radius: 4px;
+  background: var(--card-foreground-third);
+
+  padding: 2px 6px;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19.07px;
+  text-align: left;
+  z-index: 6;
+  user-select: none;
+}
+
+.arkynMultiSelectMark button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: inherit;
+
+  width: 15px;
+  height: 15px;
+}
+
+.arkynMultiSelectMark button:disabled {
+  cursor: not-allowed;
+}
+
+.arkynMultiSelectMark button:hover:not(:disabled) {
+  cursor: pointer;
+  filter: brightness(0.9);
+}
+
+.arkynMultiSelectMark button svg {
+  min-width: 10px;
+  min-height: 10px;
+  color: var(--text-muted);
+}

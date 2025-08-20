@@ -1,0 +1,37 @@
+.arkynMultiSelectOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-weight: 400;
+  line-height: 21.79px;
+
+  color: var(--text-body);
+  user-select: none;
+}
+.arkynMultiSelectOption.md {
+  font-size: 14px;
+  padding: 8px 16px;
+}
+.arkynMultiSelectOption.lg {
+  font-size: 16px;
+  padding: 8px 16px;
+}
+.arkynMultiSelectOption svg {
+  display: none;
+  height: 20px;
+  width: 20px;
+  color: rgba(var(--spotlight-primary), 1);
+}
+.arkynMultiSelectOption:hover {
+  cursor: pointer;
+  background-color: var(--card-foreground-primary);
+}
+.arkynMultiSelectOption.active {
+  font-weight: 600;
+  color: var(--text-heading);
+  background-color: var(--card-foreground-primary);
+}
+.arkynMultiSelectOption.active svg {
+  display: unset;
+}

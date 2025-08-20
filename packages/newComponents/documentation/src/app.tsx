@@ -1,3 +1,4 @@
+import { MultiSelect } from "@components";
 import { AlertExamples } from "./components/examples.alert";
 import { AudioPlayerExamples } from "./components/examples.audioPlayer";
 import { BadgeExamples } from "./components/examples.badge";
@@ -13,27 +14,64 @@ import { ModalExamples } from "./components/examples.modal";
 import { SliderExamples } from "./components/examples.slider";
 import { TabExamples } from "./components/examples.tab";
 import { TooltipExamples } from "./components/examples.tooltip";
+import { useState } from "react";
+import { Row } from "./ui/row";
+import { MultiSelectExamples } from "./components/examples.multiSelect";
 
 function App() {
+  const [selectedOption, setSelectedOption] = useState<string[]>([]);
+
+  const options = [
+    { label: "Alert", value: "alert" },
+    { label: "AudioPlayer", value: "audio-player" },
+    { label: "Badge", value: "badge" },
+    { label: "Button", value: "button" },
+    { label: "CardTab", value: "card-tab" },
+    { label: "CurrencyInput", value: "currency-input" },
+    { label: "Divider", value: "divider" },
+    { label: "Drawer", value: "drawer" },
+    { label: "IconButton", value: "icon-button" },
+    { label: "Input", value: "input" },
+    { label: "MaskedInput", value: "masked-input" },
+    { label: "Modal", value: "modal" },
+    { label: "MultiSelect", value: "multi-select" },
+    { label: "Slider", value: "slider" },
+    { label: "Tab", value: "tab" },
+    { label: "Tooltip", value: "tooltip" },
+  ];
+
+  function showExamples(value: string): boolean {
+    return selectedOption.includes(value);
+  }
+
   return (
     <div
       style={{ display: "flex", flexDirection: "column", gap: 40, padding: 40 }}
     >
-      <AlertExamples />
-      <AudioPlayerExamples />
-      <BadgeExamples />
-      <ButtonExamples />
-      <CardTabExamples />
-      <CurrencyInputExamples />
-      <DividerExamples />
-      <DrawerExamples />
-      <IconButtonExamples />
-      <InputExamples />
-      <MaskedInputExamples />
-      <ModalExamples />
-      <SliderExamples />
-      <TabExamples />
-      <TooltipExamples />
+      <MultiSelect
+        isSearchable
+        label="Select the examples:"
+        name="selectedOptions"
+        options={options}
+        onChange={setSelectedOption}
+      />
+
+      {showExamples("alert") && <AlertExamples />}
+      {showExamples("audio-player") && <AudioPlayerExamples />}
+      {showExamples("badge") && <BadgeExamples />}
+      {showExamples("button") && <ButtonExamples />}
+      {showExamples("card-tab") && <CardTabExamples />}
+      {showExamples("currency-input") && <CurrencyInputExamples />}
+      {showExamples("divider") && <DividerExamples />}
+      {showExamples("drawer") && <DrawerExamples />}
+      {showExamples("icon-button") && <IconButtonExamples />}
+      {showExamples("input") && <InputExamples />}
+      {showExamples("masked-input") && <MaskedInputExamples />}
+      {showExamples("modal") && <ModalExamples />}
+      {showExamples("multi-select") && <MultiSelectExamples />}
+      {showExamples("slider") && <SliderExamples />}
+      {showExamples("tab") && <TabExamples />}
+      {showExamples("tooltip") && <TooltipExamples />}
     </div>
   );
 }

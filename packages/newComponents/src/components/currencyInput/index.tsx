@@ -7,12 +7,11 @@ import {
   useRef,
   useState,
   type FocusEvent,
-  type KeyboardEvent,
 } from "react";
 
 import { useForm } from "../../hooks/useForm";
 import { IconRenderer } from "../../services/iconRenderer";
-import { maskValues } from "../../services/maskValues";
+import { maskCurrencyValues } from "../../services/maskCurrencyValues";
 
 import { FieldError } from "../fieldError";
 import { FieldLabel } from "../fieldLabel";
@@ -221,7 +220,7 @@ function CurrencyInput(props: CurrencyInputProps) {
   }
 
   const updateValues = (originalValue: string | number) => {
-    const [calculatedValue, calculatedMaskedValue] = maskValues(
+    const [calculatedValue, calculatedMaskedValue] = maskCurrencyValues(
       originalValue,
       locale
     );
@@ -231,7 +230,7 @@ function CurrencyInput(props: CurrencyInputProps) {
       return [calculatedValue, calculatedMaskedValue];
     }
 
-    return maskValues(originalValue, locale);
+    return maskCurrencyValues(originalValue, locale);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -243,7 +242,7 @@ function CurrencyInput(props: CurrencyInputProps) {
 
   useEffect(() => {
     const currentValue = value || +defaultValue || undefined;
-    const [, maskedValue] = maskValues(currentValue, locale);
+    const [, maskedValue] = maskCurrencyValues(currentValue, locale);
 
     setMaskedValue(maskedValue);
   }, [locale, defaultValue, value]);

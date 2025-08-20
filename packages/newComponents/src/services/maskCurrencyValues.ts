@@ -39,16 +39,16 @@ function normalizeValue(number: string | number) {
   return +removeNonNumeric(String(safeNumber)) / 10 ** 2;
 }
 
-const maskValues = (
+function maskCurrencyValues(
   inputFieldValue: string | number | undefined,
   locale: Locale
-): [number, string] => {
+): [number, string] {
   if (!inputFieldValue) return [0, formatToCurrency(0, locale)];
 
   const value = normalizeValue(inputFieldValue);
   const maskedValue = formatToCurrency(value, locale);
 
   return [value, maskedValue];
-};
+}
 
-export { maskValues };
+export { maskCurrencyValues };
