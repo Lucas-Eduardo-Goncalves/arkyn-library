@@ -20,6 +20,7 @@ export { FieldLabel } from "./components/fieldLabel";
 export { FieldWrapper } from "./components/fieldWrapper";
 export { FileUpload } from "./components/fileUpload";
 export { IconButton } from "./components/iconButton";
+export { ImageUpload } from "./components/imageUpload";
 export { Input } from "./components/input";
 export { MaskedInput } from "./components/maskedInput";
 export { ModalContainer } from "./components/modal/modalContainer";

@@ -1,4 +1,4 @@
-.arkynFileUpload {
+.arkynImageUpload {
   outline: 1px solid transparent;
 
   border-width: 1px;
@@ -6,21 +6,21 @@
   border-radius: 8px;
 
   width: 100%;
-  height: 127px;
+  height: 174px;
   max-width: 475px;
 
   background: rgba(var(--spotlight-secondary), 1);
 }
 
-.arkynFileUpload.hasFile {
+.arkynImageUpload.hasImage {
   border-style: solid;
 }
 
-.arkynFileUpload.noHasFile {
+.arkynImageUpload.noHasImage {
   border-style: dashed;
 }
 
-.arkynFileUpload.hasError {
+.arkynImageUpload.hasError {
   border-color: rgb(var(--spotlight-danger));
   outline-color: rgb(var(--spotlight-danger));
 }

@@ -12,6 +12,7 @@ import { DividerExamples } from "./components/examples.divider";
 import { DrawerExamples } from "./components/examples.drawer";
 import { FileUploadExamples } from "./components/examples.fileUpload";
 import { IconButtonExamples } from "./components/examples.iconButton";
+import { ImageUploadExamples } from "./components/examples.imageUpload";
 import { InputExamples } from "./components/examples.input";
 import { MaskedInputExamples } from "./components/examples.maskedInput";
 import { ModalExamples } from "./components/examples.modal";
@@ -40,6 +41,7 @@ function App() {
     { label: "Drawer", value: "drawer" },
     { label: "FileUpload", value: "file-upload" },
     { label: "IconButton", value: "icon-button" },
+    { label: "ImageUpload", value: "image-upload" },
     { label: "Input", value: "input" },
     { label: "MaskedInput", value: "masked-input" },
     { label: "Modal", value: "modal" },
@@ -81,6 +83,7 @@ function App() {
       {showExamples("drawer") && <DrawerExamples />}
       {showExamples("file-upload") && <FileUploadExamples />}
       {showExamples("icon-button") && <IconButtonExamples />}
+      {showExamples("image-upload") && <ImageUploadExamples />}
       {showExamples("input") && <InputExamples />}
       {showExamples("masked-input") && <MaskedInputExamples />}
       {showExamples("modal") && <ModalExamples />}
