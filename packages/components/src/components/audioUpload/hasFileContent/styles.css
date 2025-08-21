@@ -1,0 +1,59 @@
+.arkynAudioUploadHasFileContentContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 16px;
+}
+
+.arkynAudioUploadAudioPlayer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.arkynAudioUploadAudioPlayer button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  min-height: 40px;
+  min-width: 40px;
+  max-height: 40px;
+  max-width: 40px;
+
+  background-color: rgba(var(--spotlight-primary), 1);
+}
+
+.arkynAudioUploadAudioPlayer button:hover {
+  cursor: pointer;
+  background-color: rgba(var(--spotlight-primary), 0.8);
+}
+
+.arkynAudioUploadAudioPlayer button svg {
+  fill: #fff;
+  stroke: #fff;
+
+  min-height: 20px;
+  min-width: 20px;
+  max-height: 20px;
+  max-width: 20px;
+}
+
+.arkynAudioUploadAudioPlayer p {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 12px;
+  text-align: left;
+  color: var(--text-body);
+  user-select: none;
+}
+
+.arkynAudioUploadButtonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 8px;
+}

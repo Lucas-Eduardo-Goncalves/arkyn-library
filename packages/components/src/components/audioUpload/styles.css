@@ -1,0 +1,27 @@
+.arkynAudioUpload {
+  border-width: 1px;
+
+  outline: 1px solid transparent;
+
+  border-color: var(--border);
+  border-radius: 8px;
+
+  width: 100%;
+  height: 137px;
+  max-width: 475px;
+
+  background: rgba(var(--spotlight-secondary), 1);
+}
+
+.arkynAudioUpload.hasAudio {
+  border-style: solid;
+}
+
+.arkynAudioUpload.noHasAudio {
+  border-style: dashed;
+}
+
+.arkynAudioUpload.hasError {
+  border-color: rgb(var(--spotlight-danger));
+  outline-color: rgb(var(--spotlight-danger));
+}

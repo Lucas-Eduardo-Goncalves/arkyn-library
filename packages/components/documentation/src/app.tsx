@@ -21,6 +21,7 @@ import { RadioExamples } from "./components/examples.radio";
 import { SwitchExamples } from "./components/examples.switch";
 import { TextareaExamples } from "./components/examples.texarea";
 import { PhoneInputExamples } from "./components/examples.phoneInput";
+import { AudioUploadExamples } from "./components/examples.audioUpload";
 
 function App() {
   const [selectedOption, setSelectedOption] = useState<string[]>([]);
@@ -28,6 +29,7 @@ function App() {
   const options = [
     { label: "Alert", value: "alert" },
     { label: "AudioPlayer", value: "audio-player" },
+    { label: "AudioUpload", value: "audio-upload" },
     { label: "Badge", value: "badge" },
     { label: "Button", value: "button" },
     { label: "CardTab", value: "card-tab" },
@@ -67,6 +69,7 @@ function App() {
 
       {showExamples("alert") && <AlertExamples />}
       {showExamples("audio-player") && <AudioPlayerExamples />}
+      {showExamples("audio-upload") && <AudioUploadExamples />}
       {showExamples("badge") && <BadgeExamples />}
       {showExamples("button") && <ButtonExamples />}
       {showExamples("card-tab") && <CardTabExamples />}

@@ -32,7 +32,7 @@
     "prod:server": "cd packages/server && npm publish --tag latest",
     "prod:shared": "cd packages/shared && npm publish --tag latest",
     "prod:templates": "cd packages/templates && npm publish --tag latest",
-    "dev:components": "cd packages/newComponents && bun run dev"
+    "dev:components": "cd packages/components && bun run dev"
   },
   "type": "module",
   "workspaces": [
