@@ -2,6 +2,7 @@ import { MultiSelect } from "@components";
 import { useState } from "react";
 import { AlertExamples } from "./components/examples.alert";
 import { AudioPlayerExamples } from "./components/examples.audioPlayer";
+import { AudioUploadExamples } from "./components/examples.audioUpload";
 import { BadgeExamples } from "./components/examples.badge";
 import { ButtonExamples } from "./components/examples.button";
 import { CardTabExamples } from "./components/examples.cardTab";
@@ -9,19 +10,19 @@ import { CheckboxExamples } from "./components/examples.checkbox";
 import { CurrencyInputExamples } from "./components/examples.currencyInput";
 import { DividerExamples } from "./components/examples.divider";
 import { DrawerExamples } from "./components/examples.drawer";
+import { FileUploadExamples } from "./components/examples.fileUpload";
 import { IconButtonExamples } from "./components/examples.iconButton";
 import { InputExamples } from "./components/examples.input";
 import { MaskedInputExamples } from "./components/examples.maskedInput";
 import { ModalExamples } from "./components/examples.modal";
 import { MultiSelectExamples } from "./components/examples.multiSelect";
-import { SliderExamples } from "./components/examples.slider";
-import { TabExamples } from "./components/examples.tab";
-import { TooltipExamples } from "./components/examples.tooltip";
-import { RadioExamples } from "./components/examples.radio";
-import { SwitchExamples } from "./components/examples.switch";
-import { TextareaExamples } from "./components/examples.texarea";
 import { PhoneInputExamples } from "./components/examples.phoneInput";
-import { AudioUploadExamples } from "./components/examples.audioUpload";
+import { RadioExamples } from "./components/examples.radio";
+import { SliderExamples } from "./components/examples.slider";
+import { SwitchExamples } from "./components/examples.switch";
+import { TabExamples } from "./components/examples.tab";
+import { TextareaExamples } from "./components/examples.texarea";
+import { TooltipExamples } from "./components/examples.tooltip";
 
 function App() {
   const [selectedOption, setSelectedOption] = useState<string[]>([]);
@@ -37,6 +38,7 @@ function App() {
     { label: "CurrencyInput", value: "currency-input" },
     { label: "Divider", value: "divider" },
     { label: "Drawer", value: "drawer" },
+    { label: "FileUpload", value: "file-upload" },
     { label: "IconButton", value: "icon-button" },
     { label: "Input", value: "input" },
     { label: "MaskedInput", value: "masked-input" },
@@ -77,6 +79,7 @@ function App() {
       {showExamples("currency-input") && <CurrencyInputExamples />}
       {showExamples("divider") && <DividerExamples />}
       {showExamples("drawer") && <DrawerExamples />}
+      {showExamples("file-upload") && <FileUploadExamples />}
       {showExamples("icon-button") && <IconButtonExamples />}
       {showExamples("input") && <InputExamples />}
       {showExamples("masked-input") && <MaskedInputExamples />}

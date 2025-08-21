@@ -1,0 +1,40 @@
+.arkynFileUploadHasFileContent {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 16px;
+
+  height: 100%;
+  width: 100%;
+}
+
+.arkynFileUploadFileContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.arkynFileUploadFileContainer svg {
+  min-width: 26px;
+  min-height: 26px;
+
+  color: var(--text-heading);
+}
+
+.arkynFileUploadFileContainer p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  font-size: 14px;
+  font-weight: 400;
+  text-align: left;
+  color: var(--text-body);
+}
+
+.arkynFileUploadButtonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 8px;
+}
