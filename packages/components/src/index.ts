@@ -35,6 +35,11 @@ export { Slider } from "./components/slider";
 export { Switch } from "./components/switch";
 export { TabButton } from "./components/tab/tabButton";
 export { TabContainer } from "./components/tab/tabContainer";
+export { TableBody } from "./components/table/tableBody";
+export { TableCaption } from "./components/table/tableCaption";
+export { TableContainer } from "./components/table/tableContainer";
+export { TableFooter } from "./components/table/tableFooter";
+export { TableHeader } from "./components/table/tableHeader";
 export { Textarea } from "./components/textarea";
 export { Tooltip } from "./components/tooltip";
 

@@ -162,9 +162,12 @@ function Tooltip(props: TooltipProps) {
   return (
     <div className={className.trim()} {...rest} ref={tooltipRef}>
       {children}
-      <div className="arkynTooltipText" id={tooltipId}>
-        {text}
-      </div>
+
+      <div
+        className="arkynTooltipText"
+        id={tooltipId}
+        dangerouslySetInnerHTML={{ __html: text }}
+      />
     </div>
   );
 }
