@@ -21,6 +21,7 @@ export { generateSlug } from "./generators/generateSlug";
 // services
 export { calculateCardInstallment } from "./services/calculateCardInstallment";
 export { ensureQuotes } from "./services/ensureQuotes";
+export { isHtml } from "./services/isHtml";
 export { maskSensitiveData } from "./services/maskSensitiveData";
 export { removeCurrencySymbols } from "./services/removeCurrencySymbols";
 export { removeNonNumeric } from "./services/removeNonNumeric";

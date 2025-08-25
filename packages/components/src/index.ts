@@ -60,4 +60,5 @@ export { ModalProvider } from "./providers/modalProvider";
 export { ToastProvider } from "./providers/toastProvider";
 
 // services
-export { RichTextService } from "./services/richText";
+export { toHtml } from "./services/toHtml";
+export { toRichTextValue } from "./services/toRichTextValue";

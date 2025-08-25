@@ -116,7 +116,8 @@ function App() {
 
 ## Services
 
-- **RichTextService** - A comprehensive service for managing rich text editing functionality.
+- **toHtml** -
+- **toRichTextValue** -
 
 ## 🎨 Component Examples
 
