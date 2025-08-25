@@ -1,8 +1,8 @@
 {
   "name": "@arkyn/server",
-  "version": "3.0.1-beta.28",
+  "version": "3.0.1-beta.29",
   "author": "Arkyn | Lucas Gonçalves",
-  "main": "./dist/bundle.js",
+  "main": "./dist/index.js",
   "module": "./src/index.ts",
   "type": "module",
   "types": "./dist/index.d.ts",
