@@ -237,6 +237,7 @@ function MaskedInput(props: MaskedInputProps) {
           disabled={disabled}
           readOnly={readOnly}
           id={inputId}
+          name={name}
           {...rest}
         />
 

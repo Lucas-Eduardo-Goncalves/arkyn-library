@@ -289,6 +289,7 @@ function CurrencyInput(props: CurrencyInputProps) {
           onBlur={handleBlur}
           onChange={handleChange}
           id={inputId}
+          name={name}
           {...rest}
         />
 

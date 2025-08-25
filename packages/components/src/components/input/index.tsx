@@ -210,6 +210,7 @@ function Input(props: InputProps) {
           onBlur={handleBlur}
           type={type}
           id={inputId}
+          name={name}
           {...rest}
         />
 
