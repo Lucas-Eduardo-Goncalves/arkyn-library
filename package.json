@@ -1,5 +1,23 @@
 {
   "name": "arkyn",
+  "description": "A comprehensive TypeScript ecosystem for building modern web applications with React and Remix, featuring UI components, server utilities, shared tools, and data templates.",
+  "version": "1.0.0",
+  "author": "Arkyn | Lucas Gonçalves",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lucas-Eduardo-Goncalves/arkyn.git"
+  },
+  "keywords": [
+    "react",
+    "remix",
+    "typescript",
+    "ui-components",
+    "server-utilities",
+    "validation",
+    "formatting",
+    "monorepo"
+  ],
   "devDependencies": {
     "@arkyn/components": "workspace:*",
     "@arkyn/server": "workspace:*",

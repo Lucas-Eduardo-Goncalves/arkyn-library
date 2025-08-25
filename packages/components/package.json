@@ -7,7 +7,24 @@
   "private": false,
   "license": "Apache-2.0",
   "author": "Arkyn | Lucas Gonçalves",
-  "description": "Arkyn's component library for Remix applications.",
+  "description": "A modern React component library, featuring 40+ UI components, smooth animations, custom hooks, and TypeScript support.",
+  "keywords": [
+    "react",
+    "remix",
+    "components",
+    "ui",
+    "typescript",
+    "framer-motion",
+    "hooks",
+    "forms",
+    "design-system"
+  ],
+  "homepage": "https://docs.arkyn.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lucas-Eduardo-Goncalves/arkyn.git",
+    "directory": "packages/components"
+  },
   "scripts": {
     "dev": "bunx vite --config documentation/vite.config.ts",
     "build": "bunx vite build && tsc",

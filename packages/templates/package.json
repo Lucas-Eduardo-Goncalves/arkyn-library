@@ -5,6 +5,25 @@
   "module": "./src/index.ts",
   "type": "module",
   "types": "./dist/index.d.ts",
+  "license": "Apache-2.0",
+  "author": "Arkyn | Lucas Gonçalves",
+  "description": "Ready-to-use data templates including countries, Brazilian states, currencies, and locale information.",
+  "keywords": [
+    "templates",
+    "data",
+    "countries",
+    "brazilian-states",
+    "currencies",
+    "locale",
+    "internationalization",
+    "typescript"
+  ],
+  "homepage": "https://docs.arkyn.dev/en/templates/introduction",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lucas-Eduardo-Goncalves/arkyn.git",
+    "directory": "packages/templates"
+  },
   "scripts": {
     "clean": "rm -rf dist",
     "build": "bun run clean && bunx tsc --project tsconfig.json",

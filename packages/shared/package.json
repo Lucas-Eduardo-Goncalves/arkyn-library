@@ -6,7 +6,26 @@
   "type": "module",
   "types": "./dist/index.d.ts",
   "license": "Apache-2.0",
-  "description": "Shared utilities and types for projects.",
+  "author": "Arkyn | Lucas Gonçalves",
+  "description": "Comprehensive collection of reusable utilities for data formatting, validation, generation, and manipulation, featuring Brazilian document validators and financial tools.",
+  "keywords": [
+    "utilities",
+    "formatting",
+    "validation",
+    "brazilian-documents",
+    "cpf",
+    "cnpj",
+    "cep",
+    "currency",
+    "typescript",
+    "generators"
+  ],
+  "homepage": "https://docs.arkyn.dev/en/shared/introduction",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lucas-Eduardo-Goncalves/arkyn.git",
+    "directory": "packages/shared"
+  },
   "scripts": {
     "clean": "rm -rf dist",
     "build": "bun run clean && bunx tsc --project tsconfig.json",

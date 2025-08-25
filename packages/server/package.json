@@ -7,7 +7,24 @@
   "type": "module",
   "types": "./dist/index.d.ts",
   "license": "Apache-2.0",
-  "description": "Server-side utilities for projects.",
+  "description": "Comprehensive server-side utilities for building robust backend applications, featuring HTTP response helpers, error handlers, request utilities, and API configurations.",
+  "keywords": [
+    "server",
+    "http",
+    "api",
+    "utilities",
+    "error-handling",
+    "validation",
+    "remix",
+    "typescript",
+    "zod"
+  ],
+  "homepage": "https://docs.arkyn.dev/en/server/introduction",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lucas-Eduardo-Goncalves/arkyn.git",
+    "directory": "packages/server"
+  },
   "scripts": {
     "clean": "rm -rf dist",
     "build": "bun run clean && bunx tsc --project tsconfig.json",
@@ -22,8 +39,5 @@
     "bun-types": "latest",
     "vitest": "^3.2.4",
     "typescript": "^5.9.2"
-  },
-  "peerDependencies": {
-    "@react-router/node": "^7.6.2"
   }
 }
