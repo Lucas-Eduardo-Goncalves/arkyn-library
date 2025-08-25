@@ -111,6 +111,7 @@ function App() {
 - **useHydrated** - Check if component is hydrated
 - **useScopedParams** - URL parameter utilities
 - **useScrollLock** - Prevent page scrolling
+- **useToast** - Toast state management
 
 ## 🎨 Component Examples
 

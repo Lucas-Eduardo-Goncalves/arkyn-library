@@ -5,7 +5,7 @@ import "./styles.css";
 
 type TabContainerProps = Omit<
   HTMLAttributes<HTMLElement>,
-  "onClick" | "children" | "ref"
+  "onChange" | "children" | "ref" | "onClick"
 > & {
   children: ReactNode;
   disabled?: boolean;

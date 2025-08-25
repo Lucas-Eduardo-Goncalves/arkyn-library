@@ -33,7 +33,8 @@
   "dependencies": {
     "@react-google-maps/api": "^2.20.7",
     "@react-input/mask": "^1.2.15",
-    "framer-motion": "^11.18.2"
+    "framer-motion": "^11.18.2",
+    "react-hot-toast": "^2.6.0"
   },
   "peerDependencies": {
     "react": ">=18.3.1",
