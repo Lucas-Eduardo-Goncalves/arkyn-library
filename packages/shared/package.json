@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/shared",
-  "version": "3.0.1-beta.22",
+  "version": "3.0.1-beta.23",
   "main": "./dist/bundle.js",
   "module": "./src/index.ts",
   "type": "module",
