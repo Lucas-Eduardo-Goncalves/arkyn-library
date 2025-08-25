@@ -34,7 +34,11 @@
     "@react-google-maps/api": "^2.20.7",
     "@react-input/mask": "^1.2.15",
     "framer-motion": "^11.18.2",
-    "react-hot-toast": "^2.6.0"
+    "html-react-parser": "^5.2.2",
+    "react-hot-toast": "^2.6.0",
+    "slate": "^0.103.0",
+    "slate-history": "^0.109.0",
+    "slate-react": "^0.110.3"
   },
   "peerDependencies": {
     "react": ">=18.3.1",

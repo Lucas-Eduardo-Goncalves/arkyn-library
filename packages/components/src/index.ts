@@ -58,3 +58,6 @@ export { DrawerProvider } from "./providers/drawerProvider";
 export { FormProvider } from "./providers/formProvider";
 export { ModalProvider } from "./providers/modalProvider";
 export { ToastProvider } from "./providers/toastProvider";
+
+// services
+export { RichTextService } from "./services/richText";

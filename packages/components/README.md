@@ -114,6 +114,10 @@ function App() {
 - **useScrollLock** - Prevent page scrolling
 - **useToast** - Toast state management
 
+## Services
+
+- **RichTextService** - A comprehensive service for managing rich text editing functionality.
+
 ## 🎨 Component Examples
 
 ### Button
