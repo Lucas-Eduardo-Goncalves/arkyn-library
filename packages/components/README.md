@@ -89,6 +89,7 @@ function App() {
 - **Modal** - Modal dialogs
 - **Tooltip** - Contextual tooltips
 - **Badge** - Status and count badges
+- **Popover** - Floating content containers with positioning
 
 ### Layout
 
