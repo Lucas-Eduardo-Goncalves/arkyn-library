@@ -1,11 +1,11 @@
 {
   "name": "@arkyn/server",
-  "version": "3.0.1-beta.29",
+  "version": "3.0.1-beta.32",
   "author": "Arkyn | Lucas Gonçalves",
   "main": "./dist/index.js",
   "module": "./src/index.ts",
   "type": "module",
-  "types": "./dist/index.d.ts",
+  "types": "./src/index.ts",
   "license": "Apache-2.0",
   "description": "Comprehensive server-side utilities for building robust backend applications, featuring HTTP response helpers, error handlers, request utilities, and API configurations.",
   "keywords": [
