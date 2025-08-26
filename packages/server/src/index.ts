@@ -27,5 +27,5 @@ export { errorHandler } from "./services/errorHandler";
 export { formParse } from "./services/formParse";
 export { getCaller } from "./services/getCaller";
 export { getScopedParams } from "./services/getScopedParams";
-export { httpDebug } from "./services/httpDebug";
+export { httpDebug, HttpDebugService } from "./services/httpDebug";
 export { SchemaValidator } from "./services/schemaValidator";
