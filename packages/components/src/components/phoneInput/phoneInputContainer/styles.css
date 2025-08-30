@@ -26,7 +26,7 @@
 /* VARIANTS */
 .arkynPhoneInputContainer.solid {
   border-color: var(--border);
-  background-color: rgba(var(--input-background), 1);
+  background-color: rgba(var(--spotlight-secondary), 1);
 }
 .arkynPhoneInputContainer.solid.errored {
   border-color: rgba(var(--spotlight-danger), 1);
