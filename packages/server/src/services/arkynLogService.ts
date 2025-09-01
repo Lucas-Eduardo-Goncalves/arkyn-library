@@ -11,12 +11,12 @@ type SetArkynConfigProps = {
 };
 
 /**
- * The `ArkynLogInstance` class manages the configuration for the arkyn flow.
+ * The `ArkynLogService` class manages the configuration for the arkyn flow.
  * It allows you to set and retrieve the arkyn configuration, including the traffic source ID,
  * user token, and API URL.
  */
 
-class ArkynLogInstance {
+class ArkynLogService {
   private static arkynConfig?: ArkynConfigProps;
 
   /**
@@ -48,7 +48,7 @@ class ArkynLogInstance {
   }
 
   /**
-   * Retrieves the current arkyn configuration for the ArkynLogInstance.
+   * Retrieves the current arkyn configuration for the ArkynLogService.
    *
    * @returns {ArkynConfigProps | undefined} The current arkyn configuration if set,
    * or `undefined` if no configuration has been initialized.
@@ -67,4 +67,4 @@ class ArkynLogInstance {
   }
 }
 
-export { ArkynLogInstance };
+export { ArkynLogService };

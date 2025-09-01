@@ -4,7 +4,7 @@ import { patchRequest } from "../api/patchRequest";
 import { postRequest } from "../api/postRequest";
 import { putRequest } from "../api/putRequest";
 
-type ApiInstanceConstructorProps = {
+type ApiServiceConstructorProps = {
   baseUrl: string;
   baseHeaders?: HeadersInit;
   baseToken?: string | null;
@@ -25,20 +25,20 @@ type ApiRequestDataWithBodyProps = {
  * Class representing an API instance to handle HTTP requests with base configurations.
  */
 
-class ApiInstance {
+class ApiService {
   private baseUrl: string;
   private baseHeaders?: HeadersInit;
   private baseToken?: string;
 
   /**
-   * Creates an instance of ApiInstance.
+   * Creates an instance of ApiService.
    * @param props - The configuration properties for the API instance.
    * @param props.baseUrl - The base URL for the API.
    * @param props.baseHeaders - Optional base headers to include in all requests.
    * @param props.baseToken - Optional base token for authorization.
    */
 
-  constructor(props: ApiInstanceConstructorProps) {
+  constructor(props: ApiServiceConstructorProps) {
     this.baseUrl = props.baseUrl;
     this.baseHeaders = props.baseHeaders || undefined;
     this.baseToken = props.baseToken || undefined;
@@ -145,4 +145,4 @@ class ApiInstance {
   }
 }
 
-export { ApiInstance };
+export { ApiService };

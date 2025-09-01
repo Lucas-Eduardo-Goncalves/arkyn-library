@@ -1,7 +1,7 @@
-import { describe, it, expect } from "vitest";
-import { ArkynLogInstance } from "../arkynLogInstance";
+import { describe, expect, it } from "vitest";
+import { ArkynLogService } from "../arkynLogService";
 
-describe("ArkynLogInstance", () => {
+describe("ArkynLogService", () => {
   it("should set the arkyn configuration if not already set", () => {
     const arkynConfig = {
       arkynTrafficSourceId: "channel-123",
@@ -9,9 +9,9 @@ describe("ArkynLogInstance", () => {
       arkynLogBaseApiUrl: "https://custom-arkyn-api.com",
     };
 
-    ArkynLogInstance.setArkynConfig(arkynConfig);
+    ArkynLogService.setArkynConfig(arkynConfig);
 
-    const config = ArkynLogInstance.getArkynConfig();
+    const config = ArkynLogService.getArkynConfig();
     expect(config).toEqual({
       arkynTrafficSourceId: "channel-123",
       arkynUserToken: "user-token-abc",
@@ -33,10 +33,10 @@ describe("ArkynLogInstance", () => {
       arkynLogBaseApiUrl: "https://another-arkyn-api.com",
     };
 
-    ArkynLogInstance.setArkynConfig(initialConfig);
-    ArkynLogInstance.setArkynConfig(newConfig);
+    ArkynLogService.setArkynConfig(initialConfig);
+    ArkynLogService.setArkynConfig(newConfig);
 
-    const config = ArkynLogInstance.getArkynConfig();
+    const config = ArkynLogService.getArkynConfig();
     expect(config).toEqual({
       arkynTrafficSourceId: "channel-123",
       arkynUserToken: "user-token-abc",
@@ -46,9 +46,9 @@ describe("ArkynLogInstance", () => {
   });
 
   it("should return undefined if no configuration is set", () => {
-    ArkynLogInstance.resetArkynConfig();
+    ArkynLogService.resetArkynConfig();
 
-    const config = ArkynLogInstance.getArkynConfig();
+    const config = ArkynLogService.getArkynConfig();
     expect(config).toBeUndefined();
   });
 
@@ -60,9 +60,9 @@ describe("ArkynLogInstance", () => {
 
     const defaultArkynURL = `https://logs-arkyn-flow-logs.vw6wo7.easypanel.host/http-traffic-records/:trafficSourceId`;
 
-    ArkynLogInstance.setArkynConfig(arkynConfig);
+    ArkynLogService.setArkynConfig(arkynConfig);
 
-    const config = ArkynLogInstance.getArkynConfig();
+    const config = ArkynLogService.getArkynConfig();
     expect(config).toEqual({
       ...arkynConfig,
       arkynApiUrl: defaultArkynURL,

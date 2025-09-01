@@ -1,7 +1,3 @@
-// config
-export { ApiInstance } from "./config/apiInstance";
-export { ArkynLogInstance } from "./config/arkynLogInstance";
-
 // http bad responses
 export { BadGateway } from "./http/badResponses/badGateway";
 export { BadRequest } from "./http/badResponses/badRequest";
@@ -21,6 +17,8 @@ export { Success } from "./http/successResponses/success";
 export { Updated } from "./http/successResponses/updated";
 
 // services
+export { ApiService } from "./services/apiService";
+export { ArkynLogService } from "./services/arkynLogService";
 export { decodeErrorMessageFromRequest } from "./services/decodeErrorMessageFromRequest";
 export { decodeRequestBody } from "./services/decodeRequestBody";
 export { errorHandler } from "./services/errorHandler";

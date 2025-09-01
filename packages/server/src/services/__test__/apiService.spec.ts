@@ -1,10 +1,10 @@
-import { describe, it, expect, vi } from "vitest";
-import { ApiInstance } from "../apiInstance";
+import { describe, expect, it, vi } from "vitest";
+import { deleteRequest } from "../../api/deleteRequest";
 import { getRequest } from "../../api/getRequest";
+import { patchRequest } from "../../api/patchRequest";
 import { postRequest } from "../../api/postRequest";
 import { putRequest } from "../../api/putRequest";
-import { patchRequest } from "../../api/patchRequest";
-import { deleteRequest } from "../../api/deleteRequest";
+import { ApiService } from "../apiService";
 
 vi.mock("../../api/getRequest");
 vi.mock("../../api/postRequest");
@@ -12,12 +12,12 @@ vi.mock("../../api/putRequest");
 vi.mock("../../api/patchRequest");
 vi.mock("../../api/deleteRequest");
 
-describe("ApiInstance", () => {
+describe("ApiService", () => {
   const baseUrl = "https://api.example.com";
   const baseHeaders = { "Content-Type": "application/json" };
   const baseToken = "base-token";
 
-  const apiInstance = new ApiInstance({
+  const apiService = new ApiService({
     baseUrl,
     baseHeaders,
     baseToken,
@@ -27,7 +27,7 @@ describe("ApiInstance", () => {
     const mockResponse = { success: true, data: "get response" };
     (getRequest as any).mockResolvedValueOnce(mockResponse);
 
-    const response = await apiInstance.get("/resource", {});
+    const response = await apiService.get("/resource", {});
 
     expect(getRequest).toHaveBeenCalledWith(
       `${baseUrl}/resource`,
@@ -44,7 +44,7 @@ describe("ApiInstance", () => {
     const mockBody = { name: "New Resource" };
     (postRequest as any).mockResolvedValueOnce(mockResponse);
 
-    const response = await apiInstance.post("/resource", { body: mockBody });
+    const response = await apiService.post("/resource", { body: mockBody });
 
     expect(postRequest).toHaveBeenCalledWith(
       `${baseUrl}/resource`,
@@ -62,7 +62,7 @@ describe("ApiInstance", () => {
     const mockBody = { name: "Updated Resource" };
     (putRequest as any).mockResolvedValueOnce(mockResponse);
 
-    const response = await apiInstance.put("/resource", { body: mockBody });
+    const response = await apiService.put("/resource", { body: mockBody });
 
     expect(putRequest).toHaveBeenCalledWith(
       `${baseUrl}/resource`,
@@ -80,7 +80,7 @@ describe("ApiInstance", () => {
     const mockBody = { name: "Partially Updated Resource" };
     (patchRequest as any).mockResolvedValueOnce(mockResponse);
 
-    const response = await apiInstance.patch("/resource", { body: mockBody });
+    const response = await apiService.patch("/resource", { body: mockBody });
 
     expect(patchRequest).toHaveBeenCalledWith(
       `${baseUrl}/resource`,
@@ -98,7 +98,7 @@ describe("ApiInstance", () => {
     const mockBody = { id: 1 };
     (deleteRequest as any).mockResolvedValueOnce(mockResponse);
 
-    const response = await apiInstance.delete("/resource", { body: mockBody });
+    const response = await apiService.delete("/resource", { body: mockBody });
 
     expect(deleteRequest).toHaveBeenCalledWith(
       `${baseUrl}/resource`,
@@ -115,7 +115,7 @@ describe("ApiInstance", () => {
     const mockResponse = { success: true, data: "get response with token" };
     (getRequest as any).mockResolvedValueOnce(mockResponse);
 
-    const response = await apiInstance.get("/resource", { token: "new-token" });
+    const response = await apiService.get("/resource", { token: "new-token" });
 
     expect(getRequest).toHaveBeenCalledWith(
       `${baseUrl}/resource`,
