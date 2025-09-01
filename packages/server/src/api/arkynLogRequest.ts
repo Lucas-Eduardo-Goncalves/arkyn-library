@@ -1,4 +1,4 @@
-import { ArkynLogInstance } from "../config/arkynLogInstance";
+import { ArkynLogService } from "../services/arkynLogService";
 import { httpDebug } from "../services/httpDebug";
 
 type ConfigProps = {
@@ -30,7 +30,7 @@ type ConfigProps = {
  * @param config.responseBody - The body of the response received.
  *
  * @remarks
- * - This function retrieves the inbox flow configuration using `InboxFlowInstance.getInboxConfig()`.
+ * - This function retrieves the inbox flow configuration using `InboxFlowService.getInboxConfig()`.
  * - If the configuration is not available, the function will return early without performing any action.
  * - In a development environment (`NODE_ENV === "development"`), the function will also return early.
  * - The request is sent as a POST request to the inbox API URL with the provided configuration details.
@@ -56,10 +56,10 @@ type ConfigProps = {
  */
 
 async function arkynLogRequest(config: ConfigProps) {
-  const arkynInstance = ArkynLogInstance.getArkynConfig();
-  if (!arkynInstance) return;
+  const arkynService = ArkynLogService.getArkynConfig();
+  if (!arkynService) return;
 
-  const { arkynUserToken, arkynApiUrl } = arkynInstance;
+  const { arkynUserToken, arkynApiUrl } = arkynService;
 
   const {
     elapsedTime,
@@ -99,7 +99,7 @@ async function arkynLogRequest(config: ConfigProps) {
     await fetch(
       arkynApiUrl.replace(
         ":trafficSourceId",
-        arkynInstance.arkynTrafficSourceId
+        arkynService.arkynTrafficSourceId
       ),
       {
         method: "POST",
