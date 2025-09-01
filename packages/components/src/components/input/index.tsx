@@ -132,6 +132,7 @@ function Input(props: InputProps) {
 
   const errorMessage = baseErrorMessage || fieldErrors?.[name];
   const isError = !!errorMessage;
+  const isDisabled = disabled || isLoading;
 
   const iconSizes = { md: 20, lg: 20 };
   const iconSize = iconSizes[size];
@@ -142,7 +143,7 @@ function Input(props: InputProps) {
   const showRightSpinner = loadingPosition === "right" && isLoading;
 
   function handleSectionClick() {
-    if (disabled || !inputRef?.current) return;
+    if (isDisabled || !inputRef?.current) return;
     setIsFocused(true);
     inputRef.current.focus();
   }
@@ -172,7 +173,7 @@ function Input(props: InputProps) {
   const hasPrefix = !!prefix ? "hasPrefix" : "";
   const hasSuffix = !!suffix ? "hasSuffix" : "";
   const errored = isError ? "errored" : "";
-  const opacity = disabled || readOnly || isLoading ? "opacity" : "";
+  const opacity = isDisabled || readOnly || isLoading ? "opacity" : "";
   const focused = isFocused ? "focused" : "";
 
   const className = `arkynInput ${hasPrefix} ${hasSuffix} ${variant} ${size} ${opacity} ${errored} ${focused} ${baseClassName}`;
@@ -203,7 +204,7 @@ function Input(props: InputProps) {
         <IconRenderer show={!isLoading} icon={leftIcon} iconSize={iconSize} />
 
         <input
-          disabled={disabled || isLoading}
+          disabled={isDisabled}
           readOnly={readOnly}
           ref={inputRef}
           onFocus={handleFocus}
