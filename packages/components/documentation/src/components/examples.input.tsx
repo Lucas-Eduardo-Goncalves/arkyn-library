@@ -96,7 +96,7 @@ function InputExamples() {
           name="prefix-suffix"
           placeholder="amount"
           label="Prefix and suffix:"
-          prefix="$"
+          prefix={DollarSign}
           suffix=".00"
         />
       </Row>

@@ -17,7 +17,11 @@ function IconRenderer(props: IconRendererProps) {
     return <p className={className}>{Icon}</p>;
   }
 
-  return <Icon size={iconSize} className={className} strokeWidth={2.5} />;
+  return (
+    <p className={className}>
+      <Icon size={iconSize} strokeWidth={2.5} />
+    </p>
+  );
 }
 
 export { IconRenderer };
