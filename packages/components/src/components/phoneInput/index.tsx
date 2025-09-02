@@ -192,10 +192,14 @@ function PhoneInput(props: PhoneInputProps) {
 
   const errorMessage = baseErrorMessage || fieldErrors?.[name];
   const isError = !!errorMessage;
+  const isDisabled = disabled || isLoading;
+
   const inputPhoneMaskRef = useRef<HTMLInputElement>(null);
 
   function handleContainerFocus() {
+    if (isDisabled) return;
     if (isFocused || showCountryOptions) return;
+
     setIsFocused(true);
     if (inputPhoneMaskRef.current) inputPhoneMaskRef.current.focus();
   }
@@ -255,7 +259,7 @@ function PhoneInput(props: PhoneInputProps) {
 
       <PhoneInputContainer
         id={phoneInputId}
-        disabled={disabled}
+        disabled={isDisabled}
         isError={isError}
         isLoading={isLoading}
         isFocused={isFocused}
@@ -310,7 +314,7 @@ function PhoneInput(props: PhoneInputProps) {
             setValue(e);
             onChange && onChange(inputValue(e));
           }}
-          disabled={disabled}
+          disabled={isDisabled}
           onBlur={handleInputBlur}
           onFocus={handleInputFocus}
           size={size}

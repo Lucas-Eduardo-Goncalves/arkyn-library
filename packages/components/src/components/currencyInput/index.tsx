@@ -194,6 +194,7 @@ function CurrencyInput(props: CurrencyInputProps) {
 
   const errorMessage = baseErrorMessage || fieldErrors?.[name];
   const isError = !!errorMessage;
+  const isDisabled = disabled || isLoading;
 
   const iconSizes = { md: 20, lg: 20 };
   const iconSize = iconSizes[size];
@@ -204,7 +205,7 @@ function CurrencyInput(props: CurrencyInputProps) {
   const showRightSpinner = loadingPosition === "right" && isLoading;
 
   function handleSectionClick() {
-    if (disabled || !inputRef?.current) return;
+    if (isDisabled || !inputRef?.current) return;
     setIsFocused(true);
     inputRef.current.focus();
   }
@@ -250,7 +251,7 @@ function CurrencyInput(props: CurrencyInputProps) {
   const hasPrefix = !!prefix ? "hasPrefix" : "";
   const hasSuffix = !!suffix ? "hasSuffix" : "";
   const errored = isError ? "errored" : "";
-  const opacity = disabled || readOnly || isLoading ? "opacity" : "";
+  const opacity = isDisabled || readOnly || isLoading ? "opacity" : "";
   const focused = isFocused ? "focused" : "";
 
   const className = `arkynCurrencyInput ${hasPrefix} ${hasSuffix} ${variant} ${size} ${opacity} ${errored} ${focused} ${baseClassName}`;
@@ -282,7 +283,7 @@ function CurrencyInput(props: CurrencyInputProps) {
 
         <input
           value={maskedValue}
-          disabled={disabled || isLoading}
+          disabled={isDisabled}
           readOnly={readOnly}
           ref={inputRef}
           onFocus={handleFocus}
