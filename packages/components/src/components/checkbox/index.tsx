@@ -21,7 +21,7 @@ type CheckboxProps = Omit<
   | "onClick"
 > & {
   label?: string;
-  errorMessage?: boolean;
+  errorMessage?: string;
 
   size?: "md" | "lg" | "sm";
 
