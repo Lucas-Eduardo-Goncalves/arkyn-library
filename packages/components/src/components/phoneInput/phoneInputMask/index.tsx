@@ -30,6 +30,7 @@ type PhoneInputMaskProps = {
   onFocus: () => void;
   onBlur: () => void;
   disabled: boolean;
+  readonly: boolean;
   size: "md" | "lg";
   currentCountry: CountryType;
   value: string;
@@ -45,8 +46,16 @@ const BaseInput = forwardRef<
 
 const PhoneInputMask = forwardRef<HTMLInputElement, PhoneInputMaskProps>(
   (props, ref) => {
-    const { onFocus, onBlur, size, onChange, value, currentCountry, disabled } =
-      props;
+    const {
+      onFocus,
+      readonly,
+      onBlur,
+      size,
+      onChange,
+      value,
+      currentCountry,
+      disabled,
+    } = props;
 
     const [isMounted, setIsMounted] = useState(false);
 
@@ -87,6 +96,7 @@ const PhoneInputMask = forwardRef<HTMLInputElement, PhoneInputMaskProps>(
     return (
       <InputMask
         value={value}
+        readOnly={readonly}
         onChange={(e) => onChange(e.target.value)}
         className={className}
         component={BaseInput}
