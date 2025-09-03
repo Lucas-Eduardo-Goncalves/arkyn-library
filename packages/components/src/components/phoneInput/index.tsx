@@ -276,7 +276,7 @@ function PhoneInput(props: PhoneInputProps) {
         />
 
         <PhoneInputCountryOptionsContainer
-          isOpen={showCountryOptions}
+          isOpen={isDisabled ? false : showCountryOptions}
           search={search}
           placeholder={searchCountryPlaceholder}
           onSearch={setSearch}
@@ -302,7 +302,7 @@ function PhoneInput(props: PhoneInputProps) {
         </PhoneInputCountryOptionsContainer>
 
         <PhoneInputCountriesOverlay
-          isOpen={showCountryOptions}
+          isOpen={isDisabled ? false : showCountryOptions}
           onClick={handleCloseCountryOptions}
         />
 
