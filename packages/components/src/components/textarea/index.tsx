@@ -10,6 +10,7 @@ import { useForm } from "../../hooks/useForm";
 import { FieldLabel } from "../fieldLabel";
 import { FieldWrapper } from "../fieldWrapper";
 
+import { FieldError } from "../fieldError";
 import "./styles.css";
 
 type TextareaProps = Omit<
@@ -185,7 +186,7 @@ function Textarea(props: TextareaProps) {
           {...rest}
         />
       </section>
-      {errorMessage && <FieldLabel>{errorMessage}</FieldLabel>}
+      {errorMessage && <FieldError>{errorMessage}</FieldError>}
     </FieldWrapper>
   );
 }
