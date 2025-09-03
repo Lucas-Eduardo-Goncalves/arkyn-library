@@ -31,6 +31,7 @@ type CheckboxProps = Omit<
   checked?: boolean;
   defaultChecked?: boolean;
   onCheck?: (value: string) => void;
+  orientation?: "horizontal" | "vertical" | "horizontalReverse";
 };
 
 /**
@@ -45,6 +46,7 @@ type CheckboxProps = Omit<
  * @param props.checked - Controlled checked state of the checkbox
  * @param props.defaultChecked - Default checked state for uncontrolled usage. Default: false
  * @param props.onCheck - Callback function called when checkbox state changes, receives the value or empty string
+ * @param props.orientation - Orientation of the checkbox and label. Default: "vertical"
  *
  * **...Other valid HTML properties for button element (except type, name, defaultValue, value, onChange, onSelect, onClick)**
  *
@@ -103,6 +105,7 @@ function Checkbox(props: CheckboxProps) {
     label,
     checked: baseChecked = null,
     onCheck,
+    orientation,
     value,
     ...rest
   } = props;
@@ -132,7 +135,7 @@ function Checkbox(props: CheckboxProps) {
   }
 
   return (
-    <FieldWrapper>
+    <FieldWrapper orientation={orientation}>
       {label && <FieldLabel>{label}</FieldLabel>}
       <button
         id={checkboxId}

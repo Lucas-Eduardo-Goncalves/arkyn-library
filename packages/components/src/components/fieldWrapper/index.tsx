@@ -3,6 +3,7 @@ import "./styles.css";
 
 type FieldWrapperProps = HTMLAttributes<HTMLElement> & {
   children: ReactNode;
+  orientation?: "vertical" | "horizontal" | "horizontalReverse";
 };
 
 /**
@@ -10,6 +11,7 @@ type FieldWrapperProps = HTMLAttributes<HTMLElement> & {
  *
  * @param props - FieldWrapper component properties
  * @param props.children - React elements that compose a single field (label, input, error message, etc.)
+ * @param props.orientation - Orientation of the field wrapper. Default: "vertical"
  *
  * **...Other valid HTML properties for section element**
  *
@@ -40,9 +42,14 @@ type FieldWrapperProps = HTMLAttributes<HTMLElement> & {
  */
 
 function FieldWrapper(props: FieldWrapperProps) {
-  const { children, className: baseClassName, ...rest } = props;
+  const {
+    children,
+    className: baseClassName,
+    orientation = "vertical",
+    ...rest
+  } = props;
 
-  const className = `arkynFieldWrapper ${baseClassName}`;
+  const className = `arkynFieldWrapper ${baseClassName} ${orientation}`;
 
   return (
     <section className={className.trim()} {...rest}>
