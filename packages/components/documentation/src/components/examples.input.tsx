@@ -147,6 +147,7 @@ function InputExamples() {
           name="disabled"
           placeholder="Disabled input"
           label="Disabled:"
+          value="Cannot interact"
           disabled
         />
         <Input

@@ -18,7 +18,7 @@ import "./style.css";
 
 type InputProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
-  "size" | "prefix" | "name"
+  "size" | "prefix" | "name" | "value" | "defaultValue"
 > & {
   name: string;
 
@@ -35,6 +35,9 @@ type InputProps = Omit<
 
   leftIcon?: LucideIcon;
   rightIcon?: LucideIcon;
+
+  value?: string;
+  defaultValue?: string;
 };
 
 /**
@@ -122,6 +125,8 @@ function Input(props: InputProps) {
     type = "text",
     size = "md",
     id,
+    value,
+    placeholder,
     ...rest
   } = props;
 
@@ -175,8 +180,9 @@ function Input(props: InputProps) {
   const errored = isError ? "errored" : "";
   const opacity = isDisabled || readOnly || isLoading ? "opacity" : "";
   const focused = isFocused ? "focused" : "";
+  const disabledClass = disabled ? "disabled" : "";
 
-  const className = `arkynInput ${hasPrefix} ${hasSuffix} ${variant} ${size} ${opacity} ${errored} ${focused} ${baseClassName}`;
+  const className = `arkynInput ${hasPrefix} ${disabledClass} ${hasSuffix} ${variant} ${size} ${opacity} ${errored} ${focused} ${baseClassName}`;
 
   return (
     <FieldWrapper>
@@ -212,6 +218,8 @@ function Input(props: InputProps) {
           type={type}
           id={inputId}
           name={name}
+          placeholder={isDisabled ? value || placeholder : placeholder}
+          value={isDisabled ? null : value}
           {...rest}
         />
 

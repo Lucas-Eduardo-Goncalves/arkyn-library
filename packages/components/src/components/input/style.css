@@ -30,6 +30,10 @@
   color: var(--text-heading);
 }
 
+.arkynInput input:disabled {
+  user-select: none;
+}
+
 .arkynInput .prefix,
 .arkynInput .suffix {
   color: var(--text-body);
