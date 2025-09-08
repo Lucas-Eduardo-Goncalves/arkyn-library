@@ -36,8 +36,8 @@ type InputProps = Omit<
   leftIcon?: LucideIcon;
   rightIcon?: LucideIcon;
 
-  value?: string;
-  defaultValue?: string;
+  value?: string | null;
+  defaultValue?: string | null;
 };
 
 /**

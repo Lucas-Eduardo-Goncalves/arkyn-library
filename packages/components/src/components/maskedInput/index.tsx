@@ -42,6 +42,9 @@ type MaskedInputProps = Omit<
 
   leftIcon?: LucideIcon;
   rightIcon?: LucideIcon;
+
+  value?: string | null;
+  defaultValue?: string | null;
 };
 
 const BaseInput = forwardRef<
@@ -157,6 +160,8 @@ function MaskedInput(props: MaskedInputProps) {
     rightIcon,
     size = "md",
     id,
+    value,
+    placeholder,
     ...rest
   } = props;
 
@@ -239,6 +244,8 @@ function MaskedInput(props: MaskedInputProps) {
           readOnly={readOnly}
           id={inputId}
           name={name}
+          placeholder={isDisabled ? value || placeholder : placeholder}
+          value={isDisabled ? null : value}
           {...rest}
         />
 
