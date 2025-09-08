@@ -72,7 +72,7 @@ type CurrencyInputProps = Omit<
   rightIcon?: LucideIcon;
 
   max?: number;
-  value?: number;
+  value?: number | null;
   defaultValue?: number | null;
 
   onChange?: (
@@ -182,6 +182,7 @@ function CurrencyInput(props: CurrencyInputProps) {
     rightIcon,
     size = "md",
     id,
+    placeholder,
     ...rest
   } = props;
 
@@ -282,7 +283,6 @@ function CurrencyInput(props: CurrencyInputProps) {
         <IconRenderer show={!isLoading} icon={leftIcon} iconSize={iconSize} />
 
         <input
-          value={maskedValue}
           disabled={isDisabled}
           readOnly={readOnly}
           ref={inputRef}
@@ -291,6 +291,10 @@ function CurrencyInput(props: CurrencyInputProps) {
           onChange={handleChange}
           id={inputId}
           name={name}
+          placeholder={
+            isDisabled ? (value ? String(value) : placeholder) : placeholder
+          }
+          value={isDisabled ? null : value}
           {...rest}
         />
 
