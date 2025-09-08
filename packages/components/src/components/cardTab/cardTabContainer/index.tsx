@@ -5,7 +5,7 @@ import "./styles.css";
 
 type CardTabContainerProps = Omit<
   HTMLAttributes<HTMLElement>,
-  "onClick" | "children" | "ref"
+  "onClick" | "children" | "ref" | "onChange"
 > & {
   children: ReactNode;
   disabled?: boolean;

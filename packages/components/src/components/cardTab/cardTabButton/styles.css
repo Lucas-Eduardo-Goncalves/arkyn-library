@@ -1,4 +1,8 @@
 .arkynCardTabButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   padding: 8px 16px;
   font-size: 14px;
 
