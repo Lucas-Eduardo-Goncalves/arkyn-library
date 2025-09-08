@@ -11,7 +11,10 @@ import {
 
 import { useForm } from "../../hooks/useForm";
 import { IconRenderer } from "../../services/iconRenderer";
-import { maskCurrencyValues } from "../../services/maskCurrencyValues";
+import {
+  maskCurrencyValues,
+  normalizeValue,
+} from "../../services/maskCurrencyValues";
 
 import { FieldError } from "../fieldError";
 import { FieldLabel } from "../fieldLabel";
@@ -53,6 +56,7 @@ type CurrencyInputProps = Omit<
   | "defaultValue"
   | "value"
   | "onChange"
+  | "placeholder"
 > & {
   name: string;
   locale: Locale;
@@ -167,7 +171,7 @@ function CurrencyInput(props: CurrencyInputProps) {
     className: baseClassName = "",
     value,
     defaultValue,
-    max,
+    max = 1000000000,
     locale,
     onChange,
     prefix,
@@ -182,7 +186,6 @@ function CurrencyInput(props: CurrencyInputProps) {
     rightIcon,
     size = "md",
     id,
-    placeholder,
     ...rest
   } = props;
 
@@ -290,12 +293,16 @@ function CurrencyInput(props: CurrencyInputProps) {
           onBlur={handleBlur}
           onChange={handleChange}
           id={inputId}
-          name={name}
-          placeholder={
-            isDisabled ? (value ? String(value) : placeholder) : placeholder
-          }
-          value={isDisabled ? null : value}
+          placeholder={isDisabled ? maskedValue : undefined}
+          value={isDisabled ? undefined : maskedValue}
           {...rest}
+        />
+
+        <input
+          type="hidden"
+          name={name}
+          value={normalizeValue(maskedValue)}
+          readOnly
         />
 
         <IconRenderer show={!isLoading} icon={rightIcon} iconSize={iconSize} />

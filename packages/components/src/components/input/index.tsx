@@ -219,7 +219,7 @@ function Input(props: InputProps) {
           id={inputId}
           name={name}
           placeholder={isDisabled ? value || placeholder : placeholder}
-          value={isDisabled ? null : value}
+          value={isDisabled ? undefined : value}
           {...rest}
         />
 

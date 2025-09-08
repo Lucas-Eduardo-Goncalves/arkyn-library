@@ -19,36 +19,27 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="variant-solid"
           locale="USD"
-          placeholder="0.00"
           label="Solid variant:"
         />
         <CurrencyInput
           name="variant-outline"
           locale="EUR"
-          placeholder="0,00"
           label="Outline variant:"
           variant="outline"
         />
         <CurrencyInput
           name="variant-underline"
           locale="BRL"
-          placeholder="0,00"
           label="Underline variant:"
           variant="underline"
         />
       </Row>
 
       <Row>
-        <CurrencyInput
-          name="size-md"
-          locale="USD"
-          placeholder="0.00"
-          label="Medium size:"
-        />
+        <CurrencyInput name="size-md" locale="USD" label="Medium size:" />
         <CurrencyInput
           name="size-lg"
           locale="USD"
-          placeholder="0.00"
           label="Large size:"
           size="lg"
         />
@@ -58,21 +49,18 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="left-icon"
           locale="USD"
-          placeholder="0.00"
           label="Left icon:"
           leftIcon={DollarSign}
         />
         <CurrencyInput
           name="right-icon"
           locale="EUR"
-          placeholder="0,00"
           label="Right icon:"
           rightIcon={Calculator}
         />
         <CurrencyInput
           name="both-icons"
           locale="BRL"
-          placeholder="0,00"
           label="Both icons:"
           leftIcon={Wallet}
           rightIcon={TrendingUp}
@@ -83,21 +71,18 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="prefix"
           locale="USD"
-          placeholder="0.00"
           label="With prefix:"
           prefix="$"
         />
         <CurrencyInput
           name="suffix"
           locale="EUR"
-          placeholder="0,00"
           label="With suffix:"
           suffix="EUR"
         />
         <CurrencyInput
           name="prefix-suffix"
           locale="BRL"
-          placeholder="0,00"
           label="Prefix and suffix:"
           prefix="R$"
           suffix="BRL"
@@ -108,14 +93,12 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="loading-left"
           locale="USD"
-          placeholder="Loading..."
           label="Loading (left):"
           isLoading
         />
         <CurrencyInput
           name="loading-right"
           locale="EUR"
-          placeholder="Loading..."
           label="Loading (right):"
           rightIcon={Calculator}
           isLoading
@@ -126,7 +109,6 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="salary"
           locale="USD"
-          placeholder="0.00"
           label="Salary:"
           leftIcon={DollarSign}
           prefix="$"
@@ -134,7 +116,6 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="price"
           locale="EUR"
-          placeholder="0,00"
           label="Product Price:"
           leftIcon={Receipt}
           variant="outline"
@@ -142,7 +123,6 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="investment"
           locale="BRL"
-          placeholder="0,00"
           label="Investment:"
           leftIcon={PiggyBank}
           variant="underline"
@@ -153,7 +133,6 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="disabled"
           locale="USD"
-          placeholder="0.00"
           label="Disabled:"
           disabled
           defaultValue={1500}
@@ -161,7 +140,6 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="readonly"
           locale="EUR"
-          placeholder="0,00"
           label="Read only:"
           readOnly
           value={2500}
@@ -172,7 +150,6 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="required"
           locale="USD"
-          placeholder="0.00"
           label="Required field:"
           showAsterisk
           required
@@ -180,7 +157,6 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="error"
           locale="BRL"
-          placeholder="0,00"
           label="With error:"
           errorMessage="Amount must be greater than 0"
           leftIcon={DollarSign}
@@ -191,7 +167,6 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="max-value"
           locale="USD"
-          placeholder="0.00"
           label="Max $10,000:"
           max={10000}
           leftIcon={CreditCard}
@@ -200,7 +175,6 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="budget"
           locale="EUR"
-          placeholder="0,00"
           label="Monthly Budget:"
           leftIcon={Calculator}
           suffix="EUR"
@@ -213,14 +187,12 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="different-locales-1"
           locale="JPY"
-          placeholder="¥0"
           label="Japanese Yen:"
           leftIcon={DollarSign}
         />
         <CurrencyInput
           name="different-locales-2"
           locale="GBP"
-          placeholder="£0.00"
           label="British Pound:"
           leftIcon={DollarSign}
           prefix="£"
@@ -228,7 +200,6 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="different-locales-3"
           locale="CAD"
-          placeholder="$0.00"
           label="Canadian Dollar:"
           leftIcon={DollarSign}
           suffix="CAD"
@@ -239,7 +210,6 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="business-revenue"
           locale="USD"
-          placeholder="0.00"
           label="Annual Revenue:"
           leftIcon={TrendingUp}
           rightIcon={DollarSign}
@@ -249,7 +219,6 @@ function CurrencyInputExamples() {
         <CurrencyInput
           name="savings-goal"
           locale="BRL"
-          placeholder="0,00"
           label="Savings Goal:"
           leftIcon={PiggyBank}
           variant="underline"

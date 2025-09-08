@@ -51,4 +51,4 @@ function maskCurrencyValues(
   return [value, maskedValue];
 }
 
-export { maskCurrencyValues };
+export { maskCurrencyValues, normalizeValue };
