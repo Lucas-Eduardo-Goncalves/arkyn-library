@@ -46,7 +46,7 @@ type CheckboxProps = Omit<
  * @param props.checked - Controlled checked state of the checkbox
  * @param props.defaultChecked - Default checked state for uncontrolled usage. Default: false
  * @param props.onCheck - Callback function called when checkbox state changes, receives the value or empty string
- * @param props.orientation - Orientation of the checkbox and label. Default: "vertical"
+ * @param props.orientation - Orientation of the checkbox and label. Default: "horizontalReverse"
  *
  * **...Other valid HTML properties for button element (except type, name, defaultValue, value, onChange, onSelect, onClick)**
  *
@@ -105,7 +105,7 @@ function Checkbox(props: CheckboxProps) {
     label,
     checked: baseChecked = null,
     onCheck,
-    orientation,
+    orientation = "horizontalReverse",
     value,
     ...rest
   } = props;

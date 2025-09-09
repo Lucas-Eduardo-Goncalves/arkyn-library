@@ -32,7 +32,7 @@ type SwitchProps = Omit<
  * @param props.value - Value to be used when switch is checked. Default: "checked"
  * @param props.unCheckedValue - Value to be used when switch is unchecked. Default: ""
  * @param props.onCheck - Callback function called when switch state changes, receives the current value
- * @param props.orientation - Orientation of the switch and label. Default: "vertical"
+ * @param props.orientation - Orientation of the switch and label. Default: "horizontalReverse"
  *
  * **...Other valid HTML properties for button element (except children, onChange, defaultValue, onCheck, value)**
  *
@@ -113,7 +113,7 @@ function Switch(props: SwitchProps) {
     className: baseClassName = "",
     onCheck,
     id,
-    orientation,
+    orientation = "horizontalReverse",
     ...rest
   } = props;
 
