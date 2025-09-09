@@ -15,7 +15,7 @@ import "./styles.css";
 
 type TextareaProps = Omit<
   TextareaHTMLAttributes<HTMLTextAreaElement>,
-  "name"
+  "name" | "value" | "defaultValue"
 > & {
   name: string;
 
@@ -25,6 +25,9 @@ type TextareaProps = Omit<
 
   size?: "md" | "lg";
   variant?: "solid" | "outline";
+
+  value?: string | null;
+  defaultValue?: string | null;
 };
 
 /**
@@ -133,6 +136,9 @@ function Textarea(props: TextareaProps) {
     onBlur,
     title,
     style,
+    value,
+    defaultValue,
+    placeholder,
     id,
     ...rest
   } = props;
@@ -183,6 +189,8 @@ function Textarea(props: TextareaProps) {
           ref={textareaRef}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          placeholder={disabled ? value || placeholder : placeholder}
+          value={disabled ? undefined : value}
           {...rest}
         />
       </section>
