@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/shared",
-  "version": "3.0.1-beta.51",
+  "version": "3.0.1-beta.53",
   "main": "./dist/index.js",
   "module": "./src/index.ts",
   "type": "module",
@@ -23,7 +23,7 @@
   "homepage": "https://docs.arkyn.dev/en/shared/introduction",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Lucas-Eduardo-Goncalves/arkyn.git",
+    "url": "git+https://github.com/Lucas-Eduardo-Goncalves/arkyn.git",
     "directory": "packages/shared"
   },
   "scripts": {
