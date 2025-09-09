@@ -12,6 +12,7 @@
 .arkynFieldWrapper.horizontalReverse {
   flex-direction: row-reverse;
   align-items: center;
+  margin-right: auto;
 }
 
 .arkynFieldWrapper.vertical {
