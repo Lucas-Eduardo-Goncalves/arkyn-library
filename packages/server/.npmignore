@@ -1,5 +1,6 @@
 # Development files
 node_modules/
+src/
 
 # Config files
 tsconfig.json
