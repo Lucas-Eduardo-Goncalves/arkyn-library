@@ -92,26 +92,46 @@ function RadioBox(props: RadioBoxProps) {
     disabled,
     children,
     className: baseClassName = "",
+    onClick,
+    onFocus,
     ...rest
   } = props;
 
-  const { handleChange, size: groupSize, value, isError } = useRadioGroup();
+  const {
+    handleChange,
+    size: groupSize,
+    value,
+    isError,
+    disabled: groupDisabled,
+  } = useRadioGroup();
 
   const isChecked = value === componentValue;
   const size = componentSize || groupSize;
 
+  const isDisabled = disabled || groupDisabled;
+
   const checkedClass = isChecked ? "checkedTrue" : "checkedFalse";
   const errorClass = !!isError ? "errorTrue" : "errorFalse";
-  const disabledClass = disabled ? "disabledTrue" : "disabledFalse";
+  const disabledClass = isDisabled ? "disabledTrue" : "disabledFalse";
   const className = `arkynRadioBox ${size} ${checkedClass} ${errorClass} ${disabledClass} ${baseClassName}`;
+
+  function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
+    onClick && onClick(event);
+    handleChange(componentValue);
+  }
+
+  function handleFocus(event: React.FocusEvent<HTMLButtonElement>) {
+    onFocus && onFocus(event);
+    handleChange(componentValue);
+  }
 
   return (
     <label className={className.trim()}>
       <button
         type="button"
-        disabled={disabled}
-        onClick={() => handleChange(componentValue)}
-        onFocus={() => handleChange(componentValue)}
+        disabled={isDisabled}
+        onClick={handleClick}
+        onFocus={handleFocus}
         {...rest}
       />
 

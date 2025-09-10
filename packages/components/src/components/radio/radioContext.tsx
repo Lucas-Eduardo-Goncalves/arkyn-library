@@ -5,6 +5,7 @@ type RadioGroupContextType = {
   isError: boolean;
   size: "sm" | "md" | "lg";
   handleChange: (value: string) => void;
+  disabled: boolean;
 };
 
 type RadioProviderProps = {
@@ -13,15 +14,18 @@ type RadioProviderProps = {
   size: "sm" | "md" | "lg";
   value: string;
   handleChange: (value: string) => void;
+  disabled: boolean;
 };
 
 const radioContext = createContext({} as RadioGroupContextType);
 
 function RadioProvider(props: RadioProviderProps) {
-  const { children, size, isError, handleChange, value } = props;
+  const { children, size, isError, handleChange, value, disabled } = props;
 
   return (
-    <radioContext.Provider value={{ handleChange, value, size, isError }}>
+    <radioContext.Provider
+      value={{ handleChange, value, size, isError, disabled }}
+    >
       {children}
     </radioContext.Provider>
   );

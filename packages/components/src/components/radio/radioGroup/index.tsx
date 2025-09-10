@@ -17,6 +17,7 @@ type RadioGroupProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> & {
   defaultValue?: string;
   onChange?: (value: string) => void;
   size?: "sm" | "md" | "lg";
+  disabled?: boolean;
 };
 
 /**
@@ -108,6 +109,7 @@ function RadioGroup(props: RadioGroupProps) {
     onChange,
     size = "md",
     className: baseClassName = "",
+    disabled = false,
     ...rest
   } = props;
 
@@ -131,6 +133,7 @@ function RadioGroup(props: RadioGroupProps) {
         size={size}
         value={forceValue || value}
         handleChange={handleChange}
+        disabled={disabled}
       >
         <input
           style={{ display: "none" }}
