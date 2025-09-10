@@ -255,10 +255,13 @@ function PhoneInput(props: PhoneInputProps) {
 
   return (
     <FieldWrapper>
-      {label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
+      {label && (
+        <FieldLabel htmlFor={phoneInputId} showAsterisk={showAsterisk}>
+          {label}
+        </FieldLabel>
+      )}
 
       <PhoneInputContainer
-        id={phoneInputId}
         disabled={isDisabled}
         isError={isError}
         isLoading={isLoading}
@@ -307,6 +310,7 @@ function PhoneInput(props: PhoneInputProps) {
         />
 
         <PhoneInputMask
+          id={phoneInputId}
           ref={inputPhoneMaskRef}
           readonly={readOnly}
           currentCountry={currentCountry}

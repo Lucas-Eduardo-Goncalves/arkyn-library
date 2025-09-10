@@ -10,7 +10,6 @@ type PhoneInputContainerProps = {
   isLoading: boolean;
   isFocused: boolean;
   className?: string;
-  id: string;
   variant: "solid" | "outline";
   size: "md" | "lg";
 };
@@ -27,7 +26,6 @@ function PhoneInputContainer(props: PhoneInputContainerProps) {
     readOnly,
     variant,
     size,
-    id,
   } = props;
 
   const errored = isError ? "errored" : "";
@@ -37,7 +35,7 @@ function PhoneInputContainer(props: PhoneInputContainerProps) {
   const className = `arkynPhoneInputContainer ${variant} ${size} ${opacity} ${errored} ${focused} ${baseClassName}`;
 
   return (
-    <section id={id} className={className.trim()} onClick={onFocus}>
+    <section className={className.trim()} onClick={onFocus}>
       {children}
     </section>
   );

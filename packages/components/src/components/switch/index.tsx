@@ -135,7 +135,7 @@ function Switch(props: SwitchProps) {
 
   return (
     <FieldWrapper orientation={orientation}>
-      {label && <FieldLabel>{label}</FieldLabel>}
+      {label && <FieldLabel onClick={handleCheck}>{label}</FieldLabel>}
 
       <button
         type="button"

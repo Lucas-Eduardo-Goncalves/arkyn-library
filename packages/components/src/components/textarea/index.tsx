@@ -175,7 +175,12 @@ function Textarea(props: TextareaProps) {
 
   return (
     <FieldWrapper>
-      {label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
+      {label && (
+        <FieldLabel htmlFor={textareaId} showAsterisk={showAsterisk}>
+          {label}
+        </FieldLabel>
+      )}
+
       <section
         title={title}
         style={style}

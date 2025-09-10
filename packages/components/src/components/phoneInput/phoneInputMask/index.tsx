@@ -35,6 +35,7 @@ type PhoneInputMaskProps = {
   currentCountry: CountryType;
   value: string;
   onChange: (e: string) => void;
+  id: string;
 };
 
 const BaseInput = forwardRef<
@@ -55,6 +56,7 @@ const PhoneInputMask = forwardRef<HTMLInputElement, PhoneInputMaskProps>(
       value,
       currentCountry,
       disabled,
+      id,
     } = props;
 
     const [isMounted, setIsMounted] = useState(false);
@@ -82,6 +84,7 @@ const PhoneInputMask = forwardRef<HTMLInputElement, PhoneInputMaskProps>(
     if (currentCountry.code === "+55") {
       return (
         <input
+          id={id}
           value={value}
           onChange={handleChange}
           className={className}
@@ -95,6 +98,7 @@ const PhoneInputMask = forwardRef<HTMLInputElement, PhoneInputMaskProps>(
 
     return (
       <InputMask
+        id={id}
         value={value}
         readOnly={readonly}
         onChange={(e) => onChange(e.target.value)}
