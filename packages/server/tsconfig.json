@@ -22,6 +22,7 @@
     "**/__test__/**/*",
     "**/*.test.*",
     "**/*.spec.*",
+    "vite.config.ts",
     "vitest.config.ts"
   ],
   "include": ["src/**/*.ts"]

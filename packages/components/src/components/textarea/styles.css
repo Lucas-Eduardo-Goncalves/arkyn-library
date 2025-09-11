@@ -1,9 +1,10 @@
 /* BASE */
 .arkynTextarea {
-  flex: 1;
   position: relative;
   display: flex;
   align-items: center;
+
+  width: 100%;
 
   padding: 16px;
   gap: 8px;

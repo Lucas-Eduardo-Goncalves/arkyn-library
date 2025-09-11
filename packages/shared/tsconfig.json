@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "declaration": true,
     "declarationDir": "./dist",
     "declarationMap": true,
@@ -21,6 +22,7 @@
     "**/__test__/**/*",
     "**/*.test.*",
     "**/*.spec.*",
+    "vite.config.ts",
     "vitest.config.ts"
   ],
   "include": ["src/**/*.ts"]

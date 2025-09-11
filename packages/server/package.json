@@ -1,9 +1,9 @@
 {
   "name": "@arkyn/server",
-  "version": "3.0.1-beta.58",
+  "version": "3.0.1-beta.59",
   "author": "Arkyn | Lucas Gonçalves",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "main": "./dist/bundle.js",
+  "module": "./dist/bundle.js",
   "type": "module",
   "types": "./dist/index.d.ts",
   "license": "Apache-2.0",
@@ -27,7 +27,7 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "bun run clean && bunx tsc --project tsconfig.json",
+    "build": "bunx vite build && tsc",
     "test": "vitest --config vitest.config.ts",
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
@@ -38,6 +38,7 @@
   "devDependencies": {
     "bun-types": "latest",
     "vitest": "^3.2.4",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "vite": "^5.4.19"
   }
 }

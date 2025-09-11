@@ -1,9 +1,10 @@
 /* BASE */
 .arkynInput {
-  flex: 1;
   position: relative;
   display: flex;
   align-items: center;
+
+  width: 100%;
 
   padding: 0 16px;
   gap: 8px;

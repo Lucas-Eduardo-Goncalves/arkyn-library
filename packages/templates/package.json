@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/templates",
-  "version": "3.0.1-beta.58",
+  "version": "3.0.1-beta.59",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "type": "module",
@@ -26,13 +26,14 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "bun run clean && bunx tsc --project tsconfig.json",
+    "build": "bunx vite build && tsc",
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {},
   "devDependencies": {
     "@types/uuid": "^10.0.0",
     "bun-types": "latest",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "vite": "^5.4.19"
   }
 }
