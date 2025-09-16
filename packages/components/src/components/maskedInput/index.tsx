@@ -244,6 +244,7 @@ function MaskedInput(props: MaskedInputProps) {
           readOnly={readOnly}
           id={inputId}
           name={name}
+          defaultValue={defaultValue || undefined}
           placeholder={isDisabled ? value || placeholder : placeholder}
           value={isDisabled ? undefined : value}
           {...rest}
