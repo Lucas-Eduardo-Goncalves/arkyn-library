@@ -60,7 +60,7 @@ class ApiService {
       const debugs: string[] = [];
 
       debugs.push(`Base URL: ${this.baseUrl}`);
-      debugs.push(`Endpoint URL: ${endpoint}`);
+      debugs.push(`Endpoint: ${endpoint}`);
       debugs.push(`Method: ${method}`);
       if (data[0]) debugs.push(`Headers: ${JSON.stringify(data[0])}`);
       if (data[1]) debugs.push(`Body: ${JSON.stringify(data[1])}`);
@@ -105,7 +105,7 @@ class ApiService {
     const url = this.generateURL(endpoint);
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
 
-    this.onDebug(url, "get", [headers]);
+    this.onDebug(endpoint, "get", [headers]);
     return await getRequest(url, headers);
   }
 
@@ -121,7 +121,7 @@ class ApiService {
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
     const body = data?.body;
 
-    this.onDebug(url, "post", [headers, body]);
+    this.onDebug(endpoint, "post", [headers, body]);
     return await postRequest(url, headers, body);
   }
 
@@ -153,7 +153,7 @@ class ApiService {
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
     const body = data?.body;
 
-    this.onDebug(url, "patch", [headers, body]);
+    this.onDebug(endpoint, "patch", [headers, body]);
     return await patchRequest(url, headers, body);
   }
 
@@ -169,7 +169,7 @@ class ApiService {
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
     const body = data?.body;
 
-    this.onDebug(url, "delete", [headers, body]);
+    this.onDebug(endpoint, "delete", [headers, body]);
     return await deleteRequest(url, headers, body);
   }
 }
