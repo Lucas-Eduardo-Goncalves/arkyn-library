@@ -65,7 +65,6 @@ function formParse<T extends FormParseProps>([
   if (zodResponse.success === false) {
     const errorsObject = Object.fromEntries(
       zodResponse.error.issues.map((item) => {
-        console.log(item);
         return [item.path.join("."), item.message];
       })
     );

@@ -3,6 +3,7 @@ import { getRequest } from "../api/getRequest";
 import { patchRequest } from "../api/patchRequest";
 import { postRequest } from "../api/postRequest";
 import { putRequest } from "../api/putRequest";
+import { flushDebugLogs } from "./flushDebugLogs";
 
 type ApiServiceConstructorProps = {
   baseUrl: string;
@@ -56,15 +57,15 @@ class ApiService {
 
   private onDebug(fullRoute: string, method: string, data: any) {
     if (this.enableDebug) {
-      const reset = "\x1b[0m";
-      const yellow = "\x1b[33m";
-      const debugName = `${yellow}[ARKYN-API-DEBUG]${reset}`;
+      const debugs: string[] = [];
 
-      console.log(`${debugName} Base URL: ${this.baseUrl}`);
-      console.log(`${debugName} Full URL: ${fullRoute}`);
-      console.log(`${debugName} Method: ${method}`);
-      if (data[0]) console.log(`${debugName} Headers: `, data[0]);
-      if (data[1]) console.log(`${debugName} Body: `, data[1]);
+      debugs.push(`Base URL: ${this.baseUrl}`);
+      debugs.push(`Full URL: ${fullRoute}`);
+      debugs.push(`Method: ${method}`);
+      if (data[0]) debugs.push(`Headers: ${JSON.stringify(data[0])}`);
+      if (data[1]) debugs.push(`Body: ${JSON.stringify(data[1])}`);
+
+      flushDebugLogs({ debugs, name: "ARKYN-API-DEBUG", scheme: "yellow" });
     }
   }
 
