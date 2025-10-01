@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/components",
-  "version": "3.0.1-beta.63",
+  "version": "3.0.1-beta.64",
   "main": "./dist/bundle.js",
   "module": "./dist/bundle.js",
   "types": "./dist/index.d.ts",

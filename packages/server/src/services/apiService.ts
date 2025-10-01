@@ -55,12 +55,12 @@ class ApiService {
    * @returns The full URL as a string.
    */
 
-  private onDebug(fullRoute: string, method: string, data: any) {
+  private onDebug(endpoint: string, method: string, data: any) {
     if (this.enableDebug) {
       const debugs: string[] = [];
 
       debugs.push(`Base URL: ${this.baseUrl}`);
-      debugs.push(`Full URL: ${fullRoute}`);
+      debugs.push(`Endpoint URL: ${endpoint}`);
       debugs.push(`Method: ${method}`);
       if (data[0]) debugs.push(`Headers: ${JSON.stringify(data[0])}`);
       if (data[1]) debugs.push(`Body: ${JSON.stringify(data[1])}`);
@@ -95,14 +95,14 @@ class ApiService {
   }
 
   /**
-   * Sends a get request to the specified route.
-   * @param route - The API route to send the get request to.
+   * Sends a get request to the specified endpoint.
+   * @param endpoint - The API endpoint to send the get request to.
    * @param data - The request data, including optional headers and token.
    * @returns The API response data.
    */
 
-  async get(route: string, data?: ApiRequestDataWithoutBodyProps) {
-    const url = this.generateURL(route);
+  async get(endpoint: string, data?: ApiRequestDataWithoutBodyProps) {
+    const url = this.generateURL(endpoint);
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
 
     this.onDebug(url, "get", [headers]);
@@ -110,14 +110,14 @@ class ApiService {
   }
 
   /**
-   * Sends a post request to the specified route.
-   * @param route - The API route to send the post request to.
+   * Sends a post request to the specified endpoint.
+   * @param endpoint - The API endpoint to send the post request to.
    * @param data - The request data, including body, optional headers, and token.
    * @returns The API response data.
    */
 
-  async post(route: string, data?: ApiRequestDataWithBodyProps) {
-    const url = this.generateURL(route);
+  async post(endpoint: string, data?: ApiRequestDataWithBodyProps) {
+    const url = this.generateURL(endpoint);
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
     const body = data?.body;
 
@@ -126,30 +126,30 @@ class ApiService {
   }
 
   /**
-   * Sends a put request to the specified route.
-   * @param route - The API route to send the put request to.
+   * Sends a put request to the specified endpoint.
+   * @param endpoint - The API endpoint to send the put request to.
    * @param data - The request data, including body, optional headers, and token.
    * @returns The API response data.
    */
 
-  async put(route: string, data?: ApiRequestDataWithBodyProps) {
-    const url = this.generateURL(route);
+  async put(endpoint: string, data?: ApiRequestDataWithBodyProps) {
+    const url = this.generateURL(endpoint);
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
     const body = data?.body;
 
-    this.onDebug(url, "put", [headers, body]);
+    this.onDebug(endpoint, "put", [headers, body]);
     return await putRequest(url, headers, body);
   }
 
   /**
-   * Sends a patch request to the specified route.
-   * @param route - The API route to send the patch request to.
+   * Sends a patch request to the specified endpoint.
+   * @param endpoint - The API endpoint to send the patch request to.
    * @param data - The request data, including body, optional headers, and token.
    * @returns The API response data.
    */
 
-  async patch(route: string, data?: ApiRequestDataWithBodyProps) {
-    const url = this.generateURL(route);
+  async patch(endpoint: string, data?: ApiRequestDataWithBodyProps) {
+    const url = this.generateURL(endpoint);
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
     const body = data?.body;
 
@@ -158,14 +158,14 @@ class ApiService {
   }
 
   /**
-   * Sends a delete request to the specified route.
-   * @param route - The API route to send the delete request to.
+   * Sends a delete request to the specified endpoint.
+   * @param endpoint - The API endpoint to send the delete request to.
    * @param data - The request data, including body, optional headers, and token.
    * @returns The API response data.
    */
 
-  async delete(route: string, data?: ApiRequestDataWithBodyProps) {
-    const url = this.generateURL(route);
+  async delete(endpoint: string, data?: ApiRequestDataWithBodyProps) {
+    const url = this.generateURL(endpoint);
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
     const body = data?.body;
 
