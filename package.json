@@ -22,7 +22,8 @@
     "@arkyn/components": "workspace:*",
     "@arkyn/server": "workspace:*",
     "@arkyn/shared": "workspace:*",
-    "@arkyn/templates": "workspace:*"
+    "@arkyn/templates": "workspace:*",
+    "@rollup/rollup-darwin-arm64": "4.42.0"
   },
   "scripts": {
     "all:update-packages": "cd packages/components && bun update && cd ../server && bun update && cd ../shared && bun update && cd ../templates && bun update",
@@ -56,7 +57,5 @@
   "workspaces": [
     "packages/*"
   ],
-  "dependencies": {
-    "react-router": "^7.6.0"
-  }
+  "dependencies": {}
 }
