@@ -19,11 +19,12 @@ export { Updated } from "./http/successResponses/updated";
 // services
 export { ApiService } from "./services/apiService";
 export { ArkynLogService } from "./services/arkynLogService";
+export { DebugService } from "./services/debugService";
 export { decodeErrorMessageFromRequest } from "./services/decodeErrorMessageFromRequest";
 export { decodeRequestBody } from "./services/decodeRequestBody";
 export { errorHandler } from "./services/errorHandler";
+export { flushDebugLogs } from "./services/flushDebugLogs";
 export { formParse } from "./services/formParse";
 export { getCaller } from "./services/getCaller";
 export { getScopedParams } from "./services/getScopedParams";
-export { httpDebug, HttpDebugService } from "./services/httpDebug";
 export { SchemaValidator } from "./services/schemaValidator";

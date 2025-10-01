@@ -1,3 +1,5 @@
+import { SuccessResponse } from "./_successResponse";
+
 /**
  * Represents a successful HTTP response with a status code of 201 (Created).
  * This class is used to standardize the structure of a "Created" response,
@@ -6,7 +8,7 @@
  * @template T - The type of the response body.
  */
 
-class Created<T> {
+class Created<T> extends SuccessResponse {
   body: T;
   headers: ResponseInit["headers"];
   status: number;
@@ -20,10 +22,14 @@ class Created<T> {
    */
 
   constructor(body: T, init?: ResponseInit) {
+    super();
+
     this.body = body;
     this.headers = init?.headers || {};
     this.status = init?.status || 201;
     this.statusText = init?.statusText || "Resource created successfully";
+
+    this.onDebug("Created", body);
   }
 
   /**

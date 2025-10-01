@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { SchemaValidator } from "../schemaValidator";
-import { httpDebug } from "../httpDebug";
+import { flushDebugLogs } from "../flushDebugLogs";
 import { ServerError } from "../../http/badResponses/serverError";
 import { UnprocessableEntity } from "../../http/badResponses/unprocessableEntity";
 import { describe, expect, it, vi } from "vitest";
@@ -12,8 +12,8 @@ vi.mock("../getCaller", () => ({
   })),
 }));
 
-vi.mock("../httpDebug", () => ({
-  httpDebug: vi.fn(),
+vi.mock("../flushDebugLogs", () => ({
+  flushDebugLogs: vi.fn(),
 }));
 
 describe("SchemaValidator", () => {
@@ -91,14 +91,18 @@ describe("SchemaValidator", () => {
         // Ignore the error
       }
 
-      expect(httpDebug).toHaveBeenCalledWith(
-        "UnprocessableEntity",
+      expect(flushDebugLogs).toHaveBeenCalledWith(
         expect.objectContaining({
-          success: false,
-          fieldErrors: {
-            name: "Name is required",
-            age: "Must be at least 18",
-          },
+          scheme: "red",
+          name: "ARKYN-BAD-RESPONSE-DEBUG",
+          debugs: expect.arrayContaining([
+            expect.stringContaining("UnprocessableEntity initialized"),
+            expect.stringContaining("Caller Function: mockedFunctionName"),
+            expect.stringContaining("Caller Location: mockedCallerInfo"),
+            expect.stringContaining('"fieldErrors"'),
+            expect.stringContaining('"name": "Name is required"'),
+            expect.stringContaining('"age": "Must be at least 18"'),
+          ]),
         })
       );
     });

@@ -1,4 +1,4 @@
-import { httpDebug } from "../../services/httpDebug";
+import { BadResponse } from "./_badResponse";
 
 /**
  * Represents an HTTP error response with a status code of 400 (Bad Request).
@@ -6,7 +6,7 @@ import { httpDebug } from "../../services/httpDebug";
  * including the response body, headers, status, and status text.
  */
 
-class BadRequest {
+class BadRequest extends BadResponse {
   body: any;
   cause?: any;
   status: number = 400;
@@ -20,10 +20,13 @@ class BadRequest {
    */
 
   constructor(message: string, cause?: any) {
+    super();
+
     this.body = { name: "BadRequest", message: message };
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
-    httpDebug("BadRequest", this.body, this.cause);
+
+    this.onDebug("BadRequest", this.body, this.cause);
   }
 
   /**

@@ -1,5 +1,5 @@
 import { ArkynLogRequestMapper } from "../mapper/arkynLogRequestMapper";
-import { httpDebug } from "../services/httpDebug";
+import { flushDebugLogs } from "../services/flushDebugLogs";
 import type { ApiResponseDTO } from "../types/ApiResponseDTO";
 import { arkynLogRequest } from "./arkynLogRequest";
 
@@ -104,7 +104,12 @@ async function makeRequest<T = any>(
       cause: null,
     };
   } catch (err) {
-    httpDebug("Network error or request failed", null, err);
+    flushDebugLogs({
+      debugs: [`Network error or request failed: ${err}`],
+      name: "ARKYN_MAKE_REQUEST_ERROR",
+      scheme: "red",
+    });
+
     return {
       success: false,
       status: 0,

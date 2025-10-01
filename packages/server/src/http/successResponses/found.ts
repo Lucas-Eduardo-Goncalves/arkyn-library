@@ -1,3 +1,5 @@
+import { SuccessResponse } from "./_successResponse";
+
 /**
  * Represents an HTTP 302 Found response.
  * This class is used to create a standardized HTTP response with a status of 302 (Found),
@@ -6,7 +8,7 @@
  * @template T - The type of the response body.
  */
 
-class Found<T> {
+class Found<T> extends SuccessResponse {
   body: T;
   headers: ResponseInit["headers"];
   status: number;
@@ -23,10 +25,14 @@ class Found<T> {
    */
 
   constructor(body: T, init?: ResponseInit) {
+    super();
+
     this.body = body;
     this.headers = init?.headers || {};
     this.status = init?.status || 302;
     this.statusText = init?.statusText || "Found";
+
+    this.onDebug("Found", body);
   }
 
   /**

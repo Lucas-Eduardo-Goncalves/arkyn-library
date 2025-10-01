@@ -1,3 +1,5 @@
+import { SuccessResponse } from "./_successResponse";
+
 /**
  * Represents a successful HTTP response with a status code of 200 (OK) or other custom status codes.
  * This class is used to standardize the structure of an "Updated" response,
@@ -6,7 +8,7 @@
  * @template T - The type of the response body.
  */
 
-class Updated<T> {
+class Updated<T> extends SuccessResponse {
   body: T;
   headers: ResponseInit["headers"];
   status: number;
@@ -20,10 +22,14 @@ class Updated<T> {
    */
 
   constructor(body: T, init?: ResponseInit) {
+    super();
+
     this.body = body;
     this.headers = init?.headers || {};
     this.status = init?.status || 200;
     this.statusText = init?.statusText || "Resource updated successfully";
+
+    this.onDebug("Updated", body);
   }
 
   /**

@@ -1,4 +1,4 @@
-import { httpDebug } from "../../services/httpDebug";
+import { BadResponse } from "./_badResponse";
 
 type UnprocessableEntityProps = {
   data?: any;
@@ -13,7 +13,7 @@ type UnprocessableEntityProps = {
  * including the response body, headers, status, and status text.
  */
 
-class UnprocessableEntity {
+class UnprocessableEntity extends BadResponse {
   body: any;
   status: number = 422;
   statusText: string;
@@ -29,7 +29,9 @@ class UnprocessableEntity {
    * @param enableDebug - A boolean indicating whether to enable debug logging for this error.
    */
 
-  constructor(props: UnprocessableEntityProps, enableDebug = false) {
+  constructor(props: UnprocessableEntityProps) {
+    super();
+
     this.statusText = props.message || "Unprocessable Entity";
     this.body = {
       name: "UnprocessableEntity",
@@ -39,7 +41,7 @@ class UnprocessableEntity {
       fields: props.fields,
     };
 
-    enableDebug && httpDebug("UnprocessableEntity", this.body);
+    this.onDebug("UnprocessableEntity", this.body, this.body);
   }
 
   /**

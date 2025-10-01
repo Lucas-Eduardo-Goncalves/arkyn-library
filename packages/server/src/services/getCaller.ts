@@ -1,5 +1,5 @@
 import path from "path";
-import { HttpDebugService } from "./httpDebug";
+import { DebugService } from "./debugService";
 
 /**
  * Retrieves information about the caller of the current function.
@@ -20,7 +20,7 @@ function getCaller() {
   const stack = err.stack || "";
   const stackLines = stack.split("\n").map((line) => line.trim());
 
-  const ignoreFile = HttpDebugService.ignoreFile;
+  const ignoreFiles = DebugService.ignoreFiles;
 
   let callerIndex = 2;
 
@@ -32,10 +32,12 @@ function getCaller() {
     callerIndex++;
   }
 
-  if (ignoreFile) {
+  if (ignoreFiles.length > 0) {
     while (
       callerIndex < stackLines.length &&
-      stackLines[callerIndex].includes(ignoreFile)
+      ignoreFiles.some((ignoreFile) =>
+        stackLines[callerIndex].includes(ignoreFile)
+      )
     ) {
       callerIndex++;
     }

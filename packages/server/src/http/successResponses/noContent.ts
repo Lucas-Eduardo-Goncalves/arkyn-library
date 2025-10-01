@@ -1,10 +1,12 @@
+import { SuccessResponse } from "./_successResponse";
+
 /**
  * Represents a successful HTTP response with a status code of 204 (No Content).
  * This class is used to standardize the structure of a "No Content" response,
  * including headers, status, and status text.
  */
 
-class NoContent {
+class NoContent extends SuccessResponse {
   headers: ResponseInit["headers"];
   status: number;
   statusText: string;
@@ -16,9 +18,13 @@ class NoContent {
    */
 
   constructor(init?: ResponseInit) {
+    super();
+
     this.headers = init?.headers || {};
     this.status = init?.status || 204;
     this.statusText = init?.statusText ?? "No content";
+
+    this.onDebug("No content", null);
   }
 
   /**

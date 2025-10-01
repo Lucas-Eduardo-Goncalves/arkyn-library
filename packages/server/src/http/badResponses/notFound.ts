@@ -1,4 +1,4 @@
-import { httpDebug } from "../../services/httpDebug";
+import { BadResponse } from "./_badResponse";
 
 /**
  * Represents an HTTP error response with a status code of 404 (Not Found).
@@ -6,7 +6,7 @@ import { httpDebug } from "../../services/httpDebug";
  * including the response body, headers, status, and status text.
  */
 
-class NotFound {
+class NotFound extends BadResponse {
   body: any;
   cause?: any;
   status: number = 404;
@@ -20,10 +20,13 @@ class NotFound {
    */
 
   constructor(message: string, cause?: any) {
+    super();
+
     this.body = { name: "NotFound", message: message };
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
-    httpDebug("NotFound", this.body, this.cause);
+
+    this.onDebug("NotFound", this.body, this.cause);
   }
 
   /**

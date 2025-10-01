@@ -4,7 +4,6 @@ import { ServerError } from "../http/badResponses/serverError";
 import { UnprocessableEntity } from "../http/badResponses/unprocessableEntity";
 import { formParse } from "./formParse";
 import { getCaller } from "./getCaller";
-import { httpDebug } from "./httpDebug";
 
 function formatErrorMessage(error: z.ZodError) {
   const title = "Error validating:";
@@ -45,18 +44,14 @@ class SchemaValidator<T extends ZodType> {
     const formParsed = formParse([data, this.schema]);
 
     if (!formParsed.success) {
-      httpDebug("UnprocessableEntity", formParsed);
       const firstErrorKey = Object.keys(formParsed.fieldErrors)[0];
 
-      throw new UnprocessableEntity(
-        {
-          fields: formParsed.fields,
-          fieldErrors: formParsed.fieldErrors,
-          data: { scrollTo: firstErrorKey },
-          message,
-        },
-        false
-      );
+      throw new UnprocessableEntity({
+        fields: formParsed.fields,
+        fieldErrors: formParsed.fieldErrors,
+        data: { scrollTo: firstErrorKey },
+        message,
+      });
     }
 
     return formParsed.data as z.infer<T>;

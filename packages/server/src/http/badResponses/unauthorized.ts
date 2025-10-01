@@ -1,4 +1,4 @@
-import { httpDebug } from "../../services/httpDebug";
+import { BadResponse } from "./_badResponse";
 
 /**
  * Represents an HTTP error response with a status code of 401 (Unauthorized).
@@ -6,7 +6,7 @@ import { httpDebug } from "../../services/httpDebug";
  * including the response body, headers, status, and status text.
  */
 
-class Unauthorized {
+class Unauthorized extends BadResponse {
   body: any;
   cause?: any;
   status: number = 401;
@@ -20,10 +20,13 @@ class Unauthorized {
    */
 
   constructor(message: string, cause?: any) {
+    super();
+
     this.body = { name: "Unauthorized", message: message };
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
-    httpDebug("Unauthorized", this.body, this.cause);
+
+    this.onDebug("Unauthorized", this.body, this.cause);
   }
 
   /**

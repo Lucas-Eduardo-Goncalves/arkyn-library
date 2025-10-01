@@ -1,4 +1,4 @@
-import { httpDebug } from "../../services/httpDebug";
+import { BadResponse } from "./_badResponse";
 
 /**
  * Represents an HTTP error response with a status code of 500 (Internal Server Error).
@@ -6,7 +6,7 @@ import { httpDebug } from "../../services/httpDebug";
  * including the response body, headers, status, and status text.
  */
 
-class ServerError {
+class ServerError extends BadResponse {
   body: any;
   cause?: any;
   status: number = 500;
@@ -20,10 +20,13 @@ class ServerError {
    */
 
   constructor(message: string, cause?: any) {
+    super();
+
     this.body = { name: "ServerError", message: message };
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
-    httpDebug("ServerError", this.body, this.cause);
+
+    this.onDebug("ServerError", this.body, this.cause);
   }
 
   /**

@@ -1,4 +1,4 @@
-import { httpDebug } from "../../services/httpDebug";
+import { BadResponse } from "./_badResponse";
 
 /**
  * Represents an HTTP error response with a status code of 502 (Bad Gateway).
@@ -6,7 +6,7 @@ import { httpDebug } from "../../services/httpDebug";
  * including the response body, headers, status, and status text.
  */
 
-class BadGateway {
+class BadGateway extends BadResponse {
   body: any;
   cause?: any;
   status: number = 502;
@@ -20,10 +20,13 @@ class BadGateway {
    */
 
   constructor(message: string, cause?: any) {
+    super();
+
     this.body = { name: "BadGateway", message: message };
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
-    httpDebug("BadGateway", this.body, this.cause);
+
+    this.onDebug("BadGateway", this.body, this.cause);
   }
 
   /**

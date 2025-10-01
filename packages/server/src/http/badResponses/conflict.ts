@@ -1,4 +1,4 @@
-import { httpDebug } from "../../services/httpDebug";
+import { BadResponse } from "./_badResponse";
 
 /**
  * Represents an HTTP error response with a status code of 409 (Conflict).
@@ -6,7 +6,7 @@ import { httpDebug } from "../../services/httpDebug";
  * including the response body, headers, status, and status text.
  */
 
-class Conflict {
+class Conflict extends BadResponse {
   body: any;
   cause?: any;
   status: number = 409;
@@ -20,10 +20,13 @@ class Conflict {
    */
 
   constructor(message: string, cause?: any) {
+    super();
+
     this.body = { name: "Conflict", message: message };
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
-    httpDebug("Conflict", this.body, this.cause);
+
+    this.onDebug("Conflict", this.body, this.cause);
   }
 
   /**

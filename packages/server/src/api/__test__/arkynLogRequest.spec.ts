@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { ArkynLogInstance } from "../../config/arkynLogInstance";
+import { ArkynLogService } from "../../services/arkynLogService";
 import { arkynLogRequest } from "../arkynLogRequest";
 
-vi.mock("../../config/arkynLogInstance");
+vi.mock("../../services/arkynLogService");
 vi.mock("../../services/httpDebug");
 
 global.fetch = vi.fn() as any;
@@ -35,7 +35,7 @@ describe("arkynLogRequest", () => {
       arkynApiUrl: "https://api.example.com/arkyn",
     };
 
-    (ArkynLogInstance.getArkynConfig as any).mockReturnValue(mockInboxConfig);
+    (ArkynLogService.getArkynConfig as any).mockReturnValue(mockInboxConfig);
 
     (fetch as any).mockResolvedValueOnce({
       ok: true,
@@ -71,7 +71,7 @@ describe("arkynLogRequest", () => {
   });
 
   it("should not send a request if arkyn configuration is not set", async () => {
-    (ArkynLogInstance.getArkynConfig as any).mockReturnValue(undefined);
+    (ArkynLogService.getArkynConfig as any).mockReturnValue(undefined);
 
     await arkynLogRequest({
       status: 200,
@@ -118,7 +118,7 @@ describe("arkynLogRequest", () => {
       arkynApiUrl: "https://api.example.com/arkyn",
     };
 
-    (ArkynLogInstance.getArkynConfig as any).mockReturnValue(mockInboxConfig);
+    (ArkynLogService.getArkynConfig as any).mockReturnValue(mockInboxConfig);
 
     await arkynLogRequest(mockConfig);
 

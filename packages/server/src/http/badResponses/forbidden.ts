@@ -1,4 +1,4 @@
-import { httpDebug } from "../../services/httpDebug";
+import { BadResponse } from "./_badResponse";
 
 /**
  * Represents an HTTP error response with a status code of 403 (Forbidden).
@@ -6,7 +6,7 @@ import { httpDebug } from "../../services/httpDebug";
  * including the response body, headers, status, and status text.
  */
 
-class Forbidden {
+class Forbidden extends BadResponse {
   body: any;
   cause?: any;
   status: number = 403;
@@ -20,10 +20,13 @@ class Forbidden {
    */
 
   constructor(message: string, cause?: any) {
+    super();
+
     this.body = { name: "Forbidden", message: message };
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
-    httpDebug("Forbidden", this.body, this.cause);
+
+    this.onDebug("Forbidden", this.body, this.cause);
   }
 
   /**

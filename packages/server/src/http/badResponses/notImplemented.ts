@@ -1,4 +1,4 @@
-import { httpDebug } from "../../services/httpDebug";
+import { BadResponse } from "./_badResponse";
 
 /**
  * Represents an HTTP error response with a status code of 501 (Not Implemented).
@@ -6,7 +6,7 @@ import { httpDebug } from "../../services/httpDebug";
  * including the response body, headers, status, and status text.
  */
 
-class NotImplemented {
+class NotImplemented extends BadResponse {
   body: any;
   cause?: any;
   status: number = 501;
@@ -20,10 +20,13 @@ class NotImplemented {
    */
 
   constructor(message: string, cause?: any) {
+    super();
+
     this.body = { name: "NotImplemented", message: message };
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
-    httpDebug("NotImplemented", this.body, this.cause);
+
+    this.onDebug("NotImplemented", this.body, this.cause);
   }
 
   /**

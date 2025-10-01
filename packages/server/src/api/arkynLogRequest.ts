@@ -1,5 +1,5 @@
 import { ArkynLogService } from "../services/arkynLogService";
-import { httpDebug } from "../services/httpDebug";
+import { flushDebugLogs } from "../services/flushDebugLogs";
 
 type ConfigProps = {
   rawUrl: string;
@@ -74,7 +74,7 @@ async function arkynLogRequest(config: ConfigProps) {
     rawUrl,
   } = config;
 
-  // if (process.env.NODE_ENV === "development") return;
+  if (process.env.NODE_ENV === "development") return;
 
   try {
     const url = new URL(rawUrl);
@@ -111,7 +111,11 @@ async function arkynLogRequest(config: ConfigProps) {
       }
     );
   } catch (err) {
-    httpDebug("arkyn log error", "Error sending request", err);
+    flushDebugLogs({
+      debugs: [`Error sending request: ${err}`],
+      name: "ARKYN_LOG_ERROR",
+      scheme: "red",
+    });
   }
 }
 
