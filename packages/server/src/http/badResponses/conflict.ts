@@ -26,7 +26,12 @@ class Conflict extends BadResponse {
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
 
-    this.onDebug("Conflict", this.body, this.cause);
+    this.onDebug({
+      name: "Conflict",
+      body: this.body,
+      cause: this.cause,
+      message: this.statusText,
+    });
   }
 
   /**

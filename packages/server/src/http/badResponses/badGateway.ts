@@ -26,7 +26,12 @@ class BadGateway extends BadResponse {
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
 
-    this.onDebug("BadGateway", this.body, this.cause);
+    this.onDebug({
+      name: "BadGateway",
+      body: this.body,
+      cause: this.cause,
+      message: this.statusText,
+    });
   }
 
   /**

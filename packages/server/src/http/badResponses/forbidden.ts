@@ -26,7 +26,12 @@ class Forbidden extends BadResponse {
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
 
-    this.onDebug("Forbidden", this.body, this.cause);
+    this.onDebug({
+      name: "Forbidden",
+      body: this.body,
+      cause: this.cause,
+      message: this.statusText,
+    });
   }
 
   /**

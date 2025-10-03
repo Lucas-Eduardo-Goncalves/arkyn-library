@@ -26,7 +26,12 @@ class ServerError extends BadResponse {
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
 
-    this.onDebug("ServerError", this.body, this.cause);
+    this.onDebug({
+      name: "ServerError",
+      body: this.body,
+      cause: this.cause,
+      message: this.statusText,
+    });
   }
 
   /**

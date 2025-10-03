@@ -26,7 +26,12 @@ class BadRequest extends BadResponse {
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
 
-    this.onDebug("BadRequest", this.body, this.cause);
+    this.onDebug({
+      name: "BadRequest",
+      body: this.body,
+      cause: this.cause,
+      message: this.statusText,
+    });
   }
 
   /**

@@ -26,7 +26,12 @@ class NotFound extends BadResponse {
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
 
-    this.onDebug("NotFound", this.body, this.cause);
+    this.onDebug({
+      name: "NotFound",
+      body: this.body,
+      cause: this.cause,
+      message: this.statusText,
+    });
   }
 
   /**

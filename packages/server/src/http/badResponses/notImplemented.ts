@@ -26,7 +26,12 @@ class NotImplemented extends BadResponse {
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
 
-    this.onDebug("NotImplemented", this.body, this.cause);
+    this.onDebug({
+      name: "NotImplemented",
+      body: this.body,
+      cause: this.cause,
+      message: this.statusText,
+    });
   }
 
   /**
