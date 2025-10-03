@@ -41,7 +41,11 @@ class UnprocessableEntity extends BadResponse {
       fields: props.fields,
     };
 
-    this.onDebug("UnprocessableEntity", this.body, this.body);
+    this.onDebug(
+      "UnprocessableEntity",
+      props.message || null,
+      props.fieldErrors || null
+    );
   }
 
   /**

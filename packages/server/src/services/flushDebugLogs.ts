@@ -20,13 +20,11 @@ function flushDebugLogs(props: FlushDebugLogsProps) {
     };
 
     const debugName = `${colors[props.scheme]}[${props.name}]${reset}`;
-    let consoleData = ``;
+    let consoleData = `\n`;
 
     props.debugs.forEach((debug) => {
       consoleData += `${debugName} ${debug.trim()}\n`;
     });
-
-    consoleData += "<------------------->";
 
     console.log(consoleData);
   }
