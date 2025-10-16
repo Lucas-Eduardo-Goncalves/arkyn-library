@@ -1,0 +1,24 @@
+.arkynSelectContent {
+  display: flex;
+  align-items: start;
+  gap: 4px;
+  flex-wrap: wrap;
+
+  flex: 1;
+}
+
+.arkynSelectContent > p {
+  font-weight: 400;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+.arkynSelectContent.md > p {
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.arkynSelectContent.lg > p {
+  font-size: 16px;
+  line-height: 16px;
+}

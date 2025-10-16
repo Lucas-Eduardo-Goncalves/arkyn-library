@@ -24,6 +24,7 @@ import { SwitchExamples } from "./components/examples.switch";
 import { TabExamples } from "./components/examples.tab";
 import { TextareaExamples } from "./components/examples.texarea";
 import { TooltipExamples } from "./components/examples.tooltip";
+import { SelectExamples } from "./components/examples.select";
 
 function App() {
   const [selectedOption, setSelectedOption] = useState<string[]>([]);
@@ -48,6 +49,7 @@ function App() {
     { label: "MultiSelect", value: "multi-select" },
     { label: "PhoneInput", value: "phone-input" },
     { label: "Radio", value: "radio" },
+    { label: "Select", value: "select" },
     { label: "Slider", value: "slider" },
     { label: "Switch", value: "switch" },
     { label: "Tab", value: "tab" },
@@ -90,6 +92,7 @@ function App() {
       {showExamples("multi-select") && <MultiSelectExamples />}
       {showExamples("phone-input") && <PhoneInputExamples />}
       {showExamples("radio") && <RadioExamples />}
+      {showExamples("select") && <SelectExamples />}
       {showExamples("slider") && <SliderExamples />}
       {showExamples("switch") && <SwitchExamples />}
       {showExamples("tab") && <TabExamples />}

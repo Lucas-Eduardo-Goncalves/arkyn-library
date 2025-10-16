@@ -1,0 +1,45 @@
+/* BASE CSS */
+.arkynSelectOptionsContainer {
+  position: absolute;
+  z-index: 7;
+
+  left: -2px;
+  right: -2px;
+
+  border-radius: 6px;
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+  overflow: auto;
+  height: max-content;
+
+  border: 1px solid var(--border);
+  background-color: var(--card);
+
+  max-height: 300px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* BOTTOM POSITION (DEFAULT) */
+.arkynSelectOptionsContainer.bottom {
+  top: calc(100% + 5px);
+}
+
+/* TOP POSITION */
+.arkynSelectOptionsContainer.top {
+  bottom: calc(100% + 5px);
+}
+
+/* NOT FOUND TEXT */
+.arkynSelectOptionsContainer > p {
+  font-weight: 400;
+  font-size: 14px;
+  padding: 16px;
+  text-align: center;
+  line-height: 21.79px;
+
+  color: var(--text-body);
+}

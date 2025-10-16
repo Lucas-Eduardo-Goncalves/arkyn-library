@@ -32,6 +32,7 @@ export { PhoneInput } from "./components/phoneInput";
 export { Popover } from "./components/popover";
 export { RadioBox } from "./components/radio/radioBox";
 export { RadioGroup } from "./components/radio/radioGroup";
+export { Select } from "./components/select";
 export { Slider } from "./components/slider";
 export { Switch } from "./components/switch";
 export { TabButton } from "./components/tab/tabButton";
