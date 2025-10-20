@@ -1,0 +1,7 @@
+.arkynSelectChevron {
+  transition: 0.15s all ease-in-out;
+  color: var(--text-muted);
+}
+.arkynSelectChevron:not(.notAnimate).focused {
+  transform: rotate(180deg);
+}
