@@ -1,0 +1,27 @@
+.arkynElementBlockquote,
+.arkynElementBulletList,
+.arkynElementListItem,
+.arkynElementNumberedList,
+.arkynElementParagraph {
+  color: var(--text-body);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.arkynElementHeadingOne,
+.arkynElementHeadingTwo {
+  color: var(--text-heading);
+  font-weight: 600;
+}
+
+.arkynElementHeadingOne {
+  font-size: 18px;
+}
+
+.arkynElementHeadingTwo {
+  font-size: 16px;
+}
+
+.arkynElementImage {
+  max-width: 100%;
+}

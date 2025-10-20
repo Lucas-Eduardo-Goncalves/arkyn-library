@@ -18,7 +18,7 @@ import { serialize } from "../utils/richTextUtilities";
  * ```
  */
 
-function toHtml(richTextValue: RichTextValue) {
+function toHtml(richTextValue: RichTextValue): string {
   return richTextValue.map((node) => serialize(node)).join("");
 }
 

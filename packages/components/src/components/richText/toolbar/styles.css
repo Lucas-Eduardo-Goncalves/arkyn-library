@@ -1,0 +1,14 @@
+.arkynRichTextToolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  border-radius: 8px 8px 0 0;
+
+  padding: 12px 16px;
+  column-gap: 24px;
+  row-gap: 12px;
+
+  background-color: var(--card-foreground-secondary);
+  border-bottom: 1px solid var(--border);
+}

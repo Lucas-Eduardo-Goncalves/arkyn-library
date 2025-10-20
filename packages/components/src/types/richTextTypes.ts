@@ -58,8 +58,12 @@ type RichTextProps = {
   hiddenButtons?: RichTextHiddenButtonKey[];
   maxLimit?: number;
   enforceCharacterLimit?: boolean;
+  baseErrorMessage?: string;
   defaultValue?: string;
   isError?: boolean;
+  id?: string;
+  label?: string;
+  showAsterisk?: boolean;
   imageConfig?: RichTextInsertImageProps;
   onChangeCharactersCount?: (e: number) => void;
   onChange?: (value: Descendant[]) => void;

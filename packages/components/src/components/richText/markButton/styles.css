@@ -1,0 +1,41 @@
+.arkynRichTextMarkButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 36px;
+  width: 36px;
+
+  background-color: var(--card-foreground-secondary);
+  border: none;
+  border-radius: 4px;
+}
+
+.arkynRichTextMarkButton svg {
+  height: 20px;
+  width: 20px;
+
+  color: var(--text-heading);
+}
+
+.arkynRichTextMarkButton:hover {
+  cursor: pointer;
+  filter: brightness(0.97);
+}
+
+html.dark .arkynRichTextMarkButton:hover {
+  cursor: pointer;
+  filter: brightness(0.9);
+}
+
+.arkynRichTextMarkButton.activeTrue {
+  filter: brightness(0.97);
+}
+
+html.dark .arkynRichTextMarkButton.activeTrue {
+  filter: brightness(0.9);
+}
+
+.arkynRichTextMarkButton.activeTrue svg {
+  color: rgba(var(--spotlight-primary), 1);
+}

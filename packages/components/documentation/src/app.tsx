@@ -19,6 +19,7 @@ import { ModalExamples } from "./components/examples.modal";
 import { MultiSelectExamples } from "./components/examples.multiSelect";
 import { PhoneInputExamples } from "./components/examples.phoneInput";
 import { RadioExamples } from "./components/examples.radio";
+import { RichTextExamples } from "./components/examples.richText";
 import { SliderExamples } from "./components/examples.slider";
 import { SwitchExamples } from "./components/examples.switch";
 import { TabExamples } from "./components/examples.tab";
@@ -48,6 +49,7 @@ function App() {
     { label: "MultiSelect", value: "multi-select" },
     { label: "PhoneInput", value: "phone-input" },
     { label: "Radio", value: "radio" },
+    { label: "RichText", value: "rich-text" },
     { label: "Slider", value: "slider" },
     { label: "Switch", value: "switch" },
     { label: "Tab", value: "tab" },
@@ -90,6 +92,7 @@ function App() {
       {showExamples("multi-select") && <MultiSelectExamples />}
       {showExamples("phone-input") && <PhoneInputExamples />}
       {showExamples("radio") && <RadioExamples />}
+      {showExamples("rich-text") && <RichTextExamples />}
       {showExamples("slider") && <SliderExamples />}
       {showExamples("switch") && <SwitchExamples />}
       {showExamples("tab") && <TabExamples />}

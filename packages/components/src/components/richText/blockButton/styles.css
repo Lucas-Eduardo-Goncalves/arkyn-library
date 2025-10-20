@@ -1,0 +1,29 @@
+.arkynRichTextBlockButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 36px;
+  width: 36px;
+
+  background-color: var(--card-foreground-secondary);
+  border: none;
+  border-radius: 4px;
+}
+
+.arkynRichTextBlockButton svg {
+  height: 20px;
+  width: 20px;
+
+  color: var(--text-heading);
+}
+
+.arkynRichTextBlockButton:hover {
+  cursor: pointer;
+  filter: brightness(0.98);
+}
+
+html.dark .arkynRichTextBlockButton:hover {
+  cursor: pointer;
+  filter: brightness(0.9);
+}
