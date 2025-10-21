@@ -72,7 +72,7 @@ type SelectProps = {
  * @param props.readOnly - Whether the select is read-only. Default: false
  * @param props.isLoading - Controls loading state with spinner. Default: false
  * @param props.isSearchable - Whether the select supports search functionality. Default: false
- * @param props.closeOnSelect - Whether to close dropdown after selecting an option. Default: false
+ * @param props.closeOnSelect - Whether to close dropdown after selecting an option. Default: true
  * @param props.onSearch - Callback function called when search value changes
  * @param props.onChange - Callback function called when selected value changes
  * @param props.onFocus - Callback function called when select gains focus
@@ -150,7 +150,7 @@ function Select(props: SelectProps) {
     options,
     className = "",
     placeholder = "Selecione...",
-    closeOnSelect = false,
+    closeOnSelect = true,
     defaultValue = "",
     errorMessage: baseErrorMessage,
     isLoading = false,
