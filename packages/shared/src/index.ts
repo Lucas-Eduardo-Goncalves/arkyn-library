@@ -33,6 +33,7 @@ export { validateCep } from "./validations/validateCep";
 export { validateCnpj } from "./validations/validateCnpj";
 export { validateCpf } from "./validations/validateCpf";
 export { validateDate } from "./validations/validateDate";
+export { validateEmail } from "./validations/validateEmail";
 export { validatePassword } from "./validations/validatePassword";
 export { validatePhone } from "./validations/validatePhone";
 export { validateRg } from "./validations/validateRg";
