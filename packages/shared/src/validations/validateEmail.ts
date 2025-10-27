@@ -1,9 +1,8 @@
-import { promisify } from "util";
-import { resolve } from "dns";
+import dns from "node:dns";
 
 type ValidateEmailFunction = (rawEmail: string) => Promise<boolean>;
 
-const resolveDns = promisify(resolve);
+const resolveDns = dns.promises.resolve;
 
 // Validates basic email format using a comprehensive regex pattern
 function isValidBasicFormat(email: string): boolean {

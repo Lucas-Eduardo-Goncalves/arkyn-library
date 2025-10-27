@@ -33,6 +33,7 @@
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {
+    "util": "^0.12.5",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
