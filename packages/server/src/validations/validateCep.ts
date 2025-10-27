@@ -1,4 +1,4 @@
-import { removeNonNumeric } from "../services/removeNonNumeric";
+import { removeNonNumeric } from "@arkyn/shared";
 
 type ValidateCepFunction = (rawCep: string) => boolean;
 

@@ -31,9 +31,10 @@
     "test": "vitest --config vitest.config.ts",
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@arkyn/shared": "*",
-    "zod": "^4.0.17"
+    "@arkyn/templates": "*",
+    "zod": ">=4.0.17"
   },
   "devDependencies": {
     "bun-types": "latest",

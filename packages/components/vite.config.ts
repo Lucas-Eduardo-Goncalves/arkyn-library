@@ -13,6 +13,8 @@ export default defineConfig({
     outDir: "./dist",
     rollupOptions: {
       external: [
+        "@arkyn/shared",
+        "@arkyn/templates",
         "@react-input/mask",
         "framer-motion",
         "lucide-react",

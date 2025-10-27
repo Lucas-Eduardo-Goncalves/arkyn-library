@@ -50,6 +50,8 @@
     "lucide-react": ">=0.424.0"
   },
   "devDependencies": {
+    "@arkyn/shared": "*",
+    "@arkyn/templates": "*",
     "@types/is-hotkey": "^0.1.10",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
