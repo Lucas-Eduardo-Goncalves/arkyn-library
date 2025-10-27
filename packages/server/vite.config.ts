@@ -7,7 +7,15 @@ export default defineConfig({
     minify: true,
     outDir: "./dist",
     rollupOptions: {
-      external: ["@arkyn/shared", "@arkyn/templates", "zod"],
+      external: [
+        "@arkyn/shared",
+        "@arkyn/templates",
+        "dns",
+        "dns/promises",
+        "node:dns",
+        "node:dns/promises",
+        "zod",
+      ],
       output: { format: "esm" },
     },
     lib: {
