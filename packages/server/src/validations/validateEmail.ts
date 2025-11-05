@@ -2,7 +2,7 @@ import dns from "node:dns";
 
 type ValidateEmailFunction = (rawEmail: string) => Promise<boolean>;
 
-const resolveDns = dns.promises.resolve;
+// const resolveDns = dns.promises.resolve;
 
 // Validates basic email format using a comprehensive regex pattern
 function isValidBasicFormat(email: string): boolean {
@@ -78,26 +78,26 @@ function extractDomain(email: string): string | null {
 const DNS_RECORD_TYPES = ["MX", "A", "AAAA"] as const;
 
 // Attempts to resolve a specific DNS record type for a domain
-async function tryResolveDnsRecord(
-  domain: string,
-  recordType: string
-): Promise<boolean> {
-  try {
-    await resolveDns(domain, recordType);
-    return true;
-  } catch {
-    return false;
-  }
-}
+// async function tryResolveDnsRecord(
+//   domain: string,
+//   recordType: string
+// ): Promise<boolean> {
+//   try {
+//     await resolveDns(domain, recordType);
+//     return true;
+//   } catch {
+//     return false;
+//   }
+// }
 
 // Validates if domain has valid DNS records (MX, A, or AAAA records)
-async function isValidDns(domain: string): Promise<boolean> {
-  for (const recordType of DNS_RECORD_TYPES) {
-    const hasRecord = await tryResolveDnsRecord(domain, recordType);
-    if (hasRecord) return true;
-  }
-  return false;
-}
+// async function isValidDns(domain: string): Promise<boolean> {
+//   for (const recordType of DNS_RECORD_TYPES) {
+//     const hasRecord = await tryResolveDnsRecord(domain, recordType);
+//     if (hasRecord) return true;
+//   }
+//   return false;
+// }
 
 /**
  * Validates if an email address is valid in all possible ways, including DNS validation.
@@ -128,7 +128,8 @@ const validateEmail: ValidateEmailFunction = async (rawEmail) => {
   const domain = extractDomain(email);
   if (!domain) return false;
 
-  return await isValidDns(domain);
+  // return await isValidDns(domain);
+  return true;
 };
 
 export { validateEmail };
