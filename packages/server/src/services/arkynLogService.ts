@@ -39,7 +39,7 @@ class ArkynLogService {
     this.arkynConfig = {
       trafficSourceId,
       userToken,
-      apiUrl: logBaseApiUrl || `http://95.216.190.158:8080/ingest-log`,
+      apiUrl: logBaseApiUrl || `http://95.216.190.158:8081/ingest-log`,
     };
   }
 
