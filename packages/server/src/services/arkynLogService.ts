@@ -1,13 +1,13 @@
 type ArkynConfigProps = {
-  arkynTrafficSourceId: string;
-  arkynUserToken: string;
-  arkynApiUrl: string;
+  trafficSourceId: string;
+  userToken: string;
+  apiUrl: string;
 };
 
 type SetArkynConfigProps = {
-  arkynTrafficSourceId: string;
-  arkynUserToken: string;
-  arkynLogBaseApiUrl?: string;
+  trafficSourceId: string;
+  userToken: string;
+  logBaseApiUrl?: string;
 };
 
 /**
@@ -34,16 +34,12 @@ class ArkynLogService {
   static setArkynConfig(arkynConfig: SetArkynConfigProps) {
     if (!!this.arkynConfig) return;
 
-    let defaultArkynURL = `https://logs-arkyn-flow-logs.vw6wo7.easypanel.host`;
-    let arkynLogBaseApiUrl = arkynConfig.arkynLogBaseApiUrl || defaultArkynURL;
-
-    arkynLogBaseApiUrl =
-      arkynLogBaseApiUrl + "/http-traffic-records/:trafficSourceId";
+    const { trafficSourceId, userToken, logBaseApiUrl } = arkynConfig;
 
     this.arkynConfig = {
-      arkynTrafficSourceId: arkynConfig.arkynTrafficSourceId,
-      arkynUserToken: arkynConfig.arkynUserToken,
-      arkynApiUrl: arkynLogBaseApiUrl,
+      trafficSourceId,
+      userToken,
+      apiUrl: logBaseApiUrl || `http://95.216.190.158:8080/ingest-log`,
     };
   }
 

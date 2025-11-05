@@ -24,6 +24,7 @@ export { decodeErrorMessageFromRequest } from "./services/decodeErrorMessageFrom
 export { decodeRequestBody } from "./services/decodeRequestBody";
 export { errorHandler } from "./services/errorHandler";
 export { flushDebugLogs } from "./services/flushDebugLogs";
+export { formAsyncParse } from "./services/formAsyncParse";
 export { formParse } from "./services/formParse";
 export { getCaller } from "./services/getCaller";
 export { getScopedParams } from "./services/getScopedParams";

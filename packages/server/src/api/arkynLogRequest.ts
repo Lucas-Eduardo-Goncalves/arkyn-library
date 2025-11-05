@@ -59,7 +59,7 @@ async function arkynLogRequest(config: ConfigProps) {
   const arkynService = ArkynLogService.getArkynConfig();
   if (!arkynService) return;
 
-  const { arkynUserToken, arkynApiUrl } = arkynService;
+  const { userToken, apiUrl, trafficSourceId } = arkynService;
 
   const {
     elapsedTime,
@@ -84,6 +84,7 @@ async function arkynLogRequest(config: ConfigProps) {
     const body = JSON.stringify({
       domainUrl: url.protocol + "//" + url.host,
       pathnameUrl: url.pathname,
+      trafficSourceId: trafficSourceId,
       status,
       protocol,
       method,
@@ -96,20 +97,14 @@ async function arkynLogRequest(config: ConfigProps) {
       responseBody,
     });
 
-    await fetch(
-      arkynApiUrl.replace(
-        ":trafficSourceId",
-        arkynService.arkynTrafficSourceId
-      ),
-      {
-        method: "POST",
-        body,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${arkynUserToken}`,
-        },
-      }
-    );
+    await fetch(apiUrl, {
+      method: "POST",
+      body,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
   } catch (err) {
     flushDebugLogs({
       debugs: [`Error sending request: ${err}`],
