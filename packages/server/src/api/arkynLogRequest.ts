@@ -74,12 +74,12 @@ async function arkynLogRequest(config: ConfigProps) {
     rawUrl,
   } = config;
 
-  if (process.env.NODE_ENV === "development") return;
+  // if (process.env.NODE_ENV === "development") return;
 
   try {
     const url = new URL(rawUrl);
-    let protocol: "HTTPS" | "HTTP" = "HTTPS";
-    if (url.protocol === "http:") protocol = "HTTP";
+    let protocol: "http" | "https" = "https";
+    if (url.protocol === "http:") protocol = "http";
 
     const body = JSON.stringify({
       domainUrl: url.protocol + "//" + url.host,
@@ -87,17 +87,17 @@ async function arkynLogRequest(config: ConfigProps) {
       trafficSourceId: trafficSourceId,
       status,
       protocol,
-      method,
+      method: method.toLowerCase(),
       trafficUserId: null,
       elapsedTime,
-      requestHeaders,
-      requestBody,
-      queryParams,
-      responseHeaders,
-      responseBody,
+      requestHeaders: JSON.stringify(requestHeaders),
+      requestBody: JSON.stringify(requestBody),
+      queryParams: JSON.stringify(queryParams),
+      responseHeaders: JSON.stringify(responseHeaders),
+      responseBody: JSON.stringify(responseBody),
     });
 
-    await fetch(apiUrl, {
+    const data = await fetch(apiUrl, {
       method: "POST",
       body,
       headers: {
@@ -105,7 +105,10 @@ async function arkynLogRequest(config: ConfigProps) {
         Authorization: `Bearer ${userToken}`,
       },
     });
+
+    console.log(await data.json());
   } catch (err) {
+    console.log(err);
     flushDebugLogs({
       debugs: [`Error sending request: ${err}`],
       name: "ARKYN_LOG_ERROR",
