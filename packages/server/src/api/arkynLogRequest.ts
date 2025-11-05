@@ -74,7 +74,7 @@ async function arkynLogRequest(config: ConfigProps) {
     rawUrl,
   } = config;
 
-  // if (process.env.NODE_ENV === "development") return;
+  if (process.env.NODE_ENV === "development") return;
 
   try {
     const url = new URL(rawUrl);
@@ -97,7 +97,7 @@ async function arkynLogRequest(config: ConfigProps) {
       responseBody: JSON.stringify(responseBody),
     });
 
-    const data = await fetch(apiUrl, {
+    await fetch(apiUrl, {
       method: "POST",
       body,
       headers: {
@@ -105,10 +105,7 @@ async function arkynLogRequest(config: ConfigProps) {
         Authorization: `Bearer ${userToken}`,
       },
     });
-
-    console.log(await data.json());
   } catch (err) {
-    console.log(err);
     flushDebugLogs({
       debugs: [`Error sending request: ${err}`],
       name: "ARKYN_LOG_ERROR",
