@@ -187,9 +187,9 @@ function Select(props: SelectProps) {
 
   const [search, setSearch] = useState("");
   const [isFocused, setIsFocused] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState(defaultValue);
+  const [selectedOption, setSelectedOption] = useState(defaultValue);
 
-  const forceSelectedOptions = value || selectedOptions;
+  const forceSelectedOptions = value || selectedOption;
 
   function optionHasSelected(value: string) {
     return forceSelectedOptions === value;
@@ -219,10 +219,10 @@ function Select(props: SelectProps) {
 
   function handleChangeValue(value: string) {
     if (optionHasSelected(value)) {
-      setSelectedOptions("");
+      setSelectedOption("");
       if (onChange) onChange("");
     } else {
-      setSelectedOptions(value);
+      setSelectedOption(value);
       if (onChange) onChange(value);
     }
 
@@ -256,7 +256,7 @@ function Select(props: SelectProps) {
         <input
           ref={selectRef}
           name={name}
-          value={JSON.stringify(forceSelectedOptions)}
+          value={forceSelectedOptions}
           type="hidden"
         />
 
