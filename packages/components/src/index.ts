@@ -47,6 +47,7 @@ export { Textarea } from "./components/textarea";
 export { Tooltip } from "./components/tooltip";
 
 // hooks
+export { useAutomation } from "./hooks/useAutomation";
 export { useDrawer } from "./hooks/useDrawer";
 export { useForm } from "./hooks/useForm";
 export { useHydrated } from "./hooks/useHydrated";
