@@ -192,6 +192,7 @@ function Textarea(props: TextareaProps) {
           disabled={disabled}
           readOnly={readOnly}
           ref={textareaRef}
+          name={name}
           onFocus={handleFocus}
           onBlur={handleBlur}
           defaultValue={defaultValue || ""}
