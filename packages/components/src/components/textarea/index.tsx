@@ -194,6 +194,7 @@ function Textarea(props: TextareaProps) {
           ref={textareaRef}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          defaultValue={defaultValue || ""}
           placeholder={disabled ? value || placeholder : placeholder}
           value={disabled ? undefined : value}
           {...rest}
