@@ -114,7 +114,7 @@ html.dark .arkynButton:hover {
   font-weight: 600;
   font-size: 14px;
   line-height: 14px;
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 0px 20px;
   height: 44px;
 }
@@ -127,7 +127,7 @@ html.dark .arkynButton:hover {
   font-weight: 600;
   font-size: 14px;
   line-height: 14px;
-  border-radius: 6px;
+  border-radius: 8px;
   gap: 16px;
   padding: 0px 16px;
   height: 40px;

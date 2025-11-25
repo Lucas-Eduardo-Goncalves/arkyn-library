@@ -19,7 +19,16 @@ function MultiSelectChevron(props: MultiSelectChevronProps) {
 
   if (isLoading) return <></>;
   return (
-    <ChevronDown className={className} size={iconSize} strokeWidth={2.5} />
+    <ChevronDown
+      className={className}
+      strokeWidth={2.5}
+      style={{
+        minWidth: iconSize,
+        minHeight: iconSize,
+        maxWidth: iconSize,
+        maxHeight: iconSize,
+      }}
+    />
   );
 }
 

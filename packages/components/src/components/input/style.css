@@ -159,8 +159,8 @@
 
 /* SIZE */
 .arkynInput.md input {
-  min-height: 40px;
-  max-height: 40px;
+  min-height: 38px;
+  max-height: 38px;
   font-size: 14px;
   line-height: 14px;
   font-weight: 400;
@@ -182,7 +182,7 @@
 
 .arkynInput.md .prefix,
 .arkynInput.md .suffix {
-  height: 40px;
+  height: 38px;
   width: 44px;
   font-size: 14px;
 }

@@ -1,4 +1,11 @@
-import { MultiSelect } from "@components";
+import {
+  Button,
+  CurrencyInput,
+  Input,
+  MaskedInput,
+  MultiSelect,
+  Select,
+} from "@components";
 import { useState } from "react";
 import { AlertExamples } from "./components/examples.alert";
 import { AudioPlayerExamples } from "./components/examples.audioPlayer";
@@ -74,6 +81,19 @@ function App() {
         options={options}
         onChange={setSelectedOption}
       />
+      <div
+        style={{
+          display: "flex",
+          gap: 2,
+        }}
+      >
+        <Input name="test" />
+        <MaskedInput mask="____" replacement="_" name="test" />
+        <CurrencyInput name="test" locale="BRL" />
+        <Button variant="outline">Test Button</Button>
+        <Select name="test" options={options} />
+        <MultiSelect name="test" options={options} />
+      </div>
 
       {showExamples("alert") && <AlertExamples />}
       {showExamples("audio-player") && <AudioPlayerExamples />}

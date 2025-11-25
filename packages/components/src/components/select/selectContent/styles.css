@@ -13,6 +13,10 @@
   user-select: none;
 }
 
+.arkynSelectContent > p.hasValue {
+  color: var(--text-body);
+}
+
 .arkynSelectContent.md > p {
   font-size: 14px;
   line-height: 14px;

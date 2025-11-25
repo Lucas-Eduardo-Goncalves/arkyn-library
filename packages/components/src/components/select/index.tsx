@@ -266,7 +266,7 @@ function Select(props: SelectProps) {
 
         <SelectContent size={size}>
           {forceSelectedOptions !== "" && (
-            <p>{getOptionLabel(forceSelectedOptions)}</p>
+            <p className="hasValue">{getOptionLabel(forceSelectedOptions)}</p>
           )}
           {forceSelectedOptions === "" && <p>{placeholder}</p>}
         </SelectContent>

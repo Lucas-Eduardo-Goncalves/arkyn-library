@@ -5,10 +5,11 @@
   align-items: center;
 
   width: 100%;
+  width: min-content;
 
   padding: 0 16px;
   gap: 8px;
-  border-radius: 6px;
+  border-radius: 8px;
 
   border: 1px solid transparent;
   outline: 1px solid transparent;
@@ -111,7 +112,6 @@
 /* SIZE */
 .arkynMultiSelectContainer.md {
   min-height: 40px;
-  /* max-height: 40px; */
 }
 .arkynMultiSelectContainer.md.hasPrefix {
   padding-left: 60px;
@@ -123,7 +123,6 @@
 }
 .arkynMultiSelectContainer.lg {
   min-height: 44px;
-  /* max-height: 44px; */
 }
 .arkynMultiSelectContainer.lg .prefix {
   height: 44px;
