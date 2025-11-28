@@ -240,4 +240,4 @@ function Input(props: InputProps) {
   );
 }
 
-export { Input };
+export { Input, type InputProps };

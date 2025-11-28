@@ -1,0 +1,20 @@
+.arkynMapViewPinnedEmpty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  background-color: rgba(var(--spotlight-secondary), 1);
+}
+
+.arkynMapViewPinnedEmpty > svg {
+  height: 64px;
+  width: 64px;
+  color: var(--text-muted);
+  stroke-width: 1px;
+}
+
+.arkynMapViewPinned {
+  border-radius: 8px;
+}

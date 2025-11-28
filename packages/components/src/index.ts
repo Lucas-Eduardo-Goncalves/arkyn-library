@@ -23,6 +23,7 @@ export { FileUpload } from "./components/fileUpload";
 export { IconButton } from "./components/iconButton";
 export { ImageUpload } from "./components/imageUpload";
 export { Input } from "./components/input";
+export { MapView } from "./components/mapView";
 export { MaskedInput } from "./components/maskedInput";
 export { ModalContainer } from "./components/modal/modalContainer";
 export { ModalFooter } from "./components/modal/modalFooter";
@@ -33,6 +34,7 @@ export { Popover } from "./components/popover";
 export { RadioBox } from "./components/radio/radioBox";
 export { RadioGroup } from "./components/radio/radioGroup";
 export { RichText } from "./components/richText";
+export { SearchPlaces } from "./components/searchPlaces";
 export { Select } from "./components/select";
 export { Slider } from "./components/slider";
 export { Switch } from "./components/switch";
@@ -55,11 +57,13 @@ export { useModal } from "./hooks/useModal";
 export { useScopedParams } from "./hooks/useScopedParams";
 export { useScrollLock } from "./hooks/useScrollLock";
 export { useSlider } from "./hooks/useSlider";
+export { useToast } from "./hooks/useToast";
 
 // providers
 export { DrawerProvider } from "./providers/drawerProvider";
 export { FormProvider } from "./providers/formProvider";
 export { ModalProvider } from "./providers/modalProvider";
+export { PlacesProvider } from "./providers/placesProvider";
 export { ToastProvider } from "./providers/toastProvider";
 
 // services
