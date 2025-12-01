@@ -1,5 +1,9 @@
 import { SuccessResponse } from "./_successResponse";
 
+type InitProps = ResponseInit & {
+  message?: string;
+};
+
 /**
  * Represents a successful HTTP response with a status code of 201 (Created).
  * This class is used to standardize the structure of a "Created" response,
@@ -21,10 +25,10 @@ class Created<T> extends SuccessResponse {
    * @param init - Optional initialization object for customizing headers, status, and status text.
    */
 
-  constructor(body: T, init?: ResponseInit) {
+  constructor(body: T, init?: InitProps) {
     super();
 
-    this.body = body;
+    this.body = { ...body, name: "Created", message: init?.message };
     this.headers = init?.headers || {};
     this.status = init?.status || 201;
     this.statusText = init?.statusText || "Resource created successfully";

@@ -1,5 +1,9 @@
 import { SuccessResponse } from "./_successResponse";
 
+type InitProps = ResponseInit & {
+  message?: string;
+};
+
 /**
  * Represents an HTTP 302 Found response.
  * This class is used to create a standardized HTTP response with a status of 302 (Found),
@@ -24,10 +28,10 @@ class Found<T> extends SuccessResponse {
    *   - `statusText`: HTTP status text (default is "Found").
    */
 
-  constructor(body: T, init?: ResponseInit) {
+  constructor(body: T, init?: InitProps) {
     super();
 
-    this.body = body;
+    this.body = { ...body, name: "Found", message: init?.message };
     this.headers = init?.headers || {};
     this.status = init?.status || 302;
     this.statusText = init?.statusText || "Found";
