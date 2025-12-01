@@ -29,6 +29,7 @@ export { ModalContainer } from "./components/modal/modalContainer";
 export { ModalFooter } from "./components/modal/modalFooter";
 export { ModalHeader } from "./components/modal/modalHeader";
 export { MultiSelect } from "./components/multiSelect";
+export { Pagination } from "./components/pagination";
 export { PhoneInput } from "./components/phoneInput";
 export { Popover } from "./components/popover";
 export { RadioBox } from "./components/radio/radioBox";

@@ -1,0 +1,29 @@
+.arkynPaginationPageButton {
+  background-color: inherit;
+  border: none;
+
+  max-height: 28px;
+  max-width: 28px;
+
+  min-height: 28px;
+  min-width: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  color: var(--text-body);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.arkynPaginationPageButton:hover {
+  filter: brightness(0.98);
+  cursor: pointer;
+}
+
+html.dark .arkynPaginationPageButton:hover {
+  filter: brightness(1.2);
+}

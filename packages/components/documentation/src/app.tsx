@@ -4,6 +4,7 @@ import {
   Input,
   MaskedInput,
   MultiSelect,
+  Pagination,
   Select,
 } from "@components";
 import { useState } from "react";
@@ -70,6 +71,14 @@ function App() {
     return selectedOption.includes(value);
   }
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalCountRegisters = 1001;
+  const registerPerPage = 10;
+
+  function handlePageChange(page: number) {
+    setCurrentPage(page);
+  }
+
   return (
     <div
       style={{ display: "flex", flexDirection: "column", gap: 40, padding: 40 }}
@@ -93,6 +102,15 @@ function App() {
         <Button variant="outline">Test Button</Button>
         <Select name="test" options={options} />
         <MultiSelect name="test" options={options} />
+      </div>
+
+      <div>
+        <Pagination
+          totalCountRegisters={totalCountRegisters}
+          currentPage={currentPage}
+          registerPerPage={registerPerPage}
+          onChange={handlePageChange}
+        />
       </div>
 
       {showExamples("alert") && <AlertExamples />}
