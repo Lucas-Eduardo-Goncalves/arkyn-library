@@ -168,7 +168,7 @@ function CurrencyInput(props: CurrencyInputProps) {
     style,
     variant = "solid",
     label,
-    className: baseClassName = "",
+    className: wrapperClassName = "",
     value,
     defaultValue,
     max = 1000000000,
@@ -258,10 +258,10 @@ function CurrencyInput(props: CurrencyInputProps) {
   const opacity = isDisabled || readOnly || isLoading ? "opacity" : "";
   const focused = isFocused ? "focused" : "";
 
-  const className = `arkynCurrencyInput ${hasPrefix} ${hasSuffix} ${variant} ${size} ${opacity} ${errored} ${focused} ${baseClassName}`;
+  const className = `arkynCurrencyInput ${hasPrefix} ${hasSuffix} ${variant} ${size} ${opacity} ${errored} ${focused}`;
 
   return (
-    <FieldWrapper>
+    <FieldWrapper className={wrapperClassName}>
       {label && (
         <FieldLabel showAsterisk={showAsterisk} htmlFor={inputId}>
           {label}
@@ -271,8 +271,8 @@ function CurrencyInput(props: CurrencyInputProps) {
       <section
         title={title}
         style={style}
-        onClick={handleSectionClick}
         className={className}
+        onClick={handleSectionClick}
       >
         <IconRenderer iconSize={iconSize} icon={prefix} className="prefix" />
 

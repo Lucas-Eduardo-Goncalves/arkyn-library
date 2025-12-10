@@ -148,7 +148,7 @@ function Select(props: SelectProps) {
   const {
     name,
     options,
-    className = "",
+    className: wrapperClassName = "",
     placeholder = "Selecione...",
     closeOnSelect = true,
     defaultValue = "",
@@ -237,7 +237,7 @@ function Select(props: SelectProps) {
   });
 
   return (
-    <FieldWrapper>
+    <FieldWrapper className={wrapperClassName}>
       {label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
 
       <SelectContainer
@@ -249,7 +249,6 @@ function Select(props: SelectProps) {
         readOnly={readOnly}
         size={size}
         variant={variant}
-        className={className}
         prefixExists={!!prefix}
         id={selectId}
       >

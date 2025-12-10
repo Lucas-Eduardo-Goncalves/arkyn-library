@@ -108,7 +108,7 @@ function RadioGroup(props: RadioGroupProps) {
     value: forceValue,
     onChange,
     size = "md",
-    className: baseClassName = "",
+    className: wrapperClassName = "",
     disabled = false,
     ...rest
   } = props;
@@ -123,10 +123,10 @@ function RadioGroup(props: RadioGroupProps) {
 
   const errorMessage = baseErrorMessage || fieldErrors?.[name];
   const isError = !!errorMessage;
-  const className = `arkynRadioGroup ${size} ${baseClassName}`;
+  const className = `arkynRadioGroup ${size}`;
 
   return (
-    <FieldWrapper>
+    <FieldWrapper className={wrapperClassName}>
       {label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
       <RadioProvider
         isError={isError}

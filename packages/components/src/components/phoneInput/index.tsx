@@ -153,7 +153,7 @@ function PhoneInput(props: PhoneInputProps) {
   const {
     defaultCountry,
     label,
-    className = "",
+    className: wrapperClassName = "",
     disabled = false,
     errorMessage: baseErrorMessage,
     isLoading = false,
@@ -254,7 +254,7 @@ function PhoneInput(props: PhoneInputProps) {
   }
 
   return (
-    <FieldWrapper>
+    <FieldWrapper className={wrapperClassName}>
       {label && (
         <FieldLabel htmlFor={phoneInputId} showAsterisk={showAsterisk}>
           {label}
@@ -269,7 +269,6 @@ function PhoneInput(props: PhoneInputProps) {
         readOnly={readOnly}
         size={size}
         variant={variant}
-        className={className}
         onFocus={handleContainerFocus}
       >
         <PhoneInputCountrySelector

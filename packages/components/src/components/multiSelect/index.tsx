@@ -149,7 +149,7 @@ function MultiSelect(props: MultiSelectProps) {
   const {
     name,
     options,
-    className = "",
+    className: wrapperClassName = "",
     placeholder = "Selecione...",
     closeOnSelect = false,
     defaultValue = [],
@@ -238,7 +238,7 @@ function MultiSelect(props: MultiSelectProps) {
   });
 
   return (
-    <FieldWrapper>
+    <FieldWrapper className={wrapperClassName}>
       {label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
 
       <MultiSelectContainer
@@ -250,7 +250,6 @@ function MultiSelect(props: MultiSelectProps) {
         readOnly={readOnly}
         size={size}
         variant={variant}
-        className={className}
         prefixExists={!!prefix}
         id={multiSelectId}
       >

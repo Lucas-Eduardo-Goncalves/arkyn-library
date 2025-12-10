@@ -146,7 +146,7 @@ function MaskedInput(props: MaskedInputProps) {
     showMask,
     replacement,
     label,
-    className: baseClassName = "",
+    className: wrapperClassName = "",
     prefix,
     suffix,
     isLoading = false,
@@ -204,10 +204,10 @@ function MaskedInput(props: MaskedInputProps) {
   const opacity = isDisabled || readOnly || isLoading ? "opacity" : "";
   const focused = isFocused ? "focused" : "";
 
-  const className = `arkynMaskedInput ${hasPrefix} ${hasSuffix} ${variant} ${size} ${opacity} ${errored} ${focused} ${baseClassName}`;
+  const className = `arkynMaskedInput ${hasPrefix} ${hasSuffix} ${variant} ${size} ${opacity} ${errored} ${focused}`;
 
   return (
-    <FieldWrapper>
+    <FieldWrapper className={wrapperClassName}>
       {label && (
         <FieldLabel showAsterisk={showAsterisk} htmlFor={inputId}>
           {label}

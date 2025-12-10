@@ -111,7 +111,7 @@ function Input(props: InputProps) {
     style,
     variant = "solid",
     label,
-    className: baseClassName = "",
+    className: wrapperClassName = "",
     prefix,
     suffix,
     isLoading = false,
@@ -182,10 +182,10 @@ function Input(props: InputProps) {
   const focused = isFocused ? "focused" : "";
   const disabledClass = disabled ? "disabled" : "";
 
-  const className = `arkynInput ${hasPrefix} ${disabledClass} ${hasSuffix} ${variant} ${size} ${opacity} ${errored} ${focused} ${baseClassName}`;
+  const className = `arkynInput ${hasPrefix} ${disabledClass} ${hasSuffix} ${variant} ${size} ${opacity} ${errored} ${focused}`;
 
   return (
-    <FieldWrapper>
+    <FieldWrapper className={wrapperClassName}>
       {label && (
         <FieldLabel showAsterisk={showAsterisk} htmlFor={inputId}>
           {label}

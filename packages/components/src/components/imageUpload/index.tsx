@@ -13,6 +13,7 @@ type ImageUploadProps = {
   name: string;
   action: string;
   defaultValue?: string | null;
+  className?: string;
 
   disabled?: boolean;
 
@@ -38,6 +39,7 @@ type ImageUploadProps = {
  * @param props.name - Required field name for form handling
  * @param props.defaultValue - Initial image URL to display as preview. Default: ""
  * @param props.disabled - Whether the image upload is disabled. Default: false
+ * @param props.className - Additional class name(s) for the wrapper element
  * @param props.label - Optional label text to display above the image upload area
  * @param props.showAsterisk - Whether to show asterisk on label for required fields. Default: false
  * @param props.changeImageButtonText - Text for the button to change/replace an uploaded image. Default: "Alterar imagem"
@@ -134,6 +136,7 @@ function ImageUpload(props: ImageUploadProps) {
     showAsterisk = false,
     action,
     fileName = "file",
+    className: wrapperClassName = "",
     method = "POST",
     acceptImage = "image/*",
     fileResponseName = "url",
@@ -191,7 +194,7 @@ function ImageUpload(props: ImageUploadProps) {
   const className = `arkynImageUpload ${hasErrorClassName} ${hasImageClassName}`;
 
   return (
-    <FieldWrapper>
+    <FieldWrapper className={wrapperClassName}>
       {label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
 
       <div className={className}>

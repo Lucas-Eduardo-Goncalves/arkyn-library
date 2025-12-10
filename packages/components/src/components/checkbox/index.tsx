@@ -98,7 +98,7 @@ function Checkbox(props: CheckboxProps) {
   const {
     id,
     name,
-    className: baseClassName = "",
+    className: wrapperClassName = "",
     size = "md",
     errorMessage: baseErrorMessage,
     defaultChecked = false,
@@ -126,7 +126,7 @@ function Checkbox(props: CheckboxProps) {
   const errorClass = isError ? "errorTrue" : "errorFalse";
   const currentCheckedClass = currentChecked ? "checkedTrue" : "checkedFalse";
 
-  const className = `arkynCheckbox ${size} ${errorClass} ${currentCheckedClass} ${baseClassName}`;
+  const className = `arkynCheckbox ${size} ${errorClass} ${currentCheckedClass}`;
 
   function handleCheck() {
     const defaultChecked = isChecked;
@@ -135,7 +135,7 @@ function Checkbox(props: CheckboxProps) {
   }
 
   return (
-    <FieldWrapper orientation={orientation}>
+    <FieldWrapper orientation={orientation} className={wrapperClassName}>
       {label && <FieldLabel htmlFor={checkboxId}>{label}</FieldLabel>}
       <button
         id={checkboxId}

@@ -33,7 +33,7 @@ function MapView(props: MapViewProps) {
         zoom={zoom}
         center={coordinates}
         mapContainerStyle={{
-          borderRadius: "var(--rounded-cards)",
+          borderRadius: "8px",
           width: "100%",
           height: "100%",
         }}

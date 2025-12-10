@@ -125,7 +125,7 @@ function Textarea(props: TextareaProps) {
   const {
     variant = "solid",
     size = "md",
-    className: baseClassName,
+    className: wrapperClassName,
     errorMessage: baseErrorMessage,
     disabled = false,
     readOnly = false,
@@ -155,7 +155,7 @@ function Textarea(props: TextareaProps) {
   const opacityClass = disabled || readOnly ? "opacityTrue" : "opacityFalse";
   const focusedClass = isFocused ? "focusedTrue" : "focusedFalse";
 
-  const className = `arkynTextarea ${variant} ${size} ${opacityClass} ${errorClass} ${focusedClass} ${baseClassName}`;
+  const className = `arkynTextarea ${variant} ${size} ${opacityClass} ${errorClass} ${focusedClass}`;
 
   function handleSectionClick() {
     if (disabled || !textareaRef?.current) return;
@@ -174,7 +174,7 @@ function Textarea(props: TextareaProps) {
   }
 
   return (
-    <FieldWrapper>
+    <FieldWrapper className={wrapperClassName}>
       {label && (
         <FieldLabel htmlFor={textareaId} showAsterisk={showAsterisk}>
           {label}
