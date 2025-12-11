@@ -135,7 +135,11 @@ function SearchPlaces(props: SearchPlacesProps) {
       onPlacesChanged={handlePlacesChanged}
       options={options}
     >
-      <Input type="text" onChange={(e) => onChange(e.target.value)} {...rest} />
+      <Input
+        type="text"
+        onChange={(e) => onChange && onChange(e.target.value)}
+        {...rest}
+      />
     </StandaloneSearchBox>
   );
 }

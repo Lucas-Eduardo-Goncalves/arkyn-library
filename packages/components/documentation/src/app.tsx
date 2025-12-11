@@ -2,9 +2,12 @@ import {
   Button,
   CurrencyInput,
   Input,
+  MapView,
   MaskedInput,
   MultiSelect,
   Pagination,
+  PlacesProvider,
+  SearchPlaces,
   Select,
 } from "@components";
 import { useState } from "react";
@@ -92,16 +95,19 @@ function App() {
       />
       <div
         style={{
-          display: "flex",
-          gap: 2,
+          width: "600px",
+          height: "400px",
         }}
       >
-        <Input name="test" />
-        <MaskedInput mask="____" replacement="_" name="test" />
-        <CurrencyInput name="test" locale="BRL" />
-        <Button variant="outline">Test Button</Button>
-        <Select name="test" options={options} />
-        <MultiSelect name="test" options={options} />
+        <PlacesProvider apiKey="AIzaSyDx2hqq2vc7ewANUDl6VCcC--9Ffocpn0E">
+          {(isLoaded) =>
+            isLoaded ? (
+              <MapView coordinates={{ lat: 180, lng: 1000 }} />
+            ) : (
+              <div>Carregando Google Maps...</div>
+            )
+          }
+        </PlacesProvider>
       </div>
 
       <div>

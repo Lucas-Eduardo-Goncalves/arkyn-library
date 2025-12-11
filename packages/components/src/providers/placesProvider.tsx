@@ -1,6 +1,12 @@
 import { useLoadScript } from "@react-google-maps/api";
 import { ReactNode } from "react";
 
+const libraries: ("places" | "marker" | "maps")[] = [
+  "places",
+  "marker",
+  "maps",
+];
+
 type PlacesProviderProps = {
   apiKey: string;
   children: (isLoaded: boolean) => ReactNode;
@@ -31,7 +37,7 @@ function PlacesProvider(props: PlacesProviderProps) {
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: apiKey,
-    libraries: ["places", "marker", "maps"],
+    libraries,
     preventGoogleFontsLoading: preventFontsLoading,
   });
 

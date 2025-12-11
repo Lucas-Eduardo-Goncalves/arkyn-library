@@ -17,4 +17,7 @@
 
 .arkynMapViewPinned {
   border-radius: 8px;
+  display: flex;
+  width: 100%;
+  height: 100%;
 }
