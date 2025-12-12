@@ -1,50 +1,51 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, JSX } from "react";
 import "./styles.css";
 
+/**
+ * Props for the AlertTitle component.
+ * Extends all standard HTML div element attributes.
+ *
+ * @typedef {Object} AlertTitleProps
+ * @property {string} [className] - Additional CSS class names to apply to the alert title
+ * @extends {HTMLAttributes<HTMLDivElement>}
+ */
 type AlertTitleProps = HTMLAttributes<HTMLDivElement>;
 
 /**
- * AlertTitle component - used to display the main title/heading of alerts
+ * AlertTitle component - Displays the title section of an alert message.
  *
- * @param props - AlertTitle component properties
+ * This component renders a styled title for alert components, providing semantic structure
+ * and consistent styling across the application.
  *
- * **...Other valid HTML properties for div**
+ * @component
+ * @memberof Alert
  *
- * @returns AlertTitle JSX element
+ * @param {AlertTitleProps} props - Component props extending HTML div attributes
  *
- * @description
- * This component affects the layout of the AlertContainer. When present, the container
- * content will be aligned differently compared to alerts without a title.
+ * @returns {JSX.Element} A div element with alert title styling
+ *
+ * @requires react
  *
  * @example
- * ```tsx
- * // Basic alert with title
- * <AlertContainer schema="info">
- *   <AlertTitle>Information</AlertTitle>
- *   <AlertDescription>This is important information.</AlertDescription>
- * </AlertContainer>
- *
- * // Success alert with title and icon
+ * // Basic usage
  * <AlertContainer schema="success">
- *   <AlertIcon />
  *   <AlertTitle>Success!</AlertTitle>
- *   <AlertDescription>Your operation was completed.</AlertDescription>
+ *   <AlertDescription>Your changes have been saved.</AlertDescription>
  * </AlertContainer>
  *
- * // Error alert with custom styling
- * <AlertContainer schema="danger">
- *   <AlertIcon />
- *   <AlertTitle className="custom-title">
- *     Critical Error
- *   </AlertTitle>
- *   <AlertDescription>
- *     Please contact support immediately.
- *   </AlertDescription>
+ * @example
+ * // Complete alert example
+ * <AlertContainer schema="success">
+ *  <AlertIcon />
+ *  <AlertContent>
+ *    <AlertTitle>Success!</AlertTitle>
+ *    <AlertDescription>
+ *      You are premium user now!
+ *    </AlertDescription>
+ *  </AlertContent>
  * </AlertContainer>
- * ```
  */
-
-function AlertTitle(props: AlertTitleProps) {
+function AlertTitle(props: AlertTitleProps): JSX.Element {
   const { className: baseClassName, ...rest } = props;
   const className = `arkynAlertTitle ${baseClassName}`;
 

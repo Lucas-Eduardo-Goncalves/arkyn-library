@@ -6,59 +6,60 @@ import {
   XCircle,
 } from "lucide-react";
 
+import { JSX } from "react";
 import { useAlertContainer } from "../alertContainer";
 import "./styles.css";
 
+/**
+ * Props for the AlertIcon component.
+ * Extends all props from Lucide's icon components.
+ *
+ * @typedef {LucideProps} AlertIconProps
+ */
 type AlertIconProps = LucideProps;
 
 /**
- * AlertIcon component - automatically displays the appropriate icon based on the alert schema
+ * AlertIcon component that renders different icons based on the alert schema.
  *
- * @param props - AlertIcon component properties
- *
- * **...Other valid Lucide icon properties**
- *
- * @returns AlertIcon JSX element with schema-specific icon
+ * @component
+ * @memberof Alert
  *
  * @description
  * This component automatically selects and renders the appropriate icon based on the
- * AlertContainer's schema context:
- * - success: CheckCircle2 icon
- * - danger: XCircle icon
- * - warning: AlertTriangle icon
- * - info: Info icon
+ * alert schema from the AlertContainer context. It supports four schemas:
+ * - success: Renders a CheckCircle2 icon
+ * - danger: Renders an XCircle icon
+ * - warning: Renders an AlertTriangle icon
+ * - info: Renders an Info icon
+ *
+ * @param {AlertIconProps} props - Component props extending LucideProps
+ * @param {string} [props.className] - Additional CSS class names to apply to the icon
+ *
+ * @returns {JSX.Element} The rendered icon component based on the alert schema
+ *
+ * @requires lucide-react - For icon components (CheckCircle2, XCircle, AlertTriangle, Info)
+ * @requires useAlertContainer - Hook to access the alert schema from context
  *
  * @example
- * ```tsx
- * // Basic usage - icon automatically matches container schema
+ * // This component is used internally within an Alert component
+ * // and should not be used standalone as it depends on AlertContainer context
  * <AlertContainer schema="success">
  *   <AlertIcon />
- *   <AlertContent>
- *     <AlertTitle>Success</AlertTitle>
- *     <AlertDescription>Operation completed successfully.</AlertDescription>
- *   </AlertContent>
  * </AlertContainer>
  *
- * // Warning alert with icon
- * <AlertContainer schema="warning">
- *   <AlertIcon />
- *   <AlertContent>
- *     Please review your input before proceeding.
- *   </AlertContent>
+ * @example
+ * // Complete alert example
+ * <AlertContainer schema="success">
+ *  <AlertIcon />
+ *  <AlertContent>
+ *    <AlertTitle>Success!</AlertTitle>
+ *    <AlertDescription>
+ *      You are premium user now!
+ *    </AlertDescription>
+ *  </AlertContent>
  * </AlertContainer>
- *
- * // Custom icon size
- * <AlertContainer schema="danger">
- *   <AlertIcon size={24} />
- *   <AlertContent>
- *     <AlertTitle>Error</AlertTitle>
- *     <AlertDescription>Something went wrong.</AlertDescription>
- *   </AlertContent>
- * </AlertContainer>
- * ```
  */
-
-function AlertIcon(props: AlertIconProps) {
+function AlertIcon(props: AlertIconProps): JSX.Element {
   const { className: baseClassName, ...rest } = props;
   const { schema } = useAlertContainer();
 

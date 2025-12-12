@@ -1,49 +1,53 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, JSX } from "react";
 import "./styles.css";
 
+/**
+ * @typedef {Object} AlertContentProps
+ * @extends {HTMLAttributes<HTMLDivElement>}
+ * @description Props for the AlertContent component, extending standard HTML div attributes.
+ */
 type AlertContentProps = HTMLAttributes<HTMLDivElement>;
 
 /**
- * AlertContent component - used to wrap and style the main content area of alerts
+ * AlertContent component that renders the main content area of an alert.
  *
- * @param props - AlertContent component properties
+ * @component
+ * @memberof Alert
  *
- * **...Other valid HTML properties for div**
+ * @description
+ * This component serves as a container for the main content within an Alert component.
+ * Supports all standard HTML div attributes for maximum flexibility.
  *
- * @returns AlertContent JSX element
+ * @param {AlertContentProps} props - Component props extending HTMLDivElement attributes
+ * @param {string} [props.className] - Additional CSS classes to apply to the content container
+ * @param {React.ReactNode} [props.children] - Content to be displayed inside the alert
+ *
+ * @returns {JSX.Element} A div element with the alert content styling
+ *
+ * @requires react
  *
  * @example
- * ```tsx
- * // Basic alert content
- * <AlertContainer schema="info">
- *   <AlertContent>
- *     This is the main alert message content.
- *   </AlertContent>
- * </AlertContainer>
- *
- * // Alert with title and content
+ * // Basic usage
  * <AlertContainer schema="success">
- *   <AlertContent>
- *     <AlertTitle>Success</AlertTitle>
- *     Your operation has been completed successfully.
- *   </AlertContent>
+ *  <AlertContent>
+ *   {children}
+ *  </AlertContent>
  * </AlertContainer>
  *
- * // Multiple content sections
- * <AlertContainer schema="warning">
- *   <AlertContent>
- *     <AlertTitle>Warning</AlertTitle>
- *     <p>Please review the following items:</p>
- *     <ul>
- *       <li>Check your input data</li>
- *       <li>Verify permissions</li>
- *     </ul>
- *   </AlertContent>
+ * @example
+ * // Complete alert example
+ * <AlertContainer schema="success">
+ *  <AlertIcon />
+ *  <AlertContent>
+ *    <AlertTitle>Success!</AlertTitle>
+ *    <AlertDescription>
+ *      You are premium user now!
+ *    </AlertDescription>
+ *  </AlertContent>
  * </AlertContainer>
- * ```
  */
 
-function AlertContent(props: AlertContentProps) {
+function AlertContent(props: AlertContentProps): JSX.Element {
   const { className: baseClassName, ...rest } = props;
   const className = `arkynAlertContent ${baseClassName}`;
 
