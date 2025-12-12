@@ -38,3 +38,4 @@ npm install react react-dom lucide-react
 - **AlertDescription**
 - **AlertIcon**
 - **AlertTitle**
+- **AudioPlayer**

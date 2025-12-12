@@ -1,10 +1,17 @@
 import { Pause, Play } from "lucide-react";
-import { AudioHTMLAttributes, useEffect, useRef, useState } from "react";
+import { AudioHTMLAttributes, JSX, useEffect, useRef, useState } from "react";
 
 import { useSlider } from "../../hooks/useSlider";
 import { Slider } from "../slider";
 import "./styles.css";
 
+/**
+ * @typedef {Object} AudioInformationProps
+ * @property {number} currentTime - Current playback time in seconds
+ * @property {number} totalTime - Total duration of the audio in seconds
+ * @property {string} formattedCurrentTime - Formatted current time as MM:SS
+ * @property {string} formattedTotalTime - Formatted total time as MM:SS
+ */
 type AudioInformationProps = {
   currentTime: number;
   totalTime: number;
@@ -12,6 +19,13 @@ type AudioInformationProps = {
   formattedTotalTime: string;
 };
 
+/**
+ * @typedef {Object} AudioPlayerProps
+ * @property {string} src - Audio source URL (required)
+ * @property {boolean} [disabled] - Whether the audio player controls are disabled
+ * @property {function(AudioInformationProps): void} [onPlayAudio] - Callback fired when audio starts playing
+ * @property {function(AudioInformationProps): void} [onPauseAudio] - Callback fired when audio is paused
+ */
 type AudioPlayerProps = Omit<
   AudioHTMLAttributes<HTMLAudioElement>,
   "onEnded" | "src"
@@ -23,50 +37,34 @@ type AudioPlayerProps = Omit<
 };
 
 /**
- * AudioPlayer component - used to play audio files with playback controls
+ * AudioPlayer component
  *
- * @param props - AudioPlayer component properties
- * @param props.src - Audio source URL (required)
- * @param props.disabled - Whether the audio player is disabled. Default: false
- * @param props.onPlayAudio - Callback function called when audio starts playing
- * @param props.onPauseAudio - Callback function called when audio is paused
+ * A customizable audio player with play/pause controls, progress slider, and time display.
+ * Provides callbacks for play and pause events with detailed audio information.
  *
- * **...Other valid HTML audio properties**
+ * @component
  *
- * @returns AudioPlayer JSX element
+ * @param {AudioPlayerProps} props - The component props
+ *
+ * @returns {JSX.Element} The rendered audio player component
+ *
+ * @requires lucide-react - For Play and Pause icons
+ * @requires useSlider - For slider state management
+ * @requires slider - For the progress slider component
  *
  * @example
- * ```tsx
- * // Basic audio player
- * <AudioPlayer src="/audio/sample.mp3" />
+ * // Basic usage
+ * <AudioPlayer src="https://example.com/audio.mp3" />
  *
- * // Audio player with callbacks
+ * @example
+ * // With callbacks
  * <AudioPlayer
- *   src="/audio/sample.mp3"
- *   onPlayAudio={(info) => console.log('Playing:', info)}
- *   onPauseAudio={(info) => console.log('Paused:', info)}
+ *   src="https://example.com/audio.mp3"
+ *   onPlayAudio={(info) => console.log('Playing:', info.formattedCurrentTime)}
+ *   onPauseAudio={(info) => console.log('Paused at:', info.formattedCurrentTime)}
  * />
- *
- * // Disabled audio player
- * <AudioPlayer
- *   src="/audio/sample.mp3"
- *   disabled
- * />
- *
- * // Audio player with additional HTML audio attributes
- * <AudioPlayer
- *   src="/audio/sample.mp3"
- *   loop
- *   preload="metadata"
- *   onPlayAudio={(info) => {
- *     console.log(`Current: ${info.formattedCurrentTime}`);
- *     console.log(`Total: ${info.formattedTotalTime}`);
- *   }}
- * />
- * ```
  */
-
-function AudioPlayer(props: AudioPlayerProps) {
+function AudioPlayer(props: AudioPlayerProps): JSX.Element {
   const { onPlayAudio, onPauseAudio, disabled, ...rest } = props;
 
   const [sliderValue, setSliderValue] = useSlider(0);
@@ -88,7 +86,19 @@ function AudioPlayer(props: AudioPlayerProps) {
     formattedTotalTime,
   };
 
-  function formatTime(time?: number) {
+  /**
+   * Formats time in seconds to MM:SS string format
+   *
+   * @internal
+   * @param {number} [time] - Time in seconds
+   * @returns {string} Formatted time as MM:SS or "00:00" if time is undefined
+   *
+   * @example
+   * formatTime(65) // returns "01:05"
+   * formatTime(0) // returns "00:00"
+   * formatTime() // returns "00:00"
+   */
+  function formatTime(time?: number): string {
     if (!time) return "00:00";
 
     const minutes = Math.floor(time / 60);
@@ -100,7 +110,13 @@ function AudioPlayer(props: AudioPlayerProps) {
     return `${formattedMinutes}:${formattedSeconds}`;
   }
 
-  function handlePlayAudio() {
+  /**
+   * Starts audio playback and triggers onPlayAudio callback
+   *
+   * @internal
+   * @returns {void}
+   */
+  function handlePlayAudio(): void {
     const audioElement = audioReference.current;
     if (!audioElement) return;
     if (props.onPlayAudio) props.onPlayAudio(audioInformation);
@@ -108,7 +124,13 @@ function AudioPlayer(props: AudioPlayerProps) {
     setIsPlaying(true);
   }
 
-  function handlePauseAudio() {
+  /**
+   * Pauses audio playback and triggers onPauseAudio callback
+   *
+   * @internal
+   * @returns {void}
+   */
+  function handlePauseAudio(): void {
     const audioElement = audioReference.current;
     if (!audioElement) return;
     if (props.onPauseAudio) props.onPauseAudio(audioInformation);
@@ -116,12 +138,25 @@ function AudioPlayer(props: AudioPlayerProps) {
     setIsPlaying(false);
   }
 
-  function handleToggleAudio() {
+  /**
+   * Toggles between play and pause states
+   *
+   * @internal
+   * @returns {void}
+   */
+  function handleToggleAudio(): void {
     if (isPlaying) handlePauseAudio();
     else handlePlayAudio();
   }
 
-  function handleSliderChange(value: number) {
+  /**
+   * Handles slider value changes and updates audio current time
+   *
+   * @internal
+   * @param {number} value - Slider value from 0 to 100
+   * @returns {void}
+   */
+  function handleSliderChange(value: number): void {
     const audioElement = audioReference.current;
     if (!audioElement) return;
 
