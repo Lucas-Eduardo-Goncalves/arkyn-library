@@ -54,7 +54,7 @@ import "./styles.css";
  * @param props.enforceCharacterLimit - Whether to enforce the character limit strictly (default: false)
  * @param props.onChangeCharactersCount - Callback function triggered when character count changes
  * @param props.baseErrorMessage - Custom error message to display
- * @param props.maxLimit - Maximum number of characters allowed (default: 2000)
+ * @param props.maxLimit - Maximum number of characters allowed (default: 10000)
  * @param props.onChange - Callback function triggered when editor content changes
  * @param props.isError - Whether the component should display in error state
  * @param props.id - Custom ID for the editor element
@@ -110,7 +110,7 @@ function RichText(props: RichTextProps) {
     enforceCharacterLimit = false,
     onChangeCharactersCount,
     baseErrorMessage,
-    maxLimit = 10,
+    maxLimit = 10000,
     onChange,
     isError: baseIsError,
     label,
@@ -194,13 +194,7 @@ function RichText(props: RichTextProps) {
 
   return (
     <FieldWrapper>
-      {label && (
-        <FieldLabel
-          showAsterisk={showAsterisk}
-        >
-          {label}
-        </FieldLabel>
-      )}
+      {label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
 
       <Slate
         editor={editor}

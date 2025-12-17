@@ -86,18 +86,6 @@ function AudioPlayer(props: AudioPlayerProps): JSX.Element {
     formattedTotalTime,
   };
 
-  /**
-   * Formats time in seconds to MM:SS string format
-   *
-   * @internal
-   * @param {number} [time] - Time in seconds
-   * @returns {string} Formatted time as MM:SS or "00:00" if time is undefined
-   *
-   * @example
-   * formatTime(65) // returns "01:05"
-   * formatTime(0) // returns "00:00"
-   * formatTime() // returns "00:00"
-   */
   function formatTime(time?: number): string {
     if (!time) return "00:00";
 
@@ -110,12 +98,6 @@ function AudioPlayer(props: AudioPlayerProps): JSX.Element {
     return `${formattedMinutes}:${formattedSeconds}`;
   }
 
-  /**
-   * Starts audio playback and triggers onPlayAudio callback
-   *
-   * @internal
-   * @returns {void}
-   */
   function handlePlayAudio(): void {
     const audioElement = audioReference.current;
     if (!audioElement) return;
@@ -124,12 +106,6 @@ function AudioPlayer(props: AudioPlayerProps): JSX.Element {
     setIsPlaying(true);
   }
 
-  /**
-   * Pauses audio playback and triggers onPauseAudio callback
-   *
-   * @internal
-   * @returns {void}
-   */
   function handlePauseAudio(): void {
     const audioElement = audioReference.current;
     if (!audioElement) return;
@@ -138,24 +114,11 @@ function AudioPlayer(props: AudioPlayerProps): JSX.Element {
     setIsPlaying(false);
   }
 
-  /**
-   * Toggles between play and pause states
-   *
-   * @internal
-   * @returns {void}
-   */
   function handleToggleAudio(): void {
     if (isPlaying) handlePauseAudio();
     else handlePlayAudio();
   }
 
-  /**
-   * Handles slider value changes and updates audio current time
-   *
-   * @internal
-   * @param {number} value - Slider value from 0 to 100
-   * @returns {void}
-   */
   function handleSliderChange(value: number): void {
     const audioElement = audioReference.current;
     if (!audioElement) return;
