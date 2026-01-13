@@ -102,7 +102,7 @@ function App() {
         <PlacesProvider apiKey="AIzaSyDx2hqq2vc7ewANUDl6VCcC--9Ffocpn0E">
           {(isLoaded) =>
             isLoaded ? (
-              <MapView coordinates={{ lat: 180, lng: 1000 }} />
+              <SearchPlaces name={"aaa"} onPlaceChanged={console.log} />
             ) : (
               <div>Carregando Google Maps...</div>
             )

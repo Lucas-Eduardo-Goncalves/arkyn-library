@@ -1,6 +1,6 @@
 import type { StandaloneSearchBoxProps } from "@react-google-maps/api";
 import { StandaloneSearchBox } from "@react-google-maps/api";
-import { useState } from "react";
+import { JSX, useState } from "react";
 import { Input, InputProps } from "./input";
 
 /**
@@ -27,8 +27,8 @@ type SearchPlacesProps = {
     street: string;
     city: string;
     state: string;
-    district: string;
-    cep: string;
+    neighborhood: string;
+    postalCode: string;
     stateShortName: string;
     streetNumber: string;
     coordinates: { lat: number; lng: number };
@@ -40,7 +40,7 @@ type SearchPlacesProps = {
  *
  * This component integrates with Google Maps API to provide address autocomplete functionality.
  * When a user selects a place from the suggestions, it extracts and returns structured address data
- * including street, city, state, district, postal code, and geographic coordinates.
+ * including street, city, state, neighborhood, postal code, and geographic coordinates.
  *
  * @component
  * @example
@@ -54,8 +54,8 @@ type SearchPlacesProps = {
  *     //   street: "Rua exemplo",
  *     //   city: "São Paulo",
  *     //   state: "São Paulo",
- *     //   district: "Centro",
- *     //   cep: "01310-100",
+ *     //   neighborhood: "Centro",
+ *     //   postalCode: "01310-100",
  *     //   stateShortName: "SP",
  *     //   streetNumber: "123",
  *     //   coordinates: { lat: -23.5505, lng: -46.6333 }
@@ -77,15 +77,15 @@ type SearchPlacesProps = {
  * @requires @react-google-maps/api package
  */
 
-function SearchPlaces(props: SearchPlacesProps) {
+function SearchPlaces(props: SearchPlacesProps): JSX.Element {
   const { onChange, onPlaceChanged, options, ...rest } = props;
 
   const [searchBox, setSearchBox] = useState<any>(null);
   const handleLoad = (ref: any) => setSearchBox(ref);
 
   const handlePlacesChanged = () => {
-    const places = searchBox.getPlaces();
-    const place = places[0];
+    const places = searchBox?.getPlaces();
+    const place = places ? places[0] : null;
 
     const address_components =
       place?.address_components as AddressComponentsType;
@@ -102,14 +102,31 @@ function SearchPlaces(props: SearchPlacesProps) {
       return "";
     }
 
+    function findDataByMultipleTypes(keys: string[]) {
+      for (const key of keys) {
+        const data = address_components.find((item) =>
+          item.types.includes(key)
+        );
+        if (data) return data.long_name;
+      }
+      return "";
+    }
+
     if (place) {
       const street = findData("route");
       const streetNumber = findData("street_number");
-      const district = findData("sublocality_level_1");
+      const neighborhood = findDataByMultipleTypes([
+        "sublocality_level_1",
+        "sublocality",
+        "neighborhood",
+      ]);
       const city = findData("administrative_area_level_2");
       const state = findData("administrative_area_level_1");
       const stateShortName = findDataShort("administrative_area_level_1");
-      const cep = findData("postal_code");
+      const postalCode = findDataByMultipleTypes([
+        "postal_code",
+        "postal_code_prefix",
+      ]);
 
       const lat = place.geometry?.location?.lat();
       const lng = place.geometry?.location?.lng();
@@ -118,8 +135,8 @@ function SearchPlaces(props: SearchPlacesProps) {
         street,
         city,
         state,
-        district,
-        cep,
+        neighborhood,
+        postalCode,
         streetNumber,
         stateShortName,
         coordinates: { lat, lng },
@@ -137,6 +154,7 @@ function SearchPlaces(props: SearchPlacesProps) {
     >
       <Input
         type="text"
+        autoComplete="off"
         onChange={(e) => onChange && onChange(e.target.value)}
         {...rest}
       />
