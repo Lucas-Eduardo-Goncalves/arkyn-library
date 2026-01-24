@@ -1,7 +1,7 @@
 type InputFormatTypes = "brazilianDate" | "isoDate";
 
 type FormatDateFunction = (
-  date: string[], // [date: string, time?: string]
+  date: [date: string, time?: string],
   inputFormat: InputFormatTypes,
   outputFormat: string,
   timezone?: number,
@@ -101,14 +101,28 @@ function getDaysInMonth(month: number, year: number): number {
  * @throws {Error} If the date created is invalid.
  *
  * @example
- * // Format a Brazilian date to ISO format
- * formatDate(["25/12/2023", "15:30:00"], "brazilianDate", "YYYY-MM-DD hh:mm");
- * // Returns: "2023-12-25 15:30"
+ * Format a Brazilian date to ISO format
+ * ```typescript
+ * const formattedDate = formatDate(
+ *   ["25/12/2023", "15:30:00"],
+ *   "brazilianDate",
+ *   "YYYY-MM-DD hh:mm",
+ * );
  *
+ * console.log(formattedDate); // Output: "2023-12-25 15:30"
+ * ```
  * @example
- * // Format an ISO date to a custom format with timezone adjustment
- * formatDate(["2023-12-25", "15:30:00"], "isoDate", "DD/MM/YYYY hh:mm", -3);
- * // Returns: "25/12/2023 12:30"
+ * Format an ISO date to a custom format with timezone adjustment
+ * ```typescript
+ * const formattedDate = formatDate(
+ *   ["2023-12-25", "15:30:00"],
+ *   "isoDate",
+ *   "DD/MM/YYYY hh:mm",
+ *   -3,
+ * );
+ *
+ * console.log(formattedDate); // Output: "25/12/2023 12:30"
+ * ```
  */
 
 const formatDate: FormatDateFunction = (
