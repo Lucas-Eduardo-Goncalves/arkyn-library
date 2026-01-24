@@ -7,34 +7,27 @@ type FormatToCnpjFunction = (value: string) => string;
  *
  * The CNPJ format is: `XX.XXX.XXX/XXXX-XX`, where `X` represents a digit.
  *
- * @param value - The input value to be formatted. It can be a string or number containing the CNPJ digits.
- *                Non-numeric characters will be removed before formatting.
+ * @param {string} value - The input string to be formatted as a CNPJ, the string must contain 14 numeric digits; special characters will be ignored.
  *
- * @returns A string formatted as a CNPJ.
+ * @returns {string} The formatted CNPJ string in the pattern `XX.XXX.XXX/XXXX-XX`.
  *
  * @throws {Error} Throws an error if the input does not contain exactly 14 numeric digits.
  *
  * @example
  * ```typescript
- * import { formatToCnpj } from "./formatToCNPJ";
- *
  * const formattedCnpj = formatToCnpj("12345678000195");
  * console.log(formattedCnpj); // Output: "12.345.678/0001-95"
- *
- * try {
- *   formatToCnpj("12345");
- * } catch (error) {
- *   console.error(error.message); // Output: "Invalid CNPJ length"
- * }
  * ```
  */
 
-const formatToCnpj: FormatToCnpjFunction = (value) => {
+const formatToCnpj: FormatToCnpjFunction = (value: string): string => {
   const cleaned = removeNonNumeric(value);
   const match = cleaned.match(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/);
-  if (match)
-    return `${match[1]}.${match[2]}.${match[3]}/${match[4]}-${match[5]}`;
-  throw new Error("Invalid CNPJ length");
+
+  const errorMessage = `CNPJ must be contain 14 numeric digits: ${value}`;
+  if (!match) throw new Error(errorMessage);
+
+  return `${match[1]}.${match[2]}.${match[3]}/${match[4]}-${match[5]}`;
 };
 
 export { formatToCnpj };

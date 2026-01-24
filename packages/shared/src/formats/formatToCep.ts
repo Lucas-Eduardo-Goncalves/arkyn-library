@@ -9,9 +9,9 @@ type FormatToCepFunction = (value: string) => string;
  * and attempts to format it as a CEP in the pattern `XXXXX-XXX`.
  * If the input does not match the expected format, an error is thrown.
  *
- * @param value - The input string to be formatted as a CEP, the string must contain 8 numeric digits; special characters will be ignored.
+ * @param {string} value - The input string to be formatted as a CEP, the string must contain 8 numeric digits; special characters will be ignored.
  *
- * @returns The formatted CEP string in the pattern `XXXXX-XXX`.
+ * @returns {string} The formatted CEP string in the pattern `XXXXX-XXX`.
  *
  * @throws {Error} If the input does not match the expected CEP format.
  *
@@ -22,18 +22,14 @@ type FormatToCepFunction = (value: string) => string;
  * ```
  */
 
-const formatToCep: FormatToCepFunction = (value) => {
+const formatToCep: FormatToCepFunction = (value: string): string => {
   const cleaned = removeNonNumeric(value);
-  console.log(cleaned);
-
-  if (cleaned.length !== 8) {
-    throw new Error(`CEP must be contain 8 numeric digits: ${value}`);
-  }
-
   const match = cleaned.match(/^(\d{5})(\d{3})$/);
 
-  if (match) return `${match[1]}-${match[2]}`;
-  throw new Error(`Invalid CEP format: ${value}`);
+  const errorMessage = `CEP must be contain 8 numeric digits: ${value}`;
+  if (!match) throw new Error(errorMessage);
+
+  return `${match[1]}-${match[2]}`;
 };
 
 export { formatToCep };
