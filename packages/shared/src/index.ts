@@ -6,7 +6,6 @@ export { formatToCapitalizeFirstWordLetter } from "./formats/formatToCapitalizeF
 export { formatToCep } from "./formats/formatToCep";
 export { formatToCnpj } from "./formats/formatToCnpj";
 export { formatToCpf } from "./formats/formatToCpf";
-export { formatToCpfCnpj } from "./formats/formatToCpfCnpj";
 export { formatToCurrency } from "./formats/formatToCurrency";
 export { formatToDate } from "./formats/formatToDate";
 export { formatToEllipsis } from "./formats/formatToEllipsis";
