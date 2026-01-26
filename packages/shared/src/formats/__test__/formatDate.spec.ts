@@ -10,7 +10,7 @@ describe("formatDate", () => {
         "YYYY-MM-DD hh:mm:ss",
       );
 
-      expect(result).toBe("2023-12-25 15:30:00");
+      expect(result).toBe("2023-12-25 12:30:00");
     });
 
     it("should format Brazilian date without time", () => {
@@ -42,7 +42,7 @@ describe("formatDate", () => {
   describe("isoDate format", () => {
     it("should format ISO date to Brazilian format", () => {
       const result = formatDate(
-        ["2023-12-25", "15:30:00"],
+        ["12-25-2023", "15:30:00"],
         "isoDate",
         "DD/MM/YYYY hh:mm:ss",
       );
@@ -51,13 +51,13 @@ describe("formatDate", () => {
     });
 
     it("should format ISO date without time", () => {
-      const result = formatDate(["2023-12-25"], "isoDate", "DD/MM/YYYY");
+      const result = formatDate(["12-25-2023"], "isoDate", "DD/MM/YYYY");
       expect(result).toBe("25/12/2023");
     });
 
     it("should format ISO date to custom format", () => {
       const result = formatDate(
-        ["2024-03-15", "22:45:10"],
+        ["03-15-2024", "22:45:10"],
         "isoDate",
         "YYYY/MM/DD hh:mm:ss",
       );
@@ -66,12 +66,49 @@ describe("formatDate", () => {
     });
 
     it("should format isoDate date with single-digit month", () => {
-      const result = formatDate(["2023-6-15"], "isoDate", "DD/MM/YYYY");
+      const result = formatDate(["06-15-2023"], "isoDate", "DD/MM/YYYY");
       expect(result).toBe("15/06/2023");
     });
 
     it("should format isoDate date with single-digit day", () => {
-      const result = formatDate(["2023-06-5"], "isoDate", "DD/MM/YYYY");
+      const result = formatDate(["06-05-2023"], "isoDate", "DD/MM/YYYY");
+      expect(result).toBe("05/06/2023");
+    });
+  });
+
+  describe("timestamp format", () => {
+    it("should format timestamp date to Brazilian format", () => {
+      const result = formatDate(
+        ["2023-12-25", "15:30:00"],
+        "timestamp",
+        "DD/MM/YYYY hh:mm:ss",
+      );
+
+      expect(result).toBe("25/12/2023 15:30:00");
+    });
+
+    it("should format timestamp date without time", () => {
+      const result = formatDate(["2023-12-25"], "timestamp", "DD/MM/YYYY");
+      expect(result).toBe("25/12/2023");
+    });
+
+    it("should format timestamp date to custom format", () => {
+      const result = formatDate(
+        ["2024-03-15", "22:45:10"],
+        "timestamp",
+        "YYYY/MM/DD hh:mm:ss",
+      );
+
+      expect(result).toBe("2024/03/15 22:45:10");
+    });
+
+    it("should format timestamp date with single-digit month", () => {
+      const result = formatDate(["2023-06-15"], "timestamp", "DD/MM/YYYY");
+      expect(result).toBe("15/06/2023");
+    });
+
+    it("should format timestamp date with single-digit day", () => {
+      const result = formatDate(["2023-06-05"], "timestamp", "DD/MM/YYYY");
       expect(result).toBe("05/06/2023");
     });
   });
@@ -79,7 +116,7 @@ describe("formatDate", () => {
   describe("timezone adjustments", () => {
     it("should apply positive timezone offset", () => {
       const result = formatDate(
-        ["2023-12-25", "12:00:00"],
+        ["12-25-2023", "12:00:00"],
         "isoDate",
         "YYYY-MM-DD hh:mm:ss",
         3,
@@ -91,7 +128,7 @@ describe("formatDate", () => {
     it("should apply negative timezone offset", () => {
       const result = formatDate(
         ["2023-12-25", "15:00:00"],
-        "isoDate",
+        "timestamp",
         "DD/MM/YYYY hh:mm:ss",
         -3,
       );
@@ -101,7 +138,7 @@ describe("formatDate", () => {
 
     it("should handle timezone that changes the day", () => {
       const result = formatDate(
-        ["2023-12-31", "23:00:00"],
+        ["12-31-2023", "23:00:00"],
         "isoDate",
         "YYYY-MM-DD hh:mm:ss",
         2,
@@ -112,7 +149,7 @@ describe("formatDate", () => {
 
     it("should use default timezone (0) when not provided", () => {
       const result = formatDate(
-        ["2023-12-25", "12:00:00"],
+        ["12-25-2023", "12:00:00"],
         "isoDate",
         "YYYY-MM-DD hh:mm:ss",
       );
@@ -124,7 +161,7 @@ describe("formatDate", () => {
   describe("time handling", () => {
     it("should use default time (00:00:00) when not provided", () => {
       const result = formatDate(
-        ["2023-12-25"],
+        ["12-25-2023"],
         "isoDate",
         "YYYY-MM-DD hh:mm:ss",
       );
@@ -134,7 +171,7 @@ describe("formatDate", () => {
 
     it("should handle time with milliseconds", () => {
       const result = formatDate(
-        ["2023-12-25", "15:30:45.123"],
+        ["12-25-2023", "15:30:45.123"],
         "isoDate",
         "YYYY-MM-DD hh:mm:ss",
       );
@@ -144,7 +181,7 @@ describe("formatDate", () => {
 
     it("should handle partial time (hours and minutes only)", () => {
       const result = formatDate(
-        ["2023-12-25", "15:30"],
+        ["12-25-2023", "15:30"],
         "isoDate",
         "YYYY-MM-DD hh:mm:ss",
       );
@@ -154,7 +191,7 @@ describe("formatDate", () => {
 
     it("should handle single digit hours and minutes", () => {
       const result = formatDate(
-        ["2023-12-25", "5:5:5"],
+        ["12-25-2023", "5:5:5"],
         "isoDate",
         "YYYY-MM-DD hh:mm:ss",
       );
@@ -166,7 +203,7 @@ describe("formatDate", () => {
   describe("output format variations", () => {
     it("should format with only date components", () => {
       const result = formatDate(
-        ["2023-12-25", "15:30:00"],
+        ["12-25-2023", "15:30:00"],
         "isoDate",
         "YYYY-MM-DD",
       );
@@ -176,7 +213,7 @@ describe("formatDate", () => {
 
     it("should format with only time components", () => {
       const result = formatDate(
-        ["2023-12-25", "15:30:45"],
+        ["12-25-2023", "15:30:45"],
         "isoDate",
         "hh:mm:ss",
       );
@@ -186,7 +223,7 @@ describe("formatDate", () => {
 
     it("should format with custom separators", () => {
       const result = formatDate(
-        ["2023-12-25", "15:30:00"],
+        ["12-25-2023", "15:30:00"],
         "isoDate",
         "YYYY.MM.DD - hh:mm:ss",
       );
@@ -196,7 +233,7 @@ describe("formatDate", () => {
 
     it("should format with text in between", () => {
       const result = formatDate(
-        ["2023-12-25", "15:30:00"],
+        ["12-25-2023", "15:30:00"],
         "isoDate",
         "DD de MM de YYYY às hh:mm",
       );
@@ -223,7 +260,7 @@ describe("formatDate", () => {
 
     it("should handle midnight time", () => {
       const result = formatDate(
-        ["2023-12-25", "00:00:00"],
+        ["12-25-2023", "00:00:00"],
         "isoDate",
         "YYYY-MM-DD hh:mm:ss",
       );
@@ -232,7 +269,7 @@ describe("formatDate", () => {
 
     it("should handle end of day time", () => {
       const result = formatDate(
-        ["2023-12-25", "23:59:59"],
+        ["12-25-2023", "23:59:59"],
         "isoDate",
         "YYYY-MM-DD hh:mm:ss",
       );
@@ -288,7 +325,7 @@ describe("formatDate", () => {
 
     it("should throw error for invalid day in ISO date", () => {
       expect(() => {
-        formatDate(["2023-02-30"], "isoDate", "YYYY-MM-DD");
+        formatDate(["02-30-2023"], "isoDate", "YYYY-MM-DD");
       }).toThrow("Day 30 is not valid for February");
     });
 

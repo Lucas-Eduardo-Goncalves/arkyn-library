@@ -7,7 +7,6 @@ export { formatToCep } from "./formats/formatToCep";
 export { formatToCnpj } from "./formats/formatToCnpj";
 export { formatToCpf } from "./formats/formatToCpf";
 export { formatToCurrency } from "./formats/formatToCurrency";
-export { formatToDate } from "./formats/formatToDate";
 export { formatToEllipsis } from "./formats/formatToEllipsis";
 export { formatToHiddenDigits } from "./formats/formatToHiddenDigits";
 export { formatToPhone } from "./formats/formatToPhone";
@@ -16,6 +15,9 @@ export { formatToPhone } from "./formats/formatToPhone";
 export { generateColorByString } from "./generators/generateColorByString";
 export { generateId } from "./generators/generateId";
 export { generateSlug } from "./generators/generateSlug";
+
+// parsers
+export { parseToDate } from "./parsers/parseDate";
 
 // services
 export { calculateCardInstallment } from "./services/calculateCardInstallment";
