@@ -31,6 +31,9 @@ function formatDateString(date: Date, format: string): string {
 /**
  * Formats a date and time string based on the provided input and output formats.
  *
+ * **Note:** This function works with UTC+0 by default. The returned formatted string is not automatically converted to the machine's local timezone.
+ * To adjust the timezone, you must manually specify the `timezone` parameter (e.g., -3 for UTC-3).
+ *
  * @param {[string, string]} dateTime - An array containing the date and optional time.
  *   - The first element is the date string.
  *   - The second element is the time string (default is "00:00:00").
@@ -41,7 +44,7 @@ function formatDateString(date: Date, format: string): string {
  * @param {string} outputFormat - The desired output format for the date.
  *   - Use placeholders like "YYYY", "MM", "DD", "hh", "mm", "ss" to define the format.
  * @param {number} [timezone=0] - The timezone offset in hours to apply to the date.
- *   - Defaults to 0 (UTC).]
+ *   - Defaults to 0 (UTC).
  *
  * @returns {string} The formatted date string based on the output format.
  *

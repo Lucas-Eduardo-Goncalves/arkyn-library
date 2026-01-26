@@ -10,7 +10,7 @@ describe("formatDate", () => {
         "YYYY-MM-DD hh:mm:ss",
       );
 
-      expect(result).toBe("2023-12-25 12:30:00");
+      expect(result).toBe("2023-12-25 15:30:00");
     });
 
     it("should format Brazilian date without time", () => {

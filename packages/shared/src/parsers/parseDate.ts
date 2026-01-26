@@ -11,14 +11,17 @@ type ParseToDateFunction = (
 /**
  * Converts a date and time input into a JavaScript `Date` object, formatted according to the specified input format and timezone.
  *
+ * **Note:** This function works with UTC+0 by default. The returned Date object is not automatically converted to the machine's local timezone.
+ * To adjust the timezone, you must manually specify the `timezone` parameter (e.g., -3 for UTC-3).
+ *
  * @param {[string, string]} dateTime - An array containing the date and optional time.
  *   - The first element is the date string.
  *   - The second element is the time string (default is "00:00:00")
- * @param {"brazilianDate" | "isoDate"} inputFormat - The format of the input date.
+ * @param {"brazilianDate" | "isoDate" | "timestamp"} inputFormat - The format of the input date.
  *   - "brazilianDate": Expects the date in "DD/MM/YYYY" or "D/M/YYYY" format.
  *   - "isoDate": Expects the date in "MM-DD-YYYY" or "M-D-YYYY" format.
  * @param {number} [timezone=0] - The timezone offset in hours to apply to the date.
- *   - Defaults to 0 (UTC).]
+ *   - Defaults to 0 (UTC).
  *
  * @returns {Date} A `Date` object representing the parsed date and time, adjusted for the specified timezone.
  *
@@ -28,7 +31,7 @@ type ParseToDateFunction = (
  * @example
  * ```typescript
  * const date = parseToDate(["25/12/2023", "15:30:00"], "brazilianDate", -3);
- * console.log(date); // Outputs a Date object for "2023-12-25T18:30:00.000Z" (UTC)
+ * console.log(date); // Outputs a Date object for "2023-12-25T12:30:00.000Z" (UTC)
  * ```
  */
 
