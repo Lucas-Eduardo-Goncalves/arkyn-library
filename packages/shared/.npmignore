@@ -23,6 +23,10 @@ variables.css
 **/*.test.*
 **/*.spec.*
 
+# Test directories
+__tests__/
+__test__/
+
 # Build artifacts (keep only dist/)
 *.log
 *.tmp
