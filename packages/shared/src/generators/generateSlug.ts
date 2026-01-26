@@ -9,11 +9,18 @@
  * - Collapses multiple consecutive hyphens into a single hyphen.
  * - Trims leading and trailing hyphens.
  *
- * @param string - The input string to be converted into a slug.
- * @returns A URL-friendly slug derived from the input string.
+ * @param {string} string - The input string to be converted into a slug.
+ *
+ * @returns {string} A URL-friendly slug derived from the input string.
+ *
+ * @example
+ * ```typescript
+ * const slug = generateSlug("Hello, World! This is a Test.");
+ * console.log(slug); // Outputs: "hello-world-this-is-a-test"
+ * ```
  */
 
-function generateSlug(prop: string) {
+function generateSlug(prop: string): string {
   let slug = prop.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
   slug = slug

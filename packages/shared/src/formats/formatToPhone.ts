@@ -13,13 +13,13 @@ type CountryType = {
 
 type FormatToPhoneFunction = (prop: string) => string;
 
-function getMask(value: string): "NINE" | "EIGTH" {
-  const mask = value.length > 10 ? "NINE" : "EIGTH";
+function getMask(value: string): "NINE" | "EIGHT" {
+  const mask = value.length > 10 ? "NINE" : "EIGHT";
   return mask;
 }
 
 const TYPES = {
-  EIGTH: "(99) 9999-9999",
+  EIGHT: "(99) 9999-9999",
   NINE: "(99) 99999-9999",
 };
 
@@ -57,7 +57,7 @@ function formatPhoneNumber(phoneNumber: string, country: CountryType): string {
     let nextLength = value.length;
     if (nextLength > MAX_LENGTH) return value;
 
-    value = applyMask(value, TYPES[mask] as "EIGTH" | "NINE");
+    value = applyMask(value, TYPES[mask] as "EIGHT" | "NINE");
     return value;
   }
 
@@ -88,7 +88,7 @@ function formatPhoneNumber(phoneNumber: string, country: CountryType): string {
 
 function getCountryWithPrefixCode(countryCode: string, prefix: string) {
   const country = countries.find(
-    (country) => country.code === countryCode && country.prefix === prefix
+    (country) => country.code === countryCode && country.prefix === prefix,
   );
 
   if (!country) throw new Error("Invalid country code or prefix");
@@ -146,7 +146,7 @@ const formatToPhone: FormatToPhoneFunction = (prop) => {
 
   if (!phoneRegex.test(prop)) {
     throw new Error(
-      "Invalid phone number format. Expected format: +<countryCode>-<optionalPrefix> <phoneNumber>"
+      "Invalid phone number format. Expected format: +<countryCode>-<optionalPrefix> <phoneNumber>",
     );
   }
 

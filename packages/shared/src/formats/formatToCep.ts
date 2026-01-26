@@ -1,7 +1,5 @@
 import { removeNonNumeric } from "../services/removeNonNumeric";
 
-type FormatToCepFunction = (value: string) => string;
-
 /**
  * Formats a given string into a Brazilian postal code (CEP) format.
  *
@@ -22,7 +20,7 @@ type FormatToCepFunction = (value: string) => string;
  * ```
  */
 
-const formatToCep: FormatToCepFunction = (value: string): string => {
+const formatToCep = (value: string): string => {
   const cleaned = removeNonNumeric(value);
   const match = cleaned.match(/^(\d{5})(\d{3})$/);
 

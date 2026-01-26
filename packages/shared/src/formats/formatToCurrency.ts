@@ -3,22 +3,12 @@ import { removeCurrencySymbols } from "../services/removeCurrencySymbols";
 
 type Currencies = keyof typeof countryCurrencies;
 
-type Config = {
-  showPrefix?: boolean;
-};
-
-type FormatToCurrency = (
-  value: number,
-  currency: Currencies,
-  config?: Config,
-) => string;
-
 /**
  * Formats a numeric value into a currency string based on the specified currency and configuration.
  *
  * @param {number} value - The numeric value to be formatted.
  * @param {Currencies} currency - The currency code used to determine the formatting style.
- * @param {Config} [config] - Optional configuration object.
+ * @param {object} [config] - Optional configuration object.
  * @param {boolean} [config.showPrefix=true] - Determines whether the currency symbol/prefix should be included in the formatted string. Defaults to `true`.
  *
  * @returns {string} A formatted currency string. If `config.showPrefix` is `false`, the currency symbol is removed.
@@ -45,10 +35,10 @@ type FormatToCurrency = (
  * ```
  */
 
-const formatToCurrency: FormatToCurrency = (
-  value,
-  currency,
-  config,
+const formatToCurrency = (
+  value: number,
+  currency: Currencies,
+  config?: { showPrefix?: boolean },
 ): string => {
   if (!countryCurrencies?.[currency]) {
     throw new Error("Unsupported currency code");

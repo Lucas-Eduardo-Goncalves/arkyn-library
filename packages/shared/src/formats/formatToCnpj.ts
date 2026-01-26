@@ -1,7 +1,5 @@
 import { removeNonNumeric } from "../services/removeNonNumeric";
 
-type FormatToCnpjFunction = (value: string) => string;
-
 /**
  * Formats a given string or number into a CNPJ (Cadastro Nacional da Pessoa Jurídica) format.
  *
@@ -20,7 +18,7 @@ type FormatToCnpjFunction = (value: string) => string;
  * ```
  */
 
-const formatToCnpj: FormatToCnpjFunction = (value: string): string => {
+const formatToCnpj = (value: string): string => {
   const cleaned = removeNonNumeric(value);
   const match = cleaned.match(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/);
 

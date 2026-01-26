@@ -1,7 +1,5 @@
 import { removeNonNumeric } from "../services/removeNonNumeric";
 
-type FormatToCpfFunction = (value: string) => string;
-
 /**
  * Formats a given string into a CPF (Cadastro de Pessoas Físicas) format.
  *
@@ -22,7 +20,7 @@ type FormatToCpfFunction = (value: string) => string;
  * ```
  */
 
-const formatToCpf: FormatToCpfFunction = (value: string): string => {
+const formatToCpf = (value: string): string => {
   const cleaned = removeNonNumeric(value);
   const match = cleaned.match(/^(\d{3})(\d{3})(\d{3})(\d{2})$/);
 

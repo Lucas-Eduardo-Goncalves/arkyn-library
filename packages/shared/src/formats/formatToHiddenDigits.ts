@@ -17,16 +17,6 @@ type RootCharacterNode = {
   children: (DigitCharacterNode | OtherCharacterNode)[];
 };
 
-type FormatToHiddenDigitsOptions = {
-  range?: number | [number, number];
-  hider?: string;
-};
-
-type FormatToHiddenDigitsFunction = (
-  value: string,
-  options: FormatToHiddenDigitsOptions,
-) => string;
-
 const parseToCharacters = (value: string): RootCharacterNode => {
   let digits = 0;
 
@@ -83,19 +73,20 @@ const within = (range: [number, number], value: number): boolean =>
  * ```
  */
 
-const formatToHiddenDigits: FormatToHiddenDigitsFunction = (
+const formatToHiddenDigits = (
   value: string,
-  options: FormatToHiddenDigitsOptions,
+  options?: { range?: number | [number, number]; hider?: string },
 ): string => {
   const characters = parseToCharacters(value);
-  const range = normalizeRange(options.range ?? 3, characters.digits);
-  return characters.children
-    .map((node) => {
-      if (node.kind === "digit" && within(range, node.digit))
-        return options.hider ?? "*";
-      return node.character;
-    })
-    .join("");
+  const range = normalizeRange(options?.range ?? 3, characters.digits);
+
+  const mappedCharacters = characters.children.map((node) => {
+    if (node.kind === "digit" && within(range, node.digit))
+      return options?.hider ?? "*";
+    return node.character;
+  });
+
+  return mappedCharacters.join("");
 };
 
 export { formatToHiddenDigits };

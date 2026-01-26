@@ -1,14 +1,5 @@
 import { ValidateDateService } from "../services/validateDateService";
 
-type InputFormatTypes = "brazilianDate" | "isoDate" | "timestamp";
-
-type FormatDateFunction = (
-  date: [date: string, time?: string],
-  inputFormat: InputFormatTypes,
-  outputFormat: string,
-  timezone?: number,
-) => string;
-
 function formatDateString(date: Date, format: string): string {
   const pad = (num: number) => num.toString().padStart(2, "0");
 
@@ -76,11 +67,11 @@ function formatDateString(date: Date, format: string): string {
  * ```
  */
 
-const formatDate: FormatDateFunction = (
-  [date, time = "00:00:00"],
-  inputFormat,
-  outputFormat,
-  timezone = 0,
+const formatDate = (
+  [date, time = "00:00:00"]: [string, string?],
+  inputFormat: "brazilianDate" | "isoDate" | "timestamp",
+  outputFormat: string,
+  timezone: number = 0,
 ): string => {
   const validateDateService = new ValidateDateService();
   validateDateService.validateInputFormat(inputFormat);

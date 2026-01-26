@@ -1,13 +1,5 @@
 import { ValidateDateService } from "../services/validateDateService";
 
-type InputFormatTypes = "brazilianDate" | "isoDate" | "timestamp";
-
-type ParseToDateFunction = (
-  date: string[], // [date: string, time?: string]
-  inputFormat: InputFormatTypes,
-  timezone?: number,
-) => Date;
-
 /**
  * Converts a date and time input into a JavaScript `Date` object, formatted according to the specified input format and timezone.
  *
@@ -35,10 +27,10 @@ type ParseToDateFunction = (
  * ```
  */
 
-const parseToDate: ParseToDateFunction = (
-  [date, time = "00:00:00"],
-  inputFormat,
-  timezone = 0,
+const parseToDate = (
+  [date, time = "00:00:00"]: [string, string?],
+  inputFormat: "brazilianDate" | "isoDate" | "timestamp",
+  timezone: number = 0,
 ): Date => {
   const validateDateService = new ValidateDateService();
   validateDateService.validateInputFormat(inputFormat);
