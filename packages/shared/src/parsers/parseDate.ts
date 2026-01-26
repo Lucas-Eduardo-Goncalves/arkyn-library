@@ -12,6 +12,7 @@ import { ValidateDateService } from "../services/validateDateService";
  * @param {"brazilianDate" | "isoDate" | "timestamp"} inputFormat - The format of the input date.
  *   - "brazilianDate": Expects the date in "DD/MM/YYYY" or "D/M/YYYY" format.
  *   - "isoDate": Expects the date in "MM-DD-YYYY" or "M-D-YYYY" format.
+ *   - "timestamp": Expects the date in "YYYY-MM-DD" or "YYYY-M-D" format.
  * @param {number} [timezone=0] - The timezone offset in hours to apply to the date.
  *   - Defaults to 0 (UTC).
  *
@@ -53,8 +54,7 @@ const parseToDate = (
     case "timestamp":
       [year, month, day] = dateParts;
       validateDateService.validateDateParts(year, month, day);
-    default:
-      throw new Error("Invalid input format");
+      break;
   }
 
   const formattedDate = new Date(

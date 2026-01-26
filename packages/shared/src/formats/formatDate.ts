@@ -95,8 +95,6 @@ const formatDate = (
       [year, month, day] = dateParts;
       validateDateService.validateDateParts(year, month, day);
       break;
-    default:
-      throw new Error("Invalid input format");
   }
 
   const formattedDate = new Date(
