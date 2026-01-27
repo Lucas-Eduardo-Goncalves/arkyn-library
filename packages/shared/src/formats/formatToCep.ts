@@ -1,4 +1,4 @@
-import { removeNonNumeric } from "../services/removeNonNumeric";
+import { removeNonNumeric } from "../utilities/removeNonNumeric";
 
 /**
  * Formats a given string into a Brazilian postal code (CEP) format.

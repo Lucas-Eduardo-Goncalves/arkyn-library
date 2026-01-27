@@ -3,7 +3,7 @@
  * The function creates a hash from the string and uses it to calculate
  * RGB values, which are then converted to a hexadecimal color code.
  *
- * @param {string} prop - The input string used to generate the color.
+ * @param {string} rawString - The input string used to generate the color.
  *
  * @returns {string} A hexadecimal color code (e.g., "#a1b2c3") derived from the input string.
  *

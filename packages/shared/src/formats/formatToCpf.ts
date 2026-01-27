@@ -1,4 +1,4 @@
-import { removeNonNumeric } from "../services/removeNonNumeric";
+import { removeNonNumeric } from "../utilities/removeNonNumeric";
 
 /**
  * Formats a given string into a CPF (Cadastro de Pessoas Físicas) format.

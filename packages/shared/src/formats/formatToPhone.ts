@@ -1,6 +1,6 @@
 import { countries } from "@arkyn/templates";
 
-import { removeNonNumeric } from "../services/removeNonNumeric";
+import { removeNonNumeric } from "../utilities/removeNonNumeric";
 
 type CountryType = {
   name: string;
@@ -11,7 +11,7 @@ type CountryType = {
   mask: string;
 };
 
-type FormatToPhoneFunction = (prop: string) => string;
+type FormatToPhoneFunction = (rawString: string) => string;
 
 function getMask(value: string): "NINE" | "EIGHT" {
   const mask = value.length > 10 ? "NINE" : "EIGHT";

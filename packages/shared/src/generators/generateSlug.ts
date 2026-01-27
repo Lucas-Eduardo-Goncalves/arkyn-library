@@ -9,7 +9,7 @@
  * - Collapses multiple consecutive hyphens into a single hyphen.
  * - Trims leading and trailing hyphens.
  *
- * @param {string} string - The input string to be converted into a slug.
+ * @param {string} rawString - The input string to be converted into a slug.
  *
  * @returns {string} A URL-friendly slug derived from the input string.
  *
@@ -20,8 +20,8 @@
  * ```
  */
 
-function generateSlug(prop: string): string {
-  let slug = prop.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+function generateSlug(rawString: string): string {
+  let slug = rawString.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
   slug = slug
     .replace(/[^\w\s-]/g, "")

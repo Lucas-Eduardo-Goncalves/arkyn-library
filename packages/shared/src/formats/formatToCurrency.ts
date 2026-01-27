@@ -1,5 +1,5 @@
 import { countryCurrencies } from "@arkyn/templates";
-import { removeCurrencySymbols } from "../services/removeCurrencySymbols";
+import { removeCurrencySymbols } from "../utilities/removeCurrencySymbols";
 
 type Currencies = keyof typeof countryCurrencies;
 

@@ -1,4 +1,4 @@
-import { removeNonNumeric } from "../services/removeNonNumeric";
+import { removeNonNumeric } from "../utilities/removeNonNumeric";
 
 /**
  * Formats a given string or number into a CNPJ (Cadastro Nacional da Pessoa Jurídica) format.
