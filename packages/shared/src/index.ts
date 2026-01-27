@@ -18,13 +18,13 @@ export { generateSlug } from "./generators/generateSlug";
 
 // parsers
 export { parseToDate } from "./parsers/parseDate";
+export { parseLargeFields } from "./parsers/parseLargeFields";
+export { parseSensitiveData } from "./parsers/parseSensitiveData";
 
 // services
-export { calculateCardInstallment } from "./services/calculateCardInstallment";
-export { ensureQuotes } from "./services/ensureQuotes";
-export { isHtml } from "./services/isHtml";
-export { maskSensitiveData } from "./services/maskSensitiveData";
-export { removeCurrencySymbols } from "./services/removeCurrencySymbols";
-export { removeNonNumeric } from "./services/removeNonNumeric";
-export { stripHtmlTags } from "./services/stripHtmlTags";
-export { truncateLargeFields } from "./services/truncateLargeFields";
+export { calculateCardInstallment } from "./utilities/calculateCardInstallment";
+export { ensureQuotes } from "./utilities/ensureQuotes";
+export { isHtml } from "./utilities/isHtml";
+export { removeCurrencySymbols } from "./utilities/removeCurrencySymbols";
+export { removeNonNumeric } from "./utilities/removeNonNumeric";
+export { stripHtmlTags } from "./utilities/stripHtmlTags";

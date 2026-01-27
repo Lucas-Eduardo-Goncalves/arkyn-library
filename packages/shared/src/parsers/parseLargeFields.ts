@@ -20,13 +20,13 @@
  *   nested: { details: "Another long string that needs truncation." }
  * });
  *
- * const result = truncateLargeFields(json, 50);
+ * const result = parseLargeFields(json, 50);
  * console.log(result);
  * // Output: '{"name":"John","description":"To large information: field as 57 characters","nested":{"details":"To large information: field as 43 characters"}}'
  * ```
  */
 
-const truncateLargeFields = (
+const parseLargeFields = (
   jsonString: string,
   maxLength: number = 1000,
 ): string => {
@@ -60,4 +60,4 @@ const truncateLargeFields = (
   }
 };
 
-export { truncateLargeFields };
+export { parseLargeFields };
