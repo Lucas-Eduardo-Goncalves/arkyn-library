@@ -15,7 +15,7 @@
  * ```
  */
 
-const formatToEllipsis = (text: string, maxLength: number): string => {
+function formatToEllipsis(text: string, maxLength: number): string {
   if (text.length > maxLength) {
     let trimmedText = text.substring(0, maxLength);
 
@@ -37,6 +37,6 @@ const formatToEllipsis = (text: string, maxLength: number): string => {
   }
 
   return text;
-};
+}
 
 export { formatToEllipsis };

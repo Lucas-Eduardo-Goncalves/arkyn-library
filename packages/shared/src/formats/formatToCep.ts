@@ -20,7 +20,7 @@ import { removeNonNumeric } from "../utilities/removeNonNumeric";
  * ```
  */
 
-const formatToCep = (value: string): string => {
+function formatToCep(value: string): string {
   const cleaned = removeNonNumeric(value);
   const match = cleaned.match(/^(\d{5})(\d{3})$/);
 
@@ -28,6 +28,6 @@ const formatToCep = (value: string): string => {
   if (!match) throw new Error(errorMessage);
 
   return `${match[1]}-${match[2]}`;
-};
+}
 
 export { formatToCep };

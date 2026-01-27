@@ -1,5 +1,3 @@
-type EnsureQuotesFunction = (rawValue: string) => string;
-
 /**
  * Ensures that a given rawValue string is enclosed in quotes.
  *
@@ -7,11 +5,19 @@ type EnsureQuotesFunction = (rawValue: string) => string;
  * quotes (`'`) or double quotes (`"`). If the string is already quoted, it is
  * returned as-is. Otherwise, the function wraps the string in double quotes.
  *
- * @param url - The URL string to be checked and potentially quoted.
- * @returns The input string, either unchanged if it is already quoted, or wrapped in double quotes.
+ * @param {string} rawValue - The raw string to be checked and potentially quoted.
+ *
+ * @returns {string} The input string, either unchanged if it is already quoted, or wrapped in double quotes.
+ *
+ * @example
+ * ```typescript
+ * ensureQuotes('example'); // Returns: '"example"'
+ * ensureQuotes('"already quoted"'); // Returns: '"already quoted"'
+ * ensureQuotes("'single quoted'"); // Returns: "'single quoted'"
+ * ```
  */
 
-const ensureQuotes: EnsureQuotesFunction = (rawValue) => {
+function ensureQuotes(rawValue: string): string {
   const hasSingleQuotes = rawValue.startsWith("'") && rawValue.endsWith("'");
   const hasDoubleQuotes = rawValue.startsWith('"') && rawValue.endsWith('"');
 
@@ -20,6 +26,6 @@ const ensureQuotes: EnsureQuotesFunction = (rawValue) => {
   }
 
   return `"${rawValue}"`;
-};
+}
 
 export { ensureQuotes };

@@ -3,6 +3,7 @@ import { ValidateDateService } from "../services/validateDateService";
 /**
  * Converts a date and time input into a JavaScript `Date` object, formatted according to the specified input format and timezone.
  *
+ * @remarks
  * **Note:** This function works with UTC+0 by default. The returned Date object is not automatically converted to the machine's local timezone.
  * To adjust the timezone, you must manually specify the `timezone` parameter (e.g., -3 for UTC-3).
  *
@@ -28,11 +29,11 @@ import { ValidateDateService } from "../services/validateDateService";
  * ```
  */
 
-const parseToDate = (
+function parseToDate(
   [date, time = "00:00:00"]: [string, string?],
   inputFormat: "brazilianDate" | "isoDate" | "timestamp",
   timezone: number = 0,
-): Date => {
+): Date {
   const validateDateService = new ValidateDateService();
   validateDateService.validateInputFormat(inputFormat);
 
@@ -66,6 +67,6 @@ const parseToDate = (
   formattedDate.setUTCHours(formattedDate.getUTCHours() + timezone);
 
   return formattedDate;
-};
+}
 
 export { parseToDate };

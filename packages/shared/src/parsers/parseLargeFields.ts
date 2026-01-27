@@ -26,10 +26,10 @@
  * ```
  */
 
-const parseLargeFields = (
+function parseLargeFields(
   jsonString: string,
   maxLength: number = 1000,
-): string => {
+): string {
   function truncateValue(value: any): any {
     if (typeof value === "string" && value.length > maxLength) {
       return `To large information: field as ${value.length} characters`;
@@ -58,6 +58,6 @@ const parseLargeFields = (
   } catch (error) {
     throw new Error("Invalid JSON string");
   }
-};
+}
 
 export { parseLargeFields };

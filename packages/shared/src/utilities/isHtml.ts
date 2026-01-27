@@ -1,26 +1,26 @@
 /**
- * Verifica se uma string contém marcação HTML.
+ * Check if a string contains HTML markup.
  *
- * Esta função utiliza uma expressão regular para detectar a presença de tags HTML
- * em uma string. A verificação é case-insensitive e detecta tanto tags de abertura
- * quanto de fechamento.
+ * This function uses a regular expression to detect the presence of HTML tags
+ * in a string. The check is case-insensitive and detects both opening
+ * and closing tags.
  *
- * @param str - A string a ser verificada
- * @returns `true` se a string contém marcação HTML, `false` caso contrário
+ * @param {string} rawString - A string to be checked
+ *
+ * @returns {boolean} `true` if the string contains HTML markup, `false` otherwise
  *
  * @example
  * ```typescript
  * isHtml('<p>Hello world</p>'); // true
  * isHtml('<div>Content</div>'); // true
  * isHtml('Plain text'); // false
- * isHtml('Text with <b>bold</b>'); // true
  * isHtml(''); // false
  * ```
  */
 
-function isHtml(str: string): boolean {
+function isHtml(rawString: string): boolean {
   const htmlRegex = /<\/?[a-z][\s\S]*>/i;
-  return htmlRegex.test(str);
+  return htmlRegex.test(rawString);
 }
 
 export { isHtml };

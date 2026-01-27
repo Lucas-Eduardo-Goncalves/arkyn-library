@@ -35,11 +35,11 @@ type Currencies = keyof typeof countryCurrencies;
  * ```
  */
 
-const formatToCurrency = (
+function formatToCurrency(
   value: number,
   currency: Currencies,
   config?: { showPrefix?: boolean },
-): string => {
+): string {
   if (!countryCurrencies?.[currency]) {
     throw new Error("Unsupported currency code");
   }
@@ -56,6 +56,6 @@ const formatToCurrency = (
   return showPrefix
     ? format.replace(/\s/g, " ")
     : removeCurrencySymbols(format).replace(/\s/g, " ");
-};
+}
 
 export { formatToCurrency };

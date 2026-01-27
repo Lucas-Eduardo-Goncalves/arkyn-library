@@ -73,10 +73,10 @@ const within = (range: [number, number], value: number): boolean =>
  * ```
  */
 
-const formatToHiddenDigits = (
+function formatToHiddenDigits(
   value: string,
   options?: { range?: number | [number, number]; hider?: string },
-): string => {
+): string {
   const characters = parseToCharacters(value);
   const range = normalizeRange(options?.range ?? 3, characters.digits);
 
@@ -87,6 +87,6 @@ const formatToHiddenDigits = (
   });
 
   return mappedCharacters.join("");
-};
+}
 
 export { formatToHiddenDigits };

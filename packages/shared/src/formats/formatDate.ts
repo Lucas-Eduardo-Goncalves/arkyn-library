@@ -22,6 +22,7 @@ function formatDateString(date: Date, format: string): string {
 /**
  * Formats a date and time string based on the provided input and output formats.
  *
+ * @remarks
  * **Note:** This function works with UTC+0 by default. The returned formatted string is not automatically converted to the machine's local timezone.
  * To adjust the timezone, you must manually specify the `timezone` parameter (e.g., -3 for UTC-3).
  *
@@ -67,12 +68,12 @@ function formatDateString(date: Date, format: string): string {
  * ```
  */
 
-const formatDate = (
+function formatDate(
   [date, time = "00:00:00"]: [string, string?],
   inputFormat: "brazilianDate" | "isoDate" | "timestamp",
   outputFormat: string,
   timezone: number = 0,
-): string => {
+): string {
   const validateDateService = new ValidateDateService();
   validateDateService.validateInputFormat(inputFormat);
 
@@ -106,6 +107,6 @@ const formatDate = (
   formattedDate.setUTCHours(formattedDate.getUTCHours() + timezone);
 
   return formatDateString(formattedDate, outputFormat);
-};
+}
 
 export { formatDate };

@@ -20,7 +20,7 @@ import { removeNonNumeric } from "../utilities/removeNonNumeric";
  * ```
  */
 
-const formatToCpf = (value: string): string => {
+function formatToCpf(value: string): string {
   const cleaned = removeNonNumeric(value);
   const match = cleaned.match(/^(\d{3})(\d{3})(\d{3})(\d{2})$/);
 
@@ -28,6 +28,6 @@ const formatToCpf = (value: string): string => {
   if (!match) throw new Error(errorMessage);
 
   return `${match[1]}.${match[2]}.${match[3]}-${match[4]}`;
-};
+}
 
 export { formatToCpf };

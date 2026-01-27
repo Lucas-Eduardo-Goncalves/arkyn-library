@@ -14,7 +14,7 @@
  * ```
  */
 
-const generateColorByString = (rawString: string): string => {
+function generateColorByString(rawString: string): string {
   var hash = 0;
 
   for (var i = 0; i < rawString.length; i++) {
@@ -30,6 +30,6 @@ const generateColorByString = (rawString: string): string => {
   var blueHex = blue.toString(16).padStart(2, "0");
 
   return "#" + redHex + greenHex + blueHex;
-};
+}
 
 export { generateColorByString };

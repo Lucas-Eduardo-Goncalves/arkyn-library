@@ -19,10 +19,10 @@
  * ```
  */
 
-const parseSensitiveData = (
+function parseSensitiveData(
   jsonString: string,
   sensitiveKeys: string[] = ["password", "confirmPassword", "creditCard"],
-): string => {
+): string {
   function maskValue(key: string, value: any): any {
     if (sensitiveKeys.includes(key)) return "****";
     return value;
@@ -56,6 +56,6 @@ const parseSensitiveData = (
   } catch (error) {
     return jsonString;
   }
-};
+}
 
 export { parseSensitiveData };
