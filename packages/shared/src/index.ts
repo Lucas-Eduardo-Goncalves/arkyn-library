@@ -17,9 +17,9 @@ export { generateId } from "./generators/generateId";
 export { generateSlug } from "./generators/generateSlug";
 
 // parsers
-export { parseToDate } from "./parsers/parseDate";
 export { parseLargeFields } from "./parsers/parseLargeFields";
 export { parseSensitiveData } from "./parsers/parseSensitiveData";
+export { parseToDate } from "./parsers/parseToDate";
 
 // services
 export { ValidateDateService } from "./services/validateDateService";
