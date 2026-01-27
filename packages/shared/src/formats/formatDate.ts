@@ -66,6 +66,17 @@ function formatDateString(date: Date, format: string): string {
  *
  * console.log(formattedDate); // Output: "25/12/2023 12:30"
  * ```
+ * @example
+ * Format a timestamp date to a custom format
+ * ```typescript
+ * const formattedDate = formatDate(
+ *   ["2023-12-25", "15:30:00"],
+ *   "timestamp",
+ *   "MM-DD-YYYY hh:mm:ss",
+ * );
+ *
+ * console.log(formattedDate); // Output: "12-25-2023 15:30:00"
+ * ```
  */
 
 function formatDate(

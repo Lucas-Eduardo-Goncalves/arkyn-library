@@ -22,10 +22,20 @@ import { ValidateDateService } from "../services/validateDateService";
  * @throws {Error} If the `inputFormat` is invalid.
  * @throws {Error} If the provided date or time is invalid.
  *
- * @example
+ * @example Format a Brazilian date to Date
  * ```typescript
  * const date = parseToDate(["25/12/2023", "15:30:00"], "brazilianDate", -3);
  * console.log(date); // Outputs a Date object for "2023-12-25T12:30:00.000Z" (UTC)
+ * ```
+ * @example Format an ISO date to Date
+ * ```typescript
+ * const date = parseToDate(["12-25-2023", "15:30:00"], "isoDate", 2);
+ * console.log(date); // Outputs a Date object for "2023-12-25T13:30:00.000Z" (UTC)
+ * ```
+ * @example Format a timestamp date to Date
+ * ```typescript
+ * const date = parseToDate(["2023-12-25", "15:30:00"], "timestamp");
+ * console.log(date); // Outputs a Date object for "2023-12-25T15:30:00.000Z" (UTC)
  * ```
  */
 

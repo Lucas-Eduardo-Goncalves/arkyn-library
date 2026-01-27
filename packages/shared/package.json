@@ -11,7 +11,6 @@
   "keywords": [
     "utilities",
     "formatting",
-    "validation",
     "brazilian-documents",
     "cpf",
     "cnpj",
@@ -27,7 +26,6 @@
     "directory": "packages/shared"
   },
   "scripts": {
-    "clean": "rm -rf dist",
     "build": "bunx vite build && tsc",
     "test": "vitest --config vitest.config.ts",
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"

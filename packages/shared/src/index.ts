@@ -22,6 +22,9 @@ export { parseLargeFields } from "./parsers/parseLargeFields";
 export { parseSensitiveData } from "./parsers/parseSensitiveData";
 
 // services
+export { ValidateDateService } from "./services/validateDateService";
+
+// utilities
 export { calculateCardInstallment } from "./utilities/calculateCardInstallment";
 export { ensureQuotes } from "./utilities/ensureQuotes";
 export { isHtml } from "./utilities/isHtml";
