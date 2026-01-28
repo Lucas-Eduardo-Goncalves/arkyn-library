@@ -24,7 +24,7 @@ function validatePassword(rawPassword: string): boolean {
   const hasUppercase = /[A-Z]/.test(rawPassword);
   const hasLetter = /[a-z]/.test(rawPassword);
   const hasNumber = /\d/.test(rawPassword);
-  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>_\-+=~`[\]\\\/]/.test(
+  const hasSpecialChar = /[!@#$%^&*(),.?":;{}|<>_\-+=~`[\]\\\/]/.test(
     rawPassword,
   );
 

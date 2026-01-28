@@ -47,6 +47,12 @@ function extractDigit(cpf: string) {
 
 function validateCpf(rawCpf: string): boolean {
   if (!rawCpf) return false;
+  if (rawCpf.length > 14) return false;
+  if (rawCpf.length < 11) return false;
+
+  const hasSpaces = /\s/.test(rawCpf);
+  if (hasSpaces) return false;
+
   const cpf = removeNonNumeric(rawCpf);
 
   if (isInvalidLength(cpf)) return false;

@@ -25,11 +25,11 @@ type ValidateDateConfig = {
  * @example
  * ```typescript
  * validateDate("31/12/2023"); // true
- * validateDate("12-31-2023", { inputFormat: "MM-DD-YYYY" }); // true
- * validateDate("2023-12-31", { inputFormat: "YYYY-MM-DD", minYear: 2000, maxYear: 2100 }); // true
- * validateDate("29/02/2024", { inputFormat: "DD/MM/YYYY" }); // true (leap year)
- * validateDate("29/02/2023", { inputFormat: "DD/MM/YYYY" }); // false (not a leap year)
- * validateDate("31/04/2023", { inputFormat: "DD/MM/YYYY" }); // false (April has 30 days)
+ * validateDate("12-31-2023", { inputFormat: "isoDate" }); // true
+ * validateDate("2023-12-31", { inputFormat: "timestamp", minYear: 2000, maxYear: 2100 }); // true
+ * validateDate("29/02/2024", { inputFormat: "brazilianDate" }); // true (leap year)
+ * validateDate("29/02/2023", { inputFormat: "brazilianDate" }); // false (not a leap year)
+ * validateDate("31/04/2023", { inputFormat: "brazilianDate" }); // false (April has 30 days)
  * ```
  */
 
@@ -43,6 +43,8 @@ function validateDate(date: string, config?: ValidateDateConfig): boolean {
 
   let day: number, month: number, year: number;
   const dateParts = date.split(/[-/]/).map(Number);
+
+  if (dateParts.length !== 3) return false;
 
   try {
     switch (inputFormat) {
