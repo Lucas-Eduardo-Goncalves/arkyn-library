@@ -1,7 +1,5 @@
 import { removeNonNumeric } from "@arkyn/shared";
 
-type ValidateCnpjFunction = (rawCnpj: string) => boolean;
-
 function isInvalidLength(cnpj: string) {
   const CNPJ_LENGTH = 14;
   return cnpj.length !== CNPJ_LENGTH;
@@ -34,18 +32,24 @@ function extractDigit(cnpj: string) {
  * - Repeating digits check (invalid if all digits are the same).
  * - Verifies the two check digits with the proper weights.
  *
- * @param rawCnpj - CNPJ string, possibly formatted.
- * @returns `true` if valid, otherwise `false`.
+ * @param {string} rawCnpj - CNPJ string, possibly formatted.
+ *
+ * @returns {boolean} `true` if valid, otherwise `false`.
  *
  * @example
- * ```ts
+ * ```typescript
  * validateCnpj("12.345.678/0001-95"); // false
  * validateCnpj("11.444.777/0001-61"); // true
  * ```
  */
 
-const validateCnpj: ValidateCnpjFunction = (rawCnpj) => {
+function validateCnpj(rawCnpj: string): boolean {
   if (!rawCnpj) return false;
+  if (rawCnpj.length > 18) return false;
+  if (rawCnpj.length < 14) return false;
+
+  const hasSpaces = /\s/.test(rawCnpj);
+  if (hasSpaces) return false;
 
   const cnpj = removeNonNumeric(rawCnpj);
 
@@ -56,10 +60,10 @@ const validateCnpj: ValidateCnpjFunction = (rawCnpj) => {
   const digit1 = calculateDigit(base, [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
   const digit2 = calculateDigit(
     base + digit1,
-    [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+    [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2],
   );
 
   return extractDigit(cnpj) === `${digit1}${digit2}`;
-};
+}
 
 export { validateCnpj };

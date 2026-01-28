@@ -1,5 +1,3 @@
-type ValidatePasswordFunction = (rawPassword: string) => boolean;
-
 /**
  * Validates a password based on the following rules:
  * - At least 8 characters
@@ -8,8 +6,9 @@ type ValidatePasswordFunction = (rawPassword: string) => boolean;
  * - At least 1 number
  * - At least 1 special character
  *
- * @param rawPassword - The raw password string.
- * @returns `true` if password is valid, otherwise `false`.
+ * @param {string} rawPassword - The raw password string.
+ *
+ * @returns {boolean} `true` if password is valid, otherwise `false`.
  *
  * @example
  * ```ts
@@ -18,7 +17,7 @@ type ValidatePasswordFunction = (rawPassword: string) => boolean;
  * ```
  */
 
-const validatePassword: ValidatePasswordFunction = (rawPassword) => {
+function validatePassword(rawPassword: string): boolean {
   if (!rawPassword) return false;
 
   const hasMinLength = rawPassword.length >= 8;
@@ -26,7 +25,7 @@ const validatePassword: ValidatePasswordFunction = (rawPassword) => {
   const hasLetter = /[a-z]/.test(rawPassword);
   const hasNumber = /\d/.test(rawPassword);
   const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>_\-+=~`[\]\\\/]/.test(
-    rawPassword
+    rawPassword,
   );
 
   return [
@@ -36,6 +35,6 @@ const validatePassword: ValidatePasswordFunction = (rawPassword) => {
     hasNumber,
     hasSpecialChar,
   ].every((condition) => condition);
-};
+}
 
 export { validatePassword };

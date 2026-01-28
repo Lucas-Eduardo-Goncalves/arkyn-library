@@ -1,9 +1,5 @@
 import dns from "node:dns";
 
-type ValidateEmailFunction = (rawEmail: string) => Promise<boolean>;
-
-// const resolveDns = dns.promises.resolve;
-
 // Validates basic email format using a comprehensive regex pattern
 function isValidBasicFormat(email: string): boolean {
   const emailRegex =
@@ -78,26 +74,26 @@ function extractDomain(email: string): string | null {
 const DNS_RECORD_TYPES = ["MX", "A", "AAAA"] as const;
 
 // Attempts to resolve a specific DNS record type for a domain
-// async function tryResolveDnsRecord(
-//   domain: string,
-//   recordType: string
-// ): Promise<boolean> {
-//   try {
-//     await resolveDns(domain, recordType);
-//     return true;
-//   } catch {
-//     return false;
-//   }
-// }
+async function tryResolveDnsRecord(
+  domain: string,
+  recordType: string,
+): Promise<boolean> {
+  try {
+    await dns?.promises?.resolve(domain, recordType);
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 // Validates if domain has valid DNS records (MX, A, or AAAA records)
-// async function isValidDns(domain: string): Promise<boolean> {
-//   for (const recordType of DNS_RECORD_TYPES) {
-//     const hasRecord = await tryResolveDnsRecord(domain, recordType);
-//     if (hasRecord) return true;
-//   }
-//   return false;
-// }
+async function isValidDns(domain: string): Promise<boolean> {
+  for (const recordType of DNS_RECORD_TYPES) {
+    const hasRecord = await tryResolveDnsRecord(domain, recordType);
+    if (hasRecord) return true;
+  }
+  return false;
+}
 
 /**
  * Validates if an email address is valid in all possible ways, including DNS validation.
@@ -107,8 +103,8 @@ const DNS_RECORD_TYPES = ["MX", "A", "AAAA"] as const;
  * - Validating advanced RFC 5322 compliance rules
  * - Verifying that the domain has valid MX or A records in DNS
  *
- * @param rawEmail - The email address string to validate
- * @returns A promise that resolves to `true` if the email is valid (including DNS), otherwise `false`
+ * @param {string} rawEmail - The email address string to validate
+ * @returns {Promise<boolean>} A promise that resolves to `true` if the email is valid (including DNS), otherwise `false`
  *
  * @example
  * ```typescript
@@ -118,7 +114,7 @@ const DNS_RECORD_TYPES = ["MX", "A", "AAAA"] as const;
  * ```
  */
 
-const validateEmail: ValidateEmailFunction = async (rawEmail) => {
+async function validateEmail(rawEmail: string): Promise<boolean> {
   if (!rawEmail || typeof rawEmail !== "string") return false;
   const email = rawEmail.trim();
 
@@ -128,8 +124,7 @@ const validateEmail: ValidateEmailFunction = async (rawEmail) => {
   const domain = extractDomain(email);
   if (!domain) return false;
 
-  // return await isValidDns(domain);
-  return true;
-};
+  return await isValidDns(domain);
+}
 
 export { validateEmail };

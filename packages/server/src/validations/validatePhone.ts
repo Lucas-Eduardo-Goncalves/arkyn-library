@@ -1,7 +1,5 @@
 import { countries } from "@arkyn/templates";
 
-type ValidatePhoneFunction = (rawPhone: string) => boolean;
-
 /**
  * Validates a phone number against a list of country-specific formats.
  *
@@ -13,8 +11,9 @@ type ValidatePhoneFunction = (rawPhone: string) => boolean;
  * Special handling is applied for Brazilian phone numbers (ISO code "BR"), which
  * allows for an optional ninth digit.
  *
- * @param rawPhone - The phone number to validate as a string.
- * @returns `true` if the phone number matches any country's format, otherwise `false`.
+ * @param {string} rawPhone - The phone number to validate as a string.
+ *
+ * @returns {boolean} `true` if the phone number matches any country's format, otherwise `false`.
  *
  * @example
  * ```typescript
@@ -28,7 +27,7 @@ type ValidatePhoneFunction = (rawPhone: string) => boolean;
  * ```
  */
 
-const validatePhone: ValidatePhoneFunction = (rawPhone) => {
+function validatePhone(rawPhone: string): boolean {
   for (const country of countries) {
     const countryCode = country.code;
     const prefix = country.prefix ? `-${country.prefix}` : "";
@@ -45,6 +44,6 @@ const validatePhone: ValidatePhoneFunction = (rawPhone) => {
   }
 
   return false;
-};
+}
 
 export { validatePhone };

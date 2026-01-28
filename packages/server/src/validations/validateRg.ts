@@ -1,5 +1,3 @@
-type ValidateRgFunction = (rawRg: string) => boolean;
-
 /**
  * Validates a Brazilian RG (Registro Geral) in a generic way.
  *
@@ -8,8 +6,9 @@ type ValidateRgFunction = (rawRg: string) => boolean;
  * - Ensures length is reasonable (7–9 digits).
  * - Optionally allows for a final letter (verifier).
  *
- * @param rawRg - RG string, possibly formatted.
- * @returns `true` if format seems valid, otherwise `false`.
+ * @param {string} rawRg - RG string, possibly formatted.
+ *
+ * @returns {boolean} `true` if format seems valid, otherwise `false`.
  *
  * @example
  * ```ts
@@ -19,7 +18,7 @@ type ValidateRgFunction = (rawRg: string) => boolean;
  * ```
  */
 
-const validateRg: ValidateRgFunction = (rawRg) => {
+function validateRg(rawRg: string): boolean {
   if (!rawRg) return false;
 
   const validFormat = /^[0-9a-zA-Z.-]+$/.test(rawRg);
@@ -32,6 +31,6 @@ const validateRg: ValidateRgFunction = (rawRg) => {
   const isValidFormat = /^[0-9]{7,8}[0-9Xx]?$/.test(rg);
 
   return isValidFormat;
-};
+}
 
 export { validateRg };

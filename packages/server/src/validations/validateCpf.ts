@@ -1,7 +1,5 @@
 import { removeNonNumeric } from "@arkyn/shared";
 
-type ValidateCpfFunction = (rawCpf: string) => boolean;
-
 function isInvalidLength(cpf: string) {
   const CPF_LENGTH = 11;
   return cpf.length !== CPF_LENGTH;
@@ -36,8 +34,9 @@ function extractDigit(cpf: string) {
  * - Calculates the first and second verification digits using the CPF algorithm.
  * - Compares the calculated verification digits with the ones provided in the CPF.
  *
- * @param rawCpf - The raw CPF string, which may include formatting characters (e.g., dots or dashes).
- * @returns `true` if the CPF is valid, otherwise `false`.
+ * @param {string} rawCpf - The raw CPF string, which may include formatting characters (e.g., dots or dashes).
+ *
+ * @returns {boolean} `true` if the CPF is valid, otherwise `false`.
  *
  * @example
  * ```typescript
@@ -46,7 +45,7 @@ function extractDigit(cpf: string) {
  * ```
  */
 
-const validateCpf: ValidateCpfFunction = (rawCpf) => {
+function validateCpf(rawCpf: string): boolean {
   if (!rawCpf) return false;
   const cpf = removeNonNumeric(rawCpf);
 
@@ -57,6 +56,6 @@ const validateCpf: ValidateCpfFunction = (rawCpf) => {
   const digit2 = calculateDigit(cpf, 11);
 
   return extractDigit(cpf) === `${digit1}${digit2}`;
-};
+}
 
 export { validateCpf };

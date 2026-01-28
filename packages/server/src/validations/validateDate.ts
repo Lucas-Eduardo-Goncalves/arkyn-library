@@ -1,28 +1,26 @@
+import { ValidateDateService } from "@arkyn/shared";
+
 type ValidateDateConfig = {
-  inputFormat?: "DD/MM/YYYY" | "MM-DD-YYYY" | "YYYY-MM-DD";
+  inputFormat?: "brazilianDate" | "isoDate" | "timestamp";
   minYear?: number;
   maxYear?: number;
 };
 
-type ValidateDateFunction = (
-  rawDate: string,
-  config?: ValidateDateConfig
-) => boolean;
-
 /**
  * Validates a date string based on the provided format and configuration.
  *
- * @param rawDate - The date string to validate.
- * @param config - Optional configuration object to customize validation.
- * @param config.inputFormat - The expected format of the input date.
- *                            Supported formats are "DD/MM/YYYY", "MM-DD-YYYY", and "YYYY-MM-DD".
- *                            Defaults to "DD/MM/YYYY".
- * @param config.minYear - The minimum allowed year for the date. Defaults to 1900.
- * @param config.maxYear - The maximum allowed year for the date. Defaults to 3000.
+ * @param {string} date - The date string to validate.
+ * @param {object} config - Optional configuration object to customize validation.
+ * @param {"brazilianDate" | "isoDate" | "timestamp"} inputFormat - The format of the input date.
+ *   - "brazilianDate": Expects the date in "DD/MM/YYYY" or "D/M/YYYY" format.
+ *   - "isoDate": Expects the date in "MM-DD-YYYY" or "M-D-YYYY" format.
+ *   - "timestamp": Expects the date in "YYYY-MM-DD" or "YYYY-M-D" format.
+ * @param {number} config.minYear - The minimum allowed year for the date. Defaults to 1900.
+ * @param {number} config.maxYear - The maximum allowed year for the date. Defaults to 3000.
  *
- * @returns `true` if the date is valid according to the specified format and configuration, otherwise `false`.
+ * @returns {boolean} `true` if the date is valid according to the specified format and configuration, otherwise `false`.
  *
- * @throws {Error} If an invalid date format is provided in the configuration.
+ * @throws {Error} If an invalid input format is provided.
  *
  * @example
  * ```typescript
@@ -35,52 +33,37 @@ type ValidateDateFunction = (
  * ```
  */
 
-const validateDate: ValidateDateFunction = (rawDate, config) => {
-  let day: string, month: string, year: string;
-
-  const inputFormat = config?.inputFormat || "DD/MM/YYYY";
+function validateDate(date: string, config?: ValidateDateConfig): boolean {
+  const inputFormat = config?.inputFormat || "brazilianDate";
   const minYear = config?.minYear || 1900;
   const maxYear = config?.maxYear || 3000;
 
-  if (inputFormat === "DD/MM/YYYY") {
-    const dateRegex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
-    if (!dateRegex.test(rawDate)) return false;
-    [, day, month, year] = rawDate.match(dateRegex) || [];
-  } else if (inputFormat === "MM-DD-YYYY") {
-    const dateRegex = /^(\d{2})-(\d{2})-(\d{4})$/;
-    if (!dateRegex.test(rawDate)) return false;
-    [, month, day, year] = rawDate.match(dateRegex) || [];
-  } else if (inputFormat === "YYYY-MM-DD") {
-    const dateRegex = /^(\d{4})-(\d{2})-(\d{2})$/;
-    if (!dateRegex.test(rawDate)) return false;
-    [, year, month, day] = rawDate.match(dateRegex) || [];
-  } else {
-    throw new Error("Invalid date format");
-  }
+  const validateDateService = new ValidateDateService();
+  validateDateService.validateInputFormat(inputFormat);
 
-  const dayNum = parseInt(day, 10);
-  const monthNum = parseInt(month, 10);
-  const yearNum = parseInt(year, 10);
+  let day: number, month: number, year: number;
+  const dateParts = date.split(/[-/]/).map(Number);
 
-  if (dayNum < 1 || dayNum > 31) return false;
-  if (monthNum < 1 || monthNum > 12) return false;
-
-  const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-  if (monthNum === 2) {
-    const isLeapYear =
-      (yearNum % 4 === 0 && yearNum % 100 !== 0) || yearNum % 400 === 0;
-    if (dayNum > (isLeapYear ? 29 : 28)) return false;
-  } else if (dayNum > daysInMonth[monthNum - 1]) {
+  try {
+    switch (inputFormat) {
+      case "brazilianDate":
+        [day, month, year] = dateParts;
+        validateDateService.validateDateParts(year, month, day);
+        break;
+      case "isoDate":
+        [month, day, year] = dateParts;
+        validateDateService.validateDateParts(year, month, day);
+        break;
+      case "timestamp":
+        [year, month, day] = dateParts;
+        validateDateService.validateDateParts(year, month, day);
+        break;
+    }
+    if (year < minYear || year > maxYear) return false;
+    return true;
+  } catch {
     return false;
   }
-
-  if (yearNum < minYear || yearNum > maxYear) return false;
-
-  const isValidDate =
-    new Date(yearNum, monthNum - 1, dayNum).getDate() === dayNum;
-
-  return isValidDate;
-};
+}
 
 export { validateDate };
