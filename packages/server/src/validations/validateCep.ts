@@ -1,11 +1,12 @@
 import { removeNonNumeric } from "@arkyn/shared";
 
 /**
- * Validates a Brazilian CEP (Código de Endereçamento Postal).
- * A valid CEP has 8 numeric digits.
+ * Validates a Brazilian CEP (postal code).
  *
- * @param {string} rawCep - CEP string, may include formatting (e.g., "12345-678").
+ * A valid CEP must contain exactly 8 numeric digits,
+ * optionally formatted as "12345-678".
  *
+ * @param {string} rawCep - CEP value, with or without formatting.
  * @returns {boolean} `true` if the CEP is valid, otherwise `false`.
  *
  * @example
@@ -17,8 +18,6 @@ import { removeNonNumeric } from "@arkyn/shared";
  */
 
 function validateCep(rawCep: string): boolean {
-  if (!rawCep) return false;
-
   const validFormat = /^\d{5}-\d{3}$/.test(rawCep) || /^\d{8}$/.test(rawCep);
   if (!validFormat) return false;
 

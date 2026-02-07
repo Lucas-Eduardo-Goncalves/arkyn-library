@@ -1,6 +1,5 @@
 import dns from "node:dns";
 
-// Validates basic email format using a comprehensive regex pattern
 function isValidBasicFormat(email: string): boolean {
   const emailRegex =
     /^[a-zA-Z0-9.!$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -8,7 +7,6 @@ function isValidBasicFormat(email: string): boolean {
   return emailRegex.test(email);
 }
 
-// Validates the local part of email (before @)
 function isValidLocalPart(localPart: string): boolean {
   if (localPart.length === 0 || localPart.length > 64) return false;
   if (localPart.startsWith(".") || localPart.endsWith(".")) return false;
@@ -20,7 +18,6 @@ function isValidLocalPart(localPart: string): boolean {
   return true;
 }
 
-// Validates a single domain label
 function isValidDomainLabel(label: string): boolean {
   if (label.length === 0 || label.length > 63) return false;
   if (label.startsWith("-") || label.endsWith("-")) return false;
@@ -28,7 +25,6 @@ function isValidDomainLabel(label: string): boolean {
   return true;
 }
 
-// Validates the domain part of email (after @)
 function isValidDomainPart(domainPart: string): boolean {
   if (domainPart.length === 0 || domainPart.length > 253) return false;
 
@@ -52,7 +48,6 @@ function isValidDomainPart(domainPart: string): boolean {
   return true;
 }
 
-// Performs advanced syntax validation beyond basic regex
 function isValidAdvancedSyntax(email: string): boolean {
   const parts = email.split("@");
   if (parts.length !== 2) return false;
@@ -64,16 +59,13 @@ function isValidAdvancedSyntax(email: string): boolean {
   return true;
 }
 
-// Extracts the domain from email address
 function extractDomain(email: string): string | null {
   const parts = email.split("@");
   return parts.length === 2 ? parts[1].toLowerCase() : null;
 }
 
-// DNS record types to check for domain validation
 const DNS_RECORD_TYPES = ["MX", "A", "AAAA"] as const;
 
-// Attempts to resolve a specific DNS record type for a domain
 async function tryResolveDnsRecord(
   domain: string,
   recordType: string,
@@ -86,7 +78,6 @@ async function tryResolveDnsRecord(
   }
 }
 
-// Validates if domain has valid DNS records (MX, A, or AAAA records)
 async function isValidDns(domain: string): Promise<boolean> {
   for (const recordType of DNS_RECORD_TYPES) {
     const hasRecord = await tryResolveDnsRecord(domain, recordType);

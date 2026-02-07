@@ -7,38 +7,29 @@ import { BadResponse } from "./_badResponse";
  */
 
 class BadGateway extends BadResponse {
-  body: any;
-  cause?: any;
-  status: number = 502;
-  statusText: string;
-
   /**
    * Creates an instance of the `BadGateway` class.
    *
-   * @param message - A descriptive message explaining the cause of the error.
-   * @param cause - Optional additional information about the cause of the error.
+   * @param {string} message - A descriptive message explaining the cause of the error.
+   * @param {any} cause - Optional additional information about the cause of the error.
    */
 
   constructor(message: string, cause?: any) {
     super();
 
-    this.body = { name: "BadGateway", message: message };
+    this.name = "BadGateway";
+    this.status = 502;
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
 
-    this.onDebug({
-      name: "BadGateway",
-      body: this.body,
-      cause: this.cause,
-      message: this.statusText,
-    });
+    this.onDebug();
   }
 
   /**
    * Converts the `BadGateway` instance into a `Response` object with a JSON body.
    * This method ensures the response has the appropriate headers, status, and status text.
    *
-   * @returns A `Response` object with the serialized JSON body and response metadata.
+   * @returns {Response} A `Response` object with the serialized JSON body and response metadata.
    */
 
   toResponse(): Response {
@@ -48,14 +39,14 @@ class BadGateway extends BadResponse {
       statusText: this.statusText,
     };
 
-    return new Response(JSON.stringify(this.body), responseInit);
+    return new Response(JSON.stringify(this.makeBody()), responseInit);
   }
 
   /**
    * Converts the `BadGateway` instance into a `Response` object using the `Response.json` method.
    * This method is an alternative to `toResponse` for generating JSON error responses.
    *
-   * @returns A `Response` object with the JSON body and response metadata.
+   * @returns {Response["json"]} A `Response` object with the JSON body and response metadata.
    */
 
   toJson(): Response {
@@ -64,7 +55,7 @@ class BadGateway extends BadResponse {
       statusText: this.statusText,
     };
 
-    return Response.json(this.body, responseInit);
+    return Response.json(this.makeBody(), responseInit);
   }
 }
 

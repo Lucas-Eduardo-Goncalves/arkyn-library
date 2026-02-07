@@ -1,42 +1,33 @@
 import { SuccessResponse } from "./_successResponse";
 
 /**
- * Represents a successful HTTP response with a status code of 204 (No Content).
- * This class is used to standardize the structure of a "No Content" response,
- * including headers, status, and status text.
+ * Class representing a successful HTTP 204 NoContent response.
  */
 
 class NoContent extends SuccessResponse {
-  headers: ResponseInit["headers"];
-  status: number;
-  statusText: string;
-
   /**
    * Creates an instance of the `NoContent` class.
-   *
-   * @param init - Optional initialization object for customizing headers, status, and status text.
+   * @param {string} message - A message describing the creation status.
    */
 
-  constructor(init?: ResponseInit) {
+  constructor(message: string) {
     super();
 
-    this.headers = init?.headers || {};
-    this.status = init?.status || 204;
-    this.statusText = init?.statusText ?? "No content";
+    this.name = "NoContent";
+    this.status = 204;
+    this.statusText = message;
 
-    this.onDebug("No content", null);
+    this.onDebug();
   }
 
   /**
    * Converts the `NoContent` instance into a `Response` object.
-   * This method ensures the response has the appropriate headers, status, and status text.
-   *
-   * @returns A `Response` object with no body and response metadata.
+   * @returns {Response} A `Response` object with the body and response metadata.
    */
 
   toResponse(): Response {
     const responseInit: ResponseInit = {
-      headers: this.headers,
+      headers: { "Content-Type": "application/json" },
       status: this.status,
       statusText: this.statusText,
     };

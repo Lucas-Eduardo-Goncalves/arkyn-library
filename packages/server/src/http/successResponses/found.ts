@@ -1,54 +1,36 @@
 import { SuccessResponse } from "./_successResponse";
 
-type InitProps = ResponseInit & {
-  message?: string;
-};
-
 /**
- * Represents an HTTP 302 Found response.
- * This class is used to create a standardized HTTP response with a status of 302 (Found),
- * including optional headers and a response body.
- *
- * @template T - The type of the response body.
+ * Class representing a successful HTTP 302 Found response.
  */
 
-class Found<T> extends SuccessResponse {
-  body: T;
-  headers: ResponseInit["headers"];
-  status: number;
-  statusText: string;
-
+class Found extends SuccessResponse {
   /**
    * Creates an instance of the `Found` class.
    *
-   * @param body - The body of the response.
-   * @param init - Optional initialization object to set headers, status, and statusText.
-   *   - `headers`: Additional headers to include in the response.
-   *   - `status`: HTTP status code (default is 302).
-   *   - `statusText`: HTTP status text (default is "Found").
+   * @param {string} message - A message describing the creation status.
+   * @param {any} body - The response body to be included in the HTTP response.
    */
 
-  constructor(body: T, init?: InitProps) {
+  constructor(message: string, body?: any) {
     super();
 
-    this.body = { ...body, name: "Found", message: init?.message };
-    this.headers = init?.headers || {};
-    this.status = init?.status || 302;
-    this.statusText = init?.statusText || "Found";
+    this.name = "Found";
+    this.status = 302;
+    this.statusText = message;
+    this.body = body || undefined;
 
-    this.onDebug("Found", body);
+    this.onDebug();
   }
 
   /**
    * Converts the `Found` instance into a `Response` object.
-   * This method serializes the response body as JSON and includes the appropriate headers.
-   *
-   * @returns A `Response` object with the serialized JSON body and the specified headers, status, and statusText.
+   * @returns {Response} A `Response` object with the body and response metadata.
    */
 
-  toResponse() {
+  toResponse(): Response {
     const responseInit: ResponseInit = {
-      headers: { "Content-Type": "application/json", ...this.headers },
+      headers: { "Content-Type": "application/json" },
       status: this.status,
       statusText: this.statusText,
     };
@@ -57,15 +39,13 @@ class Found<T> extends SuccessResponse {
   }
 
   /**
-   * Converts the `Found` instance into a JSON response using `Response.json`.
-   * This method is an alternative to `toResponse` for creating JSON responses.
-   *
-   * @returns A `Response` object with the JSON body and the specified headers, status, and statusText.
+   * Converts the `Found` instance into a `Response` object using the `Response.json` method.
+   * This method is an alternative to `toResponse` for generating JSON responses.
+   * @returns {Response["json"]} A `Response` object with the JSON body and response metadata.
    */
 
-  toJson() {
+  toJson(): Response {
     const responseInit: ResponseInit = {
-      headers: this.headers,
       status: this.status,
       statusText: this.statusText,
     };

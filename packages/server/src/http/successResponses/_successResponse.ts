@@ -1,39 +1,78 @@
-import { flushDebugLogs } from "../../services/flushDebugLogs";
-import { getCaller } from "../../services/getCaller";
+import { DebugService } from "../../services/debugService";
+import { flushDebugLogs } from "../../utilities/flushDebugLogs";
 
 /**
- * Base class for handling bad HTTP responses with debugging capabilities.
- * Provides logging functionality to track response errors and their context.
+ * Base class for handling successful HTTP responses with debugging capabilities.
+ * Provides logging functionality to track response and their context.
  */
 class SuccessResponse {
+  private _body: any = null;
+  private _name: string = "SuccessResponse";
+  private _status: number = 200;
+  private _statusText: string = "OK";
+
+  get body(): any {
+    return this._body;
+  }
+
+  set body(value: any) {
+    this._body = value ?? null;
+  }
+
+  get name(): string {
+    return this._name;
+  }
+
+  set name(value: string) {
+    this._name = value;
+  }
+
+  get status(): number {
+    return this._status;
+  }
+
+  set status(value: number) {
+    this._status = value;
+  }
+
+  get statusText(): string {
+    return this._statusText;
+  }
+
+  set statusText(value: string) {
+    this._statusText = value;
+  }
+
   /**
    * Logs debug information for success responses including caller context and response details.
    *
-   * @param name - The name/type of the success response being logged
-   * @param body - The response body or success data to be logged
-   * @param cause - Optional additional cause information for the error
+   * @param {any} body - The response body or success data to be logged
    *
    * @example
    * ```typescript
    * const SuccessResponse = new SuccessResponse();
-   * SuccessResponse.onDebug("ValidationError", { field: "email", message: "Invalid format" });
+   * SuccessResponse.onDebug({ data: "Operation completed successfully" });
    * ```
    */
-  onDebug(name: string, body: any, cause?: any) {
+  onDebug(body?: any): void {
     const debugs: string[] = [];
-    const { callerInfo, functionName } = getCaller();
+    const { callerInfo, functionName } = DebugService.getCaller();
 
-    debugs.push(`${name} initialized\n`);
-    debugs.push(`Caller Function: ${functionName}\n`);
-    debugs.push(`Caller Location: ${callerInfo}\n`);
-    debugs.push(`Body: ${JSON.stringify(body, null, 2)}\n`);
-    if (cause) debugs.push(`Cause: ${JSON.stringify(cause, null, 2)}\n`);
+    debugs.push(`Caller Function: ${functionName}`);
+    debugs.push(`Caller Location: ${callerInfo}`);
 
-    flushDebugLogs({
-      scheme: "green",
-      name: "ARKYN-SUCCESS-RESPONSE-DEBUG",
-      debugs,
-    });
+    if (this.statusText) debugs.push(`Message: ${this.statusText}`);
+    if (body) debugs.push(`Body: ${JSON.stringify(body)}`);
+
+    flushDebugLogs({ scheme: "red", name: this.name, debugs });
+  }
+
+  makeBody(): any {
+    return {
+      name: this.name,
+      message: this.statusText,
+      body: this.body,
+    };
   }
 }
 

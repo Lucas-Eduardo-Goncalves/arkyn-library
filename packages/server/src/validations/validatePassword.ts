@@ -7,7 +7,6 @@
  * - At least 1 special character
  *
  * @param {string} rawPassword - The raw password string.
- *
  * @returns {boolean} `true` if password is valid, otherwise `false`.
  *
  * @example

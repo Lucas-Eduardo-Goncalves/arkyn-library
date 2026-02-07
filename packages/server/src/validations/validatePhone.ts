@@ -12,7 +12,6 @@ import { countries } from "@arkyn/templates";
  * allows for an optional ninth digit.
  *
  * @param {string} rawPhone - The phone number to validate as a string.
- *
  * @returns {boolean} `true` if the phone number matches any country's format, otherwise `false`.
  *
  * @example

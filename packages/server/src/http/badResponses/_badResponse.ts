@@ -1,29 +1,63 @@
-import { flushDebugLogs } from "../../services/flushDebugLogs";
-import { getCaller } from "../../services/getCaller";
-
-type Input = {
-  name: string;
-  body?: any;
-  cause?: any;
-  message?: string;
-};
+import { DebugService } from "../../services/debugService";
+import { flushDebugLogs } from "../../utilities/flushDebugLogs";
 
 class BadResponse {
-  onDebug(input: Input) {
-    const { name, body, cause, message } = input;
+  private _cause?: any;
+  private _name: string = "BadResponse";
+  private _status: number = 500;
+  private _statusText: string = "Unknown error";
 
+  get cause(): any {
+    return this._cause;
+  }
+
+  set cause(value: any) {
+    this._cause = value;
+  }
+
+  get name(): string {
+    return this._name;
+  }
+
+  set name(value: string) {
+    this._name = value;
+  }
+
+  get status(): number {
+    return this._status;
+  }
+
+  set status(value: number) {
+    this._status = value;
+  }
+
+  get statusText(): string {
+    return this._statusText;
+  }
+
+  set statusText(value: string) {
+    this._statusText = value;
+  }
+
+  onDebug() {
     const debugs: string[] = [];
-    const { callerInfo, functionName } = getCaller();
+    const { callerInfo, functionName } = DebugService.getCaller();
 
-    debugs.push(`${name} initialized`);
     debugs.push(`Caller Function: ${functionName}`);
     debugs.push(`Caller Location: ${callerInfo}`);
 
-    if (message) debugs.push(`Message: ${message}`);
-    if (body) debugs.push(`Body: ${JSON.stringify(body, null, 2)}`);
-    if (cause) debugs.push(`Cause: ${JSON.stringify(cause, null, 2)}`);
+    if (this._statusText) debugs.push(`Message: ${this._statusText}`);
+    if (this._cause) debugs.push(`Cause: ${JSON.stringify(this._cause)}`);
 
-    flushDebugLogs({ scheme: "red", name: "ARKYN-BAD-RESPONSE-DEBUG", debugs });
+    flushDebugLogs({ scheme: "red", name: this._name, debugs });
+  }
+
+  makeBody() {
+    return {
+      name: this._name,
+      message: this._statusText,
+      cause: this._cause,
+    };
   }
 }
 

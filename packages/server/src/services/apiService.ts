@@ -1,9 +1,9 @@
-import { deleteRequest } from "../api/deleteRequest";
-import { getRequest } from "../api/getRequest";
-import { patchRequest } from "../api/patchRequest";
-import { postRequest } from "../api/postRequest";
-import { putRequest } from "../api/putRequest";
-import { flushDebugLogs } from "./flushDebugLogs";
+import { deleteRequest } from "../http/api/deleteRequest";
+import { getRequest } from "../http/api/getRequest";
+import { patchRequest } from "../http/api/patchRequest";
+import { postRequest } from "../http/api/postRequest";
+import { putRequest } from "../http/api/putRequest";
+import { flushDebugLogs } from "../utilities/flushDebugLogs";
 
 type ApiServiceConstructorProps = {
   baseUrl: string;
@@ -15,17 +15,15 @@ type ApiServiceConstructorProps = {
 type ApiRequestDataWithoutBodyProps = {
   headers?: HeadersInit;
   token?: string;
+  urlParams?: Record<string, string>;
 };
 
 type ApiRequestDataWithBodyProps = {
   body?: any;
   headers?: HeadersInit;
   token?: string;
+  urlParams?: Record<string, string>;
 };
-
-/**
- * Class representing an API instance to handle HTTP requests with base configurations.
- */
 
 class ApiService {
   private baseUrl: string;
@@ -33,27 +31,12 @@ class ApiService {
   private baseToken?: string;
   private enableDebug?: boolean;
 
-  /**
-   * Creates an instance of ApiService.
-   * @param props - The configuration properties for the API instance.
-   * @param props.baseUrl - The base URL for the API.
-   * @param props.baseHeaders - Optional base headers to include in all requests.
-   * @param props.baseToken - Optional base token for authorization.
-   * @param props.enableDebug - Optional flag to enable debug logging for requests.
-   */
-
   constructor(props: ApiServiceConstructorProps) {
     this.baseUrl = props.baseUrl;
     this.baseHeaders = props.baseHeaders || undefined;
     this.baseToken = props.baseToken || undefined;
     this.enableDebug = props.enableDebug || false;
   }
-
-  /**
-   * Generates the full URL by appending the route to the base URL.
-   * @param route - The route to append to the base URL.
-   * @returns The full URL as a string.
-   */
 
   private onDebug(endpoint: string, method: string, data: any) {
     if (this.enableDebug) {
@@ -69,20 +52,9 @@ class ApiService {
     }
   }
 
-  private generateURL(route: string) {
-    return this.baseUrl + route;
-  }
-
-  /**
-   * Generates the headers for a request by merging base headers, provided headers, and tokens.
-   * @param initHeaders - Initial headers to include in the request.
-   * @param token - Optional token to override the base token.
-   * @returns The merged headers as a HeadersInit object.
-   */
-
   private generateHeaders(
     initHeaders: HeadersInit,
-    token?: string
+    token?: string,
   ): HeadersInit {
     let headers: HeadersInit = {};
     if (this.baseToken) headers = { Authorization: `Bearer ${this.baseToken}` };
@@ -102,11 +74,14 @@ class ApiService {
    */
 
   async get(endpoint: string, data?: ApiRequestDataWithoutBodyProps) {
-    const url = this.generateURL(endpoint);
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
 
     this.onDebug(endpoint, "get", [headers]);
-    return await getRequest(url, headers);
+    return await getRequest({
+      url: this.baseUrl + endpoint,
+      urlParams: data?.urlParams || {},
+      headers,
+    });
   }
 
   /**
@@ -117,12 +92,16 @@ class ApiService {
    */
 
   async post(endpoint: string, data?: ApiRequestDataWithBodyProps) {
-    const url = this.generateURL(endpoint);
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
     const body = data?.body;
 
     this.onDebug(endpoint, "post", [headers, body]);
-    return await postRequest(url, headers, body);
+    return await postRequest({
+      url: this.baseUrl + endpoint,
+      urlParams: data?.urlParams || {},
+      headers,
+      body,
+    });
   }
 
   /**
@@ -133,12 +112,16 @@ class ApiService {
    */
 
   async put(endpoint: string, data?: ApiRequestDataWithBodyProps) {
-    const url = this.generateURL(endpoint);
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
     const body = data?.body;
 
     this.onDebug(endpoint, "put", [headers, body]);
-    return await putRequest(url, headers, body);
+    return await putRequest({
+      url: this.baseUrl + endpoint,
+      urlParams: data?.urlParams || {},
+      headers,
+      body,
+    });
   }
 
   /**
@@ -149,12 +132,16 @@ class ApiService {
    */
 
   async patch(endpoint: string, data?: ApiRequestDataWithBodyProps) {
-    const url = this.generateURL(endpoint);
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
     const body = data?.body;
 
     this.onDebug(endpoint, "patch", [headers, body]);
-    return await patchRequest(url, headers, body);
+    return await patchRequest({
+      url: this.baseUrl + endpoint,
+      urlParams: data?.urlParams || {},
+      headers,
+      body,
+    });
   }
 
   /**
@@ -165,12 +152,16 @@ class ApiService {
    */
 
   async delete(endpoint: string, data?: ApiRequestDataWithBodyProps) {
-    const url = this.generateURL(endpoint);
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
     const body = data?.body;
 
     this.onDebug(endpoint, "delete", [headers, body]);
-    return await deleteRequest(url, headers, body);
+    return await deleteRequest({
+      url: this.baseUrl + endpoint,
+      urlParams: data?.urlParams || {},
+      headers,
+      body,
+    });
   }
 }
 

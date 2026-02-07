@@ -1,4 +1,4 @@
-// http bad responses
+// http
 export { BadGateway } from "./http/badResponses/badGateway";
 export { BadRequest } from "./http/badResponses/badRequest";
 export { Conflict } from "./http/badResponses/conflict";
@@ -8,8 +8,6 @@ export { NotImplemented } from "./http/badResponses/notImplemented";
 export { ServerError } from "./http/badResponses/serverError";
 export { Unauthorized } from "./http/badResponses/unauthorized";
 export { UnprocessableEntity } from "./http/badResponses/unprocessableEntity";
-
-// http success responses
 export { Created } from "./http/successResponses/created";
 export { Found } from "./http/successResponses/found";
 export { NoContent } from "./http/successResponses/noContent";
@@ -18,17 +16,18 @@ export { Updated } from "./http/successResponses/updated";
 
 // services
 export { ApiService } from "./services/apiService";
-export { ArkynLogService } from "./services/arkynLogService";
 export { DebugService } from "./services/debugService";
-export { decodeErrorMessageFromRequest } from "./services/decodeErrorMessageFromRequest";
-export { decodeRequestBody } from "./services/decodeRequestBody";
-export { errorHandler } from "./services/errorHandler";
-export { flushDebugLogs } from "./services/flushDebugLogs";
-export { formAsyncParse } from "./services/formAsyncParse";
-export { formParse } from "./services/formParse";
-export { getCaller } from "./services/getCaller";
-export { getScopedParams } from "./services/getScopedParams";
-export { SchemaValidator } from "./services/schemaValidator";
+export { LogService } from "./services/logService";
+
+// utilities
+export { decodeRequestBody } from "./utilities/decodeRequestBody";
+export { decodeRequestErrorMessage } from "./utilities/decodeRequestErrorMessage";
+export { errorHandler } from "./utilities/errorHandler";
+export { flushDebugLogs } from "./utilities/flushDebugLogs";
+export { formAsyncParse } from "./utilities/formAsyncParse";
+export { formParse } from "./utilities/formParse";
+export { getScopedParams } from "./utilities/getScopedParams";
+export { SchemaValidator } from "./utilities/schemaValidator";
 
 // validates
 export { validateCep } from "./validations/validateCep";

@@ -35,7 +35,6 @@ function extractDigit(cpf: string) {
  * - Compares the calculated verification digits with the ones provided in the CPF.
  *
  * @param {string} rawCpf - The raw CPF string, which may include formatting characters (e.g., dots or dashes).
- *
  * @returns {boolean} `true` if the CPF is valid, otherwise `false`.
  *
  * @example

@@ -7,7 +7,6 @@
  * - Optionally allows for a final letter (verifier).
  *
  * @param {string} rawRg - RG string, possibly formatted.
- *
  * @returns {boolean} `true` if format seems valid, otherwise `false`.
  *
  * @example

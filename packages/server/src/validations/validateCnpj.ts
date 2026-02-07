@@ -33,7 +33,6 @@ function extractDigit(cnpj: string) {
  * - Verifies the two check digits with the proper weights.
  *
  * @param {string} rawCnpj - CNPJ string, possibly formatted.
- *
  * @returns {boolean} `true` if valid, otherwise `false`.
  *
  * @example

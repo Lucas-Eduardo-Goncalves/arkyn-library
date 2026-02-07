@@ -1,26 +1,14 @@
 import { ValidateDateService } from "@arkyn/shared";
 
-type ValidateDateConfig = {
-  inputFormat?: "brazilianDate" | "isoDate" | "timestamp";
-  minYear?: number;
-  maxYear?: number;
-};
-
 /**
  * Validates a date string based on the provided format and configuration.
  *
  * @param {string} date - The date string to validate.
  * @param {object} config - Optional configuration object to customize validation.
- * @param {"brazilianDate" | "isoDate" | "timestamp"} inputFormat - The format of the input date.
- *   - "brazilianDate": Expects the date in "DD/MM/YYYY" or "D/M/YYYY" format.
- *   - "isoDate": Expects the date in "MM-DD-YYYY" or "M-D-YYYY" format.
- *   - "timestamp": Expects the date in "YYYY-MM-DD" or "YYYY-M-D" format.
  * @param {number} config.minYear - The minimum allowed year for the date. Defaults to 1900.
  * @param {number} config.maxYear - The maximum allowed year for the date. Defaults to 3000.
- *
- * @returns {boolean} `true` if the date is valid according to the specified format and configuration, otherwise `false`.
- *
  * @throws {Error} If an invalid input format is provided.
+ * @returns {boolean} `true` if the date is valid according to the specified format and configuration, otherwise `false`.
  *
  * @example
  * ```typescript
@@ -33,7 +21,14 @@ type ValidateDateConfig = {
  * ```
  */
 
-function validateDate(date: string, config?: ValidateDateConfig): boolean {
+function validateDate(
+  date: string,
+  config?: {
+    inputFormat?: "brazilianDate" | "isoDate" | "timestamp";
+    minYear?: number;
+    maxYear?: number;
+  },
+): boolean {
   const inputFormat = config?.inputFormat || "brazilianDate";
   const minYear = config?.minYear || 1900;
   const maxYear = config?.maxYear || 3000;

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseToDate } from "../parseDate";
+import { parseToDate } from "../parseToDate";
 
 describe("parseToDate", () => {
   describe("brazilianDate format", () => {

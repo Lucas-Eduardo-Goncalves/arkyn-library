@@ -7,11 +7,6 @@ import { BadResponse } from "./_badResponse";
  */
 
 class Unauthorized extends BadResponse {
-  body: any;
-  cause?: any;
-  status: number = 401;
-  statusText: string;
-
   /**
    * Creates an instance of the `Unauthorized` class.
    *
@@ -22,23 +17,19 @@ class Unauthorized extends BadResponse {
   constructor(message: string, cause?: any) {
     super();
 
-    this.body = { name: "Unauthorized", message: message };
+    this.name = "Unauthorized";
+    this.status = 401;
     this.statusText = message;
     this.cause = cause ? JSON.stringify(cause) : undefined;
 
-    this.onDebug({
-      name: "Unauthorized",
-      body: this.body,
-      cause: this.cause,
-      message: this.statusText,
-    });
+    this.onDebug();
   }
 
   /**
    * Converts the `Unauthorized` instance into a `Response` object with a JSON body.
    * This method ensures the response has the appropriate headers, status, and status text.
    *
-   * @returns A `Response` object with the serialized JSON body and response metadata.
+   * @returns {Response} A `Response` object with the serialized JSON body and response metadata.
    */
 
   toResponse(): Response {
@@ -48,14 +39,14 @@ class Unauthorized extends BadResponse {
       statusText: this.statusText,
     };
 
-    return new Response(JSON.stringify(this.body), responseInit);
+    return new Response(JSON.stringify(this.makeBody()), responseInit);
   }
 
   /**
    * Converts the `Unauthorized` instance into a `Response` object using the `Response.json` method.
    * This method is an alternative to `toResponse` for generating JSON error responses.
    *
-   * @returns A `Response` object with the JSON body and response metadata.
+   * @returns {Response["json"]} A `Response` object with the JSON body and response metadata.
    */
 
   toJson(): Response {
@@ -64,7 +55,7 @@ class Unauthorized extends BadResponse {
       statusText: this.statusText,
     };
 
-    return Response.json(this.body, responseInit);
+    return Response.json(this.makeBody(), responseInit);
   }
 }
 
