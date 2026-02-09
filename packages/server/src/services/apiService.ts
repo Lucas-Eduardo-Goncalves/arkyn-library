@@ -25,6 +25,14 @@ type ApiRequestDataWithBodyProps = {
   urlParams?: Record<string, string>;
 };
 
+type DebugConfig = {
+  headers?: HeadersInit;
+  body?: any;
+  response?: any;
+  status: number;
+  message: string;
+};
+
 class ApiService {
   private baseUrl: string;
   private baseHeaders?: HeadersInit;
@@ -38,17 +46,21 @@ class ApiService {
     this.enableDebug = props.enableDebug || false;
   }
 
-  private onDebug(endpoint: string, method: string, data: any) {
+  private onDebug(endpoint: string, method: string, data: DebugConfig) {
     if (this.enableDebug) {
       const debugs: string[] = [];
+      const json = (data: any) => (data ? JSON.stringify(data, null, 2) : null);
 
       debugs.push(`Base URL: ${this.baseUrl}`);
       debugs.push(`Endpoint: ${endpoint}`);
       debugs.push(`Method: ${method}`);
-      if (data[0]) debugs.push(`Headers: ${JSON.stringify(data[0])}`);
-      if (data[1]) debugs.push(`Body: ${JSON.stringify(data[1])}`);
+      debugs.push(`Status: ${data.status}`);
+      debugs.push(`Message: ${data.message}`);
+      debugs.push(`Headers: ${json(data.headers)}`);
+      debugs.push(`Body: ${json(data.body)}`);
+      debugs.push(`Response: ${json(data.response)}`);
 
-      flushDebugLogs({ debugs, name: "ARKYN-API-DEBUG", scheme: "yellow" });
+      flushDebugLogs({ debugs, name: "ApiDebug", scheme: "yellow" });
     }
   }
 
@@ -76,12 +88,20 @@ class ApiService {
   async get(endpoint: string, data?: ApiRequestDataWithoutBodyProps) {
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
 
-    this.onDebug(endpoint, "get", [headers]);
-    return await getRequest({
+    const response = await getRequest({
       url: this.baseUrl + endpoint,
       urlParams: data?.urlParams || {},
       headers,
     });
+
+    this.onDebug(endpoint, "get", {
+      headers,
+      message: response.message,
+      status: response.status,
+      response: response.response,
+    });
+
+    return response;
   }
 
   /**
@@ -95,13 +115,22 @@ class ApiService {
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
     const body = data?.body;
 
-    this.onDebug(endpoint, "post", [headers, body]);
-    return await postRequest({
+    const response = await postRequest({
       url: this.baseUrl + endpoint,
       urlParams: data?.urlParams || {},
       headers,
       body,
     });
+
+    this.onDebug(endpoint, "post", {
+      headers,
+      body,
+      message: response.message,
+      status: response.status,
+      response: response.response,
+    });
+
+    return response;
   }
 
   /**
@@ -115,13 +144,22 @@ class ApiService {
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
     const body = data?.body;
 
-    this.onDebug(endpoint, "put", [headers, body]);
-    return await putRequest({
+    const response = await putRequest({
       url: this.baseUrl + endpoint,
       urlParams: data?.urlParams || {},
       headers,
       body,
     });
+
+    this.onDebug(endpoint, "put", {
+      headers,
+      body,
+      message: response.message,
+      status: response.status,
+      response: response.response,
+    });
+
+    return response;
   }
 
   /**
@@ -135,13 +173,22 @@ class ApiService {
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
     const body = data?.body;
 
-    this.onDebug(endpoint, "patch", [headers, body]);
-    return await patchRequest({
+    const response = await patchRequest({
       url: this.baseUrl + endpoint,
       urlParams: data?.urlParams || {},
       headers,
       body,
     });
+
+    this.onDebug(endpoint, "patch", {
+      headers,
+      body,
+      message: response.message,
+      status: response.status,
+      response: response.response,
+    });
+
+    return response;
   }
 
   /**
@@ -155,13 +202,22 @@ class ApiService {
     const headers = this.generateHeaders(data?.headers || {}, data?.token);
     const body = data?.body;
 
-    this.onDebug(endpoint, "delete", [headers, body]);
-    return await deleteRequest({
+    const response = await deleteRequest({
       url: this.baseUrl + endpoint,
       urlParams: data?.urlParams || {},
       headers,
       body,
     });
+
+    this.onDebug(endpoint, "delete", {
+      headers,
+      body,
+      message: response.message,
+      status: response.status,
+      response: response.response,
+    });
+
+    return response;
   }
 }
 

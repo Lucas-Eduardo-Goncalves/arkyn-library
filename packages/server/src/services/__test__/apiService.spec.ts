@@ -966,7 +966,7 @@ describe("ApiService", () => {
           "Endpoint: /users",
           "Method: get",
         ]),
-        name: "ARKYN-API-DEBUG",
+        name: "ApiDebug",
         scheme: "yellow",
       });
     });
@@ -996,7 +996,7 @@ describe("ApiService", () => {
           "Method: get",
           expect.stringContaining("Headers:"),
         ]),
-        name: "ARKYN-API-DEBUG",
+        name: "ApiDebug",
         scheme: "yellow",
       });
     });
@@ -1026,7 +1026,7 @@ describe("ApiService", () => {
           "Method: post",
           expect.stringContaining("Body:"),
         ]),
-        name: "ARKYN-API-DEBUG",
+        name: "ApiDebug",
         scheme: "yellow",
       });
     });
@@ -1051,7 +1051,7 @@ describe("ApiService", () => {
 
       expect(flushDebugLogs).toHaveBeenCalledWith({
         debugs: expect.arrayContaining(["Method: put"]),
-        name: "ARKYN-API-DEBUG",
+        name: "ApiDebug",
         scheme: "yellow",
       });
     });
@@ -1076,7 +1076,7 @@ describe("ApiService", () => {
 
       expect(flushDebugLogs).toHaveBeenCalledWith({
         debugs: expect.arrayContaining(["Method: patch"]),
-        name: "ARKYN-API-DEBUG",
+        name: "ApiDebug",
         scheme: "yellow",
       });
     });
@@ -1099,7 +1099,7 @@ describe("ApiService", () => {
 
       expect(flushDebugLogs).toHaveBeenCalledWith({
         debugs: expect.arrayContaining(["Method: delete"]),
-        name: "ARKYN-API-DEBUG",
+        name: "ApiDebug",
         scheme: "yellow",
       });
     });
