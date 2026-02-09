@@ -28,7 +28,6 @@ type ApiRequestDataWithBodyProps = {
 type DebugConfig = {
   headers?: HeadersInit;
   body?: any;
-  response?: any;
   status: number;
   message: string;
 };
@@ -49,16 +48,15 @@ class ApiService {
   private onDebug(endpoint: string, method: string, data: DebugConfig) {
     if (this.enableDebug) {
       const debugs: string[] = [];
-      const json = (data: any) => (data ? JSON.stringify(data, null, 2) : null);
+      const json = (data: any) => JSON.stringify(data, null, 2);
 
       debugs.push(`Base URL: ${this.baseUrl}`);
       debugs.push(`Endpoint: ${endpoint}`);
-      debugs.push(`Method: ${method}`);
-      debugs.push(`Status: ${data.status}`);
+      debugs.push(`Status/Method: ${method} => ${data.status}`);
       debugs.push(`Message: ${data.message}`);
-      debugs.push(`Headers: ${json(data.headers)}`);
-      debugs.push(`Body: ${json(data.body)}`);
-      debugs.push(`Response: ${json(data.response)}`);
+
+      if (data.headers) debugs.push(`Headers: ${json(data.headers)}`);
+      if (data.body) debugs.push(`Body: ${json(data.body)}`);
 
       flushDebugLogs({ debugs, name: "ApiDebug", scheme: "yellow" });
     }
@@ -98,7 +96,6 @@ class ApiService {
       headers,
       message: response.message,
       status: response.status,
-      response: response.response,
     });
 
     return response;
@@ -127,7 +124,6 @@ class ApiService {
       body,
       message: response.message,
       status: response.status,
-      response: response.response,
     });
 
     return response;
@@ -156,7 +152,6 @@ class ApiService {
       body,
       message: response.message,
       status: response.status,
-      response: response.response,
     });
 
     return response;
@@ -185,7 +180,6 @@ class ApiService {
       body,
       message: response.message,
       status: response.status,
-      response: response.response,
     });
 
     return response;
@@ -214,7 +208,6 @@ class ApiService {
       body,
       message: response.message,
       status: response.status,
-      response: response.response,
     });
 
     return response;
