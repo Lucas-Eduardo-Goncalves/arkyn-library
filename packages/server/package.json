@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/server",
-  "version": "3.0.1-beta.121",
+  "version": "3.0.1-beta.122",
   "author": "Arkyn | Lucas Gonçalves",
   "main": "./dist/bundle.js",
   "module": "./dist/bundle.js",
@@ -26,7 +26,6 @@
     "directory": "packages/server"
   },
   "scripts": {
-    "clean": "rm -rf dist",
     "build": "bunx vite build && tsc",
     "test": "vitest --config vitest.config.ts",
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"

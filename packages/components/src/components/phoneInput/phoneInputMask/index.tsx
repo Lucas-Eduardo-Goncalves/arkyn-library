@@ -21,9 +21,8 @@ type CountryType = {
   name: string;
   code: string;
   iso: string;
-  prefix: null | string;
   flag: string;
-  mask: string;
+  mask: string | string[];
 };
 
 type PhoneInputMaskProps = {
@@ -61,8 +60,13 @@ const PhoneInputMask = forwardRef<HTMLInputElement, PhoneInputMaskProps>(
 
     const [isMounted, setIsMounted] = useState(false);
 
+    const mask =
+      typeof currentCountry.mask === "string"
+        ? currentCountry.mask
+        : currentCountry.mask[0];
+
     useEffect(() => {
-      if (isMounted) onChange(currentCountry.mask);
+      if (isMounted) onChange(mask);
       else setIsMounted(true);
     }, [currentCountry]);
 
@@ -107,13 +111,13 @@ const PhoneInputMask = forwardRef<HTMLInputElement, PhoneInputMaskProps>(
         onFocus={onFocus}
         onBlur={onBlur}
         disabled={disabled}
-        mask={currentCountry.mask}
+        mask={mask}
         showMask
         replacement={{ _: /\d/ }}
         ref={ref}
       />
     );
-  }
+  },
 );
 
 export { PhoneInputMask };

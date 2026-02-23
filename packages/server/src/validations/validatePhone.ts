@@ -1,4 +1,8 @@
 import { countries } from "@arkyn/templates";
+import {
+  isValidPhoneNumber,
+  parsePhoneNumberWithError,
+} from "libphonenumber-js";
 
 /**
  * Validates a phone number against a list of country-specific formats.
@@ -18,31 +22,26 @@ import { countries } from "@arkyn/templates";
  * ```typescript
  * import { validatePhone } from "./validatePhone";
  *
- * validatePhone("+55 32912345678"); // true for a valid Brazilian phone number
- * validatePhone("+55 3212345678"); // true for a valid Brazilian phone number
- * validatePhone("+1-684 1234567"); // true for a valid American Samoa phone number
- * validatePhone("+5532912345678"); // false for an invalid Brazilian phone number
- * validatePhone("+55 1234567890"); // false for an invalid Brazilian phone number
+ * validatePhone("+5532912345678"); // true for a valid Brazilian phone number
+ * validatePhone("+553212345678"); // true for a valid Brazilian phone number
+ * validatePhone("+19706574614"); // true for a valid American Samoa phone number
+ * validatePhone("+55329123456178"); // false for an invalid Brazilian phone number
+ * validatePhone("+55123456789"); // false for an invalid Brazilian phone number
  * ```
  */
 
 function validatePhone(rawPhone: string): boolean {
-  for (const country of countries) {
-    const countryCode = country.code;
-    const prefix = country.prefix ? `-${country.prefix}` : "";
-    const digitCount = country.mask.replace(/[^_]/g, "").length;
+  if (!isValidPhoneNumber(rawPhone)) return false;
 
-    if (country.iso === "BR") {
-      const brazilRegex = new RegExp(`^\\${countryCode} \\d{2}9?\\d{8}$`);
-      if (brazilRegex.test(rawPhone)) return true;
-      continue;
-    }
+  const parsedPhone = parsePhoneNumberWithError(rawPhone);
 
-    const regex = new RegExp(`^\\${countryCode}${prefix} \\d{${digitCount}}$`);
-    if (regex.test(rawPhone)) return true;
-  }
+  const countryCode = parsedPhone?.country;
+  if (!countryCode) return false;
 
-  return false;
+  const country = countries.find((c) => c.iso === countryCode);
+  if (!country) return false;
+
+  return true;
 }
 
 export { validatePhone };

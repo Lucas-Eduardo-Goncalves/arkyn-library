@@ -27,6 +27,7 @@ export { ValidateDateService } from "./services/validateDateService";
 // utilities
 export { calculateCardInstallment } from "./utilities/calculateCardInstallment";
 export { ensureQuotes } from "./utilities/ensureQuotes";
+export { findCountryMask } from "./utilities/findCountryMask";
 export { isHtml } from "./utilities/isHtml";
 export { removeCurrencySymbols } from "./utilities/removeCurrencySymbols";
 export { removeNonNumeric } from "./utilities/removeNonNumeric";

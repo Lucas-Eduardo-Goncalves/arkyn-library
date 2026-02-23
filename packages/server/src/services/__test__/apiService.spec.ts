@@ -7,6 +7,7 @@ import { putRequest } from "../../http/api/putRequest";
 import { patchRequest } from "../../http/api/patchRequest";
 import { deleteRequest } from "../../http/api/deleteRequest";
 import { flushDebugLogs } from "../../utilities/flushDebugLogs";
+import { string } from "zod";
 
 vi.mock("../../http/api/getRequest", () => ({
   getRequest: vi.fn(),
@@ -964,7 +965,9 @@ describe("ApiService", () => {
         debugs: expect.arrayContaining([
           "Base URL: https://api.example.com",
           "Endpoint: /users",
-          "Method: get",
+          "Status/Method: get => 200",
+          "Message: Success",
+          "Headers: {}",
         ]),
         name: "ApiDebug",
         scheme: "yellow",
@@ -993,7 +996,8 @@ describe("ApiService", () => {
         debugs: expect.arrayContaining([
           "Base URL: https://api.example.com",
           "Endpoint: /users",
-          "Method: get",
+          "Status/Method: get => 200",
+          "Message: Success",
           expect.stringContaining("Headers:"),
         ]),
         name: "ApiDebug",
@@ -1023,7 +1027,9 @@ describe("ApiService", () => {
         debugs: expect.arrayContaining([
           "Base URL: https://api.example.com",
           "Endpoint: /users",
-          "Method: post",
+          "Status/Method: post => 201",
+          "Message: Created",
+          expect.stringContaining("Headers:"),
           expect.stringContaining("Body:"),
         ]),
         name: "ApiDebug",
@@ -1050,7 +1056,14 @@ describe("ApiService", () => {
       });
 
       expect(flushDebugLogs).toHaveBeenCalledWith({
-        debugs: expect.arrayContaining(["Method: put"]),
+        debugs: expect.arrayContaining([
+          "Base URL: https://api.example.com",
+          "Endpoint: /users/1",
+          "Status/Method: put => 200",
+          "Message: Updated",
+          "Headers: {}",
+          expect.stringContaining("Body:"),
+        ]),
         name: "ApiDebug",
         scheme: "yellow",
       });
@@ -1075,7 +1088,14 @@ describe("ApiService", () => {
       });
 
       expect(flushDebugLogs).toHaveBeenCalledWith({
-        debugs: expect.arrayContaining(["Method: patch"]),
+        debugs: expect.arrayContaining([
+          "Base URL: https://api.example.com",
+          "Endpoint: /users/1",
+          "Status/Method: patch => 200",
+          "Message: Patched",
+          "Headers: {}",
+          expect.stringContaining("Body:"),
+        ]),
         name: "ApiDebug",
         scheme: "yellow",
       });
@@ -1098,7 +1118,13 @@ describe("ApiService", () => {
       await api.delete("/users/1");
 
       expect(flushDebugLogs).toHaveBeenCalledWith({
-        debugs: expect.arrayContaining(["Method: delete"]),
+        debugs: expect.arrayContaining([
+          "Base URL: https://api.example.com",
+          "Endpoint: /users/1",
+          "Status/Method: delete => 204",
+          "Message: Deleted",
+          "Headers: {}",
+        ]),
         name: "ApiDebug",
         scheme: "yellow",
       });

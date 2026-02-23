@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/templates",
-  "version": "3.0.1-beta.121",
+  "version": "3.0.1-beta.122",
   "main": "./dist/bundle.js",
   "module": "./dist/bundle.js",
   "type": "module",
@@ -25,7 +25,6 @@
     "directory": "packages/templates"
   },
   "scripts": {
-    "clean": "rm -rf dist",
     "build": "bunx vite build && tsc",
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },

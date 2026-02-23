@@ -7,9 +7,8 @@ type CountryType = {
   name: string;
   code: string;
   iso: string;
-  prefix: null | string;
   flag: string;
-  mask: string;
+  mask: string | string[];
 };
 
 type PhoneInputCountrySelectorProps = {

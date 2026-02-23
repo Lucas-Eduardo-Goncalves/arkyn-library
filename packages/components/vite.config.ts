@@ -3,11 +3,7 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  plugins: [
-    react({
-      jsxRuntime: "automatic",
-    }),
-  ],
+  plugins: [react({ jsxRuntime: "automatic" })],
   build: {
     minify: true,
     outDir: "./dist",

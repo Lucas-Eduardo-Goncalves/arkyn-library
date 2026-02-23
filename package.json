@@ -38,6 +38,7 @@
     "build:server": "cd packages/server && bun run build",
     "build:shared": "cd packages/shared && bun run build",
     "build:templates": "cd packages/templates && bun run build",
+    "test:components": "cd packages/components && bun run test",
     "test:shared": "cd packages/shared && bun run test",
     "test:server": "cd packages/server && bun run test",
     "typecheck:components": "cd packages/components && bun run typecheck",

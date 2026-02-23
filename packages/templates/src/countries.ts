@@ -1,8 +1,15 @@
-const countries = [
+type CountryType = {
+  name: string;
+  code: string;
+  iso: string;
+  flag: string;
+  mask: string | string[];
+};
+
+const countries: CountryType[] = [
   {
     name: "Afghanistan",
     code: "+93",
-    prefix: null,
     iso: "AF",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/af.svg",
     mask: "__-___-____",
@@ -10,7 +17,6 @@ const countries = [
   {
     name: "Aland Islands",
     code: "+358",
-    prefix: null,
     iso: "AX",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ax.svg",
     mask: "(___) ___-__-__",
@@ -18,7 +24,6 @@ const countries = [
   {
     name: "Albania",
     code: "+355",
-    prefix: null,
     iso: "AL",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/al.svg",
     mask: "(___) ___-___",
@@ -26,7 +31,6 @@ const countries = [
   {
     name: "Algeria",
     code: "+213",
-    prefix: null,
     iso: "DZ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/dz.svg",
     mask: "__-___-____",
@@ -34,15 +38,13 @@ const countries = [
   {
     name: "American Samoa",
     code: "+1",
-    prefix: "684",
     iso: "AS",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/as.svg",
-    mask: "(684) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Andorra",
     code: "+376",
-    prefix: null,
     iso: "AD",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ad.svg",
     mask: "___-___",
@@ -50,7 +52,6 @@ const countries = [
   {
     name: "Angola",
     code: "+244",
-    prefix: null,
     iso: "AO",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ao.svg",
     mask: "(___) ___-___",
@@ -58,31 +59,27 @@ const countries = [
   {
     name: "Anguilla",
     code: "+1",
-    prefix: "264",
     iso: "AI",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ai.svg",
-    mask: "(264) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Antarctica",
     code: "+672",
-    prefix: "1",
     iso: "AQ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/aq.svg",
-    mask: "1__-___",
+    mask: "___-___",
   },
   {
     name: "Antigua and Barbuda",
     code: "+1",
-    prefix: "268",
     iso: "AG",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ag.svg",
-    mask: "(268) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Argentina",
     code: "+54",
-    prefix: null,
     iso: "AR",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ar.svg",
     mask: "(___) ___-____",
@@ -90,7 +87,6 @@ const countries = [
   {
     name: "Armenia",
     code: "+374",
-    prefix: null,
     iso: "AM",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/am.svg",
     mask: "__-___-___",
@@ -98,7 +94,6 @@ const countries = [
   {
     name: "Aruba",
     code: "+297",
-    prefix: null,
     iso: "AW",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/aw.svg",
     mask: "___-____",
@@ -106,7 +101,6 @@ const countries = [
   {
     name: "Ascension Island",
     code: "+247",
-    prefix: null,
     iso: "AC",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sh.svg",
     mask: "____",
@@ -114,7 +108,6 @@ const countries = [
   {
     name: "Australia",
     code: "+61",
-    prefix: null,
     iso: "AU",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/au.svg",
     mask: "_-____-____",
@@ -122,7 +115,6 @@ const countries = [
   {
     name: "Austria",
     code: "+43",
-    prefix: null,
     iso: "AT",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/at.svg",
     mask: "(___) ___-____",
@@ -130,7 +122,6 @@ const countries = [
   {
     name: "Azerbaijan",
     code: "+994",
-    prefix: null,
     iso: "AZ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/az.svg",
     mask: "__-___-__-__",
@@ -138,15 +129,13 @@ const countries = [
   {
     name: "Bahamas",
     code: "+1",
-    prefix: "242",
     iso: "BS",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/bs.svg",
-    mask: "(242) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Bahrain",
     code: "+973",
-    prefix: null,
     iso: "BH",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/bh.svg",
     mask: "____-____",
@@ -154,23 +143,20 @@ const countries = [
   {
     name: "Bangladesh",
     code: "+880",
-    prefix: "1",
     iso: "BD",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/bd.svg",
-    mask: "1___-______",
+    mask: "____-______",
   },
   {
     name: "Barbados",
     code: "+1",
-    prefix: "246",
     iso: "BB",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/bb.svg",
-    mask: "(246) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Belarus",
     code: "+375",
-    prefix: null,
     iso: "BY",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/by.svg",
     mask: "(__) ___-__-__",
@@ -178,7 +164,6 @@ const countries = [
   {
     name: "Belgium",
     code: "+32",
-    prefix: null,
     iso: "BE",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/be.svg",
     mask: "(___) ___-___",
@@ -186,7 +171,6 @@ const countries = [
   {
     name: "Belize",
     code: "+501",
-    prefix: null,
     iso: "BZ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/bz.svg",
     mask: "___-____",
@@ -194,7 +178,6 @@ const countries = [
   {
     name: "Benin",
     code: "+229",
-    prefix: null,
     iso: "BJ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/bj.svg",
     mask: "__-__-____",
@@ -202,15 +185,13 @@ const countries = [
   {
     name: "Bermuda",
     code: "+1",
-    prefix: "441",
     iso: "BM",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/bm.svg",
-    mask: "(441) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Bhutan",
     code: "+975",
-    prefix: null,
     iso: "BT",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/bt.svg",
     mask: "_-___-___",
@@ -218,7 +199,6 @@ const countries = [
   {
     name: "Bolivia",
     code: "+591",
-    prefix: null,
     iso: "BO",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/bo.svg",
     mask: "_-___-____",
@@ -226,7 +206,6 @@ const countries = [
   {
     name: "Bosnia and Herzegovina",
     code: "+387",
-    prefix: null,
     iso: "BA",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ba.svg",
     mask: "__-_____",
@@ -234,7 +213,6 @@ const countries = [
   {
     name: "Botswana",
     code: "+267",
-    prefix: null,
     iso: "BW",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/bw.svg",
     mask: "__-___-___",
@@ -242,15 +220,13 @@ const countries = [
   {
     name: "Brasil",
     code: "+55",
-    prefix: null,
     iso: "BR",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/br.svg",
-    mask: "(__) _____-____",
+    mask: ["(__) _____-____", "(__) ____-____"],
   },
   {
     name: "British Indian Ocean Territory",
     code: "+246",
-    prefix: null,
     iso: "IO",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/io.svg",
     mask: "___-____",
@@ -258,7 +234,6 @@ const countries = [
   {
     name: "Brunei Darussalam",
     code: "+673",
-    prefix: null,
     iso: "BN",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/bn.svg",
     mask: "___-____",
@@ -266,7 +241,6 @@ const countries = [
   {
     name: "Bulgaria",
     code: "+359",
-    prefix: null,
     iso: "BG",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/bg.svg",
     mask: "(___) ___-___",
@@ -274,7 +248,6 @@ const countries = [
   {
     name: "Burkina Faso",
     code: "+226",
-    prefix: null,
     iso: "BF",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/bf.svg",
     mask: "__-__-____",
@@ -282,7 +255,6 @@ const countries = [
   {
     name: "Burundi",
     code: "+257",
-    prefix: null,
     iso: "BI",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/bi.svg",
     mask: "__-__-____",
@@ -290,7 +262,6 @@ const countries = [
   {
     name: "Cambodia",
     code: "+855",
-    prefix: null,
     iso: "KH",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/kh.svg",
     mask: "__-___-___",
@@ -298,7 +269,6 @@ const countries = [
   {
     name: "Cameroon",
     code: "+237",
-    prefix: null,
     iso: "CM",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/cm.svg",
     mask: "____-____",
@@ -306,7 +276,6 @@ const countries = [
   {
     name: "Canada",
     code: "+1",
-    prefix: null,
     iso: "CA",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ca.svg",
     mask: "(___) ___-____",
@@ -314,7 +283,6 @@ const countries = [
   {
     name: "Cape Verde",
     code: "+238",
-    prefix: null,
     iso: "CV",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/cv.svg",
     mask: "(___) __-__",
@@ -322,15 +290,13 @@ const countries = [
   {
     name: "Cayman Islands",
     code: "+1",
-    prefix: "345",
     iso: "KY",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ky.svg",
-    mask: "(345) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Central African Republic",
     code: "+236",
-    prefix: null,
     iso: "CF",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/cf.svg",
     mask: "__-__-____",
@@ -338,7 +304,6 @@ const countries = [
   {
     name: "Chad",
     code: "+235",
-    prefix: null,
     iso: "TD",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/td.svg",
     mask: "__-__-__-__",
@@ -346,7 +311,6 @@ const countries = [
   {
     name: "Chile",
     code: "+56",
-    prefix: null,
     iso: "CL",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/cl.svg",
     mask: "_-____-____",
@@ -354,7 +318,6 @@ const countries = [
   {
     name: "China",
     code: "+86",
-    prefix: null,
     iso: "CN",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/cn.svg",
     mask: "__-_____-_____",
@@ -362,7 +325,6 @@ const countries = [
   {
     name: "Christmas Island",
     code: "+61",
-    prefix: null,
     iso: "CX",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/cx.svg",
     mask: "_-____-____",
@@ -370,7 +332,6 @@ const countries = [
   {
     name: "Cocos (Keeling) Islands",
     code: "+61",
-    prefix: null,
     iso: "CC",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/cc.svg",
     mask: "_-____-____",
@@ -378,7 +339,6 @@ const countries = [
   {
     name: "Colombia",
     code: "+57",
-    prefix: null,
     iso: "CO",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/co.svg",
     mask: "(___) ___-____",
@@ -386,7 +346,6 @@ const countries = [
   {
     name: "Comoros",
     code: "+269",
-    prefix: null,
     iso: "KM",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/km.svg",
     mask: "__-_____",
@@ -394,7 +353,6 @@ const countries = [
   {
     name: "Congo",
     code: "+242",
-    prefix: null,
     iso: "CG",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/cg.svg",
     mask: "__-_____",
@@ -402,7 +360,6 @@ const countries = [
   {
     name: "Cook Islands",
     code: "+682",
-    prefix: null,
     iso: "CK",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ck.svg",
     mask: "__-___",
@@ -410,7 +367,6 @@ const countries = [
   {
     name: "Costa Rica",
     code: "+506",
-    prefix: null,
     iso: "CR",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/cr.svg",
     mask: "____-____",
@@ -418,7 +374,6 @@ const countries = [
   {
     name: "Croatia",
     code: "+385",
-    prefix: null,
     iso: "HR",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/hr.svg",
     mask: "__-___-___",
@@ -426,7 +381,6 @@ const countries = [
   {
     name: "Cuba",
     code: "+53",
-    prefix: null,
     iso: "CU",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/cu.svg",
     mask: "_-___-____",
@@ -434,7 +388,6 @@ const countries = [
   {
     name: "Cyprus",
     code: "+357",
-    prefix: null,
     iso: "CY",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/cy.svg",
     mask: "__-___-___",
@@ -442,7 +395,6 @@ const countries = [
   {
     name: "Czech Republic",
     code: "+420",
-    prefix: null,
     iso: "CZ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/cz.svg",
     mask: "(___) ___-___",
@@ -450,7 +402,6 @@ const countries = [
   {
     name: "Democratic Republic of the Congo",
     code: "+243",
-    prefix: null,
     iso: "CD",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/cd.svg",
     mask: "(___) ___-___",
@@ -458,7 +409,6 @@ const countries = [
   {
     name: "Denmark",
     code: "+45",
-    prefix: null,
     iso: "DK",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/dk.svg",
     mask: "__-__-__-__",
@@ -466,7 +416,6 @@ const countries = [
   {
     name: "Djibouti",
     code: "+253",
-    prefix: null,
     iso: "DJ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/dj.svg",
     mask: "__-__-__-__",
@@ -474,23 +423,20 @@ const countries = [
   {
     name: "Dominica",
     code: "+1",
-    prefix: "767",
     iso: "DM",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/dm.svg",
-    mask: "(767) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Dominican Republic",
     code: "+1",
-    prefix: "849",
     iso: "DO",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/do.svg",
-    mask: "(894) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Ecuador",
     code: "+593",
-    prefix: null,
     iso: "EC",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ec.svg",
     mask: "__-___-____",
@@ -498,7 +444,6 @@ const countries = [
   {
     name: "Egypt",
     code: "+20",
-    prefix: null,
     iso: "EG",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/eg.svg",
     mask: "(___) ___-____",
@@ -506,7 +451,6 @@ const countries = [
   {
     name: "El Salvador",
     code: "+503",
-    prefix: null,
     iso: "SV",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sv.svg",
     mask: "__-__-____",
@@ -514,7 +458,6 @@ const countries = [
   {
     name: "Equatorial Guinea",
     code: "+240",
-    prefix: null,
     iso: "GQ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gq.svg",
     mask: "__-___-____",
@@ -522,7 +465,6 @@ const countries = [
   {
     name: "Eritrea",
     code: "+291",
-    prefix: null,
     iso: "ER",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/er.svg",
     mask: "_-___-___",
@@ -530,7 +472,6 @@ const countries = [
   {
     name: "Estonia",
     code: "+372",
-    prefix: null,
     iso: "EE",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ee.svg",
     mask: "____-____",
@@ -538,7 +479,6 @@ const countries = [
   {
     name: "Eswatini",
     code: "+268",
-    prefix: null,
     iso: "SZ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sz.svg",
     mask: "__-__-____",
@@ -546,7 +486,6 @@ const countries = [
   {
     name: "Ethiopia",
     code: "+251",
-    prefix: null,
     iso: "ET",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/et.svg",
     mask: "__-___-____",
@@ -554,7 +493,6 @@ const countries = [
   {
     name: "Falkland Islands (Malvinas)",
     code: "+500",
-    prefix: null,
     iso: "FK",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/fk.svg",
     mask: "_____",
@@ -562,7 +500,6 @@ const countries = [
   {
     name: "Faroe Islands",
     code: "+298",
-    prefix: null,
     iso: "FO",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/fo.svg",
     mask: "__ __ __",
@@ -570,7 +507,6 @@ const countries = [
   {
     name: "Fiji",
     code: "+679",
-    prefix: null,
     iso: "FJ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/fj.svg",
     mask: "__-_____",
@@ -578,7 +514,6 @@ const countries = [
   {
     name: "Finland",
     code: "+358",
-    prefix: null,
     iso: "FI",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/fi.svg",
     mask: "__ ___ ____",
@@ -586,7 +521,6 @@ const countries = [
   {
     name: "France",
     code: "+33",
-    prefix: null,
     iso: "FR",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/fr.svg",
     mask: "_ __ __ __ __",
@@ -594,7 +528,6 @@ const countries = [
   {
     name: "French Guiana",
     code: "+594",
-    prefix: null,
     iso: "GF",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gf.svg",
     mask: "___ __ __ __",
@@ -602,7 +535,6 @@ const countries = [
   {
     name: "French Polynesia",
     code: "+689",
-    prefix: null,
     iso: "PF",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/pf.svg",
     mask: "__ __ __ __",
@@ -610,7 +542,6 @@ const countries = [
   {
     name: "Gabon",
     code: "+241",
-    prefix: null,
     iso: "GA",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ga.svg",
     mask: "_ __ __ __",
@@ -618,7 +549,6 @@ const countries = [
   {
     name: "Gambia",
     code: "+220",
-    prefix: null,
     iso: "GM",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gm.svg",
     mask: "___ ____",
@@ -626,7 +556,6 @@ const countries = [
   {
     name: "Georgia",
     code: "+995",
-    prefix: null,
     iso: "GE",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ge.svg",
     mask: "(___) ___-___",
@@ -634,23 +563,20 @@ const countries = [
   {
     name: "Germany",
     code: "+49",
-    prefix: "3",
     iso: "DE",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/de.svg",
-    mask: "(3____) __-____",
+    mask: "(_____) __-____",
   },
   {
     name: "Ghana",
     code: "+233",
-    prefix: "03",
     iso: "GH",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gh.svg",
-    mask: "03_ ___ ____",
+    mask: "___ ___ ____",
   },
   {
     name: "Gibraltar",
     code: "+350",
-    prefix: null,
     iso: "GI",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gi.svg",
     mask: "___-_____",
@@ -658,7 +584,6 @@ const countries = [
   {
     name: "Greece",
     code: "+30",
-    prefix: null,
     iso: "GR",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gr.svg",
     mask: "(___) ___-____",
@@ -666,7 +591,6 @@ const countries = [
   {
     name: "Greenland",
     code: "+299",
-    prefix: null,
     iso: "GL",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gl.svg",
     mask: "__-__-__",
@@ -674,15 +598,13 @@ const countries = [
   {
     name: "Grenada",
     code: "+1",
-    prefix: "473",
     iso: "GD",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gd.svg",
-    mask: "(473) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Guadeloupe",
     code: "+590",
-    prefix: null,
     iso: "GP",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gp.svg",
     mask: "___ __ __ __",
@@ -690,15 +612,13 @@ const countries = [
   {
     name: "Guam",
     code: "+1",
-    prefix: "671",
     iso: "GU",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gu.svg",
-    mask: "671 ___ ____",
+    mask: "___ ___ ____",
   },
   {
     name: "Guatemala",
     code: "+502",
-    prefix: null,
     iso: "GT",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gt.svg",
     mask: "_-___-____",
@@ -706,7 +626,6 @@ const countries = [
   {
     name: "Guernsey",
     code: "+44",
-    prefix: null,
     iso: "GG",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gg.svg",
     mask: "(____) ______",
@@ -714,7 +633,6 @@ const countries = [
   {
     name: "Guinea",
     code: "+224",
-    prefix: null,
     iso: "GN",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gn.svg",
     mask: "__-___-___",
@@ -722,7 +640,6 @@ const countries = [
   {
     name: "Guinea-Bissau",
     code: "+245",
-    prefix: null,
     iso: "GW",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gw.svg",
     mask: "_-______",
@@ -730,7 +647,6 @@ const countries = [
   {
     name: "Guyana",
     code: "+592",
-    prefix: null,
     iso: "GY",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gy.svg",
     mask: "___-____",
@@ -738,7 +654,6 @@ const countries = [
   {
     name: "Haiti",
     code: "+509",
-    prefix: null,
     iso: "HT",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ht.svg",
     mask: "__-__-____",
@@ -746,15 +661,13 @@ const countries = [
   {
     name: "Holy See (Vatican City State)",
     code: "+39",
-    prefix: "06698",
     iso: "VA",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/va.svg",
-    mask: "06 698_____",
+    mask: "__ ________",
   },
   {
     name: "Honduras",
     code: "+504",
-    prefix: null,
     iso: "HN",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/hn.svg",
     mask: "____-____",
@@ -762,7 +675,6 @@ const countries = [
   {
     name: "Hong Kong",
     code: "+852",
-    prefix: null,
     iso: "HK",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/hk.svg",
     mask: "____-____",
@@ -770,7 +682,6 @@ const countries = [
   {
     name: "Hungary",
     code: "+36",
-    prefix: null,
     iso: "HU",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/hu.svg",
     mask: "__ ___ ____",
@@ -778,7 +689,6 @@ const countries = [
   {
     name: "Iceland",
     code: "+354",
-    prefix: null,
     iso: "IS",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/is.svg",
     mask: "___-____",
@@ -786,7 +696,6 @@ const countries = [
   {
     name: "India",
     code: "+91",
-    prefix: null,
     iso: "IN",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/in.svg",
     mask: "(____) ___-___",
@@ -794,15 +703,13 @@ const countries = [
   {
     name: "Indonesia",
     code: "+62",
-    prefix: "8",
     iso: "ID",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/id.svg",
-    mask: "(8__) ___-__-___",
+    mask: "(___) ___-__-___",
   },
   {
     name: "Iran",
     code: "+98",
-    prefix: null,
     iso: "IR",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ir.svg",
     mask: "(___) ___-____",
@@ -810,7 +717,6 @@ const countries = [
   {
     name: "Iraq",
     code: "+964",
-    prefix: null,
     iso: "IQ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/iq.svg",
     mask: "(___) ___-____",
@@ -818,7 +724,6 @@ const countries = [
   {
     name: "Ireland",
     code: "+353",
-    prefix: null,
     iso: "IE",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ie.svg",
     mask: "(___) ___-___",
@@ -826,7 +731,6 @@ const countries = [
   {
     name: "Isle of Man",
     code: "+44",
-    prefix: null,
     iso: "IM",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/im.svg",
     mask: "(____) ______",
@@ -834,7 +738,6 @@ const countries = [
   {
     name: "Israel",
     code: "+972",
-    prefix: "5",
     iso: "IL",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/il.svg",
     mask: "__-___-____",
@@ -842,7 +745,6 @@ const countries = [
   {
     name: "Italy",
     code: "+39",
-    prefix: null,
     iso: "IT",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/it.svg",
     mask: "(___) ____-___",
@@ -850,7 +752,6 @@ const countries = [
   {
     name: "Ivory Coast / Cote d'Ivoire",
     code: "+225",
-    prefix: null,
     iso: "CI",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ci.svg",
     mask: "__-___-___",
@@ -858,15 +759,13 @@ const countries = [
   {
     name: "Jamaica",
     code: "+1",
-    prefix: "876",
     iso: "JM",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/jm.svg",
-    mask: "(876) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Japan",
     code: "+81",
-    prefix: null,
     iso: "JP",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/jp.svg",
     mask: "__-____-____",
@@ -874,7 +773,6 @@ const countries = [
   {
     name: "Jersey",
     code: "+44",
-    prefix: null,
     iso: "JE",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/je.svg",
     mask: "(____) ____-______",
@@ -882,7 +780,6 @@ const countries = [
   {
     name: "Jordan",
     code: "+962",
-    prefix: null,
     iso: "JO",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/jo.svg",
     mask: "_-____-____",
@@ -890,7 +787,6 @@ const countries = [
   {
     name: "Kazakhstan",
     code: "+77",
-    prefix: null,
     iso: "KZ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/kz.svg",
     mask: "(_____) _ __ __",
@@ -898,7 +794,6 @@ const countries = [
   {
     name: "Kenya",
     code: "+254",
-    prefix: null,
     iso: "KE",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ke.svg",
     mask: "___-______",
@@ -906,7 +801,6 @@ const countries = [
   {
     name: "Kiribati",
     code: "+686",
-    prefix: null,
     iso: "KI",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ki.svg",
     mask: "__-___",
@@ -914,7 +808,6 @@ const countries = [
   {
     name: "Korea, Democratic People's Republic of Korea",
     code: "+850",
-    prefix: null,
     iso: "KP",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/kp.svg",
     mask: "____-_____________",
@@ -922,7 +815,6 @@ const countries = [
   {
     name: "Korea, Republic of South Korea",
     code: "+82",
-    prefix: null,
     iso: "KR",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/kr.svg",
     mask: "__-___-____",
@@ -930,7 +822,6 @@ const countries = [
   {
     name: "Kosovo",
     code: "+383",
-    prefix: null,
     iso: "XK",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/xk.svg",
     mask: "___-___-___",
@@ -938,7 +829,6 @@ const countries = [
   {
     name: "Kuwait",
     code: "+965",
-    prefix: null,
     iso: "KW",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/kw.svg",
     mask: "____-____",
@@ -946,7 +836,6 @@ const countries = [
   {
     name: "Kyrgyzstan",
     code: "+996",
-    prefix: null,
     iso: "KG",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/kg.svg",
     mask: "(___) ___-___",
@@ -954,15 +843,13 @@ const countries = [
   {
     name: "Laos",
     code: "+856",
-    prefix: "20",
     iso: "LA",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/la.svg",
-    mask: "(20__) ___-___",
+    mask: "(____) ___-___",
   },
   {
     name: "Latvia",
     code: "+371",
-    prefix: null,
     iso: "LV",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/lv.svg",
     mask: "__-___-___",
@@ -970,7 +857,6 @@ const countries = [
   {
     name: "Lebanon",
     code: "+961",
-    prefix: null,
     iso: "LB",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/lb.svg",
     mask: "__-___-___",
@@ -978,7 +864,6 @@ const countries = [
   {
     name: "Lesotho",
     code: "+266",
-    prefix: null,
     iso: "LS",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ls.svg",
     mask: "_-___-____",
@@ -986,7 +871,6 @@ const countries = [
   {
     name: "Liberia",
     code: "+231",
-    prefix: null,
     iso: "LR",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/lr.svg",
     mask: "__-___-___",
@@ -994,15 +878,13 @@ const countries = [
   {
     name: "Libya",
     code: "+218",
-    prefix: "21",
     iso: "LY",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ly.svg",
-    mask: "21-___-____",
+    mask: "__-___-____",
   },
   {
     name: "Liechtenstein",
     code: "+423",
-    prefix: null,
     iso: "LI",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/li.svg",
     mask: "(___) ___-____",
@@ -1010,7 +892,6 @@ const countries = [
   {
     name: "Lithuania",
     code: "+370",
-    prefix: null,
     iso: "LT",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/lt.svg",
     mask: "(___) __-___",
@@ -1018,7 +899,6 @@ const countries = [
   {
     name: "Luxembourg",
     code: "+352",
-    prefix: null,
     iso: "LU",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/lu.svg",
     mask: "(___) ___-___",
@@ -1026,7 +906,6 @@ const countries = [
   {
     name: "Macau",
     code: "+853",
-    prefix: null,
     iso: "MO",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mo.svg",
     mask: "____-____",
@@ -1034,7 +913,6 @@ const countries = [
   {
     name: "Madagascar",
     code: "+261",
-    prefix: null,
     iso: "MG",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mg.svg",
     mask: "__-__-_____",
@@ -1042,7 +920,6 @@ const countries = [
   {
     name: "Malawi",
     code: "+265",
-    prefix: null,
     iso: "MW",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mw.svg",
     mask: "_-____-____",
@@ -1050,7 +927,6 @@ const countries = [
   {
     name: "Malaysia",
     code: "+60",
-    prefix: null,
     iso: "MY",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/my.svg",
     mask: "__-___-____",
@@ -1058,7 +934,6 @@ const countries = [
   {
     name: "Maldives",
     code: "+960",
-    prefix: null,
     iso: "MV",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mv.svg",
     mask: "___-____",
@@ -1066,7 +941,6 @@ const countries = [
   {
     name: "Mali",
     code: "+223",
-    prefix: null,
     iso: "ML",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ml.svg",
     mask: "__-__-____",
@@ -1074,7 +948,6 @@ const countries = [
   {
     name: "Malta",
     code: "+356",
-    prefix: null,
     iso: "MT",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mt.svg",
     mask: "____-____",
@@ -1082,7 +955,6 @@ const countries = [
   {
     name: "Marshall Islands",
     code: "+692",
-    prefix: null,
     iso: "MH",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mh.svg",
     mask: "___-____",
@@ -1090,7 +962,6 @@ const countries = [
   {
     name: "Martinique",
     code: "+596",
-    prefix: null,
     iso: "MQ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mq.svg",
     mask: "(___) __-__-__",
@@ -1098,7 +969,6 @@ const countries = [
   {
     name: "Mauritania",
     code: "+222",
-    prefix: null,
     iso: "MR",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mr.svg",
     mask: "__-__-____",
@@ -1106,7 +976,6 @@ const countries = [
   {
     name: "Mauritius",
     code: "+230",
-    prefix: null,
     iso: "MU",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mu.svg",
     mask: "___-____",
@@ -1114,7 +983,6 @@ const countries = [
   {
     name: "Mayotte",
     code: "+262",
-    prefix: null,
     iso: "YT",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/yt.svg",
     mask: "_____-____",
@@ -1122,7 +990,6 @@ const countries = [
   {
     name: "Mexico",
     code: "+52",
-    prefix: null,
     iso: "MX",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mx.svg",
     mask: "(___) ___-____",
@@ -1130,7 +997,6 @@ const countries = [
   {
     name: "Micronesia, Federated States of Micronesia",
     code: "+691",
-    prefix: null,
     iso: "FM",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/fm.svg",
     mask: "___-____",
@@ -1138,7 +1004,6 @@ const countries = [
   {
     name: "Moldova",
     code: "+373",
-    prefix: null,
     iso: "MD",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/md.svg",
     mask: "____-____",
@@ -1146,7 +1011,6 @@ const countries = [
   {
     name: "Monaco",
     code: "+377",
-    prefix: null,
     iso: "MC",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mc.svg",
     mask: "(___) ___-___",
@@ -1154,7 +1018,6 @@ const countries = [
   {
     name: "Mongolia",
     code: "+976",
-    prefix: null,
     iso: "MN",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mn.svg",
     mask: "__-__-____",
@@ -1162,7 +1025,6 @@ const countries = [
   {
     name: "Montenegro",
     code: "+382",
-    prefix: null,
     iso: "ME",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/me.svg",
     mask: "__-___-___",
@@ -1170,15 +1032,13 @@ const countries = [
   {
     name: "Montserrat",
     code: "+1",
-    prefix: "664",
     iso: "MS",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ms.svg",
-    mask: "(664) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Morocco",
     code: "+212",
-    prefix: null,
     iso: "MA",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ma.svg",
     mask: "__-____-___",
@@ -1186,7 +1046,6 @@ const countries = [
   {
     name: "Mozambique",
     code: "+258",
-    prefix: null,
     iso: "MZ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mz.svg",
     mask: "__-___-___",
@@ -1194,7 +1053,6 @@ const countries = [
   {
     name: "Myanmar",
     code: "+95",
-    prefix: null,
     iso: "MM",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mm.svg",
     mask: "__-___-___",
@@ -1202,7 +1060,6 @@ const countries = [
   {
     name: "Namibia",
     code: "+264",
-    prefix: null,
     iso: "NA",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/na.svg",
     mask: "__-___-____",
@@ -1210,7 +1067,6 @@ const countries = [
   {
     name: "Nauru",
     code: "+674",
-    prefix: null,
     iso: "NR",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/nr.svg",
     mask: "___-____",
@@ -1218,7 +1074,6 @@ const countries = [
   {
     name: "Nepal",
     code: "+977",
-    prefix: null,
     iso: "NP",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/np.svg",
     mask: "__-___-___",
@@ -1226,7 +1081,6 @@ const countries = [
   {
     name: "Netherlands",
     code: "+31",
-    prefix: null,
     iso: "NL",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/nl.svg",
     mask: "__-___-____",
@@ -1234,7 +1088,6 @@ const countries = [
   {
     name: "New Caledonia",
     code: "+687",
-    prefix: null,
     iso: "NC",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/nc.svg",
     mask: "__-____",
@@ -1242,7 +1095,6 @@ const countries = [
   {
     name: "New Zealand",
     code: "+64",
-    prefix: null,
     iso: "NZ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/nz.svg",
     mask: "(___) ___-____",
@@ -1250,7 +1102,6 @@ const countries = [
   {
     name: "Nicaragua",
     code: "+505",
-    prefix: null,
     iso: "NI",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ni.svg",
     mask: "____-____",
@@ -1258,7 +1109,6 @@ const countries = [
   {
     name: "Niger",
     code: "+227",
-    prefix: null,
     iso: "NE",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ne.svg",
     mask: "__-__-____",
@@ -1266,7 +1116,6 @@ const countries = [
   {
     name: "Nigeria",
     code: "+234",
-    prefix: null,
     iso: "NG",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ng.svg",
     mask: "(___) ___-____",
@@ -1274,7 +1123,6 @@ const countries = [
   {
     name: "Niue",
     code: "+683",
-    prefix: null,
     iso: "NU",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/nu.svg",
     mask: "____",
@@ -1282,15 +1130,13 @@ const countries = [
   {
     name: "Norfolk Island",
     code: "+672",
-    prefix: "3",
     iso: "NF",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/nf.svg",
-    mask: "3__-___",
+    mask: "___-___",
   },
   {
     name: "North Macedonia",
     code: "+389",
-    prefix: null,
     iso: "MK",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mk.svg",
     mask: "__-___-___",
@@ -1298,15 +1144,13 @@ const countries = [
   {
     name: "Northern Mariana Islands",
     code: "+1",
-    prefix: "670",
     iso: "MP",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mp.svg",
-    mask: "(670) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Norway",
     code: "+47",
-    prefix: null,
     iso: "NO",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/no.svg",
     mask: "(___) __-___",
@@ -1314,7 +1158,6 @@ const countries = [
   {
     name: "Oman",
     code: "+968",
-    prefix: null,
     iso: "OM",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/om.svg",
     mask: "__-___-___",
@@ -1322,7 +1165,6 @@ const countries = [
   {
     name: "Pakistan",
     code: "+92",
-    prefix: null,
     iso: "PK",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/pk.svg",
     mask: "(___) ___-____",
@@ -1330,7 +1172,6 @@ const countries = [
   {
     name: "Palau",
     code: "+680",
-    prefix: null,
     iso: "PW",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/pw.svg",
     mask: "___-____",
@@ -1338,7 +1179,6 @@ const countries = [
   {
     name: "Palestine",
     code: "+970",
-    prefix: null,
     iso: "PS",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ps.svg",
     mask: "__-___-____",
@@ -1346,7 +1186,6 @@ const countries = [
   {
     name: "Panama",
     code: "+507",
-    prefix: null,
     iso: "PA",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/pa.svg",
     mask: "___-____",
@@ -1354,7 +1193,6 @@ const countries = [
   {
     name: "Papua New Guinea",
     code: "+675",
-    prefix: null,
     iso: "PG",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/pg.svg",
     mask: "(___) __-___",
@@ -1362,7 +1200,6 @@ const countries = [
   {
     name: "Paraguay",
     code: "+595",
-    prefix: null,
     iso: "PY",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/py.svg",
     mask: "(___) ___-___",
@@ -1370,7 +1207,6 @@ const countries = [
   {
     name: "Peru",
     code: "+51",
-    prefix: null,
     iso: "PE",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/pe.svg",
     mask: "(___) ___-___",
@@ -1378,7 +1214,6 @@ const countries = [
   {
     name: "Philippines",
     code: "+63",
-    prefix: null,
     iso: "PH",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ph.svg",
     mask: "(___) ___-____",
@@ -1386,7 +1221,6 @@ const countries = [
   {
     name: "Pitcairn",
     code: "+870",
-    prefix: null,
     iso: "PN",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/pn.svg",
     mask: "___-___-___",
@@ -1394,7 +1228,6 @@ const countries = [
   {
     name: "Poland",
     code: "+48",
-    prefix: null,
     iso: "PL",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/pl.svg",
     mask: "(___) ___-___",
@@ -1402,7 +1235,6 @@ const countries = [
   {
     name: "Portugal",
     code: "+351",
-    prefix: null,
     iso: "PT",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/pt.svg",
     mask: "__-___-____",
@@ -1410,7 +1242,6 @@ const countries = [
   {
     name: "Puerto Rico",
     code: "+1",
-    prefix: null,
     iso: "PR",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/pr.svg",
     mask: "(___) ___ ____",
@@ -1418,7 +1249,6 @@ const countries = [
   {
     name: "Qatar",
     code: "+974",
-    prefix: null,
     iso: "QA",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/qa.svg",
     mask: "____-____",
@@ -1426,7 +1256,6 @@ const countries = [
   {
     name: "Reunion",
     code: "+262",
-    prefix: null,
     iso: "RE",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/re.svg",
     mask: "_____-____",
@@ -1434,7 +1263,6 @@ const countries = [
   {
     name: "Romania",
     code: "+40",
-    prefix: null,
     iso: "RO",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ro.svg",
     mask: "__-___-____",
@@ -1442,7 +1270,6 @@ const countries = [
   {
     name: "Russia",
     code: "+7",
-    prefix: null,
     iso: "RU",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ru.svg",
     mask: "(___) ___-__-__",
@@ -1450,7 +1277,6 @@ const countries = [
   {
     name: "Rwanda",
     code: "+250",
-    prefix: null,
     iso: "RW",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/rw.svg",
     mask: "(___) ___-___",
@@ -1458,7 +1284,6 @@ const countries = [
   {
     name: "Saint Barthelemy",
     code: "+590",
-    prefix: null,
     iso: "BL",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/bl.svg",
     mask: "___-__-__-__",
@@ -1466,7 +1291,6 @@ const countries = [
   {
     name: "Saint Helena, Ascension and Tristan Da Cunha",
     code: "+290",
-    prefix: null,
     iso: "SH",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sh.svg",
     mask: "____",
@@ -1474,23 +1298,20 @@ const countries = [
   {
     name: "Saint Kitts and Nevis",
     code: "+1",
-    prefix: null,
     iso: "KN",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/kn.svg",
-    mask: "(869) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Saint Lucia",
     code: "+1",
-    prefix: "758",
     iso: "LC",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/lc.svg",
-    mask: "(758) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Saint Martin",
     code: "+590",
-    prefix: null,
     iso: "MF",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/mf.svg",
     mask: "(___) ___-___",
@@ -1498,7 +1319,6 @@ const countries = [
   {
     name: "Saint Pierre and Miquelon",
     code: "+508",
-    prefix: null,
     iso: "PM",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/pm.svg",
     mask: "__-____",
@@ -1506,15 +1326,13 @@ const countries = [
   {
     name: "Saint Vincent and the Grenadines",
     code: "+1",
-    prefix: "784",
     iso: "VC",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/vc.svg",
-    mask: "(784) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Samoa",
     code: "+685",
-    prefix: null,
     iso: "WS",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ws.svg",
     mask: "__-____",
@@ -1522,7 +1340,6 @@ const countries = [
   {
     name: "San Marino",
     code: "+378",
-    prefix: null,
     iso: "SM",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sm.svg",
     mask: "____-______",
@@ -1530,7 +1347,6 @@ const countries = [
   {
     name: "Sao Tome and Principe",
     code: "+239",
-    prefix: null,
     iso: "ST",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/st.svg",
     mask: "__-_____",
@@ -1538,7 +1354,6 @@ const countries = [
   {
     name: "Saudi Arabia",
     code: "+966",
-    prefix: null,
     iso: "SA",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sa.svg",
     mask: "_-____-____",
@@ -1546,7 +1361,6 @@ const countries = [
   {
     name: "Senegal",
     code: "+221",
-    prefix: null,
     iso: "SN",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sn.svg",
     mask: "__-___-____",
@@ -1554,7 +1368,6 @@ const countries = [
   {
     name: "Serbia",
     code: "+381",
-    prefix: null,
     iso: "RS",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/rs.svg",
     mask: "__-___-____",
@@ -1562,7 +1375,6 @@ const countries = [
   {
     name: "Seychelles",
     code: "+248",
-    prefix: null,
     iso: "SC",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sc.svg",
     mask: "_-___-___",
@@ -1570,7 +1382,6 @@ const countries = [
   {
     name: "Sierra Leone",
     code: "+232",
-    prefix: null,
     iso: "SL",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sl.svg",
     mask: "__-______",
@@ -1578,7 +1389,6 @@ const countries = [
   {
     name: "Singapore",
     code: "+65",
-    prefix: null,
     iso: "SG",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sg.svg",
     mask: "____-____",
@@ -1586,15 +1396,13 @@ const countries = [
   {
     name: "Sint Maarten",
     code: "+1",
-    prefix: "721",
     iso: "SX",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sx.svg",
-    mask: "(721) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Slovakia",
     code: "+421",
-    prefix: null,
     iso: "SK",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sk.svg",
     mask: "(___) ___-___",
@@ -1602,7 +1410,6 @@ const countries = [
   {
     name: "Slovenia",
     code: "+386",
-    prefix: null,
     iso: "SI",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/si.svg",
     mask: "__-___-___",
@@ -1610,7 +1417,6 @@ const countries = [
   {
     name: "Solomon Islands",
     code: "+677",
-    prefix: null,
     iso: "SB",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sb.svg",
     mask: "___-____",
@@ -1618,7 +1424,6 @@ const countries = [
   {
     name: "Somalia",
     code: "+252",
-    prefix: null,
     iso: "SO",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/so.svg",
     mask: "__-___-___",
@@ -1626,7 +1431,6 @@ const countries = [
   {
     name: "South Africa",
     code: "+27",
-    prefix: null,
     iso: "ZA",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/za.svg",
     mask: "__-___-____",
@@ -1634,7 +1438,6 @@ const countries = [
   {
     name: "South Georgia and the South Sandwich Islands",
     code: "+500",
-    prefix: null,
     iso: "GS",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gs.svg",
     mask: "_____",
@@ -1642,7 +1445,6 @@ const countries = [
   {
     name: "South Sudan",
     code: "+211",
-    prefix: null,
     iso: "SS",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ss.svg",
     mask: "__-___-____",
@@ -1650,7 +1452,6 @@ const countries = [
   {
     name: "Spain",
     code: "+34",
-    prefix: null,
     iso: "ES",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/es.svg",
     mask: "(___) ___-___",
@@ -1658,7 +1459,6 @@ const countries = [
   {
     name: "Sri Lanka",
     code: "+94",
-    prefix: null,
     iso: "LK",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/lk.svg",
     mask: "__-___-____",
@@ -1666,7 +1466,6 @@ const countries = [
   {
     name: "Sudan",
     code: "+249",
-    prefix: null,
     iso: "SD",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sd.svg",
     mask: "__-___-____",
@@ -1674,7 +1473,6 @@ const countries = [
   {
     name: "Suriname",
     code: "+597",
-    prefix: null,
     iso: "SR",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sr.svg",
     mask: "___-____",
@@ -1682,7 +1480,6 @@ const countries = [
   {
     name: "Svalbard and Jan Mayen",
     code: "+47",
-    prefix: null,
     iso: "SJ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sj.svg",
     mask: "(___) __-___",
@@ -1690,7 +1487,6 @@ const countries = [
   {
     name: "Sweden",
     code: "+46",
-    prefix: null,
     iso: "SE",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/se.svg",
     mask: "__-___-____",
@@ -1698,7 +1494,6 @@ const countries = [
   {
     name: "Switzerland",
     code: "+41",
-    prefix: null,
     iso: "CH",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ch.svg",
     mask: "__-___-____",
@@ -1706,7 +1501,6 @@ const countries = [
   {
     name: "Syrian Arab Republic",
     code: "+963",
-    prefix: null,
     iso: "SY",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/sy.svg",
     mask: "__-____-___",
@@ -1714,7 +1508,6 @@ const countries = [
   {
     name: "Taiwan",
     code: "+886",
-    prefix: null,
     iso: "TW",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/tw.svg",
     mask: "_-____-____",
@@ -1722,7 +1515,6 @@ const countries = [
   {
     name: "Tajikistan",
     code: "+992",
-    prefix: null,
     iso: "TJ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/tj.svg",
     mask: "__-___-____",
@@ -1730,7 +1522,6 @@ const countries = [
   {
     name: "United Republic of Tanzania",
     code: "+255",
-    prefix: null,
     iso: "TZ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/tz.svg",
     mask: "__-___-____",
@@ -1738,7 +1529,6 @@ const countries = [
   {
     name: "Thailand",
     code: "+66",
-    prefix: null,
     iso: "TH",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/th.svg",
     mask: "__-___-____",
@@ -1746,7 +1536,6 @@ const countries = [
   {
     name: "Timor-Leste",
     code: "+670",
-    prefix: null,
     iso: "TL",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/tl.svg",
     mask: "___-_____",
@@ -1754,7 +1543,6 @@ const countries = [
   {
     name: "Togo",
     code: "+228",
-    prefix: null,
     iso: "TG",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/tg.svg",
     mask: "__-___-___",
@@ -1762,7 +1550,6 @@ const countries = [
   {
     name: "Tokelau",
     code: "+690",
-    prefix: null,
     iso: "TK",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/tk.svg",
     mask: "____",
@@ -1770,7 +1557,6 @@ const countries = [
   {
     name: "Tonga",
     code: "+676",
-    prefix: null,
     iso: "TO",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/to.svg",
     mask: "_____",
@@ -1778,15 +1564,13 @@ const countries = [
   {
     name: "Trinidad and Tobago",
     code: "+1",
-    prefix: "868",
     iso: "TT",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/tt.svg",
-    mask: "(868) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Tunisia",
     code: "+216",
-    prefix: null,
     iso: "TN",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/tn.svg",
     mask: "__-___-___",
@@ -1794,7 +1578,6 @@ const countries = [
   {
     name: "Turkey",
     code: "+90",
-    prefix: null,
     iso: "TR",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/tr.svg",
     mask: "(___) ___-____",
@@ -1802,7 +1585,6 @@ const countries = [
   {
     name: "Turkmenistan",
     code: "+993",
-    prefix: null,
     iso: "TM",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/tm.svg",
     mask: "_-___-____",
@@ -1810,15 +1592,13 @@ const countries = [
   {
     name: "Turks and Caicos Islands",
     code: "+1",
-    prefix: "249",
     iso: "TC",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/tc.svg",
-    mask: "(249) ___-___",
+    mask: "(___) ___-___",
   },
   {
     name: "Tuvalu",
     code: "+688",
-    prefix: null,
     iso: "TV",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/tv.svg",
     mask: "______",
@@ -1826,7 +1606,6 @@ const countries = [
   {
     name: "Uganda",
     code: "+256",
-    prefix: null,
     iso: "UG",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ug.svg",
     mask: "(___) ___-___",
@@ -1834,7 +1613,6 @@ const countries = [
   {
     name: "Ukraine",
     code: "+380",
-    prefix: null,
     iso: "UA",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ua.svg",
     mask: "(__) ___-__-__",
@@ -1842,7 +1620,6 @@ const countries = [
   {
     name: "United Arab Emirates",
     code: "+971",
-    prefix: null,
     iso: "AE",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ae.svg",
     mask: "_-___-____",
@@ -1850,7 +1627,6 @@ const countries = [
   {
     name: "United Kingdom",
     code: "+44",
-    prefix: null,
     iso: "GB",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/gb.svg",
     mask: "__-____-____",
@@ -1858,15 +1634,13 @@ const countries = [
   {
     name: "United States",
     code: "+1",
-    prefix: "408",
     iso: "US",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/us.svg",
-    mask: "(408) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Uruguay",
     code: "+598",
-    prefix: null,
     iso: "UY",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/uy.svg",
     mask: "_-___-__-__",
@@ -1874,7 +1648,6 @@ const countries = [
   {
     name: "Uzbekistan",
     code: "+998",
-    prefix: null,
     iso: "UZ",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/uz.svg",
     mask: "__-___-____",
@@ -1882,7 +1655,6 @@ const countries = [
   {
     name: "Vanuatu",
     code: "+678",
-    prefix: null,
     iso: "VU",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/vu.svg",
     mask: "__-_____",
@@ -1890,7 +1662,6 @@ const countries = [
   {
     name: "Venezuela, Bolivarian Republic of Venezuela",
     code: "+58",
-    prefix: null,
     iso: "VE",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ve.svg",
     mask: "(___) ___-____",
@@ -1898,7 +1669,6 @@ const countries = [
   {
     name: "Vietnam",
     code: "+84",
-    prefix: null,
     iso: "VN",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/vn.svg",
     mask: "(___) ____-___",
@@ -1906,23 +1676,20 @@ const countries = [
   {
     name: "Virgin Islands, British",
     code: "+1",
-    prefix: "284",
     iso: "VG",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/vg.svg",
-    mask: "(284) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Virgin Islands, U.S.",
     code: "+1",
-    prefix: "340",
     iso: "VI",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/vi.svg",
-    mask: "(340) ___-____",
+    mask: "(___) ___-____",
   },
   {
     name: "Wallis and Futuna",
     code: "+681",
-    prefix: null,
     iso: "WF",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/wf.svg",
     mask: "__-____",
@@ -1930,7 +1697,6 @@ const countries = [
   {
     name: "Yemen",
     code: "+967",
-    prefix: null,
     iso: "YE",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/ye.svg",
     mask: "___-___-___",
@@ -1938,7 +1704,6 @@ const countries = [
   {
     name: "Zambia",
     code: "+260",
-    prefix: null,
     iso: "ZM",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/zm.svg",
     mask: "__-___-____",
@@ -1946,11 +1711,10 @@ const countries = [
   {
     name: "Zimbabwe",
     code: "+263",
-    prefix: null,
     iso: "ZW",
     flag: "https://cdn.kcak11.com/CountryFlags/countries/zw.svg",
     mask: "_-______",
   },
 ] as const;
 
-export { countries };
+export { countries, type CountryType };
