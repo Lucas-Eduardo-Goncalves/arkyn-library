@@ -8,6 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@components": resolve(__dirname, "../src"),
+      "@server": resolve(__dirname, "../../server/src"),
     },
   },
 });

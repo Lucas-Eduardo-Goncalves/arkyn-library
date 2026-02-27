@@ -26,7 +26,7 @@ function formatDateString(date: Date, format: string): string {
  * **Note:** This function works with UTC+0 by default. The returned formatted string is not automatically converted to the machine's local timezone.
  * To adjust the timezone, you must manually specify the `timezone` parameter (e.g., -3 for UTC-3).
  *
- * @param {[string, string]} dateTime - An array containing the date and optional time.
+ * @param {string[]} dateTime - An array containing the date and optional time.
  *   - The first element is the date string.
  *   - The second element is the time string (default is "00:00:00").
  * @param {"brazilianDate" | "isoDate" | "timestamp"} inputFormat - The format of the input date.
@@ -80,7 +80,7 @@ function formatDateString(date: Date, format: string): string {
  */
 
 function formatDate(
-  [date, time = "00:00:00"]: [string, string?],
+  [date, time = "00:00:00"]: string[],
   inputFormat: "brazilianDate" | "isoDate" | "timestamp",
   outputFormat: string,
   timezone: number = 0,

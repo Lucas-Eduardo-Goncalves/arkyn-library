@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/components",
-  "version": "3.0.1-beta.122",
+  "version": "3.0.1-beta.123",
   "main": "./dist/bundle.js",
   "module": "./dist/bundle.js",
   "types": "./dist/index.d.ts",
@@ -38,6 +38,7 @@
   "dependencies": {
     "@react-google-maps/api": "^2.20.7",
     "@react-input/mask": "^1.2.15",
+    "@vitejs/plugin-react": "^5.1.4",
     "framer-motion": "^11.18.2",
     "html-react-parser": "^5.2.2",
     "react-hot-toast": "^2.6.0",

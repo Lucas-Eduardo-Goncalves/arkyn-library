@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/server",
-  "version": "3.0.1-beta.122",
+  "version": "3.0.1-beta.123",
   "author": "Arkyn | Lucas Gonçalves",
   "main": "./dist/bundle.js",
   "module": "./dist/bundle.js",

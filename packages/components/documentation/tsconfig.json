@@ -33,6 +33,7 @@
     "target": "ESNext",
     "paths": {
       "@components": ["../src/index.ts"],
+      "@server": ["../../server/src/index.ts"],
       "@components/*": ["../src/*"]
     }
   }
