@@ -6,6 +6,9 @@
   border: 2px dashed var(--border);
   border-radius: 8px;
   background-color: rgba(var(--spotlight-secondary), 1);
+
+  height: 100%;
+  width: 100%;
 }
 
 .arkynMapViewPinnedEmpty > svg {
@@ -34,3 +37,34 @@
 .arkynMapViewPinned .gm-ui-hover-effect {
   display: none !important;
 }
+
+.mapboxgl-popup-content {
+  padding: 0 !important;
+  background-color: transparent !important;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.mapboxgl-popup-tip {
+  display: none !important;
+}
+
+/* .arkynMarker {
+  width: 26px;
+  height: 26px;
+  background: #ff385c;
+  border-radius: 50% 50% 50% 0;
+  position: relative;
+  cursor: pointer;
+}
+
+.arkynMarker::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: #a4082a;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */

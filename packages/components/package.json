@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/components",
-  "version": "3.0.1-beta.123",
+  "version": "3.0.1-beta.126",
   "main": "./dist/bundle.js",
   "module": "./dist/bundle.js",
   "types": "./dist/index.d.ts",
@@ -41,6 +41,7 @@
     "@vitejs/plugin-react": "^5.1.4",
     "framer-motion": "^11.18.2",
     "html-react-parser": "^5.2.2",
+    "mapbox-gl": "^3.20.0",
     "react-hot-toast": "^2.6.0",
     "slate": "^0.103.0",
     "slate-history": "^0.109.0",
@@ -54,6 +55,9 @@
   "devDependencies": {
     "@arkyn/shared": "*",
     "@arkyn/templates": "*",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/is-hotkey": "^0.1.10",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",

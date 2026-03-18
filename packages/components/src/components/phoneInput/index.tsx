@@ -44,11 +44,13 @@ type PhoneInputProps = {
   searchCountryPlaceholder?: string;
   defaultCountryIso?: (typeof countries)[number]["iso"];
   onChange?: (e: string) => void;
+  value?: string;
 };
 
 function PhoneInput(props: PhoneInputProps) {
   const {
     defaultCountryIso,
+    value: rawValue,
     label,
     className: wrapperClassName = "",
     disabled = false,
@@ -76,7 +78,8 @@ function PhoneInput(props: PhoneInputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [search, setSearch] = useState("");
   const [showCountryOptions, setShowCountryOptions] = useState(false);
-  const [value, setValue] = useState(defaultData);
+  const [internalValue, setValue] = useState(defaultData);
+  const value = rawValue !== undefined ? rawValue : internalValue;
 
   const [currentCountry, setCurrentCountry] = useState(defaultCountry);
 
