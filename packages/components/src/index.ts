@@ -46,6 +46,7 @@ export { TableCaption } from "./components/table/tableCaption";
 export { TableContainer } from "./components/table/tableContainer";
 export { TableFooter } from "./components/table/tableFooter";
 export { TableHeader } from "./components/table/tableHeader";
+export { TagManager } from "./components/tagManager";
 export { Textarea } from "./components/textarea";
 export { Tooltip } from "./components/tooltip";
 
