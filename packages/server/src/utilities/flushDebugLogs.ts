@@ -60,8 +60,9 @@ function flushDebugLogs(props: {
     const debugName = `${colors[props.scheme]}[${props.name}]${reset}`;
     let consoleData = `\n`;
 
-    props.debugs.forEach((debug) => {
-      consoleData += `${debugName} ${debug.trim()}\n`;
+    props.debugs.forEach((debug, index) => {
+      consoleData += `${debugName} ${debug.trim()}`;
+      if (index < props.debugs.length - 1) consoleData += `\n`;
     });
 
     console.log(consoleData);
