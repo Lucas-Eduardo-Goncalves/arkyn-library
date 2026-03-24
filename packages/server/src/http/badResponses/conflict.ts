@@ -20,6 +20,7 @@ class Conflict extends BadResponse {
     this.name = "Conflict";
     this.status = 409;
     this.statusText = message;
+    this.debugColor = "yellow";
     this.cause = cause ? JSON.stringify(cause) : undefined;
 
     this.onDebug();

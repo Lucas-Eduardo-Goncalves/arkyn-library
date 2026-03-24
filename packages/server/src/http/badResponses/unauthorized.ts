@@ -20,6 +20,7 @@ class Unauthorized extends BadResponse {
     this.name = "Unauthorized";
     this.status = 401;
     this.statusText = message;
+    this.debugColor = "yellow";
     this.cause = cause ? JSON.stringify(cause) : undefined;
 
     this.onDebug();

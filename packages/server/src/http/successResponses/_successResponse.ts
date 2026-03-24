@@ -10,6 +10,7 @@ class SuccessResponse {
   private _name: string = "SuccessResponse";
   private _status: number = 200;
   private _statusText: string = "OK";
+  private _debugColor: "green" | "yellow" | "cyan" | "red" = "green";
 
   get body(): any {
     return this._body;
@@ -43,6 +44,15 @@ class SuccessResponse {
     this._statusText = value;
   }
 
+  get debugColor(): "green" | "yellow" | "cyan" | "red" {
+    return this._debugColor;
+  }
+
+  set debugColor(value: "green" | "yellow" | "cyan" | "red") {
+    if (!["green", "yellow", "cyan", "red"].includes(value)) return;
+    this._debugColor = value;
+  }
+
   /**
    * Logs debug information for success responses including caller context and response details.
    *
@@ -64,7 +74,7 @@ class SuccessResponse {
     if (this.statusText) debugs.push(`Message: ${this.statusText}`);
     if (body) debugs.push(`Body: ${JSON.stringify(body)}`);
 
-    flushDebugLogs({ scheme: "red", name: this.name, debugs });
+    flushDebugLogs({ scheme: this._debugColor, name: this.name, debugs });
   }
 
   makeBody(): any {

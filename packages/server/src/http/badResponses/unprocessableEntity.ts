@@ -28,6 +28,7 @@ class UnprocessableEntity extends BadResponse {
     this.name = "UnprocessableEntity";
     this.status = 422;
     this.statusText = props.message || "Unprocessable entity";
+    this.debugColor = "yellow";
     this.cause = {
       data: props.data,
       fieldErrors: props.fieldErrors,

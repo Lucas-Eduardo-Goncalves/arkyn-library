@@ -1,3 +1,5 @@
+import { formatJsonString } from "@arkyn/shared";
+
 import { DebugService } from "../../services/debugService";
 import { flushDebugLogs } from "../../utilities/flushDebugLogs";
 
@@ -6,6 +8,7 @@ class BadResponse {
   private _name: string = "BadResponse";
   private _status: number = 500;
   private _statusText: string = "Unknown error";
+  private _debugColor: "green" | "yellow" | "cyan" | "red" = "red";
 
   get cause(): any {
     return this._cause;
@@ -39,6 +42,15 @@ class BadResponse {
     this._statusText = value;
   }
 
+  get debugColor(): "green" | "yellow" | "cyan" | "red" {
+    return this._debugColor;
+  }
+
+  set debugColor(value: "green" | "yellow" | "cyan" | "red") {
+    if (!["green", "yellow", "cyan", "red"].includes(value)) return;
+    this._debugColor = value;
+  }
+
   onDebug() {
     const debugs: string[] = [];
     const { callerInfo, functionName } = DebugService.getCaller();
@@ -47,7 +59,9 @@ class BadResponse {
     debugs.push(`Caller Location: ${callerInfo}`);
 
     if (this._statusText) debugs.push(`Message: ${this._statusText}`);
-    if (this._cause) debugs.push(`Cause: ${JSON.stringify(this._cause)}`);
+    if (this._cause) {
+      debugs.push(`Cause: ${formatJsonString(JSON.stringify(this._cause))}`);
+    }
 
     flushDebugLogs({ scheme: "red", name: this._name, debugs });
   }
