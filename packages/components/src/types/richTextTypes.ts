@@ -10,7 +10,8 @@ type RichTextHiddenButtonKey =
   | "right"
   | "center"
   | "justify"
-  | "image";
+  | "image"
+  | "video";
 
 type RichTextElementFormatType =
   | "blockQuote"
@@ -20,7 +21,8 @@ type RichTextElementFormatType =
   | "listItem"
   | "numberedList"
   | "paragraph"
-  | "image";
+  | "image"
+  | "video";
 
 type RichTextAlignFormatType = "center" | "left" | "right" | "justify";
 
@@ -34,6 +36,14 @@ type RichTextInsertImageProps = {
   modalInputImageLabel?: string;
   modalCancelButton?: string;
   modalConfirmButton?: string;
+};
+
+type RichTextInsertVideoProps = {
+  modalTitle?: string;
+  modalInputUrlLabel?: string;
+  modalCancelButton?: string;
+  modalConfirmButton?: string;
+  invalidUrlMessage?: string;
 };
 
 type RichTextCustomElement = {
@@ -65,6 +75,7 @@ type RichTextProps = {
   label?: string;
   showAsterisk?: boolean;
   imageConfig?: RichTextInsertImageProps;
+  videoConfig?: RichTextInsertVideoProps;
   onChangeCharactersCount?: (e: number) => void;
   onChange?: (value: Descendant[]) => void;
 };
@@ -89,6 +100,7 @@ export type {
   RichTextElementFormatType,
   RichTextHiddenButtonKey,
   RichTextInsertImageProps,
+  RichTextInsertVideoProps,
   RichTextMarkFormatType,
   RichTextProps,
   RichTextValue,

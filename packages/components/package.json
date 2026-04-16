@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/components",
-  "version": "3.0.1-beta.129",
+  "version": "3.0.1-beta.130",
   "main": "./dist/bundle.js",
   "module": "./dist/bundle.js",
   "types": "./dist/index.d.ts",
@@ -36,36 +36,36 @@
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@react-google-maps/api": "^2.20.7",
+    "@react-google-maps/api": "^2.20.8",
     "@react-input/mask": "^1.2.15",
-    "@vitejs/plugin-react": "^5.1.4",
+    "@vitejs/plugin-react": "^5.2.0",
     "framer-motion": "^11.18.2",
-    "html-react-parser": "^5.2.2",
-    "mapbox-gl": "^3.20.0",
+    "html-react-parser": "^5.2.17",
+    "mapbox-gl": "^3.21.0",
     "react-hot-toast": "^2.6.0",
     "slate": "^0.103.0",
     "slate-history": "^0.109.0",
     "slate-react": "^0.110.3"
   },
   "peerDependencies": {
-    "react": ">=18.3.1",
-    "react-dom": ">=18.3.1",
-    "lucide-react": ">=0.424.0"
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "lucide-react": "^1.8.0"
   },
   "devDependencies": {
     "@arkyn/shared": "*",
     "@arkyn/templates": "*",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.2.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@types/is-hotkey": "^0.1.10",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "bun-types": "latest",
     "globals": "^15.15.0",
-    "jsdom": "^28.0.0",
-    "typescript": "^5.9.2",
-    "vite": "^5.4.19",
-    "vitest": "^4.1.0-beta.4"
+    "jsdom": "^28.1.0",
+    "typescript": "^5.9.3",
+    "vite": "^5.4.21",
+    "vitest": "^4.1.4"
   }
 }

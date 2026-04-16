@@ -1,7 +1,7 @@
 import { ClientOnly } from "../clientOnly";
-import { TagManagerClient } from "./tagManager.client";
+import { GoogleTagManagerClient } from "./googleTagManager.client";
 
-type TagManagerProps = {
+type GoogleTagManagerProps = {
   gtmId: string;
   events?: Record<string, string>;
   dataLayer?: Record<string, string>;
@@ -12,9 +12,9 @@ type TagManagerProps = {
 };
 
 /**
- * TagManager component - injects Google Tag Manager snippets into the page
+ * GoogleTagManager component - injects Google Tag Manager snippets into the page
  *
- * @param props - TagManager component properties
+ * @param props - GoogleTagManager component properties
  * @param props.gtmId - Google Tag Manager container id (for example: "GTM-XXXXXXX")
  * @param props.events - Additional GTM events payload
  * @param props.dataLayer - Initial data to populate the dataLayer
@@ -23,15 +23,15 @@ type TagManagerProps = {
  * @param props.preview - GTM environment preview token
  * @param props.showInDevMode - If true, renders in development mode. Default: false
  *
- * @returns TagManager JSX element
+ * @returns GoogleTagManager JSX element
  *
  * @example
  * ```tsx
  * // Basic GTM setup
- * <TagManager gtmId="GTM-XXXXXXX" />
+ * <GoogleTagManager gtmId="GTM-XXXXXXX" />
  *
  * // GTM with initial dataLayer values
- * <TagManager
+ * <GoogleTagManager
  *  gtmId="GTM-XXXXXXX"
  *  dataLayer={{
  *    pageType: "home",
@@ -40,7 +40,7 @@ type TagManagerProps = {
  * />
  *
  * // GTM environment (staging)
- * <TagManager
+ * <GoogleTagManager
  *  gtmId="GTM-XXXXXXX"
  *  auth="your-auth-token"
  *  preview="env-3"
@@ -49,7 +49,7 @@ type TagManagerProps = {
  * ```
  */
 
-function TagManager(props: TagManagerProps) {
+function GoogleTagManager(props: GoogleTagManagerProps) {
   const {
     gtmId,
     auth = "",
@@ -67,7 +67,7 @@ function TagManager(props: TagManagerProps) {
   return (
     <ClientOnly>
       {() => (
-        <TagManagerClient
+        <GoogleTagManagerClient
           auth={auth}
           dataLayer={dataLayer}
           dataLayerName={dataLayerName}
@@ -80,4 +80,4 @@ function TagManager(props: TagManagerProps) {
   );
 }
 
-export { TagManager };
+export { GoogleTagManager };

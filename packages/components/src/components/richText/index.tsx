@@ -20,6 +20,7 @@ import { Editable, Slate, withReact } from "slate-react";
 import { BlockButton } from "./blockButton";
 import { Element } from "./element";
 import { InsertImage } from "./insertImage";
+import { InsertVideo } from "./insertVideo";
 import { Leaf } from "./leaf";
 import { MarkButton } from "./markButton";
 import { Toolbar } from "./toolbar";
@@ -106,6 +107,7 @@ function RichText(props: RichTextProps) {
     name,
     hiddenButtons,
     imageConfig,
+    videoConfig,
     defaultValue = "[]",
     enforceCharacterLimit = false,
     onChangeCharactersCount,
@@ -133,7 +135,7 @@ function RichText(props: RichTextProps) {
           typeof node === "object" &&
           node !== null &&
           "type" in node &&
-          "children" in node
+          "children" in node,
       );
 
       return isValidNodes ? parsedNodes : initialValue;
@@ -146,7 +148,7 @@ function RichText(props: RichTextProps) {
 
   const [charactersCount, setCharactersCount] = useState(textFromNodes.length);
   const [inputValue, setInputValue] = useState(
-    JSON.stringify(getDefaultNodes()) || "[]"
+    JSON.stringify(getDefaultNodes()) || "[]",
   );
 
   const [onFocus, setOnFocus] = useState(false);
@@ -181,8 +183,8 @@ function RichText(props: RichTextProps) {
   const errorClass = isError
     ? "errorTrue"
     : maxLimit < charactersCount
-    ? "errorTrue"
-    : "errorFalse";
+      ? "errorTrue"
+      : "errorFalse";
 
   const className = `arkynRichText ${errorClass} ${focusClass}`;
 
@@ -251,6 +253,8 @@ function RichText(props: RichTextProps) {
             {imageConfig && buttonIsNotHidden("image") && (
               <InsertImage {...imageConfig} />
             )}
+
+            {buttonIsNotHidden("video") && <InsertVideo {...videoConfig} />}
           </Toolbar>
 
           <Editable

@@ -20,10 +20,12 @@ function serialize(node: any): string {
   }
 
   if (Element.isElement(node)) {
-    const children = node.children.map((n: any) => serialize(n)).join("");
+    const children = node.children?.map((n: any) => serialize(n)).join("");
     const alignStyle = node.align || "left";
 
     switch (node.type) {
+      case "video":
+        return `<iframe src="${node.src}" class="align_${alignStyle}" />`;
       case "image":
         return `<img src="${node.src}" class="align_${alignStyle}" />`;
       case "paragraph":
@@ -41,7 +43,7 @@ function serialize(node: any): string {
       case "numberedList":
         return `<ol class="align_${alignStyle}">${children}</ol>`;
       default:
-        return children;
+        return "";
     }
   }
 

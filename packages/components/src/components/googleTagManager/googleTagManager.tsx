@@ -30,7 +30,7 @@ interface Window {
 
 declare var window: Window;
 
-class TagManager {
+class GoogleTagManager {
   private initializeDataScript(dataLayer: string) {
     const script = document.createElement("script");
     script.innerHTML = dataLayer;
@@ -97,4 +97,4 @@ class TagManager {
   }
 }
 
-export { TagManager };
+export { GoogleTagManager };

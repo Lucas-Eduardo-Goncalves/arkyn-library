@@ -14,6 +14,7 @@
   ],
   "compilerOptions": {
     "outDir": "./dist",
+    "rootDir": "./src",
     "composite": false,
     "declaration": true,
     "declarationDir": "./dist",
@@ -22,7 +23,7 @@
     "forceConsistentCasingInFileNames": true,
     "inlineSources": false,
     "isolatedModules": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "preserveWatchOutput": true,

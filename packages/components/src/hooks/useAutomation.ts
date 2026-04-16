@@ -59,9 +59,15 @@ function useAutomation(formResponseData: any) {
     if (message) {
       if (type === "success") showToast({ message, type: "success" });
       if (type === "danger") showToast({ message, type: "danger" });
-      if (badResponses.includes(name)) showToast({ message, type: "danger" });
-      if (successResponses.includes(name))
+      if (badResponses.includes(name) && !badResponses.includes(message)) {
+        showToast({ message, type: "danger" });
+      }
+      if (
+        successResponses.includes(name) &&
+        !successResponses.includes(message)
+      ) {
         showToast({ message, type: "success" });
+      }
     }
   }, [formResponseData]);
 }

@@ -1,4 +1,5 @@
-import { ModalProvider, ToastProvider } from "@components";
+import { ModalProvider } from "../../src/providers/modalProvider";
+import { ToastProvider } from "../../src/providers/toastProvider";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./app";

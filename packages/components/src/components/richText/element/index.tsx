@@ -57,6 +57,21 @@ function Element({ attributes, children, element }: RenderElementProps) {
           {children}
         </div>
       );
+    case "video":
+      return (
+        <div style={style} {...attributes}>
+          <iframe
+            className="arkynElementVideo"
+            src={element?.src || ""}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+
+          {children}
+        </div>
+      );
 
     default:
       return (
