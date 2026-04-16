@@ -1,9 +1,9 @@
-import { ClientOnly } from "@arkyn/components";
 import { MapPinned } from "lucide-react";
 import type { HtmlHTMLAttributes, ReactNode } from "react";
 
 import { ClientMapView } from "./mapView.client";
 import "./styles.css";
+import { ClientOnly } from "../clientOnly";
 
 type Coordinate = {
   lat: number;

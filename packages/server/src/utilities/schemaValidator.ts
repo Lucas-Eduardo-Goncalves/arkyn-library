@@ -1,4 +1,4 @@
-import { ZodType, z } from "zod";
+import type { ZodType, z } from "zod";
 
 import { ServerError } from "../http/badResponses/serverError";
 import { UnprocessableEntity } from "../http/badResponses/unprocessableEntity";

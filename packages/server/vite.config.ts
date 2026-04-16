@@ -14,6 +14,8 @@ export default defineConfig({
         "dns/promises",
         "node:dns",
         "node:dns/promises",
+        "path",
+        "node:path",
         "zod",
       ],
       output: { format: "esm" },

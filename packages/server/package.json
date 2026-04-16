@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/server",
-  "version": "3.0.1-beta.130",
+  "version": "3.0.1-beta.135",
   "author": "Arkyn | Lucas Gonçalves",
   "main": "./dist/bundle.js",
   "module": "./dist/bundle.js",
@@ -31,9 +31,9 @@
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
   "peerDependencies": {
-    "@arkyn/shared": "*",
-    "@arkyn/templates": "*",
-    "zod": "^4.3.6"
+    "@arkyn/shared": ">=3.0.1-beta.132",
+    "@arkyn/templates": ">=3.0.1-beta.132",
+    "zod": ">=4.0.0"
   },
   "devDependencies": {
     "bun-types": "latest",

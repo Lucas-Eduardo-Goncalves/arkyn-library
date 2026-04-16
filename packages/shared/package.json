@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/shared",
-  "version": "3.0.1-beta.130",
+  "version": "3.0.1-beta.135",
   "main": "./dist/bundle.js",
   "module": "./dist/bundle.js",
   "type": "module",
@@ -31,6 +31,7 @@
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@arkyn/templates": ">=3.0.1-beta.132",
     "libphonenumber-js": "^1.12.41",
     "uuid": "^10.0.0"
   },

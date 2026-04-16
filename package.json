@@ -23,7 +23,7 @@
     "@arkyn/server": "workspace:*",
     "@arkyn/shared": "workspace:*",
     "@arkyn/templates": "workspace:*",
-    "@rollup/rollup-linux-x64-gnu": "^4.52.5"
+    "@rollup/rollup-linux-x64-gnu": "^4.60.1"
   },
   "scripts": {
     "all:update-packages": "cd packages/components && bun update && cd ../server && bun update && cd ../shared && bun update && cd ../templates && bun update",

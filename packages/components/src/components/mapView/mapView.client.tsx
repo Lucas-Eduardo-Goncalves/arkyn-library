@@ -1,6 +1,6 @@
 import mapBoxGl, { Map } from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
 import { createRoot } from "react-dom/client";
+import "./mapbox.css";
 import {
   useEffect,
   useRef,

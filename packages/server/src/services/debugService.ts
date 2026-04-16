@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 
 /**
  * Service for managing HTTP debug configuration and behavior.

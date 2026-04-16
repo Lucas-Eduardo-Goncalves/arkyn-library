@@ -8,13 +8,15 @@
         "@arkyn/server": "workspace:*",
         "@arkyn/shared": "workspace:*",
         "@arkyn/templates": "workspace:*",
-        "@rollup/rollup-linux-x64-gnu": "^4.52.5",
+        "@rollup/rollup-linux-x64-gnu": "^4.60.1",
       },
     },
     "packages/components": {
       "name": "@arkyn/components",
-      "version": "3.0.1-beta.129",
+      "version": "3.0.1-beta.133",
       "dependencies": {
+        "@arkyn/shared": ">=3.0.1-beta.132",
+        "@arkyn/templates": ">=3.0.1-beta.132",
         "@react-google-maps/api": "^2.20.8",
         "@react-input/mask": "^1.2.15",
         "@vitejs/plugin-react": "^5.2.0",
@@ -27,8 +29,6 @@
         "slate-react": "^0.110.3",
       },
       "devDependencies": {
-        "@arkyn/shared": "*",
-        "@arkyn/templates": "*",
         "@testing-library/jest-dom": "^6.9.1",
         "@testing-library/react": "^16.3.2",
         "@testing-library/user-event": "^14.6.1",
@@ -43,14 +43,14 @@
         "vitest": "^4.1.4",
       },
       "peerDependencies": {
-        "lucide-react": "^1.8.0",
+        "lucide-react": ">=0.1.0",
         "react": "^19.2.5",
         "react-dom": "^19.2.5",
       },
     },
     "packages/server": {
       "name": "@arkyn/server",
-      "version": "3.0.1-beta.129",
+      "version": "3.0.1-beta.132",
       "devDependencies": {
         "bun-types": "latest",
         "typescript": "^5.9.3",
@@ -58,15 +58,16 @@
         "vitest": "^3.2.4",
       },
       "peerDependencies": {
-        "@arkyn/shared": "*",
-        "@arkyn/templates": "*",
-        "zod": "^4.3.6",
+        "@arkyn/shared": ">=3.0.1-beta.132",
+        "@arkyn/templates": ">=3.0.1-beta.132",
+        "zod": ">=4.0.0",
       },
     },
     "packages/shared": {
       "name": "@arkyn/shared",
-      "version": "3.0.1-beta.129",
+      "version": "3.0.1-beta.132",
       "dependencies": {
+        "@arkyn/templates": ">=3.0.1-beta.132",
         "libphonenumber-js": "^1.12.41",
         "uuid": "^10.0.0",
       },
@@ -80,12 +81,12 @@
     },
     "packages/templates": {
       "name": "@arkyn/templates",
-      "version": "3.0.1-beta.129",
+      "version": "3.0.1-beta.132",
       "devDependencies": {
         "@types/uuid": "^10.0.0",
         "bun-types": "latest",
-        "typescript": "^5.9.2",
-        "vite": "^5.4.19",
+        "typescript": "^5.9.3",
+        "vite": "^5.4.21",
       },
     },
   },
