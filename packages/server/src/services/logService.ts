@@ -28,7 +28,7 @@ class LogService {
     if (!!this.config) return;
 
     const { trafficSourceId, userToken, logBaseApiUrl } = config;
-    const baseUrl = logBaseApiUrl || `http://95.216.190.158:8081`;
+    const baseUrl = logBaseApiUrl || `http://62.238.8.44:8081`;
     const apiUrl = `${baseUrl}/ingest-log`;
 
     this.config = { trafficSourceId, userToken, apiUrl };
