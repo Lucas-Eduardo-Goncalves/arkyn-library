@@ -1,3 +1,4 @@
+import { formatJsonObject } from "@arkyn/shared";
 import { flushDebugLogs } from "../..";
 import { LogService } from "../../services/logService";
 
@@ -106,7 +107,29 @@ async function logRequest(config: ConfigProps): Promise<void> {
       Authorization: `Bearer ${userToken}`,
     };
 
-    await fetch(apiUrl, { method: "POST", body, headers });
+    const fetchResponse = await fetch(apiUrl, {
+      method: "POST",
+      body,
+      headers,
+    });
+
+    if (!fetchResponse.ok) {
+      const errorText = await fetchResponse.text();
+      const errorStatus = fetchResponse.status;
+      const errorStatusText = fetchResponse.statusText;
+      const jsonResponse = await fetchResponse.json().catch(() => null);
+
+      flushDebugLogs({
+        name: "LogError",
+        scheme: "red",
+        debugs: [
+          `Failed to log request.`,
+          `Status: ${errorStatus} ${errorStatusText}.`,
+          `Status text: ${errorText}.`,
+          `JSON Response: ${jsonResponse ? formatJsonObject(jsonResponse, 0) : "No JSON response"}`,
+        ],
+      });
+    }
   } catch (err) {
     flushDebugLogs({
       debugs: [`Error sending request: ${err}`],
