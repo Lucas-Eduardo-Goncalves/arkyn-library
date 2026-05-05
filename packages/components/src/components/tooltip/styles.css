@@ -27,13 +27,13 @@
 
 .arkynTooltip.lg .arkynTooltipText {
   font-size: 14px;
-  line-height: 14px;
+  line-height: 130%;
   padding: 8px 12px;
 }
 
 .arkynTooltip.md .arkynTooltipText {
   font-size: 12px;
-  line-height: 12px;
+  line-height: 130%;
   padding: 8px 12px;
 }
 

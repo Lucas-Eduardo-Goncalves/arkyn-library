@@ -18,6 +18,13 @@ function decodeRequestErrorMessage(data: any, response: Response): string {
     return data?.message;
   }
 
+  if (
+    data?.operator_erro_message &&
+    typeof data?.operator_erro_message === "string"
+  ) {
+    return data?.operator_erro_message;
+  }
+
   if (data?.error && typeof data?.error === "string") {
     return data?.error;
   }

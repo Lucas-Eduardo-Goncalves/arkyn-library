@@ -32,6 +32,7 @@
 
 .arkynTextarea textarea::placeholder {
   color: var(--text-muted);
+  line-height: 130%;
 }
 
 .arkynTextarea.opacityTrue {
