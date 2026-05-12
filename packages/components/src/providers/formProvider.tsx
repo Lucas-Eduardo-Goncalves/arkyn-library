@@ -80,7 +80,12 @@ function FormProvider(props: FormProviderProps) {
   return (
     <formContext.Provider value={{ fieldErrors }}>
       {!form && children}
-      {form && cloneElement(form, form.props, children)}
+      {form &&
+        cloneElement(
+          form as React.ReactElement,
+          form.props as React.ReactElement,
+          children,
+        )}
     </formContext.Provider>
   );
 }

@@ -43,8 +43,8 @@ type MaskedInputProps = Omit<
   leftIcon?: LucideIcon;
   rightIcon?: LucideIcon;
 
-  value?: string | null;
-  defaultValue?: string | null;
+  value?: string;
+  defaultValue?: string;
 };
 
 const BaseInput = forwardRef<

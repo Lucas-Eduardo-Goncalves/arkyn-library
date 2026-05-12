@@ -30,6 +30,7 @@
     "skipLibCheck": true,
     "jsx": "react-jsx",
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "types": ["node"],
     "module": "ESNext",
     "target": "ESNext",
     "paths": {

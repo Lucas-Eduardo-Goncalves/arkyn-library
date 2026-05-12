@@ -73,8 +73,8 @@ function AudioPlayer(props: AudioPlayerProps): JSX.Element {
 
   const audioReference = useRef<HTMLAudioElement>(null);
 
-  const currentTime = audioReference.current?.currentTime;
-  const totalTime = audioReference.current?.duration;
+  const currentTime = audioReference.current?.currentTime || 0;
+  const totalTime = audioReference.current?.duration || 0;
 
   const formattedCurrentTime = formatTime(currentTime);
   const formattedTotalTime = formatTime(totalTime);

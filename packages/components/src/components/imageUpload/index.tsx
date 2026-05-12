@@ -29,7 +29,7 @@ type ImageUploadProps = {
   fileResponseName?: string;
   acceptImage?: string;
 
-  onChange?: (url?: string) => void;
+  onChange?: (url: string) => void;
 };
 
 /**
