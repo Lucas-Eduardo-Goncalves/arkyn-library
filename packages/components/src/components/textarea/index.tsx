@@ -26,8 +26,8 @@ type TextareaProps = Omit<
   size?: "md" | "lg";
   variant?: "solid" | "outline";
 
-  value?: string | null;
-  defaultValue?: string | null;
+  value?: string;
+  defaultValue?: string;
 };
 
 /**

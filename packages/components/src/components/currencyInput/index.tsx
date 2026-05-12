@@ -76,13 +76,13 @@ type CurrencyInputProps = Omit<
   rightIcon?: LucideIcon;
 
   max?: number;
-  value?: number | null;
-  defaultValue?: number | null;
+  value?: number;
+  defaultValue?: number;
 
   onChange?: (
     event: ChangeEvent<HTMLInputElement>,
     originalValue: string,
-    maskedValue: string
+    maskedValue: string,
   ) => void;
 };
 
@@ -227,7 +227,7 @@ function CurrencyInput(props: CurrencyInputProps) {
   const updateValues = (originalValue: string | number) => {
     const [calculatedValue, calculatedMaskedValue] = maskCurrencyValues(
       originalValue,
-      locale
+      locale,
     );
 
     if (!max || calculatedValue <= max) {
@@ -246,8 +246,13 @@ function CurrencyInput(props: CurrencyInputProps) {
   };
 
   useEffect(() => {
-    const currentValue = value || +defaultValue || undefined;
-    const [, maskedValue] = maskCurrencyValues(currentValue, locale);
+    function currentValue() {
+      if (typeof value === "number") return value;
+      if (typeof defaultValue === "number") return defaultValue;
+      return undefined;
+    }
+
+    const [, maskedValue] = maskCurrencyValues(currentValue(), locale);
 
     setMaskedValue(maskedValue);
   }, [locale, defaultValue, value]);
