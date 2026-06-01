@@ -65,7 +65,7 @@ type AudioPlayerProps = Omit<
  * />
  */
 function AudioPlayer(props: AudioPlayerProps): JSX.Element {
-  const { onPlayAudio, onPauseAudio, disabled, ...rest } = props;
+  const { onPlayAudio, onPauseAudio, disabled, style, ...rest } = props;
 
   const [sliderValue, setSliderValue] = useSlider(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -155,7 +155,7 @@ function AudioPlayer(props: AudioPlayerProps): JSX.Element {
   }, []);
 
   return (
-    <div className="arkynAudioPlayer">
+    <div className="arkynAudioPlayer" style={style}>
       <audio
         {...rest}
         ref={audioReference}

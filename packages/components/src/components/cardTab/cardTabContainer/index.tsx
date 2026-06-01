@@ -1,6 +1,6 @@
 import { HTMLAttributes, ReactNode, useState } from "react";
 
-import { TabProvider } from "../cardTabContext";
+import { CardTabProvider } from "../cardTabContext";
 import "./styles.css";
 
 type CardTabContainerProps = Omit<
@@ -106,7 +106,7 @@ function CardTabContainer(props: CardTabContainerProps) {
   }
 
   return (
-    <TabProvider
+    <CardTabProvider
       disabled={disabled}
       currentTab={currentTab}
       changeCurrentTab={changeCurrentTab}
@@ -114,7 +114,7 @@ function CardTabContainer(props: CardTabContainerProps) {
       <nav className={className.trim()} {...rest}>
         {children}
       </nav>
-    </TabProvider>
+    </CardTabProvider>
   );
 }
 

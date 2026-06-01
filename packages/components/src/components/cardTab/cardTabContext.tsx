@@ -6,7 +6,7 @@ type CardTabContextProps = {
   changeCurrentTab: (tab: string) => void;
 };
 
-type TabProviderProps = {
+type CardTabProviderProps = {
   children: ReactNode;
   disabled: boolean;
   currentTab: string;
@@ -19,7 +19,7 @@ function useCardTab() {
   return useContext(CardTabContext);
 }
 
-function TabProvider(props: TabProviderProps) {
+function CardTabProvider(props: CardTabProviderProps) {
   return (
     <CardTabContext.Provider value={props}>
       {props.children}
@@ -27,4 +27,4 @@ function TabProvider(props: TabProviderProps) {
   );
 }
 
-export { TabProvider, useCardTab };
+export { CardTabProvider, useCardTab };
