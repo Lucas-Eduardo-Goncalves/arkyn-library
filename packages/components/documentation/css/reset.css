@@ -8,7 +8,6 @@
 input,
 textarea,
 button {
-  line-height: 130%;
   font-family: "Open Sans", sans-serif;
   font-optical-sizing: auto;
 }
