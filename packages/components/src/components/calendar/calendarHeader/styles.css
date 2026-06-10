@@ -1,0 +1,40 @@
+.arkynCalendarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+}
+
+.arkynCalendarHeader > p {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-body);
+}
+
+.arkynCalendarHeader .arkynCalendarButton {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  border: unset;
+  background-color: unset;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.arkynCalendarHeader .arkynCalendarButton:hover svg {
+  color: rgb(var(--spotlight-primary));
+}
+
+.arkynCalendarHeader > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.arkynCalendarHeader div .arkynSelectContainer {
+  padding: unset;
+  min-height: 24px;
+  min-width: 70px;
+}

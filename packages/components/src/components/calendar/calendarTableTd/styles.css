@@ -1,0 +1,120 @@
+.arkynCalendarTableTd {
+  user-select: none;
+  cursor: pointer;
+}
+
+.arkynCalendarTableTd p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  text-align: center;
+  border-radius: 8px;
+
+  height: 40px;
+  width: 40px;
+
+  margin: auto;
+}
+
+.arkynCalendarTableTd.previous p,
+.arkynCalendarTableTd.next p {
+  color: var(--text-muted);
+}
+
+.arkynCalendarTableTd.current p {
+  color: var(--text-body);
+}
+
+.arkynCalendarTableTd:hover p {
+  color: rgb(var(--spotlight-primary));
+}
+
+.arkynCalendarTableTd.today:not(.checkedDay) p {
+  color: var(--text-body);
+  font-weight: 500;
+  background-color: rgb(var(--spotlight-secondary));
+  filter: brightness(0.97);
+}
+
+.arkynCalendarTableTd .textGroup {
+  position: relative;
+
+  height: 40px;
+  width: 40px;
+  margin: auto;
+}
+
+.arkynCalendarTableTd.checkedDay .textGroup span {
+  content: " ";
+
+  position: absolute;
+  background-color: rgb(var(--spotlight-primary));
+
+  border-radius: 8px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 2;
+}
+
+.arkynCalendarTableTd.checkedDay .textGroup p {
+  position: absolute;
+  color: var(--white);
+  font-weight: 600;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 3;
+}
+
+.arkynCalendarTableTd.middleDay .textGroup span {
+  content: " ";
+
+  position: absolute;
+  background-color: rgb(var(--spotlight-secondary));
+  filter: brightness(0.95);
+
+  top: 0;
+  left: -15px;
+  right: -15px;
+  bottom: 0;
+
+  z-index: 1;
+}
+
+.arkynCalendarTableTd:first-child.middleDay .textGroup span {
+  left: 0px;
+  right: -15px;
+
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.arkynCalendarTableTd:last-child.middleDay .textGroup span {
+  left: -15px;
+  right: 0px;
+
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.arkynCalendarTableTd.middleDay .textGroup p {
+  position: absolute;
+  color: var(--text-muted);
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 2;
+}
+
+.arkynCalendarTableTd.current.middleDay .textGroup p {
+  color: var(--text-body);
+}

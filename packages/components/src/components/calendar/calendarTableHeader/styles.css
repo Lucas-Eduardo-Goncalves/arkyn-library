@@ -1,0 +1,10 @@
+.arkynCalendarTableHeader th {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding-bottom: 8px;
+}
+
+.arkynCalendarTableHeader {
+  border-bottom: 1px solid var(--border);
+}

@@ -8,6 +8,7 @@ export { AudioPlayer } from "./components/audioPlayer";
 export { AudioUpload } from "./components/audioUpload";
 export { Badge } from "./components/badge";
 export { Button } from "./components/button";
+export { Calendar } from "./components/calendar";
 export { CardTabButton } from "./components/cardTab/cardTabButton";
 export { CardTabContainer } from "./components/cardTab/cardTabContainer";
 export { Checkbox } from "./components/checkbox";

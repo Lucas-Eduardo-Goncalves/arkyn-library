@@ -1,0 +1,12 @@
+.arkynCalendarContainer {
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 8px;
+  padding: 16px;
+  gap: 32px;
+  border: 1px solid var(--border);
+
+  background-color: rgba(var(--spotlight-secondary));
+  max-width: 400px;
+}
