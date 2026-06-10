@@ -2,10 +2,8 @@ import { Check } from "lucide-react";
 import { ButtonHTMLAttributes, useId, useRef, useState } from "react";
 
 import { useForm } from "../../hooks/useForm";
-import { FieldWrapper } from "../fieldWrapper";
+import { FieldTemplate } from "../../services/fieldTemplate";
 
-import { FieldError } from "../fieldError";
-import { FieldLabel } from "../fieldLabel";
 import "./styles.css";
 
 type CheckboxProps = Omit<
@@ -21,6 +19,8 @@ type CheckboxProps = Omit<
   | "onClick"
 > & {
   label?: string;
+  showAsterisk?: boolean;
+  unShowFieldTemplate?: boolean;
   errorMessage?: string;
 
   size?: "md" | "lg" | "sm";
@@ -46,7 +46,9 @@ type CheckboxProps = Omit<
  * @param props.checked - Controlled checked state of the checkbox
  * @param props.defaultChecked - Default checked state for uncontrolled usage. Default: false
  * @param props.onCheck - Callback function called when checkbox state changes, receives the value or empty string
- * @param props.orientation - Orientation of the checkbox and label. Default: "horizontalReverse"
+ * @param props.showAsterisk - Whether to show asterisk on label for required fields
+ * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
+ * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
  *
  * **...Other valid HTML properties for button element (except type, name, defaultValue, value, onChange, onSelect, onClick)**
  *
@@ -106,6 +108,8 @@ function Checkbox(props: CheckboxProps) {
     checked: baseChecked = null,
     onCheck,
     orientation = "horizontalReverse",
+    showAsterisk,
+    unShowFieldTemplate,
     value,
     ...rest
   } = props;
@@ -135,8 +139,15 @@ function Checkbox(props: CheckboxProps) {
   }
 
   return (
-    <FieldWrapper orientation={orientation} className={wrapperClassName}>
-      {label && <FieldLabel htmlFor={checkboxId}>{label}</FieldLabel>}
+    <FieldTemplate
+      name={name}
+      label={label}
+      showAsterisk={showAsterisk}
+      className={wrapperClassName}
+      errorMessage={errorMessage}
+      unShowFieldTemplate={unShowFieldTemplate}
+      orientation={orientation}
+    >
       <button
         id={checkboxId}
         type="button"
@@ -153,8 +164,7 @@ function Checkbox(props: CheckboxProps) {
 
         <Check />
       </button>
-      {errorMessage && <FieldError>{errorMessage}</FieldError>}
-    </FieldWrapper>
+    </FieldTemplate>
   );
 }
 

@@ -10,15 +10,12 @@ import {
 } from "react";
 
 import { useForm } from "../../hooks/useForm";
+import { FieldTemplate } from "../../services/fieldTemplate";
 import { IconRenderer } from "../../services/iconRenderer";
 import {
   maskCurrencyValues,
   normalizeValue,
 } from "../../services/maskCurrencyValues";
-
-import { FieldError } from "../fieldError";
-import { FieldLabel } from "../fieldLabel";
-import { FieldWrapper } from "../fieldWrapper";
 
 import "./style.css";
 
@@ -64,9 +61,11 @@ type CurrencyInputProps = Omit<
   label?: string;
   errorMessage?: string;
   isLoading?: boolean;
+  unShowFieldTemplate?: boolean;
 
   size?: "md" | "lg";
   variant?: "solid" | "outline" | "underline";
+  orientation?: "horizontal" | "vertical" | "horizontalReverse";
 
   prefix?: string | LucideIcon;
   suffix?: string | LucideIcon;
@@ -106,6 +105,9 @@ type CurrencyInputProps = Omit<
  * @param props.value - Controlled value (number) for the input
  * @param props.defaultValue - Default value (number) for uncontrolled usage
  * @param props.onChange - Callback function called when value changes, receives event, original value and masked value
+ * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
+ * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
+ *
  *
  * **...Other valid HTML properties for input element (except type, max, defaultValue, value, onChange)**
  *
@@ -182,6 +184,8 @@ function CurrencyInput(props: CurrencyInputProps) {
     onFocus,
     onBlur,
     errorMessage: baseErrorMessage,
+    unShowFieldTemplate,
+    orientation,
     showAsterisk,
     rightIcon,
     size = "md",
@@ -266,13 +270,15 @@ function CurrencyInput(props: CurrencyInputProps) {
   const className = `arkynCurrencyInput ${hasPrefix} ${hasSuffix} ${variant} ${size} ${opacity} ${errored} ${focused}`;
 
   return (
-    <FieldWrapper className={wrapperClassName}>
-      {label && (
-        <FieldLabel showAsterisk={showAsterisk} htmlFor={inputId}>
-          {label}
-        </FieldLabel>
-      )}
-
+    <FieldTemplate
+      name={name}
+      label={label}
+      showAsterisk={showAsterisk}
+      className={wrapperClassName}
+      errorMessage={errorMessage}
+      unShowFieldTemplate={unShowFieldTemplate}
+      orientation={orientation}
+    >
       <section
         title={title}
         style={style}
@@ -321,9 +327,7 @@ function CurrencyInput(props: CurrencyInputProps) {
 
         <IconRenderer iconSize={iconSize} icon={suffix} className="suffix" />
       </section>
-
-      {errorMessage && <FieldError>{errorMessage}</FieldError>}
-    </FieldWrapper>
+    </FieldTemplate>
   );
 }
 

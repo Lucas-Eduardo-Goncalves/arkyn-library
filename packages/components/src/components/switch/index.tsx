@@ -1,9 +1,8 @@
 import type { ButtonHTMLAttributes } from "react";
 import { useId, useRef, useState } from "react";
 
+import { FieldTemplate } from "../../services/fieldTemplate";
 import "./styles.css";
-import { FieldWrapper } from "../fieldWrapper";
-import { FieldLabel } from "../fieldLabel";
 
 type SwitchProps = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
@@ -18,6 +17,9 @@ type SwitchProps = Omit<
   name: string;
   onCheck?: (value: string) => void;
   orientation?: "vertical" | "horizontal" | "horizontalReverse";
+  unShowFieldTemplate?: boolean;
+  showAsterisk?: boolean;
+  errorMessage?: string;
 };
 
 /**
@@ -32,7 +34,8 @@ type SwitchProps = Omit<
  * @param props.value - Value to be used when switch is checked. Default: "checked"
  * @param props.unCheckedValue - Value to be used when switch is unchecked. Default: ""
  * @param props.onCheck - Callback function called when switch state changes, receives the current value
- * @param props.orientation - Orientation of the switch and label. Default: "horizontalReverse"
+ * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
+ * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
  *
  * **...Other valid HTML properties for button element (except children, onChange, defaultValue, onCheck, value)**
  *
@@ -114,6 +117,10 @@ function Switch(props: SwitchProps) {
     onCheck,
     id,
     orientation = "horizontalReverse",
+    className: wrapperClassName = "",
+    showAsterisk,
+    errorMessage,
+    unShowFieldTemplate = false,
     ...rest
   } = props;
 
@@ -134,9 +141,15 @@ function Switch(props: SwitchProps) {
   const className = `arkynSwitch ${checkedClass} ${size} ${baseClassName}`;
 
   return (
-    <FieldWrapper orientation={orientation}>
-      {label && <FieldLabel onClick={handleCheck}>{label}</FieldLabel>}
-
+    <FieldTemplate
+      name={name}
+      label={label}
+      showAsterisk={showAsterisk}
+      className={wrapperClassName}
+      errorMessage={errorMessage}
+      unShowFieldTemplate={unShowFieldTemplate}
+      orientation={orientation}
+    >
       <button
         type="button"
         onClick={handleCheck}
@@ -152,7 +165,7 @@ function Switch(props: SwitchProps) {
           value={currentChecked ? value || "checked" : unCheckedValue}
         />
       </button>
-    </FieldWrapper>
+    </FieldTemplate>
   );
 }
 

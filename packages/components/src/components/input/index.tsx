@@ -8,11 +8,8 @@ import {
 } from "react";
 
 import { useForm } from "../../hooks/useForm";
+import { FieldTemplate } from "../../services/fieldTemplate";
 import { IconRenderer } from "../../services/iconRenderer";
-
-import { FieldError } from "../fieldError";
-import { FieldLabel } from "../fieldLabel";
-import { FieldWrapper } from "../fieldWrapper";
 
 import "./style.css";
 
@@ -25,6 +22,7 @@ type InputProps = Omit<
   label?: string;
   errorMessage?: string;
   isLoading?: boolean;
+  unShowFieldTemplate?: boolean;
 
   size?: "md" | "lg";
   variant?: "solid" | "outline" | "underline";
@@ -32,6 +30,7 @@ type InputProps = Omit<
   prefix?: string | LucideIcon;
   suffix?: string | LucideIcon;
   showAsterisk?: boolean;
+  orientation?: "horizontal" | "vertical" | "horizontalReverse";
 
   leftIcon?: LucideIcon;
   rightIcon?: LucideIcon;
@@ -55,6 +54,8 @@ type InputProps = Omit<
  * @param props.showAsterisk - Whether to show asterisk on label for required fields
  * @param props.leftIcon - Optional icon to display on the left side
  * @param props.rightIcon - Optional icon to display on the right side
+ * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
+ * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
  *
  * **...Other valid HTML properties for input element**
  *
@@ -119,6 +120,7 @@ function Input(props: InputProps) {
     readOnly,
     onFocus,
     onBlur,
+    unShowFieldTemplate = false,
     errorMessage: baseErrorMessage,
     showAsterisk,
     rightIcon,
@@ -127,6 +129,7 @@ function Input(props: InputProps) {
     id,
     value,
     placeholder,
+    orientation,
     ...rest
   } = props;
 
@@ -185,13 +188,15 @@ function Input(props: InputProps) {
   const className = `arkynInput ${hasPrefix} ${disabledClass} ${hasSuffix} ${variant} ${size} ${opacity} ${errored} ${focused}`;
 
   return (
-    <FieldWrapper className={wrapperClassName}>
-      {label && (
-        <FieldLabel showAsterisk={showAsterisk} htmlFor={inputId}>
-          {label}
-        </FieldLabel>
-      )}
-
+    <FieldTemplate
+      name={name}
+      label={label}
+      showAsterisk={showAsterisk}
+      className={wrapperClassName}
+      errorMessage={errorMessage}
+      unShowFieldTemplate={unShowFieldTemplate}
+      orientation={orientation}
+    >
       <section
         title={title}
         style={style}
@@ -234,9 +239,7 @@ function Input(props: InputProps) {
 
         <IconRenderer iconSize={iconSize} icon={suffix} className="suffix" />
       </section>
-
-      {errorMessage && <FieldError>{errorMessage}</FieldError>}
-    </FieldWrapper>
+    </FieldTemplate>
   );
 }
 

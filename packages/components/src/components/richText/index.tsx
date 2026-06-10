@@ -27,17 +27,13 @@ import { Toolbar } from "./toolbar";
 
 import { useForm } from "../../hooks/useForm";
 import { extractTextFromNode } from "../../services/extractTextFromNode";
+import { FieldTemplate } from "../../services/fieldTemplate";
 import { toggleMark } from "../../services/toggleMark";
 import { hotKeys, initialValue } from "../../templates/richTextTemplates";
 import {
   RichTextHiddenButtonKey,
   RichTextProps,
 } from "../../types/richTextTypes";
-
-import { FieldError } from "../fieldError";
-import { FieldLabel } from "../fieldLabel";
-import { FieldWrapper } from "../fieldWrapper";
-
 import "./styles.css";
 
 /**
@@ -59,6 +55,8 @@ import "./styles.css";
  * @param props.onChange - Callback function triggered when editor content changes
  * @param props.isError - Whether the component should display in error state
  * @param props.id - Custom ID for the editor element
+ * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
+ * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
  *
  * @returns JSX element representing the rich text editor
  *
@@ -108,6 +106,7 @@ function RichText(props: RichTextProps) {
     hiddenButtons,
     imageConfig,
     videoConfig,
+    className: wrapperClassName = "",
     defaultValue = "[]",
     enforceCharacterLimit = false,
     onChangeCharactersCount,
@@ -118,6 +117,8 @@ function RichText(props: RichTextProps) {
     label,
     showAsterisk,
     id,
+    orientation = "horizontal",
+    unShowFieldTemplate = false,
   } = props;
 
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
@@ -195,9 +196,15 @@ function RichText(props: RichTextProps) {
   }
 
   return (
-    <FieldWrapper>
-      {label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
-
+    <FieldTemplate
+      name={name}
+      label={label}
+      showAsterisk={showAsterisk}
+      className={wrapperClassName}
+      errorMessage={errorMessage}
+      unShowFieldTemplate={unShowFieldTemplate}
+      orientation={orientation}
+    >
       <Slate
         editor={editor}
         initialValue={getDefaultNodes()}
@@ -290,8 +297,7 @@ function RichText(props: RichTextProps) {
 
         <input type="hidden" name={`${name}Count`} value={charactersCount} />
       </Slate>
-      <FieldError>{errorMessage}</FieldError>
-    </FieldWrapper>
+    </FieldTemplate>
   );
 }
 

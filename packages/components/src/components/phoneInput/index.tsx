@@ -1,16 +1,13 @@
-import { countries } from "@arkyn/templates";
-import { useId, useRef, useState } from "react";
 import {
   findCountryMask,
   formatToPhone,
   removeNonNumeric,
 } from "@arkyn/shared";
+import { countries } from "@arkyn/templates";
+import { useId, useRef, useState } from "react";
 
 import { useForm } from "../../hooks/useForm";
-
-import { FieldError } from "../fieldError";
-import { FieldLabel } from "../fieldLabel";
-import { FieldWrapper } from "../fieldWrapper";
+import { FieldTemplate } from "../../services/fieldTemplate";
 
 import { PhoneInputContainer } from "./phoneInputContainer";
 import { PhoneInputCountriesOverlay } from "./phoneInputCountriesOverlay";
@@ -45,8 +42,56 @@ type PhoneInputProps = {
   defaultCountryIso?: (typeof countries)[number]["iso"];
   onChange?: (e: string) => void;
   value?: string;
+  unShowFieldTemplate?: boolean;
+  orientation?: "horizontal" | "vertical" | "horizontalReverse";
 };
 
+/**
+ * Phone input with country selector, mask formatting, and hidden form value.
+ *
+ * The component formats the visible value according to the selected country mask,
+ * while the hidden input stores a numeric string prefixed with the country code.
+ * It also integrates with `useForm` to display validation errors by field name.
+ *
+ * @param {PhoneInputProps} props Component properties.
+ * @param {string} props.name Hidden input name used in form submission.
+ * @param {string} [props.label] Optional field label.
+ * @param {boolean} [props.showAsterisk] Displays required marker in the label.
+ * @param {string} [props.errorMessage] Custom error message (overrides form context error).
+ * @param {"md" | "lg"} [props.size="md"] Visual size.
+ * @param {"solid" | "outline"} [props.variant="solid"] Visual variant.
+ * @param {boolean} [props.disabled=false] Disables interactions.
+ * @param {boolean} [props.readOnly=false] Prevents editing while keeping value visible.
+ * @param {boolean} [props.isLoading=false] Applies loading state and disables interactions.
+ * @param {string} [props.defaultValue=""] Initial phone value for uncontrolled usage.
+ * @param {string} [props.value] Controlled phone value.
+ * @param {(value: string) => void} [props.onChange] Callback with numeric value including country code.
+ * @param {(typeof countries)[number]["iso"]} [props.defaultCountryIso] Reserved prop for default country ISO.
+ * @param {string} [props.searchCountryPlaceholder="Pesquisar país"] Placeholder for country search input.
+ * @param {string} [props.notFoundCountryText="Nenhum país encontrado"] Text shown when no country matches search.
+ * @param {string} [props.className] Class applied to the field wrapper.
+ * @param {string} [props.id] Optional id for the visible phone input.
+ * @param {boolean} [props.unShowFieldTemplate=false] When `true`, skips wrapper/label/error rendering from `FieldTemplate`.
+ * @param {"horizontal" | "vertical" | "horizontalReverse"} [props.orientation="horizontal"] Layout direction forwarded to `FieldTemplate`/`FieldWrapper`.
+ *
+ * @returns {JSX.Element} Phone input field with country picker and hidden input for form submission.
+ *
+ * @example
+ * ```tsx
+ * <PhoneInput name="phone" label="Telefone" />
+ * ```
+ *
+ * @example
+ * ```tsx
+ * <PhoneInput
+ *   name="contactPhone"
+ *   value={phone}
+ *   onChange={setPhone}
+ *   variant="outline"
+ *   size="lg"
+ * />
+ * ```
+ */
 function PhoneInput(props: PhoneInputProps) {
   const {
     defaultCountryIso,
@@ -66,6 +111,8 @@ function PhoneInput(props: PhoneInputProps) {
     searchCountryPlaceholder = "Pesquisar país",
     notFoundCountryText = "Nenhum país encontrado",
     id,
+    unShowFieldTemplate = false,
+    orientation = "horizontal",
   } = props;
 
   const brasilCountry = countries.find((country) => country.iso === "BR")!;
@@ -131,13 +178,15 @@ function PhoneInput(props: PhoneInputProps) {
   }
 
   return (
-    <FieldWrapper className={wrapperClassName}>
-      {label && (
-        <FieldLabel htmlFor={phoneInputId} showAsterisk={showAsterisk}>
-          {label}
-        </FieldLabel>
-      )}
-
+    <FieldTemplate
+      name={name}
+      label={label}
+      showAsterisk={showAsterisk}
+      className={wrapperClassName}
+      errorMessage={errorMessage}
+      unShowFieldTemplate={unShowFieldTemplate}
+      orientation={orientation}
+    >
       <PhoneInputContainer
         disabled={isDisabled}
         isError={isError}
@@ -208,9 +257,7 @@ function PhoneInput(props: PhoneInputProps) {
           value={inputValue()}
         />
       </PhoneInputContainer>
-
-      {errorMessage && <FieldError>{errorMessage}</FieldError>}
-    </FieldWrapper>
+    </FieldTemplate>
   );
 }
 

@@ -2,11 +2,9 @@ import { LucideIcon } from "lucide-react";
 import { FocusEvent, useId, useRef, useState } from "react";
 
 import { useForm } from "../../hooks/useForm";
+import { FieldTemplate } from "../../services/fieldTemplate";
 import { IconRenderer } from "../../services/iconRenderer";
 
-import { FieldError } from "../fieldError";
-import { FieldLabel } from "../fieldLabel";
-import { FieldWrapper } from "../fieldWrapper";
 import { SelectChevron } from "./selectChevron";
 import { SelectContainer } from "./selectContainer";
 import { SelectContent } from "./selectContent";
@@ -51,6 +49,9 @@ type SelectProps = {
   leftIcon?: LucideIcon;
 
   optionMaxHeight?: number;
+
+  unShowFieldTemplate?: boolean;
+  orientation?: "horizontal" | "vertical" | "horizontalReverse";
 };
 
 /**
@@ -82,6 +83,8 @@ type SelectProps = {
  * @param props.prefix - Text or icon to display at the beginning of the select
  * @param props.leftIcon - Optional icon to display on the left side
  * @param props.optionMaxHeight - Maximum height for the options dropdown
+ * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
+ * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
  *
  * @returns Select JSX element wrapped in FieldWrapper with optional label and error
  *
@@ -171,6 +174,8 @@ function Select(props: SelectProps) {
     size = "md",
     value,
     variant = "solid",
+    orientation = "horizontal",
+    unShowFieldTemplate = false,
   } = props;
 
   const { fieldErrors } = useForm();
@@ -237,9 +242,15 @@ function Select(props: SelectProps) {
   });
 
   return (
-    <FieldWrapper className={wrapperClassName}>
-      {label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
-
+    <FieldTemplate
+      name={name}
+      label={label}
+      showAsterisk={showAsterisk}
+      className={wrapperClassName}
+      errorMessage={errorMessage}
+      unShowFieldTemplate={unShowFieldTemplate}
+      orientation={orientation}
+    >
       <SelectContainer
         handleContainerFocus={handleContainerFocus}
         disabled={disabled}
@@ -301,9 +312,7 @@ function Select(props: SelectProps) {
         <SelectSpinner iconSize={iconSize} isLoading={isLoading} />
         <SelectOverlay handleBlur={handleBlur} isFocused={isFocused} />
       </SelectContainer>
-
-      {errorMessage && <FieldError>{errorMessage}</FieldError>}
-    </FieldWrapper>
+    </FieldTemplate>
   );
 }
 

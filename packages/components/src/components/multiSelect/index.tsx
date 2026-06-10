@@ -4,9 +4,7 @@ import { FocusEvent, useId, useRef, useState } from "react";
 import { useForm } from "../../hooks/useForm";
 import { IconRenderer } from "../../services/iconRenderer";
 
-import { FieldError } from "../fieldError";
-import { FieldLabel } from "../fieldLabel";
-import { FieldWrapper } from "../fieldWrapper";
+import { FieldTemplate } from "@components/services/fieldTemplate";
 import { MultiSelectChevron } from "./multiSelectChevron";
 import { MultiSelectContainer } from "./multiSelectContainer";
 import { MultiSelectContent } from "./multiSelectContent";
@@ -52,6 +50,9 @@ type MultiSelectProps = {
   leftIcon?: LucideIcon;
 
   optionMaxHeight?: number;
+
+  unShowFieldTemplate?: boolean;
+  orientation?: "horizontal" | "vertical" | "horizontalReverse";
 };
 
 /**
@@ -83,6 +84,8 @@ type MultiSelectProps = {
  * @param props.prefix - Text or icon to display at the beginning of the multiselect
  * @param props.leftIcon - Optional icon to display on the left side
  * @param props.optionMaxHeight - Maximum height for the options dropdown
+ * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
+ * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
  *
  * @returns MultiSelect JSX element wrapped in FieldWrapper with optional label and error
  *
@@ -172,6 +175,8 @@ function MultiSelect(props: MultiSelectProps) {
     size = "md",
     value,
     variant = "solid",
+    unShowFieldTemplate = false,
+    orientation = "horizontal",
   } = props;
 
   const { fieldErrors } = useForm();
@@ -238,9 +243,15 @@ function MultiSelect(props: MultiSelectProps) {
   });
 
   return (
-    <FieldWrapper className={wrapperClassName}>
-      {label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
-
+    <FieldTemplate
+      name={name}
+      label={label}
+      showAsterisk={showAsterisk}
+      className={wrapperClassName}
+      errorMessage={errorMessage}
+      unShowFieldTemplate={unShowFieldTemplate}
+      orientation={orientation}
+    >
       <MultiSelectContainer
         handleContainerFocus={handleContainerFocus}
         disabled={disabled}
@@ -309,9 +320,7 @@ function MultiSelect(props: MultiSelectProps) {
         <MultiSelectSpinner iconSize={iconSize} isLoading={isLoading} />
         <MultiSelectOverlay handleBlur={handleBlur} isFocused={isFocused} />
       </MultiSelectContainer>
-
-      {errorMessage && <FieldError>{errorMessage}</FieldError>}
-    </FieldWrapper>
+    </FieldTemplate>
   );
 }
 

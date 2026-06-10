@@ -1,9 +1,7 @@
 import { HTMLAttributes, useState } from "react";
 
-import { FieldError } from "../../../components/fieldError";
-import { FieldLabel } from "../../../components/fieldLabel";
-import { FieldWrapper } from "../../../components/fieldWrapper";
 import { useForm } from "../../../hooks/useForm";
+import { FieldTemplate } from "../../../services/fieldTemplate";
 
 import { RadioProvider } from "../radioContext";
 import "./styles.css";
@@ -18,6 +16,8 @@ type RadioGroupProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> & {
   onChange?: (value: string) => void;
   size?: "sm" | "md" | "lg";
   disabled?: boolean;
+  unShowFieldTemplate?: boolean;
+  orientation?: "horizontal" | "vertical" | "horizontalReverse";
 };
 
 /**
@@ -32,6 +32,8 @@ type RadioGroupProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> & {
  * @param props.defaultValue - Default selected value for uncontrolled usage. Default: ""
  * @param props.onChange - Callback function called when radio selection changes, receives the selected value
  * @param props.size - Size variant for all radio buttons in the group. Default: "md"
+ * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
+ * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
  *
  * **...Other valid HTML properties for div element (except onChange)**
  *
@@ -110,6 +112,8 @@ function RadioGroup(props: RadioGroupProps) {
     size = "md",
     className: wrapperClassName = "",
     disabled = false,
+    unShowFieldTemplate = false,
+    orientation = "horizontal",
     ...rest
   } = props;
 
@@ -126,8 +130,15 @@ function RadioGroup(props: RadioGroupProps) {
   const className = `arkynRadioGroup ${size}`;
 
   return (
-    <FieldWrapper className={wrapperClassName}>
-      {label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
+    <FieldTemplate
+      name={name}
+      label={label}
+      showAsterisk={showAsterisk}
+      className={wrapperClassName}
+      errorMessage={errorMessage}
+      unShowFieldTemplate={unShowFieldTemplate}
+      orientation={orientation}
+    >
       <RadioProvider
         isError={isError}
         size={size}
@@ -145,8 +156,7 @@ function RadioGroup(props: RadioGroupProps) {
 
         <div className={className.trim()} {...rest} />
       </RadioProvider>
-      {errorMessage && <FieldError>{errorMessage}</FieldError>}
-    </FieldWrapper>
+    </FieldTemplate>
   );
 }
 

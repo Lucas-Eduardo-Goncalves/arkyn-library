@@ -1,9 +1,7 @@
 import { useState } from "react";
 
 import { useForm } from "../../hooks/useForm";
-import { FieldError } from "../fieldError";
-import { FieldLabel } from "../fieldLabel";
-import { FieldWrapper } from "../fieldWrapper";
+import { FieldTemplate } from "../../services/fieldTemplate";
 
 import { HasFileContent } from "./hasFileContent";
 import { NoFileContent } from "./noFileContent";
@@ -30,6 +28,9 @@ type ImageUploadProps = {
   acceptImage?: string;
 
   onChange?: (url: string) => void;
+
+  unShowFieldTemplate?: boolean;
+  orientation?: "horizontal" | "vertical" | "horizontalReverse";
 };
 
 /**
@@ -51,6 +52,8 @@ type ImageUploadProps = {
  * @param props.fileResponseName - Property name in the response object containing the image URL. Default: "url"
  * @param props.acceptImage - Image file types accepted by the input (e.g., "image/*", ".jpg,.png"). Default: "image/*"
  * @param props.onChange - Callback function called when image upload completes successfully, receives the image URL
+ * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
+ * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
  *
  * @returns ImageUpload JSX element wrapped in FieldGroup with optional label, image preview, and error handling
  *
@@ -145,6 +148,8 @@ function ImageUpload(props: ImageUploadProps) {
     dropImageText = "Ou arraste e solte a imagem aqui",
     onChange,
     disabled = false,
+    unShowFieldTemplate = false,
+    orientation = "horizontal",
   } = props;
 
   const { fieldErrors } = useForm();
@@ -194,9 +199,15 @@ function ImageUpload(props: ImageUploadProps) {
   const className = `arkynImageUpload ${hasErrorClassName} ${hasImageClassName}`;
 
   return (
-    <FieldWrapper className={wrapperClassName}>
-      {label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
-
+    <FieldTemplate
+      name={name}
+      label={label}
+      showAsterisk={showAsterisk}
+      className={wrapperClassName}
+      errorMessage={errorMessage}
+      unShowFieldTemplate={unShowFieldTemplate}
+      orientation={orientation}
+    >
       <div className={className}>
         <input type="hidden" name={name} value={value || ""} />
 
@@ -225,9 +236,7 @@ function ImageUpload(props: ImageUploadProps) {
           />
         )}
       </div>
-
-      {errorMessage && <FieldError>{errorMessage}</FieldError>}
-    </FieldWrapper>
+    </FieldTemplate>
   );
 }
 

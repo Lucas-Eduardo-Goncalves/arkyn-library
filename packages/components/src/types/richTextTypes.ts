@@ -65,6 +65,9 @@ type Descendant = RichTextCustomElement | RichTextCustomText;
 
 type RichTextProps = {
   name: string;
+  className?: string;
+  unShowFieldTemplate?: boolean;
+  orientation?: "horizontal" | "vertical" | "horizontalReverse";
   hiddenButtons?: RichTextHiddenButtonKey[];
   maxLimit?: number;
   enforceCharacterLimit?: boolean;
