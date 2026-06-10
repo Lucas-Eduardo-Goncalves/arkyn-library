@@ -2,9 +2,9 @@ import { LucideIcon } from "lucide-react";
 import { FocusEvent, useId, useRef, useState } from "react";
 
 import { useForm } from "../../hooks/useForm";
+import { FieldTemplate } from "../../services/fieldTemplate";
 import { IconRenderer } from "../../services/iconRenderer";
 
-import { FieldTemplate } from "@components/services/fieldTemplate";
 import { MultiSelectChevron } from "./multiSelectChevron";
 import { MultiSelectContainer } from "./multiSelectContainer";
 import { MultiSelectContent } from "./multiSelectContent";
