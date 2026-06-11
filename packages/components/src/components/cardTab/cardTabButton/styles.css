@@ -9,9 +9,13 @@
   font-weight: 600;
   letter-spacing: 0%;
   border: none;
-  color: var(--text-muted);
-  background-color: var(--background);
+  color: var(--text-heading);
   cursor: pointer;
+
+  height: 40px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background-color: transparent;
 }
 
 .arkynCardTabButton.isDisabled {
@@ -20,15 +24,11 @@
 }
 
 .arkynCardTabButton:hover:not(:disabled) {
-  background-color: var(--background-foreground);
-  color: rgb(var(--spotlight-primary));
-}
-
-.arkynCardTabButton:not(:last-child) {
-  border-right: 2px solid var(--border);
+  background-color: var(--white);
+  border-color: var(--border);
 }
 
 .arkynCardTabButton.isActive {
-  background-color: var(--background-foreground);
-  color: rgb(var(--spotlight-primary));
+  background-color: var(--white);
+  border-color: var(--border);
 }

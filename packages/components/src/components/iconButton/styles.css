@@ -49,7 +49,7 @@ html.dark .arkynIconButton:hover {
 }
 
 .arkynIconButton.outline {
-  background-color: var(--card-foreground-primary);
+  background-color: var(--card);
   border-color: var(--border);
 }
 .arkynIconButton.outline.primary {
