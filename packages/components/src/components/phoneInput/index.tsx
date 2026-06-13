@@ -71,7 +71,7 @@ type PhoneInputProps = {
   unShowFieldTemplate?: boolean;
   /**
    * Layout direction forwarded to `FieldTemplate`.
-   * @default "horizontal"
+   * @default "vertical"
    */
   orientation?: "horizontal" | "vertical" | "horizontalReverse";
 };
@@ -98,7 +98,7 @@ type PhoneInputProps = {
  * @param props.defaultCountryIso - ISO code of the initially selected country. Default: "BR"
  * @param props.searchCountryPlaceholder - Placeholder for country search. Default: "Pesquisar país"
  * @param props.notFoundCountryText - Text shown when no country matches. Default: "Nenhum país encontrado"
- * @param props.orientation - Layout direction. Default: "horizontal"
+ * @param props.orientation - Layout direction. Default: "vertical"
  * @param props.unShowFieldTemplate - Skips wrapper, label, and error rendering. Default: false
  *
  * @returns PhoneInput JSX element wrapped in `FieldTemplate`.
@@ -147,7 +147,7 @@ function PhoneInput(props: PhoneInputProps) {
     notFoundCountryText = "Nenhum país encontrado",
     id,
     unShowFieldTemplate = false,
-    orientation = "horizontal",
+    orientation = "vertical",
   } = props;
 
   const brasilCountry = countries.find((country) => country.iso === "BR")!;
