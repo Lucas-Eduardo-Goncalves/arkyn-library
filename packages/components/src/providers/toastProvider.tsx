@@ -17,36 +17,25 @@ type ToastProviderProps = {
 const toastContext = createContext({} as ToastContextProps);
 
 /**
- * ToastProvider component - provides toast context for managing toast notifications
+ * ToastProvider — mounts a `react-hot-toast` `<Toaster>` and exposes `showToast` via context.
  *
- * @param props - ToastProvider component properties
- * @param props.children - React elements that will have access to the toast context
+ * Wrap your app once. Then call `useToast()` anywhere in the tree to show notifications.
+ * Supports two types: `"success"` (green) and `"danger"` (red).
  *
- * @returns ToastProvider JSX element that wraps children with toast context
+ * @param props.children - App subtree that will have access to `useToast`.
+ *
+ * @returns ToastProvider JSX element.
  *
  * @example
- * Basic usage:
  * ```tsx
+ * // In your root layout
  * <ToastProvider>
  *   <App />
  * </ToastProvider>
- * ```
  *
- * @example
- * Using toast in component:
- * ```tsx
- * function MyComponent() {
- *   const { showToast } = useToast();
- *
- *   const handleClick = () => {
- *     showToast({
- *       message: 'Success!',
- *       type: 'success'
- *     });
- *   };
- *
- *   return <button onClick={handleClick}>Show Toast</button>;
- * }
+ * // Anywhere in the tree
+ * const { showToast } = useToast();
+ * showToast({ message: "Order placed!", type: "success" });
  * ```
  */
 

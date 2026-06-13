@@ -17,56 +17,79 @@ type InputProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
   "size" | "prefix" | "name" | "value" | "defaultValue"
 > & {
+  /** Field name for form submission. Required. */
   name: string;
-
+  /** Optional label text displayed above the input. */
   label?: string;
+  /** Validation error message displayed below the input. */
   errorMessage?: string;
+  /** Shows a spinner and disables the input during async operations. @default false */
   isLoading?: boolean;
+  /** When true, skips `FieldTemplate` wrapper (label and error text). @default false */
   unShowFieldTemplate?: boolean;
-
+  /**
+   * Input size.
+   * @default "md"
+   */
   size?: "md" | "lg";
+  /**
+   * Visual style variant.
+   * - `solid`: filled background.
+   * - `outline`: bordered, transparent background.
+   * - `underline`: bottom border only.
+   * @default "solid"
+   */
   variant?: "solid" | "outline" | "underline";
-
+  /** Text or icon rendered at the far left, outside the input area (e.g. `"https://"`). */
   prefix?: string | LucideIcon;
+  /** Text or icon rendered at the far right, outside the input area (e.g. `".com"`). */
   suffix?: string | LucideIcon;
+  /** Displays an asterisk on the label to signal a required field. */
   showAsterisk?: boolean;
+  /**
+   * Layout direction forwarded to `FieldTemplate`.
+   * @default "horizontal"
+   */
   orientation?: "horizontal" | "vertical" | "horizontalReverse";
-
+  /** Lucide icon rendered inside the input on the left. */
   leftIcon?: LucideIcon;
+  /** Lucide icon rendered inside the input on the right. */
   rightIcon?: LucideIcon;
-
+  /** Controlled value. */
   value?: string;
+  /** Uncontrolled default value. */
   defaultValue?: string;
 };
 
 /**
- * Input component - used for text input fields with support for labels, validation, icons, and loading states
+ * Input — text input field with label, validation, icons, prefix/suffix, and loading state.
  *
- * @param props - Input component properties
- * @param props.name - Required field name for form handling
- * @param props.label - Optional label text to display above the input
- * @param props.errorMessage - Error message to display below the input
- * @param props.isLoading - Controls loading state with spinner. Default: false
- * @param props.size - Input size. Default: "md"
- * @param props.variant - Visual variant of the input. Default: "solid"
- * @param props.prefix - Text or icon to display at the beginning of the input
- * @param props.suffix - Text or icon to display at the end of the input
- * @param props.showAsterisk - Whether to show asterisk on label for required fields
- * @param props.leftIcon - Optional icon to display on the left side
- * @param props.rightIcon - Optional icon to display on the right side
- * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
- * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
+ * Integrates with `useForm` to display validation errors by field name.
  *
- * **...Other valid HTML properties for input element**
+ * @param props.name - Field name for form submission. Required.
+ * @param props.label - Label text displayed above the input.
+ * @param props.errorMessage - Validation error message.
+ * @param props.isLoading - Shows a spinner and disables the input. Default: false
+ * @param props.size - Input size (`md` | `lg`). Default: "md"
+ * @param props.variant - Visual style variant. Default: "solid"
+ * @param props.prefix - Text or icon at the far left (outside the input).
+ * @param props.suffix - Text or icon at the far right (outside the input).
+ * @param props.leftIcon - Lucide icon inside the input on the left.
+ * @param props.rightIcon - Lucide icon inside the input on the right.
+ * @param props.showAsterisk - Appends `*` to the label.
+ * @param props.orientation - Layout direction (`horizontal` | `vertical` | `horizontalReverse`). Default: "horizontal"
+ * @param props.unShowFieldTemplate - Skips wrapper, label, and error rendering. Default: false
  *
- * @returns Input JSX element wrapped in FieldGroup with optional label and error
+ * **...Other valid HTML properties for `<input>`**
+ *
+ * @returns Input JSX element wrapped in `FieldTemplate`.
  *
  * @example
  * ```tsx
- * // Basic input
+ * // Basic
  * <Input name="username" placeholder="Enter username" />
  *
- * // Input with label and validation
+ * // With label and validation
  * <Input
  *   name="email"
  *   label="Email Address"
@@ -75,32 +98,11 @@ type InputProps = Omit<
  *   errorMessage="Please enter a valid email"
  * />
  *
- * // Input with icons and loading state
- * <Input
- *   name="search"
- *   label="Search"
- *   leftIcon={SearchIcon}
- *   rightIcon={FilterIcon}
- *   isLoading
- * />
+ * // With icons and loading state
+ * <Input name="search" label="Search" leftIcon={SearchIcon} isLoading />
  *
- * // Input with prefix/suffix
- * <Input
- *   name="website"
- *   label="Website"
- *   prefix="https://"
- *   suffix=".com"
- *   variant="outline"
- * />
- *
- * // Large input with underline variant
- * <Input
- *   name="title"
- *   label="Article Title"
- *   size="lg"
- *   variant="underline"
- *   placeholder="Enter article title"
- * />
+ * // With prefix/suffix
+ * <Input name="website" label="Website" prefix="https://" suffix=".com" variant="outline" />
  * ```
  */
 

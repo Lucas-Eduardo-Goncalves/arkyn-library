@@ -94,8 +94,8 @@ async function isValidDns(domain: string): Promise<boolean> {
  * - Validating advanced RFC 5322 compliance rules
  * - Verifying that the domain has valid MX or A records in DNS
  *
- * @param {string} rawEmail - The email address string to validate
- * @returns {Promise<boolean>} A promise that resolves to `true` if the email is valid (including DNS), otherwise `false`
+ * @param rawEmail - The email address to validate.
+ * @returns `true` if the email passes format checks and its domain resolves in DNS, otherwise `false`.
  *
  * @example
  * ```typescript

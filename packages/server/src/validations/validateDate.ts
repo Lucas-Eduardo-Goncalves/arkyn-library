@@ -1,23 +1,19 @@
 import { ValidateDateService } from "@arkyn/shared";
 
 /**
- * Validates a date string based on the provided format and configuration.
+ * Validates a date string against a format and optional year bounds.
  *
- * @param {string} date - The date string to validate.
- * @param {object} config - Optional configuration object to customize validation.
- * @param {number} config.minYear - The minimum allowed year for the date. Defaults to 1900.
- * @param {number} config.maxYear - The maximum allowed year for the date. Defaults to 3000.
- * @throws {Error} If an invalid input format is provided.
- * @returns {boolean} `true` if the date is valid according to the specified format and configuration, otherwise `false`.
+ * @param date - The date string to validate.
+ * @param config.inputFormat - Parsing format: `"brazilianDate"` (DD/MM/YYYY, default), `"isoDate"` (MM-DD-YYYY), or `"timestamp"` (YYYY-MM-DD).
+ * @param config.minYear - Minimum allowed year. Defaults to 1900.
+ * @param config.maxYear - Maximum allowed year. Defaults to 3000.
+ * @returns `true` if the date is valid according to the format and bounds, otherwise `false`.
  *
  * @example
  * ```typescript
  * validateDate("31/12/2023"); // true
- * validateDate("12-31-2023", { inputFormat: "isoDate" }); // true
  * validateDate("2023-12-31", { inputFormat: "timestamp", minYear: 2000, maxYear: 2100 }); // true
- * validateDate("29/02/2024", { inputFormat: "brazilianDate" }); // true (leap year)
- * validateDate("29/02/2023", { inputFormat: "brazilianDate" }); // false (not a leap year)
- * validateDate("31/04/2023", { inputFormat: "brazilianDate" }); // false (April has 30 days)
+ * validateDate("29/02/2023"); // false (not a leap year)
  * ```
  */
 

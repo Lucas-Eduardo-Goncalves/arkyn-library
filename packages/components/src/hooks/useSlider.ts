@@ -3,30 +3,16 @@ import { useState } from "react";
 type UseSliderReturnProps = [number, (number: number) => void];
 
 /**
- * useSlider hook - manages slider value state with boundary validation
+ * useSlider — state manager for the `Slider` component. Clamps values to `[0, 100]`.
  *
- * @param defaultValue - Initial value for the slider (0-100). Default: 0
+ * @param defaultValue - Initial percentage value (0–100). Default: 0
  *
- * @returns Array containing current slider value and setter function
- * - [0]: Current slider value (number between 0-100)
- * - [1]: Function to update slider value with boundary validation
+ * @returns `[value, setValue]` — current percentage and a setter that clamps at the boundaries.
  *
  * @example
  * ```tsx
- * // Basic usage
- * const [value, setValue] = useSlider();
- *
- * // With default value
- * const [value, setValue] = useSlider(50);
- *
- * // Usage in component
- * function SliderComponent() {
- *   const [sliderValue, changeSliderValue] = useSlider(25);
- *
- *   return (
- *     <Slider value={sliderValue} onChange={changeSliderValue} />
- *   );
- * }
+ * const [volume, setVolume] = useSlider(50);
+ * return <Slider value={volume} onChange={setVolume} />;
  * ```
  */
 

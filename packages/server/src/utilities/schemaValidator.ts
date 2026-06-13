@@ -15,103 +15,51 @@ function formatErrorMessage(error: z.ZodError) {
 }
 
 /**
- * A schema validator class that provides multiple validation methods for Zod schemas.
+ * Wraps a Zod schema with convenience validation methods suited for server-side use:
+ * - `isValid` — boolean check, no throws
+ * - `safeValidate` — raw Zod result, no throws
+ * - `validate` — throws `ServerError` on failure (for trusted/internal data)
+ * - `formValidate` / `formAsyncValidate` — throws `UnprocessableEntity` on failure (for user-submitted forms)
  *
  * @example
  * ```typescript
- * import { z } from "zod";
+ * const validator = new SchemaValidator(z.object({ email: z.string().email() }));
  *
- * const userSchema = z.object({
- *   name: z.string().min(1, "Name is required"),
- *   email: z.string().email("Invalid email"),
- *   age: z.number().min(18, "Must be at least 18")
- * });
- *
- * const validator = new SchemaValidator(userSchema);
- *
- * // Check if data is valid without throwing
- * const isValid = validator.isValid({ name: "John", email: "john@example.com", age: 25 });
- *
- * // Validate and throw ServerError on failure
- * try {
- *   const validData = validator.validate({ name: "John", email: "john@example.com", age: 25 });
- * } catch (error) {
- *   console.error(error.message);
- * }
- *
- * // Form validation with UnprocessableEntity error
- * try {
- *   const formData = validator.formValidate(requestBody);
- * } catch (error) {
- *   // Returns structured error with fieldErrors for forms
- * }
+ * // Inside a Remix action:
+ * const body = validator.formValidate(await decodeRequestBody(request));
  * ```
  */
 class SchemaValidator<T extends ZodType> {
   /**
-   * Creates a new SchemaValidator instance.
-   * @param {T} schema - The Zod schema to use for validation.
+   * @param schema - The Zod schema used for all validation methods on this instance.
    */
   constructor(readonly schema: T) {}
 
   /**
-   * Checks if the provided data is valid according to the schema without throwing errors.
+   * Returns `true` if the data satisfies the schema, `false` otherwise. Never throws.
    *
-   * @param {any} data - The data to validate.
-   *
-   * @returns {boolean} True if the data is valid, false otherwise.
-   *
-   * @example
-   * ```typescript
-   * const validator = new SchemaValidator(userSchema);
-   * const isValid = validator.isValid({ name: "John", email: "invalid-email" });
-   * console.log(isValid); // false
-   * ```
+   * @param data - The value to check.
    */
   isValid(data: any): boolean {
     return this.schema.safeParse(data).success;
   }
 
   /**
-   * Safely validates data and returns the complete parse result without throwing errors.
+   * Validates data and returns the raw Zod `safeParseResult` without throwing.
+   * Useful when you need access to the full error details.
    *
-   * @param {any} data - The data to validate.
-   * @returns {z.ZodSafeParseResult<z.infer<T>>} The Zod safe parse result containing success status and data or error.
-   *
-   * @example
-   * ```typescript
-   * const validator = new SchemaValidator(userSchema);
-   * const result = validator.safeValidate({ name: "", email: "john@example.com" });
-   *
-   * if (result.success) {
-   *   console.log(result.data); // Validated data
-   * } else {
-   *   console.log(result.error.issues); // Validation errors
-   * }
-   * ```
+   * @param data - The value to validate.
    */
   safeValidate(data: any): z.ZodSafeParseResult<z.infer<T>> {
     return this.schema.safeParse(data);
   }
 
   /**
-   * Validates data and returns the parsed result, throwing a ServerError on validation failure.
+   * Validates data and returns the typed result, throwing `ServerError` on failure.
+   * Use for validating internal/trusted data (e.g. env vars, config objects).
    *
-   * @param {any} data - The data to validate.
-   * @throws {ServerError} When validation fails, with a formatted error message.
-   * @returns {z.infer<T>} The validated and parsed data.
-   *
-   * @example
-   * ```typescript
-   * const validator = new SchemaValidator(userSchema);
-   *
-   * try {
-   *   const validUser = validator.validate({ name: "John", email: "john@example.com", age: 25 });
-   *   console.log(validUser); // { name: "John", email: "john@example.com", age: 25 }
-   * } catch (error) {
-   *   console.error(error.message); // "Error validating:\n-> name: String must contain at least 1 character(s)"
-   * }
-   * ```
+   * @param data - The value to validate.
+   * @throws `ServerError` with a formatted field-by-field error message.
    */
   validate(data: any): z.infer<T> {
     try {
@@ -122,26 +70,17 @@ class SchemaValidator<T extends ZodType> {
   }
 
   /**
-   * Validates form data and returns the parsed result, throwing an UnprocessableEntity error on validation failure.
-   * This method is specifically designed for form validation in web applications.
+   * Validates form data and returns the typed result, throwing `UnprocessableEntity` on failure.
+   * The error includes `fieldErrors`, `fields`, and `data.scrollTo` (first failing field name).
    *
-   * @param {any} data - The form data to validate.
-   * @param {string} [message] - Optional custom error message.
-   * @throws {UnprocessableEntity} When validation fails, with structured field errors for form handling.
-   * @returns {z.infer<T>} The validated and parsed form data.
+   * @param data - The raw form data to validate.
+   * @param message - Optional human-readable error message for the 422 response.
+   * @throws `UnprocessableEntity` with structured field errors for client-side form handling.
    *
    * @example
    * ```typescript
-   * const validator = new SchemaValidator(userSchema);
-   *
-   * try {
-   *   const validFormData = validator.formValidate(requestBody, "User data is invalid");
-   *   console.log(validFormData);
-   * } catch (error) {
-   *   // UnprocessableEntity with fieldErrors, fields, and scrollTo data
-   *   console.log(error.fieldErrors); // { name: "Name is required", email: "Invalid email" }
-   *   console.log(error.data.scrollTo); // "name" (first error field)
-   * }
+   * const validator = new SchemaValidator(registerSchema);
+   * const body = validator.formValidate(await decodeRequestBody(request));
    * ```
    */
   formValidate(data: any, message?: string): z.infer<T> {
@@ -162,26 +101,16 @@ class SchemaValidator<T extends ZodType> {
   }
 
   /**
-   * Asynchronously validates form data and returns the parsed result, throwing an UnprocessableEntity error on validation failure.
-   * This method is the async version of formValidate, designed for form validation with async schemas.
+   * Async version of `formValidate` for schemas with async refinements (e.g. uniqueness checks).
    *
-   * @param {any} data - The form data to validate.
-   * @param {string} [message] - Optional custom error message.
-   * @throws {UnprocessableEntity} When validation fails, with structured field errors for form handling.
-   * @returns {Promise<z.infer<T>>} A promise that resolves to the validated and parsed form data.
+   * @param data - The raw form data to validate.
+   * @param message - Optional human-readable error message for the 422 response.
+   * @throws `UnprocessableEntity` with structured field errors for client-side form handling.
    *
    * @example
    * ```typescript
-   * const validator = new SchemaValidator(userSchemaWithAsyncValidation);
-   *
-   * try {
-   *   const validFormData = await validator.formAsyncValidate(requestBody, "User data is invalid");
-   *   console.log(validFormData);
-   * } catch (error) {
-   *   // UnprocessableEntity with fieldErrors, fields, and scrollTo data
-   *   console.log(error.fieldErrors); // { name: "Name is required", email: "Invalid email" }
-   *   console.log(error.data.scrollTo); // "name" (first error field)
-   * }
+   * const validator = new SchemaValidator(registerSchema);
+   * const body = await validator.formAsyncValidate(await decodeRequestBody(request));
    * ```
    */
   async formAsyncValidate(data: any, message?: string): Promise<z.infer<T>> {

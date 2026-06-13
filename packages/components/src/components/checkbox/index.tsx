@@ -18,48 +18,64 @@ type CheckboxProps = Omit<
   | "onSelect"
   | "onClick"
 > & {
+  /** Optional label text displayed beside the checkbox. */
   label?: string;
+  /** Displays an asterisk on the label to signal a required field. */
   showAsterisk?: boolean;
+  /** When true, skips `FieldTemplate` wrapper (label and error text). @default false */
   unShowFieldTemplate?: boolean;
+  /** Validation error message displayed below the checkbox. */
   errorMessage?: string;
-
+  /**
+   * Checkbox size.
+   * @default "md"
+   */
   size?: "md" | "lg" | "sm";
-
+  /** Field name for form submission. Required. */
   name: string;
+  /** Value stored in the hidden input when checked. @default "checked" */
   value?: string;
-
+  /** Controlled checked state. */
   checked?: boolean;
+  /** Uncontrolled initial checked state. @default false */
   defaultChecked?: boolean;
+  /** Callback fired on toggle — receives the value string (or `""` when unchecked). */
   onCheck?: (value: string) => void;
+  /**
+   * Layout direction forwarded to `FieldTemplate`.
+   * @default "horizontalReverse"
+   */
   orientation?: "horizontal" | "vertical" | "horizontalReverse";
 };
 
 /**
- * Checkbox component - used for creating interactive checkbox inputs with customizable styling and validation
+ * Checkbox — interactive checkbox input with label, validation, and form integration.
  *
- * @param props - Checkbox component properties
- * @param props.name - Required field name for form handling and hidden input identification
- * @param props.label - Optional label text to display next to the checkbox
- * @param props.errorMessage - Error state indicator to display validation errors
- * @param props.size - Size variant of the checkbox. Default: "md"
- * @param props.value - Optional value to be used when checkbox is checked. Default: "checked"
- * @param props.checked - Controlled checked state of the checkbox
- * @param props.defaultChecked - Default checked state for uncontrolled usage. Default: false
- * @param props.onCheck - Callback function called when checkbox state changes, receives the value or empty string
- * @param props.showAsterisk - Whether to show asterisk on label for required fields
- * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
- * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
+ * Stores value in a hidden `<input>` for native form submission.
+ * Integrates with `useForm` to display validation errors by field name.
  *
- * **...Other valid HTML properties for button element (except type, name, defaultValue, value, onChange, onSelect, onClick)**
+ * @param props.name - Field name for form submission. Required.
+ * @param props.label - Label text displayed beside the checkbox.
+ * @param props.size - Checkbox size (`sm` | `md` | `lg`). Default: "md"
+ * @param props.value - Value stored when checked. Default: "checked"
+ * @param props.checked - Controlled checked state.
+ * @param props.defaultChecked - Uncontrolled initial checked state. Default: false
+ * @param props.onCheck - Callback fired on toggle — receives value or `""` when unchecked.
+ * @param props.errorMessage - Validation error message.
+ * @param props.showAsterisk - Appends `*` to the label.
+ * @param props.orientation - Layout direction (`horizontal` | `vertical` | `horizontalReverse`). Default: "horizontalReverse"
+ * @param props.unShowFieldTemplate - Skips wrapper, label, and error rendering. Default: false
  *
- * @returns Checkbox JSX element wrapped in FieldWrapper with optional label and error
+ * **...Other valid HTML properties for `<button>` (except `type`, `name`, `defaultValue`, `value`, `onChange`, `onSelect`, `onClick`)**
+ *
+ * @returns Checkbox JSX element wrapped in `FieldTemplate`.
  *
  * @example
  * ```tsx
- * // Basic checkbox
+ * // Basic
  * <Checkbox name="terms" label="I agree to the terms and conditions" />
  *
- * // Checkbox with custom value and validation
+ * // With custom value and error
  * <Checkbox
  *   name="newsletter"
  *   label="Subscribe to newsletter"
@@ -67,31 +83,13 @@ type CheckboxProps = Omit<
  *   errorMessage={errors.newsletter}
  * />
  *
- * // Large checkbox with controlled state
+ * // Controlled
  * <Checkbox
  *   name="premium"
  *   label="Enable premium features"
  *   size="lg"
  *   checked={isPremium}
- *   onCheck={(value) => setIsPremium(!!value)}
- * />
- *
- * // Small checkbox with default checked state
- * <Checkbox
- *   name="remember"
- *   label="Remember me"
- *   size="sm"
- *   defaultChecked={true}
- *   value="remember_user"
- * />
- *
- * // Checkbox with custom styling and callback
- * <Checkbox
- *   name="notifications"
- *   label="Enable notifications"
- *   className="custom-checkbox"
- *   onCheck={(value) => console.log('Notification setting:', value)}
- *   disabled={isLoading}
+ *   onCheck={(v) => setIsPremium(!!v)}
  * />
  * ```
  */

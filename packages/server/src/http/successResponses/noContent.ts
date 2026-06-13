@@ -1,15 +1,18 @@
 import { SuccessResponse } from "./_successResponse";
 
 /**
- * Class representing a successful HTTP 204 NoContent response.
+ * HTTP 204 No Content — the request succeeded but there is no content to return.
+ * Typically used for delete or update operations where a body is not needed.
+ *
+ * @example
+ * ```typescript
+ * return new NoContent("Record deleted").toResponse();
+ * ```
  */
-
 class NoContent extends SuccessResponse {
   /**
-   * Creates an instance of the `NoContent` class.
-   * @param {string} message - A message describing the creation status.
+   * @param message - Description included in the response status text.
    */
-
   constructor(message: string) {
     super();
 
@@ -20,11 +23,7 @@ class NoContent extends SuccessResponse {
     this.onDebug();
   }
 
-  /**
-   * Converts the `NoContent` instance into a `Response` object.
-   * @returns {Response} A `Response` object with the body and response metadata.
-   */
-
+  /** Converts to a `Response` with `Content-Type: application/json` header and no body. */
   toResponse(): Response {
     const responseInit: ResponseInit = {
       headers: { "Content-Type": "application/json" },

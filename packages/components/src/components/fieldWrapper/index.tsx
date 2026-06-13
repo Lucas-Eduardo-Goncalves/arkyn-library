@@ -2,41 +2,31 @@ import { HTMLAttributes, ReactNode } from "react";
 import "./styles.css";
 
 type FieldWrapperProps = HTMLAttributes<HTMLElement> & {
+  /** Field elements to render inside the wrapper (label, input, error, etc.). Required. */
   children: ReactNode;
+  /**
+   * Layout orientation of the wrapper.
+   * @default "vertical"
+   */
   orientation?: "vertical" | "horizontal" | "horizontalReverse";
 };
 
 /**
- * FieldWrapper component - used as a container wrapper for a single form field and its related elements
+ * FieldWrapper — `<section>` container that groups a form field with its label and error message.
  *
- * @param props - FieldWrapper component properties
- * @param props.children - React elements that compose a single field (label, input, error message, etc.)
- * @param props.orientation - Orientation of the field wrapper. Default: "vertical"
+ * @param props.children - Field elements (label, input, error, etc.).
+ * @param props.orientation - Layout direction. Default: "vertical"
  *
- * **...Other valid HTML properties for section element**
+ * **...Other valid HTML properties for `<section>`**
  *
- * @returns FieldWrapper JSX element
+ * @returns FieldWrapper JSX element.
  *
  * @example
  * ```tsx
- * // Basic field container
  * <FieldWrapper>
- *   <FieldLabel>Username</FieldLabel>
- *   <Input name="username" />
- *   <FieldError>This field is required</FieldError>
- * </FieldWrapper>
- *
- * // Field container with custom styling
- * <FieldWrapper className="custom-spacing">
- *   <FieldLabel>Email</FieldLabel>
+ *   <FieldLabel showAsterisk>Email</FieldLabel>
  *   <Input name="email" type="email" />
- * </FieldWrapper>
- *
- * // Complete field with all elements
- * <FieldWrapper>
- *   <FieldLabel showAsterisk>Password</FieldLabel>
- *   <Input name="password" type="password" />
- *   <FieldError>Password must be at least 8 characters</FieldError>
+ *   <FieldError>Invalid email address</FieldError>
  * </FieldWrapper>
  * ```
  */

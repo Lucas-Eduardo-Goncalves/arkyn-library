@@ -6,8 +6,8 @@
  * - Ensures length is reasonable (7–9 digits).
  * - Optionally allows for a final letter (verifier).
  *
- * @param {string} rawRg - RG string, possibly formatted.
- * @returns {boolean} `true` if format seems valid, otherwise `false`.
+ * @param rawRg - RG string, possibly formatted.
+ * @returns `true` if format seems valid, otherwise `false`.
  *
  * @example
  * ```ts

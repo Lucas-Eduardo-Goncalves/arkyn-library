@@ -4,41 +4,20 @@ import "./styles.css";
 type TableHeaderProps = HTMLAttributes<HTMLTableSectionElement>;
 
 /**
- * TableHeader component - used to render the header section of a table with automatic spacing
+ * TableHeader — `<thead>` section with an automatic spacing row below the header row.
  *
- * @param props - TableHeader component properties
+ * Pass `<th>` elements as children — they are wrapped in a `<tr>` automatically.
+ * Accepts all standard HTML `<thead>` attributes.
  *
- * **...All valid HTML properties for thead element**
- *
- * @returns TableHeader JSX element
+ * @returns TableHeader JSX element.
  *
  * @example
  * ```tsx
- * // Basic table header
  * <TableHeader>
  *   <th>Name</th>
  *   <th>Email</th>
  *   <th>Actions</th>
  * </TableHeader>
- *
- * // Table header with custom styling
- * <TableHeader className="custom-header">
- *   <th>Product</th>
- *   <th>Price</th>
- *   <th>Stock</th>
- * </TableHeader>
- *
- * // Complete table usage
- * <TableContainer>
- *   <TableHeader>
- *     <th>ID</th>
- *     <th>User</th>
- *     <th>Status</th>
- *   </TableHeader>
- *   <TableBody>
- *     // table rows...
- *   </TableBody>
- * </TableContainer>
  * ```
  */
 

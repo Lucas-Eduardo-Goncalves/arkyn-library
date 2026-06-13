@@ -1,51 +1,27 @@
 import { useEffect } from "react";
 
-/**
- * Calculates the width of the scrollbar
- * @returns The scrollbar width in pixels
- */
-
 function getScrollbarWidth(): number {
-  // Check if we're in a browser environment
   if (typeof window === "undefined") return 0;
-
-  // Calculate the difference between window width and document width
   return window.innerWidth - document.documentElement.clientWidth;
 }
 
 /**
- * useScrollLock hook - manages body scroll blocking for overlays
+ * useScrollLock — locks `document.body` scroll while an overlay is open.
  *
- * @param isLocked - Whether the body scroll should be locked
+ * Compensates for the scrollbar width by adding equivalent `paddingRight`,
+ * preventing layout shift when the scrollbar disappears.
+ * Restores the original `overflow` and `paddingRight` when `isLocked` becomes `false`.
+ *
+ * Used internally by `Modal` and `Drawer` — you usually don't need this directly
+ * unless building a custom overlay.
+ *
+ * @param isLocked - When `true`, body scroll is disabled.
  *
  * @example
  * ```tsx
- * // Basic usage
- * const [isModalOpen, setIsModalOpen] = useState(false);
- * useScrollLock(isModalOpen);
- *
- * // In a modal component
- * function Modal({ isVisible }) {
- *   useScrollLock(isVisible);
- *
- *   return isVisible ? (
- *     <div className="modal">
- *       <div className="modal-content">
- *         Modal content
- *       </div>
- *     </div>
- *   ) : null;
- * }
- *
- * // In a drawer component
- * function Drawer({ isOpen }) {
+ * function CustomOverlay({ isOpen }) {
  *   useScrollLock(isOpen);
- *
- *   return (
- *     <aside className={`drawer ${isOpen ? 'open' : 'closed'}`}>
- *       Drawer content
- *     </aside>
- *   );
+ *   return isOpen ? <div className="overlay">...</div> : null;
  * }
  * ```
  */

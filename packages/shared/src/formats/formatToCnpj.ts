@@ -5,9 +5,8 @@ import { removeNonNumeric } from "../utilities/removeNonNumeric";
  *
  * The CNPJ format is: `XX.XXX.XXX/XXXX-XX`, where `X` represents a digit.
  *
- * @param {string} value - The input string to be formatted as a CNPJ, the string must contain 14 numeric digits; special characters will be ignored.
- *
- * @returns {string} The formatted CNPJ string in the pattern `XX.XXX.XXX/XXXX-XX`.
+ * @param value - Input string with 14 numeric digits (special characters are stripped).
+ * @returns The formatted CNPJ string in the pattern `XX.XXX.XXX/XXXX-XX`.
  *
  * @throws {Error} Throws an error if the input does not contain exactly 14 numeric digits.
  *

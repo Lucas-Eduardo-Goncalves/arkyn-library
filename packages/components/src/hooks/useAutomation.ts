@@ -7,46 +7,38 @@ import { badResponses } from "../templates/badResponses";
 import { successResponses } from "../templates/successResponses";
 
 /**
- * Executes UI automations based on a form response payload.
+ * useAutomation — runs UI side-effects (close modals, scroll, toast) in response to a server action payload.
  *
- * Current behaviors:
- * - Closes all open modals when `closeModal` is `true`.
- * - Scrolls to a target element when `cause.data.scrollTo` is provided.
- * - Shows a toast according to response `name`, `message`, and `cause.fieldErrors`.
+ * Pass the raw response from a form submission. On every change the hook:
+ * 1. Closes all open modals if `closeModal` is `true`.
+ * 2. Smooth-scrolls to a named element if `cause.data.scrollTo` is set.
+ * 3. Shows a toast based on `name` (matched against `successResponses`/`badResponses`) and `message`.
+ *    When `cause.fieldErrors` is present, the first field error takes priority in the toast.
+ *    The message `"Unprocessable entity"` is intentionally suppressed.
  *
- * Toast rules:
- * - Success responses (`successResponses`) show a success toast with `message`.
- * - Bad responses (`badResponses`) show a danger toast.
- * - When `cause.fieldErrors` exists, the first field error message has priority.
- * - The message `"Unprocessable entity"` is intentionally ignored.
- *
- * @param {any} formResponseData Response payload used to trigger automations.
- * @param {boolean} [formResponseData.closeModal] Closes all modals when `true`.
- * @param {string} [formResponseData.message] Message used in toast notifications.
- * @param {string} [formResponseData.name] Response identifier used to classify success/error.
- * @param {Object} [formResponseData.cause] Additional payload metadata.
- * @param {Object} [formResponseData.cause.data] Additional response data.
- * @param {string} [formResponseData.cause.data.scrollTo] Scroll target name for `react-scroll`.
- * @param {Record<string, string>} [formResponseData.cause.fieldErrors] Field-level error messages.
+ * @param formResponseData - Raw server response payload.
+ * @param formResponseData.closeModal - Closes all open modals when `true`.
+ * @param formResponseData.name - Response identifier matched against success/bad response lists.
+ * @param formResponseData.message - Text shown in the toast notification.
+ * @param formResponseData.cause.data.scrollTo - Element name to scroll to via `react-scroll`.
+ * @param formResponseData.cause.fieldErrors - Field-level errors; the first value is shown in the toast.
  *
  * @example
  * ```tsx
- * useAutomation({
- *   closeModal: true,
- *   name: "created",
- *   message: "Saved successfully"
- * });
+ * // After a successful create action
+ * useAutomation({ closeModal: true, name: "created", message: "Saved successfully" });
  * ```
  *
  * @example
  * ```tsx
+ * // Validation error with field-level feedback and scroll
  * useAutomation({
  *   name: "validation_error",
  *   message: "Invalid payload",
  *   cause: {
  *     data: { scrollTo: "email" },
- *     fieldErrors: { email: "E-mail is required" }
- *   }
+ *     fieldErrors: { email: "E-mail is required" },
+ *   },
  * });
  * ```
  */

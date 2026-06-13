@@ -1,16 +1,18 @@
 /**
- * Decodes an error message from a given request data object or response object.
+ * Extracts a human-readable error message from an API response body or a `Response` object.
+ * Checks `data.message`, `data.operator_erro_message`, `data.error`, `data.error.message`,
+ * and `response.statusText` in that order. Falls back to `"Missing error message"`.
  *
- * This function attempts to extract a meaningful error message from the provided
- * `data` or `response` objects by checking various properties in a specific order.
- * If no valid error message is found, it returns a default message: "Missing error message".
+ * @param data - Parsed response body that may contain error info.
+ * @param response - The raw `Response` object, used as a fallback for `statusText`.
+ * @returns The first non-empty string error message found.
  *
- * @param {any} data - The data object that may contain error information. It can have properties
- * such as `message`, `error`, or `error.message` that are checked for a string value.
- * @param {Response} response - The response object that may contain a `statusText` property
- * representing the HTTP status text.
- * @returns {string} A string representing the decoded error message, or a default message
- * if no error message is found.
+ * @example
+ * ```typescript
+ * const res = await fetch("/api/orders");
+ * const data = await res.json().catch(() => null);
+ * const message = decodeRequestErrorMessage(data, res);
+ * ```
  */
 
 function decodeRequestErrorMessage(data: any, response: Response): string {

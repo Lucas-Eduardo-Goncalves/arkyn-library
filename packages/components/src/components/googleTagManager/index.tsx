@@ -2,49 +2,55 @@ import { ClientOnly } from "../clientOnly";
 import { GoogleTagManagerClient } from "./googleTagManager.client";
 
 type GoogleTagManagerProps = {
+  /** Google Tag Manager container ID (e.g. `"GTM-XXXXXXX"`). Required. */
   gtmId: string;
+  /** Additional key-value pairs pushed to the dataLayer on initialization. */
   events?: Record<string, string>;
+  /** Initial key-value pairs added to the dataLayer before GTM loads. */
   dataLayer?: Record<string, string>;
+  /** Global variable name for the dataLayer array. @default "dataLayer" */
   dataLayerName?: string;
+  /** GTM environment auth token (for staging/testing environments). */
   auth?: string;
+  /** GTM environment preview token (e.g. `"env-3"`). */
   preview?: string;
+  /** When true, renders the GTM snippet in development mode (bypasses the production check). @default false */
   showInDevMode?: boolean;
 };
 
 /**
- * GoogleTagManager component - injects Google Tag Manager snippets into the page
+ * GoogleTagManager — injects the GTM `<script>` and `<noscript>` snippets into the page client-side.
  *
- * @param props - GoogleTagManager component properties
- * @param props.gtmId - Google Tag Manager container id (for example: "GTM-XXXXXXX")
- * @param props.events - Additional GTM events payload
- * @param props.dataLayer - Initial data to populate the dataLayer
+ * Renders nothing in development mode unless `showInDevMode` is `true`.
+ * Wrapped in `ClientOnly` to avoid SSR errors.
+ *
+ * @param props.gtmId - GTM container ID (e.g. `"GTM-XXXXXXX"`). Required.
+ * @param props.dataLayer - Initial key-value pairs for the dataLayer.
  * @param props.dataLayerName - Global dataLayer variable name. Default: "dataLayer"
- * @param props.auth - GTM environment auth token
- * @param props.preview - GTM environment preview token
- * @param props.showInDevMode - If true, renders in development mode. Default: false
+ * @param props.events - Additional key-value pairs pushed on initialization.
+ * @param props.auth - GTM environment auth token.
+ * @param props.preview - GTM environment preview token (e.g. `"env-3"`).
+ * @param props.showInDevMode - Renders in development mode. Default: false
  *
- * @returns GoogleTagManager JSX element
+ * @returns GoogleTagManager JSX element, or an empty fragment in dev mode.
  *
  * @example
  * ```tsx
- * // Basic GTM setup
+ * // Basic setup in your root layout
  * <GoogleTagManager gtmId="GTM-XXXXXXX" />
  *
- * // GTM with initial dataLayer values
+ * // With initial dataLayer values
  * <GoogleTagManager
- *  gtmId="GTM-XXXXXXX"
- *  dataLayer={{
- *    pageType: "home",
- *    userType: "anonymous",
- *  }}
+ *   gtmId="GTM-XXXXXXX"
+ *   dataLayer={{ pageType: "home", userType: "anonymous" }}
  * />
  *
- * // GTM environment (staging)
+ * // Staging/preview environment
  * <GoogleTagManager
- *  gtmId="GTM-XXXXXXX"
- *  auth="your-auth-token"
- *  preview="env-3"
- *  showInDevMode
+ *   gtmId="GTM-XXXXXXX"
+ *   auth="your-auth-token"
+ *   preview="env-3"
+ *   showInDevMode
  * />
  * ```
  */

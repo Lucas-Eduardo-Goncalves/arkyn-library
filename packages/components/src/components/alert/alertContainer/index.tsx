@@ -8,74 +8,54 @@ import {
 import { AlertTitle } from "../alertTitle";
 import "./styles.css";
 
-/**
- * @typedef {Object} AlertContainerProps
- * @property {"success" | "danger" | "warning" | "info"} schema - The visual style schema for the alert (success: green, danger: red, warning: yellow, info: blue)
- * @property {ReactNode} children - The content to be displayed inside the alert container
- * @property {string} [className] - Optional additional CSS classes to apply to the container
- * @extends {HTMLAttributes<HTMLDivElement>}
- */
 type AlertContainerProps = {
+  /**
+   * Visual style and semantic meaning.
+   * - `success`: green — operation completed.
+   * - `danger`: red — error or destructive action.
+   * - `warning`: yellow — caution required.
+   * - `info`: blue — informational message.
+   */
   schema: "success" | "danger" | "warning" | "info";
 } & HTMLAttributes<HTMLDivElement>;
 
-/**
- * Context for sharing alert container properties with child components
- * @internal
- */
 const AlertContainerContext = createContext({} as AlertContainerProps);
 
-/**
- * Custom hook to access the AlertContainer context
- *
- * @returns {AlertContainerProps} The current alert container properties including schema and HTML attributes
- *
- * @example
- * function CustomAlertContent() {
- *   const { schema } = useAlertContainer();
- *   return <div>Current schema: {schema}</div>;
- * }
- */
+/** @internal Accesses the schema and HTML props of the enclosing `AlertContainer`. */
 function useAlertContainer(): AlertContainerProps {
   return useContext(AlertContainerContext);
 }
 
 /**
- * AlertContainer - A flexible alert component that displays messages with different visual styles
+ * AlertContainer — root wrapper for the Alert component set. Provides schema context to child components.
  *
- * This component automatically adjusts its layout based on whether an AlertTitle component
- * is present among its children. When AlertTitle is detected, the content is left-aligned;
- * otherwise, it's centered.
+ * Automatically detects whether an `AlertTitle` is present among children and adjusts layout:
+ * centered when no title, left-aligned when a title is present.
  *
- * @component
- * @memberof Alert
+ * @param props.schema - Visual style variant. Required.
+ * @param props.children - Alert sub-components: `AlertIcon`, `AlertContent`, `AlertTitle`, `AlertDescription`.
  *
- * @param {AlertContainerProps} props - Component properties
- * @param {"success" | "danger" | "warning" | "info"} props.schema - Determines the visual styling and semantic meaning of the alert
- * @param {ReactNode} props.children - Content to be rendered inside the alert, can include AlertTitle and other components
- * @param {string} [props.className] - Additional CSS classes to customize the alert appearance
+ * **...Other valid HTML properties for `<div>`**
  *
- * @returns {JSX.Element} A styled alert container with context provider for child components
- *
- * @requires react - For createContext, useContext, ReactNode
+ * @returns AlertContainer JSX element.
  *
  * @example
- * // Basic usage
+ * ```tsx
+ * // Inline alert — no title, centered layout
  * <AlertContainer schema="success">
- *  {children}
+ *   <AlertIcon />
+ *   <AlertContent>Your subscription has been activated.</AlertContent>
  * </AlertContainer>
  *
- * @example
- * // Complete alert example
- * <AlertContainer schema="success">
- *  <AlertIcon />
- *  <AlertContent>
- *    <AlertTitle>Success!</AlertTitle>
- *    <AlertDescription>
- *      You are premium user now!
- *    </AlertDescription>
- *  </AlertContent>
+ * // Full alert with title and description — left-aligned layout
+ * <AlertContainer schema="danger">
+ *   <AlertIcon />
+ *   <AlertContent>
+ *     <AlertTitle>Payment failed</AlertTitle>
+ *     <AlertDescription>Please check your card details and try again.</AlertDescription>
+ *   </AlertContent>
  * </AlertContainer>
+ * ```
  */
 
 function AlertContainer(props: AlertContainerProps): JSX.Element {

@@ -4,58 +4,18 @@ import "./styles.css";
 type TableCaptionProps = HTMLAttributes<HTMLElement>;
 
 /**
- * TableCaption component - used to provide a title or description for a table with proper styling
+ * TableCaption — title / description placed above a table. Renders as a `<caption>` element.
  *
- * @param props - TableCaption component properties
+ * Accepts all standard HTML element attributes.
  *
- * **...All valid HTML properties for caption element**
- *
- * @returns TableCaption JSX element
+ * @returns TableCaption JSX element.
  *
  * @example
  * ```tsx
- * // Basic table caption
  * <TableContainer>
- *   <TableCaption>
- *     User Management
- *   </TableCaption>
- *   <TableHeader>
- *     <th>Name</th>
- *     <th>Email</th>
- *   </TableHeader>
- *   <TableBody>
- *     // table rows...
- *   </TableBody>
- * </TableContainer>
- *
- * // Table caption with custom styling
- * <TableContainer>
- *   <TableCaption className="highlighted-caption">
- *     Sales Report - Q4 2024
- *   </TableCaption>
- *   <TableHeader>
- *     <th>Product</th>
- *     <th>Revenue</th>
- *   </TableHeader>
- *   <TableBody>
- *     // table rows...
- *   </TableBody>
- * </TableContainer>
- *
- * // Caption with rich content
- * <TableContainer>
- *   <TableCaption>
- *     <h3>Employee Directory</h3>
- *     <p>Updated: {new Date().toLocaleDateString()}</p>
- *   </TableCaption>
- *   <TableHeader>
- *     <th>Employee ID</th>
- *     <th>Name</th>
- *     <th>Department</th>
- *   </TableHeader>
- *   <TableBody>
- *     // table rows...
- *   </TableBody>
+ *   <TableCaption>Orders — Q2 2025</TableCaption>
+ *   <TableHeader>...</TableHeader>
+ *   <TableBody>...</TableBody>
  * </TableContainer>
  * ```
  */

@@ -1,19 +1,18 @@
 import { BadResponse } from "./_badResponse";
 
 /**
- * Represents an HTTP error response with a status code of 409 (Conflict).
- * This class is used to standardize the structure of a "Conflict" error response,
- * including the response body, headers, status, and status text.
+ * HTTP 409 Conflict — the request conflicts with the current state of the server (e.g. duplicate record).
+ *
+ * @example
+ * ```typescript
+ * throw new Conflict("Email already in use");
+ * ```
  */
-
 class Conflict extends BadResponse {
   /**
-   * Creates an instance of the `Conflict` class.
-   *
-   * @param {string} message - A descriptive message explaining the cause of the conflict.
-   * @param {any} cause - Optional additional information about the cause of the conflict.
+   * @param message - Error description.
+   * @param cause - Optional extra context (serialized to JSON).
    */
-
   constructor(message: string, cause?: any) {
     super();
 
@@ -26,13 +25,7 @@ class Conflict extends BadResponse {
     this.onDebug();
   }
 
-  /**
-   * Converts the `Conflict` instance into a `Response` object with a JSON body.
-   * This method ensures the response has the appropriate headers, status, and status text.
-   *
-   * @returns {Response} A `Response` object with the serialized JSON body and response metadata.
-   */
-
+  /** Converts to a `Response` with `Content-Type: application/json` header. */
   toResponse(): Response {
     const responseInit: ResponseInit = {
       headers: { "Content-Type": "application/json" },
@@ -43,13 +36,7 @@ class Conflict extends BadResponse {
     return new Response(JSON.stringify(this.makeBody()), responseInit);
   }
 
-  /**
-   * Converts the `Conflict` instance into a `Response` object using the `Response.json` method.
-   * This method is an alternative to `toResponse` for generating JSON error responses.
-   *
-   * @returns {Response["json"]} A `Response` object with the JSON body and response metadata.
-   */
-
+  /** Converts to a `Response` using `Response.json()`. Alternative to `toResponse()`. */
   toJson(): Response {
     const responseInit: ResponseInit = {
       status: this.status,

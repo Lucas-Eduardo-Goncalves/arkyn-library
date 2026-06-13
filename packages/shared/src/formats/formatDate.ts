@@ -20,62 +20,26 @@ function formatDateString(date: Date, format: string): string {
 }
 
 /**
- * Formats a date and time string based on the provided input and output formats.
+ * Formats a date (and optional time) string into a custom output format.
+ * All calculations are in UTC+0; use the `timezone` parameter to shift the result.
  *
- * @remarks
- * **Note:** This function works with UTC+0 by default. The returned formatted string is not automatically converted to the machine's local timezone.
- * To adjust the timezone, you must manually specify the `timezone` parameter (e.g., -3 for UTC-3).
- *
- * @param {string[]} dateTime - An array containing the date and optional time.
- *   - The first element is the date string.
- *   - The second element is the time string (default is "00:00:00").
- * @param {"brazilianDate" | "isoDate" | "timestamp"} inputFormat - The format of the input date.
- *   - "brazilianDate": Expects the date in "DD/MM/YYYY" or "D/M/YYYY" format.
- *   - "isoDate": Expects the date in "MM-DD-YYYY" or "M-D-YYYY" format.
- *   - "timestamp": Expects the date in "YYYY-MM-DD" or "YYYY-M-D" format.
- * @param {string} outputFormat - The desired output format for the date.
- *   - Use placeholders like "YYYY", "MM", "DD", "hh", "mm", "ss" to define the format.
- * @param {number} [timezone=0] - The timezone offset in hours to apply to the date.
- *   - Defaults to 0 (UTC).
- *
- * @returns {string} The formatted date string based on the output format.
- *
- * @throws {Error} If the date parts are invalid (e.g., month not between 1-12).
- * @throws {Error} If the date created is invalid.
+ * @param date - Date string in the format determined by `inputFormat`.
+ * @param time - Optional time string `"HH:mm:ss"` (defaults to `"00:00:00"`).
+ * @param inputFormat - Parsing format:
+ *   - `"brazilianDate"`: DD/MM/YYYY
+ *   - `"isoDate"`: MM-DD-YYYY
+ *   - `"timestamp"`: YYYY-MM-DD
+ * @param outputFormat - Output template using `YYYY`, `MM`, `DD`, `hh`, `mm`, `ss` placeholders.
+ * @param timezone - UTC offset in hours (e.g. `-3` for UTC-3). Defaults to `0`.
+ * @returns The formatted date string.
  *
  * @example
- * Format a Brazilian date to ISO format
  * ```typescript
- * const formattedDate = formatDate(
- *   ["25/12/2023", "15:30:00"],
- *   "brazilianDate",
- *   "YYYY-MM-DD hh:mm",
- * );
+ * formatDate(["25/12/2023", "15:30:00"], "brazilianDate", "YYYY-MM-DD hh:mm");
+ * // "2023-12-25 15:30"
  *
- * console.log(formattedDate); // Output: "2023-12-25 15:30"
- * ```
- * @example
- * Format an ISO date to a custom format with timezone adjustment
- * ```typescript
- * const formattedDate = formatDate(
- *   ["2023-12-25", "15:30:00"],
- *   "isoDate",
- *   "DD/MM/YYYY hh:mm",
- *   -3,
- * );
- *
- * console.log(formattedDate); // Output: "25/12/2023 12:30"
- * ```
- * @example
- * Format a timestamp date to a custom format
- * ```typescript
- * const formattedDate = formatDate(
- *   ["2023-12-25", "15:30:00"],
- *   "timestamp",
- *   "MM-DD-YYYY hh:mm:ss",
- * );
- *
- * console.log(formattedDate); // Output: "12-25-2023 15:30:00"
+ * formatDate(["2023-12-25", "15:30:00"], "timestamp", "DD/MM/YYYY hh:mm", -3);
+ * // "2023-12-25 12:30"
  * ```
  */
 

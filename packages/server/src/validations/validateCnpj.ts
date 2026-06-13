@@ -32,8 +32,8 @@ function extractDigit(cnpj: string) {
  * - Repeating digits check (invalid if all digits are the same).
  * - Verifies the two check digits with the proper weights.
  *
- * @param {string} rawCnpj - CNPJ string, possibly formatted.
- * @returns {boolean} `true` if valid, otherwise `false`.
+ * @param rawCnpj - CNPJ string, possibly formatted.
+ * @returns `true` if valid, otherwise `false`.
  *
  * @example
  * ```typescript

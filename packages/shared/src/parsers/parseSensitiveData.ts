@@ -1,10 +1,9 @@
 /**
  * Masks sensitive data in a JSON string by replacing the values of specified keys with "****".
  *
- * @param {string} jsonString - The JSON string to be processed.
- * @param {string[]} sensitiveKeys - An array of keys whose values should be masked. Defaults to `["password", "confirmPassword", "creditCard"]`.
- *
- * @returns {string} A JSON string with sensitive data masked. If the input is not a valid JSON string, it returns the original string.
+ * @param jsonString - The JSON string to be processed.
+ * @param sensitiveKeys - Keys whose values will be replaced with `"****"`. Defaults to `["password", "confirmPassword", "creditCard"]`.
+ * @returns A JSON string with sensitive values masked. Returns the original string if it is not valid JSON.
  *
  * @example
  * ```typescript

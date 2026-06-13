@@ -3,25 +3,29 @@ import { ClientOnly } from "../clientOnly";
 import { GoogleAnalyticsClient } from "./googleAnalytics.client";
 
 type GoogleAnalyticsProps = {
+  /** Google Analytics 4 Measurement ID (e.g. `"G-XXXXXXXXXX"`). Required. */
   measurementId: string;
+  /** When true, renders the GA4 snippet in development mode (bypasses the production check). @default false */
   showInDevMode?: boolean;
 };
 
 /**
- * GoogleAnalytics component - injects Google Analytics 4 snippets into the page
+ * GoogleAnalytics — injects the Google Analytics 4 script into the page client-side.
  *
- * @param props - GoogleAnalytics component properties
- * @param {string} props.measurementId - Google Analytics 4 Measurement ID (for example: "G-XXXXXXXXXX")
- * @param {boolean} [props.showInDevMode] - If true, renders in development mode. Default: false
+ * Renders nothing in development mode unless `showInDevMode` is `true`.
+ * Wrapped in `ClientOnly` to avoid SSR errors.
  *
- * @returns {JSX.Element} GoogleAnalytics JSX element
+ * @param props.measurementId - GA4 Measurement ID (e.g. `"G-XXXXXXXXXX"`). Required.
+ * @param props.showInDevMode - Renders in development mode. Default: false
+ *
+ * @returns GoogleAnalytics JSX element, or an empty fragment in dev mode.
  *
  * @example
  * ```tsx
- * // Basic GA4 setup
+ * // In your root layout
  * <GoogleAnalytics measurementId="G-XXXXXXXXXX" />
  *
- * // GA4 in development mode
+ * // Enable in development for testing
  * <GoogleAnalytics measurementId="G-XXXXXXXXXX" showInDevMode />
  * ```
  */

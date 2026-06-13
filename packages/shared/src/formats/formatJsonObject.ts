@@ -6,10 +6,9 @@
  * - If the input is a string that can be parsed as JSON, it will attempt to parse and format it.
  * - Primitive values (e.g., numbers, booleans, null) will be converted to their string representation.
  *
- * @param {any} json - The JSON object or value to format. It can be an object, array, string, or primitive value.
- * @param {number} indentLevel - The current level of indentation to apply. This is used recursively to format nested structures.
- *
- * @returns {string} A formatted string representation of the JSON object.
+ * @param json - The value to format: object, array, string, or primitive.
+ * @param indentLevel - Current indentation depth (used recursively; pass `0` at the top level).
+ * @returns A pretty-printed string representation of the value.
  *
  * @example
  * ```typescript

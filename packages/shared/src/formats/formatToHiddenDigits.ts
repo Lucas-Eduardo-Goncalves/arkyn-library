@@ -44,32 +44,21 @@ const within = (range: [number, number], value: number): boolean =>
   value >= range[0] && value <= range[1];
 
 /**
- * Formats a string by hiding specific digits within a given range.
+ * Replaces specific digits in a string with a masking character, leaving non-digit characters unchanged.
  *
- * This function takes a string input and replaces digits within a specified range
- * with a hiding character (e.g., "*"). Non-digit characters remain unchanged.
- *
- * @param {string} value - The input string to be formatted.
- * @param {FormatToHiddenDigitsOptions} options - Configuration options for formatting.
- * @param {number | [number, number]} options.range - The range of digits to hide. It can be:
- *   - A single number (e.g., `3`), which hides the first `n` digits if positive,
- *     or the last `n` digits if negative.
- *   - A tuple `[start, end]` specifying the range of digits to hide (inclusive).
- *   - Defaults to `3`, hiding the first three digits.
- * @param {string} options.hider - The character used to hide digits. Defaults to `"*"`.
- *
- * @returns {string} The formatted string with specified digits hidden.
+ * @param value - The input string to mask.
+ * @param options.range - Which digits to hide:
+ *   - Positive number `n` — hides the first `n` digits.
+ *   - Negative number `-n` — hides the last `n` digits.
+ *   - Tuple `[start, end]` — hides digits from position `start` to `end` (inclusive, 1-indexed).
+ *   - Defaults to `3`.
+ * @param options.hider - The masking character. Defaults to `"*"`.
+ * @returns The string with the specified digit positions replaced.
  *
  * @example
  * ```typescript
- * const formatted = formatToHiddenDigits("123-456-7890", { range: 3 });
- * console.log(formatted); // Output: "***-456-7890"
- * ```
- *
- * @example
- * ```typescript
- * const formatted = formatToHiddenDigits("123-456-7890", { range: [4, 6], hider: "#" });
- * console.log(formatted); // Output: "123-###-7890"
+ * formatToHiddenDigits("123-456-7890", { range: 3 });         // "***-456-7890"
+ * formatToHiddenDigits("123-456-7890", { range: [4, 6], hider: "#" }); // "123-###-7890"
  * ```
  */
 

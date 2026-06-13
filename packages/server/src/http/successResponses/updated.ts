@@ -1,17 +1,19 @@
 import { SuccessResponse } from "./_successResponse";
 
 /**
- * Class representing a successful HTTP 200 Updated response.
+ * HTTP 200 OK — the request succeeded and the resource was updated.
+ * Semantically equivalent to `Success` but signals an update operation to consumers.
+ *
+ * @example
+ * ```typescript
+ * return new Updated("Profile updated", { user }).toJson();
+ * ```
  */
-
 class Updated extends SuccessResponse {
   /**
-   * Creates an instance of the `Updated` class.
-   *
-   * @param {string} message - A message describing the creation status.
-   * @param {any} body - The response body to be included in the HTTP response.
+   * @param message - Description included in the response status text.
+   * @param body - Data to include in the response body.
    */
-
   constructor(message: string, body?: any) {
     super();
 
@@ -23,11 +25,7 @@ class Updated extends SuccessResponse {
     this.onDebug();
   }
 
-  /**
-   * Converts the `Updated` instance into a `Response` object.
-   * @returns {Response} A `Response` object with the body and response metadata.
-   */
-
+  /** Converts to a `Response` with `Content-Type: application/json` header. */
   toResponse(): Response {
     const responseInit: ResponseInit = {
       headers: { "Content-Type": "application/json" },
@@ -38,12 +36,7 @@ class Updated extends SuccessResponse {
     return new Response(JSON.stringify(this.body), responseInit);
   }
 
-  /**
-   * Converts the `Updated` instance into a `Response` object using the `Response.json` method.
-   * This method is an alternative to `toResponse` for generating JSON responses.
-   * @returns {Response["json"]} A `Response` object with the JSON body and response metadata.
-   */
-
+  /** Converts to a `Response` using `Response.json()`. Alternative to `toResponse()`. */
   toJson(): Response {
     const responseInit: ResponseInit = {
       status: this.status,

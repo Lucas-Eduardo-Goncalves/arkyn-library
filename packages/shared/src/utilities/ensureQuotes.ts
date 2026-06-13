@@ -5,9 +5,8 @@
  * quotes (`'`) or double quotes (`"`). If the string is already quoted, it is
  * returned as-is. Otherwise, the function wraps the string in double quotes.
  *
- * @param {string} rawValue - The raw string to be checked and potentially quoted.
- *
- * @returns {string} The input string, either unchanged if it is already quoted, or wrapped in double quotes.
+ * @param rawValue - The string to be checked and potentially quoted.
+ * @returns The original string if already quoted, otherwise the string wrapped in double quotes.
  *
  * @example
  * ```typescript

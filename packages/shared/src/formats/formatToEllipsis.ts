@@ -2,12 +2,9 @@
  * Truncates a given text to a specified maximum length and appends an ellipsis ("...")
  * if the text exceeds the maximum length.
  *
- * @param {string} text - The input string to be truncated.
- *
- * @param {number} maxLength - The maximum allowed length of the string before truncation.
- *
- * @returns {string} The truncated string with an ellipsis if the input exceeds the maximum length,
- *          or the original string if it does not.
+ * @param text - The input string to be truncated.
+ * @param maxLength - Maximum allowed length before truncation.
+ * @returns The truncated string with `"..."` appended, or the original string if it fits.
  * @example
  * ```typescript
  * const result = formatToEllipsis("Hello, world!", 5);

@@ -5,65 +5,31 @@ import { useModal } from "../modalContext";
 import "./styles.css";
 
 type ModalHeaderProps = HTMLAttributes<HTMLElement> & {
+  /** Whether to render the X close button. @default true */
   showCloseButton?: boolean;
 };
 
 /**
- * ModalHeader component - header section for modals with optional close button
+ * ModalHeader — header section for a `ModalContainer`, with an optional close button.
  *
- * @param props - ModalHeader component properties
- * @param props.showCloseButton - Shows close button in header. Default: true
+ * The close button calls `makeInvisible` from the nearest `ModalContainer` context.
+ * Must be rendered inside a `ModalContainer`.
  *
- * **...Other valid HTML properties for header element**
+ * @param props.showCloseButton - Renders the X close button. Default: true
  *
- * @returns ModalHeader JSX element
+ * **...Other valid HTML `<header>` properties**
+ *
+ * @returns ModalHeader JSX element.
  *
  * @example
  * ```tsx
- * // Basic modal header with close button
- * <ModalHeader>
- *   <h2>Modal Title</h2>
- * </ModalHeader>
- *
- * // Header without close button
- * <ModalHeader showCloseButton={false}>
- *   <h2>Important Notice</h2>
- * </ModalHeader>
- *
- * // Header with subtitle
- * <ModalHeader>
- *   <div>
- *     <h2>Settings</h2>
- *     <p>Manage your preferences</p>
- *   </div>
- * </ModalHeader>
- *
- * // Complete modal example
  * <ModalContainer isVisible={isOpen} makeInvisible={() => setIsOpen(false)}>
- *   <div className="modal-content">
- *     <ModalHeader>
- *       <h2>Confirm Delete</h2>
- *       <p>This action cannot be undone</p>
- *     </ModalHeader>
- *
- *     <main>
- *       <p>Are you sure you want to delete this item?</p>
- *     </main>
- *
- *     <ModalFooter>
- *       <button onClick={() => setIsOpen(false)}>Cancel</button>
- *       <button onClick={handleDelete}>Delete</button>
- *     </ModalFooter>
- *   </div>
+ *   <ModalHeader>
+ *     <h2>Edit profile</h2>
+ *   </ModalHeader>
+ *   <main>...</main>
+ *   <ModalFooter><Button onClick={onSave}>Save</Button></ModalFooter>
  * </ModalContainer>
- *
- * // Custom styled header
- * <ModalHeader className="custom-header">
- *   <div className="header-content">
- *     <img src="/icon.png" alt="Icon" />
- *     <h1>Welcome</h1>
- *   </div>
- * </ModalHeader>
  * ```
  */
 

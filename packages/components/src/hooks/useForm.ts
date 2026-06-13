@@ -2,47 +2,30 @@ import { useContext } from "react";
 import { formContext } from "../providers/formProvider";
 
 /**
- * useForm hook - provides access to form context data including field errors
+ * useForm — reads the nearest `FormProvider` context to access field-level validation errors.
  *
- * @returns Form context object containing:
- * - `fieldErrors`: Object with field validation errors indexed by field name
+ * All form inputs (`Input`, `Select`, `Checkbox`, etc.) call this hook internally,
+ * so you rarely need it directly. Use it when you want to read errors outside of
+ * an input component, or build a custom input.
+ *
+ * @returns Form context containing:
+ * - `fieldErrors` — `Record<string, string>` mapping field names to error messages.
  *
  * @example
  * ```tsx
- * // Basic usage in a component
- * function MyComponent() {
- *   const { fieldErrors } = useForm();
- *
- *   return (
- *     <Input
- *       name="email"
- *       errorMessage={fieldErrors?.email}
- *     />
- *   );
- * }
- *
- * // Usage with FormProvider
+ * // Wrapping a form with FormProvider
  * function App() {
- *   const errors = { email: "Invalid email format" };
- *
  *   return (
- *     <FormProvider fieldErrors={errors}>
+ *     <FormProvider fieldErrors={{ email: "Invalid email" }}>
  *       <MyForm />
  *     </FormProvider>
  *   );
  * }
  *
- * // Checking for specific field errors
- * function FormField() {
+ * // Reading errors manually
+ * function CustomField() {
  *   const { fieldErrors } = useForm();
- *   const hasError = !!fieldErrors?.username;
- *
- *   return (
- *     <div>
- *       <Input name="username" />
- *       {hasError && <span>Error: {fieldErrors.username}</span>}
- *     </div>
- *   );
+ *   return <span>{fieldErrors?.username}</span>;
  * }
  * ```
  */

@@ -7,82 +7,40 @@ type CardTabContainerProps = Omit<
   HTMLAttributes<HTMLElement>,
   "onClick" | "children" | "ref" | "onChange"
 > & {
+  /** `CardTabButton` components to render as tabs. Required. */
   children: ReactNode;
+  /** Disables all tab buttons at once. @default false */
   disabled?: boolean;
+  /** Initially selected tab value. */
   defaultValue?: string;
+  /** Callback fired when the active tab changes, receiving the new value. */
   onChange?: (index: string) => void;
 };
 
 /**
- * CardTabContainer component - used as a wrapper for CardTabButton components to create tabbed navigation
+ * CardTabContainer — wrapper that manages active state for a group of `CardTabButton` components.
  *
- * @param props - CardTabContainer component properties
- * @param props.children - CardTabButton components and other content (required)
- * @param props.disabled - Whether all tab buttons are disabled. Default: false
- * @param props.defaultValue - Initial tab value to be selected
- * @param props.onChange - Callback function called when tab changes, receives the tab value
+ * Renders as a `<nav>` element. Provides context consumed by each `CardTabButton`.
  *
- * **...Other valid HTML nav properties except onClick, children, and ref**
+ * @param props.children - `CardTabButton` elements. Required.
+ * @param props.defaultValue - Initially selected tab value.
+ * @param props.disabled - Disables all buttons. Default: false
+ * @param props.onChange - Called with the new value whenever the active tab changes.
  *
- * @returns CardTabContainer JSX element
+ * **...Other valid HTML `<nav>` properties**
  *
- * @example
- * ```tsx
- * // Basic tab container
- * <CardTabContainer>
- *   <CardTabButton value="home">Home</CardTabButton>
- *   <CardTabButton value="about">About</CardTabButton>
- *   <CardTabButton value="contact">Contact</CardTabButton>
- * </CardTabContainer>
- * ```
+ * @returns CardTabContainer JSX element.
  *
  * @example
  * ```tsx
- * // Tab container with default value and change handler
- * <CardTabContainer
- *   defaultValue="dashboard"
- *   onChange={(value) => console.log('Active tab:', value)}
- * >
- *   <CardTabButton value="dashboard">Dashboard</CardTabButton>
+ * <CardTabContainer defaultValue="overview" onChange={setActiveTab}>
+ *   <CardTabButton value="overview">Overview</CardTabButton>
  *   <CardTabButton value="analytics">Analytics</CardTabButton>
  *   <CardTabButton value="settings">Settings</CardTabButton>
  * </CardTabContainer>
- * ```
  *
- * @example
- * ```tsx
- * // Disabled all tabs
- * <CardTabContainer disabled>
- *   <CardTabButton value="tab1">Tab 1</CardTabButton>
- *   <CardTabButton value="tab2">Tab 2</CardTabButton>
- * </CardTabContainer>
- * ```
- *
- * @example
- * ```tsx
- * // Tab container with custom styling and state management
- * function MyTabs() {
- *   const [activeTab, setActiveTab] = useState('profile');
- *
- *   return (
- *     <div>
- *       <CardTabContainer
- *         defaultValue={activeTab}
- *         onChange={setActiveTab}
- *         className="custom-tabs"
- *         role="tablist"
- *       >
- *         <CardTabButton value="profile">Profile</CardTabButton>
- *         <CardTabButton value="account">Account</CardTabButton>
- *         <CardTabButton value="notifications">Notifications</CardTabButton>
- *       </CardTabContainer>
- *
- *       {activeTab === 'profile' && <ProfileContent />}
- *       {activeTab === 'account' && <AccountContent />}
- *       {activeTab === 'notifications' && <NotificationsContent />}
- *     </div>
- *   );
- * }
+ * {activeTab === 'overview' && <OverviewPanel />}
+ * {activeTab === 'analytics' && <AnalyticsPanel />}
  * ```
  */
 

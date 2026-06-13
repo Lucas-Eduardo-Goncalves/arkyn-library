@@ -3,44 +3,20 @@ import { parsePhoneNumberWithError } from "libphonenumber-js";
 import { removeNonNumeric } from "./removeNonNumeric";
 
 /**
- * Finds and returns the phone mask for a given phone number based on the project's
- * country templates (masks use "_" as digit placeholders).
+ * Resolves the matching phone mask and country metadata for a given phone number.
+ * Masks use `"_"` as digit placeholders. For countries with multiple mask lengths
+ * (e.g. Brazil with and without the ninth digit), the mask matching the number's
+ * digit count is returned.
  *
- * The function typically:
- * - Parses the provided phone number to determine the country (using libphonenumber-js).
- * - Looks up the corresponding country mask in the `@arkyn/templates` list.
- * - Returns the mask string (e.g. "(__) _____-____") to be used for formatting.
- *
- * @param {string} phoneNumber - The input phone number (can include country code or be in national format).
- * @returns {string} The country mask string containing "_" placeholders for digits.
- *
- * @throws {Error} If the phone number is invalid or if no mask is found for the parsed country.
+ * @param phoneNumber - Phone number in E.164 format (e.g. `"+5511999999999"`).
+ * @returns A tuple of `[maskString, CountryType]`.
+ * @throws If the number is invalid or no mask is found for the parsed country.
  *
  * @example
  * ```typescript
- * console.log(findCountryMask("+5511999999999"));
- * // output:
- * [
- *  ["(__) _____-____", ["(__) ____-____"]],
- *  {
- *    name: "Brazil",
- *    code: "+55",
- *    iso: "BR",
- *    flag: "🇧🇷",
- *    mask: ["(__) _____-____", ["(__) ____-____"]] }
- * ]
- *
- * console.log(findCountryMask("+19700000000"));
- * // output:
- * [
- *  "(___) ___-____",
- *  {
- *    name: "United States",
- *    code: "+1",
- *    iso: "US",
- *    flag: "🇺🇸",
- *    mask: "(___) ___-____" }
- * ]
+ * const [mask, country] = findCountryMask("+5511999999999");
+ * // mask: "(__) _____-____"
+ * // country.name: "Brazil"
  * ```
  */
 

@@ -5,75 +5,20 @@ function subscribe() {
 }
 
 /**
- * useHydrated hook - detects if the component is hydrated on the client side
+ * useHydrated — returns `true` once the component has hydrated on the client, `false` during SSR.
  *
- * This hook is useful for preventing hydration mismatches when rendering different content
- * on server and client sides. It returns false during SSR and true after hydration.
+ * Built on `useSyncExternalStore` so it is safe with React 18 concurrent rendering.
+ * Use this when you need to defer client-only rendering (e.g. browser APIs, `window`, `navigator`)
+ * without causing a hydration mismatch. For most cases, prefer the `ClientOnly` component.
  *
- * @returns Boolean indicating if the component is hydrated
- * - `true`: Component is hydrated on the client side
- * - `false`: Component is being rendered on the server side or before hydration
+ * @returns `true` on the client after hydration; `false` on the server.
  *
  * @example
  * ```tsx
- * // Basic usage to prevent hydration mismatches
- * function ClientOnlyComponent() {
+ * function Map() {
  *   const isHydrated = useHydrated();
- *
- *   if (!isHydrated) {
- *     return <div>Loading...</div>;
- *   }
- *
- *   return (
- *     <div>
- *       <p>This content is only rendered on the client</p>
- *       <p>Current time: {new Date().toLocaleString()}</p>
- *     </div>
- *   );
- * }
- *
- * // Conditional rendering based on hydration state
- * function ResponsiveComponent() {
- *   const isHydrated = useHydrated();
- *
- *   return (
- *     <div>
- *       <h1>My App</h1>
- *       {isHydrated ? (
- *         <InteractiveWidget />
- *       ) : (
- *         <StaticPlaceholder />
- *       )}
- *     </div>
- *   );
- * }
- *
- * // Using with client-only features
- * function LocationComponent() {
- *   const isHydrated = useHydrated();
- *   const [location, setLocation] = useState(null);
- *
- *   useEffect(() => {
- *     if (isHydrated && navigator.geolocation) {
- *       navigator.geolocation.getCurrentPosition((pos) => {
- *         setLocation(pos.coords);
- *       });
- *     }
- *   }, [isHydrated]);
- *
- *   if (!isHydrated) {
- *     return <div>Preparing location services...</div>;
- *   }
- *
- *   return (
- *     <div>
- *       {location ? (
- *         <p>Your location: {location.latitude}, {location.longitude}</p>
- *       ) : (
- *         <p>Getting your location...</p>
- *       )}
- *     </div>
- *   );
+ *   if (!isHydrated) return <Skeleton />;
+ *   return <MapView accessToken={token} coordinates={coords} />;
  * }
  * ```
  */

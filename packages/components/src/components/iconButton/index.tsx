@@ -7,42 +7,57 @@ type IconButtonProps = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   "children" | "aria-label"
 > & {
+  /** Lucide icon component rendered inside the button. Required. */
   icon: LucideIcon;
+  /** Accessible label for screen readers. Required. */
   "aria-label": string;
-
+  /** Shows a spinner and disables the button during async operations. @default false */
   isLoading?: boolean;
+  /**
+   * Button size.
+   * @default "md"
+   */
   size?: "xs" | "sm" | "md" | "lg";
+  /**
+   * Visual style variant.
+   * - `solid`: filled background.
+   * - `outline`: bordered, transparent background.
+   * - `ghost`: no border, subtle hover.
+   * - `invisible`: no visual styling.
+   * @default "solid"
+   */
   variant?: "solid" | "outline" | "ghost" | "invisible";
+  /**
+   * Color scheme applied to the button.
+   * @default "primary"
+   */
   scheme?: "primary" | "success" | "warning" | "danger" | "info";
 };
 
 /**
- * IconButton component - compact button that renders only an icon
+ * IconButton — compact button that renders a single icon without a text label.
  *
- * @param props - IconButton component properties
- * @param props.icon - Icon to render inside the button (LucideIcon). Required
- * @param props.aria-label - Accessible label for screen readers. Required
- * @param props.isLoading - Controls loading state with spinner. Default: false
- * @param props.size - Button size. Default: "md"
- * @param props.variant - Visual variant of the button. Default: "solid"
- * @param props.scheme - Button color scheme. Default: "primary"
+ * Always requires `aria-label` for accessibility.
  *
- * **...Other valid HTML properties for button element (children not supported)**
+ * @param props.icon - Lucide icon component to render. Required.
+ * @param props["aria-label"] - Accessible label for screen readers. Required.
+ * @param props.isLoading - Shows a spinner and disables the button. Default: false
+ * @param props.size - Button size (`xs` | `sm` | `md` | `lg`). Default: "md"
+ * @param props.variant - Visual style variant. Default: "solid"
+ * @param props.scheme - Color scheme. Default: "primary"
  *
- * @returns IconButton JSX element
+ * **...Other valid HTML properties for `<button>` (children not supported)**
+ *
+ * @returns IconButton JSX element.
  *
  * @example
  * ```tsx
- * // Basic icon button
- * <IconButton icon={Plus} aria-label="Add" />
+ * <IconButton icon={Plus} aria-label="Add item" />
  *
- * // Different color scheme and variant
  * <IconButton icon={Trash2} aria-label="Delete" scheme="danger" variant="outline" />
  *
- * // Loading state
  * <IconButton icon={Save} aria-label="Saving" isLoading />
  *
- * // Sizes
  * <IconButton icon={MoreVertical} aria-label="More options" size="sm" />
  * ```
  */

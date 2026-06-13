@@ -3,56 +3,42 @@ import { HTMLAttributes, useEffect, useRef, useState } from "react";
 import "./styles.css";
 
 type SliderProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> & {
+  /** Current slider position as a percentage (0–100). Required. */
   value: number;
+  /** Callback fired whenever the value changes. Required. */
   onChange: (value: number) => void;
+  /** Disables all drag and click interactions. @default false */
   disabled?: boolean;
-  onDragging?: (value: boolean) => void;
+  /** Callback fired when the dragging state changes (`true` = drag started, `false` = drag ended). */
+  onDragging?: (isDragging: boolean) => void;
 };
 
 /**
- * Slider component - interactive range input for selecting numeric values
+ * Slider — interactive track for selecting a numeric value between 0 and 100.
  *
- * @param props - Slider component properties
- * @param props.value - Current slider value (0-100)
- * @param props.onChange - Callback function called when value changes
- * @param props.disabled - Disables slider interaction. Default: false
- * @param props.onDragging - Callback function called when dragging state changes
+ * Pair with `useSlider` for managed state.
  *
- * **...Other valid HTML properties for div element**
+ * @param props.value - Current position as a percentage (0–100). Required.
+ * @param props.onChange - Callback fired on value change. Required.
+ * @param props.disabled - Disables interactions. Default: false
+ * @param props.onDragging - Callback fired when dragging starts or stops.
  *
- * @returns Slider JSX element
+ * **...Other valid HTML properties for `<div>`**
+ *
+ * @returns Slider JSX element.
  *
  * @example
  * ```tsx
- * // Basic slider
+ * // Controlled slider
  * const [value, setValue] = useState(50);
  * <Slider value={value} onChange={setValue} />
  *
- * // Disabled slider
+ * // With useSlider hook
+ * const [value, setValue] = useSlider(25);
+ * <Slider value={value} onChange={setValue} onDragging={setIsDragging} />
+ *
+ * // Disabled
  * <Slider value={75} onChange={() => {}} disabled />
- *
- * // Slider with dragging callback
- * const [isDragging, setIsDragging] = useState(false);
- * <Slider
- *   value={value}
- *   onChange={setValue}
- *   onDragging={setIsDragging}
- * />
- *
- * // Complete example with useSlider hook
- * function SliderExample() {
- *   const [sliderValue, setSliderValue] = useSlider(25);
- *   const [isDragging, setIsDragging] = useState(false);
- *
- *   return (
- *     <Slider
- *       value={sliderValue}
- *       onChange={setSliderValue}
- *       onDragging={setIsDragging}
- *       className="custom-slider"
- *     />
- *   );
- * }
  * ```
  */
 

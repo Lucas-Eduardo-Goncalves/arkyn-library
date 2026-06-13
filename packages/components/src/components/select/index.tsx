@@ -14,135 +14,129 @@ import { SelectOverlay } from "./selectOverlay";
 import { SelectSpinner } from "./selectSpinner";
 
 type SelectProps = {
+  /** Field name for form submission. Required. */
   name: string;
+  /** Array of selectable options. Required. */
   options: { label: string; value: string }[];
-
+  /** Optional HTML id for the underlying hidden input. */
   id?: string;
+  /** Controlled selected value. */
   value?: string;
+  /** Uncontrolled default selected value. @default "" */
   defaultValue?: string;
+  /** Displays an asterisk on the label to signal a required field. */
   showAsterisk?: boolean;
+  /** Optional label text displayed above the select. */
   label?: string;
+  /** Validation error message displayed below the select. */
   errorMessage?: string;
-
+  /** Placeholder text shown when no option is selected. @default "Selecione..." */
   placeholder?: string;
+  /** Text shown when no options match the search query. @default "Sem opções disponíveis" */
   notFoundText?: string;
+  /** Additional CSS class applied to the wrapper element. */
   className?: string;
-
+  /** Disables all interactions. @default false */
   disabled?: boolean;
+  /** Prevents value changes while keeping the current value visible. @default false */
   readOnly?: boolean;
-
+  /** Shows a loading spinner and disables interactions. @default false */
   isLoading?: boolean;
+  /** Enables search/filter within the dropdown. @default false */
   isSearchable?: boolean;
-
+  /** Closes the dropdown after an option is selected. @default true */
   closeOnSelect?: boolean;
-
+  /** Callback fired when the search query changes. Use for async option loading. */
   onSearch?: (value: string) => void;
+  /** Callback fired when the selected value changes. */
   onChange?: (value: string) => void;
-
+  /** Callback fired when the select gains focus. */
   onFocus?: () => void;
+  /** Callback fired when the select loses focus. */
   onBlur?: (e: FocusEvent<HTMLDivElement>) => void;
-
+  /**
+   * Select size.
+   * @default "md"
+   */
   size?: "md" | "lg";
+  /**
+   * Visual style variant.
+   * - `solid`: filled background.
+   * - `outline`: bordered, transparent background.
+   * - `underline`: bottom border only.
+   * @default "solid"
+   */
   variant?: "solid" | "outline" | "underline";
-
+  /** Text or icon rendered at the far left, outside the select area. */
   prefix?: string | LucideIcon;
+  /** Lucide icon rendered inside the select on the left. */
   leftIcon?: LucideIcon;
-
+  /** Maximum height (in px) of the options dropdown. */
   optionMaxHeight?: number;
-
+  /** When true, skips `FieldTemplate` wrapper (label and error text). @default false */
   unShowFieldTemplate?: boolean;
+  /**
+   * Layout direction forwarded to `FieldTemplate`.
+   * @default "horizontal"
+   */
   orientation?: "horizontal" | "vertical" | "horizontalReverse";
 };
 
 /**
- * Select component - used for selecting sle options from a dropdown list with support for search, labels, and validation
+ * Select — single-option dropdown with optional search, label, validation, and form integration.
  *
- * @param props - Select component properties
- * @param props.name - Required field name for form handling
- * @param props.options - Array of options with label and value properties
- * @param props.id - Optional unique identifier for the component
- * @param props.value - Controlled value of selected option
- * @param props.defaultValue - Default selected value. Default: ""
- * @param props.showAsterisk - Whether to show asterisk on label for required fields
- * @param props.label - Optional label text to display above the select
- * @param props.errorMessage - Error message to display below the select
- * @param props.placeholder - Placeholder text when no options are selected. Default: "Selecione..."
- * @param props.notFoundText - Text to display when no options match search. Default: "Sem opções disponíveis"
- * @param props.className - Additional CSS classes to apply
- * @param props.disabled - Whether the select is disabled. Default: false
- * @param props.readOnly - Whether the select is read-only. Default: false
- * @param props.isLoading - Controls loading state with spinner. Default: false
- * @param props.isSearchable - Whether the select supports search functionality. Default: false
- * @param props.closeOnSelect - Whether to close dropdown after selecting an option. Default: true
- * @param props.onSearch - Callback function called when search value changes
- * @param props.onChange - Callback function called when selected value changes
- * @param props.onFocus - Callback function called when select gains focus
- * @param props.onBlur - Callback function called when select loses focus
- * @param props.size - Select size. Default: "md"
- * @param props.variant - Visual variant of the select. Default: "solid"
- * @param props.prefix - Text or icon to display at the beginning of the select
- * @param props.leftIcon - Optional icon to display on the left side
- * @param props.optionMaxHeight - Maximum height for the options dropdown
- * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
- * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
+ * Integrates with `useForm` to display validation errors by field name.
  *
- * @returns Select JSX element wrapped in FieldWrapper with optional label and error
+ * @param props.name - Field name for form submission. Required.
+ * @param props.options - Array of selectable options (`{ label, value }`). Required.
+ * @param props.value - Controlled selected value.
+ * @param props.defaultValue - Uncontrolled default value. Default: ""
+ * @param props.label - Label text displayed above the select.
+ * @param props.placeholder - Placeholder shown when nothing is selected. Default: "Selecione..."
+ * @param props.errorMessage - Validation error message.
+ * @param props.isSearchable - Enables search/filter within the dropdown. Default: false
+ * @param props.isLoading - Shows a loading spinner and disables interactions. Default: false
+ * @param props.closeOnSelect - Closes the dropdown after selecting. Default: true
+ * @param props.onChange - Callback fired when the selected value changes.
+ * @param props.onSearch - Callback fired when the search query changes.
+ * @param props.size - Select size (`md` | `lg`). Default: "md"
+ * @param props.variant - Visual style variant. Default: "solid"
+ * @param props.orientation - Layout direction. Default: "horizontal"
+ * @param props.unShowFieldTemplate - Skips wrapper, label, and error rendering. Default: false
+ *
+ * @returns Select JSX element wrapped in `FieldTemplate`.
  *
  * @example
  * ```tsx
- * // Basic select
+ * // Basic
  * <Select
- *   name="category:"
+ *   name="category"
  *   options={[
  *     { label: "Technology", value: "tech" },
  *     { label: "Design", value: "design" },
- *     { label: "Marketing", value: "marketing" }
  *   ]}
  * />
  *
- * // Select with label and validation
- * <Select
- *   name="skill"
- *   label="Select your skill:"
- *   showAsterisk
- *   errorMessage="Please select at least one skill"
- *   options={skillOptions}
- *   placeholder="Choose your skills..."
- * />
- *
- * // Searchable select with custom styling
+ * // With label, validation, and searchable
  * <Select
  *   name="country"
- *   label="Country:"
+ *   label="Country"
+ *   showAsterisk
  *   isSearchable
- *   variant="outline"
- *   size="lg"
- *   leftIcon={GlobeIcon}
  *   options={countryOptions}
+ *   errorMessage={errors.country}
  *   notFoundText="No countries found"
  * />
  *
- * // Controlled select with callbacks
+ * // Controlled with async search
  * <Select
  *   name="tag"
- *   label="Tag:"
+ *   label="Tag"
  *   value={selectedTag}
  *   onChange={setSelectedTag}
- *   onSearch={handleSearch}
- *   closeOnSelect={false}
+ *   onSearch={fetchTagOptions}
  *   isLoading={isLoadingTags}
  *   options={tagOptions}
- * />
- *
- * // Select with prefix and custom behavior
- * <Select
- *   name="department"
- *   label="Department:"
- *   prefix="Dept:"
- *   closeOnSelect={true}
- *   variant="underline"
- *   defaultValue="hr"
- *   options={departmentOptions}
  * />
  * ```
  */

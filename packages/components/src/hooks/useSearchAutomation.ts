@@ -7,50 +7,32 @@ import { successResponses } from "../templates/successResponses";
 import { useScopedParams } from "./useScopedParams";
 
 /**
- * Hook for automating actions based on form response data.
+ * useSearchAutomation — URL-driven version of `useAutomation`. Reads automation params from a
+ * URL search string and executes the same side-effects (close modals, toast) on every change.
  *
- * This hook automates the closing of modals and the display of toast notifications
- * based on the properties provided in the form response data object.
+ * Reads the following params (optionally prefixed by `scope:`):
+ * - `closeModal=true` — closes all open modals.
+ * - `message` — text for the toast notification.
+ * - `type` — `"success"` or `"danger"` toast style.
+ * - `name` — response identifier matched against `successResponses`/`badResponses` lists.
  *
- * @param {string} searchString - Raw search parameters string containing automation data
- * properties (e.g., "closeModal=true&message=Success!&type=success"). This string is typically obtained from the URL's search parameters.
- * @param {string} [scope=""] - Optional scope prefix for parameters. When provided, parameters will be prefixed with "scope:". Default: ""
+ * @param searchString - Raw URL search string (e.g. `location.search`).
+ * @param scope - Optional prefix for all params. Default: `""` (no prefix).
  *
  * @example
  * ```tsx
- * // Complete usage with success notification
- * const responseData = "closeModal=true&message=Operation%20completed%20successfully!&type=success";
- * useSearchAutomation(responseData);
+ * // Remix / Next.js Server Action that redirects with search params
+ * // redirect("?closeModal=true&message=Saved!&type=success")
+ * const [searchParams] = useSearchParams();
+ * useSearchAutomation(searchParams.toString());
  * ```
  *
  * @example
  * ```tsx
- * // Close modal only
- * const responseData = "closeModal=true";
- * useSearchAutomation(responseData);
+ * // Scoped params — avoids collisions when multiple features share the URL
+ * // redirect("?filters:closeModal=true&filters:message=Applied!&filters:type=success")
+ * useSearchAutomation(location.search, "filters");
  * ```
- *
- * @example
- * ```tsx
- * // Display error notification
- * const responseData = "message=Error%20processing%20request&type=danger";
- * useSearchAutomation(responseData);
- * ```
- *
- * @example
- * ```tsx
- * // Using scope for parameters
- * const responseData = "filters:closeModal=true&filters:message=Filtered%20successfully!&filters:type=success";
- * useSearchAutomation(responseData, 'filters');
- * ```
- *
- * @remarks
- * - The `closeModal` parameter should be set to "true" to trigger modal closing.
- * - The `message` parameter contains the text to be displayed in the toast notification.
- * - The `type` parameter determines the style of the toast and can be either "success" or "danger".
- * - If the `name` parameter matches any entry in the `badResponses` template, a danger toast will be shown regardless of the `type` parameter.
- * - If the `name` parameter matches any entry in the `successResponses` template, a success toast will be shown regardless of the `type` parameter.
- * - This hook relies on URL search parameters, so it is typically used in conjunction with React Router or similar routing libraries that manage URL state.
  */
 
 function useSearchAutomation(searchString: string, scope: string = "") {

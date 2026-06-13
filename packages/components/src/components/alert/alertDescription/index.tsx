@@ -1,52 +1,24 @@
 import { HTMLAttributes, JSX } from "react";
 import "./styles.css";
 
-/**
- * Props for the AlertDescription component.
- * @typedef {Object} AlertDescriptionProps
- * @extends {HTMLAttributes<HTMLDivElement>}
- */
 type AlertDescriptionProps = HTMLAttributes<HTMLDivElement>;
 
 /**
- * AlertDescription component displays descriptive text content within an Alert component.
+ * AlertDescription — body text for an alert. Place inside `AlertContent`.
  *
- * This component provides a semantic wrapper for alert descriptions with appropriate styling
- * through the `arkynAlertDescription` CSS class. It extends all standard HTML div attributes,
- * making it flexible for various content and accessibility requirements.
+ * Accepts all standard `<div>` HTML attributes.
  *
- * @component
- * @memberof Alert
- *
- * @param {AlertDescriptionProps} props - Component props extending HTML div attributes
- * @param {string} [props.className] - Additional CSS classes to apply to the description
- * @param {React.ReactNode} [props.children] - The description content to display
- *
- * @returns {JSX.Element} A div element with alert description styling
- *
- * @requires react
+ * @returns AlertDescription JSX element.
  *
  * @example
- * // Basic usage
- * <AlertContainer schema="success">
- *  <AlertContent>
- *    <AlertDescription>
- *      Your are premium user now!
- *    </AlertDescription>
- *  </AlertContent>
+ * ```tsx
+ * <AlertContainer schema="info">
+ *   <AlertContent>
+ *     <AlertTitle>Maintenance scheduled</AlertTitle>
+ *     <AlertDescription>The service will be unavailable on Sunday from 2–4 AM UTC.</AlertDescription>
+ *   </AlertContent>
  * </AlertContainer>
- *
- * @example
- * // Complete alert example
- * <AlertContainer schema="success">
- *  <AlertIcon />
- *  <AlertContent>
- *    <AlertTitle>Success!</AlertTitle>
- *    <AlertDescription>
- *      You are premium user now!
- *    </AlertDescription>
- *  </AlertContent>
- * </AlertContainer>
+ * ```
  */
 
 function AlertDescription(props: AlertDescriptionProps): JSX.Element {

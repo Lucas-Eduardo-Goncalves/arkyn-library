@@ -6,77 +6,37 @@ import { ModalProvider } from "../modalContext";
 import "./styles.css";
 
 type ModalContainerProps = HTMLAttributes<HTMLElement> & {
+  /** Controls whether the modal is visible. */
   isVisible: boolean;
+  /** Callback invoked when the backdrop overlay is clicked. */
   makeInvisible: () => void;
 };
 
 /**
- * ModalContainer component - animated overlay modal for dialogs and content
+ * ModalContainer — animated centered modal rendered over a backdrop overlay.
  *
- * @param props - ModalContainer component properties
- * @param props.isVisible - Controls modal visibility state
- * @param props.makeInvisible - Callback function to hide the modal
+ * Locks body scroll while open. Closes when the overlay is clicked.
+ * Provides context consumed by `ModalHeader` (close button).
  *
- * **...Other valid HTML properties for aside element**
+ * @param props.isVisible - Whether the modal is open. Required.
+ * @param props.makeInvisible - Called when the overlay is clicked. Required.
  *
- * @returns ModalContainer JSX element
+ * **...Other valid HTML `<aside>` properties**
+ *
+ * @returns ModalContainer JSX element.
  *
  * @example
  * ```tsx
- * // Basic modal
  * const [isOpen, setIsOpen] = useState(false);
- * <ModalContainer
- *   isVisible={isOpen}
- *   makeInvisible={() => setIsOpen(false)}
- * >
- *   <p>Modal content</p>
+ *
+ * <ModalContainer isVisible={isOpen} makeInvisible={() => setIsOpen(false)}>
+ *   <ModalHeader><h2>Confirm deletion</h2></ModalHeader>
+ *   <main><p>This action cannot be undone.</p></main>
+ *   <ModalFooter>
+ *     <Button onClick={() => setIsOpen(false)}>Cancel</Button>
+ *     <Button scheme="danger" onClick={handleDelete}>Delete</Button>
+ *   </ModalFooter>
  * </ModalContainer>
- *
- * // Modal with custom styling
- * <ModalContainer
- *   isVisible={isOpen}
- *   makeInvisible={() => setIsOpen(false)}
- *   className="custom-modal"
- * >
- *   <div className="modal-content">
- *     <h2>Confirmation</h2>
- *     <p>Are you sure you want to proceed?</p>
- *   </div>
- * </ModalContainer>
- *
- * // Complete modal example
- * function ModalExample() {
- *   const [isModalOpen, setIsModalOpen] = useState(false);
- *
- *   return (
- *     <>
- *       <button onClick={() => setIsModalOpen(true)}>
- *         Open Modal
- *       </button>
- *
- *       <ModalContainer
- *         isVisible={isModalOpen}
- *         makeInvisible={() => setIsModalOpen(false)}
- *       >
- *         <div className="modal-dialog">
- *           <header>
- *             <h2>Modal Title</h2>
- *           </header>
- *
- *           <main>
- *             <p>This is the modal content.</p>
- *           </main>
- *
- *           <footer>
- *             <button onClick={() => setIsModalOpen(false)}>
- *               Close
- *             </button>
- *           </footer>
- *         </div>
- *       </ModalContainer>
- *     </>
- *   );
- * }
  * ```
  */
 

@@ -5,57 +5,67 @@ import { IconRenderer } from "../../services/iconRenderer";
 import "./styles.css";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  /** Shows a spinner and disables the button during async operations. @default false */
   isLoading?: boolean;
+  /** Text displayed beside the spinner when `isLoading` is true. */
   loadingText?: string;
+  /**
+   * Button size.
+   * @default "md"
+   */
   size?: "xs" | "sm" | "md" | "lg";
+  /**
+   * Visual style variant.
+   * - `solid`: filled background.
+   * - `outline`: bordered, transparent background.
+   * - `ghost`: no border, subtle hover.
+   * - `invisible`: no visual styling.
+   * @default "solid"
+   */
   variant?: "solid" | "outline" | "ghost" | "invisible";
+  /**
+   * Color scheme applied to the button.
+   * @default "primary"
+   */
   scheme?: "primary" | "success" | "warning" | "danger" | "info";
+  /** Lucide icon rendered to the left of the label. */
   leftIcon?: LucideIcon;
+  /** Lucide icon rendered to the right of the label. */
   rightIcon?: LucideIcon;
 };
 
 /**
- * Button component - used for user interactions and form submissions
+ * Button — used for user interactions and form submissions.
  *
- * @param props - Button component properties
- * @param props.isLoading - Controls loading state with spinner. Default: false
- * @param props.loadingText - Text to display during loading state
- * @param props.size - Button size. Default: "md"
- * @param props.variant - Visual variant of the button. Default: "solid"
- * @param props.scheme - Button color scheme. Default: "primary"
- * @param props.leftIcon - Optional icon to display on the left
- * @param props.rightIcon - Optional icon to display on the right
+ * @param props.isLoading - Shows a spinner and disables the button. Default: false
+ * @param props.loadingText - Text displayed beside the spinner when loading.
+ * @param props.size - Button size (`xs` | `sm` | `md` | `lg`). Default: "md"
+ * @param props.variant - Visual style variant. Default: "solid"
+ * @param props.scheme - Color scheme. Default: "primary"
+ * @param props.leftIcon - Lucide icon rendered to the left of the label.
+ * @param props.rightIcon - Lucide icon rendered to the right of the label.
  *
- * **...Other valid HTML properties for button**
+ * **...Other valid HTML properties for `<button>`**
  *
- * @returns Button JSX element
+ * @returns Button JSX element.
  *
  * @example
  * ```tsx
  * // Basic button
  * <Button>Click me</Button>
  *
- * // Button with color scheme
+ * // With color scheme
  * <Button scheme="success">Save</Button>
  *
- * // Button with loading state
- * <Button isLoading loadingText="Saving...">
- *  Save
- * </Button>
+ * // With loading state
+ * <Button isLoading loadingText="Saving...">Save</Button>
  *
- * // Button with icons
- * <Button leftIcon={SaveIcon} scheme="success">
- *  Save
- * </Button>
+ * // With icons
+ * <Button leftIcon={SaveIcon} scheme="success">Save</Button>
  *
- * // Custom button
- * <Button
- *  size="lg"
- *  variant="outline"
- *  scheme="danger"
- *  rightIcon={TrashIcon}
- * >
- *  Delete
+ * // Custom size, variant and scheme
+ * <Button size="lg" variant="outline" scheme="danger" rightIcon={TrashIcon}>
+ *   Delete
  * </Button>
  * ```
  */

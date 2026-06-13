@@ -5,48 +5,57 @@ import { IconRenderer } from "../../services/iconRenderer";
 import "./styles.css";
 
 type BadgeProps = HTMLAttributes<HTMLDivElement> & {
+  /**
+   * Badge size.
+   * @default "lg"
+   */
   size?: "md" | "lg";
+  /**
+   * Visual style variant.
+   * - `solid`: filled background.
+   * - `outline`: bordered, transparent background.
+   * - `ghost`: no border, subtle background on hover.
+   * @default "ghost"
+   */
   variant?: "solid" | "outline" | "ghost";
+  /**
+   * Color scheme applied to the badge.
+   * @default "primary"
+   */
   scheme?: "primary" | "secondary" | "success" | "warning" | "danger" | "info";
+  /** Lucide icon rendered to the left of the label. */
   leftIcon?: LucideIcon;
+  /** Lucide icon rendered to the right of the label. */
   rightIcon?: LucideIcon;
 };
 
 /**
- * Badge component - used to display labels, statuses, and categorizations
+ * Badge — displays labels, statuses, and categorization tags.
  *
- * @param props - Badge component properties
- * @param props.size - Badge size. Default: "lg"
- * @param props.variant - Visual variant of the badge. Default: "ghost"
- * @param props.scheme - Badge color scheme. Default: "primary"
- * @param props.leftIcon - Optional icon to display on the left
- * @param props.rightIcon - Optional icon to display on the right
+ * @param props.size - Badge size (`md` | `lg`). Default: "lg"
+ * @param props.variant - Visual style variant. Default: "ghost"
+ * @param props.scheme - Color scheme. Default: "primary"
+ * @param props.leftIcon - Lucide icon rendered to the left of the label.
+ * @param props.rightIcon - Lucide icon rendered to the right of the label.
  *
- * **...Other valid HTML properties for div**
+ * **...Other valid HTML properties for `<div>`**
  *
- * @returns Badge JSX element
+ * @returns Badge JSX element.
  *
  * @example
  * ```tsx
  * // Basic badge
  * <Badge>New</Badge>
  *
- * // Badge with color scheme
+ * // With color scheme
  * <Badge scheme="success">Approved</Badge>
  *
- * // Badge with icons
- * <Badge leftIcon={CheckIcon} scheme="success">
- *  Completed
- * </Badge>
+ * // With icon
+ * <Badge leftIcon={CheckIcon} scheme="success">Completed</Badge>
  *
- * // Custom badge
- * <Badge
- *  size="lg"
- *  variant="solid"
- *  scheme="warning"
- *  rightIcon={AlertIcon}
- * >
- *  Warning
+ * // Custom size, variant and scheme
+ * <Badge size="lg" variant="solid" scheme="warning" rightIcon={AlertIcon}>
+ *   Warning
  * </Badge>
  * ```
  */

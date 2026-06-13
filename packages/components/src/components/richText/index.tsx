@@ -37,67 +37,53 @@ import {
 import "./styles.css";
 
 /**
- * RichText component provides a feature-rich text editor with formatting capabilities
- * including bold, italic, underline, code, headings, block quotes, alignment, and image insertion.
+ * RichText — WYSIWYG rich-text editor built on Slate.js with a configurable toolbar.
  *
- * Built on top of Slate.js, this component offers a customizable toolbar and supports
- * character limits, form integration, and error handling.
+ * **Toolbar features:** bold, italic, underline, code, H1/H2, block quote, alignment (left/center/right/justify), image and video insertion.
  *
- * @param props - Configuration object for the RichText component
- * @param props.name - The name attribute for the form field (required)
- * @param props.hiddenButtons - Array of button keys to hide from the toolbar
- * @param props.imageConfig - Configuration object for image insertion functionality
- * @param props.defaultValue - Initial JSON string value for the editor content (default: "[]")
- * @param props.enforceCharacterLimit - Whether to enforce the character limit strictly (default: false)
- * @param props.onChangeCharactersCount - Callback function triggered when character count changes
- * @param props.baseErrorMessage - Custom error message to display
- * @param props.maxLimit - Maximum number of characters allowed (default: 10000)
- * @param props.onChange - Callback function triggered when editor content changes
- * @param props.isError - Whether the component should display in error state
- * @param props.id - Custom ID for the editor element
- * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
- * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
+ * Editor content is stored as a Slate JSON string in a hidden `<input>` for form submission.
+ * Integrates with `useForm` to display validation errors by field name.
  *
- * @returns JSX element representing the rich text editor
+ * @param props.name - Field name for form submission. Required.
+ * @param props.label - Label text displayed above the editor.
+ * @param props.hiddenButtons - Toolbar button keys to hide (e.g. `["image", "code"]`).
+ * @param props.imageConfig - Enables image insertion; contains the upload endpoint and modal labels.
+ * @param props.defaultValue - Initial editor content as a Slate JSON string. Default: "[]"
+ * @param props.maxLimit - Maximum character count. Default: 10000
+ * @param props.enforceCharacterLimit - Prevents typing past `maxLimit`. Default: false
+ * @param props.onChangeCharactersCount - Callback fired on every keystroke — receives the current character count.
+ * @param props.onChange - Callback fired when editor content changes — receives the Slate `Descendant[]`.
+ * @param props.baseErrorMessage - Custom error message (overrides `useForm` context error).
+ * @param props.isError - Forces the error visual state.
+ * @param props.id - Custom id for the editable area element.
+ * @param props.showAsterisk - Appends `*` to the label.
+ * @param props.orientation - Layout direction. Default: "horizontal"
+ * @param props.unShowFieldTemplate - Skips wrapper, label, and error rendering. Default: false
+ *
+ * @returns RichText JSX element wrapped in `FieldTemplate`.
  *
  * @example
  * ```tsx
- * // Basic usage
+ * // Basic
  * <RichText name="content" />
  *
- * // With character limit and custom buttons
+ * // With character limit and hidden toolbar buttons
  * <RichText
  *   name="description"
+ *   label="Description"
  *   maxLimit={500}
- *   enforceCharacterLimit={true}
- *   hiddenButtons={["image", "code"]}
- *   onChangeCharactersCount={(count) => console.log(count)}
+ *   enforceCharacterLimit
+ *   hiddenButtons={["image", "video", "code"]}
+ *   onChangeCharactersCount={(n) => setCharCount(n)}
  * />
  *
- * // With image upload configuration
+ * // With image upload support
  * <RichText
  *   name="article"
- *   imageConfig={{
- *     action: "/api/upload",
- *     modalTitle: "Insert Image",
- *     modalInputUrlLabel: "Image URL",
- *     modalInputImageLabel: "Upload Image"
- *   }}
+ *   label="Article Body"
+ *   imageConfig={{ action: "/api/upload" }}
  * />
  * ```
- *
- * @description
- * The component includes:
- * - **Formatting**: Bold, italic, underline, code, headings (H1, H2), block quotes
- * - **Alignment**: Left, center, right, justify
- * - **Image Support**: Upload and URL insertion (when imageConfig is provided)
- * - **Character Limits**: Configurable limits with visual feedback
- * - **Form Integration**: Works with form providers and validation
- * - **Keyboard Shortcuts**: Standard shortcuts for formatting (Ctrl+B, Ctrl+I, etc.)
- * - **Error Handling**: Visual error states and validation messages
- *
- * The editor outputs JSON data representing the document structure, which can be
- * converted to HTML using the provided utility functions.
  */
 
 function RichText(props: RichTextProps) {

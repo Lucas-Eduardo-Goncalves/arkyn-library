@@ -4,73 +4,33 @@ import { modalContext, ModalContextProps } from "../providers/modalProvider";
 type OpenModalProps<T = any> = (data?: T) => void;
 
 /**
- * useModal hook - provides access to modal context for managing modal state and data
+ * useModal — accesses the nearest `ModalProvider` context.
  *
- * @param key - Optional modal identifier key. When provided, returns functions for a specific modal
+ * Two call signatures:
+ * - **Without `key`** — returns the raw context object (manage any modal by name).
+ * - **With `key`** — returns a scoped object bound to one named modal.
  *
- * @returns When called without key: Complete modal context with all modal management functions
- * @returns When called with key: Object containing modal-specific functions:
- * - `modalIsOpen`: Boolean indicating if the specific modal is open
- * - `modalData`: Data associated with the specific modal
- * - `openModal`: Function to open the specific modal with optional data
- * - `closeModal`: Function to close the specific modal
+ * @param key - Modal identifier registered in `ModalProvider`.
+ *
+ * @returns Without key: full `ModalContextProps`. With key: `{ modalIsOpen, modalData, openModal, closeModal }`.
+ *
+ * @throws If called outside a `ModalProvider`.
  *
  * @example
  * ```tsx
- * // Basic usage - access to full modal context
- * function ModalManager() {
- *   const modalContext = useModal();
+ * // Scoped to one modal — the most common pattern
+ * const { modalIsOpen, modalData, openModal, closeModal } = useModal<{ id: number }>('confirm-delete');
  *
- *   return (
- *     <div>
- *       <button onClick={() => modalContext.openModal('user-details', { id: 1 })}>
- *         Open User Modal
- *       </button>
- *     </div>
- *   );
- * }
+ * openModal({ id: user.id });
+ * ```
  *
- * // Usage with specific modal key
- * function UserModal() {
- *   const { modalIsOpen, modalData, openModal, closeModal } = useModal('user-details');
+ * @example
+ * ```tsx
+ * // Full context — useful when triggering multiple different modals from one place
+ * const { openModal } = useModal();
  *
- *   return (
- *     <Modal isOpen={modalIsOpen} onClose={closeModal}>
- *       <h2>User Details</h2>
- *       <p>User ID: {modalData?.id}</p>
- *       <button onClick={closeModal}>Close</button>
- *     </Modal>
- *   );
- * }
- *
- * // Usage with typed data
- * interface UserData {
- *   id: number;
- *   name: string;
- *   email: string;
- * }
- *
- * function UserProfileModal() {
- *   const { modalIsOpen, modalData, closeModal } = useModal<UserData>('user-profile');
- *
- *   return (
- *     <Modal isOpen={modalIsOpen} onClose={closeModal}>
- *       <h2>{modalData?.name}</h2>
- *       <p>Email: {modalData?.email}</p>
- *     </Modal>
- *   );
- * }
- *
- * // Usage with ModalProvider
- * function App() {
- *   return (
- *     <ModalProvider>
- *       <UserModal />
- *       <UserProfileModal />
- *       <ModalManager />
- *     </ModalProvider>
- *   );
- * }
+ * openModal('confirm-delete', { id: user.id });
+ * openModal('user-details', { id: user.id });
  * ```
  */
 

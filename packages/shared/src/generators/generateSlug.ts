@@ -9,9 +9,8 @@
  * - Collapses multiple consecutive hyphens into a single hyphen.
  * - Trims leading and trailing hyphens.
  *
- * @param {string} rawString - The input string to be converted into a slug.
- *
- * @returns {string} A URL-friendly slug derived from the input string.
+ * @param rawString - The input string to be converted into a slug.
+ * @returns A URL-friendly slug derived from the input string.
  *
  * @example
  * ```typescript

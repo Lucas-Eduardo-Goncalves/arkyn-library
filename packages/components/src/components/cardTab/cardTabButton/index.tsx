@@ -7,70 +7,32 @@ type CardTabButtonProps = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   "children" | "value" | "type"
 > & {
+  /** Content displayed inside the tab button. */
   children: ReactNode;
+  /** Unique identifier for this tab; matched against the container's active value. */
   value: string;
 };
 
 /**
- * CardTabButton component - used as interactive buttons within a CardTabContainer for tab navigation
+ * CardTabButton — individual tab button inside a `CardTabContainer`.
  *
- * @param props - CardTabButton component properties
- * @param props.children - Content to display inside the tab button (required)
- * @param props.value - Unique identifier for the tab button (required)
- * @param props.disabled - Whether the button is disabled. Can be overridden by CardTabContainer's disabled state
+ * Reads active state and disabled state from `CardTabContainer` context.
+ * The button's own `disabled` prop is ORed with the container's `disabled`.
  *
- * **...Other valid HTML button properties except children, value, and type**
+ * @param props.children - Tab label content. Required.
+ * @param props.value - Tab identifier. Required.
+ * @param props.disabled - Disables this tab individually (container can also disable all tabs).
  *
- * @returns CardTabButton JSX element
+ * **...Other valid HTML `<button>` properties except `type`**
  *
- * @example
- * ```tsx
- * // Basic tab buttons within CardTabContainer
- * <CardTabContainer>
- *   <CardTabButton value="home">Home</CardTabButton>
- *   <CardTabButton value="about">About</CardTabButton>
- *   <CardTabButton value="contact">Contact</CardTabButton>
- * </CardTabContainer>
- * ```
+ * @returns CardTabButton JSX element.
  *
  * @example
  * ```tsx
- * // Tab button with click handler
- * <CardTabContainer onChange={(value) => console.log('Tab changed:', value)}>
- *   <CardTabButton
- *     value="profile"
- *     onClick={() => console.log('Profile tab clicked')}
- *   >
- *     Profile
- *   </CardTabButton>
- *   <CardTabButton value="settings">Settings</CardTabButton>
- * </CardTabContainer>
- * ```
- *
- * @example
- * ```tsx
- * // Disabled tab button
- * <CardTabContainer>
- *   <CardTabButton value="available">Available</CardTabButton>
- *   <CardTabButton value="coming-soon" disabled>
- *     Coming Soon
- *   </CardTabButton>
- * </CardTabContainer>
- * ```
- *
- * @example
- * ```tsx
- * // Tab buttons with custom styling and default value
- * <CardTabContainer defaultValue="dashboard">
- *   <CardTabButton
- *     value="dashboard"
- *     className="custom-tab"
- *     aria-label="Dashboard tab"
- *   >
- *     Dashboard
- *   </CardTabButton>
- *   <CardTabButton value="analytics">Analytics</CardTabButton>
- *   <CardTabButton value="reports">Reports</CardTabButton>
+ * <CardTabContainer defaultValue="details" onChange={setTab}>
+ *   <CardTabButton value="details">Details</CardTabButton>
+ *   <CardTabButton value="history">History</CardTabButton>
+ *   <CardTabButton value="settings" disabled>Settings</CardTabButton>
  * </CardTabContainer>
  * ```
  */

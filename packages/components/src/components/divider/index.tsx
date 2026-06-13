@@ -2,44 +2,31 @@ import { HTMLAttributes } from "react";
 import "./styles.css";
 
 type DividerProps = HTMLAttributes<HTMLDivElement> & {
+  /**
+   * Divider orientation.
+   * @default "horizontal"
+   */
   orientation?: "horizontal" | "vertical";
 };
 
 /**
- * Divider component - used to visually separate content sections
+ * Divider — visually separates content sections.
  *
- * @param props - Divider component properties
- * @param props.orientation - Divider orientation. Default: "horizontal"
+ * @param props.orientation - Line direction (`horizontal` | `vertical`). Default: "horizontal"
  *
- * **...Other valid HTML properties for div**
+ * **...Other valid HTML properties for `<div>`**
  *
- * @returns Divider JSX element
+ * @returns Divider JSX element.
  *
  * @example
  * ```tsx
- * // Basic horizontal divider
+ * // Between sections
+ * <h2>Section 1</h2>
  * <Divider />
+ * <h2>Section 2</h2>
  *
- * // Explicit horizontal divider
- * <Divider orientation="horizontal" />
- *
- * // Vertical divider
+ * // Vertical (e.g. between sidebar and content)
  * <Divider orientation="vertical" />
- *
- * // Custom styled divider
- * <Divider
- *   orientation="horizontal"
- *   className="my-custom-divider"
- * />
- *
- * // Usage in layout
- * <div>
- *   <h2>Section 1</h2>
- *   <p>Content for section 1</p>
- *   <Divider />
- *   <h2>Section 2</h2>
- *   <p>Content for section 2</p>
- * </div>
  * ```
  */
 

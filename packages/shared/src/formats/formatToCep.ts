@@ -7,9 +7,8 @@ import { removeNonNumeric } from "../utilities/removeNonNumeric";
  * and attempts to format it as a CEP in the pattern `XXXXX-XXX`.
  * If the input does not match the expected format, an error is thrown.
  *
- * @param {string} value - The input string to be formatted as a CEP, the string must contain 8 numeric digits; special characters will be ignored.
- *
- * @returns {string} The formatted CEP string in the pattern `XXXXX-XXX`.
+ * @param value - Input string with 8 numeric digits (special characters are stripped).
+ * @returns The formatted CEP string in the pattern `XXXXX-XXX`.
  *
  * @throws {Error} If the input does not match the expected CEP format.
  *

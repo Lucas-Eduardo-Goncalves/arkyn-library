@@ -15,135 +15,129 @@ import { MultiSelectOverlay } from "./multiSelectOverlay";
 import { MultiSelectSpinner } from "./multiSelectSpinner";
 
 type MultiSelectProps = {
+  /** Field name for form submission. Required. */
   name: string;
+  /** Array of selectable options. Required. */
   options: { label: string; value: string }[];
-
+  /** Optional HTML id for the underlying hidden input. */
   id?: string;
+  /** Controlled array of selected values. */
   value?: string[];
+  /** Uncontrolled default array of selected values. @default [] */
   defaultValue?: string[];
+  /** Displays an asterisk on the label to signal a required field. */
   showAsterisk?: boolean;
+  /** Optional label text displayed above the multiselect. */
   label?: string;
+  /** Validation error message displayed below the multiselect. */
   errorMessage?: string;
-
+  /** Placeholder text shown when no options are selected. @default "Selecione..." */
   placeholder?: string;
+  /** Text shown when no options match the search query. @default "Sem opções disponíveis" */
   notFoundText?: string;
+  /** Additional CSS class applied to the wrapper element. */
   className?: string;
-
+  /** Disables all interactions. @default false */
   disabled?: boolean;
+  /** Prevents value changes while keeping the current selection visible. @default false */
   readOnly?: boolean;
-
+  /** Shows a loading spinner and disables interactions. @default false */
   isLoading?: boolean;
+  /** Enables search/filter within the dropdown. @default false */
   isSearchable?: boolean;
-
+  /** Closes the dropdown after an option is selected or deselected. @default false */
   closeOnSelect?: boolean;
-
+  /** Callback fired when the search query changes. Use for async option loading. */
   onSearch?: (value: string) => void;
+  /** Callback fired when the selected values array changes. */
   onChange?: (value: string[]) => void;
-
+  /** Callback fired when the multiselect gains focus. */
   onFocus?: () => void;
+  /** Callback fired when the multiselect loses focus. */
   onBlur?: (e: FocusEvent<HTMLDivElement>) => void;
-
+  /**
+   * MultiSelect size.
+   * @default "md"
+   */
   size?: "md" | "lg";
+  /**
+   * Visual style variant.
+   * - `solid`: filled background.
+   * - `outline`: bordered, transparent background.
+   * - `underline`: bottom border only.
+   * @default "solid"
+   */
   variant?: "solid" | "outline" | "underline";
-
+  /** Text or icon rendered at the far left, outside the select area. */
   prefix?: string | LucideIcon;
+  /** Lucide icon rendered inside the select on the left. */
   leftIcon?: LucideIcon;
-
+  /** Maximum height (in px) of the options dropdown. */
   optionMaxHeight?: number;
-
+  /** When true, skips `FieldTemplate` wrapper (label and error text). @default false */
   unShowFieldTemplate?: boolean;
+  /**
+   * Layout direction forwarded to `FieldTemplate`.
+   * @default "horizontal"
+   */
   orientation?: "horizontal" | "vertical" | "horizontalReverse";
 };
 
 /**
- * MultiSelect component - used for selecting multiple options from a dropdown list with support for search, labels, and validation
+ * MultiSelect — multi-option dropdown with optional search, label, validation, and form integration.
  *
- * @param props - MultiSelect component properties
- * @param props.name - Required field name for form handling
- * @param props.options - Array of options with label and value properties
- * @param props.id - Optional unique identifier for the component
- * @param props.value - Controlled value array of selected option values
- * @param props.defaultValue - Default selected values. Default: []
- * @param props.showAsterisk - Whether to show asterisk on label for required fields
- * @param props.label - Optional label text to display above the multiselect
- * @param props.errorMessage - Error message to display below the multiselect
- * @param props.placeholder - Placeholder text when no options are selected. Default: "Selecione..."
- * @param props.notFoundText - Text to display when no options match search. Default: "Sem opções disponíveis"
- * @param props.className - Additional CSS classes to apply
- * @param props.disabled - Whether the multiselect is disabled. Default: false
- * @param props.readOnly - Whether the multiselect is read-only. Default: false
- * @param props.isLoading - Controls loading state with spinner. Default: false
- * @param props.isSearchable - Whether the multiselect supports search functionality. Default: false
- * @param props.closeOnSelect - Whether to close dropdown after selecting an option. Default: false
- * @param props.onSearch - Callback function called when search value changes
- * @param props.onChange - Callback function called when selected values change
- * @param props.onFocus - Callback function called when multiselect gains focus
- * @param props.onBlur - Callback function called when multiselect loses focus
- * @param props.size - MultiSelect size. Default: "md"
- * @param props.variant - Visual variant of the multiselect. Default: "solid"
- * @param props.prefix - Text or icon to display at the beginning of the multiselect
- * @param props.leftIcon - Optional icon to display on the left side
- * @param props.optionMaxHeight - Maximum height for the options dropdown
- * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
- * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
+ * Selected values are stored as a JSON array in a hidden `<input>` for form submission.
+ * Integrates with `useForm` to display validation errors by field name.
  *
- * @returns MultiSelect JSX element wrapped in FieldWrapper with optional label and error
+ * @param props.name - Field name for form submission. Required.
+ * @param props.options - Array of selectable options (`{ label, value }`). Required.
+ * @param props.value - Controlled array of selected values.
+ * @param props.defaultValue - Uncontrolled default selection. Default: []
+ * @param props.label - Label text displayed above the multiselect.
+ * @param props.placeholder - Placeholder shown when nothing is selected. Default: "Selecione..."
+ * @param props.errorMessage - Validation error message.
+ * @param props.isSearchable - Enables search/filter within the dropdown. Default: false
+ * @param props.isLoading - Shows a loading spinner and disables interactions. Default: false
+ * @param props.closeOnSelect - Closes the dropdown after toggling an option. Default: false
+ * @param props.onChange - Callback fired when the selection changes.
+ * @param props.onSearch - Callback fired when the search query changes.
+ * @param props.size - MultiSelect size (`md` | `lg`). Default: "md"
+ * @param props.variant - Visual style variant. Default: "solid"
+ * @param props.orientation - Layout direction. Default: "horizontal"
+ * @param props.unShowFieldTemplate - Skips wrapper, label, and error rendering. Default: false
+ *
+ * @returns MultiSelect JSX element wrapped in `FieldTemplate`.
  *
  * @example
  * ```tsx
- * // Basic multiselect
+ * // Basic
  * <MultiSelect
  *   name="categories"
  *   options={[
  *     { label: "Technology", value: "tech" },
  *     { label: "Design", value: "design" },
- *     { label: "Marketing", value: "marketing" }
  *   ]}
  * />
  *
- * // MultiSelect with label and validation
+ * // With label, validation, and searchable
  * <MultiSelect
  *   name="skills"
- *   label="Select Skills"
+ *   label="Skills"
  *   showAsterisk
- *   errorMessage="Please select at least one skill"
- *   options={skillOptions}
- *   placeholder="Choose your skills..."
- * />
- *
- * // Searchable multiselect with custom styling
- * <MultiSelect
- *   name="countries"
- *   label="Countries"
  *   isSearchable
- *   variant="outline"
- *   size="lg"
- *   leftIcon={GlobeIcon}
- *   options={countryOptions}
- *   notFoundText="No countries found"
+ *   options={skillOptions}
+ *   errorMessage={errors.skills}
  * />
  *
- * // Controlled multiselect with callbacks
+ * // Controlled with async search
  * <MultiSelect
  *   name="tags"
  *   label="Tags"
  *   value={selectedTags}
  *   onChange={setSelectedTags}
- *   onSearch={handleSearch}
- *   closeOnSelect={false}
+ *   onSearch={fetchTagOptions}
  *   isLoading={isLoadingTags}
  *   options={tagOptions}
- * />
- *
- * // MultiSelect with prefix and custom behavior
- * <MultiSelect
- *   name="departments"
- *   label="Departments"
- *   prefix="Dept:"
- *   closeOnSelect={true}
- *   variant="underline"
- *   defaultValue={["hr", "it"]}
- *   options={departmentOptions}
  * />
  * ```
  */

@@ -18,40 +18,19 @@ type FormParseReturnType<T extends FormParseProps> =
   | ErrorResponse;
 
 /**
- * Asynchronously parses form data using a Zod schema and returns the result.
+ * Async variant of `formParse` — uses `safeParseAsync` to support Zod schemas with async refinements.
+ * Returns `{ success: true, data }` on success or `{ success: false, fieldErrors, fields }` on failure.
  *
- * @template T - A type that extends `FormParseProps`.
- *
- * @param {T} props - An array containing the form data and the Zod schema.
- * @param {T[0]} formData[0] - The form data to be validated.
- * @param {T[1]} schema[1] - The Zod schema used for validation.
- *
- * @returns {Promise<FormParseReturnType<T>>} A promise that resolves to an object containing the validation result.
- * - If validation fails, it includes:
- *   - `success`: A boolean indicating the validation status (false).
- *   - `fieldErrors`: An object mapping field names to their respective error messages.
- *   - `fields`: The original form data.
- * - If validation succeeds, it includes:
- *   - `success`: A boolean indicating the validation status (true).
- *   - `data`: The parsed and validated data.
+ * @param formData - The raw form data object to validate.
+ * @param schema - The Zod schema to validate against.
  *
  * @example
  * ```typescript
- * import { z } from "zod";
- *
- * const schema = z.object({
- *   name: z.string().min(1, "Name is required"),
- *   age: z.number().min(18, "Must be at least 18"),
- * });
- *
- * const formData = { name: "", age: 17 };
- *
- * const result = await formAsyncParse([formData, schema]);
+ * const schema = z.object({ email: z.string().email() });
+ * const result = await formAsyncParse([{ email: "bad" }, schema]);
  *
  * if (!result.success) {
- *   console.log(result.fieldErrors); // { name: "Name is required", age: "Must be at least 18" }
- * } else {
- *   console.log(result.data); // Parsed data
+ *   console.log(result.fieldErrors); // { email: "Invalid email" }
  * }
  * ```
  */

@@ -38,22 +38,31 @@ type PaginationProps = {
 } & Omit<HTMLAttributes<HTMLDivElement>, "onChange">;
 
 /**
- * Pagination component for navigating through paginated data.
+ * Pagination — navigation control for paginated data sets.
  *
- * @component
+ * Renders page number buttons, prev/next arrows, and spread indicators (…)
+ * when the page count exceeds the visible range.
+ *
+ * @param props.totalCountRegisters - Total number of records. Required.
+ * @param props.currentPage - The currently active page (1-indexed). Required.
+ * @param props.registerPerPage - Records per page. Default: 10
+ * @param props.siblingsCount - Number of sibling pages visible on each side of the current page. Default: 1
+ * @param props.onChange - Callback fired when the user selects a different page.
+ *
+ * **...Other valid HTML properties for `<div>`**
+ *
+ * @returns Pagination JSX element.
+ *
  * @example
  * ```tsx
  * <Pagination
- *   totalCountRegisters={100}
- *   currentPage={1}
- *   registerPerPage={10}
+ *   totalCountRegisters={250}
+ *   currentPage={page}
+ *   registerPerPage={20}
  *   siblingsCount={1}
- *   onChange={(page) => console.log('Page changed to:', page)}
+ *   onChange={(p) => setPage(p)}
  * />
  * ```
- *
- * @param props - The component props
- * @returns A pagination navigation component with page numbers and navigation buttons
  */
 
 function Pagination(props: PaginationProps) {

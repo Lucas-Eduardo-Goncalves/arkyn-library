@@ -6,9 +6,13 @@ import { putRequest } from "../http/api/putRequest";
 import { flushDebugLogs } from "../utilities/flushDebugLogs";
 
 type ApiServiceConstructorProps = {
+  /** Base URL prepended to every request path (e.g. `"https://api.example.com"`). */
   baseUrl: string;
+  /** Default headers merged into every request. */
   baseHeaders?: HeadersInit;
+  /** Default Bearer token; can be overridden per request via `data.token`. */
   baseToken?: string | null;
+  /** When `true`, logs each request and response to the console in development. */
   enableDebug?: boolean;
 };
 
@@ -32,6 +36,22 @@ type DebugConfig = {
   message: string;
 };
 
+/**
+ * HTTP client for external API calls. Wraps fetch with base URL, default headers, optional auth token,
+ * and per-request overrides for all standard HTTP methods.
+ *
+ * @example
+ * ```typescript
+ * const api = new ApiService({
+ *   baseUrl: "https://api.example.com",
+ *   baseToken: session.token,
+ *   enableDebug: true,
+ * });
+ *
+ * const { data } = await api.get("/users/me");
+ * const { data: created } = await api.post("/orders", { body: { productId: 1 } });
+ * ```
+ */
 class ApiService {
   private baseUrl: string;
   private baseHeaders?: HeadersInit;

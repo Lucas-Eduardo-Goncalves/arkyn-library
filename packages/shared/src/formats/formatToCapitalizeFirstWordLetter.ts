@@ -1,33 +1,14 @@
 /**
- * Formats a sentence by capitalizing the first letter of each word.
- *
- * This function takes a string and capitalizes the first letter of each word
- * while the remaining letters are lowercase.
+ * Capitalizes the first letter of each word and lowercases the rest.
  * Words are separated by spaces.
  *
- * @param sentence - The sentence to be formatted.
- * @returns The sentence formatted with the first letter of each word capitalized.
+ * @param sentence - The string to format.
+ * @returns The sentence with every word title-cased.
  *
  * @example
  * ```typescript
- * // Basic example
- * formatToCapitalizeFirstWordLetter("hello world");
- * // Returns: "Hello World"
- *
- * // With capitalized text.
- * formatToCapitalizeFirstWordLetter("HELLO WORLD");
- * // Returns: "Hello World"
- *
- * // With mixed text.
- * formatToCapitalizeFirstWordLetter("hELLO WoRLd"); * // Returns: "Hello World"
- *
- * // With multiple words
- * formatToCapitalizeFirstWordLetter("javascript is an amazing language");
- * // Returns: "Javascript is an amazing language"
- *
- * // Empty string
- * formatToCapitalizeFirstWordLetter("");
- * // Returns: ""
+ * formatToCapitalizeFirstWordLetter("hello world");  // "Hello World"
+ * formatToCapitalizeFirstWordLetter("HELLO WORLD");  // "Hello World"
  * ```
  */
 

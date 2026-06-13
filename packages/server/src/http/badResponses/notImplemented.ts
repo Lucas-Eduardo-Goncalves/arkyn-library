@@ -1,19 +1,18 @@
 import { BadResponse } from "./_badResponse";
 
 /**
- * Represents an HTTP error response with a status code of 501 (Not Implemented).
- * This class is used to standardize the structure of a "Not Implemented" error response,
- * including the response body, headers, status, and status text.
+ * HTTP 501 Not Implemented — the server does not support the functionality required to fulfill the request.
+ *
+ * @example
+ * ```typescript
+ * throw new NotImplemented("Webhook delivery is not yet implemented");
+ * ```
  */
-
 class NotImplemented extends BadResponse {
   /**
-   * Creates an instance of the `NotImplemented` class.
-   *
-   * @param {string} message - A descriptive message explaining why the functionality is not implemented.
-   * @param {any} cause - Optional additional information about the cause of the error.
+   * @param message - Error description.
+   * @param cause - Optional extra context (serialized to JSON).
    */
-
   constructor(message: string, cause?: any) {
     super();
 
@@ -25,13 +24,7 @@ class NotImplemented extends BadResponse {
     this.onDebug();
   }
 
-  /**
-   * Converts the `NotImplemented` instance into a `Response` object with a JSON body.
-   * This method ensures the response has the appropriate headers, status, and status text.
-   *
-   * @returns {Response} A `Response` object with the serialized JSON body and response metadata.
-   */
-
+  /** Converts to a `Response` with `Content-Type: application/json` header. */
   toResponse(): Response {
     const responseInit: ResponseInit = {
       headers: { "Content-Type": "application/json" },
@@ -42,13 +35,7 @@ class NotImplemented extends BadResponse {
     return new Response(JSON.stringify(this.makeBody()), responseInit);
   }
 
-  /**
-   * Converts the `NotImplemented` instance into a `Response` object using the `Response.json` method.
-   * This method is an alternative to `toResponse` for generating JSON error responses.
-   *
-   * @returns {Response["json"]} A `Response` object with the JSON body and response metadata.
-   */
-
+  /** Converts to a `Response` using `Response.json()`. Alternative to `toResponse()`. */
   toJson(): Response {
     const responseInit: ResponseInit = {
       status: this.status,

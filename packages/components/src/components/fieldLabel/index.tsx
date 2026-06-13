@@ -2,37 +2,22 @@ import { LabelHTMLAttributes } from "react";
 import "./styles.css";
 
 type FieldLabelProps = LabelHTMLAttributes<HTMLLabelElement> & {
+  /** When true, appends an asterisk (*) to signal a required field. @default false */
   showAsterisk?: boolean;
 };
 
 /**
- * FieldLabel component - used to display labels for form fields with optional required indicator
+ * FieldLabel — label for form fields, with an optional required-field asterisk.
  *
- * @param props - FieldLabel component properties
- * @param props.showAsterisk - Whether to display an asterisk (*) to indicate required field. Default: false
+ * @param props.showAsterisk - Appends `*` to the label. Default: false
  *
- * **...Other valid HTML properties for label element**
+ * **...Other valid HTML properties for `<label>`**
  *
- * @returns FieldLabel JSX element
+ * @returns FieldLabel JSX element.
  *
  * @example
  * ```tsx
- * // Basic field label
- * <FieldLabel htmlFor="username">Username</FieldLabel>
- *
- * // Required field label with asterisk
- * <FieldLabel htmlFor="email" showAsterisk>
- *   Email Address
- * </FieldLabel>
- *
- * // Label with custom styling
- * <FieldLabel
- *   htmlFor="password"
- *   className="custom-label"
- *   showAsterisk
- * >
- *   Password
- * </FieldLabel>
+ * <FieldLabel htmlFor="email" showAsterisk>Email Address</FieldLabel>
  * ```
  */
 

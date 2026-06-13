@@ -6,70 +6,36 @@ import { DrawerProvider } from "../drawerContext";
 import "./styles.css";
 
 type DrawerContainerProps = HTMLAttributes<HTMLElement> & {
+  /** Controls whether the drawer is visible. */
   isVisible: boolean;
+  /** Callback invoked when the overlay is clicked to close the drawer. */
   makeInvisible: () => void;
+  /** Side from which the drawer slides in. @default "left" */
   orientation?: "left" | "right";
 };
 
-/**O
- * DrawerContainer component - animated slide-out panel for navigation or content
+/**
+ * DrawerContainer — animated slide-in panel rendered over an overlay backdrop.
  *
- * @param props - DrawerContainer component properties
- * @param props.isVisible - Controls drawer visibility state
- * @param props.makeInvisible - Callback function to hide the drawer
- * @param props.orientation - Side from which drawer slides (left, right). Default: "left"
+ * Locks body scroll while open. Closes when the overlay is clicked.
+ * Provides context consumed by `DrawerHeader` (close button).
  *
- * **...Other valid HTML properties for aside element**
+ * @param props.isVisible - Whether the drawer is open. Required.
+ * @param props.makeInvisible - Called when the overlay or close button is clicked. Required.
+ * @param props.orientation - Slide direction. Default: `"left"`
  *
- * @returns DrawerContainer JSX element
+ * **...Other valid HTML `<aside>` properties**
+ *
+ * @returns DrawerContainer JSX element.
  *
  * @example
  * ```tsx
- * // Basic drawer from left
  * const [isOpen, setIsOpen] = useState(false);
- * <DrawerContainer
- *   isVisible={isOpen}
- *   makeInvisible={setIsOpen}
- * >
- *   <p>Drawer content</p>
+ *
+ * <DrawerContainer isVisible={isOpen} makeInvisible={() => setIsOpen(false)} orientation="right">
+ *   <DrawerHeader><h2>Navigation</h2></DrawerHeader>
+ *   <nav>...</nav>
  * </DrawerContainer>
- *
- * // Right-side drawer
- * <DrawerContainer
- *   isVisible={isOpen}
- *   makeInvisible={setIsOpen}
- *   orientation="right"
- * >
- *   <nav>Navigation items</nav>
- * </DrawerContainer>
- *
- * // Complete drawer example
- * function DrawerExample() {
- *   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
- *
- *   return (
- *     <>
- *       <button onClick={() => setIsDrawerOpen(true)}>
- *         Open Menu
- *       </button>
- *
- *       <DrawerContainer
- *         isVisible={isDrawerOpen}
- *         makeInvisible={setIsDrawerOpen}
- *         orientation="right"
- *       >
- *         <div className="drawer-content">
- *           <h2>Menu</h2>
- *           <ul>
- *             <li>Home</li>
- *             <li>About</li>
- *             <li>Contact</li>
- *           </ul>
- *         </div>
- *       </DrawerContainer>
- *     </>
- *   );
- * }
  * ```
  */
 

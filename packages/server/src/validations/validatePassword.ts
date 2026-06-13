@@ -6,8 +6,8 @@
  * - At least 1 number
  * - At least 1 special character
  *
- * @param {string} rawPassword - The raw password string.
- * @returns {boolean} `true` if password is valid, otherwise `false`.
+ * @param rawPassword - The password string to validate.
+ * @returns `true` if the password meets all rules, otherwise `false`.
  *
  * @example
  * ```ts

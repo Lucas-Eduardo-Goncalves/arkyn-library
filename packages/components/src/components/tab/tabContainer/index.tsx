@@ -7,82 +7,40 @@ type TabContainerProps = Omit<
   HTMLAttributes<HTMLElement>,
   "onChange" | "children" | "ref" | "onClick"
 > & {
+  /** `TabButton` components to render as tabs. Required. */
   children: ReactNode;
+  /** Disables all tab buttons at once. @default false */
   disabled?: boolean;
+  /** Initially selected tab value. */
   defaultValue?: string;
+  /** Callback fired when the active tab changes, receiving the new value. */
   onChange?: (index: string) => void;
 };
 
 /**
- * TabContainer component - used as a wrapper for TabButton components to create tabbed navigation
+ * TabContainer — wrapper that manages active state for a group of `TabButton` components.
  *
- * @param props - TabContainer component properties
- * @param props.children - TabButton components and other content (required)
- * @param props.disabled - Whether all tab buttons are disabled. Default: false
- * @param props.defaultValue - Initial tab value to be selected
- * @param props.onChange - Callback function called when tab changes, receives the tab value
+ * Renders as a `<nav>` element. Provides context consumed by each `TabButton`.
  *
- * **...Other valid HTML nav properties except onClick, children, and ref**
+ * @param props.children - `TabButton` elements. Required.
+ * @param props.defaultValue - Initially selected tab value.
+ * @param props.disabled - Disables all buttons. Default: false
+ * @param props.onChange - Called with the new value whenever the active tab changes.
  *
- * @returns TabContainer JSX element
+ * **...Other valid HTML `<nav>` properties**
  *
- * @example
- * ```tsx
- * // Basic tab container
- * <TabContainer>
- *   <TabButton value="home">Home</TabButton>
- *   <TabButton value="about">About</TabButton>
- *   <TabButton value="contact">Contact</TabButton>
- * </TabContainer>
- * ```
+ * @returns TabContainer JSX element.
  *
  * @example
  * ```tsx
- * // Tab container with default value and change handler
- * <TabContainer
- *   defaultValue="dashboard"
- *   onChange={(value) => console.log('Active tab:', value)}
- * >
- *   <TabButton value="dashboard">Dashboard</TabButton>
+ * <TabContainer defaultValue="overview" onChange={setActiveTab}>
+ *   <TabButton value="overview">Overview</TabButton>
  *   <TabButton value="analytics">Analytics</TabButton>
  *   <TabButton value="settings">Settings</TabButton>
  * </TabContainer>
- * ```
  *
- * @example
- * ```tsx
- * // Disabled all tabs
- * <TabContainer disabled>
- *   <TabButton value="tab1">Tab 1</TabButton>
- *   <TabButton value="tab2">Tab 2</TabButton>
- * </TabContainer>
- * ```
- *
- * @example
- * ```tsx
- * // Tab container with custom styling and state management
- * function MyTabs() {
- *   const [activeTab, setActiveTab] = useState('profile');
- *
- *   return (
- *     <div>
- *       <TabContainer
- *         defaultValue={activeTab}
- *         onChange={setActiveTab}
- *         className="custom-tabs"
- *         role="tablist"
- *       >
- *         <TabButton value="profile">Profile</TabButton>
- *         <TabButton value="account">Account</TabButton>
- *         <TabButton value="notifications">Notifications</TabButton>
- *       </TabContainer>
- *
- *       {activeTab === 'profile' && <ProfileContent />}
- *       {activeTab === 'account' && <AccountContent />}
- *       {activeTab === 'notifications' && <NotificationsContent />}
- *     </div>
- *   );
- * }
+ * {activeTab === 'overview' && <OverviewPanel />}
+ * {activeTab === 'analytics' && <AnalyticsPanel />}
  * ```
  */
 

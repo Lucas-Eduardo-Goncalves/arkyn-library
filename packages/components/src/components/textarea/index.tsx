@@ -17,40 +17,54 @@ type TextareaProps = Omit<
   TextareaHTMLAttributes<HTMLTextAreaElement>,
   "name" | "value" | "defaultValue"
 > & {
+  /** Field name for form submission. Required. */
   name: string;
-
+  /** Optional label text displayed above the textarea. */
   label?: string;
+  /** Displays an asterisk on the label to signal a required field. */
   showAsterisk?: boolean;
+  /** Validation error message displayed below the textarea. */
   errorMessage?: string;
-
+  /**
+   * Textarea size.
+   * @default "md"
+   */
   size?: "md" | "lg";
+  /**
+   * Visual style variant.
+   * - `solid`: filled background.
+   * - `outline`: bordered, transparent background.
+   * @default "solid"
+   */
   variant?: "solid" | "outline";
-
+  /** Controlled value. */
   value?: string;
+  /** Uncontrolled default value. */
   defaultValue?: string;
 };
 
 /**
- * Textarea component - used for multi-line text input with customizable styling and validation
+ * Textarea — multi-line text input with label, validation, and form integration.
  *
- * @param props - Textarea component properties
- * @param props.name - Required field name for form handling and textarea identification
- * @param props.label - Optional label text to display above the textarea
- * @param props.showAsterisk - Whether to show asterisk on label for required fields
- * @param props.errorMessage - Error message to display below the textarea
- * @param props.size - Size variant of the textarea. Default: "md"
- * @param props.variant - Visual variant of the textarea. Default: "solid"
+ * Integrates with `useForm` to display validation errors by field name.
  *
- * **...Other valid HTML properties for textarea element (except name)**
+ * @param props.name - Field name for form submission. Required.
+ * @param props.label - Label text displayed above the textarea.
+ * @param props.showAsterisk - Appends `*` to the label.
+ * @param props.errorMessage - Validation error message.
+ * @param props.size - Textarea size (`md` | `lg`). Default: "md"
+ * @param props.variant - Visual style variant. Default: "solid"
  *
- * @returns Textarea JSX element wrapped in FieldWrapper with optional label and error message
+ * **...Other valid HTML properties for `<textarea>`**
+ *
+ * @returns Textarea JSX element wrapped in `FieldWrapper`.
  *
  * @example
  * ```tsx
- * // Basic textarea
+ * // Basic
  * <Textarea name="description" placeholder="Enter description..." />
  *
- * // Textarea with label and validation
+ * // With label and validation
  * <Textarea
  *   name="bio"
  *   label="Biography"
@@ -59,64 +73,15 @@ type TextareaProps = Omit<
  *   errorMessage="Biography is required"
  * />
  *
- * // Large textarea with outline variant
- * <Textarea
- *   name="comments"
- *   label="Comments"
- *   size="lg"
- *   variant="outline"
- *   placeholder="Enter your comments here..."
- *   rows={6}
- * />
- *
- * // Textarea with character limit and custom styling
- * <Textarea
- *   name="feedback"
- *   label="Feedback"
- *   placeholder="Share your feedback (max 500 characters)"
- *   maxLength={500}
- *   rows={4}
- *   className="feedback-textarea"
- * />
- *
- * // Read-only textarea for display
- * <Textarea
- *   name="terms"
- *   label="Terms and Conditions"
- *   value={termsContent}
- *   readOnly
- *   rows={10}
- *   variant="outline"
- * />
- *
- * // Disabled textarea
- * <Textarea
- *   name="disabled_field"
- *   label="Disabled Field"
- *   value="This field is disabled"
- *   disabled
- *   placeholder="Cannot edit this field"
- * />
- *
- * // Textarea with controlled value and change handler
+ * // Controlled with custom rows
  * <Textarea
  *   name="message"
  *   label="Message"
  *   value={message}
  *   onChange={(e) => setMessage(e.target.value)}
- *   placeholder="Type your message..."
  *   rows={5}
- *   showAsterisk
- * />
- *
- * // Textarea with resize control
- * <Textarea
- *   name="notes"
- *   label="Notes"
- *   placeholder="Enter your notes..."
- *   style={{ resize: 'vertical' }}
- *   rows={3}
- *   cols={50}
+ *   size="lg"
+ *   variant="outline"
  * />
  * ```
  */

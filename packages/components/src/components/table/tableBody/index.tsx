@@ -2,66 +2,32 @@ import { Children, HTMLAttributes } from "react";
 import "./styles.css";
 
 type TableBodyProps = HTMLAttributes<HTMLTableSectionElement> & {
+  /** Text displayed in a full-width row when no children are present. @default "Nenhum dado adicionado." */
   emptyMessage?: string;
 };
 
 /**
- * TableBody component - used to render the main content section of a table with empty state handling
+ * TableBody — `<tbody>` section with built-in empty state handling.
  *
- * @param props - TableBody component properties
- * @param props.emptyMessage - Message to display when no children are provided. Default: "Nenhum dado adicionado."
+ * When `children` is empty, renders a full-width row with `emptyMessage`.
+ * Accepts all standard HTML `<tbody>` attributes.
  *
- * **...All valid HTML properties for tbody element**
+ * @param props.emptyMessage - Empty state text. Default: `"Nenhum dado adicionado."`
  *
- * @returns TableBody JSX element
+ * **...Other valid HTML `<tbody>` properties**
+ *
+ * @returns TableBody JSX element.
  *
  * @example
  * ```tsx
- * // Basic table body with data
- * <TableBody>
- *   <tr>
- *     <td>John Doe</td>
- *     <td>john@example.com</td>
- *   </tr>
- *   <tr>
- *     <td>Jane Smith</td>
- *     <td>jane@example.com</td>
- *   </tr>
- * </TableBody>
- *
- * // Empty table body with custom message
- * <TableBody emptyMessage="No users found. Please add some users to get started." />
- *
- * // Table body with dynamic content and custom styling
- * <TableBody className="striped-rows" emptyMessage="No products available">
- *   {products.map(product => (
- *     <tr key={product.id}>
- *       <td>{product.name}</td>
- *       <td>{product.price}</td>
- *       <td>{product.stock}</td>
+ * <TableBody emptyMessage="No orders found">
+ *   {orders.map(o => (
+ *     <tr key={o.id}>
+ *       <td>{o.number}</td>
+ *       <td>{o.status}</td>
  *     </tr>
  *   ))}
  * </TableBody>
- *
- * // Complete table usage
- * <TableContainer>
- *   <TableHeader>
- *     <th>Name</th>
- *     <th>Status</th>
- *     <th>Actions</th>
- *   </TableHeader>
- *   <TableBody emptyMessage="No data to display">
- *     {data.map(item => (
- *       <tr key={item.id}>
- *         <td>{item.name}</td>
- *         <td>{item.status}</td>
- *         <td>
- *           <Button>Edit</Button>
- *         </td>
- *       </tr>
- *     ))}
- *   </TableBody>
- * </TableContainer>
  * ```
  */
 

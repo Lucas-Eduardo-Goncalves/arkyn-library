@@ -5,9 +5,8 @@
  * and removes them using a regular expression. The resulting string
  * is also trimmed of any leading or trailing whitespace.
  *
- * @param {string} rawString - The input string containing currency symbols.
- *
- * @returns {string} A string with all currency symbols removed and trimmed of whitespace.
+ * @param rawString - The formatted string that may contain currency symbols.
+ * @returns The string with all currency symbols removed and trimmed of whitespace.
  *
  * @example
  * ```typescript

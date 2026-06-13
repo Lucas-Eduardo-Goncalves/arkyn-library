@@ -8,125 +8,91 @@ import { NoFileContent } from "./noFileContent";
 import "./styles.css";
 
 type ImageUploadProps = {
+  /** Field name for form submission (stores the uploaded image URL). Required. */
   name: string;
+  /** Server endpoint URL that receives the `multipart/form-data` upload request. Required. */
   action: string;
+  /** Pre-populated image URL displayed as a preview (e.g. an existing avatar). @default "" */
   defaultValue?: string | null;
+  /** Additional CSS class applied to the wrapper element. */
   className?: string;
-
+  /** Disables file selection and upload. @default false */
   disabled?: boolean;
-
+  /** Optional label text displayed above the upload area. */
   label?: string;
+  /** Displays an asterisk on the label to signal a required field. @default false */
   showAsterisk?: boolean;
-
+  /** Label for the file-picker button after an image is selected. @default "Alterar imagem" */
   changeImageButtonText?: string;
+  /** Label for the file-picker button before an image is selected. @default "Selecionar imagem" */
   selectImageButtonText?: string;
+  /** Text displayed in the drag-and-drop zone. @default "Ou arraste e solte a imagem aqui" */
   dropImageText?: string;
-
+  /** HTTP method for the upload request. @default "POST" */
   method?: string;
+  /** Form-data field name used for the file. @default "file" */
   fileName?: string;
+  /** Property name in the server response that contains the image URL. @default "url" */
   fileResponseName?: string;
+  /** Accepted image MIME types or extensions (e.g. `"image/jpeg,image/png"`). @default "image/*" */
   acceptImage?: string;
-
+  /** Callback fired after a successful upload. Receives the image URL returned by the server. */
   onChange?: (url: string) => void;
-
+  /** When true, skips `FieldTemplate` wrapper (label and error text). @default false */
   unShowFieldTemplate?: boolean;
+  /**
+   * Layout direction forwarded to `FieldTemplate`.
+   * @default "horizontal"
+   */
   orientation?: "horizontal" | "vertical" | "horizontalReverse";
 };
 
 /**
- * ImageUpload component - specialized file upload component for image files with preview functionality
+ * ImageUpload — drag-and-drop image uploader with server upload and image preview.
  *
- * @param props - ImageUpload component properties
- * @param props.name - Required field name for form handling
- * @param props.defaultValue - Initial image URL to display as preview. Default: ""
- * @param props.disabled - Whether the image upload is disabled. Default: false
- * @param props.className - Additional class name(s) for the wrapper element
- * @param props.label - Optional label text to display above the image upload area
- * @param props.showAsterisk - Whether to show asterisk on label for required fields. Default: false
- * @param props.changeImageButtonText - Text for the button to change/replace an uploaded image. Default: "Alterar imagem"
- * @param props.selectImageButtonText - Text for the button to select an image. Default: "Selecionar imagem"
- * @param props.dropImageText - Text displayed in the drop zone area. Default: "Ou arraste e solte a imagem aqui"
- * @param props.action - Required endpoint URL where the image will be uploaded
- * @param props.method - HTTP method for the upload request. Default: "POST"
- * @param props.fileName - Form data field name for the image file. Default: "file"
- * @param props.fileResponseName - Property name in the response object containing the image URL. Default: "url"
- * @param props.acceptImage - Image file types accepted by the input (e.g., "image/*", ".jpg,.png"). Default: "image/*"
- * @param props.onChange - Callback function called when image upload completes successfully, receives the image URL
- * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
- * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
+ * Sends the file via `fetch` as `multipart/form-data` and stores the returned URL
+ * in a hidden `<input>` for form submission.
+ * Integrates with `useForm` to display validation errors by field name.
  *
- * @returns ImageUpload JSX element wrapped in FieldGroup with optional label, image preview, and error handling
+ * @param props.name - Field name for form submission. Required.
+ * @param props.action - Upload endpoint URL. Required.
+ * @param props.defaultValue - Pre-populated image URL displayed as preview.
+ * @param props.disabled - Disables file selection and upload. Default: false
+ * @param props.label - Label text displayed above the upload area.
+ * @param props.showAsterisk - Appends `*` to the label. Default: false
+ * @param props.acceptImage - Accepted MIME types or extensions. Default: "image/*"
+ * @param props.method - HTTP method. Default: "POST"
+ * @param props.fileName - Form-data field name for the file. Default: "file"
+ * @param props.fileResponseName - Server response property containing the URL. Default: "url"
+ * @param props.onChange - Callback fired after a successful upload — receives the image URL.
+ * @param props.orientation - Layout direction. Default: "horizontal"
+ * @param props.unShowFieldTemplate - Skips wrapper, label, and error rendering. Default: false
+ *
+ * @returns ImageUpload JSX element wrapped in `FieldTemplate`.
  *
  * @example
  * ```tsx
- * // Basic image upload
- * <ImageUpload
- *   name="avatar"
- *   action="/api/upload/image"
- * />
+ * // Basic
+ * <ImageUpload name="avatar" action="/api/upload/image" />
  *
- * // Image upload with label and custom text
+ * // Profile picture with existing image and label
  * <ImageUpload
  *   name="profilePicture"
  *   action="/api/upload/avatar"
  *   label="Profile Picture"
  *   showAsterisk
- *   selectImageButtonText="Choose Photo"
- *   changeImageButtonText="Change Photo"
- *   dropImageText="Drop your photo here"
+ *   defaultValue={user.avatarUrl}
+ *   selectImageButtonText="Choose photo"
+ *   onChange={(url) => updateProfile({ avatarUrl: url })}
  * />
  *
- * // Image upload with default value and restrictions
+ * // Restricted to JPEG/PNG
  * <ImageUpload
  *   name="productImage"
  *   action="/api/upload/product"
  *   label="Product Image"
- *   defaultValue="https://example.com/default-image.jpg"
- *   acceptImage=".jpg,.jpeg,.png,.webp"
- *   fileName="productImage"
- *   fileResponseName="imageUrl"
- *   onChange={(url) => console.log('Image uploaded:', url)}
- * />
- *
- * // Disabled image upload with existing image
- * <ImageUpload
- *   name="banner"
- *   action="/api/upload/banner"
- *   label="Banner Image"
- *   defaultValue="https://example.com/banner.jpg"
- *   disabled
- * />
- *
- * // Image upload with custom HTTP method and response handling
- * <ImageUpload
- *   name="gallery"
- *   action="/api/images"
- *   method="PUT"
- *   fileName="galleryImage"
- *   fileResponseName="imageUrl"
- *   label="Gallery Image"
  *   acceptImage="image/jpeg,image/png"
- *   onChange={(url) => {
- *     if (url) {
- *       setImageUrl(url);
- *       console.log('Upload successful:', url);
- *     }
- *   }}
- * />
- *
- * // Image upload for user avatar with form integration
- * <ImageUpload
- *   name="userAvatar"
- *   action="/api/users/avatar"
- *   label="User Avatar"
- *   showAsterisk
- *   defaultValue={user?.avatarUrl}
- *   selectImageButtonText="Select Avatar"
- *   changeImageButtonText="Update Avatar"
- *   dropImageText="Drop avatar image here"
- *   onChange={(avatarUrl) => {
- *     updateUserProfile({ avatarUrl });
- *   }}
+ *   fileResponseName="imageUrl"
  * />
  * ```
  */

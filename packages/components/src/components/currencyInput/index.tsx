@@ -55,29 +55,62 @@ type CurrencyInputProps = Omit<
   | "onChange"
   | "placeholder"
 > & {
+  /** Field name for form submission. Required. */
   name: string;
+  /**
+   * Currency locale used to format the displayed value.
+   * Supported: `"USD"` | `"EUR"` | `"BRL"` | `"JPY"` | `"GBP"` | … (22 locales).
+   * Required.
+   */
   locale: Locale;
-
+  /** Optional label text displayed above the input. */
   label?: string;
+  /** Validation error message displayed below the input. */
   errorMessage?: string;
+  /** Shows a spinner and disables the input during async operations. @default false */
   isLoading?: boolean;
+  /** When true, skips `FieldTemplate` wrapper (label and error text). @default false */
   unShowFieldTemplate?: boolean;
-
+  /**
+   * Input size.
+   * @default "md"
+   */
   size?: "md" | "lg";
+  /**
+   * Visual style variant.
+   * - `solid`: filled background.
+   * - `outline`: bordered, transparent background.
+   * - `underline`: bottom border only.
+   * @default "solid"
+   */
   variant?: "solid" | "outline" | "underline";
+  /**
+   * Layout direction forwarded to `FieldTemplate`.
+   * @default "horizontal"
+   */
   orientation?: "horizontal" | "vertical" | "horizontalReverse";
-
+  /** Text or icon rendered at the far left, outside the input area. */
   prefix?: string | LucideIcon;
+  /** Text or icon rendered at the far right, outside the input area. */
   suffix?: string | LucideIcon;
+  /** Displays an asterisk on the label to signal a required field. */
   showAsterisk?: boolean;
-
+  /** Lucide icon rendered inside the input on the left. */
   leftIcon?: LucideIcon;
+  /** Lucide icon rendered inside the input on the right. */
   rightIcon?: LucideIcon;
-
+  /** Maximum numeric value allowed. @default 1_000_000_000 */
   max?: number;
+  /** Controlled numeric value. */
   value?: number;
+  /** Uncontrolled default numeric value. */
   defaultValue?: number;
-
+  /**
+   * Callback fired on value change.
+   * @param event - Native change event.
+   * @param originalValue - Raw numeric string (e.g. `"1234.56"`).
+   * @param maskedValue - Formatted display string (e.g. `"$ 1,234.56"`).
+   */
   onChange?: (
     event: ChangeEvent<HTMLInputElement>,
     originalValue: string,
@@ -86,39 +119,40 @@ type CurrencyInputProps = Omit<
 };
 
 /**
- * CurrencyInput component - used for currency input fields with automatic formatting based on locale
+ * CurrencyInput — numeric input that automatically formats the displayed value according to a currency locale.
  *
- * @param props - CurrencyInput component properties
- * @param props.name - Required field name for form handling
- * @param props.locale - Currency locale for formatting (e.g., "USD", "EUR", "BRL", etc.)
- * @param props.label - Optional label text to display above the input
- * @param props.errorMessage - Error message to display below the input
- * @param props.isLoading - Controls loading state with spinner. Default: false
- * @param props.size - Input size. Default: "md"
- * @param props.variant - Visual variant of the input. Default: "solid"
- * @param props.prefix - Text or icon to display at the beginning of the input
- * @param props.suffix - Text or icon to display at the end of the input
- * @param props.showAsterisk - Whether to show asterisk on label for required fields
- * @param props.leftIcon - Optional icon to display on the left side
- * @param props.rightIcon - Optional icon to display on the right side
- * @param props.max - Maximum allowed value for the currency input
- * @param props.value - Controlled value (number) for the input
- * @param props.defaultValue - Default value (number) for uncontrolled usage
- * @param props.onChange - Callback function called when value changes, receives event, original value and masked value
- * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
- * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
+ * The raw numeric value is stored in a hidden `<input>` for form submission.
+ * Integrates with `useForm` to display validation errors by field name.
  *
+ * @param props.name - Field name for form submission. Required.
+ * @param props.locale - Currency locale (e.g. `"USD"`, `"BRL"`, `"EUR"`). Required.
+ * @param props.label - Label text displayed above the input.
+ * @param props.errorMessage - Validation error message.
+ * @param props.isLoading - Shows a spinner and disables the input. Default: false
+ * @param props.size - Input size (`md` | `lg`). Default: "md"
+ * @param props.variant - Visual style variant. Default: "solid"
+ * @param props.max - Maximum numeric value allowed. Default: 1_000_000_000
+ * @param props.value - Controlled numeric value.
+ * @param props.defaultValue - Uncontrolled default numeric value.
+ * @param props.onChange - Callback fired on change — receives the event, the raw numeric string, and the formatted string.
+ * @param props.prefix - Text or icon at the far left.
+ * @param props.suffix - Text or icon at the far right.
+ * @param props.leftIcon - Lucide icon inside the input on the left.
+ * @param props.rightIcon - Lucide icon inside the input on the right.
+ * @param props.showAsterisk - Appends `*` to the label.
+ * @param props.orientation - Layout direction. Default: "horizontal"
+ * @param props.unShowFieldTemplate - Skips wrapper, label, and error rendering. Default: false
  *
- * **...Other valid HTML properties for input element (except type, max, defaultValue, value, onChange)**
+ * **...Other valid HTML properties for `<input>` (except `type`, `max`, `value`, `defaultValue`, `onChange`, `placeholder`)**
  *
- * @returns CurrencyInput JSX element wrapped in FieldGroup with optional label and error
+ * @returns CurrencyInput JSX element wrapped in `FieldTemplate`.
  *
  * @example
  * ```tsx
- * // Basic currency input
- * <CurrencyInput name="price" locale="USD" placeholder="Enter price" />
+ * // Basic
+ * <CurrencyInput name="price" locale="USD" />
  *
- * // Currency input with label and validation
+ * // With label and validation
  * <CurrencyInput
  *   name="salary"
  *   locale="BRL"
@@ -127,37 +161,14 @@ type CurrencyInputProps = Omit<
  *   errorMessage="Please enter a valid amount"
  * />
  *
- * // Currency input with icons and loading state
- * <CurrencyInput
- *   name="budget"
- *   locale="EUR"
- *   label="Budget"
- *   leftIcon={DollarSignIcon}
- *   rightIcon={CalculatorIcon}
- *   isLoading
- * />
- *
- * // Currency input with max value and controlled state
+ * // With max value and controlled state
  * <CurrencyInput
  *   name="limit"
  *   locale="USD"
  *   label="Credit Limit"
  *   max={10000}
  *   value={creditLimit}
- *   onChange={(e, original, masked) => setCreditLimit(Number(original))}
- *   variant="outline"
- * />
- *
- * // Large currency input with prefix/suffix
- * <CurrencyInput
- *   name="investment"
- *   locale="GBP"
- *   label="Investment Amount"
- *   size="lg"
- *   variant="underline"
- *   prefix="£"
- *   suffix="GBP"
- *   placeholder="Enter investment amount"
+ *   onChange={(e, original) => setCreditLimit(Number(original))}
  * />
  * ```
  */

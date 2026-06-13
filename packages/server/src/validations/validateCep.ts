@@ -6,8 +6,8 @@ import { removeNonNumeric } from "@arkyn/shared";
  * A valid CEP must contain exactly 8 numeric digits,
  * optionally formatted as "12345-678".
  *
- * @param {string} rawCep - CEP value, with or without formatting.
- * @returns {boolean} `true` if the CEP is valid, otherwise `false`.
+ * @param rawCep - CEP value, with or without formatting.
+ * @returns `true` if the CEP is valid, otherwise `false`.
  *
  * @example
  * ```typescript

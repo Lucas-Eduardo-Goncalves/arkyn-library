@@ -2,71 +2,38 @@ import { HTMLAttributes } from "react";
 import "./styles.css";
 
 type ModalFooterProps = HTMLAttributes<HTMLElement> & {
+  /**
+   * Horizontal alignment of footer content.
+   * - `left` / `center` / `right`: flex-start, center, flex-end.
+   * - `between`: space-between.
+   * - `around`: space-around.
+   * @default "right"
+   */
   alignment?: "left" | "center" | "right" | "between" | "around";
 };
 
 /**
- * ModalFooter component - footer section for modals with flexible alignment options
+ * ModalFooter — action bar at the bottom of a modal dialog.
  *
- * @param props - ModalFooter component properties
- * @param props.alignment - Content alignment within the footer. Default: "right"
+ * @param props.alignment - Horizontal alignment of children. Default: `"right"`
  *
- * **...Other valid HTML properties for footer element**
+ * **...Other valid HTML `<footer>` properties**
  *
- * @returns ModalFooter JSX element
+ * @returns ModalFooter JSX element.
  *
  * @example
  * ```tsx
- * // Basic footer with right alignment (default)
+ * // Confirm / cancel pattern (right-aligned by default)
  * <ModalFooter>
- *   <button>Cancel</button>
- *   <button>Save</button>
+ *   <Button variant="ghost" onClick={onClose}>Cancel</Button>
+ *   <Button scheme="danger" onClick={onConfirm}>Delete</Button>
  * </ModalFooter>
  *
- * // Left aligned footer
- * <ModalFooter alignment="left">
- *   <button>Delete</button>
- * </ModalFooter>
- *
- * // Center aligned footer
- * <ModalFooter alignment="center">
- *   <button>OK</button>
- * </ModalFooter>
- *
- * // Space between buttons
+ * // Space-between layout (e.g. back / next in a wizard)
  * <ModalFooter alignment="between">
- *   <button>Cancel</button>
- *   <button>Confirm</button>
+ *   <Button variant="outline" onClick={onBack}>Back</Button>
+ *   <Button onClick={onNext}>Next</Button>
  * </ModalFooter>
- *
- * // Space around buttons
- * <ModalFooter alignment="around">
- *   <button>Previous</button>
- *   <button>Next</button>
- *   <button>Finish</button>
- * </ModalFooter>
- *
- * // Complete modal example
- * <ModalContainer isVisible={isOpen} makeInvisible={() => setIsOpen(false)}>
- *   <div className="modal-content">
- *     <header>
- *       <h2>Confirm Action</h2>
- *     </header>
- *
- *     <main>
- *       <p>Are you sure you want to delete this item?</p>
- *     </main>
- *
- *     <ModalFooter alignment="right">
- *       <button onClick={() => setIsOpen(false)}>
- *         Cancel
- *       </button>
- *       <button onClick={handleDelete}>
- *         Delete
- *       </button>
- *     </ModalFooter>
- *   </div>
- * </ModalContainer>
  * ```
  */
 

@@ -22,28 +22,60 @@ type MaskedInputProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
   "size" | "prefix" | "name" | "type"
 > & {
+  /** Field name for form submission. Required. */
   name: string;
+  /**
+   * Mask pattern string. Use the replacement character as an editable placeholder.
+   * Example: `"(__) _____-____"` for a Brazilian mobile phone number.
+   * Required.
+   */
   mask: string;
+  /**
+   * Character or replacement map that marks editable positions in the mask.
+   * - String: `"_"` — every `_` in the mask becomes editable.
+   * - Object: `{ _: /\d/ }` — only accepts digits in those positions.
+   * Required.
+   */
   replacement: string | Replacement;
-
+  /**
+   * When true, strips mask characters from the underlying value,
+   * keeping only the user-typed characters.
+   */
   separate?: boolean;
+  /** When true, shows the full mask pattern in the input before the user types. */
   showMask?: boolean;
-
+  /** Optional label text displayed above the input. */
   label?: string;
+  /** Validation error message displayed below the input. */
   errorMessage?: string;
+  /** Shows a spinner and disables the input during async operations. @default false */
   isLoading?: boolean;
-
+  /**
+   * Input size.
+   * @default "md"
+   */
   size?: "md" | "lg";
+  /**
+   * Visual style variant.
+   * - `solid`: filled background.
+   * - `outline`: bordered, transparent background.
+   * - `underline`: bottom border only.
+   * @default "solid"
+   */
   variant?: "solid" | "outline" | "underline";
-
+  /** Text or icon rendered at the far left, outside the input area. */
   prefix?: string | LucideIcon;
+  /** Text or icon rendered at the far right, outside the input area. */
   suffix?: string | LucideIcon;
+  /** Displays an asterisk on the label to signal a required field. */
   showAsterisk?: boolean;
-
+  /** Lucide icon rendered inside the input on the left. */
   leftIcon?: LucideIcon;
+  /** Lucide icon rendered inside the input on the right. */
   rightIcon?: LucideIcon;
-
+  /** Controlled value. */
   value?: string;
+  /** Uncontrolled default value. */
   defaultValue?: string;
 };
 
@@ -55,81 +87,58 @@ const BaseInput = forwardRef<
 });
 
 /**
- * MaskedInput component - used for text input fields with input masking support, labels, validation, icons, and loading states
+ * MaskedInput — text input with a configurable mask for structured values (phones, CPF, credit cards, etc.).
  *
- * @param props - MaskedInput component properties
- * @param props.name - Required field name for form handling
- * @param props.mask - Input mask pattern (e.g., "___.___.___-__" for CPF)
- * @param props.replacement - Character or replacement configuration for mask positions
- * @param props.separate - Whether to separate mask characters from input value. Default: undefined
- * @param props.showMask - Whether to show the mask placeholder. Default: undefined
- * @param props.label - Optional label text to display above the input
- * @param props.errorMessage - Error message to display below the input
- * @param props.isLoading - Controls loading state with spinner. Default: false
- * @param props.size - Input size. Default: "md"
- * @param props.variant - Visual variant of the input. Default: "solid"
- * @param props.prefix - Text or icon to display at the beginning of the input
- * @param props.suffix - Text or icon to display at the end of the input
- * @param props.showAsterisk - Whether to show asterisk on label for required fields
- * @param props.leftIcon - Optional icon to display on the left side
- * @param props.rightIcon - Optional icon to display on the right side
+ * Built on `@react-input/mask`. Integrates with `useForm` to display validation errors by field name.
  *
- * **...Other valid HTML properties for input element (except 'type' which is controlled by the mask)**
+ * @param props.name - Field name for form submission. Required.
+ * @param props.mask - Mask pattern string. Required.
+ * @param props.replacement - Character or map that marks editable positions. Required.
+ * @param props.separate - Strips mask chars from the value, keeping only typed characters.
+ * @param props.showMask - Shows the full mask pattern before the user types.
+ * @param props.label - Label text displayed above the input.
+ * @param props.errorMessage - Validation error message.
+ * @param props.isLoading - Shows a spinner and disables the input. Default: false
+ * @param props.size - Input size (`md` | `lg`). Default: "md"
+ * @param props.variant - Visual style variant. Default: "solid"
+ * @param props.prefix - Text or icon at the far left.
+ * @param props.suffix - Text or icon at the far right.
+ * @param props.leftIcon - Lucide icon inside the input on the left.
+ * @param props.rightIcon - Lucide icon inside the input on the right.
+ * @param props.showAsterisk - Appends `*` to the label.
  *
- * @returns MaskedInput JSX element wrapped in FieldGroup with optional label and error
+ * **...Other valid HTML properties for `<input>` (except `type`)**
+ *
+ * @returns MaskedInput JSX element wrapped in `FieldWrapper`.
  *
  * @example
  * ```tsx
- * // Basic masked input for phone number
+ * // Brazilian mobile phone
  * <MaskedInput
  *   name="phone"
  *   mask="(__) _____-____"
  *   replacement={{ _: /\d/ }}
- *   placeholder="(00) 00000-0000"
+ *   label="Phone"
  * />
  *
- * // CPF input with label and validation
+ * // CPF with mask visible and validation
  * <MaskedInput
  *   name="cpf"
  *   label="CPF"
  *   mask="___.___.___-__"
  *   replacement="_"
- *   showAsterisk
- *   errorMessage="Please enter a valid CPF"
  *   showMask
+ *   showAsterisk
+ *   errorMessage="Invalid CPF"
  * />
  *
- * // Credit card input with icons and loading state
+ * // Credit card
  * <MaskedInput
- *   name="creditCard"
+ *   name="card"
  *   label="Credit Card"
  *   mask="____ ____ ____ ____"
  *   replacement={{ _: /\d/ }}
- *   leftIcon={CreditCardIcon}
- *   rightIcon={ShieldIcon}
- *   isLoading
- * />
- *
- * // Date input with prefix/suffix
- * <MaskedInput
- *   name="birthDate"
- *   label="Birth Date"
- *   mask="__/__/____"
- *   replacement="_"
- *   prefix="📅"
- *   variant="outline"
- *   separate
- * />
- *
- * // Large masked input with underline variant
- * <MaskedInput
- *   name="zipCode"
- *   label="ZIP Code"
- *   mask="_____-___"
- *   replacement={{ _: /\d/ }}
- *   size="lg"
- *   variant="underline"
- *   placeholder="00000-000"
+ *   leftIcon={CreditCard}
  * />
  * ```
  */

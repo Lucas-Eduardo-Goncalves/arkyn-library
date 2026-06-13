@@ -25,70 +25,105 @@ type CountryType = {
 };
 
 type PhoneInputProps = {
+  /** Optional HTML id for the visible phone text input. */
   id?: string;
+  /** Disables all interactions. @default false */
   disabled?: boolean;
+  /** Prevents value changes while keeping the current value visible. @default false */
   readOnly?: boolean;
+  /** Validation error message (overrides the `useForm` context error for this field). */
   errorMessage?: string;
+  /** Optional label text displayed above the input. */
   label?: string;
+  /** Displays an asterisk on the label to signal a required field. */
   showAsterisk?: boolean;
+  /** Shows a loading state and disables interactions. @default false */
   isLoading?: boolean;
+  /**
+   * Input size.
+   * @default "md"
+   */
   size?: "md" | "lg";
+  /**
+   * Visual style variant.
+   * - `solid`: filled background.
+   * - `outline`: bordered, transparent background.
+   * @default "solid"
+   */
   variant?: "solid" | "outline";
+  /** Additional CSS class applied to the field wrapper. */
   className?: string;
+  /** Uncontrolled default phone value (numeric string with or without country code). @default "" */
   defaultValue?: string;
+  /** Text displayed when no country matches the search query. @default "Nenhum país encontrado" */
   notFoundCountryText?: string;
+  /** Field name for form submission (stored as numeric string with country code). Required. */
   name: string;
+  /** Placeholder for the country search input. @default "Pesquisar país" */
   searchCountryPlaceholder?: string;
+  /** ISO 3166-1 alpha-2 code of the initially selected country. @default "BR" */
   defaultCountryIso?: (typeof countries)[number]["iso"];
+  /** Callback fired on value change. Receives a numeric string prefixed with the country dial code. */
   onChange?: (e: string) => void;
+  /** Controlled phone value (without country code). */
   value?: string;
+  /** When true, skips `FieldTemplate` wrapper (label and error text). @default false */
   unShowFieldTemplate?: boolean;
+  /**
+   * Layout direction forwarded to `FieldTemplate`.
+   * @default "horizontal"
+   */
   orientation?: "horizontal" | "vertical" | "horizontalReverse";
 };
 
 /**
- * Phone input with country selector, mask formatting, and hidden form value.
+ * PhoneInput — phone number field with an integrated country selector and automatic mask formatting.
  *
- * The component formats the visible value according to the selected country mask,
- * while the hidden input stores a numeric string prefixed with the country code.
- * It also integrates with `useForm` to display validation errors by field name.
+ * The visible input is masked according to the selected country's phone format.
+ * The hidden `<input>` stores a numeric string prefixed with the country dial code for form submission.
+ * Integrates with `useForm` to display validation errors by field name.
  *
- * @param {PhoneInputProps} props Component properties.
- * @param {string} props.name Hidden input name used in form submission.
- * @param {string} [props.label] Optional field label.
- * @param {boolean} [props.showAsterisk] Displays required marker in the label.
- * @param {string} [props.errorMessage] Custom error message (overrides form context error).
- * @param {"md" | "lg"} [props.size="md"] Visual size.
- * @param {"solid" | "outline"} [props.variant="solid"] Visual variant.
- * @param {boolean} [props.disabled=false] Disables interactions.
- * @param {boolean} [props.readOnly=false] Prevents editing while keeping value visible.
- * @param {boolean} [props.isLoading=false] Applies loading state and disables interactions.
- * @param {string} [props.defaultValue=""] Initial phone value for uncontrolled usage.
- * @param {string} [props.value] Controlled phone value.
- * @param {(value: string) => void} [props.onChange] Callback with numeric value including country code.
- * @param {(typeof countries)[number]["iso"]} [props.defaultCountryIso] Reserved prop for default country ISO.
- * @param {string} [props.searchCountryPlaceholder="Pesquisar país"] Placeholder for country search input.
- * @param {string} [props.notFoundCountryText="Nenhum país encontrado"] Text shown when no country matches search.
- * @param {string} [props.className] Class applied to the field wrapper.
- * @param {string} [props.id] Optional id for the visible phone input.
- * @param {boolean} [props.unShowFieldTemplate=false] When `true`, skips wrapper/label/error rendering from `FieldTemplate`.
- * @param {"horizontal" | "vertical" | "horizontalReverse"} [props.orientation="horizontal"] Layout direction forwarded to `FieldTemplate`/`FieldWrapper`.
+ * @param props.name - Field name for form submission. Required.
+ * @param props.label - Label text displayed above the input.
+ * @param props.showAsterisk - Appends `*` to the label.
+ * @param props.errorMessage - Validation error message.
+ * @param props.size - Input size (`md` | `lg`). Default: "md"
+ * @param props.variant - Visual style variant. Default: "solid"
+ * @param props.disabled - Disables all interactions. Default: false
+ * @param props.readOnly - Prevents editing. Default: false
+ * @param props.isLoading - Shows loading state and disables interactions. Default: false
+ * @param props.defaultValue - Uncontrolled default phone value.
+ * @param props.value - Controlled phone value (without country code).
+ * @param props.onChange - Callback fired on change — receives numeric string with country code.
+ * @param props.defaultCountryIso - ISO code of the initially selected country. Default: "BR"
+ * @param props.searchCountryPlaceholder - Placeholder for country search. Default: "Pesquisar país"
+ * @param props.notFoundCountryText - Text shown when no country matches. Default: "Nenhum país encontrado"
+ * @param props.orientation - Layout direction. Default: "horizontal"
+ * @param props.unShowFieldTemplate - Skips wrapper, label, and error rendering. Default: false
  *
- * @returns {JSX.Element} Phone input field with country picker and hidden input for form submission.
+ * @returns PhoneInput JSX element wrapped in `FieldTemplate`.
  *
  * @example
  * ```tsx
- * <PhoneInput name="phone" label="Telefone" />
- * ```
+ * // Basic
+ * <PhoneInput name="phone" label="Phone" />
  *
- * @example
- * ```tsx
+ * // Controlled with outline variant
  * <PhoneInput
  *   name="contactPhone"
+ *   label="Contact Phone"
  *   value={phone}
- *   onChange={setPhone}
+ *   onChange={(v) => setPhone(v)}
  *   variant="outline"
  *   size="lg"
+ * />
+ *
+ * // Pre-selected country (US)
+ * <PhoneInput
+ *   name="phone"
+ *   label="Phone"
+ *   defaultCountryIso="US"
+ *   showAsterisk
  * />
  * ```
  */

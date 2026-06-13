@@ -1,17 +1,18 @@
 import { SuccessResponse } from "./_successResponse";
 
 /**
- * Class representing a successful HTTP 302 Found response.
+ * HTTP 302 Found — the resource was located and the response includes it in the body.
+ *
+ * @example
+ * ```typescript
+ * return new Found("Products retrieved", { products }).toJson();
+ * ```
  */
-
 class Found extends SuccessResponse {
   /**
-   * Creates an instance of the `Found` class.
-   *
-   * @param {string} message - A message describing the creation status.
-   * @param {any} body - The response body to be included in the HTTP response.
+   * @param message - Description included in the response status text.
+   * @param body - Data to include in the response body.
    */
-
   constructor(message: string, body?: any) {
     super();
 
@@ -23,11 +24,7 @@ class Found extends SuccessResponse {
     this.onDebug();
   }
 
-  /**
-   * Converts the `Found` instance into a `Response` object.
-   * @returns {Response} A `Response` object with the body and response metadata.
-   */
-
+  /** Converts to a `Response` with `Content-Type: application/json` header. */
   toResponse(): Response {
     const responseInit: ResponseInit = {
       headers: { "Content-Type": "application/json" },
@@ -38,12 +35,7 @@ class Found extends SuccessResponse {
     return new Response(JSON.stringify(this.body), responseInit);
   }
 
-  /**
-   * Converts the `Found` instance into a `Response` object using the `Response.json` method.
-   * This method is an alternative to `toResponse` for generating JSON responses.
-   * @returns {Response["json"]} A `Response` object with the JSON body and response metadata.
-   */
-
+  /** Converts to a `Response` using `Response.json()`. Alternative to `toResponse()`. */
   toJson(): Response {
     const responseInit: ResponseInit = {
       status: this.status,

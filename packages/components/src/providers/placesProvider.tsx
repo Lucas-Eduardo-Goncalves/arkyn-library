@@ -14,22 +14,27 @@ type PlacesProviderProps = {
 };
 
 /**
- * PlacesProvider component that loads Google Maps API with Places, Marker, and Maps libraries.
+ * PlacesProvider — loads the Google Maps JS API with `places`, `marker`, and `maps` libraries.
  *
- * @component
+ * Uses a render-prop pattern: `children` receives `isLoaded` so you can defer rendering
+ * `SearchPlaces` or `MapView` until the script is ready.
+ *
+ * @param props.apiKey - Google Maps API key. Required.
+ * @param props.children - Render function: `(isLoaded: boolean) => ReactNode`.
+ * @param props.preventFontsLoading - Prevents Google Fonts from being injected by the Maps SDK. @default true
+ *
+ * @returns The result of calling `children(isLoaded)`.
+ *
  * @example
  * ```tsx
- * <PlacesProvider apiKey="YOUR_API_KEY">
- *   {(isLoaded) => isLoaded ? <MapComponent /> : <LoadingSpinner />)}
+ * <PlacesProvider apiKey={env.GOOGLE_MAPS_KEY}>
+ *   {(isLoaded) => (
+ *     isLoaded
+ *       ? <SearchPlaces apiKey={env.GOOGLE_MAPS_KEY} onSelect={setAddress} />
+ *       : <Skeleton />
+ *   )}
  * </PlacesProvider>
  * ```
- *
- * @param {PlacesProviderProps} props - The component props
- * @param {string} props.apiKey - Maps API key for authentication
- * @param {(isLoaded: boolean) => ReactNode} props.children - Render function that receives the loading state
- * @param {boolean} [props.preventFontsLoading=true] - Whether to prevent Fonts from loading
- *
- * @returns {ReactNode} The rendered children with the loading state
  */
 
 function PlacesProvider(props: PlacesProviderProps) {

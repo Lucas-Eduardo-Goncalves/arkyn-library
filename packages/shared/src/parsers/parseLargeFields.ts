@@ -5,10 +5,9 @@
  * any string fields that exceed the specified maximum length. If a string field is truncated,
  * it is replaced with a message indicating the original length of the field.
  *
- * @param {string} jsonString - The JSON string to process.
- * @param {number} maxLength - The maximum allowed length for string fields. Defaults to 1000.
- *
- * @returns {string} A JSON string with large string fields truncated.
+ * @param jsonString - The JSON string to process.
+ * @param maxLength - The maximum allowed length for string fields. Defaults to 1000.
+ * @returns A JSON string with large string fields truncated.
  *
  * @throws {Error} Throws an error if the input is not a valid JSON string.
  *

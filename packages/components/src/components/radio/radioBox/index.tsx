@@ -4,85 +4,37 @@ import { useRadioGroup } from "../radioContext";
 import "./styles.css";
 
 type RadioBoxProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  /** Value submitted to the form when this option is selected. Required. */
   value: string;
+  /** Applies error styling. Inherited from `RadioGroup` when not set. */
   isError?: boolean;
+  /** Size variant. Inherits from `RadioGroup` when not set. */
   size?: "sm" | "md" | "lg";
 };
 
 /**
- * RadioBox component - individual radio button option that must be used within a RadioGroup
+ * RadioBox — individual option inside a `RadioGroup`. Renders as a `<label>` + hidden `<button>` pair.
  *
- * @param props - RadioBox component properties
- * @param props.value - Required unique value for this radio option within the group
- * @param props.isError - Optional error state indicator for styling
- * @param props.size - Size variant for the radio box, inherits from RadioGroup if not specified
- * @param props.children - Content to display next to the radio button (label text, icons, etc.)
+ * Reads active value, size, error state, and disabled state from `RadioGroup` context.
+ * Must be used as a direct child of `RadioGroup`.
  *
- * **...Other valid HTML properties for button element**
+ * @param props.value - Option value. Required.
+ * @param props.children - Option label content (text, icons, or rich markup).
+ * @param props.disabled - Disables this option (group can also disable all options).
+ * @param props.size - Size override. Inherits from group by default.
  *
- * @returns RadioBox JSX element wrapped in a label for accessibility
+ * **...Other valid HTML `<button>` properties**
+ *
+ * @returns RadioBox JSX element.
  *
  * @example
  * ```tsx
- * // Basic radio boxes within a group
- * <RadioGroup name="gender">
- *   <RadioBox value="male">Male</RadioBox>
- *   <RadioBox value="female">Female</RadioBox>
- *   <RadioBox value="other">Other</RadioBox>
- * </RadioGroup>
- *
- * // Radio boxes with rich content
- * <RadioGroup name="plan" label="Choose your plan">
- *   <RadioBox value="basic">
- *     <div>
- *       <h4>Basic Plan</h4>
- *       <p>$9.99/month - Perfect for individuals</p>
- *     </div>
- *   </RadioBox>
- *   <RadioBox value="premium">
- *     <div>
- *       <h4>Premium Plan</h4>
- *       <p>$19.99/month - Great for small teams</p>
- *     </div>
- *   </RadioBox>
- * </RadioGroup>
- *
- * // Radio boxes with custom size override
- * <RadioGroup name="priority" size="md">
- *   <RadioBox value="low" size="sm">Low Priority</RadioBox>
- *   <RadioBox value="medium">Medium Priority</RadioBox>
- *   <RadioBox value="high" size="lg">High Priority</RadioBox>
- * </RadioGroup>
- *
- * // Radio boxes with disabled state
- * <RadioGroup name="options">
- *   <RadioBox value="option1">Available Option</RadioBox>
- *   <RadioBox value="option2" disabled>Disabled Option</RadioBox>
- *   <RadioBox value="option3">Another Available Option</RadioBox>
- * </RadioGroup>
- *
- * // Radio boxes with custom styling
- * <RadioGroup name="theme">
- *   <RadioBox value="light" className="theme-option">
- *     🌞 Light Theme
- *   </RadioBox>
- *   <RadioBox value="dark" className="theme-option">
- *     🌙 Dark Theme
- *   </RadioBox>
- *   <RadioBox value="auto" className="theme-option">
- *     🔄 Auto Theme
- *   </RadioBox>
+ * <RadioGroup name="plan" label="Choose a plan" onChange={setPlan}>
+ *   <RadioBox value="basic">Basic — $9/mo</RadioBox>
+ *   <RadioBox value="pro">Pro — $29/mo</RadioBox>
+ *   <RadioBox value="enterprise" disabled>Enterprise — contact us</RadioBox>
  * </RadioGroup>
  * ```
- *
- * @remarks
- * This component must be used as a child of RadioGroup. It automatically inherits:
- * - Group name for form handling
- * - Size from parent RadioGroup (unless overridden)
- * - Change handlers and state management
- * - Error states from form validation
- *
- * The component handles both click and focus events for accessibility.
  */
 
 function RadioBox(props: RadioBoxProps) {

@@ -3,78 +3,77 @@ import { StandaloneSearchBox } from "@react-google-maps/api";
 import { JSX, useState } from "react";
 import { Input, InputProps } from "./input";
 
-/**
- * Represents the structure of address components returned by Google Places API.
- * @internal
- */
 type AddressComponentsType = {
   long_name: string;
   short_name: string;
   types: string[];
 }[];
 
-/**
- * Props for the SearchPlaces component.
- * @typedef {Object} SearchPlacesProps
- * @property {StandaloneSearchBoxProps["options"]} [options] - Google Maps StandaloneSearchBox configuration options
- * @property {(value: string) => void} [onChange] - Callback fired when the input value changes
- * @property {(place: PlaceData) => void} [onPlaceChanged] - Callback fired when a place is selected from the autocomplete suggestions
- */
+/** Structured address data extracted from a Google Places result. */
+type PlaceData = {
+  /** Street name (e.g. `"Rua Exemplo"`). */
+  street: string;
+  /** City name (e.g. `"São Paulo"`). */
+  city: string;
+  /** Full state name (e.g. `"São Paulo"`). */
+  state: string;
+  /** Neighborhood / district name. */
+  neighborhood: string;
+  /** Postal / ZIP code. */
+  postalCode: string;
+  /** State abbreviation (e.g. `"SP"`). */
+  stateShortName: string;
+  /** Street number (e.g. `"123"`). */
+  streetNumber: string;
+  /** Geographic coordinates of the place. */
+  coordinates: { lat: number; lng: number };
+};
+
 type SearchPlacesProps = {
+  /** Google Maps `StandaloneSearchBox` options (e.g. `componentRestrictions`, `bounds`). */
   options?: StandaloneSearchBoxProps["options"];
+  /** Callback fired every time the input text changes. Receives the current string value. */
   onChange?: (e: string) => void;
-  onPlaceChanged?: (e: {
-    street: string;
-    city: string;
-    state: string;
-    neighborhood: string;
-    postalCode: string;
-    stateShortName: string;
-    streetNumber: string;
-    coordinates: { lat: number; lng: number };
-  }) => void;
+  /**
+   * Callback fired when the user selects a place from the autocomplete suggestions.
+   * Receives a structured {@link PlaceData} object.
+   */
+  onPlaceChanged?: (e: PlaceData) => void;
 } & Omit<InputProps, "onLoad" | "onChange" | "type">;
 
 /**
- * SearchPlaces component - A Google Places autocomplete input field.
+ * SearchPlaces — text input with Google Places autocomplete that returns structured address data.
  *
- * This component integrates with Google Maps API to provide address autocomplete functionality.
- * When a user selects a place from the suggestions, it extracts and returns structured address data
- * including street, city, state, neighborhood, postal code, and geographic coordinates.
+ * Requires the Google Maps JavaScript API with the Places library to be loaded.
+ * Built on `@react-google-maps/api`'s `StandaloneSearchBox`.
  *
- * @component
+ * @param props.options - Google Maps search box options (e.g. restrict by country).
+ * @param props.onChange - Fires on every keystroke — receives the current text value.
+ * @param props.onPlaceChanged - Fires when the user selects a suggestion — receives structured address data.
+ *
+ * **...Other valid `Input` properties (except `onLoad`, `onChange`, `type`)**
+ *
+ * @returns SearchPlaces JSX element (an `Input` wrapped in `StandaloneSearchBox`).
+ *
  * @example
  * ```tsx
  * <SearchPlaces
- *   placeholder="Digite o endereço"
- *   onChange={(value) => console.log('Input:', value)}
+ *   name="address"
+ *   label="Address"
+ *   placeholder="Start typing an address…"
+ *   options={{ componentRestrictions: { country: "br" } }}
+ *   onChange={(v) => setRawAddress(v)}
  *   onPlaceChanged={(place) => {
- *     console.log('Selected place:', place);
- *     // place = {
- *     //   street: "Rua exemplo",
- *     //   city: "São Paulo",
- *     //   state: "São Paulo",
- *     //   neighborhood: "Centro",
- *     //   postalCode: "01310-100",
- *     //   stateShortName: "SP",
- *     //   streetNumber: "123",
- *     //   coordinates: { lat: -23.5505, lng: -46.6333 }
- *     // }
- *   }}
- *   options={{
- *     componentRestrictions: { country: "br" }
+ *     setAddress({
+ *       street: place.street,
+ *       city: place.city,
+ *       state: place.state,
+ *       postalCode: place.postalCode,
+ *       coordinates: place.coordinates,
+ *     });
  *   }}
  * />
  * ```
- *
- * @param {SearchPlacesProps} props - Component props
- * @param {StandaloneSearchBoxProps["options"]} [props.options] - Google Maps API options for filtering/customizing search results
- * @param {(value: string) => void} [props.onChange] - Handler called when the input text changes
- * @param {(place: PlaceData) => void} [props.onPlaceChanged] - Handler called when a place is selected, receives structured address data
- * @returns {JSX.Element} An input field with Google Places autocomplete functionality
- *
- * @requires Google Maps JavaScript API with Places library loaded
- * @requires @react-google-maps/api package
  */
 
 function SearchPlaces(props: SearchPlacesProps): JSX.Element {

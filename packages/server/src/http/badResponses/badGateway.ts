@@ -1,19 +1,20 @@
 import { BadResponse } from "./_badResponse";
 
 /**
- * Represents an HTTP error response with a status code of 502 (Bad Gateway).
- * This class is used to standardize the structure of a "Bad Gateway" error response,
- * including the response body, headers, status, and status text.
+ * HTTP 502 Bad Gateway — the upstream server returned an invalid or unexpected response.
+ *
+ * Throw inside a server action/loader and catch with `errorHandler`, or call `.toJson()` directly.
+ *
+ * @example
+ * ```typescript
+ * throw new BadGateway("Payment gateway unavailable");
+ * ```
  */
-
 class BadGateway extends BadResponse {
   /**
-   * Creates an instance of the `BadGateway` class.
-   *
-   * @param {string} message - A descriptive message explaining the cause of the error.
-   * @param {any} cause - Optional additional information about the cause of the error.
+   * @param message - Error description sent in the response body and logged for debugging.
+   * @param cause - Optional extra context (serialized to JSON in the response).
    */
-
   constructor(message: string, cause?: any) {
     super();
 
@@ -25,13 +26,7 @@ class BadGateway extends BadResponse {
     this.onDebug();
   }
 
-  /**
-   * Converts the `BadGateway` instance into a `Response` object with a JSON body.
-   * This method ensures the response has the appropriate headers, status, and status text.
-   *
-   * @returns {Response} A `Response` object with the serialized JSON body and response metadata.
-   */
-
+  /** Converts to a `Response` with `Content-Type: application/json` header. */
   toResponse(): Response {
     const responseInit: ResponseInit = {
       headers: { "Content-Type": "application/json" },
@@ -42,13 +37,7 @@ class BadGateway extends BadResponse {
     return new Response(JSON.stringify(this.makeBody()), responseInit);
   }
 
-  /**
-   * Converts the `BadGateway` instance into a `Response` object using the `Response.json` method.
-   * This method is an alternative to `toResponse` for generating JSON error responses.
-   *
-   * @returns {Response["json"]} A `Response` object with the JSON body and response metadata.
-   */
-
+  /** Converts to a `Response` using `Response.json()`. Alternative to `toResponse()`. */
   toJson(): Response {
     const responseInit: ResponseInit = {
       status: this.status,

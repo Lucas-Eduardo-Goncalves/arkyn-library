@@ -8,98 +8,82 @@ type SwitchProps = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   "children" | "onChange" | "defaultValue" | "onCheck" | "value"
 > & {
+  /** Optional label text displayed beside the switch. */
   label?: string;
+  /**
+   * Switch size.
+   * @default "lg"
+   */
   size?: "sm" | "md" | "lg";
+  /** Uncontrolled initial checked state. @default false */
   defaultChecked?: boolean;
+  /** Controlled checked state. */
   checked?: boolean;
+  /** Value emitted when the switch is on. @default "checked" */
   value?: string;
+  /** Value emitted when the switch is off. @default "" */
   unCheckedValue?: string;
+  /** Field name for form submission. Required. */
   name: string;
+  /** Callback fired on toggle — receives the current value string. */
   onCheck?: (value: string) => void;
+  /**
+   * Layout direction forwarded to `FieldTemplate`.
+   * @default "horizontalReverse"
+   */
   orientation?: "vertical" | "horizontal" | "horizontalReverse";
+  /** When true, skips `FieldTemplate` wrapper (label and error text). @default false */
   unShowFieldTemplate?: boolean;
+  /** Displays an asterisk on the label to signal a required field. */
   showAsterisk?: boolean;
+  /** Validation error message displayed below the switch. */
   errorMessage?: string;
 };
 
 /**
- * Switch component - used for creating toggle switches with on/off states
+ * Switch — toggle input for binary on/off states.
  *
- * @param props - Switch component properties
- * @param props.name - Required field name for form handling and input identification
- * @param props.label - Optional label text to display next to the switch
- * @param props.size - Size variant of the switch. Default: "lg"
- * @param props.defaultChecked - Default checked state for uncontrolled usage. Default: false
- * @param props.checked - Controlled checked state of the switch
- * @param props.value - Value to be used when switch is checked. Default: "checked"
- * @param props.unCheckedValue - Value to be used when switch is unchecked. Default: ""
- * @param props.onCheck - Callback function called when switch state changes, receives the current value
- * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
- * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
+ * Stores value in a hidden `<input>` for native form submission.
+ * Integrates with `useForm` to display validation errors by field name.
  *
- * **...Other valid HTML properties for button element (except children, onChange, defaultValue, onCheck, value)**
+ * @param props.name - Field name for form submission. Required.
+ * @param props.label - Label text displayed beside the switch.
+ * @param props.size - Switch size (`sm` | `md` | `lg`). Default: "lg"
+ * @param props.defaultChecked - Uncontrolled initial checked state. Default: false
+ * @param props.checked - Controlled checked state.
+ * @param props.value - Value emitted when on. Default: "checked"
+ * @param props.unCheckedValue - Value emitted when off. Default: ""
+ * @param props.onCheck - Callback fired on toggle — receives the current value string.
+ * @param props.orientation - Layout direction (`horizontal` | `vertical` | `horizontalReverse`). Default: "horizontalReverse"
+ * @param props.unShowFieldTemplate - Skips wrapper, label, and error rendering. Default: false
+ * @param props.showAsterisk - Appends `*` to the label.
+ * @param props.errorMessage - Validation error message.
  *
- * @returns Switch JSX element wrapped in FieldWrapper with optional label
+ * **...Other valid HTML properties for `<button>` (except `children`, `onChange`, `defaultValue`)**
+ *
+ * @returns Switch JSX element wrapped in `FieldTemplate`.
  *
  * @example
  * ```tsx
- * // Basic switch
+ * // Basic
  * <Switch name="notifications" label="Enable notifications" />
  *
- * // Switch with custom values
+ * // Custom on/off values
  * <Switch
  *   name="theme"
  *   label="Dark mode"
  *   value="dark"
  *   unCheckedValue="light"
- *   onCheck={(value) => console.log('Theme:', value)}
+ *   onCheck={(v) => setTheme(v)}
  * />
  *
- * // Controlled switch with callback
+ * // Controlled
  * <Switch
  *   name="autoSave"
- *   label="Auto-save documents"
+ *   label="Auto-save"
  *   checked={isAutoSaveEnabled}
- *   onCheck={(value) => setIsAutoSaveEnabled(!!value)}
+ *   onCheck={(v) => setAutoSave(!!v)}
  *   size="md"
- * />
- *
- * // Small switch with default checked state
- * <Switch
- *   name="marketing"
- *   label="Marketing emails"
- *   size="sm"
- *   defaultChecked={true}
- *   value="subscribed"
- *   unCheckedValue="unsubscribed"
- * />
- *
- * // Switch with custom styling and disabled state
- * <Switch
- *   name="premium"
- *   label="Premium features"
- *   className="premium-switch"
- *   disabled={!isPremiumUser}
- *   onCheck={(value) => handlePremiumToggle(value)}
- * />
- *
- * // Large switch for accessibility
- * <Switch
- *   name="accessibility"
- *   label="High contrast mode"
- *   size="lg"
- *   checked={isHighContrast}
- *   onCheck={(value) => setIsHighContrast(!!value)}
- *   value="enabled"
- *   unCheckedValue="disabled"
- * />
- *
- * // Switch without label for inline usage
- * <Switch
- *   name="inline_toggle"
- *   value="on"
- *   unCheckedValue="off"
- *   onCheck={(value) => console.log('Toggle state:', value)}
  * />
  * ```
  */

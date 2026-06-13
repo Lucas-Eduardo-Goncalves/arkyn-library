@@ -4,37 +4,19 @@ import { removeCurrencySymbols } from "../utilities/removeCurrencySymbols";
 type Currencies = keyof typeof countryCurrencies;
 
 /**
- * Formats a numeric value into a currency string based on the specified currency and configuration.
+ * Formats a number into a locale-aware currency string using `Intl.NumberFormat`.
  *
- * @param {number} value - The numeric value to be formatted.
- * @param {Currencies} currency - The currency code used to determine the formatting style.
- * @param {object} [config] - Optional configuration object.
- * @param {boolean} [config.showPrefix=true] - Determines whether the currency symbol/prefix should be included in the formatted string. Defaults to `true`.
+ * @param value - The numeric value to format.
+ * @param currency - A currency code from `@arkyn/templates` (e.g. `"BRL"`, `"USD"`).
+ * @param config.showPrefix - Whether to include the currency symbol. Defaults to `true`.
+ * @returns The formatted currency string.
  *
- * @returns {string} A formatted currency string. If `config.showPrefix` is `false`, the currency symbol is removed.
- *
- * @example Format a value in USD with prefix
+ * @example
  * ```typescript
- * const formatted = formatToCurrency(1234.56, "USD", { showPrefix: true });
- * console.log(formatted); // "$1,234.56"
- * ```
- * @example Format a value in USD without prefix
- * ```typescript
- * const withoutPrefix = formatToCurrency(1234.56, "USD", { showPrefix: false });
- * console.log(withoutPrefix); // "1,234.56"
- * ```
- * @example Format a value in BRL with prefix
- * ```typescript
- * const formattedBRL = formatToCurrency(1234.56, "BRL", { showPrefix: true });
- * console.log(formattedBRL); // "R$ 1.234,56"
- * ```
- * @example Format a value in BRL without prefix
- * ```typescript
- * const withoutPrefixBRL = formatToCurrency(1234.56, "BRL", { showPrefix: false });
- * console.log(withoutPrefixBRL); // "1.234,56"
+ * formatToCurrency(1234.56, "BRL"); // "R$ 1.234,56"
+ * formatToCurrency(1234.56, "USD", { showPrefix: false }); // "1,234.56"
  * ```
  */
-
 function formatToCurrency(
   value: number,
   currency: Currencies,

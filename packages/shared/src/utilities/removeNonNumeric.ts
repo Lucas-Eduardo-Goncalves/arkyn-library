@@ -1,9 +1,8 @@
 /**
  * Removes all non-numeric characters from a given string.
  *
- * @param {string} rawString - The input string from which non-numeric characters will be removed.
- *
- * @returns {string} A new string containing only numeric characters from the input.
+ * @param rawString - The input string to strip non-numeric characters from.
+ * @returns A new string containing only the numeric characters from the input.
  *
  * @example
  * ```typescript

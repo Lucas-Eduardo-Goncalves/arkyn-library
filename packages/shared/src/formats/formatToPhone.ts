@@ -8,9 +8,8 @@ import { findCountryMask } from "../utilities/findCountryMask";
  * national number, then applies the corresponding country's mask (underscore `_` used
  * as digit placeholder) replacing placeholders with actual digits.
  *
- * @param {string} phoneNumber - The input phone number (can include country code or be in national format).
- *
- * @returns {string} The phone number formatted following the country's mask.
+ * @param phoneNumber - The input phone number in E.164 format (e.g. `"+5534920524282"`).
+ * @returns The phone number formatted according to the country's mask.
  *
  * @throws {Error} If the phone number is invalid or if no country mask is found for the parsed country.
  *

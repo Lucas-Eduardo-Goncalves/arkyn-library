@@ -5,54 +5,30 @@ import { useDrawer } from "../drawerContext";
 import "./styles.css";
 
 type DrawerHeaderProps = HTMLAttributes<HTMLElement> & {
+  /** Whether to render the X close button. @default true */
   showCloseButton?: boolean;
 };
 
 /**
- * DrawerHeader component - header section for drawer with optional close button
+ * DrawerHeader — header section for a `DrawerContainer`, with an optional close button.
  *
- * @param props - DrawerHeader component properties
- * @param props.showCloseButton - Shows close button in header. Default: true
+ * The close button calls `makeInvisible` from the nearest `DrawerContainer` context.
+ * Must be rendered inside a `DrawerContainer`.
  *
- * **...Other valid HTML properties for header element**
+ * @param props.showCloseButton - Renders the X close button. Default: true
  *
- * @returns DrawerHeader JSX element
+ * **...Other valid HTML `<header>` properties**
+ *
+ * @returns DrawerHeader JSX element.
  *
  * @example
  * ```tsx
- * // Basic drawer header with close button
- * <DrawerHeader>
- *   <h2>Menu</h2>
- * </DrawerHeader>
- *
- * // Header without close button
- * <DrawerHeader showCloseButton={false}>
- *   <h2>Settings</h2>
- * </DrawerHeader>
- *
- * // Complete drawer example
  * <DrawerContainer isVisible={isOpen} makeInvisible={() => setIsOpen(false)}>
  *   <DrawerHeader>
  *     <h2>Navigation</h2>
- *     <p>Welcome to our app</p>
  *   </DrawerHeader>
- *
- *   <div className="drawer-content">
- *     <nav>
- *       <a href="/home">Home</a>
- *       <a href="/about">About</a>
- *       <a href="/contact">Contact</a>
- *     </nav>
- *   </div>
+ *   <nav>...</nav>
  * </DrawerContainer>
- *
- * // Custom styled header
- * <DrawerHeader className="custom-header">
- *   <div className="header-content">
- *     <img src="/logo.png" alt="Logo" />
- *     <h1>My App</h1>
- *   </div>
- * </DrawerHeader>
  * ```
  */
 

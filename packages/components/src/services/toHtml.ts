@@ -2,19 +2,20 @@ import { RichTextValue } from "../types/richTextTypes";
 import { serialize } from "../utils/richTextUtilities";
 
 /**
- * Converts a RichTextValue array to HTML string format.
+ * toHtml — converts a `RichTextValue` (Slate.js Descendant array) to an HTML string.
  *
- * @param {RichTextValue} richTextValue - Array of Descendant objects representing rich text content
- * @returns {string} HTML string representation of the rich text content
+ * Use this to persist or display the editor's content as plain HTML.
+ *
+ * @param richTextValue - The value from a `RichText` component's `onChange` callback.
+ * @returns HTML string representation of the rich text content.
  *
  * @example
- * ```typescript
- * const richTextService = new RichTextService();
- * const richText = [
- *   { type: 'paragraph', children: [{ text: 'Hello world', bold: true }] }
- * ];
- * const html = richTextService.toHtml(richText);
- * // Returns: "<p><strong>Hello world</strong></p>"
+ * ```tsx
+ * const [content, setContent] = useState<RichTextValue>([]);
+ *
+ * // On form submit, convert to HTML for storage
+ * const html = toHtml(content);
+ * // e.g. "<p><strong>Hello world</strong></p>"
  * ```
  */
 

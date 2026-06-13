@@ -4,60 +4,31 @@ import "./styles.css";
 type TableContainerProps = TableHTMLAttributes<HTMLTableElement>;
 
 /**
- * TableContainer component - wraps table content in a styled container with responsive behavior
+ * TableContainer — root wrapper for the Table component set. Renders a responsive scrollable container around a `<table>`.
  *
- * @param props - TableContainer component properties
+ * Accepts all standard HTML `<table>` attributes.
  *
- * **...All valid HTML properties for table element**
- *
- * @returns TableContainer JSX element
+ * @returns TableContainer JSX element.
  *
  * @example
  * ```tsx
- * // Basic table container
  * <TableContainer>
+ *   <TableCaption>Users</TableCaption>
  *   <TableHeader>
  *     <th>Name</th>
  *     <th>Email</th>
- *   </TableHeader>
- *   <TableBody>
- *     <tr>
- *       <td>John Doe</td>
- *       <td>john@example.com</td>
- *     </tr>
- *   </TableBody>
- * </TableContainer>
- *
- * // Table container with custom styling
- * <TableContainer className="custom-table">
- *   <TableCaption>
- *     User Management Table
- *   </TableCaption>
- *   <TableHeader>
- *     <th>ID</th>
- *     <th>User</th>
  *     <th>Status</th>
  *   </TableHeader>
  *   <TableBody emptyMessage="No users found">
- *     // table rows...
+ *     {users.map(u => (
+ *       <tr key={u.id}>
+ *         <td>{u.name}</td>
+ *         <td>{u.email}</td>
+ *         <td>{u.status}</td>
+ *       </tr>
+ *     ))}
  *   </TableBody>
- *   <TableFooter>
- *     <Pagination />
- *   </TableFooter>
- * </TableContainer>
- *
- * // Responsive table with overflow handling
- * <TableContainer style={{ maxWidth: '100%', overflowX: 'auto' }}>
- *   <TableHeader>
- *     <th>Product</th>
- *     <th>Description</th>
- *     <th>Price</th>
- *     <th>Stock</th>
- *     <th>Actions</th>
- *   </TableHeader>
- *   <TableBody>
- *     // table rows...
- *   </TableBody>
+ *   <TableFooter><Pagination /></TableFooter>
  * </TableContainer>
  * ```
  */

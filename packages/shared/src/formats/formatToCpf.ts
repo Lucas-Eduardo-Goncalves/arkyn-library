@@ -7,9 +7,8 @@ import { removeNonNumeric } from "../utilities/removeNonNumeric";
  * This function ensures the input is cleaned of non-numeric characters and
  * then formats it into the standard CPF format: `XXX.XXX.XXX-XX`.
  *
- * @param {string} value -  The input string to be formatted as a CPF, the string must contain 11 numeric digits; special characters will be ignored.
- *
- * @returns {string} The formatted CPF string.
+ * @param value - Input string with 11 numeric digits (special characters are stripped).
+ * @returns The formatted CPF string in the pattern `XXX.XXX.XXX-XX`.
  *
  * @throws {Error} If the input string does not match the expected CPF format.
  *

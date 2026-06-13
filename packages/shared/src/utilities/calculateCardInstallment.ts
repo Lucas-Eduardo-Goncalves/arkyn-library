@@ -1,29 +1,16 @@
 /**
- * Calculates the installment price and total price for a card payment plan.
+ * Calculates the per-installment and total price for a card payment plan with compound interest.
+ * No interest is applied when `fees` is `0` or `numberInstallments` is `1`.
  *
- * @remarks
- * **Important:** When the interest amount (`fees`) is equal to 0 or the number of installments (`numberInstallments`) is equal to 1, no interest will be charged.
- *
- * @param {object} props - The input parameters for the calculation.
- * @param {number} props.cashPrice - The total cash price of the product or service.
- * @param {number} props.numberInstallments - The number of installments for the payment plan.
- * @param {number} [props.fees=0.0349] - The interest rate per installment (default is 0.0349).
- *
- * @throws {Error} If `numberInstallments` is less than or equal to 0.
- * @throws {Error} If `fees` is less than 0.
- *
- * @returns {object} An object containing:
- * - `totalPrice`: The total price to be paid, rounded to two decimal places.
- * - `installmentPrice`: The price of each installment, rounded to two decimal places.
+ * @param props.cashPrice - The base price of the item.
+ * @param props.numberInstallments - Number of installments (must be > 0).
+ * @param props.fees - Monthly interest rate (defaults to `0.0349`).
+ * @returns `{ totalPrice, installmentPrice }` — both rounded to 2 decimal places.
  *
  * @example
  * ```typescript
- * const result = calculateCardInstallment({
- *   cashPrice: 1000,
- *   numberInstallments: 12,
- *   fees: 0.02,
- * });
- * console.log(result); // Output: { totalPrice: 1124.62, installmentPrice: 93.72 }
+ * calculateCardInstallment({ cashPrice: 1000, numberInstallments: 12, fees: 0.02 });
+ * // { totalPrice: 1124.62, installmentPrice: 93.72 }
  * ```
  */
 

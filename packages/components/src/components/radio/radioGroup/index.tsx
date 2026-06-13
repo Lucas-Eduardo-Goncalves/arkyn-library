@@ -7,95 +7,64 @@ import { RadioProvider } from "../radioContext";
 import "./styles.css";
 
 type RadioGroupProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> & {
+  /** Field name used for form submission. Required. */
   name: string;
+  /** Label displayed above the group. */
   label?: string;
+  /** Appends an asterisk to the label. @default false */
   showAsterisk?: boolean;
+  /** Error message shown below the group. Overrides `fieldErrors[name]` from `FormProvider`. */
   errorMessage?: string;
+  /** Controlled selected value. */
   value?: string;
+  /** Initial selected value (uncontrolled). @default "" */
   defaultValue?: string;
+  /** Callback fired when the selected option changes. */
   onChange?: (value: string) => void;
+  /** Size variant applied to all `RadioBox` children. @default "md" */
   size?: "sm" | "md" | "lg";
+  /** Disables all `RadioBox` children. @default false */
   disabled?: boolean;
+  /** When `true`, skips the `FieldTemplate` wrapper (label, error message). @default false */
   unShowFieldTemplate?: boolean;
+  /** Layout direction of the `FieldWrapper`. @default "horizontal" */
   orientation?: "horizontal" | "vertical" | "horizontalReverse";
 };
 
 /**
- * RadioGroup component - used for creating a group of radio button options with shared state management
+ * RadioGroup — managed group of `RadioBox` options with form integration.
  *
- * @param props - RadioGroup component properties
- * @param props.name - Required field name for form handling and radio button grouping
- * @param props.label - Optional label text to display above the radio group
- * @param props.showAsterisk - Whether to show asterisk on label for required fields
- * @param props.errorMessage - Error message to display below the radio group
- * @param props.value - Controlled value for the selected radio option
- * @param props.defaultValue - Default selected value for uncontrolled usage. Default: ""
- * @param props.onChange - Callback function called when radio selection changes, receives the selected value
- * @param props.size - Size variant for all radio buttons in the group. Default: "md"
- * @param props.unShowFieldTemplate - When true, skips `FieldTemplate` structure (wrapper, label and error text) and renders only the checkbox button content.
- * @param props.orientation - Layout direction forwarded to `FieldTemplate`/`FieldWrapper` (`horizontal`, `vertical`, `horizontalReverse`). Default: "horizontalReverse"
+ * Renders a hidden `<input>` for native form submission. Reads `fieldErrors[name]` from
+ * the nearest `FormProvider` when no `errorMessage` is explicitly provided.
  *
- * **...Other valid HTML properties for div element (except onChange)**
+ * @param props.name - Form field name. Required.
+ * @param props.label - Label displayed above the group.
+ * @param props.showAsterisk - Appends `*` to the label. Default: false
+ * @param props.value - Controlled selection.
+ * @param props.defaultValue - Initial selection (uncontrolled). Default: `""`
+ * @param props.onChange - Called with the newly selected value.
+ * @param props.size - Size for all child `RadioBox` elements. Default: `"md"`
+ * @param props.disabled - Disables all options. Default: false
+ * @param props.errorMessage - Validation error message.
+ * @param props.unShowFieldTemplate - Omit label/error wrapper. Default: false
  *
- * @returns RadioGroup JSX element wrapped in FieldWrapper with RadioProvider context for child Radio components
+ * **...Other valid HTML `<div>` properties**
+ *
+ * @returns RadioGroup JSX element.
  *
  * @example
  * ```tsx
- * // Basic radio group
- * <RadioGroup name="gender">
- *   <Radio value="male" label="Male" />
- *   <Radio value="female" label="Female" />
- *   <Radio value="other" label="Other" />
+ * // Uncontrolled with label
+ * <RadioGroup name="gender" label="Gender" showAsterisk defaultValue="male">
+ *   <RadioBox value="male">Male</RadioBox>
+ *   <RadioBox value="female">Female</RadioBox>
+ *   <RadioBox value="other">Other</RadioBox>
  * </RadioGroup>
  *
- * // Radio group with label and validation
- * <RadioGroup
- *   name="subscription"
- *   label="Choose your plan"
- *   showAsterisk
- *   errorMessage="Please select a subscription plan"
- * >
- *   <Radio value="basic" label="Basic Plan - $9.99/month" />
- *   <Radio value="premium" label="Premium Plan - $19.99/month" />
- *   <Radio value="enterprise" label="Enterprise Plan - $49.99/month" />
- * </RadioGroup>
- *
- * // Controlled radio group with callback
- * <RadioGroup
- *   name="theme"
- *   label="Select Theme"
- *   value={selectedTheme}
- *   onChange={(value) => setSelectedTheme(value)}
- *   size="lg"
- * >
- *   <Radio value="light" label="Light Theme" />
- *   <Radio value="dark" label="Dark Theme" />
- *   <Radio value="auto" label="Auto (System)" />
- * </RadioGroup>
- *
- * // Radio group with default selection
- * <RadioGroup
- *   name="language"
- *   label="Preferred Language"
- *   defaultValue="en"
- *   size="sm"
- * >
- *   <Radio value="en" label="English" />
- *   <Radio value="es" label="Spanish" />
- *   <Radio value="fr" label="French" />
- *   <Radio value="pt" label="Portuguese" />
- * </RadioGroup>
- *
- * // Radio group with custom styling and onChange handler
- * <RadioGroup
- *   name="difficulty"
- *   label="Select Difficulty Level"
- *   className="custom-radio-group"
- *   onChange={(value) => console.log('Selected difficulty:', value)}
- * >
- *   <Radio value="easy" label="Easy" />
- *   <Radio value="medium" label="Medium" />
- *   <Radio value="hard" label="Hard" />
+ * // Controlled with change handler
+ * <RadioGroup name="plan" label="Subscription plan" value={plan} onChange={setPlan}>
+ *   <RadioBox value="basic">Basic — $9/mo</RadioBox>
+ *   <RadioBox value="pro">Pro — $29/mo</RadioBox>
  * </RadioGroup>
  * ```
  */

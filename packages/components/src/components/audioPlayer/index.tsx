@@ -5,64 +5,56 @@ import { useSlider } from "../../hooks/useSlider";
 import { Slider } from "../slider";
 import "./styles.css";
 
-/**
- * @typedef {Object} AudioInformationProps
- * @property {number} currentTime - Current playback time in seconds
- * @property {number} totalTime - Total duration of the audio in seconds
- * @property {string} formattedCurrentTime - Formatted current time as MM:SS
- * @property {string} formattedTotalTime - Formatted total time as MM:SS
- */
+/** Audio state snapshot passed to play/pause callbacks. */
 type AudioInformationProps = {
+  /** Current playback position in seconds. */
   currentTime: number;
+  /** Total audio duration in seconds. */
   totalTime: number;
+  /** Current position formatted as `MM:SS`. */
   formattedCurrentTime: string;
+  /** Total duration formatted as `MM:SS`. */
   formattedTotalTime: string;
 };
 
-/**
- * @typedef {Object} AudioPlayerProps
- * @property {string} src - Audio source URL (required)
- * @property {boolean} [disabled] - Whether the audio player controls are disabled
- * @property {function(AudioInformationProps): void} [onPlayAudio] - Callback fired when audio starts playing
- * @property {function(AudioInformationProps): void} [onPauseAudio] - Callback fired when audio is paused
- */
 type AudioPlayerProps = Omit<
   AudioHTMLAttributes<HTMLAudioElement>,
   "onEnded" | "src"
 > & {
+  /** Audio file URL. Required. */
   src: string;
+  /** Disables the play/pause button and the progress slider. @default false */
   disabled?: boolean;
+  /** Callback fired when playback starts. Receives the current audio state. */
   onPlayAudio?: (props: AudioInformationProps) => void;
+  /** Callback fired when playback is paused. Receives the current audio state. */
   onPauseAudio?: (props: AudioInformationProps) => void;
 };
 
 /**
- * AudioPlayer component
+ * AudioPlayer — play/pause controls, a scrubable progress bar, and elapsed/total time display.
  *
- * A customizable audio player with play/pause controls, progress slider, and time display.
- * Provides callbacks for play and pause events with detailed audio information.
+ * @param props.src - Audio file URL. Required.
+ * @param props.disabled - Disables controls. Default: false
+ * @param props.onPlayAudio - Callback fired when playback starts.
+ * @param props.onPauseAudio - Callback fired when playback is paused.
  *
- * @component
+ * **...Other valid HTML properties for `<audio>` (except `onEnded` and `src`)**
  *
- * @param {AudioPlayerProps} props - The component props
- *
- * @returns {JSX.Element} The rendered audio player component
- *
- * @requires lucide-react - For Play and Pause icons
- * @requires useSlider - For slider state management
- * @requires slider - For the progress slider component
+ * @returns AudioPlayer JSX element.
  *
  * @example
- * // Basic usage
- * <AudioPlayer src="https://example.com/audio.mp3" />
+ * ```tsx
+ * // Basic
+ * <AudioPlayer src="/audio/episode.mp3" />
  *
- * @example
- * // With callbacks
+ * // With play/pause callbacks
  * <AudioPlayer
- *   src="https://example.com/audio.mp3"
- *   onPlayAudio={(info) => console.log('Playing:', info.formattedCurrentTime)}
- *   onPauseAudio={(info) => console.log('Paused at:', info.formattedCurrentTime)}
+ *   src="/audio/episode.mp3"
+ *   onPlayAudio={(info) => console.log("Playing at", info.formattedCurrentTime)}
+ *   onPauseAudio={(info) => console.log("Paused at", info.formattedCurrentTime)}
  * />
+ * ```
  */
 function AudioPlayer(props: AudioPlayerProps): JSX.Element {
   const { onPlayAudio, onPauseAudio, disabled, style, ...rest } = props;

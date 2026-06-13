@@ -20,94 +20,28 @@ type DrawerProviderProps = {
 const drawerContext = createContext({} as DrawerContextProps);
 
 /**
- * DrawerProvider component - provides drawer context for managing multiple drawers state and data
+ * DrawerProvider — context provider that manages open/close state and data for named drawers.
  *
- * @param props - DrawerProvider component properties
- * @param props.children - React elements that will have access to the drawer context
- * @param props.enableDrawerAutomation - Optional flag to enable drawer automation features
+ * Wrap your app (or a subtree) with this once. Any component in the tree can then call
+ * `useDrawer(key)` to open, close, or read data for a specific drawer.
  *
- * @returns DrawerProvider JSX element that wraps children with drawer context
+ * @param props.children - Components that will have access to drawer context.
+ *
+ * @returns DrawerProvider JSX element.
  *
  * @example
  * ```tsx
- * // Basic drawer provider setup
- * function App() {
- *   return (
- *     <DrawerProvider>
- *       <NavigationDrawer />
- *       <FilterDrawer />
- *       <SettingsDrawer />
- *       <MainContent />
- *     </DrawerProvider>
- *   );
- * }
+ * // In your root layout
+ * <DrawerProvider>
+ *   <App />
+ * </DrawerProvider>
  *
- * // Drawer provider with automation enabled
- * function AppWithAutomation() {
- *   return (
- *     <DrawerProvider enableDrawerAutomation={true}>
- *       <Dashboard />
- *       <SidePanel />
- *       <NotificationDrawer />
- *     </DrawerProvider>
- *   );
- * }
+ * // Opening a drawer from anywhere in the tree
+ * const { openDrawer } = useDrawer();
+ * openDrawer('filters', { category: 'electronics' });
  *
- * // Using with multiple drawers
- * function MultiDrawerApp() {
- *   return (
- *     <DrawerProvider>
- *       <Header />
- *       <NavigationDrawer key="navigation" />
- *       <FilterDrawer key="filters" />
- *       <CartDrawer key="shopping-cart" />
- *       <MainContent />
- *     </DrawerProvider>
- *   );
- * }
- *
- * // Component using drawer context
- * function DrawerController() {
- *   const { openDrawer, closeDrawer } = useDrawer();
- *
- *   const handleOpenNavigation = () => {
- *     openDrawer('navigation', { section: 'main-menu' });
- *   };
- *
- *   const handleOpenFilters = () => {
- *     openDrawer('filters', { category: 'electronics', priceRange: [0, 1000] });
- *   };
- *
- *   return (
- *     <div>
- *       <button onClick={handleOpenNavigation}>
- *         Open Navigation
- *       </button>
- *       <button onClick={handleOpenFilters}>
- *         Open Filters
- *       </button>
- *     </div>
- *   );
- * }
- *
- * // Drawer component consuming context
- * function NavigationDrawer() {
- *   const { drawerIsOpen, drawerData, closeDrawer } = useDrawer('navigation');
- *
- *   if (!drawerIsOpen) return null;
- *
- *   return (
- *     <Drawer position="left" onClose={() => closeDrawer('navigation')}>
- *       <h2>Navigation</h2>
- *       <p>Current section: {drawerData?.section}</p>
- *       <nav>
- *         <a href="/home">Home</a>
- *         <a href="/products">Products</a>
- *         <a href="/about">About</a>
- *       </nav>
- *     </Drawer>
- *   );
- * }
+ * // Consuming in the drawer component
+ * const { drawerIsOpen, drawerData, closeDrawer } = useDrawer<{ category: string }>('filters');
  * ```
  */
 

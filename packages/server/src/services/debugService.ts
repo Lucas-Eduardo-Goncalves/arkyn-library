@@ -1,19 +1,13 @@
 import path from "node:path";
 
 /**
- * Service for managing HTTP debug configuration and behavior.
- *
- * This service provides functionality to configure how the `getCaller` function
- * identifies the actual caller in the stack trace by allowing specific files
- * to be ignored during stack trace analysis.
+ * Manages stack-trace configuration for debug output, allowing specific adapter/wrapper files
+ * to be skipped so logs show the actual business-logic caller.
  *
  * @example
  * ```typescript
- * // Configure to ignore httpAdapter.ts in stack traces
- * HttpDebugService.setIgnoreFile("httpAdapter.ts");
- *
- * // Now when httpDebug is called from within httpAdapter.ts,
- * // it will show the actual caller (e.g., cart.ts) instead
+ * // Skip httpAdapter.ts so debug output shows the calling route instead
+ * DebugService.setIgnoreFile("httpAdapter.ts");
  * ```
  */
 
@@ -25,54 +19,25 @@ class DebugService {
   static ignoreFiles: string[] = [];
 
   /**
-   * Sets the file name to be ignored during stack trace analysis.
+   * Adds a file name to the ignore list so it is skipped when resolving the caller in stack traces.
    *
-   * This method configures the debug service to skip specific files when
-   * determining the actual caller of a function. This is useful when you have
-   * adapter or wrapper functions that you want to be transparent in the debug output.
-   *
-   * @param {string} file - The name of the file to ignore in stack traces (e.g., "httpAdapter.ts")
-   *
-   * @example
-   * ```typescript
-   * // Ignore the HTTP adapter file so debug shows the actual business logic caller
-   * DebugService.setIgnoreFile("httpAdapter.ts");
-   * ```
+   * @param file - File name to ignore (e.g. `"httpAdapter.ts"`).
    */
-
   static setIgnoreFile(file: string): void {
     this.ignoreFiles.push(file);
   }
 
-  /**
-   * Clears all configured ignore files.
-   *
-   * This method resets the ignore file configuration, allowing all files to be
-   * considered in stack trace analysis again.
-   *
-   * @example
-   * ```typescript
-   * // Clear all ignore file configurations
-   * DebugService.clearIgnoreFiles();
-   * ```
-   */
-
+  /** Resets the ignore list, restoring full stack trace analysis. */
   static clearIgnoreFiles(): void {
     this.ignoreFiles = [];
   }
 
   /**
-   * Retrieves information about the caller of the current function.
+   * Resolves the file path and function name of the code that triggered the current debug call,
+   * skipping internal node modules and any files registered with `setIgnoreFile`.
    *
-   * This function analyzes the stack trace to determine the file path and function name
-   * of the caller. It excludes stack trace entries related to the `@arkyn/server` package
-   * and attempts to resolve the file path relative to the project root directory.
-   *
-   * @returns An object containing:
-   * - `functionName`: The name of the function that called the current function, or "Unknown function" if it cannot be determined.
-   * - `callerInfo`: The file path of the caller relative to the project root, or "Unknown caller" if it cannot be determined.
+   * @returns `{ functionName, callerInfo }` — caller function name and file path relative to `process.cwd()`.
    */
-
   static getCaller() {
     const projectRoot = process.cwd();
 

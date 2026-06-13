@@ -4,25 +4,18 @@ import "./styles.css";
 type FieldErrorProps = HTMLAttributes<HTMLElement>;
 
 /**
- * FieldError component - used to display error messages for form fields
+ * FieldError — displays a validation error message below a form field.
  *
- * @param props - FieldError component properties
+ * Renders nothing when `children` is empty or falsy.
  *
- * **...Other valid HTML properties for strong element**
+ * **...Other valid HTML properties for `<strong>`**
  *
- * @returns FieldError JSX element or empty fragment if no children
+ * @returns FieldError `<strong>` element, or an empty fragment when there is no message.
  *
  * @example
  * ```tsx
- * // Basic field error
  * <FieldError>This field is required</FieldError>
  *
- * // Field error with custom styling
- * <FieldError className="custom-error">
- *  Invalid email format
- * </FieldError>
- *
- * // Conditional field error
  * {error && <FieldError>{error}</FieldError>}
  * ```
  */

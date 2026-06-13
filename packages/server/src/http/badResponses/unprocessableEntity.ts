@@ -1,22 +1,25 @@
 import { BadResponse } from "./_badResponse";
 
 /**
- * Represents an HTTP error response with a status code of 422 (Unprocessable Entity).
- * This class is used to standardize the structure of an "Unprocessable Entity" error response,
- * including the response body, headers, status, and status text.
+ * HTTP 422 Unprocessable Entity — the request is well-formed but contains semantic validation errors.
+ * Typically used for form field validation failures.
+ *
+ * @example
+ * ```typescript
+ * throw new UnprocessableEntity({
+ *   message: "Validation failed",
+ *   fieldErrors: { email: "Invalid email format", age: "Must be 18 or older" },
+ *   fields: { email: "not-an-email", age: "15" },
+ * });
+ * ```
  */
-
 class UnprocessableEntity extends BadResponse {
   /**
-   * Creates an instance of the `UnprocessableEntity` class.
-   *
-   * @param {object} props - An object containing details about the error, such as:
-   * @param {any} [props.data] - `data`: Additional data related to the error.
-   * @param {Record<string, string>} [props.fieldErrors] - `fieldErrors`: A record of field-specific error messages.
-   * @param {Record<string, string>} [props.fields] - `fields`: A record of field values that caused the error.
-   * @param {string} [props.message] - `message`: A descriptive message explaining the error.
+   * @param props.message - Human-readable description of the error.
+   * @param props.fieldErrors - Per-field validation messages keyed by field name.
+   * @param props.fields - Original submitted field values (useful for repopulating forms).
+   * @param props.data - Any extra data to include in the response body.
    */
-
   constructor(props: {
     data?: any;
     fieldErrors?: Record<string, string>;
@@ -38,13 +41,7 @@ class UnprocessableEntity extends BadResponse {
     this.onDebug();
   }
 
-  /**
-   * Converts the `UnprocessableEntity` instance into a `Response` object with a JSON body.
-   * This method ensures the response has the appropriate headers, status, and status text.
-   *
-   * @returns {Response} A `Response` object with the serialized JSON body and response metadata.
-   */
-
+  /** Converts to a `Response` with `Content-Type: application/json` header. */
   toResponse(): Response {
     const responseInit: ResponseInit = {
       headers: { "Content-Type": "application/json" },
@@ -55,13 +52,7 @@ class UnprocessableEntity extends BadResponse {
     return new Response(JSON.stringify(this.makeBody()), responseInit);
   }
 
-  /**
-   * Converts the `UnprocessableEntity` instance into a `Response` object using the `Response.json` method.
-   * This method is an alternative to `toResponse` for generating JSON error responses.
-   *
-   * @returns {Response["json"]} A `Response` object with the JSON body and response metadata.
-   */
-
+  /** Converts to a `Response` using `Response.json()`. Alternative to `toResponse()`. */
   toJson(): Response {
     const responseInit: ResponseInit = {
       status: this.status,

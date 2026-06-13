@@ -4,9 +4,8 @@
  * This function removes all HTML tags from the provided string by replacing any content
  * that matches the HTML tag pattern with an empty string.
  *
- * @param {string} rawHtml - The HTML string to be processed
- *
- * @returns {string} The input string with all HTML tags removed
+ * @param rawHtml - The HTML string to strip tags from.
+ * @returns The plain text with all HTML tags (including `<script>`, `<style>`, and comments) removed.
  *
  * @example
  * ```typescript

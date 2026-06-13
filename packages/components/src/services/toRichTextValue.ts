@@ -4,27 +4,21 @@ import { ParseElement, RichTextValue } from "../types/richTextTypes";
 import { deserialize } from "../utils/richTextUtilities";
 
 /**
- * Converts an HTML string to RichTextValue format.
- * Parses the HTML content and transforms it into an array of Descendant objects
- * that can be used by the rich text editor.
+ * toRichTextValue — converts an HTML string to a `RichTextValue` (Slate.js Descendant array).
  *
- * @param {string} html - HTML string to be converted to rich text format
- * @returns {RichTextValue} Array of Descendant objects representing the parsed content
+ * Use this to populate a `RichText` editor with content previously stored as HTML
+ * (e.g. loaded from a database).
  *
- * @example
- * ```typescript
- * const richTextService = new RichTextService();
- * const html = "<p><strong>Hello world</strong></p>";
- * const richText = richTextService.toRichTextValue(html);
- * // Returns: [{ type: 'paragraph', children: [{ text: 'Hello world', bold: true }] }]
- * ```
+ * @param html - HTML string to convert.
+ * @returns Slate.js Descendant array ready to pass to `RichText`'s `defaultValue` prop.
  *
  * @example
- * ```typescript
- * // Handling plain text
- * const plainText = "Simple text";
- * const richText = richTextService.toRichTextValue(plainText);
- * // Returns: [{ text: 'Simple text' }]
+ * ```tsx
+ * // Load stored HTML into the editor
+ * const defaultValue = toRichTextValue(product.description);
+ * // e.g. [{ type: 'paragraph', children: [{ text: 'Hello', bold: true }] }]
+ *
+ * <RichText name="description" defaultValue={defaultValue} />
  * ```
  */
 

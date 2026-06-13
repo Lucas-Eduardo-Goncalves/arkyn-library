@@ -24,18 +24,11 @@ function extractDigit(cpf: string) {
 }
 
 /**
- * Validates a Brazilian CPF (Cadastro de Pessoas Físicas) number.
+ * Validates a Brazilian CPF number. Strips formatting, checks length, rejects
+ * repeated-digit sequences, and verifies both check digits with the CPF algorithm.
  *
- * The CPF is a unique identifier assigned to Brazilian citizens and residents.
- * This function checks if the provided CPF is valid by performing the following steps:
- * - Removes any non-digit characters from the input.
- * - Verifies if the CPF has the correct length (11 digits).
- * - Ensures that all digits are not the same (e.g., "111.111.111-11" is invalid).
- * - Calculates the first and second verification digits using the CPF algorithm.
- * - Compares the calculated verification digits with the ones provided in the CPF.
- *
- * @param {string} rawCpf - The raw CPF string, which may include formatting characters (e.g., dots or dashes).
- * @returns {boolean} `true` if the CPF is valid, otherwise `false`.
+ * @param rawCpf - CPF string, with or without formatting (dots and dashes).
+ * @returns `true` if the CPF is valid, otherwise `false`.
  *
  * @example
  * ```typescript

@@ -9,79 +9,51 @@ import {
 import "./styles.css";
 
 type TooltipProps = Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
+  /** Text rendered inside the tooltip bubble. Supports inline HTML. Required. */
   text: string;
+  /** Element that triggers the tooltip on hover. Required. */
   children: ReactNode;
+  /**
+   * Preferred position of the tooltip relative to the trigger element.
+   * Automatically flips to the opposite side if the tooltip would overflow the viewport.
+   * @default "top"
+   */
   orientation?: "top" | "right" | "bottom" | "left";
+  /**
+   * Tooltip size.
+   * @default "lg"
+   */
   size?: "md" | "lg";
 };
 
 /**
- * Tooltip component - displays contextual information on hover with smart positioning
+ * Tooltip — shows a contextual text bubble on hover with smart viewport-aware positioning.
  *
- * @param props - Tooltip component properties
- * @param props.text - Text content to display in the tooltip
- * @param props.children - Element that triggers the tooltip on hover
- * @param props.orientation - Preferred tooltip position relative to trigger element. Default: "top"
- * @param props.size - Tooltip size variant. Default: "lg"
+ * The tooltip automatically flips to the opposite side when it would overflow the viewport.
  *
- * **...Other valid HTML properties for div element**
+ * @param props.text - Text (or HTML) to display in the tooltip. Required.
+ * @param props.children - Trigger element. Required.
+ * @param props.orientation - Preferred position relative to the trigger. Default: "top"
+ * @param props.size - Tooltip size. Default: "lg"
  *
- * @returns Tooltip JSX element
+ * **...Other valid HTML properties for `<div>`**
+ *
+ * @returns Tooltip JSX element.
  *
  * @example
  * ```tsx
- * // Basic tooltip
- * <Tooltip text="This is a helpful tip">
- *   <button>Hover me</button>
+ * <Tooltip text="Save changes before leaving">
+ *   <IconButton icon={SaveIcon} aria-label="Save" />
  * </Tooltip>
  *
- * // Tooltip with different orientations
- * <Tooltip text="Left tooltip" orientation="left">
- *   <span>Hover for left tooltip</span>
+ * // Toolbar with bottom-oriented tooltips
+ * <Tooltip text="Add item" orientation="bottom">
+ *   <IconButton icon={Plus} aria-label="Add" />
  * </Tooltip>
  *
- * <Tooltip text="Right tooltip" orientation="right">
- *   <span>Hover for right tooltip</span>
+ * <Tooltip text="Delete" orientation="bottom" size="md">
+ *   <IconButton icon={Trash2} aria-label="Delete" scheme="danger" />
  * </Tooltip>
- *
- * // Different sizes
- * <Tooltip text="Small tooltip" size="md">
- *   <button>Small tooltip</button>
- * </Tooltip>
- *
- * <Tooltip text="Large tooltip" size="lg">
- *   <button>Large tooltip</button>
- * </Tooltip>
- *
- * // Smart positioning - automatically adjusts if doesn't fit
- * <Tooltip text="This tooltip will auto-adjust position" orientation="left">
- *   <button className="near-edge">Smart positioning</button>
- * </Tooltip>
- *
- * // Complete example with custom styling
- * <Tooltip
- *   text="Save your changes before proceeding"
- *   orientation="bottom"
- *   size="lg"
- *   className="custom-tooltip"
- * >
- *   <IconButton icon={SaveIcon} />
- * </Tooltip>
- *
- * // Multiple tooltips on same page
- * <div className="toolbar">
- *   <Tooltip text="Create new file" orientation="bottom">
- *     <IconButton icon={PlusIcon} />
- *   </Tooltip>
- *
- *   <Tooltip text="Open existing file" orientation="bottom">
- *     <IconButton icon={FolderIcon} />
- *   </Tooltip>
- *
- *   <Tooltip text="Delete selected file" orientation="bottom">
- *     <IconButton icon={TrashIcon} />
- *   </Tooltip>
- * </div>
  * ```
  */
 

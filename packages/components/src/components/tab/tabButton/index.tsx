@@ -7,70 +7,32 @@ type TabButtonProps = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   "children" | "value" | "type"
 > & {
+  /** Content displayed inside the tab button. */
   children: ReactNode;
+  /** Unique identifier for this tab; matched against the container's active value. */
   value: string;
 };
 
 /**
- * TabButton component - used as interactive buttons within a TabContainer for tab navigation
+ * TabButton — individual tab button inside a `TabContainer`.
  *
- * @param props - TabButton component properties
- * @param props.children - Content to display inside the tab button (required)
- * @param props.value - Unique identifier for the tab button (required)
- * @param props.disabled - Whether the button is disabled. Can be overridden by TabContainer's disabled state
+ * Reads active state and disabled state from `TabContainer` context.
+ * The button's own `disabled` prop is ORed with the container's `disabled`.
  *
- * **...Other valid HTML button properties except children, value, and type**
+ * @param props.children - Tab label content. Required.
+ * @param props.value - Tab identifier. Required.
+ * @param props.disabled - Disables this tab individually (container can also disable all tabs).
  *
- * @returns TabButton JSX element
+ * **...Other valid HTML `<button>` properties except `type`**
  *
- * @example
- * ```tsx
- * // Basic tab buttons within TabContainer
- * <TabContainer>
- *   <TabButton value="home">Home</TabButton>
- *   <TabButton value="about">About</TabButton>
- *   <TabButton value="contact">Contact</TabButton>
- * </TabContainer>
- * ```
+ * @returns TabButton JSX element.
  *
  * @example
  * ```tsx
- * // Tab button with click handler
- * <TabContainer onChange={(value) => console.log('Tab changed:', value)}>
- *   <TabButton
- *     value="profile"
- *     onClick={() => console.log('Profile tab clicked')}
- *   >
- *     Profile
- *   </TabButton>
- *   <TabButton value="settings">Settings</TabButton>
- * </TabContainer>
- * ```
- *
- * @example
- * ```tsx
- * // Disabled tab button
- * <TabContainer>
- *   <TabButton value="available">Available</TabButton>
- *   <TabButton value="coming-soon" disabled>
- *     Coming Soon
- *   </TabButton>
- * </TabContainer>
- * ```
- *
- * @example
- * ```tsx
- * // Tab buttons with custom styling and default value
- * <TabContainer defaultValue="dashboard">
- *   <TabButton
- *     value="dashboard"
- *     className="custom-tab"
- *     aria-label="Dashboard tab"
- *   >
- *     Dashboard
- *   </TabButton>
- *   <TabButton value="analytics">Analytics</TabButton>
- *   <TabButton value="reports">Reports</TabButton>
+ * <TabContainer defaultValue="overview" onChange={setTab}>
+ *   <TabButton value="overview">Overview</TabButton>
+ *   <TabButton value="activity">Activity</TabButton>
+ *   <TabButton value="settings" disabled>Settings</TabButton>
  * </TabContainer>
  * ```
  */

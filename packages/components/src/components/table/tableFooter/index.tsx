@@ -4,42 +4,18 @@ import "./styles.css";
 type TableFooterProps = HTMLAttributes<HTMLTableSectionElement>;
 
 /**
- * TableFooter component - used to render the footer section of a table with content container
+ * TableFooter — `<tfoot>` section with an automatic spacing row above the content.
  *
- * @param props - TableFooter component properties
+ * Children span all columns via `colSpan={100}`. Commonly used for `Pagination`.
+ * Accepts all standard HTML `<tfoot>` attributes.
  *
- * **...All valid HTML properties for tfoot element**
- *
- * @returns TableFooter JSX element
+ * @returns TableFooter JSX element.
  *
  * @example
  * ```tsx
- * // Basic table footer with pagination
  * <TableFooter>
- *   <div>Showing 1-10 of 100 results</div>
- *   <Pagination />
+ *   <Pagination currentPage={page} totalPages={totalPages} onChange={setPage} />
  * </TableFooter>
- *
- * // Table footer with custom styling
- * <TableFooter className="custom-footer">
- *   <Button>Load More</Button>
- * </TableFooter>
- *
- * // Complete table usage
- * <TableContainer>
- *   <TableHeader>
- *     <th>Name</th>
- *     <th>Email</th>
- *   </TableHeader>
- *   <TableBody>
- *     // table rows...
- *   </TableBody>
- *   <TableFooter>
- *     <div className="pagination-info">
- *       Total: 250 items
- *     </div>
- *   </TableFooter>
- * </TableContainer>
  * ```
  */
 

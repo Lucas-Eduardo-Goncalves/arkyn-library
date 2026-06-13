@@ -5,9 +5,8 @@
  * in a string. The check is case-insensitive and detects both opening
  * and closing tags.
  *
- * @param {string} rawString - A string to be checked
- *
- * @returns {boolean} `true` if the string contains HTML markup, `false` otherwise
+ * @param rawString - The string to check.
+ * @returns `true` if the string contains HTML markup, `false` otherwise.
  *
  * @example
  * ```typescript

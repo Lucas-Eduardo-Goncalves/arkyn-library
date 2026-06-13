@@ -10,86 +10,70 @@ import { NoFileContent } from "./noFileContent";
 import "./styles.css";
 
 type AudioUploadProps = {
+  /** Field name for form submission (stores the uploaded audio URL). Required. */
   name: string;
+  /** Server endpoint URL that receives the `multipart/form-data` upload request. Required. */
   action: string;
-
+  /** Form-data field name used for the file. @default "file" */
   fileName?: string;
+  /** HTTP method for the upload request. @default "POST" */
   method?: string;
-
+  /** Accepted audio MIME types or extensions (e.g. `"audio/mp3,audio/wav"`). @default "audio/*" */
   acceptAudio?: string;
+  /** Text displayed in the drag-and-drop zone. @default "Ou arraste e solte um arquivo de áudio aqui" */
   dropAudioText?: string;
+  /** Label for the file-picker button before a file is selected. @default "Selecionar arquivo de áudio" */
   selectAudioButtonText?: string;
+  /** Label for the file-picker button after a file is selected. @default "Trocar arquivo de áudio" */
   changeAudioButtonText?: string;
-
+  /** Callback fired after a successful upload. Receives the URL returned by the server. */
   onChange?: (url?: string) => void;
+  /** Property name in the server response that contains the file URL. @default "url" */
   fileResponseName?: string;
-
+  /** Optional label text displayed above the upload area. */
   label?: string;
+  /** Displays an asterisk on the label to signal a required field. @default false */
   showAsterisk?: boolean;
-
+  /** Disables file selection and upload. @default false */
   disabled?: boolean;
+  /** Pre-populated audio URL (e.g. an existing recording). @default "" */
   defaultValue?: string;
 };
 
 /**
- * AudioUpload component - handles audio file upload with drag & drop functionality and server upload
+ * AudioUpload — drag-and-drop audio file uploader with server upload and playback preview.
  *
- * @param props - AudioUpload component properties
- * @param props.name - Required field name for form handling
- * @param props.action - Required server endpoint URL for file upload
- * @param props.fileName - Name of the file field in FormData. Default: "file"
- * @param props.method - HTTP method for upload request. Default: "POST"
- * @param props.acceptAudio - Audio file types to accept. Default: "audio/*"
- * @param props.dropAudioText - Text displayed in drop zone. Default: "Ou arraste e solte um arquivo de áudio aqui"
- * @param props.selectAudioButtonText - Text for file selection button. Default: "Selecionar arquivo de áudio"
- * @param props.changeAudioButtonText - Text for change file button. Default: "Trocar arquivo de áudio"
- * @param props.onChange - Callback function called after successful upload with the file URL
- * @param props.fileResponseName - Name of the URL field in server response. Default: "url"
- * @param props.label - Optional label text to display above the upload area
- * @param props.showAsterisk - Whether to show asterisk on label for required fields. Default: false
- * @param props.disabled - Whether the upload is disabled. Default: false
- * @param props.defaultValue - Default audio URL value
+ * Sends the file via `fetch` as `multipart/form-data` and stores the returned URL
+ * in a hidden `<input>` for form submission.
+ * Integrates with `useForm` to display validation errors by field name.
  *
- * @returns AudioUpload JSX element with drag & drop zone or audio preview
+ * @param props.name - Field name for form submission. Required.
+ * @param props.action - Upload endpoint URL. Required.
+ * @param props.fileName - Form-data field name for the file. Default: "file"
+ * @param props.method - HTTP method. Default: "POST"
+ * @param props.acceptAudio - Accepted MIME types / extensions. Default: "audio/*"
+ * @param props.onChange - Callback fired after a successful upload — receives the audio URL.
+ * @param props.fileResponseName - Server response property containing the URL. Default: "url"
+ * @param props.label - Label text displayed above the upload area.
+ * @param props.showAsterisk - Appends `*` to the label. Default: false
+ * @param props.disabled - Disables file selection and upload. Default: false
+ * @param props.defaultValue - Pre-populated audio URL.
+ *
+ * @returns AudioUpload JSX element wrapped in `FieldWrapper`.
  *
  * @example
  * ```tsx
- * // Basic audio upload
- * <AudioUpload
- *   name="audio"
- *   action="/api/upload"
- * />
+ * // Basic
+ * <AudioUpload name="audio" action="/api/upload" />
  *
- * // Audio upload with label and custom texts
+ * // With label and custom texts
  * <AudioUpload
  *   name="podcast"
  *   action="/api/upload/podcast"
- *   label="Upload Podcast"
+ *   label="Podcast Episode"
  *   showAsterisk
- *   selectAudioButtonText="Choose Audio File"
- *   dropAudioText="Drop your audio file here"
- *   changeAudioButtonText="Change Audio"
- * />
- *
- * // Audio upload with callback and custom settings
- * <AudioUpload
- *   name="recording"
- *   action="/api/upload"
- *   label="Voice Recording"
- *   acceptAudio="audio/mp3,audio/wav"
- *   onChange={(url) => console.log('Uploaded:', url)}
- *   fileResponseName="audioUrl"
- *   fileName="recording"
- *   method="PUT"
- * />
- *
- * // Disabled audio upload with default value
- * <AudioUpload
- *   name="preview"
- *   action="/api/upload"
- *   disabled
- *   defaultValue="/path/to/audio.mp3"
- *   label="Audio Preview"
+ *   selectAudioButtonText="Choose audio file"
+ *   onChange={(url) => setPodcastUrl(url)}
  * />
  * ```
  */
