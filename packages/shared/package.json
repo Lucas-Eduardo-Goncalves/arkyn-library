@@ -31,9 +31,11 @@
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@arkyn/templates": ">=3.0.1-beta.132",
     "libphonenumber-js": "^1.12.41",
     "uuid": "^10.0.0"
+  },
+  "peerDependencies": {
+    "@arkyn/templates": ">=3.0.1-beta.145"
   },
   "devDependencies": {
     "@types/uuid": "^10.0.0",

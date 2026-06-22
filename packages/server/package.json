@@ -31,8 +31,8 @@
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
   "peerDependencies": {
-    "@arkyn/shared": ">=3.0.1-beta.132",
-    "@arkyn/templates": ">=3.0.1-beta.132",
+    "@arkyn/shared": ">=3.0.1-beta.145",
+    "@arkyn/templates": ">=3.0.1-beta.145",
     "zod": ">=4.0.0"
   },
   "devDependencies": {
