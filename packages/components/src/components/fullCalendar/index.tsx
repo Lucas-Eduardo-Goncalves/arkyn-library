@@ -47,6 +47,8 @@ type BlockTimestamp = {
  * Props for the FullCalendar component.
  */
 type FullCalendarProps = {
+  /** Controlled value for the currently focused date. */
+  value?: Date;
   /** Initial focused date when the calendar mounts. */
   defaultValue?: Date;
   /** List of events to display across day, week, and month views. */
@@ -104,6 +106,7 @@ function FullCalendar(props: FullCalendarProps) {
   return (
     <FullCalendarProvider
       events={props.events || []}
+      value={props.value}
       defaultValue={props.defaultValue}
       onChangeView={props.onChangeView}
       blockedTimestamps={props.blockedTimestamps || []}

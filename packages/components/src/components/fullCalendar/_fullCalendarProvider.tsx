@@ -41,6 +41,7 @@ type FullCalendarProviderProps = {
   blockedTimestamps: BlockTimestamp[];
   children: ReactNode;
   language?: string;
+  value?: Date;
   defaultValue?: Date;
   onChangeView?: (date: Date) => void;
   onClickDate?: (date: Date) => void;
@@ -53,22 +54,33 @@ function useFullCalendar() {
 }
 
 function FullCalendarProvider(props: FullCalendarProviderProps) {
-  const language = props.language || "pt-BR";
+  const {
+    blockedTimestamps,
+    children,
+    events,
+    defaultValue = new Date(),
+    language = "pt-BR",
+    onChangeView,
+    onClickDate,
+    value,
+  } = props;
+
   const viewService = new ViewService();
   const listHours = viewService.listHours([8, 18]);
 
-  const [viewDate, rawSetViewDate] = useState(props.defaultValue || new Date());
+  const [rawViewDate, rawSetViewDate] = useState(defaultValue);
+  const viewDate = value || rawViewDate;
 
   function setViewDate(date: Date) {
-    if (props.onChangeView) props.onChangeView(date);
+    if (onChangeView) onChangeView(date);
     rawSetViewDate(date);
   }
 
   return (
     <FullCalendarContext.Provider
       value={{
-        events: props.events,
-        blockedTimestamps: props.blockedTimestamps,
+        events,
+        blockedTimestamps,
         viewDate,
         listHours,
         listWeek: viewService.listWeek(viewDate, language),
@@ -80,10 +92,10 @@ function FullCalendarProvider(props: FullCalendarProviderProps) {
         previousMonth: () => viewService.previousMonth(viewDate, setViewDate),
         previousWeek: () => viewService.previousWeek(viewDate, setViewDate),
         previousDay: () => viewService.previousDay(viewDate, setViewDate),
-        onClickDate: props.onClickDate,
+        onClickDate,
       }}
     >
-      {props.children}
+      {children}
     </FullCalendarContext.Provider>
   );
 }
