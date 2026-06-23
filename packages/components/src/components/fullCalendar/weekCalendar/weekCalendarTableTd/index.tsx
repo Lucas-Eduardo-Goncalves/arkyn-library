@@ -1,3 +1,4 @@
+import { useFullCalendar } from "../../_fullCalendarProvider";
 import { WeekCalendarEvent } from "../weekCalendarEvent";
 import "./styles.css";
 
@@ -11,21 +12,35 @@ type WeekCalendarTableTdProps = {
 
 function WeekCalendarTableTd(props: WeekCalendarTableTdProps) {
   const { day, month, year, dayOwner, timeInMinutes } = props;
+  const { blockedTimestamps, onClickDate } = useFullCalendar();
 
-  function isToday() {
-    const today = new Date();
-    return (
-      day === today.getDate() &&
-      month === today.getMonth() &&
-      year === today.getFullYear()
+  function isBlocked() {
+    const currentDate = new Date(year, month, day);
+
+    return blockedTimestamps.some(
+      (timestamp) =>
+        currentDate >= timestamp.initialDate &&
+        currentDate <= timestamp.endDate,
     );
+  }
+
+  function handleClick(event: React.MouseEvent) {
+    event.stopPropagation();
+    if (isBlocked()) return;
+
+    if (onClickDate) {
+      const date = new Date(year, month, day);
+      date.setHours(0, timeInMinutes, 0, 0);
+      onClickDate(date);
+    }
   }
 
   return (
     <td
-      className={`arkynWeekCalendarTableTd ${dayOwner} ${isToday() ? "today" : ""}`}
+      className={`arkynWeekCalendarTableTd ${dayOwner}  ${isBlocked() ? "blocked" : ""}`}
       data-day={day}
       data-time={timeInMinutes}
+      onClick={handleClick}
     >
       <div className="arkynWeekCalendarTableTdContent">
         <WeekCalendarEvent

@@ -6,6 +6,24 @@
   height: 73px;
 }
 
+.arkynWeekCalendarTableTd.blocked {
+  background-color: rgb(var(--spotlight-danger-light));
+}
+
+.arkynWeekCalendarTableTd.blocked:before {
+  content: " ";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  width: 4px;
+  background-color: rgb(var(--spotlight-danger));
+}
+
+.arkynWeekCalendarTableTd.blocked:hover {
+  cursor: not-allowed;
+}
+
 .arkynWeekCalendarTableTd > p {
   position: absolute;
   top: 0px;
@@ -27,11 +45,6 @@
 
 .arkynWeekCalendarTableTd.current > p {
   color: var(--text-body);
-}
-
-.arkynWeekCalendarTableTd.today > p {
-  color: var(--text-body);
-  font-weight: 500;
 }
 
 .arkynWeekCalendarTableTd .arkynWeekCalendarTableTdContent {

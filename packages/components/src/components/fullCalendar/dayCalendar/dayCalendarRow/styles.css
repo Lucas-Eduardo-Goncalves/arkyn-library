@@ -1,6 +1,37 @@
 .arkynDayCalendarRow {
   display: flex;
+  position: relative;
   align-items: stretch;
+}
+
+.arkynDayCalendarRow:first-child {
+  border-top-right-radius: 14px;
+}
+
+.arkynDayCalendarRow:last-child {
+  border-bottom-right-radius: 14px;
+}
+
+.arkynDayCalendarRow.blocked {
+  background-color: rgb(var(--spotlight-danger-light));
+}
+
+.arkynDayCalendarRow.blocked:before {
+  content: " ";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  width: 4px;
+  background-color: rgb(var(--spotlight-danger));
+}
+
+.arkynDayCalendarRow:first-child:before {
+  border-top-left-radius: 14px;
+}
+
+.arkynDayCalendarRow.blocked:hover {
+  cursor: not-allowed;
 }
 
 .arkynDayCalendarRow:not(:first-child) {

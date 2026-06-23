@@ -6,6 +6,24 @@
   height: 120px;
 }
 
+.arkynMonthlyCalendarTableTd.blocked {
+  background-color: rgb(var(--spotlight-danger-light));
+}
+
+.arkynMonthlyCalendarTableTd.blocked:before {
+  content: " ";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  width: 4px;
+  background-color: rgb(var(--spotlight-danger));
+}
+
+.arkynMonthlyCalendarTableTd.blocked:hover {
+  cursor: not-allowed;
+}
+
 .arkynMonthlyCalendarTableTd > p {
   position: absolute;
   top: 0px;

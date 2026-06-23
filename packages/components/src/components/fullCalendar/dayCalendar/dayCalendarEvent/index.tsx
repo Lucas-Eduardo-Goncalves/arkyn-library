@@ -19,14 +19,14 @@ function DayCalendarEvent(props: DayCalendarEventProps) {
     .map((event, sourceIndex) => ({ event, sourceIndex }))
     .filter(({ event }) => {
       return (
-        event.date.getDate() === day &&
-        event.date.getMonth() === month &&
-        event.date.getFullYear() === year
+        event.initialDate.getDate() === day &&
+        event.initialDate.getMonth() === month &&
+        event.initialDate.getFullYear() === year
       );
     })
     .sort((a, b) => {
-      const startA = a.event.date.getTime();
-      const startB = b.event.date.getTime();
+      const startA = a.event.initialDate.getTime();
+      const startB = b.event.initialDate.getTime();
 
       if (startA !== startB) return startA - startB;
 
@@ -48,8 +48,8 @@ function DayCalendarEvent(props: DayCalendarEventProps) {
     const dayMinute = props.timeInMinutes % 60;
 
     function isEventInInterval() {
-      const eventHour = event.date.getHours();
-      const eventMinute = event.date.getMinutes();
+      const eventHour = event.initialDate.getHours();
+      const eventMinute = event.initialDate.getMinutes();
 
       if (eventHour !== dayHour) return false;
       if (dayMinute === 0) return eventMinute < 30 && eventMinute >= 0;
@@ -58,9 +58,9 @@ function DayCalendarEvent(props: DayCalendarEventProps) {
 
     return (
       isEventInInterval() &&
-      event.date.getDate() === day &&
-      event.date.getMonth() === month &&
-      event.date.getFullYear() === year
+      event.initialDate.getDate() === day &&
+      event.initialDate.getMonth() === month &&
+      event.initialDate.getFullYear() === year
     );
   });
 
@@ -78,8 +78,12 @@ function DayCalendarEvent(props: DayCalendarEventProps) {
     return `${hours}h${minutes}`;
   }
 
-  function getEventRangeInMinutes(event: { date: Date; endDate?: Date }) {
-    const startMinutes = event.date.getHours() * 60 + event.date.getMinutes();
+  function getEventRangeInMinutes(event: {
+    initialDate: Date;
+    endDate?: Date;
+  }) {
+    const startMinutes =
+      event.initialDate.getHours() * 60 + event.initialDate.getMinutes();
 
     const endMinutes = event.endDate
       ? event.endDate.getHours() * 60 + event.endDate.getMinutes()
@@ -92,7 +96,7 @@ function DayCalendarEvent(props: DayCalendarEventProps) {
   }
 
   function countOverlappingPreviousEvents(
-    currentEvent: { date: Date; endDate?: Date },
+    currentEvent: { initialDate: Date; endDate?: Date },
     sourceIndex: number,
   ) {
     const current = getEventRangeInMinutes(currentEvent);
@@ -114,7 +118,7 @@ function DayCalendarEvent(props: DayCalendarEventProps) {
   }
 
   function getEventStyle(
-    event: { date: Date; endDate?: Date },
+    event: { initialDate: Date; endDate?: Date },
     sourceIndex: number,
   ) {
     const { startMinutes, endMinutes } = getEventRangeInMinutes(event);
@@ -133,15 +137,20 @@ function DayCalendarEvent(props: DayCalendarEventProps) {
     };
   }
 
+  function handleEventClick(event: React.MouseEvent, eventData: any) {
+    event.stopPropagation();
+    eventData.onClick?.(eventData.data);
+  }
+
   return filteredEvents.map(({ event, sourceIndex }, index) => (
     <div
       key={makeEventKey(index, sourceIndex)}
       className={`arkynDayCalendarEvent ${event?.scheme || "primary"}`}
       style={getEventStyle(event, sourceIndex)}
-      onClick={() => event.onClick?.(event.data)}
+      onClick={(e) => handleEventClick(e, event)}
     >
       <strong>
-        {makeHour(event.date)}{" "}
+        {makeHour(event.initialDate)}{" "}
         {event?.endDate && `- ${makeHour(event.endDate)}`}
       </strong>
       <p>{event.title}</p>

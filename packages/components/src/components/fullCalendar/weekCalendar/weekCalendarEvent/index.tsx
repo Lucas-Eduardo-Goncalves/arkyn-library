@@ -18,14 +18,14 @@ function WeekCalendarEvent(props: WeekCalendarEventProps) {
     .map((event, sourceIndex) => ({ event, sourceIndex }))
     .filter(({ event }) => {
       return (
-        event.date.getDate() === props.day &&
-        event.date.getMonth() === props.month &&
-        event.date.getFullYear() === props.year
+        event.initialDate.getDate() === props.day &&
+        event.initialDate.getMonth() === props.month &&
+        event.initialDate.getFullYear() === props.year
       );
     })
     .sort((a, b) => {
-      const startA = a.event.date.getTime();
-      const startB = b.event.date.getTime();
+      const startA = a.event.initialDate.getTime();
+      const startB = b.event.initialDate.getTime();
 
       if (startA !== startB) return startA - startB;
 
@@ -47,8 +47,8 @@ function WeekCalendarEvent(props: WeekCalendarEventProps) {
     const dayMinute = props.timeInMinutes % 60;
 
     function isEventInInterval() {
-      const eventHour = event.date.getHours();
-      const eventMinute = event.date.getMinutes();
+      const eventHour = event.initialDate.getHours();
+      const eventMinute = event.initialDate.getMinutes();
 
       if (eventHour !== dayHour) return false;
       if (dayMinute === 0) return eventMinute < 30 && eventMinute >= 0;
@@ -57,9 +57,9 @@ function WeekCalendarEvent(props: WeekCalendarEventProps) {
 
     return (
       isEventInInterval() &&
-      event.date.getDate() === props.day &&
-      event.date.getMonth() === props.month &&
-      event.date.getFullYear() === props.year
+      event.initialDate.getDate() === props.day &&
+      event.initialDate.getMonth() === props.month &&
+      event.initialDate.getFullYear() === props.year
     );
   });
 
@@ -77,8 +77,12 @@ function WeekCalendarEvent(props: WeekCalendarEventProps) {
     return `${hours}h${minutes}`;
   }
 
-  function getEventRangeInMinutes(event: { date: Date; endDate?: Date }) {
-    const startMinutes = event.date.getHours() * 60 + event.date.getMinutes();
+  function getEventRangeInMinutes(event: {
+    initialDate: Date;
+    endDate?: Date;
+  }) {
+    const startMinutes =
+      event.initialDate.getHours() * 60 + event.initialDate.getMinutes();
 
     const endMinutes = event.endDate
       ? event.endDate.getHours() * 60 + event.endDate.getMinutes()
@@ -91,7 +95,7 @@ function WeekCalendarEvent(props: WeekCalendarEventProps) {
   }
 
   function countOverlappingPreviousEvents(
-    currentEvent: { date: Date; endDate?: Date },
+    currentEvent: { initialDate: Date; endDate?: Date },
     sourceIndex: number,
   ) {
     const current = getEventRangeInMinutes(currentEvent);
@@ -113,7 +117,7 @@ function WeekCalendarEvent(props: WeekCalendarEventProps) {
   }
 
   function getEventStyle(
-    event: { date: Date; endDate?: Date },
+    event: { initialDate: Date; endDate?: Date },
     sourceIndex: number,
   ) {
     const { startMinutes, endMinutes } = getEventRangeInMinutes(event);
@@ -132,15 +136,20 @@ function WeekCalendarEvent(props: WeekCalendarEventProps) {
     };
   }
 
+  function handleEventClick(event: React.MouseEvent, eventData: any) {
+    event.stopPropagation();
+    eventData.onClick?.(eventData.data);
+  }
+
   return filteredEvents.map(({ event, sourceIndex }, index) => (
     <div
       key={makeEventKey(index, sourceIndex)}
       className={`arkynWeekCalendarEvent ${event?.scheme || "primary"}`}
       style={getEventStyle(event, sourceIndex)}
-      onClick={() => event.onClick?.(event.data)}
+      onClick={(e) => handleEventClick(e, event)}
     >
       <strong>
-        {makeHour(event.date)}{" "}
+        {makeHour(event.initialDate)}{" "}
         {event?.endDate && `- ${makeHour(event.endDate)}`}
       </strong>
       <p>{event.title}</p>

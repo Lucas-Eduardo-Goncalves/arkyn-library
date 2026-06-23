@@ -6,91 +6,108 @@ import { FullCalendarHeader } from "./fullCalendarHeader";
 import { MonthlyCalendar } from "./monthlyCalendar";
 import { WeekCalendar } from "./weekCalendar";
 
+/**
+ * Represents a single event rendered on the calendar.
+ */
 type FullCalendarEvent = {
-  /** Event label shown on the calendar chip. Required. */
+  /** Display label shown on the event block. */
   title: string;
-  /** Event start date/time. Required. */
-  date: Date;
-  /** Event end date/time. When omitted the event is treated as a point in time. */
+  /** Start date and time of the event. */
+  initialDate: Date;
+  /** End date and time of the event. */
   endDate?: Date;
-  /** Arbitrary payload forwarded to `onClick`. */
+  /** Arbitrary payload forwarded to the `onClick` callback. */
   data?: any;
-  /** Color scheme for the event chip. @default "primary" */
+  /**
+   * Color scheme applied to the event block.
+   * - `primary`: default blue.
+   * - `success`: green.
+   * - `warning`: yellow.
+   * - `danger`: red.
+   * - `info`: light blue.
+   *
+   * @default "primary"
+   */
   scheme?: "primary" | "success" | "warning" | "danger" | "info";
-  /** Callback fired when the user clicks the event chip. Receives `data`. */
+  /** Callback fired when the user clicks the event. Receives `data` as argument. */
   onClick?: (data: any) => void;
 };
 
-type FullCalendarProps = {
-  /** Initial view to render. @default "month" */
-  defaultView?: "day" | "week" | "month";
-  /** Initial selected date. Defaults to today. */
-  defaultValue?: Date;
-  /** Array of events to display on the calendar. */
-  events?: FullCalendarEvent[];
-  /** Callback fired when the selected date changes. Receives the new `Date`. */
-  onChange?: (date: Date) => void;
-  /** Callback fired when the user navigates to a different period. Receives the current `Date`. */
-  onChangeView?: (date: Date) => void;
+/**
+ * Represents a blocked (unavailable) time range on the calendar.
+ */
+type BlockTimestamp = {
+  /** Start of the blocked range. */
+  initialDate: Date;
+  /** End of the blocked range. */
+  endDate: Date;
 };
 
 /**
- * FullCalendar — interactive calendar with day, week, and month views.
+ * Props for the FullCalendar component.
+ */
+type FullCalendarProps = {
+  /** Initial focused date when the calendar mounts. */
+  defaultValue?: Date;
+  /** List of events to display across day, week, and month views. */
+  events?: FullCalendarEvent[];
+  /** Time ranges that should be visually marked as unavailable. */
+  blockedTimestamps?: BlockTimestamp[];
+  /** Callback fired when the user navigates to a different period. */
+  onChangeView?: (date: Date) => void;
+  /** Callback fired when the user clicks a date cell. */
+  onClickDate?: (date: Date) => void;
+};
+
+/**
+ * Full-featured calendar component with day, week, and month views.
  *
- * Renders a navigable calendar that displays a list of events. The active view
- * can be switched at runtime via the built-in header controls.
+ * Renders a switchable calendar that supports event display, blocked time
+ * ranges, and date navigation. Internal state and business logic are managed
+ * by `FullCalendarProvider`, keeping the public API minimal.
  *
- * @param props.defaultView - Initial view to render (`"day"` | `"week"` | `"month"`). Default: `"month"`
- * @param props.defaultValue - Initial selected date. Defaults to today.
- * @param props.events - Array of events to display on the calendar.
- * @param props.events[].title - Event label shown on the calendar.
- * @param props.events[].date - Event start date/time.
- * @param props.events[].endDate - Event end date/time (optional).
- * @param props.events[].data - Arbitrary payload forwarded to `onClick`.
- * @param props.events[].scheme - Color scheme for the event chip (`"primary"` | `"success"` | `"warning"` | `"danger"` | `"info"`).
- * @param props.events[].onClick - Fires when the user clicks the event — receives `data`.
- * @param props.onChange - Fires when the selected date changes — receives the new `Date`.
- * @param props.onChangeView - Fires when the user navigates to a different period — receives the current `Date`.
- *
- * @returns FullCalendar JSX element.
+ * @param props FullCalendar properties.
+ * @returns Calendar UI with a view switcher header and the active view grid.
  *
  * @example
- * ```tsx
- * // Basic monthly calendar
- * <FullCalendar />
- *
- * // Start on week view with a pre-selected date
- * <FullCalendar defaultView="week" defaultValue={new Date("2025-06-01")} />
- *
- * // With events
+ * // Basic usage with events
  * <FullCalendar
+ *   defaultValue={new Date()}
  *   events={[
  *     {
- *       title: "Team meeting",
- *       date: new Date("2025-06-13T10:00:00"),
- *       endDate: new Date("2025-06-13T11:00:00"),
+ *       title: "Team standup",
+ *       initialDate: new Date(2026, 5, 22, 9, 0),
+ *       endDate: new Date(2026, 5, 22, 9, 30),
  *       scheme: "primary",
- *       data: { meetingId: 42 },
- *       onClick: ({ meetingId }) => openMeeting(meetingId),
- *     },
- *     {
- *       title: "Deadline",
- *       date: new Date("2025-06-20"),
- *       scheme: "danger",
+ *       onClick: (data) => console.log("Event clicked:", data),
  *     },
  *   ]}
- *   onChangeView={(date) => fetchEventsForMonth(date)}
+ *   onChangeView={(date) => console.log("Viewing:", date)}
+ *   onClickDate={(date) => console.log("Date clicked:", date)}
  * />
- * ```
+ *
+ * @example
+ * // With blocked timestamps
+ * <FullCalendar
+ *   defaultValue={new Date()}
+ *   blockedTimestamps={[
+ *     {
+ *       initialDate: new Date(2026, 5, 22, 12, 0),
+ *       endDate: new Date(2026, 5, 22, 13, 0),
+ *     },
+ *   ]}
+ * />
  */
 function FullCalendar(props: FullCalendarProps) {
-  const [viewType, setViewType] = useState(props.defaultView || "month");
+  const [viewType, setViewType] = useState<"day" | "week" | "month">("month");
 
   return (
     <FullCalendarProvider
       events={props.events || []}
       defaultValue={props.defaultValue}
       onChangeView={props.onChangeView}
+      blockedTimestamps={props.blockedTimestamps || []}
+      onClickDate={props.onClickDate}
     >
       <FullCalendarContainer>
         <FullCalendarHeader viewType={viewType} setViewType={setViewType} />

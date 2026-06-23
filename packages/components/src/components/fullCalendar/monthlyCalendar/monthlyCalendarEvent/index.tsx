@@ -12,9 +12,9 @@ function MonthlyCalendarEvent(props: MonthlyCalendarEventProps) {
 
   const filteredEvents = events.filter((event) => {
     return (
-      event.date.getDate() === props.day &&
-      event.date.getMonth() === props.month &&
-      event.date.getFullYear() === props.year
+      event.initialDate.getDate() === props.day &&
+      event.initialDate.getMonth() === props.month &&
+      event.initialDate.getFullYear() === props.year
     );
   });
 
@@ -32,14 +32,19 @@ function MonthlyCalendarEvent(props: MonthlyCalendarEventProps) {
     return `${hours}h${minutes}`;
   }
 
+  function handleEventClick(event: React.MouseEvent, eventData: any) {
+    event.stopPropagation();
+    eventData.onClick?.(eventData.data);
+  }
+
   return filteredEvents.map((event, index) => (
     <div
       key={makeEventKey(index)}
       className={`arkynMonthlyCalendarEvent ${event?.scheme || "primary"}`}
-      onClick={() => event.onClick?.(event.data)}
+      onClick={(e) => handleEventClick(e, event)}
     >
       <strong>
-        {makeHour(event.date)}{" "}
+        {makeHour(event.initialDate)}{" "}
         {event?.endDate && `- ${makeHour(event.endDate)}`}
       </strong>
       <p>{event.title}</p>

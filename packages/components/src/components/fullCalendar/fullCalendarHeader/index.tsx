@@ -1,11 +1,8 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { CardTabButton } from "../../../components/cardTab/cardTabButton";
-import { CardTabContainer } from "../../../components/cardTab/cardTabContainer";
-import { IconButton } from "../../../components/iconButton";
-
 import { useFullCalendar } from "../_fullCalendarProvider";
 import "./styles.css";
+import { CardTabButton, CardTabContainer, IconButton } from "@arkyn/components";
 
 type FullCalendarHeaderProps = {
   viewType: "day" | "week" | "month";
