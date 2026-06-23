@@ -115,7 +115,7 @@ function ImageUpload(props: ImageUploadProps) {
     onChange,
     disabled = false,
     unShowFieldTemplate = false,
-    orientation = "horizontal",
+    orientation = "vertical",
   } = props;
 
   const { fieldErrors } = useForm();

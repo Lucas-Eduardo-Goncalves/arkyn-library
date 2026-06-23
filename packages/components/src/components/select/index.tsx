@@ -168,7 +168,7 @@ function Select(props: SelectProps) {
     size = "md",
     value,
     variant = "solid",
-    orientation = "horizontal",
+    orientation = "vertical",
     unShowFieldTemplate = false,
   } = props;
 
