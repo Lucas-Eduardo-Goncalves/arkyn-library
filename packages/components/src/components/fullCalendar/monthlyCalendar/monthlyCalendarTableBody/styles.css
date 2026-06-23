@@ -1,0 +1,13 @@
+.arkynMonthlyCalendarTableBody td > p {
+  font-size: 14px;
+  padding: 16px;
+  text-align: center;
+}
+
+.arkynMonthlyCalendarTableBody tr {
+  border-top: 1px solid var(--border);
+}
+
+.arkynMonthlyCalendarTableBody tr td:not(:first-child) {
+  border-left: 1px solid var(--border);
+}

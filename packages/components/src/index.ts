@@ -22,6 +22,7 @@ export { FieldError } from "./components/fieldError";
 export { FieldLabel } from "./components/fieldLabel";
 export { FieldWrapper } from "./components/fieldWrapper";
 export { FileUpload } from "./components/fileUpload";
+export { FullCalendar } from "./components/fullCalendar";
 export { GoogleAnalytics } from "./components/googleAnalytics";
 export { GoogleTagManager } from "./components/googleTagManager";
 export { IconButton } from "./components/iconButton";

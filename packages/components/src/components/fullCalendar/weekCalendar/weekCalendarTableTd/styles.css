@@ -1,0 +1,41 @@
+.arkynWeekCalendarTableTd {
+  user-select: none;
+  cursor: pointer;
+
+  position: relative;
+  height: 73px;
+}
+
+.arkynWeekCalendarTableTd > p {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  font-size: 14px;
+  text-align: center;
+  border-radius: 8px;
+
+  margin-right: auto;
+  margin-bottom: auto;
+}
+
+.arkynWeekCalendarTableTd.previous,
+.arkynWeekCalendarTableTd.next {
+  color: var(--text-muted);
+  background-color: var(--card-foreground-primary);
+}
+
+.arkynWeekCalendarTableTd.current > p {
+  color: var(--text-body);
+}
+
+.arkynWeekCalendarTableTd.today > p {
+  color: var(--text-body);
+  font-weight: 500;
+}
+
+.arkynWeekCalendarTableTd .arkynWeekCalendarTableTdContent {
+  position: relative;
+  height: calc(100%);
+  margin: 3px;
+}

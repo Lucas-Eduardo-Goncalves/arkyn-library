@@ -1,0 +1,5 @@
+.arkynDayCalendarContainer {
+  background-color: var(--card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
