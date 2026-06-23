@@ -19,10 +19,16 @@ type SingleCalendarProps = {
    * @default "complete"
    */
   variant?: "basic" | "complete";
+  /** Currently selected date. */
+  value?: Date;
   /** Initial selected date. */
   defaultValue?: Date;
   /** Callback fired when the selected date changes. */
   onChange?: (date: Date) => void;
+  /** Currently focused view date. */
+  viewValue?: Date;
+  /** Initial focused view date. */
+  defaultViewValue?: Date;
   /** Callback fired when the view (month/year) changes. */
   onChangeView?: (date: Date) => void;
 };
@@ -41,10 +47,16 @@ type RangeCalendarProps = {
    * @default "complete"
    */
   variant?: "basic" | "complete";
+  /** Currently selected range in `[start, end]` format. */
+  value?: [Date, Date];
   /** Initial selected range in `[start, end]` format. */
   defaultValue?: [Date, Date];
   /** Callback fired when the selected range changes. */
   onChange?: (date: [Date, Date]) => void;
+  /** Currently focused view date. */
+  viewValue?: Date;
+  /** Initial focused view date. */
+  defaultViewValue?: Date;
   /** Callback fired when the view (month/year) changes. */
   onChangeView?: (date: Date) => void;
 };
@@ -99,6 +111,9 @@ function Calendar(props: CalendarProps) {
   if (props.type === "range") {
     return (
       <CalendarProvider
+        value={props.value}
+        viewValue={props.viewValue}
+        defaultViewValue={props.defaultViewValue}
         defaultValue={props.defaultValue}
         calendarType="range"
         onChange={props.onChange}
@@ -117,6 +132,9 @@ function Calendar(props: CalendarProps) {
 
   return (
     <CalendarProvider
+      value={props.value}
+      viewValue={props.viewValue}
+      defaultViewValue={props.defaultViewValue}
       defaultValue={props.defaultValue}
       calendarType="single"
       onChange={props.onChange}

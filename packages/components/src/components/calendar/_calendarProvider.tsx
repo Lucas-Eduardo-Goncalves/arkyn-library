@@ -26,6 +26,9 @@ type SingleCalendarProviderProps = {
   onChangeView?: (date: Date) => void;
   defaultValue?: Date;
   onChange?: (date: Date) => void;
+  value?: Date;
+  viewValue?: Date;
+  defaultViewValue?: Date;
 };
 
 type RangeCalendarProviderProps = {
@@ -35,6 +38,9 @@ type RangeCalendarProviderProps = {
   onChangeView?: (date: Date) => void;
   defaultValue?: [Date, Date];
   onChange?: (date: [Date, Date]) => void;
+  value?: [Date, Date];
+  viewValue?: Date;
+  defaultViewValue?: Date;
 };
 
 type CalendarProviderProps =
@@ -48,15 +54,32 @@ function useCalendar() {
 }
 
 function CalendarProvider(props: CalendarProviderProps) {
-  const language = props.language || "pt-BR";
+  const {
+    calendarType,
+    children,
+    defaultValue: rawDefaultValue,
+    defaultViewValue = new Date(),
+    language = "pt-BR",
+    onChange,
+    onChangeView,
+    value,
+    viewValue,
+  } = props;
 
   const defaultValue: [Date, Date] =
-    props.calendarType === "single"
-      ? [props.defaultValue || new Date(), props.defaultValue || new Date()]
-      : props.defaultValue || [new Date(), new Date()];
+    calendarType === "single"
+      ? [rawDefaultValue || new Date(), rawDefaultValue || new Date()]
+      : rawDefaultValue || [new Date(), new Date()];
 
-  const [viewDate, rawSetViewDate] = useState(new Date());
-  const [valueDate, rawSetValueDate] = useState<[Date, Date]>(defaultValue);
+  const [rawViewDate, rawSetViewDate] = useState(defaultViewValue);
+  const [rawValueDate, rawSetValueDate] = useState<[Date, Date]>(defaultValue);
+
+  const viewDate = viewValue || rawViewDate;
+  const valueDate: [Date, Date] = value
+    ? calendarType === "single"
+      ? [value, value]
+      : value
+    : rawValueDate;
 
   const viewService = new ViewService();
 
@@ -66,19 +89,19 @@ function CalendarProvider(props: CalendarProviderProps) {
       new Date(value[1]),
     ];
 
-    if (props.onChange && props.calendarType === "range") {
-      props.onChange(normalizedValue);
+    if (onChange && calendarType === "range") {
+      onChange(normalizedValue);
     }
 
-    if (props.onChange && props.calendarType === "single") {
-      props.onChange(normalizedValue[0]);
+    if (onChange && calendarType === "single") {
+      onChange(normalizedValue[0]);
     }
 
     rawSetValueDate(normalizedValue);
   }
 
   function setViewDate(date: Date) {
-    if (props.onChangeView) props.onChangeView(date);
+    if (onChangeView) onChangeView(date);
     rawSetViewDate(date);
   }
 
@@ -100,7 +123,7 @@ function CalendarProvider(props: CalendarProviderProps) {
             day,
             month,
             year,
-            props.calendarType,
+            calendarType,
             valueDate,
             setValueDate,
             setViewDate,
@@ -113,7 +136,7 @@ function CalendarProvider(props: CalendarProviderProps) {
         previousMonth: () => viewService.previousMonth(viewDate, setViewDate),
       }}
     >
-      {props.children}
+      {children}
     </CalendarContext.Provider>
   );
 }
