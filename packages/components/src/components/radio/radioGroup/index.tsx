@@ -82,7 +82,7 @@ function RadioGroup(props: RadioGroupProps) {
     className: wrapperClassName = "",
     disabled = false,
     unShowFieldTemplate = false,
-    orientation = "horizontal",
+    orientation = "vertical",
     ...rest
   } = props;
 

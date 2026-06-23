@@ -170,7 +170,7 @@ function MultiSelect(props: MultiSelectProps) {
     value,
     variant = "solid",
     unShowFieldTemplate = false,
-    orientation = "horizontal",
+    orientation = "vertical",
   } = props;
 
   const { fieldErrors } = useForm();

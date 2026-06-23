@@ -103,7 +103,7 @@ function RichText(props: RichTextProps) {
     label,
     showAsterisk,
     id,
-    orientation = "horizontal",
+    orientation = "vertical",
     unShowFieldTemplate = false,
   } = props;
 

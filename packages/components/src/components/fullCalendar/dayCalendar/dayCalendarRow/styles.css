@@ -1,0 +1,27 @@
+.arkynDayCalendarRow {
+  display: flex;
+  align-items: stretch;
+}
+
+.arkynDayCalendarRow:not(:first-child) {
+  border-top: 1px solid var(--border);
+}
+
+.arkynDayCalendarRow > p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  color: var(--text-body);
+  padding: 24px 20px;
+
+  display: flex;
+  align-items: center;
+}
+
+.arkynDayCalendarRow .arkynDayCalendarRowContent {
+  position: relative;
+  flex: 1;
+  min-height: 100%;
+  margin: 3px;
+}

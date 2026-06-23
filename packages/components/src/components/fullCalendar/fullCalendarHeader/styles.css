@@ -1,0 +1,53 @@
+.arkynFullCalendarHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.arkynFullCalendarHeader > p {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-body);
+}
+
+.arkynFullCalendarHeader .arkynFullCalendarButton {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  border: unset;
+  background-color: unset;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.arkynFullCalendarHeader .arkynFullCalendarButton:hover svg {
+  color: rgb(var(--spotlight-primary));
+}
+
+.arkynFullCalendarHeader > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.arkynFullCalendarHeader .arkynFullCalendarHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+
+  border-radius: 8px;
+  width: max-content;
+  overflow: hidden;
+
+  background-color: var(--card-foreground-primary);
+  padding: 4px;
+}
+
+.arkynFullCalendarHeader .arkynFullCalendarHeaderActions p {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  color: var(--text-heading);
+}

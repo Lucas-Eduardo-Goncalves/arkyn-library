@@ -1,0 +1,45 @@
+.arkynMonthlyCalendarTableTd {
+  user-select: none;
+  cursor: pointer;
+
+  position: relative;
+  height: 120px;
+}
+
+.arkynMonthlyCalendarTableTd > p {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  font-size: 14px;
+  text-align: center;
+  border-radius: 8px;
+
+  margin-right: auto;
+  margin-bottom: auto;
+}
+
+.arkynMonthlyCalendarTableTd.previous,
+.arkynMonthlyCalendarTableTd.next {
+  color: var(--text-muted);
+  background-color: var(--card-foreground-primary);
+}
+
+.arkynMonthlyCalendarTableTd > p {
+  color: var(--text-body);
+}
+
+.arkynMonthlyCalendarTableTd > p.today {
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.arkynMonthlyCalendarTableTd .arkynMonthlyCalendarEventContainer {
+  height: calc(100% - 32px);
+  padding: 16px;
+  margin-top: calc(16px + 16px);
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

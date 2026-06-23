@@ -1,0 +1,91 @@
+.arkynWeekCalendarEvent {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 2;
+
+  padding: 8px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+  min-height: 28px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  z-index: 2;
+}
+
+.arkynWeekCalendarEvent:not(:first-child) {
+  box-shadow: -4px 0px 2px rgba(0, 0, 0, 0.1);
+}
+
+.arkynWeekCalendarEvent:hover {
+  z-index: 3;
+}
+
+.arkynWeekCalendarEvent::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  width: 4px;
+  border-radius: 8px 0 0 8px;
+}
+
+.arkynWeekCalendarEvent.primary {
+  background-color: rgb(var(--spotlight-primary-light));
+}
+
+.arkynWeekCalendarEvent.primary::before {
+  background-color: rgb(var(--spotlight-primary));
+}
+
+.arkynWeekCalendarEvent.danger {
+  background-color: rgb(var(--spotlight-danger-light));
+}
+
+.arkynWeekCalendarEvent.danger::before {
+  background-color: rgb(var(--spotlight-danger));
+}
+
+.arkynWeekCalendarEvent.warning {
+  background-color: rgb(var(--spotlight-warning-light));
+}
+
+.arkynWeekCalendarEvent.warning::before {
+  background-color: rgb(var(--spotlight-warning));
+}
+
+.arkynWeekCalendarEvent.info {
+  background-color: rgb(var(--spotlight-info-light));
+}
+
+.arkynWeekCalendarEvent.info::before {
+  background-color: rgb(var(--spotlight-info));
+}
+
+.arkynWeekCalendarEvent.success {
+  background-color: rgb(var(--spotlight-success-light));
+}
+
+.arkynWeekCalendarEvent.success::before {
+  background-color: rgb(var(--spotlight-success));
+}
+
+.arkynWeekCalendarEvent > strong {
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0%;
+  color: var(--text-heading);
+}
+
+.arkynWeekCalendarEvent > p {
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0%;
+  color: var(--text-heading);
+}
