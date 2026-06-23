@@ -1,352 +1,128 @@
-# Guia Oficial para Geração Incremental de Changelogs da Arkyn
+# Changelog Generation Guide
 
-Este documento define o processo obrigatório para geração de changelogs da Arkyn.
-
-Seu objetivo é garantir que todos os changelogs sejam produzidos de forma incremental, consistente e seguindo exatamente o padrão adotado pela biblioteca.
+This guide describes the steps to generate a new changelog entry for the Arkyn ecosystem, following the conventions established in `CHANGELOG.md`.
 
 ---
 
-## Objetivo
+## Step 1 — Identify the previous version tag
 
-A partir do último changelog já existente e da versão atual do repositório, gerar automaticamente todos os changelogs faltantes até alcançar a versão mais recente.
+Find the commit that corresponds to the last released version so you know where to start collecting changes.
 
-Exemplo:
-
-Último changelog existente:
-
-```
-v3.0.1-beta.147
+```bash
+git log --oneline | grep "<previous-version>"
+# Example: git log --oneline | grep "3.0.1-beta.147"
 ```
 
-Versão atual do repositório:
-
-```
-v3.0.1-beta.150
-```
-
-Você deverá gerar:
-
-```
-CHANGELOG-3.0.1-beta.148.md
-CHANGELOG-3.0.1-beta.149.md
-CHANGELOG-3.0.1-beta.150.md
-```
-
-Cada arquivo deve representar exclusivamente as alterações daquela versão específica.
+Copy the commit hash returned.
 
 ---
 
-## Entrada esperada
+## Step 2 — List all commits since that version
 
-Sempre serão fornecidas duas informações:
+Use the hash from Step 1 to list every commit between that point and `HEAD`.
 
-### 1. Último changelog gerado
-
-Exemplo:
-
-```
-3.0.1-beta.147
+```bash
+git log --oneline <hash>..HEAD
 ```
 
-Esta é considerada a última release já documentada.
+Exclude the version-bump commit (`chore(release): bump version to ...`) — it carries no user-facing information.
 
 ---
 
-### 2. Versão atual do repositório
+## Step 3 — Inspect each commit in detail
 
-Exemplo:
+For every relevant commit, retrieve its full diff and file change summary:
 
+```bash
+git show <hash> --stat   # files changed, insertions, deletions
+git show <hash>          # full diff
 ```
-3.0.1-beta.150
-```
 
-Esta é considerada a release mais recente existente.
+Focus on:
+
+- What props, types, or exports were added, renamed, or removed.
+- What behavioral changes were made (defaults, callbacks, rendering).
+- What is purely internal (refactors, style tweaks with no API impact).
+- What breaks existing consumer code.
 
 ---
 
-## Processo obrigatório
+## Step 4 — Classify each change
 
-### Etapa 1 — Determinar as versões faltantes
+Group findings into three buckets:
 
-Identifique todas as versões existentes entre:
-
-```
-última versão documentada + 1
-```
-
-e
-
-```
-versão atual do repositório
-```
-
-inclusive.
-
-Exemplo:
-
-Última documentada:
-
-```
-147
-```
-
-Atual:
-
-```
-150
-```
-
-Resultado:
-
-```
-148
-149
-150
-```
+| Bucket | Criteria |
+|---|---|
+| **Changes By Package** | Any additive, behavioral, or cosmetic change visible to consumers. |
+| **Breaking Changes** | Renamed/removed props, changed defaults, removed exports. Requires a migration example. |
+| **Notes** | Cross-cutting observations, scope clarifications, version bump confirmation. |
 
 ---
 
-### Etapa 2 — Processar cada versão individualmente
+## Step 5 — Write the entry
 
-Para cada versão faltante:
+Follow this exact structure:
 
-1. Localize o commit responsável pela publicação dessa versão.
-
-2. Localize o commit responsável pela publicação da versão imediatamente anterior.
-
-3. Considere apenas os commits existentes entre esses dois pontos.
-
-Exemplo:
-
-Para gerar:
-
-```
-CHANGELOG-3.0.1-beta.149.md
-```
-
-utilize exclusivamente os commits entre:
-
-```
-release 3.0.1-beta.148
-```
-
-e
-
-```
-release 3.0.1-beta.149
-```
-
-Nunca utilize commits fora desse intervalo.
-
----
-
-### Etapa 3 — Identificar commits de release
-
-A identificação pode ser feita através de evidências como:
-
-- atualização de versões nos arquivos do monorepo;
-- alterações em package.json;
-- alterações em lockfiles;
-- tags;
-- convenções adotadas pelo projeto;
-- commits explícitos de publicação.
-
-Caso existam múltiplos candidatos, investigue os diffs para determinar qual representa efetivamente a release.
-
----
-
-### Etapa 4 — Revisar alterações
-
-Analise cuidadosamente todos os commits relevantes.
-
-Quando necessário:
-
-- investigue os arquivos modificados;
-- leia os diffs completos;
-- avalie impacto real;
-- entenda o comportamento introduzido.
-
-Nunca documente alterações apenas pela mensagem do commit quando ela for insuficiente.
-
----
-
-## O que deve ser ignorado
-
-Não inclua no changelog:
-
-- merge commits sem impacto funcional;
-- commits automáticos sem mudanças reais;
-- ajustes cosméticos sem impacto para consumidores;
-- reorganizações internas irrelevantes;
-- refatorações puramente internas;
-- alterações temporárias revertidas antes da release;
-- atualizações de dependências sem efeito perceptível na API ou comportamento.
-
----
-
-## Como consolidar mudanças
-
-Agrupe alterações relacionadas.
-
-Evite duplicações.
-
-Exemplo:
-
-Errado:
-
-- Corrigido comportamento X.
-- Corrigido bug em X.
-- Ajustado X.
-
-Correto:
-
-- Corrigido o comportamento de X, eliminando falhas relacionadas ao fluxo Y e garantindo funcionamento consistente.
-
----
-
-## Escrita obrigatória
-
-Cada item deve:
-
-- ser orientado ao consumidor da Arkyn;
-- explicar benefício ou impacto;
-- utilizar linguagem clara;
-- evitar termos vagos;
-- evitar copiar mensagens de commit;
-- descrever comportamento observável.
-
-Nunca reproduza commits literalmente.
-
----
-
-## Breaking Changes
-
-Caso existam alterações incompatíveis:
-
-1. Crie obrigatoriamente a seção:
-
-```
-## Breaking Changes
-```
-
-2. Explique claramente:
-
-- o que mudou;
-- quem é afetado;
-- como migrar;
-- exemplos antes/depois quando aplicável.
-
-Se não houver incompatibilidades, omita essa seção.
-
----
-
-## Estrutura obrigatória
-
-Cada changelog deve seguir exatamente o mesmo padrão do arquivo de referência mais recente.
-
-Utilize as mesmas categorias existentes no modelo fornecido.
-
-Exemplos:
-
-- Changes By Package;
-- Breaking Changes;
-- Notes.
-
-Nunca invente novas seções sem necessidade.
-
----
-
-## Formato obrigatório
-
-Nome do arquivo:
-
-```
-CHANGELOG-{versão}.md
-```
-
-Exemplo:
-
-```
-CHANGELOG-3.0.1-beta.149.md
-```
-
-Estrutura inicial:
-
-```md
-# Arkyn Releases
-
-## v{versão}
+```markdown
+## v<new-version>
 
 Date: YYYY-MM-DD
 
-Status: Resumo objetivo da release.
+Status: One-sentence summary of the release theme.
+
+### Changes By Package
+
+- `@arkyn/<package>`
+  - **Bold title for the change** — explanation of what changed and why it matters to the consumer.
+
+### Breaking Changes
+
+- **`ComponentName.propName` renamed/removed/changed** — what the consumer must do.
+
+  ```tsx
+  // Before (v<previous-version>)
+  <Component oldProp={...} />
+
+  // After (v<new-version>)
+  <Component newProp={...} />
+  ```
+
+### Notes
+
+- Consistency or scope observations.
+- Confirmation that no other APIs were affected.
+- Version bumped across all packages (`@arkyn/components`, `@arkyn/server`, `@arkyn/shared`, `@arkyn/templates`).
 ```
 
-O estilo, tom e organização devem reproduzir fielmente o modelo de changelog existente.
+**Rules:**
+
+- The `Status` line is a single sentence — the release theme, not a list.
+- Each bullet under **Changes By Package** starts with a **bold noun phrase** describing the change, followed by ` — ` and a plain-English explanation.
+- **Breaking Changes** always include a before/after code block, even for trivial renames.
+- Omit the `### Breaking Changes` section entirely if there are none.
+- List only packages that actually changed under **Changes By Package**.
+- The last Notes bullet always confirms the version bump across all packages.
 
 ---
 
-## Ordem de execução
+## Step 6 — Prepend to CHANGELOG.md
 
-Execute exatamente nesta sequência:
-
-1. Identificar versões faltantes;
-2. Para cada versão:
-   - localizar release anterior;
-   - localizar release atual;
-   - listar commits intermediários;
-   - analisar diffs;
-   - consolidar alterações;
-   - gerar o Markdown;
-   - validar o resultado;
-
-3. Prosseguir para a próxima versão;
-4. Finalizar somente após gerar todos os arquivos faltantes.
+New entries go at the **top** of the file, above the previous version. Never append.
 
 ---
 
-## Validação obrigatória
+## Quick reference — commands for a full run
 
-Antes de concluir cada arquivo:
+```bash
+# 1. Find the previous version hash
+git log --oneline | grep "<previous-version>"
 
-Verifique que:
+# 2. List commits since that hash
+git log --oneline <hash>..HEAD
 
-- nenhum commit anterior à release anterior foi incluído;
-- nenhum commit posterior à release atual foi incluído;
-- todos os commits relevantes foram considerados;
-- não existem duplicações;
-- o texto está consistente com o padrão Arkyn;
-- exemplos de migração foram incluídos quando necessários;
-- o Markdown está pronto para publicação.
+# 3. Inspect each commit
+git show <commit-hash> --stat
+git show <commit-hash>
 
----
-
-## Saída esperada
-
-Entregue exclusivamente os arquivos Markdown correspondentes às versões faltantes.
-
-Exemplo:
-
-Se a entrada for:
-
-Último changelog:
-
+# 4. Write the entry and prepend to CHANGELOG.md
 ```
-3.0.1-beta.147
-```
-
-Versão atual:
-
-```
-3.0.1-beta.150
-```
-
-A saída deverá conter apenas:
-
-```
-CHANGELOG-3.0.1-beta.148.md
-CHANGELOG-3.0.1-beta.149.md
-CHANGELOG-3.0.1-beta.150.md
-```
-
-Todos completamente preenchidos, validados e seguindo fielmente o padrão oficial dos changelogs da Arkyn.
