@@ -41,8 +41,8 @@ type FullCalendarProviderProps = {
   blockedTimestamps: BlockTimestamp[];
   children: ReactNode;
   language?: string;
-  value?: Date;
-  defaultValue?: Date;
+  viewValue?: Date;
+  defaultViewValue?: Date;
   onChangeView?: (date: Date) => void;
   onClickDate?: (date: Date) => void;
 };
@@ -58,18 +58,18 @@ function FullCalendarProvider(props: FullCalendarProviderProps) {
     blockedTimestamps,
     children,
     events,
-    defaultValue = new Date(),
+    defaultViewValue = new Date(),
     language = "pt-BR",
     onChangeView,
     onClickDate,
-    value,
+    viewValue,
   } = props;
 
   const viewService = new ViewService();
   const listHours = viewService.listHours([8, 18]);
 
-  const [rawViewDate, rawSetViewDate] = useState(defaultValue);
-  const viewDate = value || rawViewDate;
+  const [rawViewDate, rawSetViewDate] = useState(defaultViewValue);
+  const viewDate = viewValue || rawViewDate;
 
   function setViewDate(date: Date) {
     if (onChangeView) onChangeView(date);
