@@ -25,6 +25,7 @@
     "url": "git+https://github.com/Lucas-Eduardo-Goncalves/arkyn.git",
     "directory": "packages/shared"
   },
+  "sideEffects": false,
   "exports": {
     ".": {
       "import": "./dist/bundle.js",

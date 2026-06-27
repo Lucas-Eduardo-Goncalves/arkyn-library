@@ -35,6 +35,10 @@
     "test": "vitest --config vitest.config.ts",
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
+  "sideEffects": [
+    "*.css",
+    "dist/bundle.css"
+  ],
   "exports": {
     ".": {
       "import": "./dist/bundle.js",
