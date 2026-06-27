@@ -35,6 +35,15 @@
     "test": "vitest --config vitest.config.ts",
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/bundle.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles": {
+      "import": "./dist/bundle.css"
+    }
+  },
   "dependencies": {
     "@react-google-maps/api": "^2.20.8",
     "@react-input/mask": "^2.0.4",

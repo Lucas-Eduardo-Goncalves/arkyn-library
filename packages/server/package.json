@@ -25,6 +25,12 @@
     "url": "git+https://github.com/Lucas-Eduardo-Goncalves/arkyn.git",
     "directory": "packages/server"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/bundle.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "bunx vite build && tsc",
     "test": "vitest --config vitest.config.ts",

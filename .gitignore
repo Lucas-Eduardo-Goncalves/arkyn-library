@@ -3,6 +3,8 @@
 # Logs
 **/dist/
 **/.DS_Store
+**/.claude
+**/necessary-changes
 
 logs
 _.log
