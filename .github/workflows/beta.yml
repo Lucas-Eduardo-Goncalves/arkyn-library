@@ -87,9 +87,9 @@ jobs:
       # Remova este passo enquanto estiver testando
       # o workflow.
       # ------------------------------------------------------
-      # - name: Publish beta
-      #   run: bun publish --tag beta
+      - name: Publish beta
+        run: bun run all:publish:beta
 
-      #   env:
-      #     # Token salvo nos Secrets do GitHub.
-      #     NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
+        env:
+          # Token salvo nos Secrets do GitHub.
+          NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
