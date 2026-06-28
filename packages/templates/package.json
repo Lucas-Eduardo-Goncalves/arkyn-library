@@ -29,10 +29,26 @@
     ".": {
       "import": "./dist/bundle.js",
       "types": "./dist/index.d.ts"
+    },
+    "./brazilianStates": {
+      "import": "./dist/brazilianStates/index.js",
+      "types": "./dist/brazilianStates/index.d.ts"
+    },
+    "./countries": {
+      "import": "./dist/countries/index.js",
+      "types": "./dist/countries/index.d.ts"
+    },
+    "./countryCurrencies": {
+      "import": "./dist/countryCurrencies/index.js",
+      "types": "./dist/countryCurrencies/index.d.ts"
+    },
+    "./maximumFractionDigits": {
+      "import": "./dist/maximumFractionDigits/index.js",
+      "types": "./dist/maximumFractionDigits/index.d.ts"
     }
   },
   "scripts": {
-    "build": "bunx vite build && tsc",
+    "build": "bunx vite build && tsc && bun ./generate-exports.ts",
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {},

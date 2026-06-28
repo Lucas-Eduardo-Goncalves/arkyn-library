@@ -30,10 +30,142 @@
     ".": {
       "import": "./dist/bundle.js",
       "types": "./dist/index.d.ts"
+    },
+    "./apiService": {
+      "import": "./dist/services/apiService/index.js",
+      "types": "./dist/services/apiService/index.d.ts"
+    },
+    "./badGateway": {
+      "import": "./dist/http/badResponses/badGateway/index.js",
+      "types": "./dist/http/badResponses/badGateway/index.d.ts"
+    },
+    "./badRequest": {
+      "import": "./dist/http/badResponses/badRequest/index.js",
+      "types": "./dist/http/badResponses/badRequest/index.d.ts"
+    },
+    "./conflict": {
+      "import": "./dist/http/badResponses/conflict/index.js",
+      "types": "./dist/http/badResponses/conflict/index.d.ts"
+    },
+    "./created": {
+      "import": "./dist/http/successResponses/created/index.js",
+      "types": "./dist/http/successResponses/created/index.d.ts"
+    },
+    "./debugService": {
+      "import": "./dist/services/debugService/index.js",
+      "types": "./dist/services/debugService/index.d.ts"
+    },
+    "./decodeRequestBody": {
+      "import": "./dist/utilities/decodeRequestBody/index.js",
+      "types": "./dist/utilities/decodeRequestBody/index.d.ts"
+    },
+    "./decodeRequestErrorMessage": {
+      "import": "./dist/utilities/decodeRequestErrorMessage/index.js",
+      "types": "./dist/utilities/decodeRequestErrorMessage/index.d.ts"
+    },
+    "./errorHandler": {
+      "import": "./dist/utilities/errorHandler/index.js",
+      "types": "./dist/utilities/errorHandler/index.d.ts"
+    },
+    "./flushDebugLogs": {
+      "import": "./dist/utilities/flushDebugLogs/index.js",
+      "types": "./dist/utilities/flushDebugLogs/index.d.ts"
+    },
+    "./forbidden": {
+      "import": "./dist/http/badResponses/forbidden/index.js",
+      "types": "./dist/http/badResponses/forbidden/index.d.ts"
+    },
+    "./formAsyncParse": {
+      "import": "./dist/utilities/formAsyncParse/index.js",
+      "types": "./dist/utilities/formAsyncParse/index.d.ts"
+    },
+    "./formParse": {
+      "import": "./dist/utilities/formParse/index.js",
+      "types": "./dist/utilities/formParse/index.d.ts"
+    },
+    "./found": {
+      "import": "./dist/http/successResponses/found/index.js",
+      "types": "./dist/http/successResponses/found/index.d.ts"
+    },
+    "./getScopedParams": {
+      "import": "./dist/utilities/getScopedParams/index.js",
+      "types": "./dist/utilities/getScopedParams/index.d.ts"
+    },
+    "./logService": {
+      "import": "./dist/services/logService/index.js",
+      "types": "./dist/services/logService/index.d.ts"
+    },
+    "./noContent": {
+      "import": "./dist/http/successResponses/noContent/index.js",
+      "types": "./dist/http/successResponses/noContent/index.d.ts"
+    },
+    "./notFound": {
+      "import": "./dist/http/badResponses/notFound/index.js",
+      "types": "./dist/http/badResponses/notFound/index.d.ts"
+    },
+    "./notImplemented": {
+      "import": "./dist/http/badResponses/notImplemented/index.js",
+      "types": "./dist/http/badResponses/notImplemented/index.d.ts"
+    },
+    "./schemaValidator": {
+      "import": "./dist/utilities/schemaValidator/index.js",
+      "types": "./dist/utilities/schemaValidator/index.d.ts"
+    },
+    "./serverError": {
+      "import": "./dist/http/badResponses/serverError/index.js",
+      "types": "./dist/http/badResponses/serverError/index.d.ts"
+    },
+    "./success": {
+      "import": "./dist/http/successResponses/success/index.js",
+      "types": "./dist/http/successResponses/success/index.d.ts"
+    },
+    "./unauthorized": {
+      "import": "./dist/http/badResponses/unauthorized/index.js",
+      "types": "./dist/http/badResponses/unauthorized/index.d.ts"
+    },
+    "./unprocessableEntity": {
+      "import": "./dist/http/badResponses/unprocessableEntity/index.js",
+      "types": "./dist/http/badResponses/unprocessableEntity/index.d.ts"
+    },
+    "./updated": {
+      "import": "./dist/http/successResponses/updated/index.js",
+      "types": "./dist/http/successResponses/updated/index.d.ts"
+    },
+    "./validateCep": {
+      "import": "./dist/validations/validateCep/index.js",
+      "types": "./dist/validations/validateCep/index.d.ts"
+    },
+    "./validateCnpj": {
+      "import": "./dist/validations/validateCnpj/index.js",
+      "types": "./dist/validations/validateCnpj/index.d.ts"
+    },
+    "./validateCpf": {
+      "import": "./dist/validations/validateCpf/index.js",
+      "types": "./dist/validations/validateCpf/index.d.ts"
+    },
+    "./validateDate": {
+      "import": "./dist/validations/validateDate/index.js",
+      "types": "./dist/validations/validateDate/index.d.ts"
+    },
+    "./validateEmail": {
+      "import": "./dist/validations/validateEmail/index.js",
+      "types": "./dist/validations/validateEmail/index.d.ts"
+    },
+    "./validatePassword": {
+      "import": "./dist/validations/validatePassword/index.js",
+      "types": "./dist/validations/validatePassword/index.d.ts"
+    },
+    "./validatePhone": {
+      "import": "./dist/validations/validatePhone/index.js",
+      "types": "./dist/validations/validatePhone/index.d.ts"
+    },
+    "./validateRg": {
+      "import": "./dist/validations/validateRg/index.js",
+      "types": "./dist/validations/validateRg/index.d.ts"
     }
   },
   "scripts": {
-    "build": "bunx vite build && tsc",
+    "build": "bunx vite build && tsc && bun ./generate-exports.ts",
     "test": "vitest --config vitest.config.ts",
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },

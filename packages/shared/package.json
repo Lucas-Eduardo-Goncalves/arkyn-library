@@ -30,10 +30,110 @@
     ".": {
       "import": "./dist/bundle.js",
       "types": "./dist/index.d.ts"
+    },
+    "./calculateCardInstallment": {
+      "import": "./dist/utilities/calculateCardInstallment/index.js",
+      "types": "./dist/utilities/calculateCardInstallment/index.d.ts"
+    },
+    "./ensureQuotes": {
+      "import": "./dist/utilities/ensureQuotes/index.js",
+      "types": "./dist/utilities/ensureQuotes/index.d.ts"
+    },
+    "./findCountryMask": {
+      "import": "./dist/utilities/findCountryMask/index.js",
+      "types": "./dist/utilities/findCountryMask/index.d.ts"
+    },
+    "./formatDate": {
+      "import": "./dist/formats/formatDate/index.js",
+      "types": "./dist/formats/formatDate/index.d.ts"
+    },
+    "./formatJsonObject": {
+      "import": "./dist/formats/formatJsonObject/index.js",
+      "types": "./dist/formats/formatJsonObject/index.d.ts"
+    },
+    "./formatJsonString": {
+      "import": "./dist/formats/formatJsonString/index.js",
+      "types": "./dist/formats/formatJsonString/index.d.ts"
+    },
+    "./formatToCapitalizeFirstWordLetter": {
+      "import": "./dist/formats/formatToCapitalizeFirstWordLetter/index.js",
+      "types": "./dist/formats/formatToCapitalizeFirstWordLetter/index.d.ts"
+    },
+    "./formatToCep": {
+      "import": "./dist/formats/formatToCep/index.js",
+      "types": "./dist/formats/formatToCep/index.d.ts"
+    },
+    "./formatToCnpj": {
+      "import": "./dist/formats/formatToCnpj/index.js",
+      "types": "./dist/formats/formatToCnpj/index.d.ts"
+    },
+    "./formatToCpf": {
+      "import": "./dist/formats/formatToCpf/index.js",
+      "types": "./dist/formats/formatToCpf/index.d.ts"
+    },
+    "./formatToCurrency": {
+      "import": "./dist/formats/formatToCurrency/index.js",
+      "types": "./dist/formats/formatToCurrency/index.d.ts"
+    },
+    "./formatToEllipsis": {
+      "import": "./dist/formats/formatToEllipsis/index.js",
+      "types": "./dist/formats/formatToEllipsis/index.d.ts"
+    },
+    "./formatToHiddenDigits": {
+      "import": "./dist/formats/formatToHiddenDigits/index.js",
+      "types": "./dist/formats/formatToHiddenDigits/index.d.ts"
+    },
+    "./formatToPhone": {
+      "import": "./dist/formats/formatToPhone/index.js",
+      "types": "./dist/formats/formatToPhone/index.d.ts"
+    },
+    "./generateColorByString": {
+      "import": "./dist/generators/generateColorByString/index.js",
+      "types": "./dist/generators/generateColorByString/index.d.ts"
+    },
+    "./generateId": {
+      "import": "./dist/generators/generateId/index.js",
+      "types": "./dist/generators/generateId/index.d.ts"
+    },
+    "./generateSlug": {
+      "import": "./dist/generators/generateSlug/index.js",
+      "types": "./dist/generators/generateSlug/index.d.ts"
+    },
+    "./isHtml": {
+      "import": "./dist/utilities/isHtml/index.js",
+      "types": "./dist/utilities/isHtml/index.d.ts"
+    },
+    "./parseLargeFields": {
+      "import": "./dist/parsers/parseLargeFields/index.js",
+      "types": "./dist/parsers/parseLargeFields/index.d.ts"
+    },
+    "./parseSensitiveData": {
+      "import": "./dist/parsers/parseSensitiveData/index.js",
+      "types": "./dist/parsers/parseSensitiveData/index.d.ts"
+    },
+    "./parseToDate": {
+      "import": "./dist/parsers/parseToDate/index.js",
+      "types": "./dist/parsers/parseToDate/index.d.ts"
+    },
+    "./removeCurrencySymbols": {
+      "import": "./dist/utilities/removeCurrencySymbols/index.js",
+      "types": "./dist/utilities/removeCurrencySymbols/index.d.ts"
+    },
+    "./removeNonNumeric": {
+      "import": "./dist/utilities/removeNonNumeric/index.js",
+      "types": "./dist/utilities/removeNonNumeric/index.d.ts"
+    },
+    "./stripHtmlTags": {
+      "import": "./dist/utilities/stripHtmlTags/index.js",
+      "types": "./dist/utilities/stripHtmlTags/index.d.ts"
+    },
+    "./validateDateService": {
+      "import": "./dist/services/validateDateService/index.js",
+      "types": "./dist/services/validateDateService/index.d.ts"
     }
   },
   "scripts": {
-    "build": "bunx vite build && tsc",
+    "build": "bunx vite build && tsc && bun ./generate-exports.ts",
     "test": "vitest --config vitest.config.ts",
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
