@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/server",
-  "version": "3.0.1-beta.160",
+  "version": "3.0.1-beta.161",
   "author": "Arkyn | Lucas Gonçalves",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -29,6 +29,10 @@
   "scripts": {
     "audit": "bun audit --workspace packages/server",
     "build": "bunx vite build && bunx tsc --project tsconfig.json --emitDeclarationOnly && bun ./generate-exports.ts",
+    "release:beta": "bun ./generate-version.ts beta",
+    "release:patch": "bun ./generate-version.ts patch",
+    "release:minor": "bun ./generate-version.ts minor",
+    "release:major": "bun ./generate-version.ts major",
     "test": "bunx vitest --config vitest.config.ts --run",
     "test:watch": "bunx vitest --config vitest.config.ts --watch",
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"

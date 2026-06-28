@@ -3,6 +3,7 @@ src/
 documentation/
 node_modules/
 generate-exports.ts
+generate-version.ts 
 README.md
 vitest.setup.ts
 
