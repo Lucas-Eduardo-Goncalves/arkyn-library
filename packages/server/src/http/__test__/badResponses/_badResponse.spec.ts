@@ -147,7 +147,8 @@ describe("BadResponse", () => {
       badResponse.onDebug();
 
       const loggedMessage = consoleLogSpy.mock.calls[0][0];
-      expect(loggedMessage).toContain(JSON.stringify(cause));
+      expect(loggedMessage).toContain("Cause:");
+      expect(loggedMessage).toContain("Test cause");
     });
 
     it("should include caller function information", () => {

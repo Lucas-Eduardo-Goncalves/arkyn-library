@@ -202,12 +202,12 @@ describe("SuccessResponse", () => {
       expect(loggedMessage).toContain("Caller Location:");
     });
 
-    it("should use red color scheme", () => {
+    it("should use green color scheme", () => {
       const successResponse = new SuccessResponse();
       successResponse.onDebug();
 
       const loggedMessage = consoleLogSpy.mock.calls[0][0];
-      expect(loggedMessage).toContain("\x1b[31m");
+      expect(loggedMessage).toContain("\x1b[32m");
     });
 
     it("should show name in debug logs", () => {

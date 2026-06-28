@@ -29,7 +29,7 @@ describe("LogService", () => {
 
       const config = LogService.getConfig();
 
-      expect(config?.apiUrl).toBe("http://95.216.190.158:8081/ingest-log");
+      expect(config?.apiUrl).toBe("http://62.238.8.44:8081/ingest-log");
     });
 
     it("should use custom logBaseApiUrl when provided", () => {
@@ -100,7 +100,7 @@ describe("LogService", () => {
 
       const config = LogService.getConfig();
 
-      expect(config?.apiUrl).toBe("http://95.216.190.158:8081/ingest-log");
+      expect(config?.apiUrl).toBe("http://62.238.8.44:8081/ingest-log");
     });
   });
 
@@ -122,7 +122,7 @@ describe("LogService", () => {
       expect(config).toEqual({
         trafficSourceId: "source-123",
         userToken: "token-456",
-        apiUrl: "http://95.216.190.158:8081/ingest-log",
+        apiUrl: "http://62.238.8.44:8081/ingest-log",
       });
     });
 
