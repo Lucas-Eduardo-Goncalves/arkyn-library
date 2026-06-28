@@ -22,8 +22,8 @@
   "homepage": "https://docs.arkyn.dev/en/shared/introduction",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lucas-Eduardo-Goncalves/arkyn.git",
-    "directory": "packages/shared"
+    "url": "git+https://github.com/Lucas-Eduardo-Goncalves/arkyn-library.git",
+    "directory": "packages/components"
   },
   "sideEffects": false,
   "scripts": {

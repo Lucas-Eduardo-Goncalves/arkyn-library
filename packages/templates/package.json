@@ -21,8 +21,8 @@
   "homepage": "https://docs.arkyn.dev/en/templates/introduction",
   "repository": {
     "type": "git",
-    "git+url": "https://github.com/Lucas-Eduardo-Goncalves/arkyn.git",
-    "directory": "packages/templates"
+    "url": "git+https://github.com/Lucas-Eduardo-Goncalves/arkyn-library.git",
+    "directory": "packages/components"
   },
   "sideEffects": false,
   "scripts": {

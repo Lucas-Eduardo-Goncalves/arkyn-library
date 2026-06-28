@@ -26,7 +26,7 @@
   "homepage": "https://docs.arkyn.dev",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lucas-Eduardo-Goncalves/arkyn.git",
+    "url": "git+https://github.com/Lucas-Eduardo-Goncalves/arkyn-library.git",
     "directory": "packages/components"
   },
   "scripts": {
