@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/components",
-  "version": "3.0.1-beta.167",
+  "version": "3.0.1-beta.169",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -32,8 +32,8 @@
   "scripts": {
     "audit": "bun audit --workspace packages/components",
     "build": "bunx vite build && bunx tsc --project tsconfig.json --emitDeclarationOnly && bun ./generate-exports.ts",
-    "publish:beta": "bun publish --tag beta",
-    "publish:latest": "bun publish --tag latest",
+    "publish:beta": "npm publish --tag beta",
+    "publish:latest": "npm publish --tag latest",
     "release:beta": "bun ./generate-version.ts beta",
     "release:patch": "bun ./generate-version.ts patch",
     "release:minor": "bun ./generate-version.ts minor",
