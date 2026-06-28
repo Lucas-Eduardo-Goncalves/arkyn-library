@@ -1,0 +1,95 @@
+# ==========================================================
+# Nome exibido na aba "Actions" do GitHub
+# ==========================================================
+name: Beta Release
+
+# ==========================================================
+# Eventos que disparam este workflow
+# ==========================================================
+on:
+  # Sempre que houver um push...
+  push:
+    # ...na branch develop
+    branches:
+      - beta
+
+# ==========================================================
+# Lista de trabalhos
+# ==========================================================
+jobs:
+  # Nome interno do trabalho
+  publish-beta:
+    # Máquina virtual utilizada pelo GitHub
+    runs-on: ubuntu-latest
+
+    # Impede que dois deploys beta aconteçam ao mesmo tempo.
+    concurrency:
+      group: beta-release
+      cancel-in-progress: true
+
+    # Lista de etapas executadas em sequência.
+    steps:
+      # ------------------------------------------------------
+      # Faz o clone do repositório.
+      # Equivalente ao comando:
+      #
+      # git clone ...
+      # ------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ------------------------------------------------------
+      # Instala o Bun.
+      # ------------------------------------------------------
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+        with:
+          # Sempre utiliza a versão mais recente.
+          bun-version: latest
+
+      # ------------------------------------------------------
+      # Instala todas as dependências.
+      # O --frozen-lockfile garante que o bun.lock esteja
+      # sincronizado com o package.json.
+      # ------------------------------------------------------
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # ------------------------------------------------------
+      # Executa todos os testes.
+      # Caso algum falhe, o workflow para aqui.
+      # ------------------------------------------------------
+      - name: Run tests
+        run: bun run test
+
+      # ------------------------------------------------------
+      # Executa a verificação de tipos.
+      # ------------------------------------------------------
+      - name: Run typecheck
+        run: bun run typecheck
+
+      # ------------------------------------------------------
+      # Compila todos os pacotes.
+      # ------------------------------------------------------
+      - name: Build packages
+        run: bun run build
+
+      # ------------------------------------------------------
+      # Verifica vulnerabilidades.
+      # ------------------------------------------------------
+      - name: Security audit
+        run: bun run audit
+
+      # ------------------------------------------------------
+      # Publica todos os pacotes utilizando a tag beta.
+      #
+      # Remova este passo enquanto estiver testando
+      # o workflow.
+      # ------------------------------------------------------
+      - name: Publish beta
+        run: bun publish --tag beta
+
+        env:
+          # Token salvo nos Secrets do GitHub.
+          NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
