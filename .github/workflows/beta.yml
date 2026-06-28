@@ -11,7 +11,7 @@ on:
   push:
     # ...na branch develop
     branches:
-      - beta
+      - develop
 
 # ==========================================================
 # Lista de trabalhos
@@ -87,9 +87,9 @@ jobs:
       # Remova este passo enquanto estiver testando
       # o workflow.
       # ------------------------------------------------------
-      - name: Publish beta
-        run: bun publish --tag beta
+      # - name: Publish beta
+      #   run: bun publish --tag beta
 
-        env:
-          # Token salvo nos Secrets do GitHub.
-          NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #   env:
+      #     # Token salvo nos Secrets do GitHub.
+      #     NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
