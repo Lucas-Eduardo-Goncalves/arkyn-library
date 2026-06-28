@@ -39,14 +39,10 @@ jobs:
         uses: actions/checkout@v5
 
       # ------------------------------------------------------
-      # Configura o ecossistema Node para autenticação no NPM.
-      # A propriedade 'registry-url' prepara o ambiente para
-      # gerar o arquivo .npmrc temporário de forma segura.
+      # Garante o ambiente Node.js limpo na máquina.
       # ------------------------------------------------------
       - name: Setup Node.js (NPM Registry Auth)
         uses: actions/setup-node@v4
-        with:
-          registry-url: "https://registry.npmjs.org"
 
       # ------------------------------------------------------
       # Instala o Bun.
@@ -97,7 +93,7 @@ jobs:
       # o nome 'NODE_AUTH_TOKEN' para injetar a secret.
       # ------------------------------------------------------
       - name: Publish beta
-        run: bun run all:publish:beta
-        env:
-          # O ecossistema reconhece automaticamente este nome de variável
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          bun run all:publish:beta
