@@ -57,29 +57,29 @@ jobs:
         run: bun install --frozen-lockfile
 
       # ------------------------------------------------------
-      # Executa todos os testes.
-      # Caso algum falhe, o workflow para aqui.
+      # Verifica vulnerabilidades.
       # ------------------------------------------------------
-      - name: Run tests
-        run: bun run test
+      - name: Security audit
+        run: bun run all:audit
 
       # ------------------------------------------------------
       # Executa a verificação de tipos.
       # ------------------------------------------------------
       - name: Run typecheck
-        run: bun run typecheck
+        run: bun run all:typecheck
+
+      # ------------------------------------------------------
+      # Executa todos os testes.
+      # Caso algum falhe, o workflow para aqui.
+      # ------------------------------------------------------
+      - name: Run tests
+        run: bun run all:test
 
       # ------------------------------------------------------
       # Compila todos os pacotes.
       # ------------------------------------------------------
       - name: Build packages
-        run: bun run build
-
-      # ------------------------------------------------------
-      # Verifica vulnerabilidades.
-      # ------------------------------------------------------
-      - name: Security audit
-        run: bun run audit
+        run: bun run all:build
 
       # ------------------------------------------------------
       # Publica todos os pacotes utilizando a tag beta.

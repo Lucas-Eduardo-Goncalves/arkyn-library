@@ -21,6 +21,10 @@
     "@arkyn/templates": "workspace:*"
   },
   "scripts": {
+    "all:audit": "bun run components:audit && bun run server:audit && bun run shared:audit && bun run templates:audit",
+    "all:build": "bun run components:build && bun run server:build && bun run shared:build && bun run templates:build",
+    "all:test": "bun run server:test && bun run shared:test",
+    "all:typecheck": "bun run components:typecheck && bun run server:typecheck && bun run shared:typecheck && bun run templates:typecheck",
     "components:audit": "cd packages/components && bun run audit",
     "components:build": "cd packages/components && bun run build",
     "components:test": "cd packages/components && bun run test",
