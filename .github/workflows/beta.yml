@@ -22,6 +22,10 @@ jobs:
     # Máquina virtual utilizada pelo GitHub
     runs-on: ubuntu-latest
 
+    permissions:
+      id-token: write
+      contents: read
+
     # Impede que dois deploys beta aconteçam ao mesmo tempo.
     concurrency:
       group: beta-release
@@ -37,6 +41,12 @@ jobs:
       # ------------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          registry-url: https://registry.npmjs.org
 
       # ------------------------------------------------------
       # Garante o ambiente Node.js limpo na máquina.
@@ -93,7 +103,4 @@ jobs:
       # o nome 'NODE_AUTH_TOKEN' para injetar a secret.
       # ------------------------------------------------------
       - name: Publish beta
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-          bun run all:publish:beta
+        run: bun run all:publish:beta
