@@ -86,7 +86,7 @@ class SchemaValidator<T extends ZodType> {
   formValidate(data: any, message?: string): z.infer<T> {
     const formParsed = formParse([data, this.schema]);
 
-    if (!formParsed.success) {
+    if ("fieldErrors" in formParsed) {
       const firstErrorKey = Object.keys(formParsed.fieldErrors)[0];
 
       throw new UnprocessableEntity({
@@ -116,7 +116,7 @@ class SchemaValidator<T extends ZodType> {
   async formAsyncValidate(data: any, message?: string): Promise<z.infer<T>> {
     const formParsed = await formAsyncParse([data, this.schema]);
 
-    if (!formParsed.success) {
+    if ("fieldErrors" in formParsed) {
       const firstErrorKey = Object.keys(formParsed.fieldErrors)[0];
 
       throw new UnprocessableEntity({

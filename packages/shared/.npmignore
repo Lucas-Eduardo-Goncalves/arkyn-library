@@ -1,6 +1,10 @@
 # Development files
 src/
+documentation/
 node_modules/
+generate-exports.ts
+README.md
+vitest.setup.ts
 
 # Config files
 tsconfig.json
@@ -22,10 +26,6 @@ variables.css
 # Test files
 **/*.test.*
 **/*.spec.*
-
-# Test directories
-__tests__/
-__test__/
 
 # Build artifacts (keep only dist/)
 *.log

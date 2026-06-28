@@ -1,8 +1,8 @@
 {
   "name": "@arkyn/templates",
-  "version": "3.0.1-beta.150",
-  "main": "./dist/bundle.js",
-  "module": "./dist/bundle.js",
+  "version": "3.0.1-beta.156",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "type": "module",
   "types": "./dist/index.d.ts",
   "license": "Apache-2.0",
@@ -25,30 +25,8 @@
     "directory": "packages/templates"
   },
   "sideEffects": false,
-  "exports": {
-    ".": {
-      "import": "./dist/bundle.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./brazilianStates": {
-      "import": "./dist/brazilianStates/index.js",
-      "types": "./dist/brazilianStates/index.d.ts"
-    },
-    "./countries": {
-      "import": "./dist/countries/index.js",
-      "types": "./dist/countries/index.d.ts"
-    },
-    "./countryCurrencies": {
-      "import": "./dist/countryCurrencies/index.js",
-      "types": "./dist/countryCurrencies/index.d.ts"
-    },
-    "./maximumFractionDigits": {
-      "import": "./dist/maximumFractionDigits/index.js",
-      "types": "./dist/maximumFractionDigits/index.d.ts"
-    }
-  },
   "scripts": {
-    "build": "bunx vite build && tsc && bun ./generate-exports.ts",
+    "build": "bunx vite build && bunx tsc --project tsconfig.json --emitDeclarationOnly && bun ./generate-exports.ts",
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {},
@@ -56,5 +34,32 @@
     "bun-types": "latest",
     "typescript": "^5.9.3",
     "vite": "^5.4.21"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./brazilianStates": {
+      "import": "./dist/modules/brazilianStates.js",
+      "types": "./dist/brazilianStates.d.ts",
+      "default": "./dist/modules/brazilianStates.js"
+    },
+    "./countries": {
+      "import": "./dist/modules/countries.js",
+      "types": "./dist/countries.d.ts",
+      "default": "./dist/modules/countries.js"
+    },
+    "./countryCurrencies": {
+      "import": "./dist/modules/countryCurrencies.js",
+      "types": "./dist/countryCurrencies.d.ts",
+      "default": "./dist/modules/countryCurrencies.js"
+    },
+    "./maximumFractionDigits": {
+      "import": "./dist/modules/maximumFractionDigits.js",
+      "types": "./dist/maximumFractionDigits.d.ts",
+      "default": "./dist/modules/maximumFractionDigits.js"
+    }
   }
 }

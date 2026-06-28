@@ -1,30 +1,37 @@
 {
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "documentation/**/*",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "**/*.config.ts",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
+  ],
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "declaration": true,
+    "outDir": "./dist",
     "rootDir": "./src",
+    "composite": false,
+    "declaration": true,
     "declarationDir": "./dist",
     "declarationMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": false,
     "isolatedModules": true,
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "module": "ESNext",
     "moduleResolution": "bundler",
-    "outDir": "./dist",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "preserveWatchOutput": true,
     "skipLibCheck": true,
-    "strict": true,
-    "target": "ESNext",
-    "types": ["bun-types"],
-    "verbatimModuleSyntax": true
-  },
-  "exclude": [
-    "dist",
-    "node_modules",
-    "**/__test__/**/*",
-    "**/*.test.*",
-    "**/*.spec.*",
-    "vite.config.ts",
-    "vitest.config.ts"
-  ],
-  "include": ["src/**/*.ts"]
+    "jsx": "react-jsx",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "types": ["node"],
+    "module": "ESNext",
+    "target": "ESNext"
+  }
 }

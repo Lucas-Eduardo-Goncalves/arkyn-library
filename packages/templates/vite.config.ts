@@ -6,14 +6,25 @@ export default defineConfig({
   build: {
     minify: true,
     outDir: "./dist",
-    rollupOptions: {
-      external: [],
-      output: { format: "esm" },
-    },
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       name: "@arkyn/templates",
-      fileName: "bundle",
+    },
+    rollupOptions: {
+      external: (id) =>
+        !id.startsWith(".") && !id.startsWith("/") && !id.startsWith("\0"),
+      output: [
+        {
+          dir: "./dist",
+          entryFileNames: "index.js",
+        },
+        {
+          dir: "./dist/modules",
+          preserveModules: true,
+          preserveModulesRoot: "src",
+          entryFileNames: "[name].js",
+        },
+      ],
     },
   },
 });

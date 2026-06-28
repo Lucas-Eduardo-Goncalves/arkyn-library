@@ -49,13 +49,13 @@ async function formAsyncParse<T extends FormParseProps>([
     );
 
     return {
-      success: zodResponse.success,
+      success: false,
       fieldErrors: errorsObject,
       fields: formData,
     };
   } else {
     return {
-      success: zodResponse.success,
+      success: true,
       data: zodResponse.data as T[1] extends ZodType<infer U> ? U : never,
     };
   }

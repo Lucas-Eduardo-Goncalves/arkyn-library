@@ -4,6 +4,7 @@ import Bun from "bun";
 interface ExportEntry {
   import: string;
   types?: string;
+  default?: string;
 }
 
 interface PackageJson {
@@ -12,6 +13,7 @@ interface PackageJson {
 }
 
 const root = process.cwd();
+const srcDir = resolve(root, "src");
 
 const indexContent = await Bun.file(resolve(root, "src/index.ts")).text();
 
@@ -33,16 +35,31 @@ for (const match of indexContent.matchAll(regex)) {
 
   const exportName = importPath.split("/").pop()!;
 
+  const srcPath = resolve(srcDir, importPath);
+  const isDirectory =
+    (await Bun.file(`${srcPath}/index.ts`).exists()) ||
+    (await Bun.file(`${srcPath}/index.tsx`).exists());
+
+  const distImport = isDirectory
+    ? `./dist/modules/${importPath}/index.js`
+    : `./dist/modules/${importPath}.js`;
+
+  const distTypes = isDirectory
+    ? `./dist/${importPath}/index.d.ts`
+    : `./dist/${importPath}.d.ts`;
+
   exportsMap[`./${exportName}`] = {
-    import: `./dist/${importPath}/index.js`,
-    types: `./dist/${importPath}/index.d.ts`,
+    import: distImport,
+    types: distTypes,
+    default: distImport,
   };
 }
 
 packageJson.exports = {
   ".": {
-    import: "./dist/bundle.js",
+    import: "./dist/index.js",
     types: "./dist/index.d.ts",
+    default: "./dist/index.js",
   },
   ...Object.fromEntries(
     Object.entries(exportsMap).sort(([a], [b]) => a.localeCompare(b)),

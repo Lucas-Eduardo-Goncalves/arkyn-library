@@ -1,6 +1,10 @@
 # Development files
 src/
+documentation/
 node_modules/
+generate-exports.ts
+README.md
+vitest.setup.ts
 
 # Config files
 tsconfig.json
