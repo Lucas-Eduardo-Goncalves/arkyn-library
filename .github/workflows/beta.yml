@@ -63,6 +63,12 @@ jobs:
         run: bun run all:audit
 
       # ------------------------------------------------------
+      # Compila todos os pacotes.
+      # ------------------------------------------------------
+      - name: Build packages
+        run: bun run all:build
+
+      # ------------------------------------------------------
       # Executa a verificação de tipos.
       # ------------------------------------------------------
       - name: Run typecheck
@@ -74,12 +80,6 @@ jobs:
       # ------------------------------------------------------
       - name: Run tests
         run: bun run all:test
-
-      # ------------------------------------------------------
-      # Compila todos os pacotes.
-      # ------------------------------------------------------
-      - name: Build packages
-        run: bun run all:build
 
       # ------------------------------------------------------
       # Publica todos os pacotes utilizando a tag beta.
