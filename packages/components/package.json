@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/components",
-  "version": "3.0.1-beta.156",
+  "version": "3.0.1-beta.160",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -37,7 +37,7 @@
   },
   "sideEffects": [
     "*.css",
-    "dist/style.css"
+    "dist/components.css"
   ],
   "peerDependencies": {
     "@arkyn/shared": ">=3.0.1-beta.145",
@@ -108,8 +108,9 @@
       "default": "./dist/index.js"
     },
     "./styles": {
-      "import": "./dist/components.css",
-      "default": "./dist/components.css"
+      "import": "./dist/style.css",
+      "types": "./styles.d.ts",
+      "default": "./dist/style.css"
     },
     "./alertContainer": {
       "import": "./dist/modules/components/alert/alertContainer/index.js",

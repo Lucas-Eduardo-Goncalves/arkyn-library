@@ -62,8 +62,9 @@ packageJson.exports = {
     default: "./dist/index.js",
   },
   "./styles": {
-    import: "./dist/components.css",
-    default: "./dist/components.css",
+    import: "./dist/style.css",
+    types: "./styles.d.ts",
+    default: "./dist/style.css",
   },
   ...Object.fromEntries(
     Object.entries(exportsMap).sort(([a], [b]) => a.localeCompare(b)),
