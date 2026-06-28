@@ -93,7 +93,4 @@ jobs:
       # o nome 'NODE_AUTH_TOKEN' para injetar a secret.
       # ------------------------------------------------------
       - name: Publish beta
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-          bun run all:publish:beta
+        run: bun run all:publish:beta
