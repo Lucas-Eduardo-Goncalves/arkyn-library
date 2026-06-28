@@ -42,17 +42,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 26
-          registry-url: https://registry.npmjs.org
-
       # ------------------------------------------------------
       # Garante o ambiente Node.js limpo na máquina.
       # ------------------------------------------------------
       - name: Setup Node.js (NPM Registry Auth)
         uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          registry-url: https://registry.npmjs.org
 
       # ------------------------------------------------------
       # Instala o Bun.
