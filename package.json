@@ -41,6 +41,7 @@
 		"all:typecheck": "bun run components:typecheck && bun run server:typecheck && bun run shared:typecheck && bun run templates:typecheck",
 		"biome:format": "biome format --write .",
 		"biome:check": "biome check . --max-diagnostics=10000",
+		"biome:check:ci": "biome check . --ci",
 		"components:audit": "cd packages/components && bun run audit",
 		"components:build": "cd packages/components && bun run build",
 		"components:publish:beta": "cd packages/components && bun run publish:beta",

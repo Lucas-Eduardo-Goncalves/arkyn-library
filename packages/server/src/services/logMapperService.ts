@@ -95,7 +95,11 @@ class LogMapperService {
 		queryParams: URLSearchParams,
 	): Record<string, string> {
 		const params: Record<string, string> = {};
-		queryParams.forEach((value, key) => (params[key] = value));
+
+		queryParams.forEach((value, key) => {
+			params[key] = value;
+		});
+
 		return params;
 	}
 

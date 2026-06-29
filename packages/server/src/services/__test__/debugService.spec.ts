@@ -257,7 +257,9 @@ describe("DebugService", () => {
 		it("should reflect all added files", () => {
 			const files = ["a.ts", "b.ts", "c.ts", "d.ts", "e.ts"];
 
-			files.forEach((file) => DebugService.setIgnoreFile(file));
+			files.forEach((file) => {
+				DebugService.setIgnoreFile(file);
+			});
 
 			expect(DebugService.ignoreFiles).toEqual(files);
 		});

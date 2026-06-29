@@ -104,7 +104,7 @@ jobs:
       # Verifica vulnerabilidades de código com o Biome.
       # ------------------------------------------------------
       - name: Biome check
-        run: bun run biome:check
+        run: bun run biome:check:ci
 
       # ------------------------------------------------------
       # Compila todos os pacotes.

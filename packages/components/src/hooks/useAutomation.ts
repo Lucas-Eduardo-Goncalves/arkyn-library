@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { scroller } from "react-scroll";
 import { badResponses } from "../templates/badResponses";
 import { successResponses } from "../templates/successResponses";
@@ -54,7 +54,7 @@ function useAutomation(formResponseData: any) {
 		? (Object.values(formResponseData?.cause?.fieldErrors)[0] as string)
 		: null;
 
-	function fireToast() {
+	const fireToast = useCallback(() => {
 		if (!message && !firstErrorField) return;
 
 		if (successResponses.includes(name))
@@ -66,7 +66,7 @@ function useAutomation(formResponseData: any) {
 
 		if (message === "Unprocessable entity") return;
 		return showToast({ message, type: "danger" });
-	}
+	}, [message, firstErrorField, name, showToast]);
 
 	useEffect(() => {
 		if (closeModal) closeAll();
