@@ -1,5 +1,6 @@
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
+import { AtRule, type Root } from "postcss";
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -9,11 +10,18 @@ export default defineConfig({
       plugins: [
         {
           postcssPlugin: "wrap-in-layer",
-          Once(root: any, { AtRule }: any) {
-            const layer = new AtRule({ name: "layer", params: "arkyn" });
-            layer.append(root.nodes.slice());
+          Once(root: Root) {
+            const layerNode = new AtRule({
+              name: "layer",
+              params: "arkyn",
+            });
+
+            root.each((node) => {
+              layerNode.append(node.clone());
+            });
+
             root.removeAll();
-            root.append(layer);
+            root.append(layerNode);
           },
         },
       ],

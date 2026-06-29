@@ -20,6 +20,13 @@
     "@arkyn/shared": "workspace:*",
     "@arkyn/templates": "workspace:*"
   },
+  "catalog": {
+    "@types/bun": "^1.3.14",
+    "@types/node": "^26.0.1",
+    "libphonenumber-js": "^1.13.7",
+    "vite": "^8.1.0",
+    "vitest": "^4.1.9"
+  },
   "scripts": {
     "all:audit": "bun run components:audit && bun run server:audit && bun run shared:audit && bun run templates:audit",
     "all:build": "bun run templates:build && bun run shared:build && bun run components:build && bun run server:build",

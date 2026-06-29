@@ -56,10 +56,15 @@ jobs:
       # ------------------------------------------------------
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
-
         with:
           # Sempre utiliza a versão mais recente.
           bun-version: latest
+
+      # ------------------------------------------------------
+      # Buscar pacotes @types/* em dependencies (não devDependencies)
+      # ------------------------------------------------------
+      - name: Verify
+        run: grep -r "@types/" packages/*/package.json | grep -A5 '"dependencies"'
 
       # ------------------------------------------------------
       # Instala todas as dependências.

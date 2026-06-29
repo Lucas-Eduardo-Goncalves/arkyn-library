@@ -1,0 +1,93 @@
+# ==========================================================
+# Versão do schema do Dependabot.
+# Atualmente o GitHub suporta apenas a versão 2.
+# ==========================================================
+version: 2
+
+# ==========================================================
+# Lista de configurações de atualização.
+# Cada item representa um ecossistema monitorado.
+# ==========================================================
+updates:
+  # --------------------------------------------------------
+  # Monitora todas as dependências do monorepo.
+  #
+  # Como o projeto utiliza Bun Workspaces + Catalog,
+  # todas as versões ficam centralizadas no package.json
+  # da raiz.
+  #
+  # Dessa forma, basta monitorar "/" para que todas as
+  # bibliotecas do Arkyn sejam mantidas atualizadas.
+  # --------------------------------------------------------
+  - package-ecosystem: "npm"
+
+    # Diretório onde está localizado o package.json
+    # principal do projeto.
+    directory: "/"
+
+    # ------------------------------------------------------
+    # Agenda de verificações.
+    #
+    # O GitHub irá procurar novas versões das dependências
+    # toda segunda-feira às 03:00 (horário de Brasília).
+    # ------------------------------------------------------
+    schedule:
+      interval: weekly
+      day: monday
+      time: "03:00"
+      timezone: America/Sao_Paulo
+
+    # ------------------------------------------------------
+    # Limita a quantidade máxima de Pull Requests abertos
+    # simultaneamente pelo Dependabot.
+    #
+    # Evita que dezenas de PRs sejam criados ao mesmo tempo.
+    # ------------------------------------------------------
+    open-pull-requests-limit: 10
+
+    # ------------------------------------------------------
+    # Todos os PRs criados receberão automaticamente
+    # esta label.
+    #
+    # Facilita filtros e automações no GitHub.
+    # ------------------------------------------------------
+    labels:
+      - dependencies
+
+    # ------------------------------------------------------
+    # Prefixo utilizado nas mensagens de commit.
+    #
+    # Exemplo:
+    #
+    # chore(deps): bump vite from 8.1.0 to 8.2.0
+    # ------------------------------------------------------
+    commit-message:
+      prefix: "chore(deps)"
+
+    # ------------------------------------------------------
+    # Agrupa atualizações para reduzir a quantidade de PRs.
+    #
+    # development:
+    #   Agrupa todas as dependências de desenvolvimento
+    #   (TypeScript, Vite, Vitest, ESLint, etc.).
+    #
+    # production:
+    #   Agrupa todas as dependências utilizadas em produção.
+    # ------------------------------------------------------
+    groups:
+      development:
+        dependency-type: development
+
+      production:
+        dependency-type: production
+
+    # ------------------------------------------------------
+    # Permite apenas atualizações de versão estáveis.
+    #
+    # Impede que versões alpha, beta ou rc sejam abertas
+    # automaticamente pelo Dependabot.
+    # ------------------------------------------------------
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
