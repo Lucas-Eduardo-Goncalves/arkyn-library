@@ -75,10 +75,30 @@ jobs:
         run: bun run all:audit
 
       # ------------------------------------------------------
-      # Buscar pacotes @types/* em dependencies (não devDependencies)
+      # Garante que nenhum pacote @types/* esteja listado
+      # em "dependencies". Eles devem ficar apenas em
+      # "devDependencies".
       # ------------------------------------------------------
-      - name: Verify
-        run: grep -r "@types/" packages/*/package.json | grep -A5 '"dependencies"'
+      - name: Verify @types dependencies
+        shell: bash
+        run: |
+          found=0
+
+          while IFS= read -r file; do
+            if jq -e '.dependencies // {} | keys[] | startswith("@types/")' "$file" > /dev/null; then
+              echo "❌ $file possui @types em dependencies"
+              jq '.dependencies' "$file"
+              found=1
+            fi
+          done < <(find packages -name package.json)
+
+          if [ "$found" -eq 1 ]; then
+            echo ""
+            echo "Erro: pacotes @types devem estar em devDependencies."
+            exit 1
+          fi
+
+          echo "✅ Nenhum @types encontrado em dependencies."
 
       # ------------------------------------------------------
       # Verifica vulnerabilidades de código com o Biome.
