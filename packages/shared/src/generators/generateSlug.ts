@@ -20,18 +20,18 @@
  */
 
 function generateSlug(rawString: string): string {
-  let slug = rawString.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+	let slug = rawString.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-  slug = slug
-    .replace(/[^\w\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .toLowerCase();
+	slug = slug
+		.replace(/[^\w\s-]/g, "")
+		.replace(/\s+/g, "-")
+		.toLowerCase();
 
-  slug = slug.replace(/-{2,}/g, "-");
+	slug = slug.replace(/-{2,}/g, "-");
 
-  slug = slug.replace(/^-+|-+$/g, "");
+	slug = slug.replace(/^-+|-+$/g, "");
 
-  return slug;
+	return slug;
 }
 
 export { generateSlug };

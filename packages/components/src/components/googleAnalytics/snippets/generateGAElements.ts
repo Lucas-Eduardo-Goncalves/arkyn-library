@@ -1,25 +1,25 @@
 type GenerateGAElementsProps = {
-  measurementId: string;
+	measurementId: string;
 };
 
 function generateGAElements(props: GenerateGAElementsProps) {
-  const { measurementId } = props;
+	const { measurementId } = props;
 
-  if (!measurementId)
-    console.warn("Google Analytics Measurement ID is required");
+	if (!measurementId)
+		console.warn("Google Analytics Measurement ID is required");
 
-  const src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+	const src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
 
-  const script = `
+	const script = `
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', '${measurementId}');`;
 
-  return {
-    src,
-    script,
-  };
+	return {
+		src,
+		script,
+	};
 }
 
 export { generateGAElements };

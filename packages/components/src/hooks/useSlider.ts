@@ -17,22 +17,22 @@ type UseSliderReturnProps = [number, (number: number) => void];
  */
 
 function useSlider(defaultValue?: number): UseSliderReturnProps {
-  function getDefaultValue() {
-    if (!defaultValue) return 0;
-    if (defaultValue <= 0) return 0;
-    if (defaultValue >= 100) return 100;
-    return defaultValue;
-  }
+	function getDefaultValue() {
+		if (!defaultValue) return 0;
+		if (defaultValue <= 0) return 0;
+		if (defaultValue >= 100) return 100;
+		return defaultValue;
+	}
 
-  const [sliderValue, setSliderValue] = useState(getDefaultValue());
+	const [sliderValue, setSliderValue] = useState(getDefaultValue());
 
-  function changeSliderValue(value: number) {
-    if (value <= 0) return setSliderValue(0);
-    if (value >= 100) return setSliderValue(100);
-    return setSliderValue(value);
-  }
+	function changeSliderValue(value: number) {
+		if (value <= 0) return setSliderValue(0);
+		if (value >= 100) return setSliderValue(100);
+		return setSliderValue(value);
+	}
 
-  return [sliderValue, changeSliderValue];
+	return [sliderValue, changeSliderValue];
 }
 
 export { useSlider };

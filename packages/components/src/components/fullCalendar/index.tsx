@@ -10,55 +10,55 @@ import { WeekCalendar } from "./weekCalendar";
  * Represents a single event rendered on the calendar.
  */
 type FullCalendarEvent = {
-  /** Display label shown on the event block. */
-  title: string;
-  /** Start date and time of the event. */
-  initialDate: Date;
-  /** End date and time of the event. */
-  endDate?: Date;
-  /** Arbitrary payload forwarded to the `onClick` callback. */
-  data?: any;
-  /**
-   * Color scheme applied to the event block.
-   * - `primary`: default blue.
-   * - `success`: green.
-   * - `warning`: yellow.
-   * - `danger`: red.
-   * - `info`: light blue.
-   *
-   * @default "primary"
-   */
-  scheme?: "primary" | "success" | "warning" | "danger" | "info";
-  /** Callback fired when the user clicks the event. Receives `data` as argument. */
-  onClick?: (data: any) => void;
+	/** Display label shown on the event block. */
+	title: string;
+	/** Start date and time of the event. */
+	initialDate: Date;
+	/** End date and time of the event. */
+	endDate?: Date;
+	/** Arbitrary payload forwarded to the `onClick` callback. */
+	data?: any;
+	/**
+	 * Color scheme applied to the event block.
+	 * - `primary`: default blue.
+	 * - `success`: green.
+	 * - `warning`: yellow.
+	 * - `danger`: red.
+	 * - `info`: light blue.
+	 *
+	 * @default "primary"
+	 */
+	scheme?: "primary" | "success" | "warning" | "danger" | "info";
+	/** Callback fired when the user clicks the event. Receives `data` as argument. */
+	onClick?: (data: any) => void;
 };
 
 /**
  * Represents a blocked (unavailable) time range on the calendar.
  */
 type BlockTimestamp = {
-  /** Start of the blocked range. */
-  initialDate: Date;
-  /** End of the blocked range. */
-  endDate: Date;
+	/** Start of the blocked range. */
+	initialDate: Date;
+	/** End of the blocked range. */
+	endDate: Date;
 };
 
 /**
  * Props for the FullCalendar component.
  */
 type FullCalendarProps = {
-  /** Controlled value for the currently focused date. */
-  viewValue?: Date;
-  /** Initial focused date when the calendar mounts. */
-  defaultViewValue?: Date;
-  /** List of events to display across day, week, and month views. */
-  events?: FullCalendarEvent[];
-  /** Time ranges that should be visually marked as unavailable. */
-  blockedTimestamps?: BlockTimestamp[];
-  /** Callback fired when the user navigates to a different period. */
-  onChangeView?: (date: Date) => void;
-  /** Callback fired when the user clicks a date cell. */
-  onClickDate?: (date: Date) => void;
+	/** Controlled value for the currently focused date. */
+	viewValue?: Date;
+	/** Initial focused date when the calendar mounts. */
+	defaultViewValue?: Date;
+	/** List of events to display across day, week, and month views. */
+	events?: FullCalendarEvent[];
+	/** Time ranges that should be visually marked as unavailable. */
+	blockedTimestamps?: BlockTimestamp[];
+	/** Callback fired when the user navigates to a different period. */
+	onChangeView?: (date: Date) => void;
+	/** Callback fired when the user clicks a date cell. */
+	onClickDate?: (date: Date) => void;
 };
 
 /**
@@ -101,25 +101,25 @@ type FullCalendarProps = {
  * />
  */
 function FullCalendar(props: FullCalendarProps) {
-  const [viewType, setViewType] = useState<"day" | "week" | "month">("month");
+	const [viewType, setViewType] = useState<"day" | "week" | "month">("month");
 
-  return (
-    <FullCalendarProvider
-      events={props.events || []}
-      viewValue={props.viewValue}
-      defaultViewValue={props.defaultViewValue}
-      onChangeView={props.onChangeView}
-      blockedTimestamps={props.blockedTimestamps || []}
-      onClickDate={props.onClickDate}
-    >
-      <FullCalendarContainer>
-        <FullCalendarHeader viewType={viewType} setViewType={setViewType} />
-        {viewType === "day" && <DayCalendar />}
-        {viewType === "month" && <MonthlyCalendar />}
-        {viewType === "week" && <WeekCalendar />}
-      </FullCalendarContainer>
-    </FullCalendarProvider>
-  );
+	return (
+		<FullCalendarProvider
+			events={props.events || []}
+			viewValue={props.viewValue}
+			defaultViewValue={props.defaultViewValue}
+			onChangeView={props.onChangeView}
+			blockedTimestamps={props.blockedTimestamps || []}
+			onClickDate={props.onClickDate}
+		>
+			<FullCalendarContainer>
+				<FullCalendarHeader viewType={viewType} setViewType={setViewType} />
+				{viewType === "day" && <DayCalendar />}
+				{viewType === "month" && <MonthlyCalendar />}
+				{viewType === "week" && <WeekCalendar />}
+			</FullCalendarContainer>
+		</FullCalendarProvider>
+	);
 }
 
 export { FullCalendar };

@@ -1,6 +1,6 @@
 import parse from "html-react-parser";
 
-import { ParseElement, RichTextValue } from "../types/richTextTypes";
+import type { ParseElement, RichTextValue } from "../types/richTextTypes";
 import { deserialize } from "../utils/richTextUtilities";
 
 /**
@@ -23,17 +23,17 @@ import { deserialize } from "../utils/richTextUtilities";
  */
 
 function toRichTextValue(html: string): RichTextValue {
-  const parsed = parse(html);
+	const parsed = parse(html);
 
-  if (Array.isArray(parsed)) {
-    return parsed.map((node) => {
-      if (typeof node === "string") return { text: node };
-      return deserialize(node as ParseElement);
-    });
-  }
+	if (Array.isArray(parsed)) {
+		return parsed.map((node) => {
+			if (typeof node === "string") return { text: node };
+			return deserialize(node as ParseElement);
+		});
+	}
 
-  if (typeof parsed === "string") return [{ text: parsed }];
-  return [deserialize(parsed as ParseElement)];
+	if (typeof parsed === "string") return [{ text: parsed }];
+	return [deserialize(parsed as ParseElement)];
 }
 
 export { toRichTextValue };

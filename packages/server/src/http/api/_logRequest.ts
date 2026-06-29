@@ -3,16 +3,16 @@ import { flushDebugLogs } from "../..";
 import { LogService } from "../../services/logService";
 
 type ConfigProps = {
-  rawUrl: string;
-  status: number;
-  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
-  token: string | null;
-  elapsedTime: number;
-  requestHeaders: Record<string, string>;
-  requestBody: Record<string, string>;
-  queryParams: Record<string, string>;
-  responseHeaders: Record<string, string>;
-  responseBody: Record<string, string>;
+	rawUrl: string;
+	status: number;
+	method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+	token: string | null;
+	elapsedTime: number;
+	requestHeaders: Record<string, string>;
+	requestBody: Record<string, string>;
+	queryParams: Record<string, string>;
+	responseHeaders: Record<string, string>;
+	responseBody: Record<string, string>;
 };
 
 /**
@@ -60,83 +60,83 @@ type ConfigProps = {
  */
 
 async function logRequest(config: ConfigProps): Promise<void> {
-  const arkynService = LogService.getConfig();
-  if (!arkynService) return;
+	const arkynService = LogService.getConfig();
+	if (!arkynService) return;
 
-  const { userToken, apiUrl, trafficSourceId } = arkynService;
+	const { userToken, apiUrl, trafficSourceId } = arkynService;
 
-  const {
-    elapsedTime,
-    method,
-    queryParams,
-    requestBody,
-    requestHeaders,
-    responseBody,
-    responseHeaders,
-    status,
-    token,
-    rawUrl,
-  } = config;
+	const {
+		elapsedTime,
+		method,
+		queryParams,
+		requestBody,
+		requestHeaders,
+		responseBody,
+		responseHeaders,
+		status,
+		token,
+		rawUrl,
+	} = config;
 
-  if (process.env.NODE_ENV === "development") return;
+	if (process.env.NODE_ENV === "development") return;
 
-  try {
-    const url = new URL(rawUrl);
+	try {
+		const url = new URL(rawUrl);
 
-    let protocol: "http" | "https" = "https";
-    if (url.protocol === "http:") protocol = "http";
+		let protocol: "http" | "https" = "https";
+		if (url.protocol === "http:") protocol = "http";
 
-    const body = JSON.stringify({
-      domainUrl: url.protocol + "//" + url.host,
-      pathnameUrl: url.pathname,
-      trafficSourceId: trafficSourceId,
-      status,
-      protocol,
-      method: method.toLowerCase(),
-      trafficUserId: null,
-      elapsedTime,
-      requestHeaders: JSON.stringify(requestHeaders),
-      requestBody: JSON.stringify(requestBody),
-      queryParams: JSON.stringify(queryParams),
-      responseHeaders: JSON.stringify(responseHeaders),
-      responseBody: JSON.stringify(responseBody),
-    });
+		const body = JSON.stringify({
+			domainUrl: `${url.protocol}//${url.host}`,
+			pathnameUrl: url.pathname,
+			trafficSourceId: trafficSourceId,
+			status,
+			protocol,
+			method: method.toLowerCase(),
+			trafficUserId: null,
+			elapsedTime,
+			requestHeaders: JSON.stringify(requestHeaders),
+			requestBody: JSON.stringify(requestBody),
+			queryParams: JSON.stringify(queryParams),
+			responseHeaders: JSON.stringify(responseHeaders),
+			responseBody: JSON.stringify(responseBody),
+		});
 
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${userToken}`,
-    };
+		const headers = {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${userToken}`,
+		};
 
-    const fetchResponse = await fetch(apiUrl, {
-      method: "POST",
-      body,
-      headers,
-    });
+		const fetchResponse = await fetch(apiUrl, {
+			method: "POST",
+			body,
+			headers,
+		});
 
-    if (!fetchResponse.ok) {
-      const errorText = await fetchResponse.text();
-      const errorStatus = fetchResponse.status;
-      const errorStatusText = fetchResponse.statusText;
-      const jsonResponse = await fetchResponse.json().catch(() => null);
+		if (!fetchResponse.ok) {
+			const errorText = await fetchResponse.text();
+			const errorStatus = fetchResponse.status;
+			const errorStatusText = fetchResponse.statusText;
+			const jsonResponse = await fetchResponse.json().catch(() => null);
 
-      flushDebugLogs({
-        name: "LogError",
-        scheme: "red",
-        debugs: [
-          `Failed to log request.`,
-          `Status: ${errorStatus} ${errorStatusText}.`,
-          `Status text: ${errorText}.`,
-          `JSON Response: ${jsonResponse ? formatJsonObject(jsonResponse, 0) : "No JSON response"}`,
-        ],
-      });
-    }
-  } catch (err) {
-    flushDebugLogs({
-      debugs: [`Error sending request: ${err}`],
-      name: "LogError",
-      scheme: "red",
-    });
-  }
+			flushDebugLogs({
+				name: "LogError",
+				scheme: "red",
+				debugs: [
+					`Failed to log request.`,
+					`Status: ${errorStatus} ${errorStatusText}.`,
+					`Status text: ${errorText}.`,
+					`JSON Response: ${jsonResponse ? formatJsonObject(jsonResponse, 0) : "No JSON response"}`,
+				],
+			});
+		}
+	} catch (err) {
+		flushDebugLogs({
+			debugs: [`Error sending request: ${err}`],
+			name: "LogError",
+			scheme: "red",
+		});
+	}
 }
 
 export { logRequest };

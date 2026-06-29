@@ -1,4 +1,4 @@
-import { HTMLAttributes, JSX } from "react";
+import type { HTMLAttributes, JSX } from "react";
 import "./styles.css";
 
 type AlertTitleProps = HTMLAttributes<HTMLDivElement>;
@@ -23,10 +23,10 @@ type AlertTitleProps = HTMLAttributes<HTMLDivElement>;
  * ```
  */
 function AlertTitle(props: AlertTitleProps): JSX.Element {
-  const { className: baseClassName, ...rest } = props;
-  const className = `arkynAlertTitle ${baseClassName}`;
+	const { className: baseClassName, ...rest } = props;
+	const className = `arkynAlertTitle ${baseClassName}`;
 
-  return <div className={className.trim()} {...rest} />;
+	return <div className={className.trim()} {...rest} />;
 }
 
 export { AlertTitle };

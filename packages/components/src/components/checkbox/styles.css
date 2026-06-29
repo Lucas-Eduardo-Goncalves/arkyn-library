@@ -1,78 +1,78 @@
 .arkynCheckbox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-  border: 2px solid var(--border);
-  background-color: rgba(var(--spotlight-secondary), 1);
+	border: 2px solid var(--border);
+	background-color: rgba(var(--spotlight-secondary), 1);
 }
 
 .arkynCheckbox:hover {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .arkynCheckbox > svg {
-  display: none;
-  stroke-width: 3px;
+	display: none;
+	stroke-width: 3px;
 }
 
 /* SIZE */
 .arkynCheckbox.sm {
-  min-height: 16px;
-  min-width: 16px;
-  max-height: 16px;
-  max-width: 16px;
-  border-radius: 4px;
+	min-height: 16px;
+	min-width: 16px;
+	max-height: 16px;
+	max-width: 16px;
+	border-radius: 4px;
 }
 
 .arkynCheckbox.sm > svg {
-  min-height: 12px;
-  min-width: 12px;
-  max-height: 12px;
-  max-width: 12px;
+	min-height: 12px;
+	min-width: 12px;
+	max-height: 12px;
+	max-width: 12px;
 }
 
 .arkynCheckbox.md {
-  min-height: 20px;
-  min-width: 20px;
-  max-height: 20px;
-  max-width: 20px;
-  border-radius: 4px;
+	min-height: 20px;
+	min-width: 20px;
+	max-height: 20px;
+	max-width: 20px;
+	border-radius: 4px;
 }
 
 .arkynCheckbox.md > svg {
-  min-height: 14px;
-  min-width: 14px;
-  max-height: 14px;
-  max-width: 14px;
+	min-height: 14px;
+	min-width: 14px;
+	max-height: 14px;
+	max-width: 14px;
 }
 
 .arkynCheckbox.lg {
-  min-height: 24px;
-  min-width: 24px;
-  max-height: 24px;
-  max-width: 24px;
-  border-radius: 6px;
+	min-height: 24px;
+	min-width: 24px;
+	max-height: 24px;
+	max-width: 24px;
+	border-radius: 6px;
 }
 
 .arkynCheckbox.lg > svg {
-  min-height: 14px;
-  min-width: 14px;
-  max-height: 14px;
-  max-width: 14px;
+	min-height: 14px;
+	min-width: 14px;
+	max-height: 14px;
+	max-width: 14px;
 }
 
 /* CHECKED */
 .arkynCheckbox.checkedTrue {
-  background-color: rgb(var(--spotlight-primary), 1);
-  border-color: rgb(var(--spotlight-primary), 1);
+	background-color: rgb(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary), 1);
 }
 
 .arkynCheckbox.checkedTrue > svg {
-  display: unset;
-  color: #fff;
+	display: unset;
+	color: #fff;
 }
 
 .arkynCheckbox.errorTrue {
-  border-color: rgb(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger), 1);
 }

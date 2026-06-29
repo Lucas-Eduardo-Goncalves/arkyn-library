@@ -1,4 +1,4 @@
-import { TableHTMLAttributes } from "react";
+import type { TableHTMLAttributes } from "react";
 import "./styles.css";
 
 type TableContainerProps = TableHTMLAttributes<HTMLTableElement>;
@@ -34,14 +34,14 @@ type TableContainerProps = TableHTMLAttributes<HTMLTableElement>;
  */
 
 function TableContainer(props: TableContainerProps) {
-  const { children, className: baseClassName, ...rest } = props;
-  const className = `arkynTableContainer ${baseClassName}`;
+	const { children, className: baseClassName, ...rest } = props;
+	const className = `arkynTableContainer ${baseClassName}`;
 
-  return (
-    <div className={className.trim()} {...rest}>
-      <table>{children}</table>
-    </div>
-  );
+	return (
+		<div className={className.trim()} {...rest}>
+			<table>{children}</table>
+		</div>
+	);
 }
 
 export { TableContainer };

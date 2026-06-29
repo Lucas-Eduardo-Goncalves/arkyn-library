@@ -1,7 +1,7 @@
 import { countries } from "@arkyn/templates";
 import {
-  isValidPhoneNumber,
-  parsePhoneNumberWithError,
+	isValidPhoneNumber,
+	parsePhoneNumberWithError,
 } from "libphonenumber-js";
 
 /**
@@ -19,17 +19,17 @@ import {
  */
 
 function validatePhone(rawPhone: string): boolean {
-  if (!isValidPhoneNumber(rawPhone)) return false;
+	if (!isValidPhoneNumber(rawPhone)) return false;
 
-  const parsedPhone = parsePhoneNumberWithError(rawPhone);
+	const parsedPhone = parsePhoneNumberWithError(rawPhone);
 
-  const countryCode = parsedPhone?.country;
-  if (!countryCode) return false;
+	const countryCode = parsedPhone?.country;
+	if (!countryCode) return false;
 
-  const country = countries.find((c) => c.iso === countryCode);
-  if (!country) return false;
+	const country = countries.find((c) => c.iso === countryCode);
+	if (!country) return false;
 
-  return true;
+	return true;
 }
 
 export { validatePhone };

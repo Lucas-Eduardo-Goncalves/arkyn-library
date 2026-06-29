@@ -1,14 +1,14 @@
 .arkynCalendarTableBody {
-  border-collapse: collapse;
-  border-spacing: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 .arkynCalendarTableBody td p {
-  font-size: 14px;
-  padding: 16px;
-  text-align: center;
+	font-size: 14px;
+	padding: 16px;
+	text-align: center;
 }
 
 .arkynCalendarTableBody tr:first-child td {
-  padding-top: 8px;
+	padding-top: 8px;
 }

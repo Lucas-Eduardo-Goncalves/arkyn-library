@@ -24,43 +24,43 @@ import { ValidateDateService } from "../services/validateDateService";
  */
 
 function parseToDate(
-  [date, time = "00:00:00"]: string[],
-  inputFormat: "brazilianDate" | "isoDate" | "timestamp",
-  timezone: number = 0,
+	[date, time = "00:00:00"]: string[],
+	inputFormat: "brazilianDate" | "isoDate" | "timestamp",
+	timezone: number = 0,
 ): Date {
-  const validateDateService = new ValidateDateService();
-  validateDateService.validateInputFormat(inputFormat);
+	const validateDateService = new ValidateDateService();
+	validateDateService.validateInputFormat(inputFormat);
 
-  const dateParts = date.split(/[-/]/).map(Number);
-  const timeParts = time.split(".")[0].split(":").map(Number);
+	const dateParts = date.split(/[-/]/).map(Number);
+	const timeParts = time.split(".")[0].split(":").map(Number);
 
-  let day, month, year;
-  const [hours = 0, minutes = 0, seconds = 0] = timeParts;
+	let day: number, month: number, year: number;
+	const [hours = 0, minutes = 0, seconds = 0] = timeParts;
 
-  switch (inputFormat) {
-    case "brazilianDate":
-      [day, month, year] = dateParts;
-      validateDateService.validateDateParts(year, month, day);
-      break;
-    case "isoDate":
-      [month, day, year] = dateParts;
-      validateDateService.validateDateParts(year, month, day);
-      break;
-    case "timestamp":
-      [year, month, day] = dateParts;
-      validateDateService.validateDateParts(year, month, day);
-      break;
-  }
+	switch (inputFormat) {
+		case "brazilianDate":
+			[day, month, year] = dateParts;
+			validateDateService.validateDateParts(year, month, day);
+			break;
+		case "isoDate":
+			[month, day, year] = dateParts;
+			validateDateService.validateDateParts(year, month, day);
+			break;
+		case "timestamp":
+			[year, month, day] = dateParts;
+			validateDateService.validateDateParts(year, month, day);
+			break;
+	}
 
-  const formattedDate = new Date(
-    Date.UTC(year, month - 1, day, hours, minutes, seconds),
-  );
+	const formattedDate = new Date(
+		Date.UTC(year, month - 1, day, hours, minutes, seconds),
+	);
 
-  if (isNaN(formattedDate.getTime())) throw new Error("Invalid date");
+	if (Number.isNaN(formattedDate.getTime())) throw new Error("Invalid date");
 
-  formattedDate.setUTCHours(formattedDate.getUTCHours() + timezone);
+	formattedDate.setUTCHours(formattedDate.getUTCHours() + timezone);
 
-  return formattedDate;
+	return formattedDate;
 }
 
 export { parseToDate };

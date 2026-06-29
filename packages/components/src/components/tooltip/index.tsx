@@ -1,29 +1,29 @@
 import {
-  HTMLAttributes,
-  ReactNode,
-  useEffect,
-  useId,
-  useRef,
-  useState,
+	type HTMLAttributes,
+	type ReactNode,
+	useEffect,
+	useId,
+	useRef,
+	useState,
 } from "react";
 import "./styles.css";
 
 type TooltipProps = Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
-  /** Text rendered inside the tooltip bubble. Supports inline HTML. Required. */
-  text: string;
-  /** Element that triggers the tooltip on hover. Required. */
-  children: ReactNode;
-  /**
-   * Preferred position of the tooltip relative to the trigger element.
-   * Automatically flips to the opposite side if the tooltip would overflow the viewport.
-   * @default "top"
-   */
-  orientation?: "top" | "right" | "bottom" | "left";
-  /**
-   * Tooltip size.
-   * @default "lg"
-   */
-  size?: "md" | "lg";
+	/** Text rendered inside the tooltip bubble. Supports inline HTML. Required. */
+	text: string;
+	/** Element that triggers the tooltip on hover. Required. */
+	children: ReactNode;
+	/**
+	 * Preferred position of the tooltip relative to the trigger element.
+	 * Automatically flips to the opposite side if the tooltip would overflow the viewport.
+	 * @default "top"
+	 */
+	orientation?: "top" | "right" | "bottom" | "left";
+	/**
+	 * Tooltip size.
+	 * @default "lg"
+	 */
+	size?: "md" | "lg";
 };
 
 /**
@@ -58,90 +58,90 @@ type TooltipProps = Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
  */
 
 function Tooltip(props: TooltipProps) {
-  const {
-    text,
-    size = "lg",
-    children,
-    orientation = "top",
-    className: baseClassName = "",
-    ...rest
-  } = props;
+	const {
+		text,
+		size = "lg",
+		children,
+		orientation = "top",
+		className: baseClassName = "",
+		...rest
+	} = props;
 
-  const tooltipId = useId();
-  const tooltipRef = useRef<HTMLDivElement>(null);
-  const [adjustedOrientation, setAdjustedOrientation] = useState(orientation);
+	const tooltipId = useId();
+	const tooltipRef = useRef<HTMLDivElement>(null);
+	const [adjustedOrientation, setAdjustedOrientation] = useState(orientation);
 
-  useEffect(() => {
-    const checkTooltipPosition = () => {
-      if (!tooltipRef.current) return;
-      const tooltipText = document.getElementById(tooltipId) as HTMLElement;
-      if (!tooltipText) return;
+	useEffect(() => {
+		const checkTooltipPosition = () => {
+			if (!tooltipRef.current) return;
+			const tooltipText = document.getElementById(tooltipId) as HTMLElement;
+			if (!tooltipText) return;
 
-      setAdjustedOrientation(orientation);
+			setAdjustedOrientation(orientation);
 
-      requestAnimationFrame(() => {
-        const rect = tooltipText.getBoundingClientRect();
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
+			requestAnimationFrame(() => {
+				const rect = tooltipText.getBoundingClientRect();
+				const viewportWidth = window.innerWidth;
+				const viewportHeight = window.innerHeight;
 
-        let newOrientation = orientation;
+				let newOrientation = orientation;
 
-        if (orientation === "left" && rect.left < 0) {
-          newOrientation = "right";
-        } else if (orientation === "right" && rect.right > viewportWidth) {
-          newOrientation = "left";
-        } else if (orientation === "top" && rect.top < 0) {
-          newOrientation = "bottom";
-        } else if (orientation === "bottom" && rect.bottom > viewportHeight) {
-          newOrientation = "top";
-        }
+				if (orientation === "left" && rect.left < 0) {
+					newOrientation = "right";
+				} else if (orientation === "right" && rect.right > viewportWidth) {
+					newOrientation = "left";
+				} else if (orientation === "top" && rect.top < 0) {
+					newOrientation = "bottom";
+				} else if (orientation === "bottom" && rect.bottom > viewportHeight) {
+					newOrientation = "top";
+				}
 
-        if (newOrientation === "right" && rect.right > viewportWidth) {
-          newOrientation = "left";
-        } else if (newOrientation === "left" && rect.left < 0) {
-          newOrientation = "right";
-        } else if (
-          newOrientation === "bottom" &&
-          rect.bottom > viewportHeight
-        ) {
-          newOrientation = "top";
-        } else if (newOrientation === "top" && rect.top < 0) {
-          newOrientation = "bottom";
-        }
+				if (newOrientation === "right" && rect.right > viewportWidth) {
+					newOrientation = "left";
+				} else if (newOrientation === "left" && rect.left < 0) {
+					newOrientation = "right";
+				} else if (
+					newOrientation === "bottom" &&
+					rect.bottom > viewportHeight
+				) {
+					newOrientation = "top";
+				} else if (newOrientation === "top" && rect.top < 0) {
+					newOrientation = "bottom";
+				}
 
-        setAdjustedOrientation(newOrientation);
-      });
-    };
+				setAdjustedOrientation(newOrientation);
+			});
+		};
 
-    const tooltip = tooltipRef.current;
-    if (!tooltip) return;
+		const tooltip = tooltipRef.current;
+		if (!tooltip) return;
 
-    const handleMouseEnter = () => {
-      setTimeout(checkTooltipPosition, 1);
-    };
+		const handleMouseEnter = () => {
+			setTimeout(checkTooltipPosition, 1);
+		};
 
-    tooltip.addEventListener("mouseenter", handleMouseEnter);
-    window.addEventListener("resize", checkTooltipPosition);
+		tooltip.addEventListener("mouseenter", handleMouseEnter);
+		window.addEventListener("resize", checkTooltipPosition);
 
-    return () => {
-      tooltip.removeEventListener("mouseenter", handleMouseEnter);
-      window.removeEventListener("resize", checkTooltipPosition);
-    };
-  }, [orientation, tooltipId]);
+		return () => {
+			tooltip.removeEventListener("mouseenter", handleMouseEnter);
+			window.removeEventListener("resize", checkTooltipPosition);
+		};
+	}, [orientation, tooltipId]);
 
-  const className = `arkynTooltip ${size} ${adjustedOrientation} ${baseClassName}`;
+	const className = `arkynTooltip ${size} ${adjustedOrientation} ${baseClassName}`;
 
-  return (
-    <div className={className.trim()} {...rest} ref={tooltipRef}>
-      {children}
+	return (
+		<div className={className.trim()} {...rest} ref={tooltipRef}>
+			{children}
 
-      <div
-        className="arkynTooltipText"
-        id={tooltipId}
-        dangerouslySetInnerHTML={{ __html: text }}
-      />
-    </div>
-  );
+			<div
+				className="arkynTooltipText"
+				id={tooltipId}
+				dangerouslySetInnerHTML={{ __html: text }}
+			/>
+		</div>
+	);
 }
 
 export { Tooltip };

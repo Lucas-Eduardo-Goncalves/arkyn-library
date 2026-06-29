@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from "react";
 
 function subscribe() {
-  return () => {};
+	return () => {};
 }
 
 /**
@@ -24,11 +24,11 @@ function subscribe() {
  */
 
 function useHydrated() {
-  return useSyncExternalStore(
-    subscribe,
-    () => true,
-    () => false
-  );
+	return useSyncExternalStore(
+		subscribe,
+		() => true,
+		() => false,
+	);
 }
 
 export { useHydrated };

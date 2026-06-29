@@ -1,123 +1,123 @@
 import { InputMask } from "@react-input/mask";
 import {
-  ChangeEvent,
-  forwardRef,
-  InputHTMLAttributes,
-  useEffect,
-  useState,
+	type ChangeEvent,
+	forwardRef,
+	type InputHTMLAttributes,
+	useEffect,
+	useState,
 } from "react";
 
 import {
-  applyMask,
-  clear,
-  getMask,
-  MAX_LENGTH,
-  TYPES,
+	applyMask,
+	clear,
+	getMask,
+	MAX_LENGTH,
+	TYPES,
 } from "../../../utils/phoneInputUtilities";
 
 import "./style.css";
 
 type CountryType = {
-  name: string;
-  code: string;
-  iso: string;
-  flag: string;
-  mask: string | string[];
+	name: string;
+	code: string;
+	iso: string;
+	flag: string;
+	mask: string | string[];
 };
 
 type PhoneInputMaskProps = {
-  onFocus: () => void;
-  onBlur: () => void;
-  disabled: boolean;
-  readonly: boolean;
-  size: "md" | "lg";
-  currentCountry: CountryType;
-  value: string;
-  onChange: (e: string) => void;
-  id: string;
+	onFocus: () => void;
+	onBlur: () => void;
+	disabled: boolean;
+	readonly: boolean;
+	size: "md" | "lg";
+	currentCountry: CountryType;
+	value: string;
+	onChange: (e: string) => void;
+	id: string;
 };
 
 const BaseInput = forwardRef<
-  HTMLInputElement,
-  InputHTMLAttributes<HTMLInputElement>
+	HTMLInputElement,
+	InputHTMLAttributes<HTMLInputElement>
 >((props, ref) => {
-  return <input ref={ref} {...props} />;
+	return <input ref={ref} {...props} />;
 });
 
 const PhoneInputMask = forwardRef<HTMLInputElement, PhoneInputMaskProps>(
-  (props, ref) => {
-    const {
-      onFocus,
-      readonly,
-      onBlur,
-      size,
-      onChange,
-      value,
-      currentCountry,
-      disabled,
-      id,
-    } = props;
+	(props, ref) => {
+		const {
+			onFocus,
+			readonly,
+			onBlur,
+			size,
+			onChange,
+			value,
+			currentCountry,
+			disabled,
+			id,
+		} = props;
 
-    const [isMounted, setIsMounted] = useState(false);
+		const [isMounted, setIsMounted] = useState(false);
 
-    const mask =
-      typeof currentCountry.mask === "string"
-        ? currentCountry.mask
-        : currentCountry.mask[0];
+		const mask =
+			typeof currentCountry.mask === "string"
+				? currentCountry.mask
+				: currentCountry.mask[0];
 
-    useEffect(() => {
-      if (isMounted) onChange(mask);
-      else setIsMounted(true);
-    }, [currentCountry]);
+		useEffect(() => {
+			if (isMounted) onChange(mask);
+			else setIsMounted(true);
+		}, [onChange, mask, isMounted]);
 
-    const className = `phoneInputMask ${size}`;
+		const className = `phoneInputMask ${size}`;
 
-    function handleChange(event: ChangeEvent<HTMLInputElement>) {
-      let value = clear(event.target.value);
-      const mask = getMask(value);
+		function handleChange(event: ChangeEvent<HTMLInputElement>) {
+			let value = clear(event.target.value);
+			const mask = getMask(value);
 
-      let nextLength = value.length;
-      if (nextLength > MAX_LENGTH) return;
+			const nextLength = value.length;
+			if (nextLength > MAX_LENGTH) return;
 
-      value = applyMask(value, TYPES[mask] as "EIGHT" | "NINE");
-      event.target.value = value;
+			value = applyMask(value, TYPES[mask] as "EIGHT" | "NINE");
+			event.target.value = value;
 
-      onChange(value);
-    }
+			onChange(value);
+		}
 
-    if (currentCountry.code === "+55") {
-      return (
-        <input
-          id={id}
-          value={value}
-          onChange={handleChange}
-          className={className}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          disabled={disabled}
-          ref={ref}
-        />
-      );
-    }
+		if (currentCountry.code === "+55") {
+			return (
+				<input
+					id={id}
+					value={value}
+					onChange={handleChange}
+					className={className}
+					onFocus={onFocus}
+					onBlur={onBlur}
+					disabled={disabled}
+					ref={ref}
+				/>
+			);
+		}
 
-    return (
-      <InputMask
-        id={id}
-        value={value}
-        readOnly={readonly}
-        onChange={(e) => onChange(e.target.value)}
-        className={className}
-        component={BaseInput}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        disabled={disabled}
-        mask={mask}
-        showMask
-        replacement={{ _: /\d/ }}
-        ref={ref}
-      />
-    );
-  },
+		return (
+			<InputMask
+				id={id}
+				value={value}
+				readOnly={readonly}
+				onChange={(e) => onChange(e.target.value)}
+				className={className}
+				component={BaseInput}
+				onFocus={onFocus}
+				onBlur={onBlur}
+				disabled={disabled}
+				mask={mask}
+				showMask
+				replacement={{ _: /\d/ }}
+				ref={ref}
+			/>
+		);
+	},
 );
 
 export { PhoneInputMask };

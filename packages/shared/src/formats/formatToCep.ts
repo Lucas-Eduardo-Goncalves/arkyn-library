@@ -20,13 +20,13 @@ import { removeNonNumeric } from "../utilities/removeNonNumeric";
  */
 
 function formatToCep(value: string): string {
-  const cleaned = removeNonNumeric(value);
-  const match = cleaned.match(/^(\d{5})(\d{3})$/);
+	const cleaned = removeNonNumeric(value);
+	const match = cleaned.match(/^(\d{5})(\d{3})$/);
 
-  const errorMessage = `CEP must be contain 8 numeric digits: ${value}`;
-  if (!match) throw new Error(errorMessage);
+	const errorMessage = `CEP must be contain 8 numeric digits: ${value}`;
+	if (!match) throw new Error(errorMessage);
 
-  return `${match[1]}-${match[2]}`;
+	return `${match[1]}-${match[2]}`;
 }
 
 export { formatToCep };

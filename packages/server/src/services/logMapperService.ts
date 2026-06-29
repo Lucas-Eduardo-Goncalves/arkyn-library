@@ -13,16 +13,16 @@
  * @property {URLSearchParams} queryParams - Query parameters from the URL.
  */
 type InputProps = {
-  status: number;
-  rawUrl: string;
-  urlParams?: Record<string, string>;
-  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
-  requestHeaders: HeadersInit;
-  responseHeaders: HeadersInit;
-  requestBody: any;
-  elapsedTime: number;
-  responseBody: any;
-  queryParams: URLSearchParams;
+	status: number;
+	rawUrl: string;
+	urlParams?: Record<string, string>;
+	method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+	requestHeaders: HeadersInit;
+	responseHeaders: HeadersInit;
+	requestBody: any;
+	elapsedTime: number;
+	responseBody: any;
+	queryParams: URLSearchParams;
 };
 
 /**
@@ -41,16 +41,16 @@ type InputProps = {
  * @property {any} responseBody - The response body.
  */
 type OutputProps = {
-  rawUrl: string;
-  status: number;
-  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
-  token: string | null;
-  elapsedTime: number;
-  requestHeaders: Record<string, string>;
-  requestBody: Record<string, string>;
-  queryParams: Record<string, string>;
-  responseHeaders: Record<string, string>;
-  responseBody: any;
+	rawUrl: string;
+	status: number;
+	method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+	token: string | null;
+	elapsedTime: number;
+	requestHeaders: Record<string, string>;
+	requestBody: Record<string, string>;
+	queryParams: Record<string, string>;
+	responseHeaders: Record<string, string>;
+	responseBody: any;
 };
 
 /**
@@ -60,68 +60,68 @@ type OutputProps = {
  * and produces a unified output structure for logging purposes.
  */
 class LogMapperService {
-  /**
-   * Converts various header formats into a plain key-value object.
-   *
-   * @param {HeadersInit} headers - The headers to map.
-   * @returns {Record<string, string>} A plain object with header key-value pairs.
-   * @private
-   */
-  private static mapHeaders(headers: HeadersInit): Record<string, string> {
-    if (headers instanceof Headers) {
-      return Object.fromEntries(headers.entries());
-    } else if (typeof headers === "object") {
-      return Object.entries(headers).reduce(
-        (acc, [key, value]) => {
-          if (typeof value === "string") acc[key] = value;
-          else if (Array.isArray(value)) acc[key] = value.join(", ");
-          else acc[key] = JSON.stringify(value);
-          return acc;
-        },
-        {} as Record<string, string>,
-      );
-    }
-    return {};
-  }
+	/**
+	 * Converts various header formats into a plain key-value object.
+	 *
+	 * @param {HeadersInit} headers - The headers to map.
+	 * @returns {Record<string, string>} A plain object with header key-value pairs.
+	 * @private
+	 */
+	private static mapHeaders(headers: HeadersInit): Record<string, string> {
+		if (headers instanceof Headers) {
+			return Object.fromEntries(headers.entries());
+		} else if (typeof headers === "object") {
+			return Object.entries(headers).reduce(
+				(acc, [key, value]) => {
+					if (typeof value === "string") acc[key] = value;
+					else if (Array.isArray(value)) acc[key] = value.join(", ");
+					else acc[key] = JSON.stringify(value);
+					return acc;
+				},
+				{} as Record<string, string>,
+			);
+		}
+		return {};
+	}
 
-  /**
-   * Converts URLSearchParams into a plain key-value object.
-   *
-   * @param {URLSearchParams} queryParams - The query parameters to map.
-   * @returns {Record<string, string>} A plain object with query parameter key-value pairs.
-   * @private
-   */
-  private static mapQueryParams(
-    queryParams: URLSearchParams,
-  ): Record<string, string> {
-    const params: Record<string, string> = {};
-    queryParams.forEach((value, key) => (params[key] = value));
-    return params;
-  }
+	/**
+	 * Converts URLSearchParams into a plain key-value object.
+	 *
+	 * @param {URLSearchParams} queryParams - The query parameters to map.
+	 * @returns {Record<string, string>} A plain object with query parameter key-value pairs.
+	 * @private
+	 */
+	private static mapQueryParams(
+		queryParams: URLSearchParams,
+	): Record<string, string> {
+		const params: Record<string, string> = {};
+		queryParams.forEach((value, key) => (params[key] = value));
+		return params;
+	}
 
-  /**
-   * Transforms raw HTTP request/response data into a standardized log output format.
-   *
-   * @param {InputProps} props - The input properties containing request/response data.
-   * @returns {OutputProps} The mapped output object ready for logging.
-   */
-  static handle(props: InputProps): OutputProps {
-    return {
-      rawUrl: props.rawUrl,
-      status: props.status,
-      method: props.method,
-      token: null,
-      elapsedTime: props.elapsedTime,
-      requestHeaders: this.mapHeaders(props.requestHeaders),
-      requestBody: props.requestBody || null,
-      queryParams: {
-        ...this.mapQueryParams(props.queryParams),
-        ...props.urlParams,
-      },
-      responseHeaders: this.mapHeaders(props.responseHeaders),
-      responseBody: props.responseBody || null,
-    };
-  }
+	/**
+	 * Transforms raw HTTP request/response data into a standardized log output format.
+	 *
+	 * @param {InputProps} props - The input properties containing request/response data.
+	 * @returns {OutputProps} The mapped output object ready for logging.
+	 */
+	static handle(props: InputProps): OutputProps {
+		return {
+			rawUrl: props.rawUrl,
+			status: props.status,
+			method: props.method,
+			token: null,
+			elapsedTime: props.elapsedTime,
+			requestHeaders: LogMapperService.mapHeaders(props.requestHeaders),
+			requestBody: props.requestBody || null,
+			queryParams: {
+				...LogMapperService.mapQueryParams(props.queryParams),
+				...props.urlParams,
+			},
+			responseHeaders: LogMapperService.mapHeaders(props.responseHeaders),
+			responseBody: props.responseBody || null,
+		};
+	}
 }
 
 export { LogMapperService };

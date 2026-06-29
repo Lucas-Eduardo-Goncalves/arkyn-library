@@ -8,43 +8,43 @@ import { NoFileContent } from "./noFileContent";
 import "./styles.css";
 
 type ImageUploadProps = {
-  /** Field name for form submission (stores the uploaded image URL). Required. */
-  name: string;
-  /** Server endpoint URL that receives the `multipart/form-data` upload request. Required. */
-  action: string;
-  /** Pre-populated image URL displayed as a preview (e.g. an existing avatar). @default "" */
-  defaultValue?: string | null;
-  /** Additional CSS class applied to the wrapper element. */
-  className?: string;
-  /** Disables file selection and upload. @default false */
-  disabled?: boolean;
-  /** Optional label text displayed above the upload area. */
-  label?: string;
-  /** Displays an asterisk on the label to signal a required field. @default false */
-  showAsterisk?: boolean;
-  /** Label for the file-picker button after an image is selected. @default "Alterar imagem" */
-  changeImageButtonText?: string;
-  /** Label for the file-picker button before an image is selected. @default "Selecionar imagem" */
-  selectImageButtonText?: string;
-  /** Text displayed in the drag-and-drop zone. @default "Ou arraste e solte a imagem aqui" */
-  dropImageText?: string;
-  /** HTTP method for the upload request. @default "POST" */
-  method?: string;
-  /** Form-data field name used for the file. @default "file" */
-  fileName?: string;
-  /** Property name in the server response that contains the image URL. @default "url" */
-  fileResponseName?: string;
-  /** Accepted image MIME types or extensions (e.g. `"image/jpeg,image/png"`). @default "image/*" */
-  acceptImage?: string;
-  /** Callback fired after a successful upload. Receives the image URL returned by the server. */
-  onChange?: (url: string) => void;
-  /** When true, skips `FieldTemplate` wrapper (label and error text). @default false */
-  unShowFieldTemplate?: boolean;
-  /**
-   * Layout direction forwarded to `FieldTemplate`.
-   * @default "horizontal"
-   */
-  orientation?: "horizontal" | "vertical" | "horizontalReverse";
+	/** Field name for form submission (stores the uploaded image URL). Required. */
+	name: string;
+	/** Server endpoint URL that receives the `multipart/form-data` upload request. Required. */
+	action: string;
+	/** Pre-populated image URL displayed as a preview (e.g. an existing avatar). @default "" */
+	defaultValue?: string | null;
+	/** Additional CSS class applied to the wrapper element. */
+	className?: string;
+	/** Disables file selection and upload. @default false */
+	disabled?: boolean;
+	/** Optional label text displayed above the upload area. */
+	label?: string;
+	/** Displays an asterisk on the label to signal a required field. @default false */
+	showAsterisk?: boolean;
+	/** Label for the file-picker button after an image is selected. @default "Alterar imagem" */
+	changeImageButtonText?: string;
+	/** Label for the file-picker button before an image is selected. @default "Selecionar imagem" */
+	selectImageButtonText?: string;
+	/** Text displayed in the drag-and-drop zone. @default "Ou arraste e solte a imagem aqui" */
+	dropImageText?: string;
+	/** HTTP method for the upload request. @default "POST" */
+	method?: string;
+	/** Form-data field name used for the file. @default "file" */
+	fileName?: string;
+	/** Property name in the server response that contains the image URL. @default "url" */
+	fileResponseName?: string;
+	/** Accepted image MIME types or extensions (e.g. `"image/jpeg,image/png"`). @default "image/*" */
+	acceptImage?: string;
+	/** Callback fired after a successful upload. Receives the image URL returned by the server. */
+	onChange?: (url: string) => void;
+	/** When true, skips `FieldTemplate` wrapper (label and error text). @default false */
+	unShowFieldTemplate?: boolean;
+	/**
+	 * Layout direction forwarded to `FieldTemplate`.
+	 * @default "horizontal"
+	 */
+	orientation?: "horizontal" | "vertical" | "horizontalReverse";
 };
 
 /**
@@ -98,112 +98,112 @@ type ImageUploadProps = {
  */
 
 function ImageUpload(props: ImageUploadProps) {
-  const {
-    name,
-    defaultValue = "",
-    label,
-    showAsterisk = false,
-    action,
-    fileName = "file",
-    className: wrapperClassName = "",
-    method = "POST",
-    acceptImage = "image/*",
-    fileResponseName = "url",
-    changeImageButtonText = "Alterar imagem",
-    selectImageButtonText = "Selecionar imagem",
-    dropImageText = "Ou arraste e solte a imagem aqui",
-    onChange,
-    disabled = false,
-    unShowFieldTemplate = false,
-    orientation = "vertical",
-  } = props;
+	const {
+		name,
+		defaultValue = "",
+		label,
+		showAsterisk = false,
+		action,
+		fileName = "file",
+		className: wrapperClassName = "",
+		method = "POST",
+		acceptImage = "image/*",
+		fileResponseName = "url",
+		changeImageButtonText = "Alterar imagem",
+		selectImageButtonText = "Selecionar imagem",
+		dropImageText = "Ou arraste e solte a imagem aqui",
+		onChange,
+		disabled = false,
+		unShowFieldTemplate = false,
+		orientation = "vertical",
+	} = props;
 
-  const { fieldErrors } = useForm();
-  const fieldError = fieldErrors?.[name];
+	const { fieldErrors } = useForm();
+	const fieldError = fieldErrors?.[name];
 
-  const [value, setValue] = useState(defaultValue);
-  const [error, setError] = useState("");
-  const [file, setFile] = useState<File | null>(null);
-  const [filePath, setFilePath] = useState(defaultValue);
-  const [isLoading, setIsLoading] = useState(false);
+	const [value, setValue] = useState(defaultValue);
+	const [error, setError] = useState("");
+	const [file, setFile] = useState<File | null>(null);
+	const [filePath, setFilePath] = useState(defaultValue);
+	const [isLoading, setIsLoading] = useState(false);
 
-  async function handleUploadImage(file: File) {
-    if (disabled) return;
+	async function handleUploadImage(file: File) {
+		if (disabled) return;
 
-    setIsLoading(true);
-    setFile(file);
-    setError("");
+		setIsLoading(true);
+		setFile(file);
+		setError("");
 
-    const formData = new FormData();
-    formData.append(fileName, file);
+		const formData = new FormData();
+		formData.append(fileName, file);
 
-    await fetch(action, { method: method, body: formData })
-      .then(async (response) => await response.json())
-      .then((response) => {
-        if (!!response?.error) setError(response.error);
-        else setValue(response?.[fileResponseName]);
-        onChange && onChange(response?.[fileResponseName]);
-      })
-      .catch((error) => {
-        console.error(error);
-        setError("Erro ao enviar imagem");
-      })
-      .finally(() => setIsLoading(false));
-  }
+		await fetch(action, { method: method, body: formData })
+			.then(async (response) => await response.json())
+			.then((response) => {
+				if (response?.error) setError(response.error);
+				else setValue(response?.[fileResponseName]);
+				onChange?.(response?.[fileResponseName]);
+			})
+			.catch((error) => {
+				console.error(error);
+				setError("Erro ao enviar imagem");
+			})
+			.finally(() => setIsLoading(false));
+	}
 
-  function handleSelectFile(file: File) {
-    if (disabled) return;
+	function handleSelectFile(file: File) {
+		if (disabled) return;
 
-    setFilePath(URL.createObjectURL(file));
-    handleUploadImage(file);
-  }
+		setFilePath(URL.createObjectURL(file));
+		handleUploadImage(file);
+	}
 
-  const errorMessage = fieldError || error;
+	const errorMessage = fieldError || error;
 
-  const hasErrorClassName = errorMessage ? "hasError" : "noHasError";
-  const hasImageClassName = filePath ? "hasImage" : "noHasImage";
-  const className = `arkynImageUpload ${hasErrorClassName} ${hasImageClassName}`;
+	const hasErrorClassName = errorMessage ? "hasError" : "noHasError";
+	const hasImageClassName = filePath ? "hasImage" : "noHasImage";
+	const className = `arkynImageUpload ${hasErrorClassName} ${hasImageClassName}`;
 
-  return (
-    <FieldTemplate
-      name={name}
-      label={label}
-      showAsterisk={showAsterisk}
-      className={wrapperClassName}
-      errorMessage={errorMessage}
-      unShowFieldTemplate={unShowFieldTemplate}
-      orientation={orientation}
-    >
-      <div className={className}>
-        <input type="hidden" name={name} value={value || ""} />
+	return (
+		<FieldTemplate
+			name={name}
+			label={label}
+			showAsterisk={showAsterisk}
+			className={wrapperClassName}
+			errorMessage={errorMessage}
+			unShowFieldTemplate={unShowFieldTemplate}
+			orientation={orientation}
+		>
+			<div className={className}>
+				<input type="hidden" name={name} value={value || ""} />
 
-        {!filePath && (
-          <NoFileContent
-            disabled={disabled}
-            isLoading={isLoading}
-            acceptImage={acceptImage}
-            dropImageText={dropImageText}
-            handleSelectFile={handleSelectFile}
-            selectImageButtonText={selectImageButtonText}
-          />
-        )}
+				{!filePath && (
+					<NoFileContent
+						disabled={disabled}
+						isLoading={isLoading}
+						acceptImage={acceptImage}
+						dropImageText={dropImageText}
+						handleSelectFile={handleSelectFile}
+						selectImageButtonText={selectImageButtonText}
+					/>
+				)}
 
-        {filePath && (
-          <HasFileContent
-            disabled={disabled}
-            isLoading={isLoading}
-            acceptImage={acceptImage}
-            filePath={filePath}
-            handleSelectFile={handleSelectFile}
-            changeImageButtonText={changeImageButtonText}
-            reSendImage={
-              !!errorMessage && file ? () => handleUploadImage(file) : undefined
-            }
-          />
-        )}
-      </div>
-    </FieldTemplate>
-  );
+				{filePath && (
+					<HasFileContent
+						disabled={disabled}
+						isLoading={isLoading}
+						acceptImage={acceptImage}
+						filePath={filePath}
+						handleSelectFile={handleSelectFile}
+						changeImageButtonText={changeImageButtonText}
+						reSendImage={
+							errorMessage && file ? () => handleUploadImage(file) : undefined
+						}
+					/>
+				)}
+			</div>
+		</FieldTemplate>
+	);
 }
 
 export { ImageUpload };

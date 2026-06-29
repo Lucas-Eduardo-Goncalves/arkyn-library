@@ -37,43 +37,43 @@ import { Updated } from "../http/successResponses/updated";
  * ```
  */
 function errorHandler(error: any): Response {
-  switch (true) {
-    case error instanceof Response:
-      return error;
-    case error instanceof Found:
-      return error.toResponse();
-    case error instanceof Created:
-      return error.toResponse();
-    case error instanceof Updated:
-      return error.toResponse();
-    case error instanceof Success:
-      return error.toResponse();
-    case error instanceof NoContent:
-      return error.toResponse();
-  }
+	switch (true) {
+		case error instanceof Response:
+			return error;
+		case error instanceof Found:
+			return error.toResponse();
+		case error instanceof Created:
+			return error.toResponse();
+		case error instanceof Updated:
+			return error.toResponse();
+		case error instanceof Success:
+			return error.toResponse();
+		case error instanceof NoContent:
+			return error.toResponse();
+	}
 
-  switch (true) {
-    case error instanceof BadGateway:
-      return error.toResponse();
-    case error instanceof BadRequest:
-      return error.toResponse();
-    case error instanceof Conflict:
-      return error.toResponse();
-    case error instanceof Forbidden:
-      return error.toResponse();
-    case error instanceof NotFound:
-      return error.toResponse();
-    case error instanceof NotImplemented:
-      return error.toResponse();
-    case error instanceof ServerError:
-      return error.toResponse();
-    case error instanceof Unauthorized:
-      return error.toResponse();
-    case error instanceof UnprocessableEntity:
-      return error.toResponse();
-  }
+	switch (true) {
+		case error instanceof BadGateway:
+			return error.toResponse();
+		case error instanceof BadRequest:
+			return error.toResponse();
+		case error instanceof Conflict:
+			return error.toResponse();
+		case error instanceof Forbidden:
+			return error.toResponse();
+		case error instanceof NotFound:
+			return error.toResponse();
+		case error instanceof NotImplemented:
+			return error.toResponse();
+		case error instanceof ServerError:
+			return error.toResponse();
+		case error instanceof Unauthorized:
+			return error.toResponse();
+		case error instanceof UnprocessableEntity:
+			return error.toResponse();
+	}
 
-  return new ServerError("Server error", error).toResponse();
+	return new ServerError("Server error", error).toResponse();
 }
 
 export { errorHandler };

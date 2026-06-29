@@ -1,17 +1,17 @@
 .arkynDivider {
-  display: block;
-  flex: 1;
-  background-color: var(--border);
+	display: block;
+	flex: 1;
+	background-color: var(--border);
 }
 
 .arkynDivider.horizontal {
-  width: 100%;
-  min-height: 1px;
-  max-height: 1px;
+	width: 100%;
+	min-height: 1px;
+	max-height: 1px;
 }
 
 .arkynDivider.vertical {
-  height: 100%;
-  min-width: 1px;
-  max-width: 1px;
+	height: 100%;
+	min-width: 1px;
+	max-width: 1px;
 }

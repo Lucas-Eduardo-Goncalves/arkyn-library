@@ -17,34 +17,34 @@
  */
 
 function flushDebugLogs(props: {
-  scheme: "yellow" | "cyan" | "red" | "green";
-  name: string;
-  debugs: string[];
+	scheme: "yellow" | "cyan" | "red" | "green";
+	name: string;
+	debugs: string[];
 }): void {
-  const isDebugMode =
-    process.env.NODE_ENV === "development" ||
-    process.env?.DEBUG_MODE === "true";
+	const isDebugMode =
+		process.env.NODE_ENV === "development" ||
+		process.env?.DEBUG_MODE === "true";
 
-  if (isDebugMode) {
-    const reset = "\x1b[0m";
+	if (isDebugMode) {
+		const reset = "\x1b[0m";
 
-    const colors = {
-      yellow: "\x1b[33m",
-      cyan: "\x1b[36m",
-      red: "\x1b[31m",
-      green: "\x1b[32m",
-    };
+		const colors = {
+			yellow: "\x1b[33m",
+			cyan: "\x1b[36m",
+			red: "\x1b[31m",
+			green: "\x1b[32m",
+		};
 
-    const debugName = `${colors[props.scheme]}[${props.name}]${reset}`;
-    let consoleData = `\n`;
+		const debugName = `${colors[props.scheme]}[${props.name}]${reset}`;
+		let consoleData = `\n`;
 
-    props.debugs.forEach((debug, index) => {
-      consoleData += `${debugName} ${debug.trim()}`;
-      if (index < props.debugs.length - 1) consoleData += `\n`;
-    });
+		props.debugs.forEach((debug, index) => {
+			consoleData += `${debugName} ${debug.trim()}`;
+			if (index < props.debugs.length - 1) consoleData += `\n`;
+		});
 
-    console.log(consoleData);
-  }
+		console.log(consoleData);
+	}
 }
 
 export { flushDebugLogs };

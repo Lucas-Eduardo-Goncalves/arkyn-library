@@ -1,28 +1,28 @@
 .arkynSelectContent {
-  display: flex;
-  align-items: start;
-  gap: 4px;
-  flex-wrap: wrap;
+	display: flex;
+	align-items: start;
+	gap: 4px;
+	flex-wrap: wrap;
 
-  flex: 1;
+	flex: 1;
 }
 
 .arkynSelectContent > p {
-  font-weight: 400;
-  color: var(--text-muted);
-  user-select: none;
+	font-weight: 400;
+	color: var(--text-muted);
+	user-select: none;
 }
 
 .arkynSelectContent > p.hasValue {
-  color: var(--text-body);
+	color: var(--text-body);
 }
 
 .arkynSelectContent.md > p {
-  font-size: 14px;
-  line-height: 14px;
+	font-size: 14px;
+	line-height: 14px;
 }
 
 .arkynSelectContent.lg > p {
-  font-size: 16px;
-  line-height: 16px;
+	font-size: 16px;
+	line-height: 16px;
 }

@@ -7,37 +7,37 @@ import { ClientOnly } from "../clientOnly";
 
 /** Data for a single map marker. */
 type Coordinate = {
-  /** Latitude of the marker position. */
-  lat: number;
-  /** Longitude of the marker position. */
-  lng: number;
-  /** Arbitrary data attached to the marker — available in `onMarkerClick`. */
-  data?: any;
-  /** Custom React node rendered inside the marker popup on click. */
-  popUp?: ReactNode;
+	/** Latitude of the marker position. */
+	lat: number;
+	/** Longitude of the marker position. */
+	lng: number;
+	/** Arbitrary data attached to the marker — available in `onMarkerClick`. */
+	data?: any;
+	/** Custom React node rendered inside the marker popup on click. */
+	popUp?: ReactNode;
 };
 
 type MapViewProps = {
-  /** Mapbox GL public access token from your Mapbox account. Required. */
-  accessToken: string;
-  /** Initial zoom level. @default 18 */
-  zoom?: number;
-  /** Single coordinate or array of coordinates to display as markers. */
-  coordinates?: Coordinate | Coordinate[];
-  /** Callback fired when the user clicks a marker. Receives the coordinate's data. */
-  onMarkerClick?: (coordinate: Coordinate) => void;
+	/** Mapbox GL public access token from your Mapbox account. Required. */
+	accessToken: string;
+	/** Initial zoom level. @default 18 */
+	zoom?: number;
+	/** Single coordinate or array of coordinates to display as markers. */
+	coordinates?: Coordinate | Coordinate[];
+	/** Callback fired when the user clicks a marker. Receives the coordinate's data. */
+	onMarkerClick?: (coordinate: Coordinate) => void;
 } & HtmlHTMLAttributes<HTMLDivElement>;
 
 type EmptyMapProps = {
-  className?: string;
+	className?: string;
 };
 
 function EmptyMap({ className }: EmptyMapProps) {
-  return (
-    <div className={"arkynMapViewPinnedEmpty " + className}>
-      <MapPinned />
-    </div>
-  );
+	return (
+		<div className={`arkynMapViewPinnedEmpty ${className}`}>
+			<MapPinned />
+		</div>
+	);
 }
 
 /**
@@ -76,33 +76,33 @@ function EmptyMap({ className }: EmptyMapProps) {
  * ```
  */
 function MapView(props: MapViewProps) {
-  const {
-    coordinates,
-    zoom = 18,
-    accessToken,
-    className,
-    onMarkerClick,
-    ...rest
-  } = props;
+	const {
+		coordinates,
+		zoom = 18,
+		accessToken,
+		className,
+		onMarkerClick,
+		...rest
+	} = props;
 
-  if (!coordinates) return <EmptyMap className={className} />;
+	if (!coordinates) return <EmptyMap className={className} />;
 
-  const coordArray = Array.isArray(coordinates) ? coordinates : [coordinates];
-  if (coordArray.length === 0) return <EmptyMap className={className} />;
+	const coordArray = Array.isArray(coordinates) ? coordinates : [coordinates];
+	if (coordArray.length === 0) return <EmptyMap className={className} />;
 
-  return (
-    <ClientOnly fallback={<EmptyMap className={className} />}>
-      {() => (
-        <ClientMapView
-          accessToken={accessToken}
-          coordinates={coordArray}
-          center={coordArray[0]}
-          onMarkerClick={onMarkerClick}
-          {...rest}
-        />
-      )}
-    </ClientOnly>
-  );
+	return (
+		<ClientOnly fallback={<EmptyMap className={className} />}>
+			{() => (
+				<ClientMapView
+					accessToken={accessToken}
+					coordinates={coordArray}
+					center={coordArray[0]}
+					onMarkerClick={onMarkerClick}
+					{...rest}
+				/>
+			)}
+		</ClientOnly>
+	);
 }
 
 export { MapView };

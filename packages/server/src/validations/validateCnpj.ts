@@ -1,26 +1,26 @@
 import { removeNonNumeric } from "@arkyn/shared";
 
 function isInvalidLength(cnpj: string) {
-  const CNPJ_LENGTH = 14;
-  return cnpj.length !== CNPJ_LENGTH;
+	const CNPJ_LENGTH = 14;
+	return cnpj.length !== CNPJ_LENGTH;
 }
 
 function hasAllDigitsEqual(cnpj: string) {
-  const [firstDigit] = cnpj;
-  return [...cnpj].every((digit) => digit === firstDigit);
+	const [firstDigit] = cnpj;
+	return [...cnpj].every((digit) => digit === firstDigit);
 }
 
 function calculateDigit(cnpj: string, multipliers: number[]) {
-  let total = 0;
-  for (let i = 0; i < multipliers.length; i++) {
-    total += parseInt(cnpj[i]) * multipliers[i];
-  }
-  const rest = total % 11;
-  return rest < 2 ? 0 : 11 - rest;
+	let total = 0;
+	for (let i = 0; i < multipliers.length; i++) {
+		total += parseInt(cnpj[i], 10) * multipliers[i];
+	}
+	const rest = total % 11;
+	return rest < 2 ? 0 : 11 - rest;
 }
 
 function extractDigit(cnpj: string) {
-  return cnpj.slice(12);
+	return cnpj.slice(12);
 }
 
 /**
@@ -43,26 +43,26 @@ function extractDigit(cnpj: string) {
  */
 
 function validateCnpj(rawCnpj: string): boolean {
-  if (!rawCnpj) return false;
-  if (rawCnpj.length > 18) return false;
-  if (rawCnpj.length < 14) return false;
+	if (!rawCnpj) return false;
+	if (rawCnpj.length > 18) return false;
+	if (rawCnpj.length < 14) return false;
 
-  const hasSpaces = /\s/.test(rawCnpj);
-  if (hasSpaces) return false;
+	const hasSpaces = /\s/.test(rawCnpj);
+	if (hasSpaces) return false;
 
-  const cnpj = removeNonNumeric(rawCnpj);
+	const cnpj = removeNonNumeric(rawCnpj);
 
-  if (isInvalidLength(cnpj)) return false;
-  if (hasAllDigitsEqual(cnpj)) return false;
+	if (isInvalidLength(cnpj)) return false;
+	if (hasAllDigitsEqual(cnpj)) return false;
 
-  const base = cnpj.slice(0, 12);
-  const digit1 = calculateDigit(base, [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
-  const digit2 = calculateDigit(
-    base + digit1,
-    [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2],
-  );
+	const base = cnpj.slice(0, 12);
+	const digit1 = calculateDigit(base, [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+	const digit2 = calculateDigit(
+		base + digit1,
+		[6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2],
+	);
 
-  return extractDigit(cnpj) === `${digit1}${digit2}`;
+	return extractDigit(cnpj) === `${digit1}${digit2}`;
 }
 
 export { validateCnpj };

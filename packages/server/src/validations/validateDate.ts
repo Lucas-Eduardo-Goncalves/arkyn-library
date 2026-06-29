@@ -18,45 +18,45 @@ import { ValidateDateService } from "@arkyn/shared";
  */
 
 function validateDate(
-  date: string,
-  config?: {
-    inputFormat?: "brazilianDate" | "isoDate" | "timestamp";
-    minYear?: number;
-    maxYear?: number;
-  },
+	date: string,
+	config?: {
+		inputFormat?: "brazilianDate" | "isoDate" | "timestamp";
+		minYear?: number;
+		maxYear?: number;
+	},
 ): boolean {
-  const inputFormat = config?.inputFormat || "brazilianDate";
-  const minYear = config?.minYear || 1900;
-  const maxYear = config?.maxYear || 3000;
+	const inputFormat = config?.inputFormat || "brazilianDate";
+	const minYear = config?.minYear || 1900;
+	const maxYear = config?.maxYear || 3000;
 
-  const validateDateService = new ValidateDateService();
-  validateDateService.validateInputFormat(inputFormat);
+	const validateDateService = new ValidateDateService();
+	validateDateService.validateInputFormat(inputFormat);
 
-  let day: number, month: number, year: number;
-  const dateParts = date.split(/[-/]/).map(Number);
+	let day: number, month: number, year: number;
+	const dateParts = date.split(/[-/]/).map(Number);
 
-  if (dateParts.length !== 3) return false;
+	if (dateParts.length !== 3) return false;
 
-  try {
-    switch (inputFormat) {
-      case "brazilianDate":
-        [day, month, year] = dateParts;
-        validateDateService.validateDateParts(year, month, day);
-        break;
-      case "isoDate":
-        [month, day, year] = dateParts;
-        validateDateService.validateDateParts(year, month, day);
-        break;
-      case "timestamp":
-        [year, month, day] = dateParts;
-        validateDateService.validateDateParts(year, month, day);
-        break;
-    }
-    if (year < minYear || year > maxYear) return false;
-    return true;
-  } catch {
-    return false;
-  }
+	try {
+		switch (inputFormat) {
+			case "brazilianDate":
+				[day, month, year] = dateParts;
+				validateDateService.validateDateParts(year, month, day);
+				break;
+			case "isoDate":
+				[month, day, year] = dateParts;
+				validateDateService.validateDateParts(year, month, day);
+				break;
+			case "timestamp":
+				[year, month, day] = dateParts;
+				validateDateService.validateDateParts(year, month, day);
+				break;
+		}
+		if (year < minYear || year > maxYear) return false;
+		return true;
+	} catch {
+		return false;
+	}
 }
 
 export { validateDate };

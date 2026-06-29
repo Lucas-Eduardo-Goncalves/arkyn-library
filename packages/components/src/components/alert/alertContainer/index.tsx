@@ -1,29 +1,29 @@
 import {
-  createContext,
-  HTMLAttributes,
-  JSX,
-  ReactNode,
-  useContext,
+	createContext,
+	type HTMLAttributes,
+	type JSX,
+	type ReactNode,
+	useContext,
 } from "react";
 import { AlertTitle } from "../alertTitle";
 import "./styles.css";
 
 type AlertContainerProps = {
-  /**
-   * Visual style and semantic meaning.
-   * - `success`: green — operation completed.
-   * - `danger`: red — error or destructive action.
-   * - `warning`: yellow — caution required.
-   * - `info`: blue — informational message.
-   */
-  schema: "success" | "danger" | "warning" | "info";
+	/**
+	 * Visual style and semantic meaning.
+	 * - `success`: green — operation completed.
+	 * - `danger`: red — error or destructive action.
+	 * - `warning`: yellow — caution required.
+	 * - `info`: blue — informational message.
+	 */
+	schema: "success" | "danger" | "warning" | "info";
 } & HTMLAttributes<HTMLDivElement>;
 
 const AlertContainerContext = createContext({} as AlertContainerProps);
 
 /** @internal Accesses the schema and HTML props of the enclosing `AlertContainer`. */
 function useAlertContainer(): AlertContainerProps {
-  return useContext(AlertContainerContext);
+	return useContext(AlertContainerContext);
 }
 
 /**
@@ -59,44 +59,44 @@ function useAlertContainer(): AlertContainerProps {
  */
 
 function AlertContainer(props: AlertContainerProps): JSX.Element {
-  const { schema, children, className: baseClassName, ...rest } = props;
+	const { schema, children, className: baseClassName, ...rest } = props;
 
-  const hasAlertTitle = (children: ReactNode): boolean => {
-    let found = false;
-    const searchForAlertTitle = (nodes: ReactNode) => {
-      if (Array.isArray(nodes)) {
-        nodes.forEach(searchForAlertTitle);
-      } else if (nodes && typeof nodes === "object" && "type" in nodes) {
-        if (nodes.type === AlertTitle) {
-          found = true;
-        } else if (
-          nodes.props &&
-          typeof nodes.props === "object" &&
-          nodes.props !== null &&
-          "children" in nodes.props
-        ) {
-          searchForAlertTitle((nodes.props as any).children);
-        }
-      }
-    };
-    searchForAlertTitle(children);
-    return found;
-  };
+	const hasAlertTitle = (children: ReactNode): boolean => {
+		let found = false;
+		const searchForAlertTitle = (nodes: ReactNode) => {
+			if (Array.isArray(nodes)) {
+				nodes.forEach(searchForAlertTitle);
+			} else if (nodes && typeof nodes === "object" && "type" in nodes) {
+				if (nodes.type === AlertTitle) {
+					found = true;
+				} else if (
+					nodes.props &&
+					typeof nodes.props === "object" &&
+					nodes.props !== null &&
+					"children" in nodes.props
+				) {
+					searchForAlertTitle((nodes.props as any).children);
+				}
+			}
+		};
+		searchForAlertTitle(children);
+		return found;
+	};
 
-  const shouldAlignCenter = !hasAlertTitle(children);
-  const finalClassName = shouldAlignCenter
-    ? "nonExistsAlertTitle"
-    : "existsAlertTitle";
+	const shouldAlignCenter = !hasAlertTitle(children);
+	const finalClassName = shouldAlignCenter
+		? "nonExistsAlertTitle"
+		: "existsAlertTitle";
 
-  const className = `arkynAlertContainer ${schema} ${finalClassName} ${baseClassName}`;
+	const className = `arkynAlertContainer ${schema} ${finalClassName} ${baseClassName}`;
 
-  return (
-    <AlertContainerContext.Provider value={props}>
-      <div className={className.trim()} {...rest}>
-        {children}
-      </div>
-    </AlertContainerContext.Provider>
-  );
+	return (
+		<AlertContainerContext.Provider value={props}>
+			<div className={className.trim()} {...rest}>
+				{children}
+			</div>
+		</AlertContainerContext.Provider>
+	);
 }
 
 export { AlertContainer, useAlertContainer };

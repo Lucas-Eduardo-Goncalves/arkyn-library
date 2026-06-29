@@ -1,12 +1,12 @@
 import { X } from "lucide-react";
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 
 import { useDrawer } from "../drawerContext";
 import "./styles.css";
 
 type DrawerHeaderProps = HTMLAttributes<HTMLElement> & {
-  /** Whether to render the X close button. @default true */
-  showCloseButton?: boolean;
+	/** Whether to render the X close button. @default true */
+	showCloseButton?: boolean;
 };
 
 /**
@@ -33,32 +33,32 @@ type DrawerHeaderProps = HTMLAttributes<HTMLElement> & {
  */
 
 function DrawerHeader(props: DrawerHeaderProps) {
-  const {
-    showCloseButton = true,
-    className: baseClassName,
-    children,
-    ...rest
-  } = props;
+	const {
+		showCloseButton = true,
+		className: baseClassName,
+		children,
+		...rest
+	} = props;
 
-  const { makeInvisible } = useDrawer();
-  const className = `arkynDrawerHeader ${baseClassName}`;
+	const { makeInvisible } = useDrawer();
+	const className = `arkynDrawerHeader ${baseClassName}`;
 
-  return (
-    <header className={className.trim()} {...rest}>
-      {children}
+	return (
+		<header className={className.trim()} {...rest}>
+			{children}
 
-      {showCloseButton && (
-        <button
-          className="arkynDrawerHeaderCloseButton"
-          type="button"
-          onClick={makeInvisible}
-          aria-label="Close drawer"
-        >
-          <X size={24} />
-        </button>
-      )}
-    </header>
-  );
+			{showCloseButton && (
+				<button
+					className="arkynDrawerHeaderCloseButton"
+					type="button"
+					onClick={makeInvisible}
+					aria-label="Close drawer"
+				>
+					<X size={24} />
+				</button>
+			)}
+		</header>
+	);
 }
 
 export { DrawerHeader };

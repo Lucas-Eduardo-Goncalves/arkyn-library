@@ -32,28 +32,28 @@ type ParamsType = Record<string, string | number | boolean | undefined>;
  */
 
 function useScopedParams(searchString: string, scope: string = "") {
-  const searchParams = new URLSearchParams(searchString);
-  const prefix = scope ? `${scope}:` : "";
+	const searchParams = new URLSearchParams(searchString);
+	const prefix = scope ? `${scope}:` : "";
 
-  const updateSearchParams = (params: ParamsType) => {
-    Object.entries(params).forEach(([key, value]) => {
-      if (value === undefined) {
-        searchParams.delete(`${prefix}${key}`);
-      } else {
-        searchParams.set(`${prefix}${key}`, String(value));
-      }
-    });
-  };
+	const updateSearchParams = (params: ParamsType) => {
+		Object.entries(params).forEach(([key, value]) => {
+			if (value === undefined) {
+				searchParams.delete(`${prefix}${key}`);
+			} else {
+				searchParams.set(`${prefix}${key}`, String(value));
+			}
+		});
+	};
 
-  return {
-    getParam: (key: string) => searchParams.get(`${prefix}${key}`),
-    getScopedSearch: (params: ParamsType) => {
-      updateSearchParams(params);
-      let search = searchParams.toString();
-      if (search) search = "?" + search;
-      return search;
-    },
-  };
+	return {
+		getParam: (key: string) => searchParams.get(`${prefix}${key}`),
+		getScopedSearch: (params: ParamsType) => {
+			updateSearchParams(params);
+			let search = searchParams.toString();
+			if (search) search = `?${search}`;
+			return search;
+		},
+	};
 }
 
 export { useScopedParams };

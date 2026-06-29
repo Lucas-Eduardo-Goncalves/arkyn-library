@@ -1,13 +1,13 @@
 .arkynTableFooterContent {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 
-  height: 48px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
+	height: 48px;
+	padding-top: 16px;
+	border-top: 1px solid var(--border);
 }
 
 .arkynTableFooter .spacingRow {
-  height: 24px;
+	height: 24px;
 }

@@ -2,20 +2,20 @@ import { ClientOnly } from "../clientOnly";
 import { GoogleTagManagerClient } from "./googleTagManager.client";
 
 type GoogleTagManagerProps = {
-  /** Google Tag Manager container ID (e.g. `"GTM-XXXXXXX"`). Required. */
-  gtmId: string;
-  /** Additional key-value pairs pushed to the dataLayer on initialization. */
-  events?: Record<string, string>;
-  /** Initial key-value pairs added to the dataLayer before GTM loads. */
-  dataLayer?: Record<string, string>;
-  /** Global variable name for the dataLayer array. @default "dataLayer" */
-  dataLayerName?: string;
-  /** GTM environment auth token (for staging/testing environments). */
-  auth?: string;
-  /** GTM environment preview token (e.g. `"env-3"`). */
-  preview?: string;
-  /** When true, renders the GTM snippet in development mode (bypasses the production check). @default false */
-  showInDevMode?: boolean;
+	/** Google Tag Manager container ID (e.g. `"GTM-XXXXXXX"`). Required. */
+	gtmId: string;
+	/** Additional key-value pairs pushed to the dataLayer on initialization. */
+	events?: Record<string, string>;
+	/** Initial key-value pairs added to the dataLayer before GTM loads. */
+	dataLayer?: Record<string, string>;
+	/** Global variable name for the dataLayer array. @default "dataLayer" */
+	dataLayerName?: string;
+	/** GTM environment auth token (for staging/testing environments). */
+	auth?: string;
+	/** GTM environment preview token (e.g. `"env-3"`). */
+	preview?: string;
+	/** When true, renders the GTM snippet in development mode (bypasses the production check). @default false */
+	showInDevMode?: boolean;
 };
 
 /**
@@ -56,34 +56,34 @@ type GoogleTagManagerProps = {
  */
 
 function GoogleTagManager(props: GoogleTagManagerProps) {
-  const {
-    gtmId,
-    auth = "",
-    preview = "",
-    dataLayerName = "dataLayer",
-    events = {},
-    dataLayer = {},
-    showInDevMode = false,
-  } = props;
+	const {
+		gtmId,
+		auth = "",
+		preview = "",
+		dataLayerName = "dataLayer",
+		events = {},
+		dataLayer = {},
+		showInDevMode = false,
+	} = props;
 
-  if (process.env.NODE_ENV !== "production" && !showInDevMode) {
-    return <></>;
-  }
+	if (process.env.NODE_ENV !== "production" && !showInDevMode) {
+		return <></>;
+	}
 
-  return (
-    <ClientOnly>
-      {() => (
-        <GoogleTagManagerClient
-          auth={auth}
-          dataLayer={dataLayer}
-          dataLayerName={dataLayerName}
-          events={events}
-          gtmId={gtmId}
-          preview={preview}
-        />
-      )}
-    </ClientOnly>
-  );
+	return (
+		<ClientOnly>
+			{() => (
+				<GoogleTagManagerClient
+					auth={auth}
+					dataLayer={dataLayer}
+					dataLayerName={dataLayerName}
+					events={events}
+					gtmId={gtmId}
+					preview={preview}
+				/>
+			)}
+		</ClientOnly>
+	);
 }
 
 export { GoogleTagManager };

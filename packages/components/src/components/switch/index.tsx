@@ -5,39 +5,39 @@ import { FieldTemplate } from "../../services/fieldTemplate";
 import "./styles.css";
 
 type SwitchProps = Omit<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  "children" | "onChange" | "defaultValue" | "onCheck" | "value"
+	ButtonHTMLAttributes<HTMLButtonElement>,
+	"children" | "onChange" | "defaultValue" | "onCheck" | "value"
 > & {
-  /** Optional label text displayed beside the switch. */
-  label?: string;
-  /**
-   * Switch size.
-   * @default "lg"
-   */
-  size?: "sm" | "md" | "lg";
-  /** Uncontrolled initial checked state. @default false */
-  defaultChecked?: boolean;
-  /** Controlled checked state. */
-  checked?: boolean;
-  /** Value emitted when the switch is on. @default "checked" */
-  value?: string;
-  /** Value emitted when the switch is off. @default "" */
-  unCheckedValue?: string;
-  /** Field name for form submission. Required. */
-  name: string;
-  /** Callback fired on toggle — receives the current value string. */
-  onCheck?: (value: string) => void;
-  /**
-   * Layout direction forwarded to `FieldTemplate`.
-   * @default "horizontalReverse"
-   */
-  orientation?: "vertical" | "horizontal" | "horizontalReverse";
-  /** When true, skips `FieldTemplate` wrapper (label and error text). @default false */
-  unShowFieldTemplate?: boolean;
-  /** Displays an asterisk on the label to signal a required field. */
-  showAsterisk?: boolean;
-  /** Validation error message displayed below the switch. */
-  errorMessage?: string;
+	/** Optional label text displayed beside the switch. */
+	label?: string;
+	/**
+	 * Switch size.
+	 * @default "lg"
+	 */
+	size?: "sm" | "md" | "lg";
+	/** Uncontrolled initial checked state. @default false */
+	defaultChecked?: boolean;
+	/** Controlled checked state. */
+	checked?: boolean;
+	/** Value emitted when the switch is on. @default "checked" */
+	value?: string;
+	/** Value emitted when the switch is off. @default "" */
+	unCheckedValue?: string;
+	/** Field name for form submission. Required. */
+	name: string;
+	/** Callback fired on toggle — receives the current value string. */
+	onCheck?: (value: string) => void;
+	/**
+	 * Layout direction forwarded to `FieldTemplate`.
+	 * @default "horizontalReverse"
+	 */
+	orientation?: "vertical" | "horizontal" | "horizontalReverse";
+	/** When true, skips `FieldTemplate` wrapper (label and error text). @default false */
+	unShowFieldTemplate?: boolean;
+	/** Displays an asterisk on the label to signal a required field. */
+	showAsterisk?: boolean;
+	/** Validation error message displayed below the switch. */
+	errorMessage?: string;
 };
 
 /**
@@ -89,68 +89,68 @@ type SwitchProps = Omit<
  */
 
 function Switch(props: SwitchProps) {
-  const {
-    label,
-    size = "lg",
-    defaultChecked = false,
-    checked: baseChecked = null,
-    value,
-    unCheckedValue = "",
-    name,
-    className: baseClassName = "",
-    onCheck,
-    id,
-    orientation = "horizontalReverse",
-    className: wrapperClassName = "",
-    showAsterisk,
-    errorMessage,
-    unShowFieldTemplate = false,
-    ...rest
-  } = props;
+	const {
+		label,
+		size = "lg",
+		defaultChecked = false,
+		checked: baseChecked = null,
+		value,
+		unCheckedValue = "",
+		name,
+		className: baseClassName = "",
+		onCheck,
+		id,
+		orientation = "horizontalReverse",
+		className: wrapperClassName = "",
+		showAsterisk,
+		errorMessage,
+		unShowFieldTemplate = false,
+		...rest
+	} = props;
 
-  const inputRef = useRef<HTMLInputElement>(null);
-  const inputId = id || useId();
+	const inputRef = useRef<HTMLInputElement>(null);
+	const inputId = id || useId();
 
-  const [isChecked, setIsChecked] = useState(defaultChecked);
+	const [isChecked, setIsChecked] = useState(defaultChecked);
 
-  const currentChecked =
-    typeof baseChecked === "boolean" ? baseChecked : isChecked;
+	const currentChecked =
+		typeof baseChecked === "boolean" ? baseChecked : isChecked;
 
-  function handleCheck() {
-    setIsChecked(!isChecked);
-    onCheck && onCheck(!currentChecked ? value || "checked" : unCheckedValue);
-  }
+	function handleCheck() {
+		setIsChecked(!isChecked);
+		onCheck?.(!currentChecked ? value || "checked" : unCheckedValue);
+	}
 
-  const checkedClass = currentChecked ? "checkedTrue" : "checkedFalse";
-  const className = `arkynSwitch ${checkedClass} ${size} ${baseClassName}`;
+	const checkedClass = currentChecked ? "checkedTrue" : "checkedFalse";
+	const className = `arkynSwitch ${checkedClass} ${size} ${baseClassName}`;
 
-  return (
-    <FieldTemplate
-      name={name}
-      label={label}
-      showAsterisk={showAsterisk}
-      className={wrapperClassName}
-      errorMessage={errorMessage}
-      unShowFieldTemplate={unShowFieldTemplate}
-      orientation={orientation}
-    >
-      <button
-        type="button"
-        onClick={handleCheck}
-        className={className}
-        {...rest}
-      >
-        <input
-          id={inputId}
-          type="hidden"
-          name={name}
-          ref={inputRef}
-          onClick={handleCheck}
-          value={currentChecked ? value || "checked" : unCheckedValue}
-        />
-      </button>
-    </FieldTemplate>
-  );
+	return (
+		<FieldTemplate
+			name={name}
+			label={label}
+			showAsterisk={showAsterisk}
+			className={wrapperClassName}
+			errorMessage={errorMessage}
+			unShowFieldTemplate={unShowFieldTemplate}
+			orientation={orientation}
+		>
+			<button
+				type="button"
+				onClick={handleCheck}
+				className={className}
+				{...rest}
+			>
+				<input
+					id={inputId}
+					type="hidden"
+					name={name}
+					ref={inputRef}
+					onClick={handleCheck}
+					value={currentChecked ? value || "checked" : unCheckedValue}
+				/>
+			</button>
+		</FieldTemplate>
+	);
 }
 
 export { Switch };

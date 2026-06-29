@@ -1,227 +1,227 @@
 /* BASE */
 .arkynMaskedInput {
-  position: relative;
-  display: flex;
-  align-items: center;
+	position: relative;
+	display: flex;
+	align-items: center;
 
-  width: 100%;
+	width: 100%;
 
-  padding: 0 16px;
-  gap: 8px;
-  border-radius: 8px;
+	padding: 0 16px;
+	gap: 8px;
+	border-radius: 8px;
 
-  border: 1px solid transparent;
-  outline: 1px solid transparent;
+	border: 1px solid transparent;
+	outline: 1px solid transparent;
 }
 
 .arkynMaskedInput:hover {
-  cursor: text;
+	cursor: text;
 }
 
 .arkynMaskedInput input {
-  border: none;
-  outline: none;
-  background: transparent;
-  width: 100%;
+	border: none;
+	outline: none;
+	background: transparent;
+	width: 100%;
 
-  line-height: 100%;
+	line-height: 100%;
 }
 
 .arkynMaskedInput input {
-  color: var(--text-heading);
+	color: var(--text-heading);
 }
 
 .arkynMaskedInput .prefix,
 .arkynMaskedInput .suffix {
-  color: var(--text-body);
-  background: var(--border);
-  font-weight: 400;
+	color: var(--text-body);
+	background: var(--border);
+	font-weight: 400;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-  position: absolute;
+	position: absolute;
 
-  line-height: 100%;
+	line-height: 100%;
 }
 
 .arkynMaskedInput .prefix {
-  left: 0;
-  top: 0;
-  bottom: 0;
-  border-radius: calc(8px - 1px) 0 0 calc(8px - 1px);
-  border-right: 1px solid var(--border);
+	left: 0;
+	top: 0;
+	bottom: 0;
+	border-radius: calc(8px - 1px) 0 0 calc(8px - 1px);
+	border-right: 1px solid var(--border);
 }
 
 .arkynMaskedInput .suffix {
-  right: 0;
-  top: 0;
-  bottom: 0;
-  border-radius: 0 calc(8px - 1px) calc(8px - 1px) 0;
-  border-left: 1px solid var(--border);
+	right: 0;
+	top: 0;
+	bottom: 0;
+	border-radius: 0 calc(8px - 1px) calc(8px - 1px) 0;
+	border-left: 1px solid var(--border);
 }
 
 .arkynMaskedInput input::placeholder {
-  color: var(--text-muted);
-  line-height: 100%;
+	color: var(--text-muted);
+	line-height: 100%;
 }
 
 .arkynMaskedInput svg {
-  color: var(--text-muted);
+	color: var(--text-muted);
 }
 
 .arkynMaskedInput.errored svg {
-  color: rgba(var(--spotlight-danger), 1);
+	color: rgba(var(--spotlight-danger), 1);
 }
 
 .arkynMaskedInput:not(.opacity).focused svg {
-  color: rgba(var(--spotlight-primary), 1);
+	color: rgba(var(--spotlight-primary), 1);
 }
 
 .arkynMaskedInput.opacity {
-  opacity: 0.5;
+	opacity: 0.5;
 }
 
 /* VARIANTS */
 .arkynMaskedInput.solid {
-  border-color: var(--border);
-  background-color: rgba(var(--spotlight-secondary), 1);
+	border-color: var(--border);
+	background-color: rgba(var(--spotlight-secondary), 1);
 }
 
 .arkynMaskedInput.solid.errored {
-  border-color: rgba(var(--spotlight-danger), 1);
-  outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgba(var(--spotlight-danger), 1);
+	outline-color: rgba(var(--spotlight-danger), 1);
 }
 
 .arkynMaskedInput:not(.opacity).solid.focused {
-  border-color: rgba(var(--spotlight-primary), 1);
-  outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgba(var(--spotlight-primary), 1);
+	outline-color: rgba(var(--spotlight-primary), 1);
 }
 
 .arkynMaskedInput.outline {
-  border-color: var(--border);
+	border-color: var(--border);
 }
 
 .arkynMaskedInput.outline.errored {
-  border-color: rgba(var(--spotlight-danger), 1);
-  outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgba(var(--spotlight-danger), 1);
+	outline-color: rgba(var(--spotlight-danger), 1);
 }
 
 .arkynMaskedInput:not(.opacity).outline.focused {
-  border-color: rgba(var(--spotlight-primary), 1);
-  outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgba(var(--spotlight-primary), 1);
+	outline-color: rgba(var(--spotlight-primary), 1);
 }
 
 .arkynMaskedInput.underline {
-  border-radius: 0;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  outline: none;
-  border-color: var(--border);
+	border-radius: 0;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	outline: none;
+	border-color: var(--border);
 }
 
 .arkynMaskedInput.underline .suffix,
 .arkynMaskedInput.underline .prefix {
-  display: none;
+	display: none;
 }
 
 .arkynMaskedInput.underline::before {
-  content: " ";
-  position: absolute;
-  height: 1px;
-  left: 0;
-  right: 0;
-  bottom: -2px;
-  background: transparent;
+	content: " ";
+	position: absolute;
+	height: 1px;
+	left: 0;
+	right: 0;
+	bottom: -2px;
+	background: transparent;
 }
 
 .arkynMaskedInput.underline.errored {
-  border-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgba(var(--spotlight-danger), 1);
 }
 
 .arkynMaskedInput.underline.errored::before {
-  background: rgba(var(--spotlight-danger), 1);
+	background: rgba(var(--spotlight-danger), 1);
 }
 
 .arkynMaskedInput:not(.opacity).underline.focused {
-  border-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgba(var(--spotlight-primary), 1);
 }
 
 .arkynMaskedInput:not(.opacity).underline.focused::before {
-  background: rgba(var(--spotlight-primary), 1);
+	background: rgba(var(--spotlight-primary), 1);
 }
 
 /* SIZE */
 .arkynMaskedInput.md input {
-  min-height: 38px;
-  max-height: 38px;
-  font-size: 14px;
-  line-height: 14px;
-  font-weight: 400;
+	min-height: 38px;
+	max-height: 38px;
+	font-size: 14px;
+	line-height: 14px;
+	font-weight: 400;
 }
 
 .arkynMaskedInput.md input::placeholder {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 14px;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 14px;
 }
 
 .arkynMaskedInput.md.hasPrefix {
-  padding-left: 60px;
+	padding-left: 60px;
 }
 
 .arkynMaskedInput.md.hasSuffix {
-  padding-right: 60px;
+	padding-right: 60px;
 }
 
 .arkynMaskedInput.md .prefix,
 .arkynMaskedInput.md .suffix {
-  height: 38px;
-  width: 44px;
-  font-size: 14px;
+	height: 38px;
+	width: 44px;
+	font-size: 14px;
 }
 
 .arkynMaskedInput.lg input {
-  min-height: 44px;
-  max-height: 44px;
-  line-height: 16px;
-  font-size: 16px;
-  font-weight: 400;
+	min-height: 44px;
+	max-height: 44px;
+	line-height: 16px;
+	font-size: 16px;
+	font-weight: 400;
 }
 
 .arkynMaskedInput.lg input::placeholder {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 16px;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 16px;
 }
 
 .arkynMaskedInput.lg .prefix,
 .arkynMaskedInput.lg .suffix {
-  height: 44px;
-  width: 48px;
-  font-size: 16px;
+	height: 44px;
+	width: 48px;
+	font-size: 16px;
 }
 
 .arkynMaskedInput.lg.hasPrefix {
-  padding-left: 64px;
+	padding-left: 64px;
 }
 
 .arkynMaskedInput.lg.hasSuffix {
-  padding-right: 64px;
+	padding-right: 64px;
 }
 
 /* SPIN */
 .arkynMaskedInput .spinner {
-  animation: spin 2s linear infinite;
+	animation: spin 2s linear infinite;
 }
 
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }

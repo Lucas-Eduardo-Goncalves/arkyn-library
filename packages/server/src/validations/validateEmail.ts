@@ -1,89 +1,89 @@
 import dns from "node:dns";
 
 function isValidBasicFormat(email: string): boolean {
-  const emailRegex =
-    /^[a-zA-Z0-9.!$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+	const emailRegex =
+		/^[a-zA-Z0-9.!$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-  return emailRegex.test(email);
+	return emailRegex.test(email);
 }
 
 function isValidLocalPart(localPart: string): boolean {
-  if (localPart.length === 0 || localPart.length > 64) return false;
-  if (localPart.startsWith(".") || localPart.endsWith(".")) return false;
-  if (localPart.includes("..")) return false;
+	if (localPart.length === 0 || localPart.length > 64) return false;
+	if (localPart.startsWith(".") || localPart.endsWith(".")) return false;
+	if (localPart.includes("..")) return false;
 
-  const validLocalRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+$/;
-  if (!validLocalRegex.test(localPart)) return false;
+	const validLocalRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+$/;
+	if (!validLocalRegex.test(localPart)) return false;
 
-  return true;
+	return true;
 }
 
 function isValidDomainLabel(label: string): boolean {
-  if (label.length === 0 || label.length > 63) return false;
-  if (label.startsWith("-") || label.endsWith("-")) return false;
-  if (!/^[a-zA-Z0-9-]+$/.test(label)) return false;
-  return true;
+	if (label.length === 0 || label.length > 63) return false;
+	if (label.startsWith("-") || label.endsWith("-")) return false;
+	if (!/^[a-zA-Z0-9-]+$/.test(label)) return false;
+	return true;
 }
 
 function isValidDomainPart(domainPart: string): boolean {
-  if (domainPart.length === 0 || domainPart.length > 253) return false;
+	if (domainPart.length === 0 || domainPart.length > 253) return false;
 
-  if (
-    domainPart.startsWith(".") ||
-    domainPart.endsWith(".") ||
-    domainPart.startsWith("-") ||
-    domainPart.endsWith("-")
-  ) {
-    return false;
-  }
+	if (
+		domainPart.startsWith(".") ||
+		domainPart.endsWith(".") ||
+		domainPart.startsWith("-") ||
+		domainPart.endsWith("-")
+	) {
+		return false;
+	}
 
-  const labels = domainPart.split(".");
-  if (labels.length < 2) return false;
+	const labels = domainPart.split(".");
+	if (labels.length < 2) return false;
 
-  for (const label of labels) if (!isValidDomainLabel(label)) return false;
+	for (const label of labels) if (!isValidDomainLabel(label)) return false;
 
-  const tld = labels[labels.length - 1];
-  if (tld.length < 2 || !/^[a-zA-Z]+$/.test(tld)) return false;
+	const tld = labels[labels.length - 1];
+	if (tld.length < 2 || !/^[a-zA-Z]+$/.test(tld)) return false;
 
-  return true;
+	return true;
 }
 
 function isValidAdvancedSyntax(email: string): boolean {
-  const parts = email.split("@");
-  if (parts.length !== 2) return false;
+	const parts = email.split("@");
+	if (parts.length !== 2) return false;
 
-  const [localPart, domainPart] = parts;
+	const [localPart, domainPart] = parts;
 
-  if (!isValidLocalPart(localPart)) return false;
-  if (!isValidDomainPart(domainPart)) return false;
-  return true;
+	if (!isValidLocalPart(localPart)) return false;
+	if (!isValidDomainPart(domainPart)) return false;
+	return true;
 }
 
 function extractDomain(email: string): string | null {
-  const parts = email.split("@");
-  return parts.length === 2 ? parts[1].toLowerCase() : null;
+	const parts = email.split("@");
+	return parts.length === 2 ? parts[1].toLowerCase() : null;
 }
 
 const DNS_RECORD_TYPES = ["MX", "A", "AAAA"] as const;
 
 async function tryResolveDnsRecord(
-  domain: string,
-  recordType: string,
+	domain: string,
+	recordType: string,
 ): Promise<boolean> {
-  try {
-    await dns?.promises?.resolve(domain, recordType);
-    return true;
-  } catch {
-    return false;
-  }
+	try {
+		await dns?.promises?.resolve(domain, recordType);
+		return true;
+	} catch {
+		return false;
+	}
 }
 
 async function isValidDns(domain: string): Promise<boolean> {
-  for (const recordType of DNS_RECORD_TYPES) {
-    const hasRecord = await tryResolveDnsRecord(domain, recordType);
-    if (hasRecord) return true;
-  }
-  return false;
+	for (const recordType of DNS_RECORD_TYPES) {
+		const hasRecord = await tryResolveDnsRecord(domain, recordType);
+		if (hasRecord) return true;
+	}
+	return false;
 }
 
 /**
@@ -106,16 +106,16 @@ async function isValidDns(domain: string): Promise<boolean> {
  */
 
 async function validateEmail(rawEmail: string): Promise<boolean> {
-  if (!rawEmail || typeof rawEmail !== "string") return false;
-  const email = rawEmail.trim();
+	if (!rawEmail || typeof rawEmail !== "string") return false;
+	const email = rawEmail.trim();
 
-  if (!isValidBasicFormat(email)) return false;
-  if (!isValidAdvancedSyntax(email)) return false;
+	if (!isValidBasicFormat(email)) return false;
+	if (!isValidAdvancedSyntax(email)) return false;
 
-  const domain = extractDomain(email);
-  if (!domain) return false;
+	const domain = extractDomain(email);
+	if (!domain) return false;
 
-  return await isValidDns(domain);
+	return await isValidDns(domain);
 }
 
 export { validateEmail };

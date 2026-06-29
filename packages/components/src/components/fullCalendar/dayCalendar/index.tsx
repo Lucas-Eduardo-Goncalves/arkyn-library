@@ -3,14 +3,14 @@ import { DayCalendarContainer } from "./dayCalendarContainer";
 import { DayCalendarRow } from "./dayCalendarRow";
 
 function DayCalendar() {
-  const { listHours } = useFullCalendar();
-  return (
-    <DayCalendarContainer>
-      {listHours.map((hour) => (
-        <DayCalendarRow hour={hour} timeInMinutes={hour} />
-      ))}
-    </DayCalendarContainer>
-  );
+	const { listHours } = useFullCalendar();
+	return (
+		<DayCalendarContainer>
+			{listHours.map((hour) => (
+				<DayCalendarRow hour={hour} timeInMinutes={hour} />
+			))}
+		</DayCalendarContainer>
+	);
 }
 
 export { DayCalendar };

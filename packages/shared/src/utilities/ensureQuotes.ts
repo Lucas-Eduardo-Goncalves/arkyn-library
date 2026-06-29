@@ -17,14 +17,14 @@
  */
 
 function ensureQuotes(rawValue: string): string {
-  const hasSingleQuotes = rawValue.startsWith("'") && rawValue.endsWith("'");
-  const hasDoubleQuotes = rawValue.startsWith('"') && rawValue.endsWith('"');
+	const hasSingleQuotes = rawValue.startsWith("'") && rawValue.endsWith("'");
+	const hasDoubleQuotes = rawValue.startsWith('"') && rawValue.endsWith('"');
 
-  if (hasSingleQuotes || hasDoubleQuotes) {
-    return rawValue;
-  }
+	if (hasSingleQuotes || hasDoubleQuotes) {
+		return rawValue;
+	}
 
-  return `"${rawValue}"`;
+	return `"${rawValue}"`;
 }
 
 export { ensureQuotes };

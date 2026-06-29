@@ -1,95 +1,95 @@
 /* BASE */
 .arkynTextarea {
-  position: relative;
-  display: flex;
-  align-items: center;
+	position: relative;
+	display: flex;
+	align-items: center;
 
-  width: 100%;
+	width: 100%;
 
-  padding: 16px;
-  gap: 8px;
-  border-radius: 8px;
+	padding: 16px;
+	gap: 8px;
+	border-radius: 8px;
 
-  border: 1px solid transparent;
-  outline: 1px solid transparent;
+	border: 1px solid transparent;
+	outline: 1px solid transparent;
 }
 
 .arkynTextarea:hover {
-  cursor: text;
+	cursor: text;
 }
 
 .arkynTextarea textarea {
-  border: none;
-  outline: none;
-  background: transparent;
-  width: 100%;
-  resize: none;
+	border: none;
+	outline: none;
+	background: transparent;
+	width: 100%;
+	resize: none;
 }
 
 .arkynTextarea textarea {
-  color: var(--text-heading);
+	color: var(--text-heading);
 }
 
 .arkynTextarea textarea::placeholder {
-  color: var(--text-muted);
-  line-height: 130%;
+	color: var(--text-muted);
+	line-height: 130%;
 }
 
 .arkynTextarea.opacityTrue {
-  opacity: 0.5;
+	opacity: 0.5;
 }
 
 /* VARIANTS */
 .arkynTextarea.solid {
-  border-color: var(--border);
-  background-color: rgba(var(--spotlight-secondary), 1);
+	border-color: var(--border);
+	background-color: rgba(var(--spotlight-secondary), 1);
 }
 
 .arkynTextarea.solid.errorTrue {
-  border-color: rgba(var(--spotlight-danger), 1);
-  outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgba(var(--spotlight-danger), 1);
+	outline-color: rgba(var(--spotlight-danger), 1);
 }
 
 .arkynTextarea:not(.opacityTrue).solid.focusedTrue {
-  border-color: rgba(var(--spotlight-primary), 1);
-  outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgba(var(--spotlight-primary), 1);
+	outline-color: rgba(var(--spotlight-primary), 1);
 }
 
 .arkynTextarea.outline {
-  border-color: var(--border);
+	border-color: var(--border);
 }
 
 .arkynTextarea.outline.errorTrue {
-  border-color: rgba(var(--spotlight-danger), 1);
-  outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgba(var(--spotlight-danger), 1);
+	outline-color: rgba(var(--spotlight-danger), 1);
 }
 
 .arkynTextarea:not(.opacityTrue).outline.focusedTrue {
-  border-color: rgba(var(--spotlight-primary), 1);
-  outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgba(var(--spotlight-primary), 1);
+	outline-color: rgba(var(--spotlight-primary), 1);
 }
 
 /* SIZE */
 .arkynTextarea.md textarea {
-  font-size: 14px;
-  line-height: 14px;
-  font-weight: 400;
+	font-size: 14px;
+	line-height: 14px;
+	font-weight: 400;
 }
 
 .arkynTextarea.md textarea::placeholder {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 14px;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 14px;
 }
 
 .arkynTextarea.lg textarea {
-  line-height: 16px;
-  font-size: 16px;
-  font-weight: 400;
+	line-height: 16px;
+	font-size: 16px;
+	font-weight: 400;
 }
 
 .arkynTextarea.lg textarea::placeholder {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 16px;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 16px;
 }

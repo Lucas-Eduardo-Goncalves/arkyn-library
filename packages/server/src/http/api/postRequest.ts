@@ -1,10 +1,10 @@
-import { makeRequest, type ApiResponseDTO } from "./_makeRequest";
+import { type ApiResponseDTO, makeRequest } from "./_makeRequest";
 
 type InputProps = {
-  url: string;
-  urlParams?: Record<string, string>;
-  headers?: HeadersInit;
-  body?: any;
+	url: string;
+	urlParams?: Record<string, string>;
+	headers?: HeadersInit;
+	body?: any;
 };
 
 /**
@@ -16,15 +16,15 @@ type InputProps = {
  */
 
 async function postRequest<T = any>(
-  input: InputProps,
+	input: InputProps,
 ): Promise<ApiResponseDTO<T>> {
-  return makeRequest({
-    method: "POST",
-    url: input.url,
-    urlParams: input.urlParams,
-    headers: input.headers,
-    body: input.body,
-  });
+	return makeRequest({
+		method: "POST",
+		url: input.url,
+		urlParams: input.urlParams,
+		headers: input.headers,
+		body: input.body,
+	});
 }
 
 export { postRequest };

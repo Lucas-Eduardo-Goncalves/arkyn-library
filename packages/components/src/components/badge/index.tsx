@@ -1,32 +1,32 @@
-import { LucideIcon } from "lucide-react";
-import { HTMLAttributes } from "react";
+import type { LucideIcon } from "lucide-react";
+import type { HTMLAttributes } from "react";
 
 import { IconRenderer } from "../../services/iconRenderer";
 import "./styles.css";
 
 type BadgeProps = HTMLAttributes<HTMLDivElement> & {
-  /**
-   * Badge size.
-   * @default "lg"
-   */
-  size?: "md" | "lg";
-  /**
-   * Visual style variant.
-   * - `solid`: filled background.
-   * - `outline`: bordered, transparent background.
-   * - `ghost`: no border, subtle background on hover.
-   * @default "ghost"
-   */
-  variant?: "solid" | "outline" | "ghost";
-  /**
-   * Color scheme applied to the badge.
-   * @default "primary"
-   */
-  scheme?: "primary" | "secondary" | "success" | "warning" | "danger" | "info";
-  /** Lucide icon rendered to the left of the label. */
-  leftIcon?: LucideIcon;
-  /** Lucide icon rendered to the right of the label. */
-  rightIcon?: LucideIcon;
+	/**
+	 * Badge size.
+	 * @default "lg"
+	 */
+	size?: "md" | "lg";
+	/**
+	 * Visual style variant.
+	 * - `solid`: filled background.
+	 * - `outline`: bordered, transparent background.
+	 * - `ghost`: no border, subtle background on hover.
+	 * @default "ghost"
+	 */
+	variant?: "solid" | "outline" | "ghost";
+	/**
+	 * Color scheme applied to the badge.
+	 * @default "primary"
+	 */
+	scheme?: "primary" | "secondary" | "success" | "warning" | "danger" | "info";
+	/** Lucide icon rendered to the left of the label. */
+	leftIcon?: LucideIcon;
+	/** Lucide icon rendered to the right of the label. */
+	rightIcon?: LucideIcon;
 };
 
 /**
@@ -61,29 +61,29 @@ type BadgeProps = HTMLAttributes<HTMLDivElement> & {
  */
 
 function Badge(props: BadgeProps) {
-  const {
-    variant = "ghost",
-    scheme = "primary",
-    size = "lg",
-    leftIcon,
-    rightIcon,
-    className: baseClassName = "",
-    children,
-    ...rest
-  } = props;
+	const {
+		variant = "ghost",
+		scheme = "primary",
+		size = "lg",
+		leftIcon,
+		rightIcon,
+		className: baseClassName = "",
+		children,
+		...rest
+	} = props;
 
-  const iconSizes = { md: 12, lg: 14 };
-  const iconSize = iconSizes[size];
+	const iconSizes = { md: 12, lg: 14 };
+	const iconSize = iconSizes[size];
 
-  const className = `arkynBadge ${variant} ${scheme} ${size} ${baseClassName}`;
+	const className = `arkynBadge ${variant} ${scheme} ${size} ${baseClassName}`;
 
-  return (
-    <div className={className.trim()} {...rest}>
-      <IconRenderer iconSize={iconSize} icon={leftIcon} />
-      <p>{children}</p>
-      <IconRenderer iconSize={iconSize} icon={rightIcon} />
-    </div>
-  );
+	return (
+		<div className={className.trim()} {...rest}>
+			<IconRenderer iconSize={iconSize} icon={leftIcon} />
+			<p>{children}</p>
+			<IconRenderer iconSize={iconSize} icon={rightIcon} />
+		</div>
+	);
 }
 
 export { Badge };

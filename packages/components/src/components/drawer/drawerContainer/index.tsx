@@ -1,17 +1,17 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 
 import { useScrollLock } from "../../../hooks/useScrollLock";
 import { DrawerProvider } from "../drawerContext";
 import "./styles.css";
 
 type DrawerContainerProps = HTMLAttributes<HTMLElement> & {
-  /** Controls whether the drawer is visible. */
-  isVisible: boolean;
-  /** Callback invoked when the overlay is clicked to close the drawer. */
-  makeInvisible: () => void;
-  /** Side from which the drawer slides in. @default "left" */
-  orientation?: "left" | "right";
+	/** Controls whether the drawer is visible. */
+	isVisible: boolean;
+	/** Callback invoked when the overlay is clicked to close the drawer. */
+	makeInvisible: () => void;
+	/** Side from which the drawer slides in. @default "left" */
+	orientation?: "left" | "right";
 };
 
 /**
@@ -40,50 +40,50 @@ type DrawerContainerProps = HTMLAttributes<HTMLElement> & {
  */
 
 function DrawerContainer(props: DrawerContainerProps) {
-  const {
-    isVisible,
-    makeInvisible,
-    orientation = "left",
-    children,
-    className: baseClassName,
-    ...rest
-  } = props;
+	const {
+		isVisible,
+		makeInvisible,
+		orientation = "left",
+		children,
+		className: baseClassName,
+		...rest
+	} = props;
 
-  useScrollLock(isVisible);
+	useScrollLock(isVisible);
 
-  const translateX = orientation === "left" ? "-100%" : "100%";
+	const translateX = orientation === "left" ? "-100%" : "100%";
 
-  const visibleClass = isVisible ? "visibleTrue" : "visibleFalse";
-  const className = `arkynDrawerContainer ${orientation} ${visibleClass} ${baseClassName}`;
+	const visibleClass = isVisible ? "visibleTrue" : "visibleFalse";
+	const className = `arkynDrawerContainer ${orientation} ${visibleClass} ${baseClassName}`;
 
-  return (
-    <DrawerProvider makeInvisible={makeInvisible}>
-      <AnimatePresence>
-        {isVisible && (
-          <aside className={className.trim()} {...rest}>
-            <motion.div
-              className="arkynDrawerContainerOverlay"
-              transition={{ duration: 0.15, ease: "easeOut" }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={makeInvisible}
-            />
+	return (
+		<DrawerProvider makeInvisible={makeInvisible}>
+			<AnimatePresence>
+				{isVisible && (
+					<aside className={className.trim()} {...rest}>
+						<motion.div
+							className="arkynDrawerContainerOverlay"
+							transition={{ duration: 0.15, ease: "easeOut" }}
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							onClick={makeInvisible}
+						/>
 
-            <motion.div
-              className="arkynDrawerContainerContent"
-              transition={{ ease: "easeOut", duration: 0.15 }}
-              initial={{ transform: `translateX(${translateX})` }}
-              animate={{ transform: "translateX(0px)" }}
-              exit={{ transform: `translateX(${translateX})` }}
-            >
-              {children}
-            </motion.div>
-          </aside>
-        )}
-      </AnimatePresence>
-    </DrawerProvider>
-  );
+						<motion.div
+							className="arkynDrawerContainerContent"
+							transition={{ ease: "easeOut", duration: 0.15 }}
+							initial={{ transform: `translateX(${translateX})` }}
+							animate={{ transform: "translateX(0px)" }}
+							exit={{ transform: `translateX(${translateX})` }}
+						>
+							{children}
+						</motion.div>
+					</aside>
+				)}
+			</AnimatePresence>
+		</DrawerProvider>
+	);
 }
 
 export { DrawerContainer };

@@ -9,56 +9,56 @@ import { CalendarTableHeader } from "./calendarTableHeader";
  * Props for Calendar single-date selection mode.
  */
 type SingleCalendarProps = {
-  /** Sets single-date selection mode. */
-  type: "single";
-  /**
-   * Defines the visual/behavioral variant.
-   * - `basic`: simplified header.
-   * - `complete`: full navigation experience.
-   *
-   * @default "complete"
-   */
-  variant?: "basic" | "complete";
-  /** Currently selected date. */
-  value?: Date;
-  /** Initial selected date. */
-  defaultValue?: Date;
-  /** Callback fired when the selected date changes. */
-  onChange?: (date: Date) => void;
-  /** Currently focused view date. */
-  viewValue?: Date;
-  /** Initial focused view date. */
-  defaultViewValue?: Date;
-  /** Callback fired when the view (month/year) changes. */
-  onChangeView?: (date: Date) => void;
+	/** Sets single-date selection mode. */
+	type: "single";
+	/**
+	 * Defines the visual/behavioral variant.
+	 * - `basic`: simplified header.
+	 * - `complete`: full navigation experience.
+	 *
+	 * @default "complete"
+	 */
+	variant?: "basic" | "complete";
+	/** Currently selected date. */
+	value?: Date;
+	/** Initial selected date. */
+	defaultValue?: Date;
+	/** Callback fired when the selected date changes. */
+	onChange?: (date: Date) => void;
+	/** Currently focused view date. */
+	viewValue?: Date;
+	/** Initial focused view date. */
+	defaultViewValue?: Date;
+	/** Callback fired when the view (month/year) changes. */
+	onChangeView?: (date: Date) => void;
 };
 
 /**
  * Props for Calendar range selection mode.
  */
 type RangeCalendarProps = {
-  /** Sets range selection mode. */
-  type: "range";
-  /**
-   * Defines the visual/behavioral variant.
-   * - `basic`: simplified header.
-   * - `complete`: full navigation experience.
-   *
-   * @default "complete"
-   */
-  variant?: "basic" | "complete";
-  /** Currently selected range in `[start, end]` format. */
-  value?: [Date, Date];
-  /** Initial selected range in `[start, end]` format. */
-  defaultValue?: [Date, Date];
-  /** Callback fired when the selected range changes. */
-  onChange?: (date: [Date, Date]) => void;
-  /** Currently focused view date. */
-  viewValue?: Date;
-  /** Initial focused view date. */
-  defaultViewValue?: Date;
-  /** Callback fired when the view (month/year) changes. */
-  onChangeView?: (date: Date) => void;
+	/** Sets range selection mode. */
+	type: "range";
+	/**
+	 * Defines the visual/behavioral variant.
+	 * - `basic`: simplified header.
+	 * - `complete`: full navigation experience.
+	 *
+	 * @default "complete"
+	 */
+	variant?: "basic" | "complete";
+	/** Currently selected range in `[start, end]` format. */
+	value?: [Date, Date];
+	/** Initial selected range in `[start, end]` format. */
+	defaultValue?: [Date, Date];
+	/** Callback fired when the selected range changes. */
+	onChange?: (date: [Date, Date]) => void;
+	/** Currently focused view date. */
+	viewValue?: Date;
+	/** Initial focused view date. */
+	defaultViewValue?: Date;
+	/** Callback fired when the view (month/year) changes. */
+	onChangeView?: (date: Date) => void;
 };
 
 /**
@@ -106,49 +106,49 @@ type CalendarProps = SingleCalendarProps | RangeCalendarProps;
  * />
  */
 function Calendar(props: CalendarProps) {
-  const variant = props.variant || "complete";
+	const variant = props.variant || "complete";
 
-  if (props.type === "range") {
-    return (
-      <CalendarProvider
-        value={props.value}
-        viewValue={props.viewValue}
-        defaultViewValue={props.defaultViewValue}
-        defaultValue={props.defaultValue}
-        calendarType="range"
-        onChange={props.onChange}
-        onChangeView={props.onChangeView}
-      >
-        <CalendarContainer>
-          <CalendarHeader basicMode={variant.includes("basic")} />
-          <CalendarTableContainer>
-            <CalendarTableHeader />
-            <CalendarTableBody />
-          </CalendarTableContainer>
-        </CalendarContainer>
-      </CalendarProvider>
-    );
-  }
+	if (props.type === "range") {
+		return (
+			<CalendarProvider
+				value={props.value}
+				viewValue={props.viewValue}
+				defaultViewValue={props.defaultViewValue}
+				defaultValue={props.defaultValue}
+				calendarType="range"
+				onChange={props.onChange}
+				onChangeView={props.onChangeView}
+			>
+				<CalendarContainer>
+					<CalendarHeader basicMode={variant.includes("basic")} />
+					<CalendarTableContainer>
+						<CalendarTableHeader />
+						<CalendarTableBody />
+					</CalendarTableContainer>
+				</CalendarContainer>
+			</CalendarProvider>
+		);
+	}
 
-  return (
-    <CalendarProvider
-      value={props.value}
-      viewValue={props.viewValue}
-      defaultViewValue={props.defaultViewValue}
-      defaultValue={props.defaultValue}
-      calendarType="single"
-      onChange={props.onChange}
-      onChangeView={props.onChangeView}
-    >
-      <CalendarContainer>
-        <CalendarHeader basicMode={variant.includes("basic")} />
-        <CalendarTableContainer>
-          <CalendarTableHeader />
-          <CalendarTableBody />
-        </CalendarTableContainer>
-      </CalendarContainer>
-    </CalendarProvider>
-  );
+	return (
+		<CalendarProvider
+			value={props.value}
+			viewValue={props.viewValue}
+			defaultViewValue={props.defaultViewValue}
+			defaultValue={props.defaultValue}
+			calendarType="single"
+			onChange={props.onChange}
+			onChangeView={props.onChangeView}
+		>
+			<CalendarContainer>
+				<CalendarHeader basicMode={variant.includes("basic")} />
+				<CalendarTableContainer>
+					<CalendarTableHeader />
+					<CalendarTableBody />
+				</CalendarTableContainer>
+			</CalendarContainer>
+		</CalendarProvider>
+	);
 }
 
 export { Calendar };

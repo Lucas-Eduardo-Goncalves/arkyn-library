@@ -1,50 +1,50 @@
 .arkynAudioPlayer {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
 }
 
 .arkynAudioPlayer button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-  border: none;
-  border-radius: 50%;
+	border: none;
+	border-radius: 50%;
 
-  min-height: 40px;
-  min-width: 40px;
-  max-height: 40px;
-  max-width: 40px;
+	min-height: 40px;
+	min-width: 40px;
+	max-height: 40px;
+	max-width: 40px;
 
-  background-color: rgba(var(--spotlight-primary), 1);
+	background-color: rgba(var(--spotlight-primary), 1);
 }
 
 .arkynAudioPlayer button:hover:not(:disabled) {
-  cursor: pointer;
-  background-color: rgba(var(--spotlight-primary), 0.8);
+	cursor: pointer;
+	background-color: rgba(var(--spotlight-primary), 0.8);
 }
 
 .arkynAudioPlayer button:disabled {
-  cursor: not-allowed;
-  opacity: 0.2;
+	cursor: not-allowed;
+	opacity: 0.2;
 }
 
 .arkynAudioPlayer button svg {
-  fill: #fff;
-  stroke: #fff;
+	fill: #fff;
+	stroke: #fff;
 
-  min-height: 20px;
-  min-width: 20px;
-  max-height: 20px;
-  max-width: 20px;
+	min-height: 20px;
+	min-width: 20px;
+	max-height: 20px;
+	max-width: 20px;
 }
 
 .arkynAudioPlayer p {
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 12px;
-  text-align: left;
-  color: var(--text-body);
-  user-select: none;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 12px;
+	text-align: left;
+	color: var(--text-body);
+	user-select: none;
 }

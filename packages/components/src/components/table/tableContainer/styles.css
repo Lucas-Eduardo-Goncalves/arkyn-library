@@ -1,15 +1,15 @@
 .arkynTableContainer {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-  width: 100%;
-  height: max-content;
+	width: 100%;
+	height: max-content;
 
-  overflow-y: hidden;
-  overflow-x: auto;
+	overflow-y: hidden;
+	overflow-x: auto;
 }
 
 .arkynTableContainer table {
-  border-collapse: separate;
-  border-spacing: 0;
+	border-collapse: separate;
+	border-spacing: 0;
 }

@@ -18,8 +18,8 @@
  */
 
 function isHtml(rawString: string): boolean {
-  const htmlRegex = /<\/?[a-z][\s\S]*>/i;
-  return htmlRegex.test(rawString);
+	const htmlRegex = /<\/?[a-z][\s\S]*>/i;
+	return htmlRegex.test(rawString);
 }
 
 export { isHtml };

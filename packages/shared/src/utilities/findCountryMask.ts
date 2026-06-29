@@ -1,4 +1,4 @@
-import { countries, type CountryType } from "@arkyn/templates";
+import { type CountryType, countries } from "@arkyn/templates";
 import { parsePhoneNumberWithError } from "libphonenumber-js";
 import { removeNonNumeric } from "./removeNonNumeric";
 
@@ -21,36 +21,36 @@ import { removeNonNumeric } from "./removeNonNumeric";
  */
 
 function findCountryMask(phoneNumber: string): [string, CountryType] {
-  try {
-    const parsedPhone = parsePhoneNumberWithError(phoneNumber);
+	try {
+		const parsedPhone = parsePhoneNumberWithError(phoneNumber);
 
-    const countryCode = parsedPhone?.country;
-    if (!countryCode) throw new Error("Invalid phone number");
+		const countryCode = parsedPhone?.country;
+		if (!countryCode) throw new Error("Invalid phone number");
 
-    const country = countries.find((c) => c.iso === countryCode);
-    if (!country) throw new Error("Phone number country not supported");
+		const country = countries.find((c) => c.iso === countryCode);
+		if (!country) throw new Error("Phone number country not supported");
 
-    if (typeof country.mask === "string") return [country.mask, country];
+		if (typeof country.mask === "string") return [country.mask, country];
 
-    const maskForLength = country.mask.find((mask) => {
-      const maskDigits = mask.replace(/[^_]/g, "");
-      const phoneDigits = removeNonNumeric(parsedPhone.nationalNumber);
+		const maskForLength = country.mask.find((mask) => {
+			const maskDigits = mask.replace(/[^_]/g, "");
+			const phoneDigits = removeNonNumeric(parsedPhone.nationalNumber);
 
-      const maskDigitsCount = maskDigits.length;
-      const phoneDigitsCount = phoneDigits.length;
+			const maskDigitsCount = maskDigits.length;
+			const phoneDigitsCount = phoneDigits.length;
 
-      return maskDigitsCount === phoneDigitsCount;
-    });
+			return maskDigitsCount === phoneDigitsCount;
+		});
 
-    if (!maskForLength) {
-      throw new Error("No mask found for the given phone number length");
-    }
+		if (!maskForLength) {
+			throw new Error("No mask found for the given phone number length");
+		}
 
-    return [maskForLength, country];
-  } catch (rawError) {
-    const error = rawError as Error;
-    throw new Error(error.message);
-  }
+		return [maskForLength, country];
+	} catch (rawError) {
+		const error = rawError as Error;
+		throw new Error(error.message);
+	}
 }
 
 export { findCountryMask };

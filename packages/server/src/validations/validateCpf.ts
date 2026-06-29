@@ -1,26 +1,26 @@
 import { removeNonNumeric } from "@arkyn/shared";
 
 function isInvalidLength(cpf: string) {
-  const CPF_LENGTH = 11;
-  return cpf.length !== CPF_LENGTH;
+	const CPF_LENGTH = 11;
+	return cpf.length !== CPF_LENGTH;
 }
 
 function hasAllDigitsEqual(cpf: string) {
-  const [firstCpfDigit] = cpf;
-  return [...cpf].every((digit) => digit === firstCpfDigit);
+	const [firstCpfDigit] = cpf;
+	return [...cpf].every((digit) => digit === firstCpfDigit);
 }
 
 function calculateDigit(cpf: string, factor: number) {
-  let total = 0;
-  for (const digit of cpf) {
-    if (factor > 1) total += parseInt(digit) * factor--;
-  }
-  const rest = total % 11;
-  return rest < 2 ? 0 : 11 - rest;
+	let total = 0;
+	for (const digit of cpf) {
+		if (factor > 1) total += parseInt(digit, 10) * factor--;
+	}
+	const rest = total % 11;
+	return rest < 2 ? 0 : 11 - rest;
 }
 
 function extractDigit(cpf: string) {
-  return cpf.slice(9);
+	return cpf.slice(9);
 }
 
 /**
@@ -38,22 +38,22 @@ function extractDigit(cpf: string) {
  */
 
 function validateCpf(rawCpf: string): boolean {
-  if (!rawCpf) return false;
-  if (rawCpf.length > 14) return false;
-  if (rawCpf.length < 11) return false;
+	if (!rawCpf) return false;
+	if (rawCpf.length > 14) return false;
+	if (rawCpf.length < 11) return false;
 
-  const hasSpaces = /\s/.test(rawCpf);
-  if (hasSpaces) return false;
+	const hasSpaces = /\s/.test(rawCpf);
+	if (hasSpaces) return false;
 
-  const cpf = removeNonNumeric(rawCpf);
+	const cpf = removeNonNumeric(rawCpf);
 
-  if (isInvalidLength(cpf)) return false;
-  if (hasAllDigitsEqual(cpf)) return false;
+	if (isInvalidLength(cpf)) return false;
+	if (hasAllDigitsEqual(cpf)) return false;
 
-  const digit1 = calculateDigit(cpf, 10);
-  const digit2 = calculateDigit(cpf, 11);
+	const digit1 = calculateDigit(cpf, 10);
+	const digit2 = calculateDigit(cpf, 11);
 
-  return extractDigit(cpf) === `${digit1}${digit2}`;
+	return extractDigit(cpf) === `${digit1}${digit2}`;
 }
 
 export { validateCpf };

@@ -1,20 +1,20 @@
-import { HTMLAttributes, ReactNode, useState } from "react";
+import { type HTMLAttributes, type ReactNode, useState } from "react";
 
 import { CardTabProvider } from "../cardTabContext";
 import "./styles.css";
 
 type CardTabContainerProps = Omit<
-  HTMLAttributes<HTMLElement>,
-  "onClick" | "children" | "ref" | "onChange"
+	HTMLAttributes<HTMLElement>,
+	"onClick" | "children" | "ref" | "onChange"
 > & {
-  /** `CardTabButton` components to render as tabs. Required. */
-  children: ReactNode;
-  /** Disables all tab buttons at once. @default false */
-  disabled?: boolean;
-  /** Initially selected tab value. */
-  defaultValue?: string;
-  /** Callback fired when the active tab changes, receiving the new value. */
-  onChange?: (index: string) => void;
+	/** `CardTabButton` components to render as tabs. Required. */
+	children: ReactNode;
+	/** Disables all tab buttons at once. @default false */
+	disabled?: boolean;
+	/** Initially selected tab value. */
+	defaultValue?: string;
+	/** Callback fired when the active tab changes, receiving the new value. */
+	onChange?: (index: string) => void;
 };
 
 /**
@@ -45,35 +45,35 @@ type CardTabContainerProps = Omit<
  */
 
 function CardTabContainer(props: CardTabContainerProps) {
-  const {
-    children,
-    onChange,
-    defaultValue,
-    disabled = false,
-    className: baseClassName,
-    ...rest
-  } = props;
+	const {
+		children,
+		onChange,
+		defaultValue,
+		disabled = false,
+		className: baseClassName,
+		...rest
+	} = props;
 
-  const [currentTab, setCurrentTab] = useState(defaultValue || "");
+	const [currentTab, setCurrentTab] = useState(defaultValue || "");
 
-  const className = `arkynCardTabContainer ${baseClassName || ""}`;
+	const className = `arkynCardTabContainer ${baseClassName || ""}`;
 
-  function changeCurrentTab(value: string) {
-    setCurrentTab(value);
-    if (onChange) onChange(value);
-  }
+	function changeCurrentTab(value: string) {
+		setCurrentTab(value);
+		if (onChange) onChange(value);
+	}
 
-  return (
-    <CardTabProvider
-      disabled={disabled}
-      currentTab={currentTab}
-      changeCurrentTab={changeCurrentTab}
-    >
-      <nav className={className.trim()} {...rest}>
-        {children}
-      </nav>
-    </CardTabProvider>
-  );
+	return (
+		<CardTabProvider
+			disabled={disabled}
+			currentTab={currentTab}
+			changeCurrentTab={changeCurrentTab}
+		>
+			<nav className={className.trim()} {...rest}>
+				{children}
+			</nav>
+		</CardTabProvider>
+	);
 }
 
 export { CardTabContainer };

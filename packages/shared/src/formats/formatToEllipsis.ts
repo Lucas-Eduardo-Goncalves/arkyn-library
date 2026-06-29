@@ -13,27 +13,27 @@
  */
 
 function formatToEllipsis(text: string, maxLength: number): string {
-  if (text.length > maxLength) {
-    let trimmedText = text.substring(0, maxLength);
+	if (text.length > maxLength) {
+		let trimmedText = text.substring(0, maxLength);
 
-    // Find the last space to avoid breaking words
-    const lastSpaceIndex = trimmedText.lastIndexOf(" ");
-    if (lastSpaceIndex > 0) {
-      trimmedText = trimmedText.substring(0, lastSpaceIndex);
-    }
+		// Find the last space to avoid breaking words
+		const lastSpaceIndex = trimmedText.lastIndexOf(" ");
+		if (lastSpaceIndex > 0) {
+			trimmedText = trimmedText.substring(0, lastSpaceIndex);
+		}
 
-    // Remove trailing punctuation
-    trimmedText = trimmedText.replace(/[\s.,!?;:]+$/, "");
+		// Remove trailing punctuation
+		trimmedText = trimmedText.replace(/[\s.,!?;:]+$/, "");
 
-    // If after removing punctuation the text is empty or only contains punctuation/spaces, return only "..."
-    if (trimmedText.trim().length === 0 || /^[.,!?;:\s]+$/.test(trimmedText)) {
-      return "...";
-    }
+		// If after removing punctuation the text is empty or only contains punctuation/spaces, return only "..."
+		if (trimmedText.trim().length === 0 || /^[.,!?;:\s]+$/.test(trimmedText)) {
+			return "...";
+		}
 
-    return `${trimmedText}...`;
-  }
+		return `${trimmedText}...`;
+	}
 
-  return text;
+	return text;
 }
 
 export { formatToEllipsis };

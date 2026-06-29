@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import "./styles.css";
 
 type FieldErrorProps = HTMLAttributes<HTMLElement>;
@@ -21,16 +21,16 @@ type FieldErrorProps = HTMLAttributes<HTMLElement>;
  */
 
 function FieldError(props: FieldErrorProps) {
-  const { children, className: baseClassName, ...rest } = props;
-  const className = `arkynFieldError ${baseClassName}`;
+	const { children, className: baseClassName, ...rest } = props;
+	const className = `arkynFieldError ${baseClassName}`;
 
-  if (!children) return <></>;
+	if (!children) return <></>;
 
-  return (
-    <strong className={className.trim()} {...rest}>
-      {children}
-    </strong>
-  );
+	return (
+		<strong className={className.trim()} {...rest}>
+			{children}
+		</strong>
+	);
 }
 
 export { FieldError };

@@ -1,9 +1,9 @@
-import { Children, HTMLAttributes } from "react";
+import { Children, type HTMLAttributes } from "react";
 import "./styles.css";
 
 type TableBodyProps = HTMLAttributes<HTMLTableSectionElement> & {
-  /** Text displayed in a full-width row when no children are present. @default "Nenhum dado adicionado." */
-  emptyMessage?: string;
+	/** Text displayed in a full-width row when no children are present. @default "Nenhum dado adicionado." */
+	emptyMessage?: string;
 };
 
 /**
@@ -32,29 +32,29 @@ type TableBodyProps = HTMLAttributes<HTMLTableSectionElement> & {
  */
 
 function TableBody(props: TableBodyProps) {
-  const {
-    emptyMessage = "Nenhum dado adicionado.",
-    className: baseClassName,
-    children,
-    ...rest
-  } = props;
+	const {
+		emptyMessage = "Nenhum dado adicionado.",
+		className: baseClassName,
+		children,
+		...rest
+	} = props;
 
-  const className = `arkynTableBody ${baseClassName}`;
-  const isEmpty = Children.count(children) === 0;
+	const className = `arkynTableBody ${baseClassName}`;
+	const isEmpty = Children.count(children) === 0;
 
-  return (
-    <tbody className={className.trim()} {...rest}>
-      {isEmpty ? (
-        <tr className="arkynTableBodyEmptyLine">
-          <td colSpan={100}>
-            <div>{emptyMessage}</div>
-          </td>
-        </tr>
-      ) : (
-        children
-      )}
-    </tbody>
-  );
+	return (
+		<tbody className={className.trim()} {...rest}>
+			{isEmpty ? (
+				<tr className="arkynTableBodyEmptyLine">
+					<td colSpan={100}>
+						<div>{emptyMessage}</div>
+					</td>
+				</tr>
+			) : (
+				children
+			)}
+		</tbody>
+	);
 }
 
 export { TableBody };

@@ -1,12 +1,12 @@
 import { X } from "lucide-react";
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 
 import { useModal } from "../modalContext";
 import "./styles.css";
 
 type ModalHeaderProps = HTMLAttributes<HTMLElement> & {
-  /** Whether to render the X close button. @default true */
-  showCloseButton?: boolean;
+	/** Whether to render the X close button. @default true */
+	showCloseButton?: boolean;
 };
 
 /**
@@ -34,32 +34,32 @@ type ModalHeaderProps = HTMLAttributes<HTMLElement> & {
  */
 
 function ModalHeader(args: ModalHeaderProps) {
-  const {
-    showCloseButton = true,
-    className: baseClassName,
-    children,
-    ...rest
-  } = args;
+	const {
+		showCloseButton = true,
+		className: baseClassName,
+		children,
+		...rest
+	} = args;
 
-  const { makeInvisible } = useModal();
-  const className = `arkynModalHeader ${baseClassName}`;
+	const { makeInvisible } = useModal();
+	const className = `arkynModalHeader ${baseClassName}`;
 
-  return (
-    <header className={className.trim()} {...rest}>
-      {children}
+	return (
+		<header className={className.trim()} {...rest}>
+			{children}
 
-      {showCloseButton && (
-        <button
-          type="button"
-          onClick={makeInvisible}
-          aria-label="Close modal button"
-          className="arkynModalHeaderCloseButton"
-        >
-          <X size={24} />
-        </button>
-      )}
-    </header>
-  );
+			{showCloseButton && (
+				<button
+					type="button"
+					onClick={makeInvisible}
+					aria-label="Close modal button"
+					className="arkynModalHeaderCloseButton"
+				>
+					<X size={24} />
+				</button>
+			)}
+		</header>
+	);
 }
 
 export { ModalHeader };

@@ -28,60 +28,59 @@
  */
 
 const formatJsonObject = (json: any, indentLevel: number): string => {
-  const indent = "  ".repeat(indentLevel);
-  let formattedString = "";
+	const indent = "  ".repeat(indentLevel);
+	let formattedString = "";
 
-  if (typeof json === "object" && json !== null) {
-    if (Array.isArray(json)) {
-      if (json.length === 0) {
-        // Caso especial para arrays vazios
-        formattedString += "[]";
-      } else {
-        formattedString += "[\n";
-        json.forEach((item, index) => {
-          formattedString +=
-            indent + "  " + formatJsonObject(item, indentLevel + 1);
-          if (index < json.length - 1) {
-            formattedString += ",";
-          }
-          formattedString += "\n";
-        });
-        formattedString += indent + "]";
-      }
-    } else {
-      const keys = Object.keys(json);
-      if (keys.length === 0) {
-        // Caso especial para objetos vazios
-        formattedString += "{}";
-      } else {
-        formattedString += "{\n";
-        keys.forEach((key, index) => {
-          formattedString +=
-            indent +
-            '  "' +
-            key +
-            '": ' +
-            formatJsonObject(json[key], indentLevel + 1);
-          if (index < keys.length - 1) {
-            formattedString += ",";
-          }
-          formattedString += "\n";
-        });
-        formattedString += indent + "}";
-      }
-    }
-  } else if (typeof json === "string") {
-    try {
-      const parsedObj = JSON.parse(json);
-      formattedString += formatJsonObject(parsedObj, indentLevel);
-    } catch {
-      formattedString += '"' + json + '"';
-    }
-  } else {
-    formattedString += json;
-  }
+	if (typeof json === "object" && json !== null) {
+		if (Array.isArray(json)) {
+			if (json.length === 0) {
+				// Caso especial para arrays vazios
+				formattedString += "[]";
+			} else {
+				formattedString += "[\n";
+				json.forEach((item, index) => {
+					formattedString += `${indent}  ${formatJsonObject(item, indentLevel + 1)}`;
+					if (index < json.length - 1) {
+						formattedString += ",";
+					}
+					formattedString += "\n";
+				});
+				formattedString += `${indent}]`;
+			}
+		} else {
+			const keys = Object.keys(json);
+			if (keys.length === 0) {
+				// Caso especial para objetos vazios
+				formattedString += "{}";
+			} else {
+				formattedString += "{\n";
+				keys.forEach((key, index) => {
+					formattedString +=
+						indent +
+						'  "' +
+						key +
+						'": ' +
+						formatJsonObject(json[key], indentLevel + 1);
+					if (index < keys.length - 1) {
+						formattedString += ",";
+					}
+					formattedString += "\n";
+				});
+				formattedString += `${indent}}`;
+			}
+		}
+	} else if (typeof json === "string") {
+		try {
+			const parsedObj = JSON.parse(json);
+			formattedString += formatJsonObject(parsedObj, indentLevel);
+		} catch {
+			formattedString += `"${json}"`;
+		}
+	} else {
+		formattedString += json;
+	}
 
-  return formattedString;
+	return formattedString;
 };
 
 export { formatJsonObject };

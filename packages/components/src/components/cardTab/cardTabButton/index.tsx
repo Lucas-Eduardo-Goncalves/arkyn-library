@@ -1,16 +1,16 @@
-import { ButtonHTMLAttributes, MouseEvent, ReactNode } from "react";
+import type { ButtonHTMLAttributes, MouseEvent, ReactNode } from "react";
 
 import { useCardTab } from "../cardTabContext";
 import "./styles.css";
 
 type CardTabButtonProps = Omit<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  "children" | "value" | "type"
+	ButtonHTMLAttributes<HTMLButtonElement>,
+	"children" | "value" | "type"
 > & {
-  /** Content displayed inside the tab button. */
-  children: ReactNode;
-  /** Unique identifier for this tab; matched against the container's active value. */
-  value: string;
+	/** Content displayed inside the tab button. */
+	children: ReactNode;
+	/** Unique identifier for this tab; matched against the container's active value. */
+	value: string;
 };
 
 /**
@@ -38,39 +38,39 @@ type CardTabButtonProps = Omit<
  */
 
 function CardTabButton(props: CardTabButtonProps) {
-  const {
-    children,
-    disabled: rawDisabled = false,
-    className: baseClassName = "",
-    onClick,
-    value,
-    ...rest
-  } = props;
+	const {
+		children,
+		disabled: rawDisabled = false,
+		className: baseClassName = "",
+		onClick,
+		value,
+		...rest
+	} = props;
 
-  const { disabled, currentTab, changeCurrentTab } = useCardTab();
+	const { disabled, currentTab, changeCurrentTab } = useCardTab();
 
-  const isDisabled = disabled || rawDisabled;
+	const isDisabled = disabled || rawDisabled;
 
-  const disabledClass = isDisabled ? "isDisabled" : "";
-  const activeClass = currentTab === value && value ? "isActive" : "";
-  const className = `arkynCardTabButton ${disabledClass} ${activeClass} ${baseClassName}`;
+	const disabledClass = isDisabled ? "isDisabled" : "";
+	const activeClass = currentTab === value && value ? "isActive" : "";
+	const className = `arkynCardTabButton ${disabledClass} ${activeClass} ${baseClassName}`;
 
-  function handleClick(event: MouseEvent<HTMLButtonElement>) {
-    changeCurrentTab(value);
-    onClick && onClick(event);
-  }
+	function handleClick(event: MouseEvent<HTMLButtonElement>) {
+		changeCurrentTab(value);
+		onClick?.(event);
+	}
 
-  return (
-    <button
-      onClick={handleClick}
-      className={className.trim()}
-      {...rest}
-      disabled={isDisabled}
-      type="button"
-    >
-      {children}
-    </button>
-  );
+	return (
+		<button
+			onClick={handleClick}
+			className={className.trim()}
+			{...rest}
+			disabled={isDisabled}
+			type="button"
+		>
+			{children}
+		</button>
+	);
 }
 
 export { CardTabButton };

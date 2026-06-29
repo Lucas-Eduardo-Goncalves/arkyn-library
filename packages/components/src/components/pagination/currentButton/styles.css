@@ -1,19 +1,19 @@
 .arkynPaginationCurrentButton {
-  background-color: rgba(var(--spotlight-primary), 1);
-  color: #ffffff;
-  border: none;
+	background-color: rgba(var(--spotlight-primary), 1);
+	color: #ffffff;
+	border: none;
 
-  min-height: 28px;
-  min-width: 28px;
+	min-height: 28px;
+	min-width: 28px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-  border-radius: 8px;
+	border-radius: 8px;
 
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 14px;
-  text-align: center;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 14px;
+	text-align: center;
 }

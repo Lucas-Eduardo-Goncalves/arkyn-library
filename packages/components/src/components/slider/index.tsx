@@ -1,16 +1,16 @@
-import { HTMLAttributes, useEffect, useRef, useState } from "react";
+import { type HTMLAttributes, useEffect, useRef, useState } from "react";
 
 import "./styles.css";
 
 type SliderProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> & {
-  /** Current slider position as a percentage (0–100). Required. */
-  value: number;
-  /** Callback fired whenever the value changes. Required. */
-  onChange: (value: number) => void;
-  /** Disables all drag and click interactions. @default false */
-  disabled?: boolean;
-  /** Callback fired when the dragging state changes (`true` = drag started, `false` = drag ended). */
-  onDragging?: (isDragging: boolean) => void;
+	/** Current slider position as a percentage (0–100). Required. */
+	value: number;
+	/** Callback fired whenever the value changes. Required. */
+	onChange: (value: number) => void;
+	/** Disables all drag and click interactions. @default false */
+	disabled?: boolean;
+	/** Callback fired when the dragging state changes (`true` = drag started, `false` = drag ended). */
+	onDragging?: (isDragging: boolean) => void;
 };
 
 /**
@@ -43,76 +43,76 @@ type SliderProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> & {
  */
 
 function Slider(props: SliderProps) {
-  const {
-    onChange,
-    value,
-    disabled = false,
-    onDragging,
-    className = "",
-    ...rest
-  } = props;
+	const {
+		onChange,
+		value,
+		disabled = false,
+		onDragging,
+		className = "",
+		...rest
+	} = props;
 
-  const [isDragging, setIsDragging] = useState(false);
-  const sliderRef = useRef<HTMLDivElement>(null);
+	const [isDragging, setIsDragging] = useState(false);
+	const sliderRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseDown = () => setIsDragging(true);
-  const handleMouseUp = () => setIsDragging(false);
+	const handleMouseDown = () => setIsDragging(true);
+	const handleMouseUp = () => setIsDragging(false);
 
-  const handleMouseMove = (event: MouseEvent) => {
-    if (disabled) return;
-    if (!isDragging || !sliderRef.current) return;
+	const handleMouseMove = (event: MouseEvent) => {
+		if (disabled) return;
+		if (!isDragging || !sliderRef.current) return;
 
-    const rect = sliderRef.current.getBoundingClientRect();
-    const offsetX = event.clientX - rect.left;
-    const newValue = Math.min(Math.max((offsetX / rect.width) * 100, 0), 100);
+		const rect = sliderRef.current.getBoundingClientRect();
+		const offsetX = event.clientX - rect.left;
+		const newValue = Math.min(Math.max((offsetX / rect.width) * 100, 0), 100);
 
-    onChange(newValue);
-  };
+		onChange(newValue);
+	};
 
-  const handleSliderClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (disabled) return;
-    if (!sliderRef.current) return;
+	const handleSliderClick = (event: React.MouseEvent<HTMLDivElement>) => {
+		if (disabled) return;
+		if (!sliderRef.current) return;
 
-    const rect = sliderRef.current.getBoundingClientRect();
-    const offsetX = event.clientX - rect.left;
-    const newValue = Math.min(Math.max((offsetX / rect.width) * 100, 0), 100);
+		const rect = sliderRef.current.getBoundingClientRect();
+		const offsetX = event.clientX - rect.left;
+		const newValue = Math.min(Math.max((offsetX / rect.width) * 100, 0), 100);
 
-    onChange(newValue);
-  };
+		onChange(newValue);
+	};
 
-  useEffect(() => {
-    if (isDragging) {
-      onDragging && onDragging(true);
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-    } else {
-      onDragging && onDragging(false);
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-    }
+	useEffect(() => {
+		if (isDragging) {
+			onDragging?.(true);
+			document.addEventListener("mousemove", handleMouseMove);
+			document.addEventListener("mouseup", handleMouseUp);
+		} else {
+			onDragging?.(false);
+			document.removeEventListener("mousemove", handleMouseMove);
+			document.removeEventListener("mouseup", handleMouseUp);
+		}
 
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, [isDragging]);
+		return () => {
+			document.removeEventListener("mousemove", handleMouseMove);
+			document.removeEventListener("mouseup", handleMouseUp);
+		};
+	}, [isDragging, onDragging, handleMouseUp, handleMouseMove]);
 
-  const isDraggingClass = isDragging ? "isDragging" : "isNotDragging";
-  const disabledClass = disabled ? "isDisabled" : "isEnabled";
-  const sliderClassname = `arkynSliderTrack ${isDraggingClass} ${disabledClass} ${className}`;
+	const isDraggingClass = isDragging ? "isDragging" : "isNotDragging";
+	const disabledClass = disabled ? "isDisabled" : "isEnabled";
+	const sliderClassname = `arkynSliderTrack ${isDraggingClass} ${disabledClass} ${className}`;
 
-  return (
-    <div
-      {...rest}
-      className={sliderClassname}
-      onMouseDown={handleMouseDown}
-      onClick={handleSliderClick}
-      ref={sliderRef}
-    >
-      <div className="arkynSliderFill" style={{ width: `${value}%` }} />
-      <div className="arkynSliderThumb" style={{ left: `${value}%` }} />
-    </div>
-  );
+	return (
+		<div
+			{...rest}
+			className={sliderClassname}
+			onMouseDown={handleMouseDown}
+			onClick={handleSliderClick}
+			ref={sliderRef}
+		>
+			<div className="arkynSliderFill" style={{ width: `${value}%` }} />
+			<div className="arkynSliderThumb" style={{ left: `${value}%` }} />
+		</div>
+	);
 }
 
 export { Slider };

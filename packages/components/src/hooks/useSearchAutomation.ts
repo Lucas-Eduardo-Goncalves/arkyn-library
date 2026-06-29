@@ -1,10 +1,9 @@
 import { useEffect } from "react";
-
-import { useModal } from "./useModal";
-import { useToast } from "./useToast";
 import { badResponses } from "../templates/badResponses";
 import { successResponses } from "../templates/successResponses";
+import { useModal } from "./useModal";
 import { useScopedParams } from "./useScopedParams";
+import { useToast } from "./useToast";
 
 /**
  * useSearchAutomation — URL-driven version of `useAutomation`. Reads automation params from a
@@ -36,39 +35,39 @@ import { useScopedParams } from "./useScopedParams";
  */
 
 function useSearchAutomation(searchString: string, scope: string = "") {
-  const { closeAll } = useModal();
-  const { showToast } = useToast();
+	const { closeAll } = useModal();
+	const { showToast } = useToast();
 
-  const { getParam } = useScopedParams(searchString, scope);
+	const { getParam } = useScopedParams(searchString, scope);
 
-  const closeModal = getParam("closeModal") === "true";
-  const message = getParam("message");
-  const name = getParam("name");
-  const type = getParam("type") as "success" | "danger" | null;
+	const closeModal = getParam("closeModal") === "true";
+	const message = getParam("message");
+	const name = getParam("name");
+	const type = getParam("type") as "success" | "danger" | null;
 
-  useEffect(() => {
-    if (closeModal) closeAll();
-    if (message) {
-      if (type === "success") showToast({ message, type: "success" });
-      if (type === "danger") showToast({ message, type: "danger" });
+	useEffect(() => {
+		if (closeModal) closeAll();
+		if (message) {
+			if (type === "success") showToast({ message, type: "success" });
+			if (type === "danger") showToast({ message, type: "danger" });
 
-      if (
-        name &&
-        badResponses.includes(name) &&
-        !badResponses.includes(message)
-      ) {
-        showToast({ message, type: "danger" });
-      }
+			if (
+				name &&
+				badResponses.includes(name) &&
+				!badResponses.includes(message)
+			) {
+				showToast({ message, type: "danger" });
+			}
 
-      if (
-        name &&
-        successResponses.includes(name) &&
-        !successResponses.includes(message)
-      ) {
-        showToast({ message, type: "success" });
-      }
-    }
-  }, [closeModal, message, name, type]);
+			if (
+				name &&
+				successResponses.includes(name) &&
+				!successResponses.includes(message)
+			) {
+				showToast({ message, type: "success" });
+			}
+		}
+	}, [closeModal, message, name, type, showToast, closeAll]);
 }
 
 export { useSearchAutomation };

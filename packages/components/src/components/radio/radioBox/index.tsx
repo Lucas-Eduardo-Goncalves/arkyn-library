@@ -1,15 +1,15 @@
-import { ButtonHTMLAttributes } from "react";
+import type { ButtonHTMLAttributes } from "react";
 
 import { useRadioGroup } from "../radioContext";
 import "./styles.css";
 
 type RadioBoxProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  /** Value submitted to the form when this option is selected. Required. */
-  value: string;
-  /** Applies error styling. Inherited from `RadioGroup` when not set. */
-  isError?: boolean;
-  /** Size variant. Inherits from `RadioGroup` when not set. */
-  size?: "sm" | "md" | "lg";
+	/** Value submitted to the form when this option is selected. Required. */
+	value: string;
+	/** Applies error styling. Inherited from `RadioGroup` when not set. */
+	isError?: boolean;
+	/** Size variant. Inherits from `RadioGroup` when not set. */
+	size?: "sm" | "md" | "lg";
 };
 
 /**
@@ -38,58 +38,58 @@ type RadioBoxProps = ButtonHTMLAttributes<HTMLButtonElement> & {
  */
 
 function RadioBox(props: RadioBoxProps) {
-  const {
-    value: componentValue,
-    size: componentSize,
-    disabled,
-    children,
-    className: baseClassName = "",
-    onClick,
-    onFocus,
-    ...rest
-  } = props;
+	const {
+		value: componentValue,
+		size: componentSize,
+		disabled,
+		children,
+		className: baseClassName = "",
+		onClick,
+		onFocus,
+		...rest
+	} = props;
 
-  const {
-    handleChange,
-    size: groupSize,
-    value,
-    isError,
-    disabled: groupDisabled,
-  } = useRadioGroup();
+	const {
+		handleChange,
+		size: groupSize,
+		value,
+		isError,
+		disabled: groupDisabled,
+	} = useRadioGroup();
 
-  const isChecked = value === componentValue;
-  const size = componentSize || groupSize;
+	const isChecked = value === componentValue;
+	const size = componentSize || groupSize;
 
-  const isDisabled = disabled || groupDisabled;
+	const isDisabled = disabled || groupDisabled;
 
-  const checkedClass = isChecked ? "checkedTrue" : "checkedFalse";
-  const errorClass = !!isError ? "errorTrue" : "errorFalse";
-  const disabledClass = isDisabled ? "disabledTrue" : "disabledFalse";
-  const className = `arkynRadioBox ${size} ${checkedClass} ${errorClass} ${disabledClass} ${baseClassName}`;
+	const checkedClass = isChecked ? "checkedTrue" : "checkedFalse";
+	const errorClass = isError ? "errorTrue" : "errorFalse";
+	const disabledClass = isDisabled ? "disabledTrue" : "disabledFalse";
+	const className = `arkynRadioBox ${size} ${checkedClass} ${errorClass} ${disabledClass} ${baseClassName}`;
 
-  function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
-    onClick && onClick(event);
-    handleChange(componentValue);
-  }
+	function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
+		onClick?.(event);
+		handleChange(componentValue);
+	}
 
-  function handleFocus(event: React.FocusEvent<HTMLButtonElement>) {
-    onFocus && onFocus(event);
-    handleChange(componentValue);
-  }
+	function handleFocus(event: React.FocusEvent<HTMLButtonElement>) {
+		onFocus?.(event);
+		handleChange(componentValue);
+	}
 
-  return (
-    <label className={className.trim()}>
-      <button
-        type="button"
-        disabled={isDisabled}
-        onClick={handleClick}
-        onFocus={handleFocus}
-        {...rest}
-      />
+	return (
+		<label className={className.trim()}>
+			<button
+				type="button"
+				disabled={isDisabled}
+				onClick={handleClick}
+				onFocus={handleFocus}
+				{...rest}
+			/>
 
-      {children}
-    </label>
-  );
+			{children}
+		</label>
+	);
 }
 
 export { RadioBox };

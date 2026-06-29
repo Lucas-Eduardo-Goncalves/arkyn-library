@@ -13,15 +13,15 @@
  */
 
 function formatToCapitalizeFirstWordLetter(sentence: string) {
-  const words = sentence.split(" ");
+	const words = sentence.split(" ");
 
-  const capitalizedWords = words.map((word) => {
-    const firstLetter = word.charAt(0).toUpperCase();
-    const restOfWord = word.slice(1).toLowerCase();
-    return firstLetter + restOfWord;
-  });
+	const capitalizedWords = words.map((word) => {
+		const firstLetter = word.charAt(0).toUpperCase();
+		const restOfWord = word.slice(1).toLowerCase();
+		return firstLetter + restOfWord;
+	});
 
-  return capitalizedWords.join(" ");
+	return capitalizedWords.join(" ");
 }
 
 export { formatToCapitalizeFirstWordLetter };

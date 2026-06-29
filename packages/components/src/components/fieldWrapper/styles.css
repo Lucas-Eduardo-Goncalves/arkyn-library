@@ -1,21 +1,21 @@
 .arkynFieldWrapper {
-  display: flex;
-  gap: 6px;
-  height: max-content;
+	display: flex;
+	gap: 6px;
+	height: max-content;
 }
 
 .arkynFieldWrapper.horizontal {
-  flex-direction: row;
-  align-items: center;
+	flex-direction: row;
+	align-items: center;
 }
 
 .arkynFieldWrapper.horizontalReverse {
-  flex-direction: row-reverse;
-  align-items: center;
-  margin-right: auto;
+	flex-direction: row-reverse;
+	align-items: center;
+	margin-right: auto;
 }
 
 .arkynFieldWrapper.vertical {
-  flex-direction: column;
-  align-items: flex-start;
+	flex-direction: column;
+	align-items: flex-start;
 }

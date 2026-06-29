@@ -22,31 +22,31 @@ import { findCountryMask } from "../utilities/findCountryMask";
  */
 
 function formatToPhone(phoneNumber: string): string {
-  try {
-    const parsedPhone = parsePhoneNumberWithError(phoneNumber);
-    const phoneNumberDigits = parsedPhone.nationalNumber.toString();
+	try {
+		const parsedPhone = parsePhoneNumberWithError(phoneNumber);
+		const phoneNumberDigits = parsedPhone.nationalNumber.toString();
 
-    let formattedNumber = findCountryMask(phoneNumber)[0];
+		let formattedNumber = findCountryMask(phoneNumber)[0];
 
-    for (
-      let i = 0, j = 0;
-      i < formattedNumber.length && j < phoneNumberDigits.length;
-      i++
-    ) {
-      if (formattedNumber[i] === "_") {
-        formattedNumber =
-          formattedNumber.substring(0, i) +
-          phoneNumberDigits[j] +
-          formattedNumber.substring(i + 1);
-        j++;
-      }
-    }
+		for (
+			let i = 0, j = 0;
+			i < formattedNumber.length && j < phoneNumberDigits.length;
+			i++
+		) {
+			if (formattedNumber[i] === "_") {
+				formattedNumber =
+					formattedNumber.substring(0, i) +
+					phoneNumberDigits[j] +
+					formattedNumber.substring(i + 1);
+				j++;
+			}
+		}
 
-    return formattedNumber;
-  } catch (rawError) {
-    const error = rawError as Error;
-    throw new Error(error.message);
-  }
+		return formattedNumber;
+	} catch (rawError) {
+		const error = rawError as Error;
+		throw new Error(error.message);
+	}
 }
 
 export { formatToPhone };

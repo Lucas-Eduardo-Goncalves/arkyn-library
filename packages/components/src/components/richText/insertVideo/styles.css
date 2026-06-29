@@ -1,47 +1,47 @@
 .arkynRichTextInsertVideo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-  height: 36px;
-  width: 36px;
+	height: 36px;
+	width: 36px;
 
-  background-color: var(--card-foreground-secondary);
-  border: none;
-  border-radius: 4px;
+	background-color: var(--card-foreground-secondary);
+	border: none;
+	border-radius: 4px;
 }
 
 .arkynRichTextInsertVideo svg {
-  height: 20px;
-  width: 20px;
+	height: 20px;
+	width: 20px;
 
-  color: var(--text-heading);
+	color: var(--text-heading);
 }
 
 .arkynRichTextInsertVideo:hover {
-  cursor: pointer;
-  filter: brightness(0.98);
+	cursor: pointer;
+	filter: brightness(0.98);
 }
 
 .arkynRichTextInsertVideoModalContent {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding: 16px;
 
-  width: 500px;
+	width: 500px;
 }
 
 .arkynRichTextInsertVideoModalPreviewVideo {
-  width: 100%;
-  border-radius: var(--rounded-cards);
+	width: 100%;
+	border-radius: var(--rounded-cards);
 }
 
 .arkynRichTextInsertVideoModalContent .arkynVideoUpload {
-  min-height: 174px;
+	min-height: 174px;
 }
 
 html.dark .arkynRichTextInsertVideo:hover {
-  cursor: pointer;
-  filter: brightness(0.9);
+	cursor: pointer;
+	filter: brightness(0.9);
 }

@@ -26,37 +26,37 @@
  */
 
 function parseLargeFields(
-  jsonString: string,
-  maxLength: number = 1000,
+	jsonString: string,
+	maxLength: number = 1000,
 ): string {
-  function truncateValue(value: any): any {
-    if (typeof value === "string" && value.length > maxLength) {
-      return `To large information: field as ${value.length} characters`;
-    }
-    return value;
-  }
+	function truncateValue(value: any): any {
+		if (typeof value === "string" && value.length > maxLength) {
+			return `To large information: field as ${value.length} characters`;
+		}
+		return value;
+	}
 
-  function recursiveTruncate(obj: any): any {
-    if (Array.isArray(obj)) {
-      return obj.map((item) => recursiveTruncate(item));
-    } else if (obj !== null && typeof obj === "object") {
-      return Object.fromEntries(
-        Object.entries(obj).map(([key, value]) => [
-          key,
-          recursiveTruncate(value),
-        ]),
-      );
-    }
-    return truncateValue(obj);
-  }
+	function recursiveTruncate(obj: any): any {
+		if (Array.isArray(obj)) {
+			return obj.map((item) => recursiveTruncate(item));
+		} else if (obj !== null && typeof obj === "object") {
+			return Object.fromEntries(
+				Object.entries(obj).map(([key, value]) => [
+					key,
+					recursiveTruncate(value),
+				]),
+			);
+		}
+		return truncateValue(obj);
+	}
 
-  try {
-    const parsedJson = JSON.parse(jsonString);
-    const truncatedJson = recursiveTruncate(parsedJson);
-    return JSON.stringify(truncatedJson);
-  } catch (error) {
-    throw new Error("Invalid JSON string");
-  }
+	try {
+		const parsedJson = JSON.parse(jsonString);
+		const truncatedJson = recursiveTruncate(parsedJson);
+		return JSON.stringify(truncatedJson);
+	} catch (_error) {
+		throw new Error("Invalid JSON string");
+	}
 }
 
 export { parseLargeFields };

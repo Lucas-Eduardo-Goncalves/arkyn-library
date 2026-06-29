@@ -18,26 +18,26 @@ type Currencies = keyof typeof countryCurrencies;
  * ```
  */
 function formatToCurrency(
-  value: number,
-  currency: Currencies,
-  config?: { showPrefix?: boolean },
+	value: number,
+	currency: Currencies,
+	config?: { showPrefix?: boolean },
 ): string {
-  if (!countryCurrencies?.[currency]) {
-    throw new Error("Unsupported currency code");
-  }
+	if (!countryCurrencies?.[currency]) {
+		throw new Error("Unsupported currency code");
+	}
 
-  const showPrefix = config?.showPrefix ?? true;
+	const showPrefix = config?.showPrefix ?? true;
 
-  const { countryCurrency, countryLanguage } = countryCurrencies[currency];
+	const { countryCurrency, countryLanguage } = countryCurrencies[currency];
 
-  const format = new Intl.NumberFormat(countryLanguage, {
-    style: "currency",
-    currency: countryCurrency,
-  }).format(value);
+	const format = new Intl.NumberFormat(countryLanguage, {
+		style: "currency",
+		currency: countryCurrency,
+	}).format(value);
 
-  return showPrefix
-    ? format.replace(/\s/g, " ")
-    : removeCurrencySymbols(format).replace(/\s/g, " ");
+	return showPrefix
+		? format.replace(/\s/g, " ")
+		: removeCurrencySymbols(format).replace(/\s/g, " ");
 }
 
 export { formatToCurrency };

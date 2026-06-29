@@ -2,31 +2,31 @@ import { ClientOnly } from "../clientOnly";
 import { FacebookPixelClient } from "./facebookPixel.client";
 
 type FacebookPixelProps = {
-  /** Facebook Pixel ID from your Ads Manager account. Required. */
-  pixelId: string;
-  /** When true, renders the pixel in development mode (bypasses the production check). @default false */
-  showInDevMode?: boolean;
-  /** Pixel initialization options. */
-  options?: {
-    /** Enables automatic configuration. @default true */
-    autoConfig?: boolean;
-    /** Enables debug logging in the browser console. @default false */
-    debug?: boolean;
-  };
-  /** When true, fires a standard `PageView` event on mount. */
-  pageView?: boolean;
-  /** When true, grants cookie/tracking consent via `fbq("consent", "grant")`. */
-  grantConsent?: boolean;
-  /** When true, revokes cookie/tracking consent via `fbq("consent", "revoke")`. */
-  revokeConsent?: boolean;
-  /** Standard event to track: `[eventName, eventData?]`. */
-  track?: [string, any?];
-  /** Custom event to track: `[eventName, eventData?]`. */
-  trackCustom?: [string, any?];
-  /** Single-pixel standard event: `[eventName, eventData?]`. */
-  trackSingle?: [string, any?];
-  /** Single-pixel custom event: `[eventName, eventData?]`. */
-  trackSingleCustom?: [string, any?];
+	/** Facebook Pixel ID from your Ads Manager account. Required. */
+	pixelId: string;
+	/** When true, renders the pixel in development mode (bypasses the production check). @default false */
+	showInDevMode?: boolean;
+	/** Pixel initialization options. */
+	options?: {
+		/** Enables automatic configuration. @default true */
+		autoConfig?: boolean;
+		/** Enables debug logging in the browser console. @default false */
+		debug?: boolean;
+	};
+	/** When true, fires a standard `PageView` event on mount. */
+	pageView?: boolean;
+	/** When true, grants cookie/tracking consent via `fbq("consent", "grant")`. */
+	grantConsent?: boolean;
+	/** When true, revokes cookie/tracking consent via `fbq("consent", "revoke")`. */
+	revokeConsent?: boolean;
+	/** Standard event to track: `[eventName, eventData?]`. */
+	track?: [string, any?];
+	/** Custom event to track: `[eventName, eventData?]`. */
+	trackCustom?: [string, any?];
+	/** Single-pixel standard event: `[eventName, eventData?]`. */
+	trackSingle?: [string, any?];
+	/** Single-pixel custom event: `[eventName, eventData?]`. */
+	trackSingleCustom?: [string, any?];
 };
 
 /**
@@ -65,11 +65,11 @@ type FacebookPixelProps = {
  * ```
  */
 function FacebookPixel(props: FacebookPixelProps) {
-  if (process.env.NODE_ENV !== "production" && !props.showInDevMode) {
-    return <></>;
-  }
+	if (process.env.NODE_ENV !== "production" && !props.showInDevMode) {
+		return <></>;
+	}
 
-  return <ClientOnly>{() => <FacebookPixelClient {...props} />}</ClientOnly>;
+	return <ClientOnly>{() => <FacebookPixelClient {...props} />}</ClientOnly>;
 }
 
 export { FacebookPixel, type FacebookPixelProps };

@@ -2,17 +2,17 @@ import type { ReactNode } from "react";
 import "./styles.css";
 
 type WeekCalendarTableContainerProps = {
-  children: ReactNode;
+	children: ReactNode;
 };
 
 function WeekCalendarTableContainer({
-  children,
+	children,
 }: WeekCalendarTableContainerProps) {
-  return (
-    <div className="arkynWeekCalendarTableContainer">
-      <table>{children}</table>
-    </div>
-  );
+	return (
+		<div className="arkynWeekCalendarTableContainer">
+			<table>{children}</table>
+		</div>
+	);
 }
 
 export { WeekCalendarTableContainer };

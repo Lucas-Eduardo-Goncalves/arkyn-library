@@ -10,34 +10,34 @@ import { NoFileContent } from "./noFileContent";
 import "./styles.css";
 
 type AudioUploadProps = {
-  /** Field name for form submission (stores the uploaded audio URL). Required. */
-  name: string;
-  /** Server endpoint URL that receives the `multipart/form-data` upload request. Required. */
-  action: string;
-  /** Form-data field name used for the file. @default "file" */
-  fileName?: string;
-  /** HTTP method for the upload request. @default "POST" */
-  method?: string;
-  /** Accepted audio MIME types or extensions (e.g. `"audio/mp3,audio/wav"`). @default "audio/*" */
-  acceptAudio?: string;
-  /** Text displayed in the drag-and-drop zone. @default "Ou arraste e solte um arquivo de áudio aqui" */
-  dropAudioText?: string;
-  /** Label for the file-picker button before a file is selected. @default "Selecionar arquivo de áudio" */
-  selectAudioButtonText?: string;
-  /** Label for the file-picker button after a file is selected. @default "Trocar arquivo de áudio" */
-  changeAudioButtonText?: string;
-  /** Callback fired after a successful upload. Receives the URL returned by the server. */
-  onChange?: (url?: string) => void;
-  /** Property name in the server response that contains the file URL. @default "url" */
-  fileResponseName?: string;
-  /** Optional label text displayed above the upload area. */
-  label?: string;
-  /** Displays an asterisk on the label to signal a required field. @default false */
-  showAsterisk?: boolean;
-  /** Disables file selection and upload. @default false */
-  disabled?: boolean;
-  /** Pre-populated audio URL (e.g. an existing recording). @default "" */
-  defaultValue?: string;
+	/** Field name for form submission (stores the uploaded audio URL). Required. */
+	name: string;
+	/** Server endpoint URL that receives the `multipart/form-data` upload request. Required. */
+	action: string;
+	/** Form-data field name used for the file. @default "file" */
+	fileName?: string;
+	/** HTTP method for the upload request. @default "POST" */
+	method?: string;
+	/** Accepted audio MIME types or extensions (e.g. `"audio/mp3,audio/wav"`). @default "audio/*" */
+	acceptAudio?: string;
+	/** Text displayed in the drag-and-drop zone. @default "Ou arraste e solte um arquivo de áudio aqui" */
+	dropAudioText?: string;
+	/** Label for the file-picker button before a file is selected. @default "Selecionar arquivo de áudio" */
+	selectAudioButtonText?: string;
+	/** Label for the file-picker button after a file is selected. @default "Trocar arquivo de áudio" */
+	changeAudioButtonText?: string;
+	/** Callback fired after a successful upload. Receives the URL returned by the server. */
+	onChange?: (url?: string) => void;
+	/** Property name in the server response that contains the file URL. @default "url" */
+	fileResponseName?: string;
+	/** Optional label text displayed above the upload area. */
+	label?: string;
+	/** Displays an asterisk on the label to signal a required field. @default false */
+	showAsterisk?: boolean;
+	/** Disables file selection and upload. @default false */
+	disabled?: boolean;
+	/** Pre-populated audio URL (e.g. an existing recording). @default "" */
+	defaultValue?: string;
 };
 
 /**
@@ -79,110 +79,110 @@ type AudioUploadProps = {
  */
 
 function AudioUpload(props: AudioUploadProps) {
-  const {
-    name,
-    label,
-    fileName = "file",
-    method = "POST",
-    onChange,
-    fileResponseName = "url",
-    selectAudioButtonText = "Selecionar arquivo de áudio",
-    dropAudioText = "Ou arraste e solte um arquivo de áudio aqui",
-    changeAudioButtonText = "Trocar arquivo de áudio",
-    acceptAudio = "audio/*",
-    action,
-    defaultValue = "",
-    showAsterisk = false,
-    disabled = false,
-  } = props;
+	const {
+		name,
+		label,
+		fileName = "file",
+		method = "POST",
+		onChange,
+		fileResponseName = "url",
+		selectAudioButtonText = "Selecionar arquivo de áudio",
+		dropAudioText = "Ou arraste e solte um arquivo de áudio aqui",
+		changeAudioButtonText = "Trocar arquivo de áudio",
+		acceptAudio = "audio/*",
+		action,
+		defaultValue = "",
+		showAsterisk = false,
+		disabled = false,
+	} = props;
 
-  const { fieldErrors } = useForm();
-  const fieldError = fieldErrors?.[name];
+	const { fieldErrors } = useForm();
+	const fieldError = fieldErrors?.[name];
 
-  const [value, setValue] = useState(defaultValue);
-  const [error, setError] = useState("");
-  const [file, setFile] = useState<File | null>(null);
-  const [filePath, setFilePath] = useState(defaultValue);
-  const [isLoading, setIsLoading] = useState(false);
+	const [value, setValue] = useState(defaultValue);
+	const [error, setError] = useState("");
+	const [file, setFile] = useState<File | null>(null);
+	const [filePath, setFilePath] = useState(defaultValue);
+	const [isLoading, setIsLoading] = useState(false);
 
-  async function handleUploadAudio(file: File) {
-    if (disabled) return;
+	async function handleUploadAudio(file: File) {
+		if (disabled) return;
 
-    setIsLoading(true);
-    setFile(file);
-    setError("");
+		setIsLoading(true);
+		setFile(file);
+		setError("");
 
-    const formData = new FormData();
-    formData.append(fileName, file);
+		const formData = new FormData();
+		formData.append(fileName, file);
 
-    await fetch(action, { method: method, body: formData })
-      .then(async (response) => await response.json())
-      .then((response) => {
-        if (!!response?.error) setError(response.error);
-        else setValue(response?.[fileResponseName]);
-        onChange && onChange(response?.[fileResponseName]);
-      })
-      .catch((error) => {
-        console.error(error);
-        setError("Erro ao enviar audio");
-      })
-      .finally(() => setIsLoading(false));
-  }
+		await fetch(action, { method: method, body: formData })
+			.then(async (response) => await response.json())
+			.then((response) => {
+				if (response?.error) setError(response.error);
+				else setValue(response?.[fileResponseName]);
+				onChange?.(response?.[fileResponseName]);
+			})
+			.catch((error) => {
+				console.error(error);
+				setError("Erro ao enviar audio");
+			})
+			.finally(() => setIsLoading(false));
+	}
 
-  function handleSelectFile(file: File) {
-    if (disabled) return;
+	function handleSelectFile(file: File) {
+		if (disabled) return;
 
-    if (file.type.indexOf("audio") === -1) {
-      setError("O arquivo selecionado não é um arquivo de áudio");
-      return;
-    }
+		if (file.type.indexOf("audio") === -1) {
+			setError("O arquivo selecionado não é um arquivo de áudio");
+			return;
+		}
 
-    setFilePath(URL.createObjectURL(file));
-    handleUploadAudio(file);
-  }
+		setFilePath(URL.createObjectURL(file));
+		handleUploadAudio(file);
+	}
 
-  const errorMessage = fieldError || error;
+	const errorMessage = fieldError || error;
 
-  const hasErrorClassName = errorMessage ? "hasError" : "noHasError";
-  const hasImageClassName = filePath ? "hasAudio" : "noHasAudio";
-  const className = `arkynAudioUpload ${hasErrorClassName} ${hasImageClassName}`;
+	const hasErrorClassName = errorMessage ? "hasError" : "noHasError";
+	const hasImageClassName = filePath ? "hasAudio" : "noHasAudio";
+	const className = `arkynAudioUpload ${hasErrorClassName} ${hasImageClassName}`;
 
-  return (
-    <FieldWrapper>
-      {label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
+	return (
+		<FieldWrapper>
+			{label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
 
-      <div className={className}>
-        <input type="hidden" name={name} value={value || ""} />
+			<div className={className}>
+				<input type="hidden" name={name} value={value || ""} />
 
-        {!filePath && (
-          <NoFileContent
-            disabled={disabled}
-            isLoading={isLoading}
-            acceptAudio={acceptAudio}
-            dropAudioText={dropAudioText}
-            handleSelectFile={handleSelectFile}
-            selectAudioButtonText={selectAudioButtonText}
-          />
-        )}
+				{!filePath && (
+					<NoFileContent
+						disabled={disabled}
+						isLoading={isLoading}
+						acceptAudio={acceptAudio}
+						dropAudioText={dropAudioText}
+						handleSelectFile={handleSelectFile}
+						selectAudioButtonText={selectAudioButtonText}
+					/>
+				)}
 
-        {filePath && (
-          <HasFileContent
-            filePath={filePath}
-            acceptAudio={acceptAudio}
-            changeAudioButtonText={changeAudioButtonText}
-            disabled={disabled}
-            handleSelectFile={handleSelectFile}
-            isLoading={isLoading}
-            reSendAudio={
-              !!errorMessage && file ? () => handleUploadAudio(file) : undefined
-            }
-          />
-        )}
-      </div>
+				{filePath && (
+					<HasFileContent
+						filePath={filePath}
+						acceptAudio={acceptAudio}
+						changeAudioButtonText={changeAudioButtonText}
+						disabled={disabled}
+						handleSelectFile={handleSelectFile}
+						isLoading={isLoading}
+						reSendAudio={
+							errorMessage && file ? () => handleUploadAudio(file) : undefined
+						}
+					/>
+				)}
+			</div>
 
-      {errorMessage && <FieldError>{errorMessage}</FieldError>}
-    </FieldWrapper>
-  );
+			{errorMessage && <FieldError>{errorMessage}</FieldError>}
+		</FieldWrapper>
+	);
 }
 
 export { AudioUpload };

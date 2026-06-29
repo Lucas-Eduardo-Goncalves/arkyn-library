@@ -1,21 +1,21 @@
 import type { ZodType } from "zod";
 
 type SuccessResponse<T extends FormParseProps> = {
-  success: true;
-  data: T[1] extends ZodType<infer U> ? U : never;
+	success: true;
+	data: T[1] extends ZodType<infer U> ? U : never;
 };
 
 type ErrorResponse = {
-  success: false;
-  fields: { [x: string]: string };
-  fieldErrors: { [x: string]: string };
+	success: false;
+	fields: { [x: string]: string };
+	fieldErrors: { [x: string]: string };
 };
 
 type FormParseProps = [formData: { [k: string]: any }, schema: ZodType];
 
 type FormParseReturnType<T extends FormParseProps> =
-  | SuccessResponse<T>
-  | ErrorResponse;
+	| SuccessResponse<T>
+	| ErrorResponse;
 
 /**
  * Async variant of `formParse` — uses `safeParseAsync` to support Zod schemas with async refinements.
@@ -36,29 +36,29 @@ type FormParseReturnType<T extends FormParseProps> =
  */
 
 async function formAsyncParse<T extends FormParseProps>([
-  formData,
-  schema,
+	formData,
+	schema,
 ]: T): Promise<FormParseReturnType<T>> {
-  const zodResponse = await schema.safeParseAsync(formData);
+	const zodResponse = await schema.safeParseAsync(formData);
 
-  if (zodResponse.success === false) {
-    const errorsObject = Object.fromEntries(
-      zodResponse.error.issues.map((item) => {
-        return [item.path.join("."), item.message];
-      }),
-    );
+	if (zodResponse.success === false) {
+		const errorsObject = Object.fromEntries(
+			zodResponse.error.issues.map((item) => {
+				return [item.path.join("."), item.message];
+			}),
+		);
 
-    return {
-      success: false,
-      fieldErrors: errorsObject,
-      fields: formData,
-    };
-  } else {
-    return {
-      success: true,
-      data: zodResponse.data as T[1] extends ZodType<infer U> ? U : never,
-    };
-  }
+		return {
+			success: false,
+			fieldErrors: errorsObject,
+			fields: formData,
+		};
+	} else {
+		return {
+			success: true,
+			data: zodResponse.data as T[1] extends ZodType<infer U> ? U : never,
+		};
+	}
 }
 
 export { formAsyncParse };

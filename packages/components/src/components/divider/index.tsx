@@ -1,12 +1,12 @@
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import "./styles.css";
 
 type DividerProps = HTMLAttributes<HTMLDivElement> & {
-  /**
-   * Divider orientation.
-   * @default "horizontal"
-   */
-  orientation?: "horizontal" | "vertical";
+	/**
+	 * Divider orientation.
+	 * @default "horizontal"
+	 */
+	orientation?: "horizontal" | "vertical";
 };
 
 /**
@@ -31,15 +31,15 @@ type DividerProps = HTMLAttributes<HTMLDivElement> & {
  */
 
 function Divider(props: DividerProps) {
-  const {
-    className: baseClassName,
-    orientation = "horizontal",
-    ...rest
-  } = props;
+	const {
+		className: baseClassName,
+		orientation = "horizontal",
+		...rest
+	} = props;
 
-  const className = `arkynDivider ${orientation} ${baseClassName}`;
+	const className = `arkynDivider ${orientation} ${baseClassName}`;
 
-  return <div className={className.trim()} {...rest} />;
+	return <div className={className.trim()} {...rest} />;
 }
 
 export { Divider };

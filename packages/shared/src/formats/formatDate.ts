@@ -1,22 +1,22 @@
 import { ValidateDateService } from "../services/validateDateService";
 
 function formatDateString(date: Date, format: string): string {
-  const pad = (num: number) => num.toString().padStart(2, "0");
+	const pad = (num: number) => num.toString().padStart(2, "0");
 
-  const replacements: Record<string, string> = {
-    YYYY: date.getUTCFullYear().toString(),
-    YY: date.getUTCFullYear().toString().slice(-2),
-    MM: pad(date.getUTCMonth() + 1),
-    DD: pad(date.getUTCDate()),
-    hh: pad(date.getUTCHours()),
-    mm: pad(date.getUTCMinutes()),
-    ss: pad(date.getUTCSeconds()),
-  };
+	const replacements: Record<string, string> = {
+		YYYY: date.getUTCFullYear().toString(),
+		YY: date.getUTCFullYear().toString().slice(-2),
+		MM: pad(date.getUTCMonth() + 1),
+		DD: pad(date.getUTCDate()),
+		hh: pad(date.getUTCHours()),
+		mm: pad(date.getUTCMinutes()),
+		ss: pad(date.getUTCSeconds()),
+	};
 
-  return format.replace(
-    /YYYY|YY|MM|DD|hh|mm|ss/g,
-    (match) => replacements[match],
-  );
+	return format.replace(
+		/YYYY|YY|MM|DD|hh|mm|ss/g,
+		(match) => replacements[match],
+	);
 }
 
 /**
@@ -44,44 +44,44 @@ function formatDateString(date: Date, format: string): string {
  */
 
 function formatDate(
-  [date, time = "00:00:00"]: string[],
-  inputFormat: "brazilianDate" | "isoDate" | "timestamp",
-  outputFormat: string,
-  timezone: number = 0,
+	[date, time = "00:00:00"]: string[],
+	inputFormat: "brazilianDate" | "isoDate" | "timestamp",
+	outputFormat: string,
+	timezone: number = 0,
 ): string {
-  const validateDateService = new ValidateDateService();
-  validateDateService.validateInputFormat(inputFormat);
+	const validateDateService = new ValidateDateService();
+	validateDateService.validateInputFormat(inputFormat);
 
-  const dateParts = date.split(/[-/]/).map(Number);
-  const timeParts = time.split(".")[0].split(":").map(Number);
+	const dateParts = date.split(/[-/]/).map(Number);
+	const timeParts = time.split(".")[0].split(":").map(Number);
 
-  let day: number, month: number, year: number;
-  const [hours = 0, minutes = 0, seconds = 0] = timeParts;
+	let day: number, month: number, year: number;
+	const [hours = 0, minutes = 0, seconds = 0] = timeParts;
 
-  switch (inputFormat) {
-    case "brazilianDate":
-      [day, month, year] = dateParts;
-      validateDateService.validateDateParts(year, month, day);
-      break;
-    case "isoDate":
-      [month, day, year] = dateParts;
-      validateDateService.validateDateParts(year, month, day);
-      break;
-    case "timestamp":
-      [year, month, day] = dateParts;
-      validateDateService.validateDateParts(year, month, day);
-      break;
-  }
+	switch (inputFormat) {
+		case "brazilianDate":
+			[day, month, year] = dateParts;
+			validateDateService.validateDateParts(year, month, day);
+			break;
+		case "isoDate":
+			[month, day, year] = dateParts;
+			validateDateService.validateDateParts(year, month, day);
+			break;
+		case "timestamp":
+			[year, month, day] = dateParts;
+			validateDateService.validateDateParts(year, month, day);
+			break;
+	}
 
-  const formattedDate = new Date(
-    Date.UTC(year, month - 1, day, hours, minutes, seconds),
-  );
+	const formattedDate = new Date(
+		Date.UTC(year, month - 1, day, hours, minutes, seconds),
+	);
 
-  if (isNaN(formattedDate.getTime())) throw new Error("Invalid date");
+	if (Number.isNaN(formattedDate.getTime())) throw new Error("Invalid date");
 
-  formattedDate.setUTCHours(formattedDate.getUTCHours() + timezone);
+	formattedDate.setUTCHours(formattedDate.getUTCHours() + timezone);
 
-  return formatDateString(formattedDate, outputFormat);
+	return formatDateString(formattedDate, outputFormat);
 }
 
 export { formatDate };

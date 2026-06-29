@@ -16,30 +16,30 @@
  */
 
 function decodeRequestErrorMessage(data: any, response: Response): string {
-  if (data?.message && typeof data?.message === "string") {
-    return data?.message;
-  }
+	if (data?.message && typeof data?.message === "string") {
+		return data?.message;
+	}
 
-  if (
-    data?.operator_erro_message &&
-    typeof data?.operator_erro_message === "string"
-  ) {
-    return data?.operator_erro_message;
-  }
+	if (
+		data?.operator_erro_message &&
+		typeof data?.operator_erro_message === "string"
+	) {
+		return data?.operator_erro_message;
+	}
 
-  if (data?.error && typeof data?.error === "string") {
-    return data?.error;
-  }
+	if (data?.error && typeof data?.error === "string") {
+		return data?.error;
+	}
 
-  if (data?.error?.message && typeof data?.error?.message === "string") {
-    return data?.error?.message;
-  }
+	if (data?.error?.message && typeof data?.error?.message === "string") {
+		return data?.error?.message;
+	}
 
-  if (response?.statusText && typeof response?.statusText === "string") {
-    return response?.statusText;
-  }
+	if (response?.statusText && typeof response?.statusText === "string") {
+		return response?.statusText;
+	}
 
-  return "Missing error message";
+	return "Missing error message";
 }
 
 export { decodeRequestErrorMessage };

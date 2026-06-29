@@ -15,11 +15,11 @@
  */
 
 function stripHtmlTags(rawHtml: string): string {
-  return rawHtml
-    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
-    .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, "")
-    .replace(/<!--[\s\S]*?-->/g, "")
-    .replace(/<\/?[a-z][a-z0-9]*[^>]*>/gi, "");
+	return rawHtml
+		.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
+		.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, "")
+		.replace(/<!--[\s\S]*?-->/g, "")
+		.replace(/<\/?[a-z][a-z0-9]*[^>]*>/gi, "");
 }
 
 export { stripHtmlTags };

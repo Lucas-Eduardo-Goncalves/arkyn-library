@@ -1,35 +1,35 @@
 .arkynRichText {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-  background-color: rgba(var(--spotlight-secondary), 1);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  outline: 1px solid transparent;
+	background-color: rgba(var(--spotlight-secondary), 1);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	outline: 1px solid transparent;
 }
 
 .arkynRichText.errorTrue {
-  outline-color: rgba(var(--spotlight-danger), 1);
-  border-color: rgba(var(--spotlight-danger), 1);
+	outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgba(var(--spotlight-danger), 1);
 }
 
 .arkynRichText.focusTrue {
-  outline-color: rgba(var(--spotlight-primary), 1);
-  border-color: rgba(var(--spotlight-primary), 1);
+	outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgba(var(--spotlight-primary), 1);
 }
 
 .arkynRichText .editorContainer {
-  padding: 16px;
-  outline: none;
-  min-height: 300px;
+	padding: 16px;
+	outline: none;
+	min-height: 300px;
 }
 
 .arkynRichText .restatesCharacters {
-  display: block;
-  margin-left: auto;
-  padding: 8px;
+	display: block;
+	margin-left: auto;
+	padding: 8px;
 
-  font-size: 16px;
-  font-weight: 600;
-  color: rgba(var(--spotlight-danger), 1);
+	font-size: 16px;
+	font-weight: 600;
+	color: rgba(var(--spotlight-danger), 1);
 }

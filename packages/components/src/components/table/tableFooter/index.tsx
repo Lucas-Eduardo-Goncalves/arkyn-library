@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import "./styles.css";
 
 type TableFooterProps = HTMLAttributes<HTMLTableSectionElement>;
@@ -20,19 +20,19 @@ type TableFooterProps = HTMLAttributes<HTMLTableSectionElement>;
  */
 
 function TableFooter(props: TableFooterProps) {
-  const { className: baseClassName, children, ...rest } = props;
-  const className = `arkynTableFooter ${baseClassName}`;
+	const { className: baseClassName, children, ...rest } = props;
+	const className = `arkynTableFooter ${baseClassName}`;
 
-  return (
-    <tfoot className={className.trim()} {...rest}>
-      <tr className="spacingRow" />
-      <tr>
-        <th colSpan={100}>
-          <div className="arkynTableFooterContent">{children}</div>
-        </th>
-      </tr>
-    </tfoot>
-  );
+	return (
+		<tfoot className={className.trim()} {...rest}>
+			<tr className="spacingRow" />
+			<tr>
+				<th colSpan={100}>
+					<div className="arkynTableFooterContent">{children}</div>
+				</th>
+			</tr>
+		</tfoot>
+	);
 }
 
 export { TableFooter };

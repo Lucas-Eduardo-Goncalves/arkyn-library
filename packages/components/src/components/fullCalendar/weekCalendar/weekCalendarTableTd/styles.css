@@ -1,54 +1,54 @@
 .arkynWeekCalendarTableTd {
-  user-select: none;
-  cursor: pointer;
+	user-select: none;
+	cursor: pointer;
 
-  position: relative;
-  height: 73px;
+	position: relative;
+	height: 73px;
 }
 
 .arkynWeekCalendarTableTd.blocked {
-  background-color: rgb(var(--spotlight-danger-light));
+	background-color: rgb(var(--spotlight-danger-light));
 }
 
 .arkynWeekCalendarTableTd.blocked:before {
-  content: " ";
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  width: 4px;
-  background-color: rgb(var(--spotlight-danger));
+	content: " ";
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	width: 4px;
+	background-color: rgb(var(--spotlight-danger));
 }
 
 .arkynWeekCalendarTableTd.blocked:hover {
-  cursor: not-allowed;
+	cursor: not-allowed;
 }
 
 .arkynWeekCalendarTableTd > p {
-  position: absolute;
-  top: 0px;
-  left: 0px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
 
-  font-size: 14px;
-  text-align: center;
-  border-radius: 8px;
+	font-size: 14px;
+	text-align: center;
+	border-radius: 8px;
 
-  margin-right: auto;
-  margin-bottom: auto;
+	margin-right: auto;
+	margin-bottom: auto;
 }
 
 .arkynWeekCalendarTableTd.previous,
 .arkynWeekCalendarTableTd.next {
-  color: var(--text-muted);
-  background-color: var(--card-foreground-primary);
+	color: var(--text-muted);
+	background-color: var(--card-foreground-primary);
 }
 
 .arkynWeekCalendarTableTd.current > p {
-  color: var(--text-body);
+	color: var(--text-body);
 }
 
 .arkynWeekCalendarTableTd .arkynWeekCalendarTableTdContent {
-  position: relative;
-  height: calc(100%);
-  margin: 3px;
+	position: relative;
+	height: calc(100%);
+	margin: 3px;
 }

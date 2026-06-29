@@ -3,12 +3,12 @@ import { WeekCalendarTableContainer } from "./weekCalendarTableContainer";
 import { WeekCalendarTableHeader } from "./weekCalendarTableHeader";
 
 function WeekCalendar() {
-  return (
-    <WeekCalendarTableContainer>
-      <WeekCalendarTableHeader />
-      <WeekCalendarTableBody />
-    </WeekCalendarTableContainer>
-  );
+	return (
+		<WeekCalendarTableContainer>
+			<WeekCalendarTableHeader />
+			<WeekCalendarTableBody />
+		</WeekCalendarTableContainer>
+	);
 }
 
 export { WeekCalendar };

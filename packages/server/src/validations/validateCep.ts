@@ -18,15 +18,15 @@ import { removeNonNumeric } from "@arkyn/shared";
  */
 
 function validateCep(rawCep: string): boolean {
-  const validFormat = /^\d{5}-\d{3}$/.test(rawCep) || /^\d{8}$/.test(rawCep);
-  if (!validFormat) return false;
+	const validFormat = /^\d{5}-\d{3}$/.test(rawCep) || /^\d{8}$/.test(rawCep);
+	if (!validFormat) return false;
 
-  const cep = removeNonNumeric(rawCep);
+	const cep = removeNonNumeric(rawCep);
 
-  const CEP_LENGTH = 8;
-  const isOnlyDigits = /^\d{8}$/.test(cep);
+	const CEP_LENGTH = 8;
+	const isOnlyDigits = /^\d{8}$/.test(cep);
 
-  return cep.length === CEP_LENGTH && isOnlyDigits;
+	return cep.length === CEP_LENGTH && isOnlyDigits;
 }
 
 export { validateCep };

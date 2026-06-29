@@ -14,21 +14,21 @@
  */
 
 function generateColorByString(rawString: string): string {
-  var hash = 0;
+	let hash = 0;
 
-  for (var i = 0; i < rawString.length; i++) {
-    hash = rawString.charCodeAt(i) + ((hash << 5) - hash);
-  }
+	for (let i = 0; i < rawString.length; i++) {
+		hash = rawString.charCodeAt(i) + ((hash << 5) - hash);
+	}
 
-  var red = (hash & 0xff0000) >> 16;
-  var green = (hash & 0x00ff00) >> 8;
-  var blue = hash & 0x0000ff;
+	const red = (hash & 0xff0000) >> 16;
+	const green = (hash & 0x00ff00) >> 8;
+	const blue = hash & 0x0000ff;
 
-  var redHex = red.toString(16).padStart(2, "0");
-  var greenHex = green.toString(16).padStart(2, "0");
-  var blueHex = blue.toString(16).padStart(2, "0");
+	const redHex = red.toString(16).padStart(2, "0");
+	const greenHex = green.toString(16).padStart(2, "0");
+	const blueHex = blue.toString(16).padStart(2, "0");
 
-  return "#" + redHex + greenHex + blueHex;
+	return `#${redHex}${greenHex}${blueHex}`;
 }
 
 export { generateColorByString };

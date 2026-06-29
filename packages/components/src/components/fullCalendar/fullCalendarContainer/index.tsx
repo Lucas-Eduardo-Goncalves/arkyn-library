@@ -2,11 +2,11 @@ import type { ReactNode } from "react";
 import "./styles.css";
 
 type FullCalendarContainerProps = {
-  children?: ReactNode;
+	children?: ReactNode;
 };
 
 function FullCalendarContainer({ children }: FullCalendarContainerProps) {
-  return <div className="arkynFullCalendarContainer">{children}</div>;
+	return <div className="arkynFullCalendarContainer">{children}</div>;
 }
 
 export { FullCalendarContainer };

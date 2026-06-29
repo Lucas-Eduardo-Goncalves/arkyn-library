@@ -1,14 +1,14 @@
-import { HTMLAttributes, ReactNode } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 import "./styles.css";
 
 type FieldWrapperProps = HTMLAttributes<HTMLElement> & {
-  /** Field elements to render inside the wrapper (label, input, error, etc.). Required. */
-  children: ReactNode;
-  /**
-   * Layout orientation of the wrapper.
-   * @default "vertical"
-   */
-  orientation?: "vertical" | "horizontal" | "horizontalReverse";
+	/** Field elements to render inside the wrapper (label, input, error, etc.). Required. */
+	children: ReactNode;
+	/**
+	 * Layout orientation of the wrapper.
+	 * @default "vertical"
+	 */
+	orientation?: "vertical" | "horizontal" | "horizontalReverse";
 };
 
 /**
@@ -32,20 +32,20 @@ type FieldWrapperProps = HTMLAttributes<HTMLElement> & {
  */
 
 function FieldWrapper(props: FieldWrapperProps) {
-  const {
-    children,
-    className: baseClassName,
-    orientation = "vertical",
-    ...rest
-  } = props;
+	const {
+		children,
+		className: baseClassName,
+		orientation = "vertical",
+		...rest
+	} = props;
 
-  const className = `arkynFieldWrapper ${baseClassName} ${orientation}`;
+	const className = `arkynFieldWrapper ${baseClassName} ${orientation}`;
 
-  return (
-    <section className={className.trim()} {...rest}>
-      {children}
-    </section>
-  );
+	return (
+		<section className={className.trim()} {...rest}>
+			{children}
+		</section>
+	);
 }
 
 export { FieldWrapper };

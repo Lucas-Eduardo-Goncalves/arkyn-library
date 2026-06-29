@@ -1,6 +1,6 @@
 .arkynPagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
 }

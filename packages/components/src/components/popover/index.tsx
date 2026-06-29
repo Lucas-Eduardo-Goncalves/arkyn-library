@@ -1,34 +1,34 @@
 import { motion } from "framer-motion";
-import { ReactNode, useState } from "react";
+import { type ReactNode, useState } from "react";
 
 import { useScrollLock } from "../../hooks/useScrollLock";
 import "./styles.css";
 
 type OrientationProps =
-  | "bottomLeft"
-  | "bottomRight"
-  | "topLeft"
-  | "topRight"
-  | "top"
-  | "left"
-  | "bottom"
-  | "right";
+	| "bottomLeft"
+	| "bottomRight"
+	| "topLeft"
+	| "topRight"
+	| "top"
+	| "left"
+	| "bottom"
+	| "right";
 
 type PopoverProps = {
-  /** Content rendered inside the floating panel. Required. */
-  children: ReactNode;
-  /** Trigger element — clicking it opens the popover. Required. */
-  button: ReactNode;
-  /** When true, clicking the popover content also closes it. @default false */
-  closeOnClick?: boolean;
-  /**
-   * Position of the floating panel relative to the trigger.
-   * Options: `"bottomLeft"` | `"bottomRight"` | `"topLeft"` | `"topRight"` | `"top"` | `"bottom"` | `"left"` | `"right"`.
-   * @default "bottomLeft"
-   */
-  orientation?: OrientationProps;
-  /** Additional CSS class applied to the popover root element. */
-  className?: string;
+	/** Content rendered inside the floating panel. Required. */
+	children: ReactNode;
+	/** Trigger element — clicking it opens the popover. Required. */
+	button: ReactNode;
+	/** When true, clicking the popover content also closes it. @default false */
+	closeOnClick?: boolean;
+	/**
+	 * Position of the floating panel relative to the trigger.
+	 * Options: `"bottomLeft"` | `"bottomRight"` | `"topLeft"` | `"topRight"` | `"top"` | `"bottom"` | `"left"` | `"right"`.
+	 * @default "bottomLeft"
+	 */
+	orientation?: OrientationProps;
+	/** Additional CSS class applied to the popover root element. */
+	className?: string;
 };
 
 /**
@@ -77,45 +77,45 @@ type PopoverProps = {
  */
 
 function Popover(props: PopoverProps) {
-  const {
-    children,
-    button,
-    closeOnClick,
-    className: baseClassName = "",
-    orientation = "bottomLeft",
-  } = props;
-  const [isOpen, setIsOpen] = useState(false);
+	const {
+		children,
+		button,
+		closeOnClick,
+		className: baseClassName = "",
+		orientation = "bottomLeft",
+	} = props;
+	const [isOpen, setIsOpen] = useState(false);
 
-  const visible = isOpen ? "visibleTrue" : "visibleFalse";
-  const className = `arkynPopover ${orientation} ${visible} ${baseClassName}`;
+	const visible = isOpen ? "visibleTrue" : "visibleFalse";
+	const className = `arkynPopover ${orientation} ${visible} ${baseClassName}`;
 
-  function handleOpenPopover() {
-    if (!isOpen) setIsOpen(true);
-  }
+	function handleOpenPopover() {
+		if (!isOpen) setIsOpen(true);
+	}
 
-  useScrollLock(isOpen);
+	useScrollLock(isOpen);
 
-  return (
-    <div className={className} onClick={handleOpenPopover}>
-      {button}
+	return (
+		<div className={className} onClick={handleOpenPopover}>
+			{button}
 
-      <motion.div
-        style={{ visibility: isOpen ? "visible" : "hidden" }}
-        transition={{ ease: "easeOut", duration: 0 }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isOpen ? 1 : 0 }}
-        exit={{ opacity: 0 }}
-        onClick={() => closeOnClick && setIsOpen(false)}
-        className="arkynPopoverContent"
-      >
-        {children}
-      </motion.div>
+			<motion.div
+				style={{ visibility: isOpen ? "visible" : "hidden" }}
+				transition={{ ease: "easeOut", duration: 0 }}
+				initial={{ opacity: 0 }}
+				animate={{ opacity: isOpen ? 1 : 0 }}
+				exit={{ opacity: 0 }}
+				onClick={() => closeOnClick && setIsOpen(false)}
+				className="arkynPopoverContent"
+			>
+				{children}
+			</motion.div>
 
-      {isOpen && (
-        <div onClick={() => setIsOpen(false)} className="arkynPopoverOverlay" />
-      )}
-    </div>
-  );
+			{isOpen && (
+				<div onClick={() => setIsOpen(false)} className="arkynPopoverOverlay" />
+			)}
+		</div>
+	);
 }
 
 export { Popover };

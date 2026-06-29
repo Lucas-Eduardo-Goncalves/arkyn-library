@@ -1,12 +1,12 @@
 .arkynMonthlyCalendarTableHeader th {
-  color: var(--text-heading);
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0%;
-  padding: 20px 0;
+	color: var(--text-heading);
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 24px;
+	letter-spacing: 0%;
+	padding: 20px 0;
 }
 
 .arkynMonthlyCalendarTableHeader tr th:not(:first-child) {
-  border-left: 1px solid var(--border);
+	border-left: 1px solid var(--border);
 }

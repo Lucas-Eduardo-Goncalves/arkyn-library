@@ -18,18 +18,18 @@
  */
 
 function validateRg(rawRg: string): boolean {
-  if (!rawRg) return false;
+	if (!rawRg) return false;
 
-  const validFormat = /^[0-9a-zA-Z.-]+$/.test(rawRg);
-  if (!validFormat) return false;
+	const validFormat = /^[0-9a-zA-Z.-]+$/.test(rawRg);
+	if (!validFormat) return false;
 
-  const rg = rawRg.replace(/[^a-zA-Z0-9]/g, "");
+	const rg = rawRg.replace(/[^a-zA-Z0-9]/g, "");
 
-  if (rg.length < 7 || rg.length > 9) return false;
+	if (rg.length < 7 || rg.length > 9) return false;
 
-  const isValidFormat = /^[0-9]{7,8}[0-9Xx]?$/.test(rg);
+	const isValidFormat = /^[0-9]{7,8}[0-9Xx]?$/.test(rg);
 
-  return isValidFormat;
+	return isValidFormat;
 }
 
 export { validateRg };

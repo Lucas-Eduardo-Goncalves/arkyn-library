@@ -1,23 +1,23 @@
-import { LucideIcon } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 type IconRendererProps = {
-  iconSize: number;
-  className?: string;
-  icon?: LucideIcon | string;
-  show?: boolean;
+	iconSize: number;
+	className?: string;
+	icon?: LucideIcon | string;
+	show?: boolean;
 };
 
 function IconRenderer(props: IconRendererProps) {
-  const { iconSize, icon: Icon, className, show = true } = props;
+	const { iconSize, icon: Icon, className, show = true } = props;
 
-  if (!show) return <></>;
-  if (!Icon) return <></>;
+	if (!show) return <></>;
+	if (!Icon) return <></>;
 
-  if (typeof Icon === "string") {
-    return <p className={className}>{Icon}</p>;
-  }
+	if (typeof Icon === "string") {
+		return <p className={className}>{Icon}</p>;
+	}
 
-  return <Icon size={iconSize} strokeWidth={2.5} className={className} />;
+	return <Icon size={iconSize} strokeWidth={2.5} className={className} />;
 }
 
 export { IconRenderer };

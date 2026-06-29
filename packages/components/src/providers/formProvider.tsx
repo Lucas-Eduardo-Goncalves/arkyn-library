@@ -1,13 +1,13 @@
-import { ReactNode, createContext, cloneElement, isValidElement } from "react";
+import { cloneElement, createContext, type ReactNode } from "react";
 
 type FormContextProps = {
-  fieldErrors: { [x: string]: any };
+	fieldErrors: { [x: string]: any };
 };
 
 type FormProviderProps = {
-  children: ReactNode;
-  fieldErrors?: any;
-  form?: React.ReactElement;
+	children: ReactNode;
+	fieldErrors?: any;
+	form?: React.ReactElement;
 };
 
 const formContext = createContext({} as FormContextProps);
@@ -39,19 +39,19 @@ const formContext = createContext({} as FormContextProps);
  */
 
 function FormProvider(props: FormProviderProps) {
-  const { children, fieldErrors, form } = props;
+	const { children, fieldErrors, form } = props;
 
-  return (
-    <formContext.Provider value={{ fieldErrors }}>
-      {!form && children}
-      {form &&
-        cloneElement(
-          form as React.ReactElement,
-          form.props as React.ReactElement,
-          children,
-        )}
-    </formContext.Provider>
-  );
+	return (
+		<formContext.Provider value={{ fieldErrors }}>
+			{!form && children}
+			{form &&
+				cloneElement(
+					form as React.ReactElement,
+					form.props as React.ReactElement,
+					children,
+				)}
+		</formContext.Provider>
+	);
 }
 
-export { formContext, FormProvider };
+export { FormProvider, formContext };

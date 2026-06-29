@@ -15,37 +15,37 @@
  */
 
 function calculateCardInstallment(props: {
-  cashPrice: number;
-  numberInstallments: number;
-  fees?: number;
+	cashPrice: number;
+	numberInstallments: number;
+	fees?: number;
 }): { totalPrice: number; installmentPrice: number } {
-  const { cashPrice, numberInstallments, fees = 0.0349 } = props;
+	const { cashPrice, numberInstallments, fees = 0.0349 } = props;
 
-  if (fees === 0 || numberInstallments === 1) {
-    return {
-      totalPrice: cashPrice,
-      installmentPrice: cashPrice / numberInstallments,
-    };
-  }
+	if (fees === 0 || numberInstallments === 1) {
+		return {
+			totalPrice: cashPrice,
+			installmentPrice: cashPrice / numberInstallments,
+		};
+	}
 
-  if (numberInstallments <= 0) {
-    throw new Error("Number of installments must be greater than 0");
-  }
+	if (numberInstallments <= 0) {
+		throw new Error("Number of installments must be greater than 0");
+	}
 
-  if (fees < 0) {
-    throw new Error("Fees must be greater than or equal to 0");
-  }
+	if (fees < 0) {
+		throw new Error("Fees must be greater than or equal to 0");
+	}
 
-  let numerator = Math.pow(1 + fees, numberInstallments) * fees;
-  let denominator = Math.pow(1 + fees, numberInstallments) - 1;
+	const numerator = (1 + fees) ** numberInstallments * fees;
+	const denominator = (1 + fees) ** numberInstallments - 1;
 
-  const installmentPrice = +(cashPrice * (numerator / denominator)).toFixed(2);
-  const totalPrice = +(installmentPrice * numberInstallments).toFixed(2);
+	const installmentPrice = +(cashPrice * (numerator / denominator)).toFixed(2);
+	const totalPrice = +(installmentPrice * numberInstallments).toFixed(2);
 
-  return {
-    totalPrice: +totalPrice.toFixed(2),
-    installmentPrice: +installmentPrice.toFixed(2),
-  };
+	return {
+		totalPrice: +totalPrice.toFixed(2),
+		installmentPrice: +installmentPrice.toFixed(2),
+	};
 }
 
 export { calculateCardInstallment };

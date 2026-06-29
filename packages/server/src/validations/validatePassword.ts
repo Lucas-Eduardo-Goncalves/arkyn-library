@@ -17,23 +17,23 @@
  */
 
 function validatePassword(rawPassword: string): boolean {
-  if (!rawPassword) return false;
+	if (!rawPassword) return false;
 
-  const hasMinLength = rawPassword.length >= 8;
-  const hasUppercase = /[A-Z]/.test(rawPassword);
-  const hasLetter = /[a-z]/.test(rawPassword);
-  const hasNumber = /\d/.test(rawPassword);
-  const hasSpecialChar = /[!@#$%^&*(),.?":;{}|<>_\-+=~`[\]\\\/]/.test(
-    rawPassword,
-  );
+	const hasMinLength = rawPassword.length >= 8;
+	const hasUppercase = /[A-Z]/.test(rawPassword);
+	const hasLetter = /[a-z]/.test(rawPassword);
+	const hasNumber = /\d/.test(rawPassword);
+	const hasSpecialChar = /[!@#$%^&*(),.?":;{}|<>_\-+=~`[\]\\/]/.test(
+		rawPassword,
+	);
 
-  return [
-    hasMinLength,
-    hasUppercase,
-    hasLetter,
-    hasNumber,
-    hasSpecialChar,
-  ].every((condition) => condition);
+	return [
+		hasMinLength,
+		hasUppercase,
+		hasLetter,
+		hasNumber,
+		hasSpecialChar,
+	].every((condition) => condition);
 }
 
 export { validatePassword };

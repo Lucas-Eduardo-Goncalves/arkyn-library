@@ -1,46 +1,45 @@
 import {
-  FocusEvent,
-  TextareaHTMLAttributes,
-  useId,
-  useRef,
-  useState,
+	type FocusEvent,
+	type TextareaHTMLAttributes,
+	useId,
+	useRef,
+	useState,
 } from "react";
 
 import { useForm } from "../../hooks/useForm";
+import { FieldError } from "../fieldError";
 import { FieldLabel } from "../fieldLabel";
 import { FieldWrapper } from "../fieldWrapper";
-
-import { FieldError } from "../fieldError";
 import "./styles.css";
 
 type TextareaProps = Omit<
-  TextareaHTMLAttributes<HTMLTextAreaElement>,
-  "name" | "value" | "defaultValue"
+	TextareaHTMLAttributes<HTMLTextAreaElement>,
+	"name" | "value" | "defaultValue"
 > & {
-  /** Field name for form submission. Required. */
-  name: string;
-  /** Optional label text displayed above the textarea. */
-  label?: string;
-  /** Displays an asterisk on the label to signal a required field. */
-  showAsterisk?: boolean;
-  /** Validation error message displayed below the textarea. */
-  errorMessage?: string;
-  /**
-   * Textarea size.
-   * @default "md"
-   */
-  size?: "md" | "lg";
-  /**
-   * Visual style variant.
-   * - `solid`: filled background.
-   * - `outline`: bordered, transparent background.
-   * @default "solid"
-   */
-  variant?: "solid" | "outline";
-  /** Controlled value. */
-  value?: string;
-  /** Uncontrolled default value. */
-  defaultValue?: string;
+	/** Field name for form submission. Required. */
+	name: string;
+	/** Optional label text displayed above the textarea. */
+	label?: string;
+	/** Displays an asterisk on the label to signal a required field. */
+	showAsterisk?: boolean;
+	/** Validation error message displayed below the textarea. */
+	errorMessage?: string;
+	/**
+	 * Textarea size.
+	 * @default "md"
+	 */
+	size?: "md" | "lg";
+	/**
+	 * Visual style variant.
+	 * - `solid`: filled background.
+	 * - `outline`: bordered, transparent background.
+	 * @default "solid"
+	 */
+	variant?: "solid" | "outline";
+	/** Controlled value. */
+	value?: string;
+	/** Uncontrolled default value. */
+	defaultValue?: string;
 };
 
 /**
@@ -87,88 +86,88 @@ type TextareaProps = Omit<
  */
 
 function Textarea(props: TextareaProps) {
-  const {
-    variant = "solid",
-    size = "md",
-    className: wrapperClassName,
-    errorMessage: baseErrorMessage,
-    disabled = false,
-    readOnly = false,
-    label,
-    showAsterisk,
-    name,
-    onFocus,
-    onBlur,
-    title,
-    style,
-    value,
-    defaultValue,
-    placeholder,
-    id,
-    ...rest
-  } = props;
+	const {
+		variant = "solid",
+		size = "md",
+		className: wrapperClassName,
+		errorMessage: baseErrorMessage,
+		disabled = false,
+		readOnly = false,
+		label,
+		showAsterisk,
+		name,
+		onFocus,
+		onBlur,
+		title,
+		style,
+		value,
+		defaultValue,
+		placeholder,
+		id,
+		...rest
+	} = props;
 
-  const { fieldErrors } = useForm();
-  const [isFocused, setIsFocused] = useState(false);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const textareaId = id || useId();
+	const { fieldErrors } = useForm();
+	const [isFocused, setIsFocused] = useState(false);
+	const textareaRef = useRef<HTMLTextAreaElement>(null);
+	const textareaId = id || useId();
 
-  const errorMessage = baseErrorMessage || fieldErrors?.[name];
-  const isError = !!errorMessage;
+	const errorMessage = baseErrorMessage || fieldErrors?.[name];
+	const isError = !!errorMessage;
 
-  const errorClass = isError ? "errorTrue" : "errorFalse";
-  const opacityClass = disabled || readOnly ? "opacityTrue" : "opacityFalse";
-  const focusedClass = isFocused ? "focusedTrue" : "focusedFalse";
+	const errorClass = isError ? "errorTrue" : "errorFalse";
+	const opacityClass = disabled || readOnly ? "opacityTrue" : "opacityFalse";
+	const focusedClass = isFocused ? "focusedTrue" : "focusedFalse";
 
-  const className = `arkynTextarea ${variant} ${size} ${opacityClass} ${errorClass} ${focusedClass}`;
+	const className = `arkynTextarea ${variant} ${size} ${opacityClass} ${errorClass} ${focusedClass}`;
 
-  function handleSectionClick() {
-    if (disabled || !textareaRef?.current) return;
-    setIsFocused(true);
-    textareaRef.current.focus();
-  }
+	function handleSectionClick() {
+		if (disabled || !textareaRef?.current) return;
+		setIsFocused(true);
+		textareaRef.current.focus();
+	}
 
-  function handleFocus(e: FocusEvent<HTMLTextAreaElement>) {
-    setIsFocused(true);
-    if (onFocus) onFocus(e);
-  }
+	function handleFocus(e: FocusEvent<HTMLTextAreaElement>) {
+		setIsFocused(true);
+		if (onFocus) onFocus(e);
+	}
 
-  function handleBlur(e: FocusEvent<HTMLTextAreaElement>) {
-    setIsFocused(false);
-    if (onBlur) onBlur(e);
-  }
+	function handleBlur(e: FocusEvent<HTMLTextAreaElement>) {
+		setIsFocused(false);
+		if (onBlur) onBlur(e);
+	}
 
-  return (
-    <FieldWrapper className={wrapperClassName}>
-      {label && (
-        <FieldLabel htmlFor={textareaId} showAsterisk={showAsterisk}>
-          {label}
-        </FieldLabel>
-      )}
+	return (
+		<FieldWrapper className={wrapperClassName}>
+			{label && (
+				<FieldLabel htmlFor={textareaId} showAsterisk={showAsterisk}>
+					{label}
+				</FieldLabel>
+			)}
 
-      <section
-        title={title}
-        style={style}
-        onClick={handleSectionClick}
-        className={className}
-      >
-        <textarea
-          id={textareaId}
-          disabled={disabled}
-          readOnly={readOnly}
-          ref={textareaRef}
-          name={name}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          defaultValue={defaultValue || ""}
-          placeholder={disabled ? value || placeholder : placeholder}
-          value={disabled ? undefined : value}
-          {...rest}
-        />
-      </section>
-      {errorMessage && <FieldError>{errorMessage}</FieldError>}
-    </FieldWrapper>
-  );
+			<section
+				title={title}
+				style={style}
+				onClick={handleSectionClick}
+				className={className}
+			>
+				<textarea
+					id={textareaId}
+					disabled={disabled}
+					readOnly={readOnly}
+					ref={textareaRef}
+					name={name}
+					onFocus={handleFocus}
+					onBlur={handleBlur}
+					defaultValue={defaultValue || ""}
+					placeholder={disabled ? value || placeholder : placeholder}
+					value={disabled ? undefined : value}
+					{...rest}
+				/>
+			</section>
+			{errorMessage && <FieldError>{errorMessage}</FieldError>}
+		</FieldWrapper>
+	);
 }
 
 export { Textarea };

@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import "./styles.css";
 
 type TableHeaderProps = HTMLAttributes<HTMLTableSectionElement>;
@@ -22,15 +22,15 @@ type TableHeaderProps = HTMLAttributes<HTMLTableSectionElement>;
  */
 
 function TableHeader(props: TableHeaderProps) {
-  const { className: baseClassName, children, ...rest } = props;
-  const className = `arkynTableHeader ${baseClassName}`;
+	const { className: baseClassName, children, ...rest } = props;
+	const className = `arkynTableHeader ${baseClassName}`;
 
-  return (
-    <thead className={className.trim()} {...rest}>
-      <tr>{children}</tr>
-      <tr className="spacingRow" />
-    </thead>
-  );
+	return (
+		<thead className={className.trim()} {...rest}>
+			<tr>{children}</tr>
+			<tr className="spacingRow" />
+		</thead>
+	);
 }
 
 export { TableHeader };

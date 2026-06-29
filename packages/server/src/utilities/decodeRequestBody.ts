@@ -17,27 +17,27 @@ import { BadRequest } from "../http/badResponses/badRequest";
  */
 
 async function decodeRequestBody(request: Request): Promise<any> {
-  let data: any;
+	let data: any;
 
-  const arrayBuffer = await request.arrayBuffer();
-  const text = new TextDecoder().decode(arrayBuffer);
+	const arrayBuffer = await request.arrayBuffer();
+	const text = new TextDecoder().decode(arrayBuffer);
 
-  try {
-    data = JSON.parse(text);
-  } catch (jsonError) {
-    try {
-      if (text.includes("=")) {
-        const formData = new URLSearchParams(text);
-        data = Object.fromEntries(formData.entries());
-      } else {
-        throw new BadRequest("Invalid URLSearchParams format");
-      }
-    } catch (formDataError) {
-      throw new BadRequest("Failed to extract data from request");
-    }
-  }
+	try {
+		data = JSON.parse(text);
+	} catch (_jsonError) {
+		try {
+			if (text.includes("=")) {
+				const formData = new URLSearchParams(text);
+				data = Object.fromEntries(formData.entries());
+			} else {
+				throw new BadRequest("Invalid URLSearchParams format");
+			}
+		} catch (_formDataError) {
+			throw new BadRequest("Failed to extract data from request");
+		}
+	}
 
-  return data;
+	return data;
 }
 
 export { decodeRequestBody };

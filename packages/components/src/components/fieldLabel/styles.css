@@ -1,15 +1,15 @@
 .arkynFieldLabel {
-  color: var(--text-body);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 19.07px;
+	color: var(--text-body);
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 19.07px;
 }
 
 .arkynFieldLabel.asteriskTrue::before {
-  content: "* ";
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 16.34px;
-  text-align: left;
-  color: rgb(var(--spotlight-danger), 1);
+	content: "* ";
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 16.34px;
+	text-align: left;
+	color: rgb(var(--spotlight-danger), 1);
 }

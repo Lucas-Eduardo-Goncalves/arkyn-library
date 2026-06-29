@@ -1,9 +1,9 @@
-import { makeRequest, type ApiResponseDTO } from "./_makeRequest";
+import { type ApiResponseDTO, makeRequest } from "./_makeRequest";
 
 type InputProps = {
-  url: string;
-  urlParams?: Record<string, string>;
-  headers?: HeadersInit;
+	url: string;
+	urlParams?: Record<string, string>;
+	headers?: HeadersInit;
 };
 
 /**
@@ -15,14 +15,14 @@ type InputProps = {
  */
 
 async function getRequest<T = any>(
-  input: InputProps,
+	input: InputProps,
 ): Promise<ApiResponseDTO<T>> {
-  return makeRequest({
-    method: "GET",
-    url: input.url,
-    urlParams: input.urlParams,
-    headers: input.headers,
-  });
+	return makeRequest({
+		method: "GET",
+		url: input.url,
+		urlParams: input.urlParams,
+		headers: input.headers,
+	});
 }
 
 export { getRequest };

@@ -1,74 +1,74 @@
 .arkynMonthlyCalendarEvent {
-  position: relative;
-  padding: 8px;
-  border-radius: 8px;
+	position: relative;
+	padding: 8px;
+	border-radius: 8px;
 
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
 }
 
 .arkynMonthlyCalendarEvent::before {
-  content: " ";
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
+	content: " ";
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
 
-  width: 4px;
-  border-radius: 8px 0 0 8px;
+	width: 4px;
+	border-radius: 8px 0 0 8px;
 }
 
 .arkynMonthlyCalendarEvent.primary {
-  background-color: rgb(var(--spotlight-primary-light));
+	background-color: rgb(var(--spotlight-primary-light));
 }
 
 .arkynMonthlyCalendarEvent.primary::before {
-  background-color: rgb(var(--spotlight-primary));
+	background-color: rgb(var(--spotlight-primary));
 }
 
 .arkynMonthlyCalendarEvent.danger {
-  background-color: rgb(var(--spotlight-danger-light));
+	background-color: rgb(var(--spotlight-danger-light));
 }
 
 .arkynMonthlyCalendarEvent.danger::before {
-  background-color: rgb(var(--spotlight-danger));
+	background-color: rgb(var(--spotlight-danger));
 }
 
 .arkynMonthlyCalendarEvent.warning {
-  background-color: rgb(var(--spotlight-warning-light));
+	background-color: rgb(var(--spotlight-warning-light));
 }
 
 .arkynMonthlyCalendarEvent.warning::before {
-  background-color: rgb(var(--spotlight-warning));
+	background-color: rgb(var(--spotlight-warning));
 }
 
 .arkynMonthlyCalendarEvent.info {
-  background-color: rgb(var(--spotlight-info-light));
+	background-color: rgb(var(--spotlight-info-light));
 }
 
 .arkynMonthlyCalendarEvent.info::before {
-  background-color: rgb(var(--spotlight-info));
+	background-color: rgb(var(--spotlight-info));
 }
 
 .arkynMonthlyCalendarEvent.success {
-  background-color: rgb(var(--spotlight-success-light));
+	background-color: rgb(var(--spotlight-success-light));
 }
 
 .arkynMonthlyCalendarEvent.success::before {
-  background-color: rgb(var(--spotlight-success));
+	background-color: rgb(var(--spotlight-success));
 }
 
 .arkynMonthlyCalendarEvent > strong {
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0%;
-  color: var(--text-heading);
+	font-weight: 600;
+	font-size: 14px;
+	letter-spacing: 0%;
+	color: var(--text-heading);
 }
 
 .arkynMonthlyCalendarEvent > p {
-  font-weight: 400;
-  font-size: 12px;
-  letter-spacing: 0%;
-  color: var(--text-heading);
+	font-weight: 400;
+	font-size: 12px;
+	letter-spacing: 0%;
+	color: var(--text-heading);
 }

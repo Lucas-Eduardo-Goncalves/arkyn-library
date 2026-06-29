@@ -31,8 +31,8 @@ import { formContext } from "../providers/formProvider";
  */
 
 function useForm() {
-  const context = useContext(formContext);
-  return context;
+	const context = useContext(formContext);
+	return context;
 }
 
 export { useForm };

@@ -1,18 +1,18 @@
 .arkynTableCaption {
-  margin-bottom: 24px;
+	margin-bottom: 24px;
 }
 
 .arkynTableCaptionContent {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .arkynTableCaptionContent > .rightSection {
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  gap: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	gap: 16px;
 
-  flex: 2;
-  padding-left: auto;
+	flex: 2;
+	padding-left: auto;
 }

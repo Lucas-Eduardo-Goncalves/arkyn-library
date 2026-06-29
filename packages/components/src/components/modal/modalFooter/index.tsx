@@ -1,15 +1,15 @@
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import "./styles.css";
 
 type ModalFooterProps = HTMLAttributes<HTMLElement> & {
-  /**
-   * Horizontal alignment of footer content.
-   * - `left` / `center` / `right`: flex-start, center, flex-end.
-   * - `between`: space-between.
-   * - `around`: space-around.
-   * @default "right"
-   */
-  alignment?: "left" | "center" | "right" | "between" | "around";
+	/**
+	 * Horizontal alignment of footer content.
+	 * - `left` / `center` / `right`: flex-start, center, flex-end.
+	 * - `between`: space-between.
+	 * - `around`: space-around.
+	 * @default "right"
+	 */
+	alignment?: "left" | "center" | "right" | "between" | "around";
 };
 
 /**
@@ -38,10 +38,10 @@ type ModalFooterProps = HTMLAttributes<HTMLElement> & {
  */
 
 function ModalFooter(args: ModalFooterProps) {
-  const { alignment = "right", className: baseClassName, ...rest } = args;
-  const className = `arkynModalFooter ${alignment} ${baseClassName}`;
+	const { alignment = "right", className: baseClassName, ...rest } = args;
+	const className = `arkynModalFooter ${alignment} ${baseClassName}`;
 
-  return <footer className={className.trim()} {...rest} />;
+	return <footer className={className.trim()} {...rest} />;
 }
 
 export { ModalFooter };

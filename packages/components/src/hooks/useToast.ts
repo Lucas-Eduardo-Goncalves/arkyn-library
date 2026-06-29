@@ -1,5 +1,5 @@
-import { toastContext } from "../providers/toastProvider";
 import { useContext } from "react";
+import { toastContext } from "../providers/toastProvider";
 
 /**
  * useToast — reads `ToastProvider` context to display toast notifications.
@@ -21,13 +21,13 @@ import { useContext } from "react";
  */
 
 function useToast() {
-  const contextData = useContext(toastContext);
+	const contextData = useContext(toastContext);
 
-  if (Object.entries(contextData).length === 0) {
-    throw new Error("useToast must be used within a Provider");
-  }
+	if (Object.entries(contextData).length === 0) {
+		throw new Error("useToast must be used within a Provider");
+	}
 
-  return contextData;
+	return contextData;
 }
 
 export { useToast };

@@ -1,4 +1,4 @@
-import { RichTextValue } from "../types/richTextTypes";
+import type { RichTextValue } from "../types/richTextTypes";
 import { serialize } from "../utils/richTextUtilities";
 
 /**
@@ -20,7 +20,7 @@ import { serialize } from "../utils/richTextUtilities";
  */
 
 function toHtml(richTextValue: RichTextValue): string {
-  return richTextValue.map((node) => serialize(node)).join("");
+	return richTextValue.map((node) => serialize(node)).join("");
 }
 
 export { toHtml };

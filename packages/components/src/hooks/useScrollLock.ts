@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
 function getScrollbarWidth(): number {
-  if (typeof window === "undefined") return 0;
-  return window.innerWidth - document.documentElement.clientWidth;
+	if (typeof window === "undefined") return 0;
+	return window.innerWidth - document.documentElement.clientWidth;
 }
 
 /**
@@ -27,30 +27,31 @@ function getScrollbarWidth(): number {
  */
 
 function useScrollLock(isLocked: boolean): void {
-  useEffect(() => {
-    if (isLocked) {
-      const originalOverflow = document.body.style.overflow;
-      const originalPaddingRight = document.body.style.paddingRight;
+	useEffect(() => {
+		if (isLocked) {
+			const originalOverflow = document.body.style.overflow;
+			const originalPaddingRight = document.body.style.paddingRight;
 
-      const scrollbarWidth = getScrollbarWidth();
+			const scrollbarWidth = getScrollbarWidth();
 
-      if (scrollbarWidth > 0) {
-        const computedStyle = window.getComputedStyle(document.body);
-        const existingPaddingRight = parseInt(computedStyle.paddingRight) || 0;
+			if (scrollbarWidth > 0) {
+				const computedStyle = window.getComputedStyle(document.body);
+				const existingPaddingRight =
+					parseInt(computedStyle.paddingRight, 10) || 0;
 
-        document.body.style.paddingRight = `${
-          existingPaddingRight + scrollbarWidth
-        }px`;
-      }
+				document.body.style.paddingRight = `${
+					existingPaddingRight + scrollbarWidth
+				}px`;
+			}
 
-      document.body.style.overflow = "hidden";
+			document.body.style.overflow = "hidden";
 
-      return () => {
-        document.body.style.overflow = originalOverflow;
-        document.body.style.paddingRight = originalPaddingRight;
-      };
-    }
-  }, [isLocked]);
+			return () => {
+				document.body.style.overflow = originalOverflow;
+				document.body.style.paddingRight = originalPaddingRight;
+			};
+		}
+	}, [isLocked]);
 }
 
 export { useScrollLock };

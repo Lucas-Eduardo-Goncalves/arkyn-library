@@ -19,7 +19,7 @@
  */
 
 function removeCurrencySymbols(rawString: string): string {
-  return rawString.replace(/(?:R\$|\p{Sc}|[$€¥£])/gu, "").trim();
+	return rawString.replace(/(?:R\$|\p{Sc}|[$€¥£])/gu, "").trim();
 }
 
 export { removeCurrencySymbols };

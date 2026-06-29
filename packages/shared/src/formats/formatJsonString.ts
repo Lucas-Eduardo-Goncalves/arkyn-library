@@ -23,12 +23,12 @@ type FormatJsonStringFunction = (jsonString: string) => string;
  */
 
 const formatJsonString: FormatJsonStringFunction = (jsonString) => {
-  try {
-    const jsonObject = JSON.parse(jsonString);
-    return formatJsonObject(jsonObject, 0);
-  } catch (error) {
-    throw new Error(`Invalid JSON string \n ${error}`);
-  }
+	try {
+		const jsonObject = JSON.parse(jsonString);
+		return formatJsonObject(jsonObject, 0);
+	} catch (error) {
+		throw new Error(`Invalid JSON string \n ${error}`);
+	}
 };
 
 export { formatJsonString };

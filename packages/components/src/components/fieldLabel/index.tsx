@@ -1,9 +1,9 @@
-import { LabelHTMLAttributes } from "react";
+import type { LabelHTMLAttributes } from "react";
 import "./styles.css";
 
 type FieldLabelProps = LabelHTMLAttributes<HTMLLabelElement> & {
-  /** When true, appends an asterisk (*) to signal a required field. @default false */
-  showAsterisk?: boolean;
+	/** When true, appends an asterisk (*) to signal a required field. @default false */
+	showAsterisk?: boolean;
 };
 
 /**
@@ -22,16 +22,16 @@ type FieldLabelProps = LabelHTMLAttributes<HTMLLabelElement> & {
  */
 
 function FieldLabel(props: FieldLabelProps) {
-  const {
-    showAsterisk = false,
-    className: baseClassName = "",
-    ...rest
-  } = props;
+	const {
+		showAsterisk = false,
+		className: baseClassName = "",
+		...rest
+	} = props;
 
-  const show = showAsterisk ? "asteriskTrue" : "asteriskFalse";
-  const className = `arkynFieldLabel ${show} ${baseClassName}`;
+	const show = showAsterisk ? "asteriskTrue" : "asteriskFalse";
+	const className = `arkynFieldLabel ${show} ${baseClassName}`;
 
-  return <label className={className.trim()} {...rest} />;
+	return <label className={className.trim()} {...rest} />;
 }
 
 export { FieldLabel };

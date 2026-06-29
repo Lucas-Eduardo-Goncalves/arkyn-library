@@ -12,7 +12,7 @@
  */
 
 function removeNonNumeric(rawString: string): string {
-  return rawString.replace(/[^0-9]/g, "");
+	return rawString.replace(/[^0-9]/g, "");
 }
 
 export { removeNonNumeric };

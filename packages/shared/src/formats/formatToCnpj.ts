@@ -18,13 +18,13 @@ import { removeNonNumeric } from "../utilities/removeNonNumeric";
  */
 
 function formatToCnpj(value: string): string {
-  const cleaned = removeNonNumeric(value);
-  const match = cleaned.match(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/);
+	const cleaned = removeNonNumeric(value);
+	const match = cleaned.match(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/);
 
-  const errorMessage = `CNPJ must be contain 14 numeric digits: ${value}`;
-  if (!match) throw new Error(errorMessage);
+	const errorMessage = `CNPJ must be contain 14 numeric digits: ${value}`;
+	if (!match) throw new Error(errorMessage);
 
-  return `${match[1]}.${match[2]}.${match[3]}/${match[4]}-${match[5]}`;
+	return `${match[1]}.${match[2]}.${match[3]}/${match[4]}-${match[5]}`;
 }
 
 export { formatToCnpj };

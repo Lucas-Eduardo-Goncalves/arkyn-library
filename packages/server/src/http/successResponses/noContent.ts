@@ -10,29 +10,29 @@ import { SuccessResponse } from "./_successResponse";
  * ```
  */
 class NoContent extends SuccessResponse {
-  /**
-   * @param message - Description included in the response status text.
-   */
-  constructor(message: string) {
-    super();
+	/**
+	 * @param message - Description included in the response status text.
+	 */
+	constructor(message: string) {
+		super();
 
-    this.name = "NoContent";
-    this.status = 204;
-    this.statusText = message;
+		this.name = "NoContent";
+		this.status = 204;
+		this.statusText = message;
 
-    this.onDebug();
-  }
+		this.onDebug();
+	}
 
-  /** Converts to a `Response` with `Content-Type: application/json` header and no body. */
-  toResponse(): Response {
-    const responseInit: ResponseInit = {
-      headers: { "Content-Type": "application/json" },
-      status: this.status,
-      statusText: this.statusText,
-    };
+	/** Converts to a `Response` with `Content-Type: application/json` header and no body. */
+	toResponse(): Response {
+		const responseInit: ResponseInit = {
+			headers: { "Content-Type": "application/json" },
+			status: this.status,
+			statusText: this.statusText,
+		};
 
-    return new Response(null, responseInit);
-  }
+		return new Response(null, responseInit);
+	}
 }
 
 export { NoContent };

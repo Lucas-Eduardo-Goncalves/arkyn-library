@@ -1,18 +1,21 @@
-import { Descendant, RichTextMarkFormatType } from "../types/richTextTypes";
+import type {
+	Descendant,
+	RichTextMarkFormatType,
+} from "../types/richTextTypes";
 
 type HotKeys = {
-  [key: string]: RichTextMarkFormatType;
+	[key: string]: RichTextMarkFormatType;
 };
 
 const hotKeys: HotKeys = {
-  "mod+b": "bold",
-  "mod+i": "italic",
-  "mod+u": "underline",
-  "mod+`": "code",
+	"mod+b": "bold",
+	"mod+i": "italic",
+	"mod+u": "underline",
+	"mod+`": "code",
 };
 
 const initialValue: Descendant[] = [
-  { type: "paragraph", children: [{ text: "" }] },
+	{ type: "paragraph", children: [{ text: "" }] },
 ];
 
 const listTypes = ["listItem", "numberedList"];

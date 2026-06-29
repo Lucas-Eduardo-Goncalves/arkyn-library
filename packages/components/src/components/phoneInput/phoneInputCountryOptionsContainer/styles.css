@@ -1,59 +1,59 @@
 /* BASE CSS */
 .arkynPhoneInputCountryOptionsContainer {
-  position: absolute;
-  z-index: 7;
+	position: absolute;
+	z-index: 7;
 
-  left: -2px;
-  right: -2px;
+	left: -2px;
+	right: -2px;
 
-  border-radius: 6px;
-  list-style: none;
+	border-radius: 6px;
+	list-style: none;
 
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-  flex: 1;
-  overflow: hidden;
-  height: max-content;
+	flex: 1;
+	overflow: hidden;
+	height: max-content;
 
-  border: 1px solid var(--border);
-  background-color: var(--card);
+	border: 1px solid var(--border);
+	background-color: var(--card);
 
-  max-height: 300px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	max-height: 300px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 
-  max-height: 200px;
-  overflow: auto;
+	max-height: 200px;
+	overflow: auto;
 }
 
 .arkynPhoneInputCountryOptionsContainer.bottom {
-  top: calc(100% + 5px);
+	top: calc(100% + 5px);
 }
 
 .arkynPhoneInputCountryOptionsContainer.top {
-  bottom: calc(100% + 5px);
+	bottom: calc(100% + 5px);
 }
 
 /* NOT FOUND TEXT */
 .arkynPhoneInputCountryOptionsContainer > p {
-  font-weight: 400;
-  font-size: 14px;
-  padding: 16px;
-  text-align: center;
-  line-height: 21.79px;
+	font-weight: 400;
+	font-size: 14px;
+	padding: 16px;
+	text-align: center;
+	line-height: 21.79px;
 
-  color: var(--text-body);
+	color: var(--text-body);
 }
 
 .arkynPhoneInputCountryOptionsContainerSearchSelect {
-  padding: 16px;
-  border: none;
-  border-bottom: 1px solid var(--border);
-  outline: none;
-  color: var(--text-heading);
-  font-size: 14px;
+	padding: 16px;
+	border: none;
+	border-bottom: 1px solid var(--border);
+	outline: none;
+	color: var(--text-heading);
+	font-size: 14px;
 }
 
 .arkynPhoneInputCountryOptionsContainerSearchSelect::placeholder {
-  color: var(--text-muted);
+	color: var(--text-muted);
 }

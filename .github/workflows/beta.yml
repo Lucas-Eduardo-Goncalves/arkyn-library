@@ -81,6 +81,12 @@ jobs:
         run: bun run all:audit
 
       # ------------------------------------------------------
+      # Verifica vulnerabilidades de código com o Biome.
+      # ------------------------------------------------------
+      - name: Biome check
+        run: bun run biome:check
+
+      # ------------------------------------------------------
       # Compila todos os pacotes.
       # ------------------------------------------------------
       - name: Build packages

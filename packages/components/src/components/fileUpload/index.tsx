@@ -10,32 +10,32 @@ import { NoFileContent } from "./noFileContent";
 import "./styles.css";
 
 type FileUploadProps = {
-  /** Field name for form submission (stores the uploaded file URL). Required. */
-  name: string;
-  /** Server endpoint URL that receives the `multipart/form-data` upload request. Required. */
-  action: string;
-  /** Disables file selection and upload. @default false */
-  disabled?: boolean;
-  /** Optional label text displayed above the upload area. */
-  label?: string;
-  /** Displays an asterisk on the label to signal a required field. @default false */
-  showAsterisk?: boolean;
-  /** Label for the file-picker button after a file is selected. @default "Alterar arquivo" */
-  changeFileButtonText?: string;
-  /** Label for the file-picker button before a file is selected. @default "Selecionar arquivo" */
-  selectFileButtonText?: string;
-  /** Text displayed in the drag-and-drop zone. @default "Ou arraste e solte o arquivo aqui" */
-  dropFileText?: string;
-  /** HTTP method for the upload request. @default "POST" */
-  method?: string;
-  /** Form-data field name used for the file. @default "file" */
-  fileName?: string;
-  /** Property name in the server response that contains the file URL. @default "url" */
-  fileResponseName?: string;
-  /** Accepted file MIME types or extensions (e.g. `".pdf"`, `"image/*"`). @default "*" */
-  acceptFile?: string;
-  /** Callback fired after a successful upload. Receives the URL returned by the server. */
-  onChange?: (url?: string) => void;
+	/** Field name for form submission (stores the uploaded file URL). Required. */
+	name: string;
+	/** Server endpoint URL that receives the `multipart/form-data` upload request. Required. */
+	action: string;
+	/** Disables file selection and upload. @default false */
+	disabled?: boolean;
+	/** Optional label text displayed above the upload area. */
+	label?: string;
+	/** Displays an asterisk on the label to signal a required field. @default false */
+	showAsterisk?: boolean;
+	/** Label for the file-picker button after a file is selected. @default "Alterar arquivo" */
+	changeFileButtonText?: string;
+	/** Label for the file-picker button before a file is selected. @default "Selecionar arquivo" */
+	selectFileButtonText?: string;
+	/** Text displayed in the drag-and-drop zone. @default "Ou arraste e solte o arquivo aqui" */
+	dropFileText?: string;
+	/** HTTP method for the upload request. @default "POST" */
+	method?: string;
+	/** Form-data field name used for the file. @default "file" */
+	fileName?: string;
+	/** Property name in the server response that contains the file URL. @default "url" */
+	fileResponseName?: string;
+	/** Accepted file MIME types or extensions (e.g. `".pdf"`, `"image/*"`). @default "*" */
+	acceptFile?: string;
+	/** Callback fired after a successful upload. Receives the URL returned by the server. */
+	onChange?: (url?: string) => void;
 };
 
 /**
@@ -77,101 +77,101 @@ type FileUploadProps = {
  */
 
 function FileUpload(props: FileUploadProps) {
-  const {
-    name,
-    label,
-    showAsterisk = false,
-    action,
-    fileName = "file",
-    method = "POST",
-    acceptFile = "*",
-    fileResponseName = "url",
-    changeFileButtonText = "Alterar arquivo",
-    selectFileButtonText = "Selecionar arquivo",
-    dropFileText = "Ou arraste e solte o arquivo aqui",
-    onChange,
-    disabled = false,
-  } = props;
+	const {
+		name,
+		label,
+		showAsterisk = false,
+		action,
+		fileName = "file",
+		method = "POST",
+		acceptFile = "*",
+		fileResponseName = "url",
+		changeFileButtonText = "Alterar arquivo",
+		selectFileButtonText = "Selecionar arquivo",
+		dropFileText = "Ou arraste e solte o arquivo aqui",
+		onChange,
+		disabled = false,
+	} = props;
 
-  const { fieldErrors } = useForm();
-  const fieldError = fieldErrors?.[name];
+	const { fieldErrors } = useForm();
+	const fieldError = fieldErrors?.[name];
 
-  const [value, setValue] = useState("");
-  const [error, setError] = useState("");
-  const [file, setFile] = useState<File | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+	const [value, setValue] = useState("");
+	const [error, setError] = useState("");
+	const [file, setFile] = useState<File | null>(null);
+	const [isLoading, setIsLoading] = useState(false);
 
-  async function handleUploadFile(file: File) {
-    if (disabled) return;
+	async function handleUploadFile(file: File) {
+		if (disabled) return;
 
-    setIsLoading(true);
-    setFile(file);
-    setError("");
+		setIsLoading(true);
+		setFile(file);
+		setError("");
 
-    const formData = new FormData();
-    formData.append(fileName, file);
+		const formData = new FormData();
+		formData.append(fileName, file);
 
-    await fetch(action, { method: method, body: formData })
-      .then(async (response) => await response.json())
-      .then((response) => {
-        if (!!response?.error) setError(response.error);
-        else setValue(response?.[fileResponseName]);
-        onChange && onChange(response?.[fileResponseName]);
-      })
-      .catch((error) => {
-        console.error(error);
-        setError("Erro ao enviar o arquivo");
-      })
-      .finally(() => setIsLoading(false));
-  }
+		await fetch(action, { method: method, body: formData })
+			.then(async (response) => await response.json())
+			.then((response) => {
+				if (response?.error) setError(response.error);
+				else setValue(response?.[fileResponseName]);
+				onChange?.(response?.[fileResponseName]);
+			})
+			.catch((error) => {
+				console.error(error);
+				setError("Erro ao enviar o arquivo");
+			})
+			.finally(() => setIsLoading(false));
+	}
 
-  function handleSelectFile(file: File) {
-    if (disabled) return;
-    handleUploadFile(file);
-  }
+	function handleSelectFile(file: File) {
+		if (disabled) return;
+		handleUploadFile(file);
+	}
 
-  const errorMessage = fieldError || error;
+	const errorMessage = fieldError || error;
 
-  const hasErrorClassName = errorMessage ? "hasError" : "noHasError";
-  const hasFileClassName = file ? "hasFile" : "noHasFile";
-  const className = `arkynFileUpload ${hasErrorClassName} ${hasFileClassName}`;
+	const hasErrorClassName = errorMessage ? "hasError" : "noHasError";
+	const hasFileClassName = file ? "hasFile" : "noHasFile";
+	const className = `arkynFileUpload ${hasErrorClassName} ${hasFileClassName}`;
 
-  return (
-    <FieldWrapper>
-      {label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
+	return (
+		<FieldWrapper>
+			{label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
 
-      <div className={className}>
-        <input type="hidden" name={name} value={value || ""} />
+			<div className={className}>
+				<input type="hidden" name={name} value={value || ""} />
 
-        {!file && (
-          <NoFileContent
-            disabled={disabled}
-            isLoading={isLoading}
-            acceptFile={acceptFile}
-            dropFileText={dropFileText}
-            handleSelectFile={handleSelectFile}
-            selectFileButtonText={selectFileButtonText}
-          />
-        )}
+				{!file && (
+					<NoFileContent
+						disabled={disabled}
+						isLoading={isLoading}
+						acceptFile={acceptFile}
+						dropFileText={dropFileText}
+						handleSelectFile={handleSelectFile}
+						selectFileButtonText={selectFileButtonText}
+					/>
+				)}
 
-        {file && (
-          <HasFileContent
-            disabled={disabled}
-            isLoading={isLoading}
-            acceptFile={acceptFile}
-            file={file}
-            handleSelectFile={handleSelectFile}
-            changeFileButtonText={changeFileButtonText}
-            reSendFile={
-              !!errorMessage && file ? () => handleUploadFile(file) : undefined
-            }
-          />
-        )}
-      </div>
+				{file && (
+					<HasFileContent
+						disabled={disabled}
+						isLoading={isLoading}
+						acceptFile={acceptFile}
+						file={file}
+						handleSelectFile={handleSelectFile}
+						changeFileButtonText={changeFileButtonText}
+						reSendFile={
+							errorMessage && file ? () => handleUploadFile(file) : undefined
+						}
+					/>
+				)}
+			</div>
 
-      {errorMessage && <FieldError>{errorMessage}</FieldError>}
-    </FieldWrapper>
-  );
+			{errorMessage && <FieldError>{errorMessage}</FieldError>}
+		</FieldWrapper>
+	);
 }
 
 export { FileUpload };

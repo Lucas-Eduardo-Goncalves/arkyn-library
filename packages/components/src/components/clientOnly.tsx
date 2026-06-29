@@ -1,10 +1,10 @@
 import { useHydrated } from "../hooks/useHydrated";
 
 type ClientOnlyProps = {
-  /** Render function — called after hydration on the client. Required. */
-  children(): React.ReactNode;
-  /** Content rendered during SSR or before hydration. @default null */
-  fallback?: React.ReactNode;
+	/** Render function — called after hydration on the client. Required. */
+	children(): React.ReactNode;
+	/** Content rendered during SSR or before hydration. @default null */
+	fallback?: React.ReactNode;
 };
 
 /**
@@ -33,8 +33,8 @@ type ClientOnlyProps = {
  */
 
 function ClientOnly(props: ClientOnlyProps) {
-  const { children, fallback = null } = props;
-  return useHydrated() ? <>{children()}</> : <>{fallback}</>;
+	const { children, fallback = null } = props;
+	return useHydrated() ? children() : fallback;
 }
 
 export { ClientOnly };

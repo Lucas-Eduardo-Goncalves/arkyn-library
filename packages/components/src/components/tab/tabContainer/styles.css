@@ -1,11 +1,11 @@
 .arkynTabContainer {
-  position: relative;
+	position: relative;
 
-  display: flex;
-  align-items: center;
-  justify-content: start;
+	display: flex;
+	align-items: center;
+	justify-content: start;
 
-  gap: 4px;
+	gap: 4px;
 
-  border-bottom: 1px solid var(--border);
+	border-bottom: 1px solid var(--border);
 }

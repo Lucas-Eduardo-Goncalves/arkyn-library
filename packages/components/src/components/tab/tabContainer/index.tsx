@@ -1,20 +1,20 @@
-import { HTMLAttributes, ReactNode, useState } from "react";
+import { type HTMLAttributes, type ReactNode, useState } from "react";
 
 import { TabProvider } from "../tabContext";
 import "./styles.css";
 
 type TabContainerProps = Omit<
-  HTMLAttributes<HTMLElement>,
-  "onChange" | "children" | "ref" | "onClick"
+	HTMLAttributes<HTMLElement>,
+	"onChange" | "children" | "ref" | "onClick"
 > & {
-  /** `TabButton` components to render as tabs. Required. */
-  children: ReactNode;
-  /** Disables all tab buttons at once. @default false */
-  disabled?: boolean;
-  /** Initially selected tab value. */
-  defaultValue?: string;
-  /** Callback fired when the active tab changes, receiving the new value. */
-  onChange?: (index: string) => void;
+	/** `TabButton` components to render as tabs. Required. */
+	children: ReactNode;
+	/** Disables all tab buttons at once. @default false */
+	disabled?: boolean;
+	/** Initially selected tab value. */
+	defaultValue?: string;
+	/** Callback fired when the active tab changes, receiving the new value. */
+	onChange?: (index: string) => void;
 };
 
 /**
@@ -45,35 +45,35 @@ type TabContainerProps = Omit<
  */
 
 function TabContainer(props: TabContainerProps) {
-  const {
-    children,
-    onChange,
-    defaultValue,
-    disabled = false,
-    className: baseClassName,
-    ...rest
-  } = props;
+	const {
+		children,
+		onChange,
+		defaultValue,
+		disabled = false,
+		className: baseClassName,
+		...rest
+	} = props;
 
-  const [currentTab, setCurrentTab] = useState(defaultValue || "");
+	const [currentTab, setCurrentTab] = useState(defaultValue || "");
 
-  const className = `arkynTabContainer ${baseClassName || ""}`;
+	const className = `arkynTabContainer ${baseClassName || ""}`;
 
-  function changeCurrentTab(value: string) {
-    setCurrentTab(value);
-    if (onChange) onChange(value);
-  }
+	function changeCurrentTab(value: string) {
+		setCurrentTab(value);
+		if (onChange) onChange(value);
+	}
 
-  return (
-    <TabProvider
-      disabled={disabled}
-      currentTab={currentTab}
-      changeCurrentTab={changeCurrentTab}
-    >
-      <nav className={className.trim()} {...rest}>
-        {children}
-      </nav>
-    </TabProvider>
-  );
+	return (
+		<TabProvider
+			disabled={disabled}
+			currentTab={currentTab}
+			changeCurrentTab={changeCurrentTab}
+		>
+			<nav className={className.trim()} {...rest}>
+				{children}
+			</nav>
+		</TabProvider>
+	);
 }
 
 export { TabContainer };

@@ -1,22 +1,30 @@
 import isHotkey from "is-hotkey";
 import {
-  AlignCenter,
-  AlignJustify,
-  AlignLeft,
-  AlignRight,
-  Bold,
-  Code,
-  Heading1,
-  Heading2,
-  Italic,
-  Quote,
-  Underline,
+	AlignCenter,
+	AlignJustify,
+	AlignLeft,
+	AlignRight,
+	Bold,
+	Code,
+	Heading1,
+	Heading2,
+	Italic,
+	Quote,
+	Underline,
 } from "lucide-react";
 import { useCallback, useId, useMemo, useRef, useState } from "react";
-import { createEditor, Descendant, Transforms } from "slate";
+import { createEditor, type Descendant, Transforms } from "slate";
 import { withHistory } from "slate-history";
 import { Editable, Slate, withReact } from "slate-react";
-
+import { useForm } from "../../hooks/useForm";
+import { extractTextFromNode } from "../../services/extractTextFromNode";
+import { FieldTemplate } from "../../services/fieldTemplate";
+import { toggleMark } from "../../services/toggleMark";
+import { hotKeys, initialValue } from "../../templates/richTextTemplates";
+import type {
+	RichTextHiddenButtonKey,
+	RichTextProps,
+} from "../../types/richTextTypes";
 import { BlockButton } from "./blockButton";
 import { Element } from "./element";
 import { InsertImage } from "./insertImage";
@@ -24,16 +32,6 @@ import { InsertVideo } from "./insertVideo";
 import { Leaf } from "./leaf";
 import { MarkButton } from "./markButton";
 import { Toolbar } from "./toolbar";
-
-import { useForm } from "../../hooks/useForm";
-import { extractTextFromNode } from "../../services/extractTextFromNode";
-import { FieldTemplate } from "../../services/fieldTemplate";
-import { toggleMark } from "../../services/toggleMark";
-import { hotKeys, initialValue } from "../../templates/richTextTemplates";
-import {
-  RichTextHiddenButtonKey,
-  RichTextProps,
-} from "../../types/richTextTypes";
 import "./styles.css";
 
 /**
@@ -87,204 +85,204 @@ import "./styles.css";
  */
 
 function RichText(props: RichTextProps) {
-  const {
-    name,
-    hiddenButtons,
-    imageConfig,
-    videoConfig,
-    className: wrapperClassName = "",
-    defaultValue = "[]",
-    enforceCharacterLimit = false,
-    onChangeCharactersCount,
-    baseErrorMessage,
-    maxLimit = 10000,
-    onChange,
-    isError: baseIsError,
-    label,
-    showAsterisk,
-    id,
-    orientation = "vertical",
-    unShowFieldTemplate = false,
-  } = props;
+	const {
+		name,
+		hiddenButtons,
+		imageConfig,
+		videoConfig,
+		className: wrapperClassName = "",
+		defaultValue = "[]",
+		enforceCharacterLimit = false,
+		onChangeCharactersCount,
+		baseErrorMessage,
+		maxLimit = 10000,
+		onChange,
+		isError: baseIsError,
+		label,
+		showAsterisk,
+		id,
+		orientation = "vertical",
+		unShowFieldTemplate = false,
+	} = props;
 
-  const editor = useMemo(() => withHistory(withReact(createEditor())), []);
+	const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
-  const { fieldErrors } = useForm();
+	const { fieldErrors } = useForm();
 
-  function getDefaultNodes(): Descendant[] {
-    try {
-      const parsedNodes = JSON.parse(defaultValue);
-      if (!Array.isArray(parsedNodes)) return initialValue;
-      if (parsedNodes.length <= 0) return initialValue;
+	function getDefaultNodes(): Descendant[] {
+		try {
+			const parsedNodes = JSON.parse(defaultValue);
+			if (!Array.isArray(parsedNodes)) return initialValue;
+			if (parsedNodes.length <= 0) return initialValue;
 
-      const isValidNodes = parsedNodes.every(
-        (node) =>
-          typeof node === "object" &&
-          node !== null &&
-          "type" in node &&
-          "children" in node,
-      );
+			const isValidNodes = parsedNodes.every(
+				(node) =>
+					typeof node === "object" &&
+					node !== null &&
+					"type" in node &&
+					"children" in node,
+			);
 
-      return isValidNodes ? parsedNodes : initialValue;
-    } catch (error) {
-      return initialValue;
-    }
-  }
+			return isValidNodes ? parsedNodes : initialValue;
+		} catch (_error) {
+			return initialValue;
+		}
+	}
 
-  const textFromNodes = extractTextFromNode(getDefaultNodes());
+	const textFromNodes = extractTextFromNode(getDefaultNodes());
 
-  const [charactersCount, setCharactersCount] = useState(textFromNodes.length);
-  const [inputValue, setInputValue] = useState(
-    JSON.stringify(getDefaultNodes()) || "[]",
-  );
+	const [charactersCount, setCharactersCount] = useState(textFromNodes.length);
+	const [inputValue, setInputValue] = useState(
+		JSON.stringify(getDefaultNodes()) || "[]",
+	);
 
-  const [onFocus, setOnFocus] = useState(false);
+	const [onFocus, setOnFocus] = useState(false);
 
-  const ref = useRef<HTMLInputElement>(null);
-  const inputId = id || useId();
+	const ref = useRef<HTMLInputElement>(null);
+	const inputId = id || useId();
 
-  const errorMessage = baseErrorMessage || fieldErrors?.[name];
-  const isError = baseIsError || !!errorMessage;
+	const errorMessage = baseErrorMessage || fieldErrors?.[name];
+	const isError = baseIsError || !!errorMessage;
 
-  const renderLeaf = useCallback(Leaf, []);
-  const renderElement = useCallback(Element, []);
+	const renderLeaf = useCallback(Leaf, []);
+	const renderElement = useCallback(Element, []);
 
-  function handleChange(value: Descendant[]) {
-    const text = extractTextFromNode(value);
+	function handleChange(value: Descendant[]) {
+		const text = extractTextFromNode(value);
 
-    setCharactersCount(text.length);
-    onChangeCharactersCount && onChangeCharactersCount(text.length);
+		setCharactersCount(text.length);
+		onChangeCharactersCount?.(text.length);
 
-    if (enforceCharacterLimit && text.length >= maxLimit) {
-      return;
-    } else {
-      setInputValue(JSON.stringify(value));
-      onChange && onChange(value);
+		if (enforceCharacterLimit && text.length >= maxLimit) {
+			return;
+		} else {
+			setInputValue(JSON.stringify(value));
+			onChange?.(value);
 
-      editor.children = value;
-      Transforms.setNodes(editor, { children: value });
-    }
-  }
+			editor.children = value;
+			Transforms.setNodes(editor, { children: value });
+		}
+	}
 
-  const focusClass = onFocus ? "focusTrue" : "focusFalse";
-  const errorClass = isError
-    ? "errorTrue"
-    : maxLimit < charactersCount
-      ? "errorTrue"
-      : "errorFalse";
+	const focusClass = onFocus ? "focusTrue" : "focusFalse";
+	const errorClass = isError
+		? "errorTrue"
+		: maxLimit < charactersCount
+			? "errorTrue"
+			: "errorFalse";
 
-  const className = `arkynRichText ${errorClass} ${focusClass}`;
+	const className = `arkynRichText ${errorClass} ${focusClass}`;
 
-  const restatesCharacters = maxLimit - charactersCount;
+	const restatesCharacters = maxLimit - charactersCount;
 
-  function buttonIsNotHidden(format: RichTextHiddenButtonKey) {
-    return !hiddenButtons?.includes(format);
-  }
+	function buttonIsNotHidden(format: RichTextHiddenButtonKey) {
+		return !hiddenButtons?.includes(format);
+	}
 
-  return (
-    <FieldTemplate
-      name={name}
-      label={label}
-      showAsterisk={showAsterisk}
-      className={wrapperClassName}
-      errorMessage={errorMessage}
-      unShowFieldTemplate={unShowFieldTemplate}
-      orientation={orientation}
-    >
-      <Slate
-        editor={editor}
-        initialValue={getDefaultNodes()}
-        onChange={handleChange}
-        onValueChange={handleChange}
-      >
-        <div className={className}>
-          <Toolbar>
-            {buttonIsNotHidden("headingOne") && (
-              <BlockButton format="headingOne" icon={Heading1} />
-            )}
+	return (
+		<FieldTemplate
+			name={name}
+			label={label}
+			showAsterisk={showAsterisk}
+			className={wrapperClassName}
+			errorMessage={errorMessage}
+			unShowFieldTemplate={unShowFieldTemplate}
+			orientation={orientation}
+		>
+			<Slate
+				editor={editor}
+				initialValue={getDefaultNodes()}
+				onChange={handleChange}
+				onValueChange={handleChange}
+			>
+				<div className={className}>
+					<Toolbar>
+						{buttonIsNotHidden("headingOne") && (
+							<BlockButton format="headingOne" icon={Heading1} />
+						)}
 
-            {buttonIsNotHidden("headingTwo") && (
-              <BlockButton format="headingTwo" icon={Heading2} />
-            )}
+						{buttonIsNotHidden("headingTwo") && (
+							<BlockButton format="headingTwo" icon={Heading2} />
+						)}
 
-            {buttonIsNotHidden("blockQuote") && (
-              <BlockButton format="blockQuote" icon={Quote} />
-            )}
+						{buttonIsNotHidden("blockQuote") && (
+							<BlockButton format="blockQuote" icon={Quote} />
+						)}
 
-            {buttonIsNotHidden("bold") && (
-              <MarkButton format="bold" icon={Bold} />
-            )}
+						{buttonIsNotHidden("bold") && (
+							<MarkButton format="bold" icon={Bold} />
+						)}
 
-            {buttonIsNotHidden("italic") && (
-              <MarkButton format="italic" icon={Italic} />
-            )}
+						{buttonIsNotHidden("italic") && (
+							<MarkButton format="italic" icon={Italic} />
+						)}
 
-            {buttonIsNotHidden("underline") && (
-              <MarkButton format="underline" icon={Underline} />
-            )}
+						{buttonIsNotHidden("underline") && (
+							<MarkButton format="underline" icon={Underline} />
+						)}
 
-            {buttonIsNotHidden("code") && (
-              <MarkButton format="code" icon={Code} />
-            )}
+						{buttonIsNotHidden("code") && (
+							<MarkButton format="code" icon={Code} />
+						)}
 
-            {buttonIsNotHidden("left") && (
-              <BlockButton format="left" icon={AlignLeft} />
-            )}
+						{buttonIsNotHidden("left") && (
+							<BlockButton format="left" icon={AlignLeft} />
+						)}
 
-            {buttonIsNotHidden("right") && (
-              <BlockButton format="right" icon={AlignRight} />
-            )}
+						{buttonIsNotHidden("right") && (
+							<BlockButton format="right" icon={AlignRight} />
+						)}
 
-            {buttonIsNotHidden("center") && (
-              <BlockButton format="center" icon={AlignCenter} />
-            )}
+						{buttonIsNotHidden("center") && (
+							<BlockButton format="center" icon={AlignCenter} />
+						)}
 
-            {buttonIsNotHidden("justify") && (
-              <BlockButton format="justify" icon={AlignJustify} />
-            )}
+						{buttonIsNotHidden("justify") && (
+							<BlockButton format="justify" icon={AlignJustify} />
+						)}
 
-            {imageConfig && buttonIsNotHidden("image") && (
-              <InsertImage {...imageConfig} />
-            )}
+						{imageConfig && buttonIsNotHidden("image") && (
+							<InsertImage {...imageConfig} />
+						)}
 
-            {buttonIsNotHidden("video") && <InsertVideo {...videoConfig} />}
-          </Toolbar>
+						{buttonIsNotHidden("video") && <InsertVideo {...videoConfig} />}
+					</Toolbar>
 
-          <Editable
-            className="editorContainer"
-            renderElement={renderElement}
-            renderLeaf={renderLeaf}
-            spellCheck
-            ref={ref}
-            id={inputId}
-            onFocus={() => setOnFocus(true)}
-            onBlur={() => setOnFocus(false)}
-            onKeyDown={(event) => {
-              for (const hotkey in hotKeys) {
-                if (isHotkey(hotkey, event as any)) {
-                  event.preventDefault();
-                  const mark = hotKeys[hotkey as keyof typeof hotKeys];
-                  toggleMark(editor, mark);
-                }
-              }
-            }}
-          />
+					<Editable
+						className="editorContainer"
+						renderElement={renderElement}
+						renderLeaf={renderLeaf}
+						spellCheck
+						ref={ref}
+						id={inputId}
+						onFocus={() => setOnFocus(true)}
+						onBlur={() => setOnFocus(false)}
+						onKeyDown={(event) => {
+							for (const hotkey in hotKeys) {
+								if (isHotkey(hotkey, event as any)) {
+									event.preventDefault();
+									const mark = hotKeys[hotkey as keyof typeof hotKeys];
+									toggleMark(editor, mark);
+								}
+							}
+						}}
+					/>
 
-          {restatesCharacters < 0 && (
-            <div className="restatesCharacters">{restatesCharacters}</div>
-          )}
-        </div>
+					{restatesCharacters < 0 && (
+						<div className="restatesCharacters">{restatesCharacters}</div>
+					)}
+				</div>
 
-        <input
-          type="hidden"
-          name={name}
-          value={inputValue.slice(0, maxLimit)}
-        />
+				<input
+					type="hidden"
+					name={name}
+					value={inputValue.slice(0, maxLimit)}
+				/>
 
-        <input type="hidden" name={`${name}Count`} value={charactersCount} />
-      </Slate>
-    </FieldTemplate>
-  );
+				<input type="hidden" name={`${name}Count`} value={charactersCount} />
+			</Slate>
+		</FieldTemplate>
+	);
 }
 
 export { RichText };
