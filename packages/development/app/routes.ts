@@ -9,4 +9,5 @@ export default [
 	route("/icon-button", "./components/components.iconButton.tsx"),
 	route("/checkbox", "./components/components.checkbox.tsx"),
 	route("/input", "./components/components.input.tsx"),
+	route("/currency-input", "./components/components.currencyInput.tsx"),
 ] satisfies RouteConfig;

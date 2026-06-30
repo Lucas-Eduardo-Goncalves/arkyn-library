@@ -10,6 +10,7 @@ export default function IndexRoute() {
 			<Link to="/card-tab">Card Tab</Link>
 			<Link to="/checkbox">Checkbox</Link>
 			<Link to="/input">Input</Link>
+			<Link to="/currency-input">Currency Input</Link>
 		</div>
 	);
 }

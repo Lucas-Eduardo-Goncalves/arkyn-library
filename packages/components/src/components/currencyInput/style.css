@@ -72,11 +72,11 @@
 }
 
 .arkynCurrencyInput.errored svg {
-	color: rgba(var(--spotlight-danger), 1);
+	color: rgb(var(--spotlight-danger));
 }
 
 .arkynCurrencyInput:not(.opacity).focused svg {
-	color: rgba(var(--spotlight-primary), 1);
+	color: rgb(var(--spotlight-primary));
 }
 
 .arkynCurrencyInput.opacity {
@@ -86,17 +86,17 @@
 /* VARIANTS */
 .arkynCurrencyInput.solid {
 	border-color: var(--border);
-	background-color: rgba(var(--spotlight-secondary), 1);
+	background-color: var(--input-background);
 }
 
 .arkynCurrencyInput.solid.errored {
-	border-color: rgba(var(--spotlight-danger), 1);
-	outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
+	outline-color: rgb(var(--spotlight-danger));
 }
 
 .arkynCurrencyInput:not(.opacity).solid.focused {
-	border-color: rgba(var(--spotlight-primary), 1);
-	outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
+	outline-color: rgb(var(--spotlight-primary));
 }
 
 .arkynCurrencyInput.outline {
@@ -104,13 +104,13 @@
 }
 
 .arkynCurrencyInput.outline.errored {
-	border-color: rgba(var(--spotlight-danger), 1);
-	outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
+	outline-color: rgb(var(--spotlight-danger));
 }
 
 .arkynCurrencyInput:not(.opacity).outline.focused {
-	border-color: rgba(var(--spotlight-primary), 1);
-	outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
+	outline-color: rgb(var(--spotlight-primary));
 }
 
 .arkynCurrencyInput.underline {
@@ -138,19 +138,19 @@
 }
 
 .arkynCurrencyInput.underline.errored {
-	border-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
 }
 
 .arkynCurrencyInput.underline.errored::before {
-	background: rgba(var(--spotlight-danger), 1);
+	background: rgb(var(--spotlight-danger));
 }
 
 .arkynCurrencyInput:not(.opacity).underline.focused {
-	border-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
 }
 
 .arkynCurrencyInput:not(.opacity).underline.focused::before {
-	background: rgba(var(--spotlight-primary), 1);
+	background: rgb(var(--spotlight-primary));
 }
 
 /* SIZE */
