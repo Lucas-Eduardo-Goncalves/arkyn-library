@@ -35,7 +35,7 @@
 }
 
 .arkynWeekCalendarEvent.primary {
-	background-color: rgb(var(--spotlight-primary-light));
+	background-color: rgb(var(--spotlight-primary-foreground));
 }
 
 .arkynWeekCalendarEvent.primary::before {
@@ -43,7 +43,7 @@
 }
 
 .arkynWeekCalendarEvent.danger {
-	background-color: rgb(var(--spotlight-danger-light));
+	background-color: rgb(var(--spotlight-danger-foreground));
 }
 
 .arkynWeekCalendarEvent.danger::before {
@@ -51,7 +51,7 @@
 }
 
 .arkynWeekCalendarEvent.warning {
-	background-color: rgb(var(--spotlight-warning-light));
+	background-color: rgb(var(--spotlight-warning-foreground));
 }
 
 .arkynWeekCalendarEvent.warning::before {
@@ -59,7 +59,7 @@
 }
 
 .arkynWeekCalendarEvent.info {
-	background-color: rgb(var(--spotlight-info-light));
+	background-color: rgb(var(--spotlight-info-foreground));
 }
 
 .arkynWeekCalendarEvent.info::before {
@@ -67,7 +67,7 @@
 }
 
 .arkynWeekCalendarEvent.success {
-	background-color: rgb(var(--spotlight-success-light));
+	background-color: rgb(var(--spotlight-success-foreground));
 }
 
 .arkynWeekCalendarEvent.success::before {

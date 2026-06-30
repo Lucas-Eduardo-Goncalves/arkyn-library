@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/shared",
-  "version": "3.0.1-beta.185",
+  "version": "3.0.1-beta.186",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "type": "module",

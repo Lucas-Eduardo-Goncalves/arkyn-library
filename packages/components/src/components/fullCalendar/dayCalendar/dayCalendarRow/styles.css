@@ -13,7 +13,7 @@
 }
 
 .arkynDayCalendarRow.blocked {
-	background-color: rgb(var(--spotlight-danger-light));
+	background-color: rgb(var(--spotlight-danger-foreground));
 }
 
 .arkynDayCalendarRow.blocked:before {

@@ -7,7 +7,7 @@
 }
 
 .arkynMonthlyCalendarTableTd.blocked {
-	background-color: rgb(var(--spotlight-danger-light));
+	background-color: rgb(var(--spotlight-danger-foreground));
 }
 
 .arkynMonthlyCalendarTableTd.blocked:before {

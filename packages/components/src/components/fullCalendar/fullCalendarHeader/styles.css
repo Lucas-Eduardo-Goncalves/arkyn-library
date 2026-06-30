@@ -40,7 +40,7 @@
 	width: max-content;
 	overflow: hidden;
 
-	background-color: var(--card-foreground-primary);
+	background-color: var(--background-underground);
 	padding: 4px;
 }
 

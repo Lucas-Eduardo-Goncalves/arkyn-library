@@ -38,7 +38,7 @@
 }
 
 .arkynDayCalendarEvent.primary {
-	background-color: rgb(var(--spotlight-primary-light));
+	background-color: rgb(var(--spotlight-primary-foreground));
 }
 
 .arkynDayCalendarEvent.primary::before {
@@ -46,7 +46,7 @@
 }
 
 .arkynDayCalendarEvent.danger {
-	background-color: rgb(var(--spotlight-danger-light));
+	background-color: rgb(var(--spotlight-danger-foreground));
 }
 
 .arkynDayCalendarEvent.danger::before {
@@ -54,7 +54,7 @@
 }
 
 .arkynDayCalendarEvent.warning {
-	background-color: rgb(var(--spotlight-warning-light));
+	background-color: rgb(var(--spotlight-warning-foreground));
 }
 
 .arkynDayCalendarEvent.warning::before {
@@ -62,7 +62,7 @@
 }
 
 .arkynDayCalendarEvent.info {
-	background-color: rgb(var(--spotlight-info-light));
+	background-color: rgb(var(--spotlight-info-foreground));
 }
 
 .arkynDayCalendarEvent.info::before {
@@ -70,7 +70,7 @@
 }
 
 .arkynDayCalendarEvent.success {
-	background-color: rgb(var(--spotlight-success-light));
+	background-color: rgb(var(--spotlight-success-foreground));
 }
 
 .arkynDayCalendarEvent.success::before {

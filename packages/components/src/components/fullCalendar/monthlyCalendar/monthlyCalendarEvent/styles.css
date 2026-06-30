@@ -20,7 +20,7 @@
 }
 
 .arkynMonthlyCalendarEvent.primary {
-	background-color: rgb(var(--spotlight-primary-light));
+	background-color: rgb(var(--spotlight-primary-foreground));
 }
 
 .arkynMonthlyCalendarEvent.primary::before {
@@ -28,7 +28,7 @@
 }
 
 .arkynMonthlyCalendarEvent.danger {
-	background-color: rgb(var(--spotlight-danger-light));
+	background-color: rgb(var(--spotlight-danger-foreground));
 }
 
 .arkynMonthlyCalendarEvent.danger::before {
@@ -36,7 +36,7 @@
 }
 
 .arkynMonthlyCalendarEvent.warning {
-	background-color: rgb(var(--spotlight-warning-light));
+	background-color: rgb(var(--spotlight-warning-foreground));
 }
 
 .arkynMonthlyCalendarEvent.warning::before {
@@ -44,7 +44,7 @@
 }
 
 .arkynMonthlyCalendarEvent.info {
-	background-color: rgb(var(--spotlight-info-light));
+	background-color: rgb(var(--spotlight-info-foreground));
 }
 
 .arkynMonthlyCalendarEvent.info::before {
@@ -52,7 +52,7 @@
 }
 
 .arkynMonthlyCalendarEvent.success {
-	background-color: rgb(var(--spotlight-success-light));
+	background-color: rgb(var(--spotlight-success-foreground));
 }
 
 .arkynMonthlyCalendarEvent.success::before {
