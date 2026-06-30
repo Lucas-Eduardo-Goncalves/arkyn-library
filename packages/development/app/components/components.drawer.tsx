@@ -14,9 +14,8 @@ export default function DrawerRoute() {
 				makeInvisible={() => setIsLeftOpen(false)}
 				orientation="left"
 			>
-				<DrawerHeader>
-					<h2>Left Drawer</h2>
-				</DrawerHeader>
+				<DrawerHeader>Left Drawer</DrawerHeader>
+
 				<div style={{ padding: "1rem" }}>
 					<p>Drawer content here.</p>
 					<p>Slides in from the left.</p>
@@ -29,7 +28,7 @@ export default function DrawerRoute() {
 				orientation="right"
 			>
 				<DrawerHeader showCloseButton={false}>
-					<h2>Right Drawer (no close button)</h2>
+					Right Drawer (no close button)
 				</DrawerHeader>
 				<div style={{ padding: "1rem" }}>
 					<p>Slides in from the right.</p>

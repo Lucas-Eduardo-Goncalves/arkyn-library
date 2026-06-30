@@ -17,10 +17,12 @@
 	right: 0;
 	bottom: 0;
 	background: rgba(0, 0, 0, 0.5);
+	cursor: pointer;
+	animation: drawerOverlayIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.arkynDrawerContainerOverlay:hover {
-	cursor: pointer;
+.arkynDrawerContainer.exiting > .arkynDrawerContainerOverlay {
+	animation: drawerOverlayOut 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .arkynDrawerContainerContent {
@@ -29,7 +31,7 @@
 	top: 0;
 	bottom: 0;
 	width: max-content;
-	background: var(--card);
+	background: var(--background-foreground);
 
 	display: flex;
 	flex-direction: column;
@@ -39,8 +41,72 @@
 
 .arkynDrawerContainer.left > .arkynDrawerContainerContent {
 	left: 0;
+	animation: drawerSlideInLeft 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .arkynDrawerContainer.right > .arkynDrawerContainerContent {
 	right: 0;
+	animation: drawerSlideInRight 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.arkynDrawerContainer.exiting.left > .arkynDrawerContainerContent {
+	animation: drawerSlideOutLeft 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.arkynDrawerContainer.exiting.right > .arkynDrawerContainerContent {
+	animation: drawerSlideOutRight 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes drawerOverlayIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes drawerOverlayOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes drawerSlideInLeft {
+	from {
+		transform: translateX(-100%);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+
+@keyframes drawerSlideOutLeft {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-100%);
+	}
+}
+
+@keyframes drawerSlideInRight {
+	from {
+		transform: translateX(100%);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+
+@keyframes drawerSlideOutRight {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(100%);
+	}
 }

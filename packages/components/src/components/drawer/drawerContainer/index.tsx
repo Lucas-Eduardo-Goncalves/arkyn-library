@@ -1,5 +1,9 @@
-import { AnimatePresence, motion } from "framer-motion";
-import type { HTMLAttributes } from "react";
+import {
+	type AnimationEvent,
+	type HTMLAttributes,
+	useEffect,
+	useState,
+} from "react";
 
 import { useScrollLock } from "../../../hooks/useScrollLock";
 import { DrawerProvider } from "../drawerContext";
@@ -49,39 +53,49 @@ function DrawerContainer(props: DrawerContainerProps) {
 		...rest
 	} = props;
 
+	const [mounted, setMounted] = useState(isVisible);
+	const [isExiting, setIsExiting] = useState(false);
+
+	useEffect(() => {
+		if (isVisible) {
+			setMounted(true);
+			setIsExiting(false);
+		} else if (mounted) {
+			setIsExiting(true);
+		}
+	}, [isVisible, mounted]);
+
 	useScrollLock(isVisible);
 
-	const translateX = orientation === "left" ? "-100%" : "100%";
+	function handleOverlayAnimationEnd(e: AnimationEvent<HTMLDivElement>) {
+		if (e.target === e.currentTarget && isExiting) {
+			setIsExiting(false);
+			setMounted(false);
+			makeInvisible();
+		}
+	}
 
-	const visibleClass = isVisible ? "visibleTrue" : "visibleFalse";
-	const className = `arkynDrawerContainer ${orientation} ${visibleClass} ${baseClassName}`;
+	if (!mounted) return null;
+
+	const className = [
+		"arkynDrawerContainer",
+		orientation,
+		isExiting ? "exiting" : "",
+		baseClassName,
+	]
+		.filter(Boolean)
+		.join(" ");
 
 	return (
-		<DrawerProvider makeInvisible={makeInvisible}>
-			<AnimatePresence>
-				{isVisible && (
-					<aside className={className.trim()} {...rest}>
-						<motion.div
-							className="arkynDrawerContainerOverlay"
-							transition={{ duration: 0.15, ease: "easeOut" }}
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-							onClick={makeInvisible}
-						/>
-
-						<motion.div
-							className="arkynDrawerContainerContent"
-							transition={{ ease: "easeOut", duration: 0.15 }}
-							initial={{ transform: `translateX(${translateX})` }}
-							animate={{ transform: "translateX(0px)" }}
-							exit={{ transform: `translateX(${translateX})` }}
-						>
-							{children}
-						</motion.div>
-					</aside>
-				)}
-			</AnimatePresence>
+		<DrawerProvider makeInvisible={() => setIsExiting(true)}>
+			<aside className={className} {...rest}>
+				<div
+					className="arkynDrawerContainerOverlay"
+					onClick={() => setIsExiting(true)}
+					onAnimationEnd={handleOverlayAnimationEnd}
+				/>
+				<div className="arkynDrawerContainerContent">{children}</div>
+			</aside>
 		</DrawerProvider>
 	);
 }

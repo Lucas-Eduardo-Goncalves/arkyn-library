@@ -28,11 +28,10 @@
 	background: none;
 
 	color: var(--text-body);
-	background-color: var(--card);
-	transition: all 0.15s ease-out;
 }
 
 .arkynDrawerHeaderCloseButton:hover {
 	cursor: pointer;
+	transition: all 0.15s ease-out;
 	filter: brightness(0.9);
 }
