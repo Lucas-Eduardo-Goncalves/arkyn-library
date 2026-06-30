@@ -41,6 +41,33 @@ export default function SelectRoute() {
 					label="Outline:"
 					placeholder="Digite algo..."
 					options={options}
+					isSearchable
+				/>
+				<Select
+					name="test"
+					variant="solid"
+					label="Solid:"
+					placeholder="Digite algo..."
+					options={options}
+					isSearchable
+				/>
+				<Select
+					name="test"
+					variant="underline"
+					label="Underline:"
+					placeholder="Digite algo..."
+					options={options}
+					isSearchable
+				/>
+			</div>
+
+			<div className="exampleContainer row foreground">
+				<Select
+					name="test"
+					variant="outline"
+					label="Outline:"
+					placeholder="Digite algo..."
+					options={options}
 					prefix="$"
 				/>
 				<Select
