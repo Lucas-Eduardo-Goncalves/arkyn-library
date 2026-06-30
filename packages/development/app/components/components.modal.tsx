@@ -1,7 +1,7 @@
+import { Button } from "@arkyn/components/button";
 import { ModalContainer } from "@arkyn/components/modalContainer";
 import { ModalFooter } from "@arkyn/components/modalFooter";
 import { ModalHeader } from "@arkyn/components/modalHeader";
-import { Button } from "@arkyn/components/button";
 import { useState } from "react";
 
 export default function ModalRoute() {

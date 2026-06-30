@@ -4,12 +4,22 @@ export default function AudioUploadRoute() {
 	return (
 		<>
 			<div className="exampleContainer row foreground">
-				<AudioUpload name="audio1" action="/api/upload" label="Audio File:" showAsterisk />
+				<AudioUpload
+					name="audio1"
+					action="/api/upload"
+					label="Audio File:"
+					showAsterisk
+				/>
 				<AudioUpload name="audio2" action="/api/upload" />
 			</div>
 
 			<div className="exampleContainer row foreground">
-				<AudioUpload name="audio3" action="/api/upload" disabled label="Disabled:" />
+				<AudioUpload
+					name="audio3"
+					action="/api/upload"
+					disabled
+					label="Disabled:"
+				/>
 				<AudioUpload
 					name="audio4"
 					action="/api/upload"

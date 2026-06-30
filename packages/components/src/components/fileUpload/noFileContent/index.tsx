@@ -1,7 +1,6 @@
 import type { DragEvent } from "react";
 
 import { Button } from "../../button";
-
 import "./styles.css";
 
 type NoFileContentProps = {

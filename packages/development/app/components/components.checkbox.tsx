@@ -13,16 +13,30 @@ export default function CheckboxRoute() {
 				<Checkbox name="cb4" label="Unchecked" size="md" />
 				<Checkbox name="cb5" label="Default checked" size="md" defaultChecked />
 				<Checkbox name="cb6" label="Disabled" size="md" disabled />
-				<Checkbox name="cb7" label="Disabled + checked" size="md" disabled defaultChecked />
+				<Checkbox
+					name="cb7"
+					label="Disabled + checked"
+					size="md"
+					disabled
+					defaultChecked
+				/>
 			</div>
 
 			<div className="exampleContainer row foreground">
 				<Checkbox name="cb8" label="Required" showAsterisk />
-				<Checkbox name="cb9" label="With error" errorMessage="This field is required" />
+				<Checkbox
+					name="cb9"
+					label="With error"
+					errorMessage="This field is required"
+				/>
 			</div>
 
 			<div className="exampleContainer row foreground">
-				<Checkbox name="cb10" label="HorizontalReverse (default)" orientation="horizontalReverse" />
+				<Checkbox
+					name="cb10"
+					label="HorizontalReverse (default)"
+					orientation="horizontalReverse"
+				/>
 				<Checkbox name="cb11" label="Horizontal" orientation="horizontal" />
 				<Checkbox name="cb12" label="Vertical" orientation="vertical" />
 			</div>

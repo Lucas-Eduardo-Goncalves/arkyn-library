@@ -32,12 +32,7 @@ export default function SwitchRoute() {
 			</div>
 
 			<div className="exampleContainer row foreground">
-				<Switch
-					name="sw10"
-					label="Required:"
-					showAsterisk
-					size="lg"
-				/>
+				<Switch name="sw10" label="Required:" showAsterisk size="lg" />
 				<Switch
 					name="sw11"
 					label="Custom values:"

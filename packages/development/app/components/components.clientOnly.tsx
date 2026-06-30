@@ -12,7 +12,10 @@ export default function ClientOnlyRoute() {
 			<div className="exampleContainer row foreground">
 				<ClientOnly>
 					{() => (
-						<p>Client window width: {typeof window !== "undefined" ? window.innerWidth : 0}px</p>
+						<p>
+							Client window width:{" "}
+							{typeof window !== "undefined" ? window.innerWidth : 0}px
+						</p>
 					)}
 				</ClientOnly>
 			</div>

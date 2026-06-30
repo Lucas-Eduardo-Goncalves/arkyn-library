@@ -35,10 +35,7 @@ export default function FullCalendarRoute() {
 
 	return (
 		<div className="exampleContainer">
-			<FullCalendar
-				events={events}
-				defaultViewValue={new Date(2026, 5, 30)}
-			/>
+			<FullCalendar events={events} defaultViewValue={new Date(2026, 5, 30)} />
 		</div>
 	);
 }

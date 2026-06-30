@@ -4,7 +4,12 @@ export default function FileUploadRoute() {
 	return (
 		<>
 			<div className="exampleContainer row foreground">
-				<FileUpload name="file1" action="/api/upload" label="Document:" showAsterisk />
+				<FileUpload
+					name="file1"
+					action="/api/upload"
+					label="Document:"
+					showAsterisk
+				/>
 				<FileUpload name="file2" action="/api/upload" />
 			</div>
 
@@ -16,7 +21,12 @@ export default function FileUploadRoute() {
 					label="PDF only:"
 					selectFileButtonText="Choose PDF"
 				/>
-				<FileUpload name="file4" action="/api/upload" disabled label="Disabled:" />
+				<FileUpload
+					name="file4"
+					action="/api/upload"
+					disabled
+					label="Disabled:"
+				/>
 			</div>
 
 			<div className="exampleContainer row">

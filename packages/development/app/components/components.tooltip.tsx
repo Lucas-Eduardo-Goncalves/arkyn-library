@@ -1,6 +1,6 @@
-import { Tooltip } from "@arkyn/components/tooltip";
-import { IconButton } from "@arkyn/components/iconButton";
 import { Button } from "@arkyn/components/button";
+import { IconButton } from "@arkyn/components/iconButton";
+import { Tooltip } from "@arkyn/components/tooltip";
 import { Info, Save, Trash2 } from "lucide-react";
 
 export default function TooltipRoute() {
