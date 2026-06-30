@@ -61,7 +61,7 @@ function MultiSelectOptionsContainer(props: MultiSelectOptionsContainerProps) {
 		onSearch(e.target.value);
 	}
 
-	if (!isFocused) return <></>;
+	if (!isFocused) return null;
 
 	return (
 		<div

@@ -17,7 +17,7 @@ function SelectChevron(props: SelectChevronProps) {
 
 	const className = `arkynSelectChevron ${notAnimate} ${focused}`;
 
-	if (isLoading) return <></>;
+	if (isLoading) return null;
 	return (
 		<ChevronDown
 			className={className}

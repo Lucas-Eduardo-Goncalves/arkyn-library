@@ -1,6 +1,7 @@
 import { Element, Text } from "slate";
 import type { ParseElement } from "../types/richTextTypes";
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 function serialize(node: any): string {
 	if (Text.isText(node)) {
 		let text = node?.text;
@@ -20,6 +21,7 @@ function serialize(node: any): string {
 	}
 
 	if (Element.isElement(node)) {
+		// biome-ignore lint/suspicious/noExplicitAny: intentional
 		const children = node.children?.map((n: any) => serialize(n)).join("");
 		const alignStyle = node.align || "left";
 
@@ -50,6 +52,7 @@ function serialize(node: any): string {
 	return "";
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 function deserialize(el: ParseElement): any {
 	if (typeof el === "string") {
 		return { text: el };

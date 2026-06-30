@@ -22,28 +22,33 @@ function parseSensitiveData(
 	jsonString: string,
 	sensitiveKeys: string[] = ["password", "confirmPassword", "creditCard"],
 ): string {
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	function maskValue(key: string, value: any): any {
 		if (sensitiveKeys.includes(key)) return "****";
 		return value;
 	}
 
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	function recursiveMask(obj: any): any {
 		if (Array.isArray(obj)) {
 			return obj.map((item) => recursiveMask(item));
 		} else if (obj !== null && typeof obj === "object") {
-			return Object.keys(obj).reduce((acc, key) => {
-				let value = obj[key];
-				if (typeof value === "string") {
-					try {
-						const parsedValue = JSON.parse(value);
-						if (typeof parsedValue === "object") {
-							value = JSON.stringify(recursiveMask(parsedValue));
-						}
-					} catch (_e) {}
-				}
-				acc[key] = recursiveMask(maskValue(key, value));
-				return acc;
-			}, {} as any);
+			return Object.keys(obj).reduce(
+				(acc, key) => {
+					let value = obj[key];
+					if (typeof value === "string") {
+						try {
+							const parsedValue = JSON.parse(value);
+							if (typeof parsedValue === "object") {
+								value = JSON.stringify(recursiveMask(parsedValue));
+							}
+						} catch (_e) {}
+					}
+					acc[key] = recursiveMask(maskValue(key, value));
+					return acc;
+				},
+				{} as Record<string, unknown>,
+			);
 		}
 		return obj;
 	}

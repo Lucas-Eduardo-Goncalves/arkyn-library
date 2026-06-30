@@ -17,6 +17,7 @@ type FullCalendarEvent = {
 	/** End date and time of the event. */
 	endDate?: Date;
 	/** Arbitrary payload forwarded to the `onClick` callback. */
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	data?: any;
 	/**
 	 * Color scheme applied to the event block.
@@ -30,6 +31,7 @@ type FullCalendarEvent = {
 	 */
 	scheme?: "primary" | "success" | "warning" | "danger" | "info";
 	/** Callback fired when the user clicks the event. Receives `data` as argument. */
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	onClick?: (data: any) => void;
 };
 

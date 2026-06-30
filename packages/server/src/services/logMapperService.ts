@@ -19,8 +19,10 @@ type InputProps = {
 	method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 	requestHeaders: HeadersInit;
 	responseHeaders: HeadersInit;
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	requestBody: any;
 	elapsedTime: number;
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	responseBody: any;
 	queryParams: URLSearchParams;
 };
@@ -50,6 +52,7 @@ type OutputProps = {
 	requestBody: Record<string, string>;
 	queryParams: Record<string, string>;
 	responseHeaders: Record<string, string>;
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	responseBody: any;
 };
 

@@ -27,6 +27,7 @@
  * ```
  */
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 const formatJsonObject = (json: any, indentLevel: number): string => {
 	const indent = "  ".repeat(indentLevel);
 	let formattedString = "";

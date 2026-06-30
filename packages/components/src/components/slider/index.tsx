@@ -1,4 +1,4 @@
-import { type HTMLAttributes, useEffect, useRef, useState } from "react";
+import { type HTMLAttributes, useCallback, useEffect, useRef, useState } from "react";
 
 import "./styles.css";
 
@@ -56,18 +56,21 @@ function Slider(props: SliderProps) {
 	const sliderRef = useRef<HTMLDivElement>(null);
 
 	const handleMouseDown = () => setIsDragging(true);
-	const handleMouseUp = () => setIsDragging(false);
+	const handleMouseUp = useCallback(() => setIsDragging(false), []);
 
-	const handleMouseMove = (event: MouseEvent) => {
-		if (disabled) return;
-		if (!isDragging || !sliderRef.current) return;
+	const handleMouseMove = useCallback(
+		(event: MouseEvent) => {
+			if (disabled) return;
+			if (!isDragging || !sliderRef.current) return;
 
-		const rect = sliderRef.current.getBoundingClientRect();
-		const offsetX = event.clientX - rect.left;
-		const newValue = Math.min(Math.max((offsetX / rect.width) * 100, 0), 100);
+			const rect = sliderRef.current.getBoundingClientRect();
+			const offsetX = event.clientX - rect.left;
+			const newValue = Math.min(Math.max((offsetX / rect.width) * 100, 0), 100);
 
-		onChange(newValue);
-	};
+			onChange(newValue);
+		},
+		[disabled, isDragging, onChange],
+	);
 
 	const handleSliderClick = (event: React.MouseEvent<HTMLDivElement>) => {
 		if (disabled) return;

@@ -8,7 +8,7 @@ function GoogleAnalyticsClient(props: GoogleAnalyticsClientProps) {
 	const googleAnalytics = new GoogleAnalytics();
 	googleAnalytics.initialize(props);
 
-	return <></>;
+	return null;
 }
 
 export { GoogleAnalyticsClient };

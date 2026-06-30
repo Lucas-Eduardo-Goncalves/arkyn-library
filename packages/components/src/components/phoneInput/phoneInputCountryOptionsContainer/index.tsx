@@ -58,7 +58,7 @@ function PhoneInputCountryOptionsContainer(
 		checkContainerPosition();
 	}, [isOpen]);
 
-	if (!isOpen) return <></>;
+	if (!isOpen) return null;
 
 	return (
 		<div

@@ -9,8 +9,10 @@ type FullCalendarEvent = {
 	initialDate: Date;
 	endDate?: Date;
 	title: string;
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	data?: any;
 	scheme?: "primary" | "success" | "warning" | "danger" | "info";
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	onClick?: (data: any) => void;
 };
 

@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { Conflict } from "../../badResponses/conflict";
 
 describe("Conflict", () => {
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	let consoleLogSpy: any;
 
 	beforeEach(() => {

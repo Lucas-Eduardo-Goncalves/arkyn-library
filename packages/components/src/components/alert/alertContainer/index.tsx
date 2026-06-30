@@ -75,6 +75,7 @@ function AlertContainer(props: AlertContainerProps): JSX.Element {
 					nodes.props !== null &&
 					"children" in nodes.props
 				) {
+					// biome-ignore lint/suspicious/noExplicitAny: intentional
 					searchForAlertTitle((nodes.props as any).children);
 				}
 			}

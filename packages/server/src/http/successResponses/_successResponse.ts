@@ -6,16 +6,19 @@ import { flushDebugLogs } from "../../utilities/flushDebugLogs";
  * Provides logging functionality to track response and their context.
  */
 class SuccessResponse {
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	private _body: any = null;
 	private _name: string = "SuccessResponse";
 	private _status: number = 200;
 	private _statusText: string = "OK";
 	private _debugColor: "green" | "yellow" | "cyan" | "red" = "green";
 
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	get body(): any {
 		return this._body;
 	}
 
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	set body(value: any) {
 		this._body = value ?? null;
 	}
@@ -64,6 +67,7 @@ class SuccessResponse {
 	 * SuccessResponse.onDebug({ data: "Operation completed successfully" });
 	 * ```
 	 */
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	onDebug(body?: any): void {
 		const debugs: string[] = [];
 		const { callerInfo, functionName } = DebugService.getCaller();
@@ -77,6 +81,7 @@ class SuccessResponse {
 		flushDebugLogs({ scheme: this._debugColor, name: this.name, debugs });
 	}
 
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	makeBody(): any {
 		return {
 			name: this.name,

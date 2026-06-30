@@ -16,7 +16,9 @@ import { BadRequest } from "../http/badResponses/badRequest";
  * ```
  */
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 async function decodeRequestBody(request: Request): Promise<any> {
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	let data: any;
 
 	const arrayBuffer = await request.arrayBuffer();

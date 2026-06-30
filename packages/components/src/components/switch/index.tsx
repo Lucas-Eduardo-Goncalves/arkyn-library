@@ -109,7 +109,8 @@ function Switch(props: SwitchProps) {
 	} = props;
 
 	const inputRef = useRef<HTMLInputElement>(null);
-	const inputId = id || useId();
+	const generatedId = useId();
+	const inputId = id || generatedId;
 
 	const [isChecked, setIsChecked] = useState(defaultChecked);
 

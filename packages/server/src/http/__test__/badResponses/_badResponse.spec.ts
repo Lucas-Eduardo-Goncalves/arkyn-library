@@ -111,6 +111,7 @@ describe("BadResponse", () => {
 	});
 
 	describe("onDebug method", () => {
+		// biome-ignore lint/suspicious/noExplicitAny: intentional
 		let consoleLogSpy: any;
 
 		beforeEach(() => {

@@ -6,7 +6,7 @@ type CurrentButtonProps = {
 
 function CurrentButton({ currentPage }: CurrentButtonProps) {
 	return (
-		<button className="arkynPaginationCurrentButton" disabled>
+		<button type="button" className="arkynPaginationCurrentButton" disabled>
 			{currentPage}
 		</button>
 	);

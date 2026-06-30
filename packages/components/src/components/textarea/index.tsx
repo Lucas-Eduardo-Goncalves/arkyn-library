@@ -110,7 +110,8 @@ function Textarea(props: TextareaProps) {
 	const { fieldErrors } = useForm();
 	const [isFocused, setIsFocused] = useState(false);
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
-	const textareaId = id || useId();
+	const generatedId = useId();
+	const textareaId = id || generatedId;
 
 	const errorMessage = baseErrorMessage || fieldErrors?.[name];
 	const isError = !!errorMessage;

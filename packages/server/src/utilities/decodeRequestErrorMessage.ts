@@ -15,6 +15,7 @@
  * ```
  */
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 function decodeRequestErrorMessage(data: any, response: Response): string {
 	if (data?.message && typeof data?.message === "string") {
 		return data?.message;

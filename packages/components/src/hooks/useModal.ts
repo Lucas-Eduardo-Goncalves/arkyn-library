@@ -4,6 +4,7 @@ import {
 	modalContext,
 } from "../providers/modalProvider";
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 type OpenModalProps<T = any> = (data?: T) => void;
 
 /**
@@ -37,7 +38,9 @@ type OpenModalProps<T = any> = (data?: T) => void;
  * ```
  */
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 function useModal<T = any>(): ModalContextProps<T>;
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 function useModal<T = any>(
 	key: string,
 ): {

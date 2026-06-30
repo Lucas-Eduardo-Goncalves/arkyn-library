@@ -20,12 +20,16 @@ type FacebookPixelProps = {
 	/** When true, revokes cookie/tracking consent via `fbq("consent", "revoke")`. */
 	revokeConsent?: boolean;
 	/** Standard event to track: `[eventName, eventData?]`. */
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	track?: [string, any?];
 	/** Custom event to track: `[eventName, eventData?]`. */
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	trackCustom?: [string, any?];
 	/** Single-pixel standard event: `[eventName, eventData?]`. */
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	trackSingle?: [string, any?];
 	/** Single-pixel custom event: `[eventName, eventData?]`. */
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	trackSingleCustom?: [string, any?];
 };
 
@@ -66,7 +70,7 @@ type FacebookPixelProps = {
  */
 function FacebookPixel(props: FacebookPixelProps) {
 	if (process.env.NODE_ENV !== "production" && !props.showInDevMode) {
-		return <></>;
+		return null;
 	}
 
 	return <ClientOnly>{() => <FacebookPixelClient {...props} />}</ClientOnly>;

@@ -14,6 +14,7 @@ type InputProps = {
  * @returns {Promise<ApiResponseDTO<T>>} A promise that resolves to the API response.
  */
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 async function getRequest<T = any>(
 	input: InputProps,
 ): Promise<ApiResponseDTO<T>> {

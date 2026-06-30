@@ -24,7 +24,7 @@ function FieldError(props: FieldErrorProps) {
 	const { children, className: baseClassName, ...rest } = props;
 	const className = `arkynFieldError ${baseClassName}`;
 
-	if (!children) return <></>;
+	if (!children) return null;
 
 	return (
 		<strong className={className.trim()} {...rest}>

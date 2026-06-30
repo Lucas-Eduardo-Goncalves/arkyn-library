@@ -10,8 +10,8 @@ type IconRendererProps = {
 function IconRenderer(props: IconRendererProps) {
 	const { iconSize, icon: Icon, className, show = true } = props;
 
-	if (!show) return <></>;
-	if (!Icon) return <></>;
+	if (!show) return null;
+	if (!Icon) return null;
 
 	if (typeof Icon === "string") {
 		return <p className={className}>{Icon}</p>;

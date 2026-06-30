@@ -79,7 +79,9 @@ type SearchPlacesProps = {
 function SearchPlaces(props: SearchPlacesProps): JSX.Element {
 	const { onChange, onPlaceChanged, options, ...rest } = props;
 
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	const [searchBox, setSearchBox] = useState<any>(null);
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	const handleLoad = (ref: any) => setSearchBox(ref);
 
 	const handlePlacesChanged = () => {

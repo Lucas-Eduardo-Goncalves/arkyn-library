@@ -11,6 +11,7 @@ type ErrorResponse = {
 	fieldErrors: { [x: string]: string };
 };
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 type FormParseProps = [formData: { [k: string]: any }, schema: ZodType];
 
 type FormParseReturnType<T extends FormParseProps> =

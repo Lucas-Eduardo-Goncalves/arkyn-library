@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { NoContent } from "../../successResponses/noContent";
 
 describe("NoContent", () => {
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	let consoleLogSpy: any;
 
 	beforeEach(() => {

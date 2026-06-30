@@ -4,6 +4,7 @@ import {
 	drawerContext,
 } from "../providers/drawerProvider";
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 type OpenDrawerProps<T = any> = (data?: T) => void;
 
 /**
@@ -37,7 +38,9 @@ type OpenDrawerProps<T = any> = (data?: T) => void;
  * ```
  */
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 function useDrawer<T = any>(): DrawerContextProps<T>;
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 function useDrawer<T = any>(
 	key: string,
 ): {

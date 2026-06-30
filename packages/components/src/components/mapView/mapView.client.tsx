@@ -1,4 +1,4 @@
-import mapBoxGl, { type Map } from "mapbox-gl";
+import mapBoxGl, { type Map as MapboxMap } from "mapbox-gl";
 import { createRoot } from "react-dom/client";
 import "./mapbox.css";
 import {
@@ -11,6 +11,7 @@ import {
 type Coordinate = {
 	lat: number;
 	lng: number;
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	data?: any;
 	popUp?: ReactNode;
 };
@@ -29,7 +30,7 @@ function ClientMapView({
 	accessToken,
 	...rest
 }: ClientMapViewProps) {
-	const mapRef = useRef<Map>(null);
+	const mapRef = useRef<MapboxMap>(null);
 	const mapContainerRef = useRef<HTMLDivElement>(null);
 
 	const center = rawCenter ? rawCenter : coordinates[0];
@@ -38,7 +39,7 @@ function ClientMapView({
 		mapBoxGl.accessToken = accessToken;
 
 		mapRef.current = new mapBoxGl.Map({
-			container: mapContainerRef.current!,
+			container: mapContainerRef.current as HTMLDivElement,
 			style: "mapbox://styles/mapbox/light-v11",
 			center: [center.lng, center.lat],
 			zoom: 13,
@@ -54,7 +55,7 @@ function ClientMapView({
 
 			const marker = new mapBoxGl.Marker(el)
 				.setLngLat([lng, lat])
-				.addTo(mapRef.current!);
+				.addTo(mapRef.current as MapboxMap);
 
 			if (popUp) {
 				const popupNode = document.createElement("div");

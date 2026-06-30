@@ -63,7 +63,7 @@ function WeekCalendarEvent(props: WeekCalendarEventProps) {
 		);
 	});
 
-	if (filteredEvents.length === 0) return <></>;
+	if (filteredEvents.length === 0) return null;
 
 	function makeEventKey(index: number, sourceIndex: number) {
 		return `${props.day}-${props.month}-${props.year}-${sourceIndex}-${index}`;
@@ -136,6 +136,7 @@ function WeekCalendarEvent(props: WeekCalendarEventProps) {
 		};
 	}
 
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	function handleEventClick(event: React.MouseEvent, eventData: any) {
 		event.stopPropagation();
 		eventData.onClick?.(eventData.data);

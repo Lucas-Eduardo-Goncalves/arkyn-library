@@ -267,7 +267,7 @@ describe("SchemaValidator", () => {
 				expect.fail("Should have thrown UnprocessableEntity");
 			} catch (error) {
 				expect(error).toBeInstanceOf(UnprocessableEntity);
-				const cause = (error as UnprocessableEntity).cause as any;
+				const cause = (error as UnprocessableEntity).cause;
 				expect(cause.fieldErrors).toBeDefined();
 				expect(cause.fieldErrors.name).toBe("Name is required");
 				expect(cause.fieldErrors.email).toBe("Invalid email");
@@ -283,7 +283,7 @@ describe("SchemaValidator", () => {
 				validator.formValidate(invalidData);
 				expect.fail("Should have thrown UnprocessableEntity");
 			} catch (error) {
-				const cause = (error as UnprocessableEntity).cause as any;
+				const cause = (error as UnprocessableEntity).cause;
 				expect(cause.fields).toEqual(invalidData);
 			}
 		});
@@ -296,7 +296,7 @@ describe("SchemaValidator", () => {
 				validator.formValidate(invalidData);
 				expect.fail("Should have thrown UnprocessableEntity");
 			} catch (error) {
-				const cause = (error as UnprocessableEntity).cause as any;
+				const cause = (error as UnprocessableEntity).cause;
 				expect(cause.data.scrollTo).toBe("name");
 			}
 		});
@@ -340,7 +340,7 @@ describe("SchemaValidator", () => {
 				validator.formValidate(invalidData);
 				expect.fail("Should have thrown UnprocessableEntity");
 			} catch (error) {
-				const cause = (error as UnprocessableEntity).cause as any;
+				const cause = (error as UnprocessableEntity).cause;
 				expect(cause.fieldErrors["address.city"]).toBe("City is required");
 			}
 		});
@@ -374,7 +374,7 @@ describe("SchemaValidator", () => {
 				expect.fail("Should have thrown UnprocessableEntity");
 			} catch (error) {
 				expect(error).toBeInstanceOf(UnprocessableEntity);
-				const cause = (error as UnprocessableEntity).cause as any;
+				const cause = (error as UnprocessableEntity).cause;
 				expect(cause.fieldErrors).toBeDefined();
 				expect(cause.fieldErrors.username).toBe(
 					"Username must be at least 3 characters",
@@ -391,7 +391,7 @@ describe("SchemaValidator", () => {
 				await validator.formAsyncValidate(invalidData);
 				expect.fail("Should have thrown UnprocessableEntity");
 			} catch (error) {
-				const cause = (error as UnprocessableEntity).cause as any;
+				const cause = (error as UnprocessableEntity).cause;
 				expect(cause.fields).toEqual(invalidData);
 			}
 		});
@@ -404,7 +404,7 @@ describe("SchemaValidator", () => {
 				await validator.formAsyncValidate(invalidData);
 				expect.fail("Should have thrown UnprocessableEntity");
 			} catch (error) {
-				const cause = (error as UnprocessableEntity).cause as any;
+				const cause = (error as UnprocessableEntity).cause;
 				expect(cause.data.scrollTo).toBe("username");
 			}
 		});

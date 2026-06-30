@@ -209,6 +209,7 @@ describe("logRequest", () => {
 				requestBody: complexBody,
 			};
 
+			// biome-ignore lint/suspicious/noExplicitAny: intentional
 			await logRequest(configWithComplexBody as any);
 
 			const [, fetchOptions] = mockFetch.mock.calls[0];

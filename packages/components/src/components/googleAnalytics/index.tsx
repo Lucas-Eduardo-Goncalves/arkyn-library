@@ -3,10 +3,10 @@ import { ClientOnly } from "../clientOnly";
 import { GoogleAnalyticsClient } from "./googleAnalytics.client";
 
 type GoogleAnalyticsProps = {
-	/** Google Analytics 4 Measurement ID (e.g. `"G-XXXXXXXXXX"`). Required. */
-	measurementId: string;
-	/** When true, renders the GA4 snippet in development mode (bypasses the production check). @default false */
-	showInDevMode?: boolean;
+  /** Google Analytics 4 Measurement ID (e.g. `"G-XXXXXXXXXX"`). Required. */
+  measurementId: string;
+  /** When true, renders the GA4 snippet in development mode (bypasses the production check). @default false */
+  showInDevMode?: boolean;
 };
 
 /**
@@ -30,18 +30,18 @@ type GoogleAnalyticsProps = {
  * ```
  */
 
-function GoogleAnalytics(props: GoogleAnalyticsProps): JSX.Element {
-	const { measurementId, showInDevMode = false } = props;
+function GoogleAnalytics(props: GoogleAnalyticsProps): JSX.Element | null {
+  const { measurementId, showInDevMode = false } = props;
 
-	if (process.env.NODE_ENV !== "production" && !showInDevMode) {
-		return <></>;
-	}
+  if (process.env.NODE_ENV !== "production" && !showInDevMode) {
+    return null;
+  }
 
-	return (
-		<ClientOnly>
-			{() => <GoogleAnalyticsClient measurementId={measurementId} />}
-		</ClientOnly>
-	);
+  return (
+    <ClientOnly>
+      {() => <GoogleAnalyticsClient measurementId={measurementId} />}
+    </ClientOnly>
+  );
 }
 
 export { GoogleAnalytics };

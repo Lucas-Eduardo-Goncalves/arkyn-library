@@ -17,7 +17,7 @@ function MultiSelectChevron(props: MultiSelectChevronProps) {
 
 	const className = `arkynMultiSelectChevron ${notAnimate} ${focused}`;
 
-	if (isLoading) return <></>;
+	if (isLoading) return null;
 	return (
 		<ChevronDown
 			className={className}

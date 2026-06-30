@@ -18,7 +18,7 @@ function MonthlyCalendarEvent(props: MonthlyCalendarEventProps) {
 		);
 	});
 
-	if (filteredEvents.length === 0) return <></>;
+	if (filteredEvents.length === 0) return null;
 
 	function makeEventKey(index: number) {
 		return `${props.day}-${props.month}-${props.year}-${index}`;
@@ -32,6 +32,7 @@ function MonthlyCalendarEvent(props: MonthlyCalendarEventProps) {
 		return `${hours}h${minutes}`;
 	}
 
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	function handleEventClick(event: React.MouseEvent, eventData: any) {
 		event.stopPropagation();
 		eventData.onClick?.(eventData.data);

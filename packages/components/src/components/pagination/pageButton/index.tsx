@@ -8,7 +8,11 @@ type PageButtonProps = {
 function PageButton(props: PageButtonProps) {
 	const { page, handlePageChange } = props;
 	return (
-		<button className="arkynPaginationPageButton" onClick={handlePageChange}>
+		<button
+			type="button"
+			className="arkynPaginationPageButton"
+			onClick={handlePageChange}
+		>
 			{page}
 		</button>
 	);

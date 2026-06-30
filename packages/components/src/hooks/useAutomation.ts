@@ -42,6 +42,7 @@ import { useToast } from "./useToast";
  * ```
  */
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 function useAutomation(formResponseData: any) {
 	const { closeAll } = useModal();
 	const { showToast } = useToast();

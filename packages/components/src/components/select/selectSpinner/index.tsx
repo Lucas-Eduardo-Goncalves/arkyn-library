@@ -9,7 +9,7 @@ type SelectSpinnerProps = {
 function SelectSpinner(props: SelectSpinnerProps) {
 	const { iconSize, isLoading } = props;
 
-	if (!isLoading) return <></>;
+	if (!isLoading) return null;
 	return (
 		<Loader2 className="arkynSelectSpinner" size={iconSize} strokeWidth={2.5} />
 	);

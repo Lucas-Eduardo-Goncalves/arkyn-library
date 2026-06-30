@@ -29,6 +29,7 @@ function parseLargeFields(
 	jsonString: string,
 	maxLength: number = 1000,
 ): string {
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	function truncateValue(value: any): any {
 		if (typeof value === "string" && value.length > maxLength) {
 			return `To large information: field as ${value.length} characters`;
@@ -36,6 +37,7 @@ function parseLargeFields(
 		return value;
 	}
 
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	function recursiveTruncate(obj: any): any {
 		if (Array.isArray(obj)) {
 			return obj.map((item) => recursiveTruncate(item));

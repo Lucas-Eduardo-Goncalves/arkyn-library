@@ -1,5 +1,6 @@
 import { createContext, type ReactNode, useState } from "react";
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 type DrawerContextProps<T = any> = {
 	drawerIsOpen(key: string): boolean;
 	drawerData(key: string): T;
@@ -9,6 +10,7 @@ type DrawerContextProps<T = any> = {
 
 type OpenedDrawers = {
 	key: string;
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	data?: any;
 }[];
 
@@ -57,6 +59,7 @@ function DrawerProvider(args: DrawerProviderProps) {
 		return openedDrawers.find((drawer) => drawer.key === key)?.data;
 	}
 
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	function openDrawer(key: string, data?: any) {
 		const alreadyExist = drawerIsOpen(key);
 		if (alreadyExist) {

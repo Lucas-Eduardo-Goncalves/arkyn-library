@@ -13,7 +13,7 @@ function GoogleTagManagerClient(props: GoogleTagManagerClientProps) {
 	const googleTagManager = new GoogleTagManager();
 	googleTagManager.initialize(props);
 
-	return <></>;
+	return null;
 }
 
 export { GoogleTagManagerClient };

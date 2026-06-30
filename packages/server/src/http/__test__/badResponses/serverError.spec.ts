@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ServerError } from "../../badResponses/serverError";
 
 describe("ServerError", () => {
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	let consoleLogSpy: any;
 
 	beforeEach(() => {
@@ -433,6 +434,7 @@ describe("ServerError", () => {
 			const cause = { id: 1, name: "test" };
 			const error = new ServerError("Internal server error", cause);
 
+			// biome-ignore lint/style/noNonNullAssertion: intentional
 			expect(() => JSON.parse(error.cause!)).not.toThrow();
 		});
 	});

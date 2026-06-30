@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { Created } from "../../successResponses/created";
 
 describe("Created", () => {
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	let consoleLogSpy: any;
 
 	beforeEach(() => {

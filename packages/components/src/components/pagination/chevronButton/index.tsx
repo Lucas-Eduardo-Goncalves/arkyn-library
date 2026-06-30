@@ -13,6 +13,7 @@ function ChevronButton(props: ChevronButtonProps) {
 
 	return (
 		<button
+			type="button"
 			className="arkynChevronPageButton"
 			disabled={disabled}
 			onClick={handlePageChange}

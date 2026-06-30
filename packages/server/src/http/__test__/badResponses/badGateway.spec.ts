@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { BadGateway } from "../../badResponses/badGateway";
 
 describe("BadGateway", () => {
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	let consoleLogSpy: any;
 
 	beforeEach(() => {

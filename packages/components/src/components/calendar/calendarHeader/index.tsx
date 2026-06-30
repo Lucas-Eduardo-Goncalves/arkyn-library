@@ -15,6 +15,7 @@ function CalendarHeader({ basicMode }: CalendarHeaderProps) {
 		return (
 			<div className={`arkynCalendarHeader`}>
 				<button
+					type="button"
 					className="arkynCalendarButton"
 					onClick={() => calendar.previousMonth()}
 				>
@@ -24,6 +25,7 @@ function CalendarHeader({ basicMode }: CalendarHeaderProps) {
 				<p>{calendar.currentDate}</p>
 
 				<button
+					type="button"
 					className="arkynCalendarButton"
 					onClick={() => calendar.nextMonth()}
 				>
@@ -37,6 +39,7 @@ function CalendarHeader({ basicMode }: CalendarHeaderProps) {
 		<div className={`arkynCalendarHeader`}>
 			<div>
 				<button
+					type="button"
 					className="arkynCalendarButton"
 					onClick={() => calendar.previousMonth()}
 				>
@@ -44,6 +47,7 @@ function CalendarHeader({ basicMode }: CalendarHeaderProps) {
 				</button>
 
 				<button
+					type="button"
 					className="arkynCalendarButton"
 					onClick={() => calendar.nextMonth()}
 				>

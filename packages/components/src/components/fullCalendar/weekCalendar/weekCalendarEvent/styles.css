@@ -13,8 +13,6 @@
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
-
-	z-index: 2;
 }
 
 .arkynWeekCalendarEvent:not(:first-child) {

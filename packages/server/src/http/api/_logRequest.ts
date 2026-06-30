@@ -74,7 +74,6 @@ async function logRequest(config: ConfigProps): Promise<void> {
 		responseBody,
 		responseHeaders,
 		status,
-		token,
 		rawUrl,
 	} = config;
 

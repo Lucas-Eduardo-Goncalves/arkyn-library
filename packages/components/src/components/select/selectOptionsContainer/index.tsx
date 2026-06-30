@@ -61,7 +61,7 @@ function SelectOptionsContainer(props: SelectOptionsContainerProps) {
 		onSearch(e.target.value);
 	}
 
-	if (!isFocused) return <></>;
+	if (!isFocused) return null;
 
 	return (
 		<div

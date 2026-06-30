@@ -1,486 +1,486 @@
 {
-	"name": "@arkyn/components",
-	"version": "3.0.1-beta.170",
-	"main": "./dist/index.js",
-	"module": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"type": "module",
-	"private": false,
-	"license": "Apache-2.0",
-	"author": "Arkyn | Lucas Gonçalves",
-	"description": "A modern React component library, featuring 40+ UI components, smooth animations, custom hooks, and TypeScript support.",
-	"keywords": [
-		"react",
-		"remix",
-		"next",
-		"astro",
-		"react-router",
-		"components",
-		"ui",
-		"typescript",
-		"framer-motion",
-		"hooks",
-		"forms",
-		"design-system"
-	],
-	"engines": {
-		"node": ">=24.16.0",
-		"bun": ">=1.3.14"
-	},
-	"homepage": "https://docs.arkyn.dev",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/Lucas-Eduardo-Goncalves/arkyn-library.git",
-		"directory": "packages/components"
-	},
-	"files": [
-		"dist",
-		"README.md",
-		"LICENSE.txt",
-		"styles.d.ts"
-	],
-	"scripts": {
-		"audit": "bun audit --workspace packages/components",
-		"build": "bunx vite build && bunx tsc --project tsconfig.json --emitDeclarationOnly && bun ./generate-exports.ts",
-		"prebuild": "rm -rf dist",
-		"publish:beta": "npm publish --tag beta",
-		"publish:latest": "npm publish --tag latest",
-		"release:beta": "bun ./generate-version.ts beta",
-		"release:patch": "bun ./generate-version.ts patch",
-		"release:minor": "bun ./generate-version.ts minor",
-		"release:major": "bun ./generate-version.ts major",
-		"test": "bunx vitest --config vitest.config.ts --run",
-		"test:watch": "bunx vitest --config vitest.config.ts --watch",
-		"typecheck": "bunx tsc --project tsconfig.json --noEmit"
-	},
-	"sideEffects": [
-		"*.css",
-		"dist/components.css"
-	],
-	"peerDependencies": {
-		"@react-google-maps/api": ">=2.0.0",
-		"@react-input/mask": ">=2.0.0",
-		"framer-motion": ">=10.0.0",
-		"html-react-parser": ">=5.0.0",
-		"lucide-react": ">=1.14.0",
-		"mapbox-gl": ">=3.0.0",
-		"react": ">=18.0.0",
-		"react-dom": ">=18.0.0",
-		"react-hot-toast": ">=2.0.0",
-		"react-scroll": ">=1.8.0",
-		"slate": ">=0.100.0",
-		"slate-history": ">=0.100.0",
-		"slate-react": ">=0.100.0"
-	},
-	"peerDependenciesMeta": {
-		"mapbox-gl": {
-			"optional": true
-		},
-		"slate": {
-			"optional": true
-		},
-		"slate-history": {
-			"optional": true
-		},
-		"slate-react": {
-			"optional": true
-		},
-		"@react-google-maps/api": {
-			"optional": true
-		},
-		"react-scroll": {
-			"optional": true
-		}
-	},
-	"devDependencies": {
-		"@react-google-maps/api": "^2.20.8",
-		"@react-input/mask": "^2.0.4",
-		"@types/bun": "catalog:",
-		"@types/is-hotkey": "^0.1.10",
-		"@types/node": "catalog:",
-		"@types/react": "^19.2.17",
-		"@types/react-dom": "^19.2.3",
-		"@types/react-scroll": "^1.8.10",
-		"@vitejs/plugin-react": "^6.0.3",
-		"framer-motion": "^12.42.0",
-		"html-react-parser": "^6.1.3",
-		"lucide-react": "^1.22.0",
-		"mapbox-gl": "^3.25.0",
-		"postcss": "^8.5.16",
-		"react": "^19.2.7",
-		"react-dom": "^19.2.7",
-		"react-hot-toast": "^2.6.0",
-		"react-scroll": "^1.9.3",
-		"slate": "^0.124.1",
-		"slate-history": "^0.113.1",
-		"slate-react": "^0.124.2",
-		"vite": "catalog:"
-	},
-	"exports": {
-		".": {
-			"import": "./dist/index.js",
-			"types": "./dist/index.d.ts",
-			"default": "./dist/index.js"
-		},
-		"./styles": {
-			"import": "./dist/style.css",
-			"types": "./styles.d.ts",
-			"default": "./dist/style.css"
-		},
-		"./alertContainer": {
-			"import": "./dist/modules/components/alert/alertContainer/index.js",
-			"types": "./dist/components/alert/alertContainer/index.d.ts",
-			"default": "./dist/modules/components/alert/alertContainer/index.js"
-		},
-		"./alertContent": {
-			"import": "./dist/modules/components/alert/alertContent/index.js",
-			"types": "./dist/components/alert/alertContent/index.d.ts",
-			"default": "./dist/modules/components/alert/alertContent/index.js"
-		},
-		"./alertDescription": {
-			"import": "./dist/modules/components/alert/alertDescription/index.js",
-			"types": "./dist/components/alert/alertDescription/index.d.ts",
-			"default": "./dist/modules/components/alert/alertDescription/index.js"
-		},
-		"./alertIcon": {
-			"import": "./dist/modules/components/alert/alertIcon/index.js",
-			"types": "./dist/components/alert/alertIcon/index.d.ts",
-			"default": "./dist/modules/components/alert/alertIcon/index.js"
-		},
-		"./alertTitle": {
-			"import": "./dist/modules/components/alert/alertTitle/index.js",
-			"types": "./dist/components/alert/alertTitle/index.d.ts",
-			"default": "./dist/modules/components/alert/alertTitle/index.js"
-		},
-		"./audioPlayer": {
-			"import": "./dist/modules/components/audioPlayer/index.js",
-			"types": "./dist/components/audioPlayer/index.d.ts",
-			"default": "./dist/modules/components/audioPlayer/index.js"
-		},
-		"./audioUpload": {
-			"import": "./dist/modules/components/audioUpload/index.js",
-			"types": "./dist/components/audioUpload/index.d.ts",
-			"default": "./dist/modules/components/audioUpload/index.js"
-		},
-		"./badge": {
-			"import": "./dist/modules/components/badge/index.js",
-			"types": "./dist/components/badge/index.d.ts",
-			"default": "./dist/modules/components/badge/index.js"
-		},
-		"./button": {
-			"import": "./dist/modules/components/button/index.js",
-			"types": "./dist/components/button/index.d.ts",
-			"default": "./dist/modules/components/button/index.js"
-		},
-		"./calendar": {
-			"import": "./dist/modules/components/calendar/index.js",
-			"types": "./dist/components/calendar/index.d.ts",
-			"default": "./dist/modules/components/calendar/index.js"
-		},
-		"./cardTabButton": {
-			"import": "./dist/modules/components/cardTab/cardTabButton/index.js",
-			"types": "./dist/components/cardTab/cardTabButton/index.d.ts",
-			"default": "./dist/modules/components/cardTab/cardTabButton/index.js"
-		},
-		"./cardTabContainer": {
-			"import": "./dist/modules/components/cardTab/cardTabContainer/index.js",
-			"types": "./dist/components/cardTab/cardTabContainer/index.d.ts",
-			"default": "./dist/modules/components/cardTab/cardTabContainer/index.js"
-		},
-		"./checkbox": {
-			"import": "./dist/modules/components/checkbox/index.js",
-			"types": "./dist/components/checkbox/index.d.ts",
-			"default": "./dist/modules/components/checkbox/index.js"
-		},
-		"./clientOnly": {
-			"import": "./dist/modules/components/clientOnly.js",
-			"types": "./dist/components/clientOnly.d.ts",
-			"default": "./dist/modules/components/clientOnly.js"
-		},
-		"./currencyInput": {
-			"import": "./dist/modules/components/currencyInput/index.js",
-			"types": "./dist/components/currencyInput/index.d.ts",
-			"default": "./dist/modules/components/currencyInput/index.js"
-		},
-		"./divider": {
-			"import": "./dist/modules/components/divider/index.js",
-			"types": "./dist/components/divider/index.d.ts",
-			"default": "./dist/modules/components/divider/index.js"
-		},
-		"./drawerContainer": {
-			"import": "./dist/modules/components/drawer/drawerContainer/index.js",
-			"types": "./dist/components/drawer/drawerContainer/index.d.ts",
-			"default": "./dist/modules/components/drawer/drawerContainer/index.js"
-		},
-		"./drawerHeader": {
-			"import": "./dist/modules/components/drawer/drawerHeader/index.js",
-			"types": "./dist/components/drawer/drawerHeader/index.d.ts",
-			"default": "./dist/modules/components/drawer/drawerHeader/index.js"
-		},
-		"./drawerProvider": {
-			"import": "./dist/modules/providers/drawerProvider.js",
-			"types": "./dist/providers/drawerProvider.d.ts",
-			"default": "./dist/modules/providers/drawerProvider.js"
-		},
-		"./facebookPixel": {
-			"import": "./dist/modules/components/facebookPixel/index.js",
-			"types": "./dist/components/facebookPixel/index.d.ts",
-			"default": "./dist/modules/components/facebookPixel/index.js"
-		},
-		"./fieldError": {
-			"import": "./dist/modules/components/fieldError/index.js",
-			"types": "./dist/components/fieldError/index.d.ts",
-			"default": "./dist/modules/components/fieldError/index.js"
-		},
-		"./fieldLabel": {
-			"import": "./dist/modules/components/fieldLabel/index.js",
-			"types": "./dist/components/fieldLabel/index.d.ts",
-			"default": "./dist/modules/components/fieldLabel/index.js"
-		},
-		"./fieldWrapper": {
-			"import": "./dist/modules/components/fieldWrapper/index.js",
-			"types": "./dist/components/fieldWrapper/index.d.ts",
-			"default": "./dist/modules/components/fieldWrapper/index.js"
-		},
-		"./fileUpload": {
-			"import": "./dist/modules/components/fileUpload/index.js",
-			"types": "./dist/components/fileUpload/index.d.ts",
-			"default": "./dist/modules/components/fileUpload/index.js"
-		},
-		"./formProvider": {
-			"import": "./dist/modules/providers/formProvider.js",
-			"types": "./dist/providers/formProvider.d.ts",
-			"default": "./dist/modules/providers/formProvider.js"
-		},
-		"./fullCalendar": {
-			"import": "./dist/modules/components/fullCalendar/index.js",
-			"types": "./dist/components/fullCalendar/index.d.ts",
-			"default": "./dist/modules/components/fullCalendar/index.js"
-		},
-		"./googleAnalytics": {
-			"import": "./dist/modules/components/googleAnalytics/index.js",
-			"types": "./dist/components/googleAnalytics/index.d.ts",
-			"default": "./dist/modules/components/googleAnalytics/index.js"
-		},
-		"./googleTagManager": {
-			"import": "./dist/modules/components/googleTagManager/index.js",
-			"types": "./dist/components/googleTagManager/index.d.ts",
-			"default": "./dist/modules/components/googleTagManager/index.js"
-		},
-		"./iconButton": {
-			"import": "./dist/modules/components/iconButton/index.js",
-			"types": "./dist/components/iconButton/index.d.ts",
-			"default": "./dist/modules/components/iconButton/index.js"
-		},
-		"./imageUpload": {
-			"import": "./dist/modules/components/imageUpload/index.js",
-			"types": "./dist/components/imageUpload/index.d.ts",
-			"default": "./dist/modules/components/imageUpload/index.js"
-		},
-		"./input": {
-			"import": "./dist/modules/components/input/index.js",
-			"types": "./dist/components/input/index.d.ts",
-			"default": "./dist/modules/components/input/index.js"
-		},
-		"./mapView": {
-			"import": "./dist/modules/components/mapView/index.js",
-			"types": "./dist/components/mapView/index.d.ts",
-			"default": "./dist/modules/components/mapView/index.js"
-		},
-		"./maskedInput": {
-			"import": "./dist/modules/components/maskedInput/index.js",
-			"types": "./dist/components/maskedInput/index.d.ts",
-			"default": "./dist/modules/components/maskedInput/index.js"
-		},
-		"./modalContainer": {
-			"import": "./dist/modules/components/modal/modalContainer/index.js",
-			"types": "./dist/components/modal/modalContainer/index.d.ts",
-			"default": "./dist/modules/components/modal/modalContainer/index.js"
-		},
-		"./modalFooter": {
-			"import": "./dist/modules/components/modal/modalFooter/index.js",
-			"types": "./dist/components/modal/modalFooter/index.d.ts",
-			"default": "./dist/modules/components/modal/modalFooter/index.js"
-		},
-		"./modalHeader": {
-			"import": "./dist/modules/components/modal/modalHeader/index.js",
-			"types": "./dist/components/modal/modalHeader/index.d.ts",
-			"default": "./dist/modules/components/modal/modalHeader/index.js"
-		},
-		"./modalProvider": {
-			"import": "./dist/modules/providers/modalProvider.js",
-			"types": "./dist/providers/modalProvider.d.ts",
-			"default": "./dist/modules/providers/modalProvider.js"
-		},
-		"./multiSelect": {
-			"import": "./dist/modules/components/multiSelect/index.js",
-			"types": "./dist/components/multiSelect/index.d.ts",
-			"default": "./dist/modules/components/multiSelect/index.js"
-		},
-		"./pagination": {
-			"import": "./dist/modules/components/pagination/index.js",
-			"types": "./dist/components/pagination/index.d.ts",
-			"default": "./dist/modules/components/pagination/index.js"
-		},
-		"./phoneInput": {
-			"import": "./dist/modules/components/phoneInput/index.js",
-			"types": "./dist/components/phoneInput/index.d.ts",
-			"default": "./dist/modules/components/phoneInput/index.js"
-		},
-		"./placesProvider": {
-			"import": "./dist/modules/providers/placesProvider.js",
-			"types": "./dist/providers/placesProvider.d.ts",
-			"default": "./dist/modules/providers/placesProvider.js"
-		},
-		"./popover": {
-			"import": "./dist/modules/components/popover/index.js",
-			"types": "./dist/components/popover/index.d.ts",
-			"default": "./dist/modules/components/popover/index.js"
-		},
-		"./radioBox": {
-			"import": "./dist/modules/components/radio/radioBox/index.js",
-			"types": "./dist/components/radio/radioBox/index.d.ts",
-			"default": "./dist/modules/components/radio/radioBox/index.js"
-		},
-		"./radioGroup": {
-			"import": "./dist/modules/components/radio/radioGroup/index.js",
-			"types": "./dist/components/radio/radioGroup/index.d.ts",
-			"default": "./dist/modules/components/radio/radioGroup/index.js"
-		},
-		"./richText": {
-			"import": "./dist/modules/components/richText/index.js",
-			"types": "./dist/components/richText/index.d.ts",
-			"default": "./dist/modules/components/richText/index.js"
-		},
-		"./searchPlaces": {
-			"import": "./dist/modules/components/searchPlaces.js",
-			"types": "./dist/components/searchPlaces.d.ts",
-			"default": "./dist/modules/components/searchPlaces.js"
-		},
-		"./select": {
-			"import": "./dist/modules/components/select/index.js",
-			"types": "./dist/components/select/index.d.ts",
-			"default": "./dist/modules/components/select/index.js"
-		},
-		"./slider": {
-			"import": "./dist/modules/components/slider/index.js",
-			"types": "./dist/components/slider/index.d.ts",
-			"default": "./dist/modules/components/slider/index.js"
-		},
-		"./switch": {
-			"import": "./dist/modules/components/switch/index.js",
-			"types": "./dist/components/switch/index.d.ts",
-			"default": "./dist/modules/components/switch/index.js"
-		},
-		"./tabButton": {
-			"import": "./dist/modules/components/tab/tabButton/index.js",
-			"types": "./dist/components/tab/tabButton/index.d.ts",
-			"default": "./dist/modules/components/tab/tabButton/index.js"
-		},
-		"./tabContainer": {
-			"import": "./dist/modules/components/tab/tabContainer/index.js",
-			"types": "./dist/components/tab/tabContainer/index.d.ts",
-			"default": "./dist/modules/components/tab/tabContainer/index.js"
-		},
-		"./tableBody": {
-			"import": "./dist/modules/components/table/tableBody/index.js",
-			"types": "./dist/components/table/tableBody/index.d.ts",
-			"default": "./dist/modules/components/table/tableBody/index.js"
-		},
-		"./tableCaption": {
-			"import": "./dist/modules/components/table/tableCaption/index.js",
-			"types": "./dist/components/table/tableCaption/index.d.ts",
-			"default": "./dist/modules/components/table/tableCaption/index.js"
-		},
-		"./tableContainer": {
-			"import": "./dist/modules/components/table/tableContainer/index.js",
-			"types": "./dist/components/table/tableContainer/index.d.ts",
-			"default": "./dist/modules/components/table/tableContainer/index.js"
-		},
-		"./tableFooter": {
-			"import": "./dist/modules/components/table/tableFooter/index.js",
-			"types": "./dist/components/table/tableFooter/index.d.ts",
-			"default": "./dist/modules/components/table/tableFooter/index.js"
-		},
-		"./tableHeader": {
-			"import": "./dist/modules/components/table/tableHeader/index.js",
-			"types": "./dist/components/table/tableHeader/index.d.ts",
-			"default": "./dist/modules/components/table/tableHeader/index.js"
-		},
-		"./textarea": {
-			"import": "./dist/modules/components/textarea/index.js",
-			"types": "./dist/components/textarea/index.d.ts",
-			"default": "./dist/modules/components/textarea/index.js"
-		},
-		"./toastProvider": {
-			"import": "./dist/modules/providers/toastProvider.js",
-			"types": "./dist/providers/toastProvider.d.ts",
-			"default": "./dist/modules/providers/toastProvider.js"
-		},
-		"./toHtml": {
-			"import": "./dist/modules/services/toHtml.js",
-			"types": "./dist/services/toHtml.d.ts",
-			"default": "./dist/modules/services/toHtml.js"
-		},
-		"./tooltip": {
-			"import": "./dist/modules/components/tooltip/index.js",
-			"types": "./dist/components/tooltip/index.d.ts",
-			"default": "./dist/modules/components/tooltip/index.js"
-		},
-		"./toRichTextValue": {
-			"import": "./dist/modules/services/toRichTextValue.js",
-			"types": "./dist/services/toRichTextValue.d.ts",
-			"default": "./dist/modules/services/toRichTextValue.js"
-		},
-		"./useAutomation": {
-			"import": "./dist/modules/hooks/useAutomation.js",
-			"types": "./dist/hooks/useAutomation.d.ts",
-			"default": "./dist/modules/hooks/useAutomation.js"
-		},
-		"./useDrawer": {
-			"import": "./dist/modules/hooks/useDrawer.js",
-			"types": "./dist/hooks/useDrawer.d.ts",
-			"default": "./dist/modules/hooks/useDrawer.js"
-		},
-		"./useForm": {
-			"import": "./dist/modules/hooks/useForm.js",
-			"types": "./dist/hooks/useForm.d.ts",
-			"default": "./dist/modules/hooks/useForm.js"
-		},
-		"./useHydrated": {
-			"import": "./dist/modules/hooks/useHydrated.js",
-			"types": "./dist/hooks/useHydrated.d.ts",
-			"default": "./dist/modules/hooks/useHydrated.js"
-		},
-		"./useModal": {
-			"import": "./dist/modules/hooks/useModal.js",
-			"types": "./dist/hooks/useModal.d.ts",
-			"default": "./dist/modules/hooks/useModal.js"
-		},
-		"./useScopedParams": {
-			"import": "./dist/modules/hooks/useScopedParams.js",
-			"types": "./dist/hooks/useScopedParams.d.ts",
-			"default": "./dist/modules/hooks/useScopedParams.js"
-		},
-		"./useScrollLock": {
-			"import": "./dist/modules/hooks/useScrollLock.js",
-			"types": "./dist/hooks/useScrollLock.d.ts",
-			"default": "./dist/modules/hooks/useScrollLock.js"
-		},
-		"./useSearchAutomation": {
-			"import": "./dist/modules/hooks/useSearchAutomation.js",
-			"types": "./dist/hooks/useSearchAutomation.d.ts",
-			"default": "./dist/modules/hooks/useSearchAutomation.js"
-		},
-		"./useSlider": {
-			"import": "./dist/modules/hooks/useSlider.js",
-			"types": "./dist/hooks/useSlider.d.ts",
-			"default": "./dist/modules/hooks/useSlider.js"
-		},
-		"./useToast": {
-			"import": "./dist/modules/hooks/useToast.js",
-			"types": "./dist/hooks/useToast.d.ts",
-			"default": "./dist/modules/hooks/useToast.js"
-		}
-	}
+  "name": "@arkyn/components",
+  "version": "3.0.1-beta.171",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "private": false,
+  "license": "Apache-2.0",
+  "author": "Arkyn | Lucas Gonçalves",
+  "description": "A modern React component library, featuring 40+ UI components, smooth animations, custom hooks, and TypeScript support.",
+  "keywords": [
+    "react",
+    "remix",
+    "next",
+    "astro",
+    "react-router",
+    "components",
+    "ui",
+    "typescript",
+    "framer-motion",
+    "hooks",
+    "forms",
+    "design-system"
+  ],
+  "engines": {
+    "node": ">=24.16.0",
+    "bun": ">=1.3.14"
+  },
+  "homepage": "https://docs.arkyn.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lucas-Eduardo-Goncalves/arkyn-library.git",
+    "directory": "packages/components"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE.txt",
+    "styles.d.ts"
+  ],
+  "scripts": {
+    "audit": "bun audit --workspace packages/components",
+    "build": "bunx vite build && bunx tsc --project tsconfig.json --emitDeclarationOnly && bun ./generate-exports.ts",
+    "prebuild": "rm -rf dist",
+    "publish:beta": "npm publish --tag beta",
+    "publish:latest": "npm publish --tag latest",
+    "release:beta": "bun ./generate-version.ts beta",
+    "release:patch": "bun ./generate-version.ts patch",
+    "release:minor": "bun ./generate-version.ts minor",
+    "release:major": "bun ./generate-version.ts major",
+    "test": "bunx vitest --config vitest.config.ts --run",
+    "test:watch": "bunx vitest --config vitest.config.ts --watch",
+    "typecheck": "bunx tsc --project tsconfig.json --noEmit"
+  },
+  "sideEffects": [
+    "*.css",
+    "dist/components.css"
+  ],
+  "peerDependencies": {
+    "@react-google-maps/api": ">=2.0.0",
+    "@react-input/mask": ">=2.0.0",
+    "framer-motion": ">=10.0.0",
+    "html-react-parser": ">=5.0.0",
+    "lucide-react": ">=1.14.0",
+    "mapbox-gl": ">=3.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "react-hot-toast": ">=2.0.0",
+    "react-scroll": ">=1.8.0",
+    "slate": ">=0.100.0",
+    "slate-history": ">=0.100.0",
+    "slate-react": ">=0.100.0"
+  },
+  "peerDependenciesMeta": {
+    "mapbox-gl": {
+      "optional": true
+    },
+    "slate": {
+      "optional": true
+    },
+    "slate-history": {
+      "optional": true
+    },
+    "slate-react": {
+      "optional": true
+    },
+    "@react-google-maps/api": {
+      "optional": true
+    },
+    "react-scroll": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@react-google-maps/api": "^2.20.8",
+    "@react-input/mask": "^2.0.4",
+    "@types/bun": "catalog:",
+    "@types/is-hotkey": "^0.1.10",
+    "@types/node": "catalog:",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-scroll": "^1.8.10",
+    "@vitejs/plugin-react": "^6.0.3",
+    "framer-motion": "^12.42.0",
+    "html-react-parser": "^6.1.3",
+    "lucide-react": "^1.22.0",
+    "mapbox-gl": "^3.25.0",
+    "postcss": "^8.5.16",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-hot-toast": "^2.6.0",
+    "react-scroll": "^1.9.3",
+    "slate": "^0.124.1",
+    "slate-history": "^0.113.1",
+    "slate-react": "^0.124.2",
+    "vite": "catalog:"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./styles": {
+      "import": "./dist/style.css",
+      "types": "./styles.d.ts",
+      "default": "./dist/style.css"
+    },
+    "./alertContainer": {
+      "import": "./dist/modules/components/alert/alertContainer/index.js",
+      "types": "./dist/components/alert/alertContainer/index.d.ts",
+      "default": "./dist/modules/components/alert/alertContainer/index.js"
+    },
+    "./alertContent": {
+      "import": "./dist/modules/components/alert/alertContent/index.js",
+      "types": "./dist/components/alert/alertContent/index.d.ts",
+      "default": "./dist/modules/components/alert/alertContent/index.js"
+    },
+    "./alertDescription": {
+      "import": "./dist/modules/components/alert/alertDescription/index.js",
+      "types": "./dist/components/alert/alertDescription/index.d.ts",
+      "default": "./dist/modules/components/alert/alertDescription/index.js"
+    },
+    "./alertIcon": {
+      "import": "./dist/modules/components/alert/alertIcon/index.js",
+      "types": "./dist/components/alert/alertIcon/index.d.ts",
+      "default": "./dist/modules/components/alert/alertIcon/index.js"
+    },
+    "./alertTitle": {
+      "import": "./dist/modules/components/alert/alertTitle/index.js",
+      "types": "./dist/components/alert/alertTitle/index.d.ts",
+      "default": "./dist/modules/components/alert/alertTitle/index.js"
+    },
+    "./audioPlayer": {
+      "import": "./dist/modules/components/audioPlayer/index.js",
+      "types": "./dist/components/audioPlayer/index.d.ts",
+      "default": "./dist/modules/components/audioPlayer/index.js"
+    },
+    "./audioUpload": {
+      "import": "./dist/modules/components/audioUpload/index.js",
+      "types": "./dist/components/audioUpload/index.d.ts",
+      "default": "./dist/modules/components/audioUpload/index.js"
+    },
+    "./badge": {
+      "import": "./dist/modules/components/badge/index.js",
+      "types": "./dist/components/badge/index.d.ts",
+      "default": "./dist/modules/components/badge/index.js"
+    },
+    "./button": {
+      "import": "./dist/modules/components/button/index.js",
+      "types": "./dist/components/button/index.d.ts",
+      "default": "./dist/modules/components/button/index.js"
+    },
+    "./calendar": {
+      "import": "./dist/modules/components/calendar/index.js",
+      "types": "./dist/components/calendar/index.d.ts",
+      "default": "./dist/modules/components/calendar/index.js"
+    },
+    "./cardTabButton": {
+      "import": "./dist/modules/components/cardTab/cardTabButton/index.js",
+      "types": "./dist/components/cardTab/cardTabButton/index.d.ts",
+      "default": "./dist/modules/components/cardTab/cardTabButton/index.js"
+    },
+    "./cardTabContainer": {
+      "import": "./dist/modules/components/cardTab/cardTabContainer/index.js",
+      "types": "./dist/components/cardTab/cardTabContainer/index.d.ts",
+      "default": "./dist/modules/components/cardTab/cardTabContainer/index.js"
+    },
+    "./checkbox": {
+      "import": "./dist/modules/components/checkbox/index.js",
+      "types": "./dist/components/checkbox/index.d.ts",
+      "default": "./dist/modules/components/checkbox/index.js"
+    },
+    "./clientOnly": {
+      "import": "./dist/modules/components/clientOnly.js",
+      "types": "./dist/components/clientOnly.d.ts",
+      "default": "./dist/modules/components/clientOnly.js"
+    },
+    "./currencyInput": {
+      "import": "./dist/modules/components/currencyInput/index.js",
+      "types": "./dist/components/currencyInput/index.d.ts",
+      "default": "./dist/modules/components/currencyInput/index.js"
+    },
+    "./divider": {
+      "import": "./dist/modules/components/divider/index.js",
+      "types": "./dist/components/divider/index.d.ts",
+      "default": "./dist/modules/components/divider/index.js"
+    },
+    "./drawerContainer": {
+      "import": "./dist/modules/components/drawer/drawerContainer/index.js",
+      "types": "./dist/components/drawer/drawerContainer/index.d.ts",
+      "default": "./dist/modules/components/drawer/drawerContainer/index.js"
+    },
+    "./drawerHeader": {
+      "import": "./dist/modules/components/drawer/drawerHeader/index.js",
+      "types": "./dist/components/drawer/drawerHeader/index.d.ts",
+      "default": "./dist/modules/components/drawer/drawerHeader/index.js"
+    },
+    "./drawerProvider": {
+      "import": "./dist/modules/providers/drawerProvider.js",
+      "types": "./dist/providers/drawerProvider.d.ts",
+      "default": "./dist/modules/providers/drawerProvider.js"
+    },
+    "./facebookPixel": {
+      "import": "./dist/modules/components/facebookPixel/index.js",
+      "types": "./dist/components/facebookPixel/index.d.ts",
+      "default": "./dist/modules/components/facebookPixel/index.js"
+    },
+    "./fieldError": {
+      "import": "./dist/modules/components/fieldError/index.js",
+      "types": "./dist/components/fieldError/index.d.ts",
+      "default": "./dist/modules/components/fieldError/index.js"
+    },
+    "./fieldLabel": {
+      "import": "./dist/modules/components/fieldLabel/index.js",
+      "types": "./dist/components/fieldLabel/index.d.ts",
+      "default": "./dist/modules/components/fieldLabel/index.js"
+    },
+    "./fieldWrapper": {
+      "import": "./dist/modules/components/fieldWrapper/index.js",
+      "types": "./dist/components/fieldWrapper/index.d.ts",
+      "default": "./dist/modules/components/fieldWrapper/index.js"
+    },
+    "./fileUpload": {
+      "import": "./dist/modules/components/fileUpload/index.js",
+      "types": "./dist/components/fileUpload/index.d.ts",
+      "default": "./dist/modules/components/fileUpload/index.js"
+    },
+    "./formProvider": {
+      "import": "./dist/modules/providers/formProvider.js",
+      "types": "./dist/providers/formProvider.d.ts",
+      "default": "./dist/modules/providers/formProvider.js"
+    },
+    "./fullCalendar": {
+      "import": "./dist/modules/components/fullCalendar/index.js",
+      "types": "./dist/components/fullCalendar/index.d.ts",
+      "default": "./dist/modules/components/fullCalendar/index.js"
+    },
+    "./googleAnalytics": {
+      "import": "./dist/modules/components/googleAnalytics/index.js",
+      "types": "./dist/components/googleAnalytics/index.d.ts",
+      "default": "./dist/modules/components/googleAnalytics/index.js"
+    },
+    "./googleTagManager": {
+      "import": "./dist/modules/components/googleTagManager/index.js",
+      "types": "./dist/components/googleTagManager/index.d.ts",
+      "default": "./dist/modules/components/googleTagManager/index.js"
+    },
+    "./iconButton": {
+      "import": "./dist/modules/components/iconButton/index.js",
+      "types": "./dist/components/iconButton/index.d.ts",
+      "default": "./dist/modules/components/iconButton/index.js"
+    },
+    "./imageUpload": {
+      "import": "./dist/modules/components/imageUpload/index.js",
+      "types": "./dist/components/imageUpload/index.d.ts",
+      "default": "./dist/modules/components/imageUpload/index.js"
+    },
+    "./input": {
+      "import": "./dist/modules/components/input/index.js",
+      "types": "./dist/components/input/index.d.ts",
+      "default": "./dist/modules/components/input/index.js"
+    },
+    "./mapView": {
+      "import": "./dist/modules/components/mapView/index.js",
+      "types": "./dist/components/mapView/index.d.ts",
+      "default": "./dist/modules/components/mapView/index.js"
+    },
+    "./maskedInput": {
+      "import": "./dist/modules/components/maskedInput/index.js",
+      "types": "./dist/components/maskedInput/index.d.ts",
+      "default": "./dist/modules/components/maskedInput/index.js"
+    },
+    "./modalContainer": {
+      "import": "./dist/modules/components/modal/modalContainer/index.js",
+      "types": "./dist/components/modal/modalContainer/index.d.ts",
+      "default": "./dist/modules/components/modal/modalContainer/index.js"
+    },
+    "./modalFooter": {
+      "import": "./dist/modules/components/modal/modalFooter/index.js",
+      "types": "./dist/components/modal/modalFooter/index.d.ts",
+      "default": "./dist/modules/components/modal/modalFooter/index.js"
+    },
+    "./modalHeader": {
+      "import": "./dist/modules/components/modal/modalHeader/index.js",
+      "types": "./dist/components/modal/modalHeader/index.d.ts",
+      "default": "./dist/modules/components/modal/modalHeader/index.js"
+    },
+    "./modalProvider": {
+      "import": "./dist/modules/providers/modalProvider.js",
+      "types": "./dist/providers/modalProvider.d.ts",
+      "default": "./dist/modules/providers/modalProvider.js"
+    },
+    "./multiSelect": {
+      "import": "./dist/modules/components/multiSelect/index.js",
+      "types": "./dist/components/multiSelect/index.d.ts",
+      "default": "./dist/modules/components/multiSelect/index.js"
+    },
+    "./pagination": {
+      "import": "./dist/modules/components/pagination/index.js",
+      "types": "./dist/components/pagination/index.d.ts",
+      "default": "./dist/modules/components/pagination/index.js"
+    },
+    "./phoneInput": {
+      "import": "./dist/modules/components/phoneInput/index.js",
+      "types": "./dist/components/phoneInput/index.d.ts",
+      "default": "./dist/modules/components/phoneInput/index.js"
+    },
+    "./placesProvider": {
+      "import": "./dist/modules/providers/placesProvider.js",
+      "types": "./dist/providers/placesProvider.d.ts",
+      "default": "./dist/modules/providers/placesProvider.js"
+    },
+    "./popover": {
+      "import": "./dist/modules/components/popover/index.js",
+      "types": "./dist/components/popover/index.d.ts",
+      "default": "./dist/modules/components/popover/index.js"
+    },
+    "./radioBox": {
+      "import": "./dist/modules/components/radio/radioBox/index.js",
+      "types": "./dist/components/radio/radioBox/index.d.ts",
+      "default": "./dist/modules/components/radio/radioBox/index.js"
+    },
+    "./radioGroup": {
+      "import": "./dist/modules/components/radio/radioGroup/index.js",
+      "types": "./dist/components/radio/radioGroup/index.d.ts",
+      "default": "./dist/modules/components/radio/radioGroup/index.js"
+    },
+    "./richText": {
+      "import": "./dist/modules/components/richText/index.js",
+      "types": "./dist/components/richText/index.d.ts",
+      "default": "./dist/modules/components/richText/index.js"
+    },
+    "./searchPlaces": {
+      "import": "./dist/modules/components/searchPlaces.js",
+      "types": "./dist/components/searchPlaces.d.ts",
+      "default": "./dist/modules/components/searchPlaces.js"
+    },
+    "./select": {
+      "import": "./dist/modules/components/select/index.js",
+      "types": "./dist/components/select/index.d.ts",
+      "default": "./dist/modules/components/select/index.js"
+    },
+    "./slider": {
+      "import": "./dist/modules/components/slider/index.js",
+      "types": "./dist/components/slider/index.d.ts",
+      "default": "./dist/modules/components/slider/index.js"
+    },
+    "./switch": {
+      "import": "./dist/modules/components/switch/index.js",
+      "types": "./dist/components/switch/index.d.ts",
+      "default": "./dist/modules/components/switch/index.js"
+    },
+    "./tabButton": {
+      "import": "./dist/modules/components/tab/tabButton/index.js",
+      "types": "./dist/components/tab/tabButton/index.d.ts",
+      "default": "./dist/modules/components/tab/tabButton/index.js"
+    },
+    "./tabContainer": {
+      "import": "./dist/modules/components/tab/tabContainer/index.js",
+      "types": "./dist/components/tab/tabContainer/index.d.ts",
+      "default": "./dist/modules/components/tab/tabContainer/index.js"
+    },
+    "./tableBody": {
+      "import": "./dist/modules/components/table/tableBody/index.js",
+      "types": "./dist/components/table/tableBody/index.d.ts",
+      "default": "./dist/modules/components/table/tableBody/index.js"
+    },
+    "./tableCaption": {
+      "import": "./dist/modules/components/table/tableCaption/index.js",
+      "types": "./dist/components/table/tableCaption/index.d.ts",
+      "default": "./dist/modules/components/table/tableCaption/index.js"
+    },
+    "./tableContainer": {
+      "import": "./dist/modules/components/table/tableContainer/index.js",
+      "types": "./dist/components/table/tableContainer/index.d.ts",
+      "default": "./dist/modules/components/table/tableContainer/index.js"
+    },
+    "./tableFooter": {
+      "import": "./dist/modules/components/table/tableFooter/index.js",
+      "types": "./dist/components/table/tableFooter/index.d.ts",
+      "default": "./dist/modules/components/table/tableFooter/index.js"
+    },
+    "./tableHeader": {
+      "import": "./dist/modules/components/table/tableHeader/index.js",
+      "types": "./dist/components/table/tableHeader/index.d.ts",
+      "default": "./dist/modules/components/table/tableHeader/index.js"
+    },
+    "./textarea": {
+      "import": "./dist/modules/components/textarea/index.js",
+      "types": "./dist/components/textarea/index.d.ts",
+      "default": "./dist/modules/components/textarea/index.js"
+    },
+    "./toastProvider": {
+      "import": "./dist/modules/providers/toastProvider.js",
+      "types": "./dist/providers/toastProvider.d.ts",
+      "default": "./dist/modules/providers/toastProvider.js"
+    },
+    "./toHtml": {
+      "import": "./dist/modules/services/toHtml.js",
+      "types": "./dist/services/toHtml.d.ts",
+      "default": "./dist/modules/services/toHtml.js"
+    },
+    "./tooltip": {
+      "import": "./dist/modules/components/tooltip/index.js",
+      "types": "./dist/components/tooltip/index.d.ts",
+      "default": "./dist/modules/components/tooltip/index.js"
+    },
+    "./toRichTextValue": {
+      "import": "./dist/modules/services/toRichTextValue.js",
+      "types": "./dist/services/toRichTextValue.d.ts",
+      "default": "./dist/modules/services/toRichTextValue.js"
+    },
+    "./useAutomation": {
+      "import": "./dist/modules/hooks/useAutomation.js",
+      "types": "./dist/hooks/useAutomation.d.ts",
+      "default": "./dist/modules/hooks/useAutomation.js"
+    },
+    "./useDrawer": {
+      "import": "./dist/modules/hooks/useDrawer.js",
+      "types": "./dist/hooks/useDrawer.d.ts",
+      "default": "./dist/modules/hooks/useDrawer.js"
+    },
+    "./useForm": {
+      "import": "./dist/modules/hooks/useForm.js",
+      "types": "./dist/hooks/useForm.d.ts",
+      "default": "./dist/modules/hooks/useForm.js"
+    },
+    "./useHydrated": {
+      "import": "./dist/modules/hooks/useHydrated.js",
+      "types": "./dist/hooks/useHydrated.d.ts",
+      "default": "./dist/modules/hooks/useHydrated.js"
+    },
+    "./useModal": {
+      "import": "./dist/modules/hooks/useModal.js",
+      "types": "./dist/hooks/useModal.d.ts",
+      "default": "./dist/modules/hooks/useModal.js"
+    },
+    "./useScopedParams": {
+      "import": "./dist/modules/hooks/useScopedParams.js",
+      "types": "./dist/hooks/useScopedParams.d.ts",
+      "default": "./dist/modules/hooks/useScopedParams.js"
+    },
+    "./useScrollLock": {
+      "import": "./dist/modules/hooks/useScrollLock.js",
+      "types": "./dist/hooks/useScrollLock.d.ts",
+      "default": "./dist/modules/hooks/useScrollLock.js"
+    },
+    "./useSearchAutomation": {
+      "import": "./dist/modules/hooks/useSearchAutomation.js",
+      "types": "./dist/hooks/useSearchAutomation.d.ts",
+      "default": "./dist/modules/hooks/useSearchAutomation.js"
+    },
+    "./useSlider": {
+      "import": "./dist/modules/hooks/useSlider.js",
+      "types": "./dist/hooks/useSlider.d.ts",
+      "default": "./dist/modules/hooks/useSlider.js"
+    },
+    "./useToast": {
+      "import": "./dist/modules/hooks/useToast.js",
+      "types": "./dist/hooks/useToast.d.ts",
+      "default": "./dist/modules/hooks/useToast.js"
+    }
+  }
 }

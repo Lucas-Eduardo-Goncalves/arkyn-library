@@ -27,7 +27,7 @@ function FacebookPixelClient(props: FacebookPixelProps) {
 	if (trackSingle) pixel.trackSingle(pixelId, ...trackSingle);
 	if (trackSingleCustom) pixel.trackSingleCustom(pixelId, ...trackSingleCustom);
 
-	return <></>;
+	return null;
 }
 
 export { FacebookPixelClient };

@@ -23,6 +23,7 @@ type ApiRequestDataWithoutBodyProps = {
 };
 
 type ApiRequestDataWithBodyProps = {
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	body?: any;
 	headers?: HeadersInit;
 	token?: string;
@@ -31,6 +32,7 @@ type ApiRequestDataWithBodyProps = {
 
 type DebugConfig = {
 	headers?: HeadersInit;
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	body?: any;
 	status: number;
 	message: string;
@@ -68,7 +70,7 @@ class ApiService {
 	private onDebug(endpoint: string, method: string, data: DebugConfig) {
 		if (this.enableDebug) {
 			const debugs: string[] = [];
-			const json = (data: any) => JSON.stringify(data, null, 2);
+			const json = (data: unknown) => JSON.stringify(data, null, 2);
 
 			debugs.push(`Base URL: ${this.baseUrl}`);
 			debugs.push(`Endpoint: ${endpoint}`);

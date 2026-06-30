@@ -7,7 +7,7 @@ type PhoneInputCountriesOverlayProps = {
 
 function PhoneInputCountriesOverlay(props: PhoneInputCountriesOverlayProps) {
 	const { isOpen, onClick } = props;
-	if (!isOpen) return <></>;
+	if (!isOpen) return null;
 	return (
 		<aside className="arkynPhoneInputCountriesOverlay" onClick={onClick} />
 	);

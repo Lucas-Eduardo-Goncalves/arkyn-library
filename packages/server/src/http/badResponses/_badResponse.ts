@@ -4,16 +4,19 @@ import { DebugService } from "../../services/debugService";
 import { flushDebugLogs } from "../../utilities/flushDebugLogs";
 
 class BadResponse {
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	private _cause?: any;
 	private _name: string = "BadResponse";
 	private _status: number = 500;
 	private _statusText: string = "Unknown error";
 	private _debugColor: "green" | "yellow" | "cyan" | "red" = "red";
 
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	get cause(): any {
 		return this._cause;
 	}
 
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	set cause(value: any) {
 		this._cause = value;
 	}

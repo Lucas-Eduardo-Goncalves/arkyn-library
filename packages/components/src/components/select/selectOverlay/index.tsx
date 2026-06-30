@@ -7,7 +7,7 @@ type SelectOverlayProps = {
 
 function SelectOverlay(props: SelectOverlayProps) {
 	const { isFocused, handleBlur } = props;
-	if (!isFocused) return <></>;
+	if (!isFocused) return null;
 	return <aside className="arkynSelectOverlay" onClick={handleBlur} />;
 }
 

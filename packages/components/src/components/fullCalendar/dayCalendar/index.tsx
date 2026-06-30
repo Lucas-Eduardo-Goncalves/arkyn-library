@@ -7,7 +7,7 @@ function DayCalendar() {
 	return (
 		<DayCalendarContainer>
 			{listHours.map((hour) => (
-				<DayCalendarRow hour={hour} timeInMinutes={hour} />
+				<DayCalendarRow key={hour} hour={hour} timeInMinutes={hour} />
 			))}
 		</DayCalendarContainer>
 	);

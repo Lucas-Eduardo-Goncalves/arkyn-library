@@ -177,7 +177,8 @@ function MaskedInput(props: MaskedInputProps) {
 	const { fieldErrors } = useForm();
 	const [isFocused, setIsFocused] = useState(false);
 	const inputRef = useRef<HTMLInputElement>(null);
-	const inputId = id || useId();
+	const generatedId = useId();
+	const inputId = id || generatedId;
 
 	const errorMessage = baseErrorMessage || fieldErrors?.[name];
 	const isError = !!errorMessage;

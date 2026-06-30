@@ -169,7 +169,7 @@ describe("flushDebugLogs", () => {
 				debugs: ["Message 1", "Message 2"],
 			});
 
-			const output = consoleSpy.mock.calls[0][0] as any;
+			const output = consoleSpy.mock.calls[0][0] as string;
 			const matches = output.match(/\[DB\]/g);
 			expect(matches).toHaveLength(2);
 		});
@@ -181,7 +181,7 @@ describe("flushDebugLogs", () => {
 				debugs: ["  trimmed message  "],
 			});
 
-			const output = consoleSpy.mock.calls[0][0] as any;
+			const output = consoleSpy.mock.calls[0][0] as string;
 			expect(output).toContain("trimmed message");
 			expect(output).not.toContain("  trimmed message  ");
 		});
@@ -193,7 +193,7 @@ describe("flushDebugLogs", () => {
 				debugs: ["Message"],
 			});
 
-			const output = consoleSpy.mock.calls[0][0] as any;
+			const output = consoleSpy.mock.calls[0][0] as string;
 			expect(output.startsWith("\n")).toBe(true);
 		});
 

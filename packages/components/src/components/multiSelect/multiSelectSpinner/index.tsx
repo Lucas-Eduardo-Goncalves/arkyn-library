@@ -9,7 +9,7 @@ type MultiSelectSpinnerProps = {
 function MultiSelectSpinner(props: MultiSelectSpinnerProps) {
 	const { iconSize, isLoading } = props;
 
-	if (!isLoading) return <></>;
+	if (!isLoading) return null;
 	return (
 		<Loader2
 			className="arkynMultiSelectSpinner"

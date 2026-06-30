@@ -7,9 +7,11 @@ type InputProps = {
 	method: "POST" | "PUT" | "DELETE" | "PATCH" | "GET";
 	urlParams?: Record<string, string>;
 	headers?: HeadersInit;
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	body?: any;
 };
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 type ApiSuccessResponse<T = any> = {
 	success: true;
 	status: number;
@@ -22,10 +24,12 @@ type ApiFailedResponse = {
 	success: false;
 	status: number;
 	message: string;
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	response: any;
 	cause: string | Error | null;
 };
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 type ApiResponseDTO<T = any> = ApiSuccessResponse<T> | ApiFailedResponse;
 
 /**
@@ -65,6 +69,7 @@ type ApiResponseDTO<T = any> = ApiSuccessResponse<T> | ApiFailedResponse;
  * ```
  */
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 async function makeRequest<T = any>(
 	input: InputProps,
 ): Promise<ApiResponseDTO<T>> {
@@ -97,6 +102,7 @@ async function makeRequest<T = any>(
 		const elapsedTime = performance.now() - startTime;
 		const status = response.status;
 
+		// biome-ignore lint/suspicious/noExplicitAny: intentional
 		let data: any = null;
 		try {
 			data = await response.json();

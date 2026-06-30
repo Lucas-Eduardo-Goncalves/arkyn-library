@@ -14,6 +14,7 @@ class Updated extends SuccessResponse {
 	 * @param message - Description included in the response status text.
 	 * @param body - Data to include in the response body.
 	 */
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	constructor(message: string, body?: any) {
 		super();
 

@@ -107,9 +107,9 @@ function Pagination(props: PaginationProps) {
 				</>
 			)}
 
-			{previousPages.map((page, index) => (
+			{previousPages.map((page) => (
 				<PageButton
-					key={index}
+					key={page}
 					page={page}
 					handlePageChange={handleMinusChange}
 				/>
@@ -117,9 +117,9 @@ function Pagination(props: PaginationProps) {
 
 			<CurrentButton currentPage={currentPage} />
 
-			{nextPages.map((page, index) => (
+			{nextPages.map((page) => (
 				<PageButton
-					key={index}
+					key={page}
 					page={page}
 					handlePageChange={handlePlusChange}
 				/>

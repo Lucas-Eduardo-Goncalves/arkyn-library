@@ -42,7 +42,7 @@ function FullCalendarHeader(props: FullCalendarHeaderProps) {
 		<div className="arkynFullCalendarHeader">
 			<CardTabContainer
 				defaultValue={viewType}
-				onChange={(value) => setViewType(value as any)}
+				onChange={(value) => setViewType(value as "day" | "week" | "month")}
 			>
 				<CardTabButton value="day">Dia</CardTabButton>
 				<CardTabButton value="week">Semana</CardTabButton>

@@ -67,7 +67,7 @@ function GoogleTagManager(props: GoogleTagManagerProps) {
 	} = props;
 
 	if (process.env.NODE_ENV !== "production" && !showInDevMode) {
-		return <></>;
+		return null;
 	}
 
 	return (

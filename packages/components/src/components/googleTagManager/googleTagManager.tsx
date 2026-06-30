@@ -25,6 +25,7 @@ type InitializeProps = {
 };
 
 interface Window {
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	[key: string]: any;
 }
 

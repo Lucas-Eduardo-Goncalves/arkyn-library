@@ -4,6 +4,7 @@ type InputProps = {
 	url: string;
 	urlParams?: Record<string, string>;
 	headers?: HeadersInit;
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	body?: any;
 };
 
@@ -15,6 +16,7 @@ type InputProps = {
  * @returns {Promise<ApiResponseDTO<T>>} A promise that resolves to the API response.
  */
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 async function putRequest<T = any>(
 	input: InputProps,
 ): Promise<ApiResponseDTO<T>> {

@@ -40,6 +40,7 @@ class SchemaValidator<T extends ZodType> {
 	 *
 	 * @param data - The value to check.
 	 */
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	isValid(data: any): boolean {
 		return this.schema.safeParse(data).success;
 	}
@@ -50,6 +51,7 @@ class SchemaValidator<T extends ZodType> {
 	 *
 	 * @param data - The value to validate.
 	 */
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	safeValidate(data: any): z.ZodSafeParseResult<z.infer<T>> {
 		return this.schema.safeParse(data);
 	}
@@ -61,11 +63,12 @@ class SchemaValidator<T extends ZodType> {
 	 * @param data - The value to validate.
 	 * @throws `ServerError` with a formatted field-by-field error message.
 	 */
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	validate(data: any): z.infer<T> {
 		try {
 			return this.schema.parse(data);
-		} catch (error: any) {
-			throw new ServerError(formatErrorMessage(error));
+		} catch (error) {
+			throw new ServerError(formatErrorMessage(error as z.ZodError));
 		}
 	}
 
@@ -83,6 +86,7 @@ class SchemaValidator<T extends ZodType> {
 	 * const body = validator.formValidate(await decodeRequestBody(request));
 	 * ```
 	 */
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	formValidate(data: any, message?: string): z.infer<T> {
 		const formParsed = formParse([data, this.schema]);
 
@@ -113,6 +117,7 @@ class SchemaValidator<T extends ZodType> {
 	 * const body = await validator.formAsyncValidate(await decodeRequestBody(request));
 	 * ```
 	 */
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	async formAsyncValidate(data: any, message?: string): Promise<z.infer<T>> {
 		const formParsed = await formAsyncParse([data, this.schema]);
 

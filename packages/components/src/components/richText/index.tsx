@@ -139,7 +139,8 @@ function RichText(props: RichTextProps) {
 	const [onFocus, setOnFocus] = useState(false);
 
 	const ref = useRef<HTMLInputElement>(null);
-	const inputId = id || useId();
+	const generatedId = useId();
+	const inputId = id || generatedId;
 
 	const errorMessage = baseErrorMessage || fieldErrors?.[name];
 	const isError = baseIsError || !!errorMessage;
@@ -259,6 +260,7 @@ function RichText(props: RichTextProps) {
 						onBlur={() => setOnFocus(false)}
 						onKeyDown={(event) => {
 							for (const hotkey in hotKeys) {
+								// biome-ignore lint/suspicious/noExplicitAny: intentional
 								if (isHotkey(hotkey, event as any)) {
 									event.preventDefault();
 									const mark = hotKeys[hotkey as keyof typeof hotKeys];

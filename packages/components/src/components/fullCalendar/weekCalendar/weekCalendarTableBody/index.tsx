@@ -15,9 +15,9 @@ function WeekCalendarTableBody() {
 						<p>{viewService.formatHourLabel(hourRow[0].timeInMinutes)}</p>
 					</td>
 
-					{hourRow.map((cell, index) => (
+					{hourRow.map((cell) => (
 						<WeekCalendarTableTd
-							key={`${cell.year}-${cell.month}-${cell.day}-${cell.timeInMinutes}-${index}`}
+							key={`${cell.year}-${cell.month}-${cell.day}-${cell.timeInMinutes}`}
 							{...cell}
 						/>
 					))}

@@ -129,7 +129,6 @@ type PhoneInputProps = {
  */
 function PhoneInput(props: PhoneInputProps) {
 	const {
-		defaultCountryIso,
 		value: rawValue,
 		label,
 		className: wrapperClassName = "",
@@ -150,6 +149,7 @@ function PhoneInput(props: PhoneInputProps) {
 		orientation = "vertical",
 	} = props;
 
+	// biome-ignore lint/style/noNonNullAssertion: "BR" is always present in the countries list
 	const brasilCountry = countries.find((country) => country.iso === "BR")!;
 
 	const defaultData = defaultValue ? formatToPhone(defaultValue) : "";
@@ -168,7 +168,8 @@ function PhoneInput(props: PhoneInputProps) {
 	const { fieldErrors } = useForm();
 
 	const phoneInputRef = useRef<HTMLInputElement>(null);
-	const phoneInputId = id || useId();
+	const generatedId = useId();
+	const phoneInputId = id || generatedId;
 
 	const errorMessage = baseErrorMessage || fieldErrors?.[name];
 	const isError = !!errorMessage;

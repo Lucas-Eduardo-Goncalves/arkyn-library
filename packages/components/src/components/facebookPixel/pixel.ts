@@ -21,6 +21,7 @@ class FacebookPixel {
 		if (window.fbq) return;
 
 		// Define a função fbq que será usada para enviar eventos ao Facebook Pixel
+		// biome-ignore lint/suspicious/noExplicitAny: intentional
 		const fbq: Fbq = ((...args: any[]) => {
 			// Se fbq.callMethod estiver definido, chama o método com os argumentos fornecidos
 			// Caso contrário, adiciona os argumentos à fila de eventos

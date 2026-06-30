@@ -33,7 +33,7 @@ for (const match of indexContent.matchAll(regex)) {
 
 	importPath = importPath.replace(/^\.\//, "");
 
-	const exportName = importPath.split("/").pop()!;
+	const exportName = importPath.split("/").pop() as string;
 
 	const srcPath = resolve(srcDir, importPath);
 	const isDirectory =

@@ -156,7 +156,6 @@ function MultiSelect(props: MultiSelectProps) {
 		isSearchable = false,
 		id,
 		label,
-		optionMaxHeight,
 		showAsterisk,
 		leftIcon: LeftIcon,
 		onSearch,
@@ -176,7 +175,8 @@ function MultiSelect(props: MultiSelectProps) {
 	const { fieldErrors } = useForm();
 
 	const multiSelectRef = useRef<HTMLInputElement>(null);
-	const multiSelectId = id || useId();
+	const generatedId = useId();
+	const multiSelectId = id || generatedId;
 
 	const errorMessage = baseErrorMessage || fieldErrors?.[name];
 	const isError = !!errorMessage;

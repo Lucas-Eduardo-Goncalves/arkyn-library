@@ -13,6 +13,7 @@ class Conflict extends BadResponse {
 	 * @param message - Error description.
 	 * @param cause - Optional extra context (serialized to JSON).
 	 */
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	constructor(message: string, cause?: any) {
 		super();
 

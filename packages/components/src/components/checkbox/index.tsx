@@ -115,7 +115,8 @@ function Checkbox(props: CheckboxProps) {
 	const { fieldErrors } = useForm();
 
 	const checkboxRef = useRef<HTMLInputElement>(null);
-	const checkboxId = id || useId();
+	const generatedId = useId();
+	const checkboxId = id || generatedId;
 
 	const errorMessage = baseErrorMessage || fieldErrors?.[name];
 	const isError = !!errorMessage;

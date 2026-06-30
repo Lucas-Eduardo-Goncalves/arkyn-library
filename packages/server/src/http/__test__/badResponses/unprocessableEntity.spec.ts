@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { UnprocessableEntity } from "../../badResponses/unprocessableEntity";
 
 describe("UnprocessableEntity", () => {
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	let consoleLogSpy: any;
 
 	beforeEach(() => {
@@ -517,6 +518,7 @@ describe("UnprocessableEntity", () => {
 			}
 			const error = new UnprocessableEntity({ fieldErrors });
 
+			// biome-ignore lint/style/noNonNullAssertion: intentional
 			expect(Object.keys(error.cause.fieldErrors!)).toHaveLength(100);
 		});
 

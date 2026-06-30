@@ -36,6 +36,7 @@ import { Updated } from "../http/successResponses/updated";
  * }
  * ```
  */
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 function errorHandler(error: any): Response {
 	switch (true) {
 		case error instanceof Response:

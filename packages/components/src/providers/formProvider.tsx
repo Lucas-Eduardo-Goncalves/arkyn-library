@@ -1,11 +1,13 @@
 import { cloneElement, createContext, type ReactNode } from "react";
 
 type FormContextProps = {
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	fieldErrors: { [x: string]: any };
 };
 
 type FormProviderProps = {
 	children: ReactNode;
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	fieldErrors?: any;
 	form?: React.ReactElement;
 };

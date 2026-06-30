@@ -31,6 +31,7 @@ function FieldLabel(props: FieldLabelProps) {
 	const show = showAsterisk ? "asteriskTrue" : "asteriskFalse";
 	const className = `arkynFieldLabel ${show} ${baseClassName}`;
 
+	// biome-ignore lint/a11y/noLabelWithoutControl: htmlFor is passed via ...rest
 	return <label className={className.trim()} {...rest} />;
 }
 

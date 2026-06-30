@@ -65,7 +65,7 @@ describe("formatJsonObject", () => {
 	});
 
 	it("should format empty array", () => {
-		const arr: any[] = [];
+		const arr: unknown[] = [];
 		const result = formatJsonObject(arr, 0);
 		expect(result).toBe("[]");
 	});

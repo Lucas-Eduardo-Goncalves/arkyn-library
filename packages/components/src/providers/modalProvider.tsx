@@ -1,5 +1,6 @@
 import { createContext, type ReactNode, useState } from "react";
 
+// biome-ignore lint/suspicious/noExplicitAny: intentional
 type ModalContextProps<T = any> = {
 	modalIsOpen(key: string): boolean;
 	modalData(key: string): T;
@@ -10,6 +11,7 @@ type ModalContextProps<T = any> = {
 
 type OpenedModals = {
 	key: string;
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	data?: any;
 }[];
 
@@ -59,6 +61,7 @@ function ModalProvider(args: ModalProviderProps) {
 		return openedModals.find((modal) => modal.key === key)?.data;
 	}
 
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	function openModal(key: string, data?: any) {
 		const alreadyExist = modalIsOpen(key);
 		if (alreadyExist) {

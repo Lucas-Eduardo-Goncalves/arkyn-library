@@ -18,14 +18,11 @@
 		"enabled": true,
 		"rules": {
 			"preset": "recommended",
-			"complexity": {
-				"noStaticOnlyClass": "off"
-			},
 			"security": {
 				"noDangerouslySetInnerHtml": "off"
 			},
 			"a11y": {
-				"useKeyWithClickEvents": "off"
+				"noStaticElementInteractions": "off"
 			}
 		}
 	},
@@ -51,5 +48,20 @@
 				"organizeImports": "on"
 			}
 		}
-	}
+	},
+	"overrides": [
+		{
+			"includes": ["**/mapbox.css"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noUnknownMediaFeatureName": "off"
+					},
+					"style": {
+						"noDescendingSpecificity": "off"
+					}
+				}
+			}
+		}
+	]
 }

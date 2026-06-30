@@ -21,6 +21,7 @@ class UnprocessableEntity extends BadResponse {
 	 * @param props.data - Any extra data to include in the response body.
 	 */
 	constructor(props: {
+		// biome-ignore lint/suspicious/noExplicitAny: intentional
 		data?: any;
 		fieldErrors?: Record<string, string>;
 		fields?: Record<string, string>;

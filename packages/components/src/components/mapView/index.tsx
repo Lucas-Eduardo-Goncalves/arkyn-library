@@ -12,6 +12,7 @@ type Coordinate = {
 	/** Longitude of the marker position. */
 	lng: number;
 	/** Arbitrary data attached to the marker — available in `onMarkerClick`. */
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	data?: any;
 	/** Custom React node rendered inside the marker popup on click. */
 	popUp?: ReactNode;

@@ -8,8 +8,8 @@ function MonthlyCalendarTableHeader() {
 	return (
 		<thead className="arkynMonthlyCalendarTableHeader">
 			<tr>
-				{listWeek.map((day, index) => (
-					<th key={index}>{formatToCapitalizeFirstWordLetter(day)}</th>
+				{listWeek.map((day) => (
+					<th key={day}>{formatToCapitalizeFirstWordLetter(day)}</th>
 				))}
 			</tr>
 		</thead>

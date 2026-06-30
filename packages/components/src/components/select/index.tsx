@@ -155,7 +155,6 @@ function Select(props: SelectProps) {
 		isSearchable = false,
 		id,
 		label,
-		optionMaxHeight,
 		showAsterisk,
 		leftIcon: LeftIcon,
 		onSearch,
@@ -175,7 +174,8 @@ function Select(props: SelectProps) {
 	const { fieldErrors } = useForm();
 
 	const selectRef = useRef<HTMLInputElement>(null);
-	const selectId = id || useId();
+	const generatedId = useId();
+	const selectId = id || generatedId;
 
 	const errorMessage = baseErrorMessage || fieldErrors?.[name];
 	const isError = !!errorMessage;

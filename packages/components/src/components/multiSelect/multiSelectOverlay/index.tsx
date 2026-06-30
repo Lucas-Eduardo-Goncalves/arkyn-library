@@ -7,7 +7,7 @@ type MultiSelectOverlayProps = {
 
 function MultiSelectOverlay(props: MultiSelectOverlayProps) {
 	const { isFocused, handleBlur } = props;
-	if (!isFocused) return <></>;
+	if (!isFocused) return null;
 	return <aside className="arkynMultiSelectOverlay" onClick={handleBlur} />;
 }
 
