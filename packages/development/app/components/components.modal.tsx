@@ -15,9 +15,7 @@ export default function ModalRoute() {
 				isVisible={isConfirmOpen}
 				makeInvisible={() => setIsConfirmOpen(false)}
 			>
-				<ModalHeader>
-					<h2>Confirmar exclusão</h2>
-				</ModalHeader>
+				<ModalHeader>Confirmar exclusão</ModalHeader>
 				<main style={{ padding: "1rem" }}>
 					<p>Esta ação não pode ser desfeita. Deseja continuar?</p>
 				</main>
@@ -35,9 +33,7 @@ export default function ModalRoute() {
 				isVisible={isWizardOpen}
 				makeInvisible={() => setIsWizardOpen(false)}
 			>
-				<ModalHeader showCloseButton={false}>
-					<h2>Passo 1 de 3</h2>
-				</ModalHeader>
+				<ModalHeader showCloseButton={false}>Passo 1 de 3</ModalHeader>
 				<main style={{ padding: "1rem" }}>
 					<p>Conteúdo do passo atual do wizard.</p>
 				</main>
@@ -53,9 +49,7 @@ export default function ModalRoute() {
 				isVisible={isAlertOpen}
 				makeInvisible={() => setIsAlertOpen(false)}
 			>
-				<ModalHeader>
-					<h2>Informação</h2>
-				</ModalHeader>
+				<ModalHeader>Informação</ModalHeader>
 				<main style={{ padding: "1rem" }}>
 					<p>Operação concluída com sucesso.</p>
 				</main>

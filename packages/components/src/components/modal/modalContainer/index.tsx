@@ -1,5 +1,9 @@
-import { AnimatePresence, motion } from "framer-motion";
-import type { HTMLAttributes } from "react";
+import {
+	type AnimationEvent,
+	type HTMLAttributes,
+	useEffect,
+	useState,
+} from "react";
 
 import { useScrollLock } from "../../../hooks/useScrollLock";
 import { ModalProvider } from "../modalContext";
@@ -49,37 +53,48 @@ function ModalContainer(args: ModalContainerProps) {
 		...rest
 	} = args;
 
+	const [mounted, setMounted] = useState(isVisible);
+	const [isExiting, setIsExiting] = useState(false);
+
+	useEffect(() => {
+		if (isVisible) {
+			setMounted(true);
+			setIsExiting(false);
+		} else if (mounted) {
+			setIsExiting(true);
+		}
+	}, [isVisible, mounted]);
+
 	useScrollLock(isVisible);
 
-	const visibleClass = isVisible ? "visibleTrue" : "visibleFalse";
-	const className = `arkynModalContainer ${visibleClass} ${baseClassName}`;
+	function handleOverlayAnimationEnd(e: AnimationEvent<HTMLDivElement>) {
+		if (e.target === e.currentTarget && isExiting) {
+			setIsExiting(false);
+			setMounted(false);
+			makeInvisible();
+		}
+	}
+
+	if (!mounted) return null;
+
+	const className = [
+		"arkynModalContainer",
+		isExiting ? "exiting" : "",
+		baseClassName,
+	]
+		.filter(Boolean)
+		.join(" ");
 
 	return (
-		<ModalProvider makeInvisible={makeInvisible}>
-			<AnimatePresence>
-				{isVisible && (
-					<aside className={className.trim()} {...rest}>
-						<motion.div
-							className="arkynModalContainerOverlay"
-							transition={{ duration: 0.15, ease: "easeOut" }}
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-							onClick={makeInvisible}
-						/>
-
-						<motion.div
-							className="arkynModalContainerContent"
-							transition={{ duration: 0.15, ease: "easeOut" }}
-							initial={{ opacity: 0, scale: 0.75 }}
-							animate={{ opacity: 1, scale: 1 }}
-							exit={{ opacity: 0, scale: 0 }}
-						>
-							{children}
-						</motion.div>
-					</aside>
-				)}
-			</AnimatePresence>
+		<ModalProvider makeInvisible={() => setIsExiting(true)}>
+			<aside className={className.trim()} {...rest}>
+				<div
+					className="arkynModalContainerOverlay"
+					onClick={() => setIsExiting(true)}
+					onAnimationEnd={handleOverlayAnimationEnd}
+				/>
+				<div className="arkynModalContainerContent">{children}</div>
+			</aside>
 		</ModalProvider>
 	);
 }

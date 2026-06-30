@@ -28,11 +28,11 @@
 	background: none;
 
 	color: var(--text-body);
-	background-color: var(--card);
-	transition: all 0.15s ease-out;
+	background-color: var(--background-foreground);
 }
 
 .arkynModalHeaderCloseButton:hover {
 	cursor: pointer;
+	transition: all 0.15s ease-out;
 	filter: brightness(0.9);
 }

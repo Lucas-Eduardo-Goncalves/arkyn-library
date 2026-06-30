@@ -9,7 +9,7 @@
 	height: 174px;
 	max-width: 475px;
 
-	background: rgba(var(--spotlight-secondary), 1);
+	background: var(--input-background);
 }
 
 .arkynImageUpload.hasImage {

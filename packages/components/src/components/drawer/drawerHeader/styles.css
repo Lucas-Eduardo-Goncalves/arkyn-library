@@ -28,6 +28,7 @@
 	background: none;
 
 	color: var(--text-body);
+	background-color: var(--background-foreground);
 }
 
 .arkynDrawerHeaderCloseButton:hover {
