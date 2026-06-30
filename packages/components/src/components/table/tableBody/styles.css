@@ -1,5 +1,20 @@
-.arkynTableBody > tr:nth-child(odd) > td {
+.arkynTableBodyEmptyLine > td {
 	background-color: var(--card-foreground-primary);
+	height: 64px;
+}
+
+.arkynTableBodyEmptyLine > td > div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	text-align: center;
+	white-space: nowrap;
+
+	font-weight: 400;
+	font-size: 14px;
+
+	color: var(--text-body);
 }
 
 .arkynTableBody > tr > td {
@@ -24,6 +39,10 @@
 	padding-right: 16px;
 }
 
+.arkynTableBody > tr:nth-child(odd) > td {
+	background-color: var(--card-foreground-primary);
+}
+
 .arkynTableBody > tr:nth-child(odd):hover > td {
 	filter: brightness(0.98);
 }
@@ -40,23 +59,4 @@ html.dark .arkynTableBody > tr:nth-child(odd):hover > td {
 html.dark .arkynTableBody > tr:nth-child(even):hover > td {
 	background-color: var(--card-foreground-primary);
 	filter: brightness(1.2);
-}
-
-.arkynTableBodyEmptyLine > td {
-	background-color: var(--card-foreground-primary);
-	height: 64px;
-}
-
-.arkynTableBodyEmptyLine > td > div {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	text-align: center;
-	white-space: nowrap;
-
-	font-weight: 400;
-	font-size: 14px;
-
-	color: var(--text-body);
 }

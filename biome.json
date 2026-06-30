@@ -22,7 +22,11 @@
 				"noDangerouslySetInnerHtml": "off"
 			},
 			"a11y": {
-				"noStaticElementInteractions": "off"
+				"noStaticElementInteractions": "off",
+				"useKeyWithClickEvents": "off"
+			},
+			"complexity": {
+				"noStaticOnlyClass": "off"
 			}
 		}
 	},

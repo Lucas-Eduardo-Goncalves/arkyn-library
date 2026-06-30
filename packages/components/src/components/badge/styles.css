@@ -10,6 +10,31 @@
 	border: 1px solid transparent;
 }
 
+/* SIZE */
+.arkynBadge.lg {
+	border-radius: 12px;
+	padding: 0px 16px;
+	height: 24px;
+}
+
+.arkynBadge.lg p {
+	line-height: 100%;
+	font-weight: 400;
+	font-size: 12px;
+}
+
+.arkynBadge.md {
+	border-radius: 10px;
+	padding: 0px 12px;
+	height: 20px;
+}
+
+.arkynBadge.md p {
+	line-height: 100%;
+	font-weight: 400;
+	font-size: 10px;
+}
+
 /* VARIANTS */
 .arkynBadge.solid {
 	color: #fff;
@@ -117,29 +142,4 @@
 .arkynBadge.ghost.info p,
 .arkynBadge.ghost.info svg {
 	color: rgba(var(--spotlight-info), 1);
-}
-
-/* SIZE */
-.arkynBadge.lg {
-	border-radius: 12px;
-	padding: 0px 16px;
-	height: 24px;
-}
-
-.arkynBadge.lg p {
-	line-height: 100%;
-	font-weight: 400;
-	font-size: 12px;
-}
-
-.arkynBadge.md {
-	border-radius: 10px;
-	padding: 0px 12px;
-	height: 20px;
-}
-
-.arkynBadge.md p {
-	line-height: 100%;
-	font-weight: 400;
-	font-size: 10px;
 }

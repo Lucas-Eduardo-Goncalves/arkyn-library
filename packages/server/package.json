@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/server",
-  "version": "3.0.1-beta.171",
+  "version": "3.0.1-beta.172",
   "author": "Arkyn | Lucas Gonçalves",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

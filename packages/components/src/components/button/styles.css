@@ -29,6 +29,16 @@ html.dark .arkynButton:hover {
 	white-space: nowrap;
 }
 
+/* loader spin */
+.arkynButton .arkynButtonSpinner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	white-space: nowrap;
+	opacity: 0;
+}
+
 /* variants */
 .arkynButton.solid {
 	color: #fff;
@@ -161,16 +171,6 @@ html.dark .arkynButton:hover {
 .arkynButton.xs .arkynButtonContent,
 .arkynButton.xs .arkynButtonSpinner {
 	gap: 8px;
-}
-
-/* loader spin */
-.arkynButton .arkynButtonSpinner {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	white-space: nowrap;
-	opacity: 0;
 }
 
 .arkynButton .arkynButtonSpinner > svg {
