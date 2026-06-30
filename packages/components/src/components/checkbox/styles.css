@@ -4,7 +4,7 @@
 	justify-content: center;
 
 	border: 2px solid var(--border);
-	background-color: rgba(var(--spotlight-secondary), 1);
+	background-color: var(--input-background);
 }
 
 .arkynCheckbox:hover {
@@ -64,15 +64,15 @@
 
 /* CHECKED */
 .arkynCheckbox.checkedTrue {
-	background-color: rgb(var(--spotlight-primary), 1);
-	border-color: rgb(var(--spotlight-primary), 1);
+	background-color: rgb(var(--spotlight-primary));
+	border-color: rgb(var(--spotlight-primary));
 }
 
 .arkynCheckbox.checkedTrue > svg {
 	display: unset;
-	color: #fff;
+	color: var(--white);
 }
 
 .arkynCheckbox.errorTrue {
-	border-color: rgb(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
 }

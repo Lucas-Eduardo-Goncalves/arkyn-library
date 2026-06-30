@@ -8,6 +8,8 @@ export default function IndexRoute() {
 			<Link to="/button">Button</Link>
 			<Link to="/icon-button">Icon Button</Link>
 			<Link to="/card-tab">Card Tab</Link>
+			<Link to="/checkbox">Checkbox</Link>
+			<Link to="/input">Input</Link>
 		</div>
 	);
 }

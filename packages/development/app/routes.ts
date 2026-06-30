@@ -7,4 +7,6 @@ export default [
 	route("/button", "./components/components.button.tsx"),
 	route("/card-tab", "./components/components.cardTab.tsx"),
 	route("/icon-button", "./components/components.iconButton.tsx"),
+	route("/checkbox", "./components/components.checkbox.tsx"),
+	route("/input", "./components/components.input.tsx"),
 ] satisfies RouteConfig;

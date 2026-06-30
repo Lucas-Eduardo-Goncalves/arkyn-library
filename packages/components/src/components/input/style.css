@@ -76,11 +76,11 @@
 }
 
 .arkynInput.errored svg {
-	color: rgba(var(--spotlight-danger), 1);
+	color: rgb(var(--spotlight-danger));
 }
 
 .arkynInput:not(.opacity).focused svg {
-	color: rgba(var(--spotlight-primary), 1);
+	color: rgb(var(--spotlight-primary));
 }
 
 .arkynInput.opacity {
@@ -90,31 +90,32 @@
 /* VARIANTS */
 .arkynInput.solid {
 	border-color: var(--border);
-	background-color: rgba(var(--spotlight-secondary), 1);
+	background-color: var(--input-background);
 }
 
 .arkynInput.solid.errored {
-	border-color: rgba(var(--spotlight-danger), 1);
-	outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
+	outline-color: rgb(var(--spotlight-danger));
 }
 
 .arkynInput:not(.opacity).solid.focused {
-	border-color: rgba(var(--spotlight-primary), 1);
-	outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
+	outline-color: rgb(var(--spotlight-primary));
 }
 
 .arkynInput.outline {
 	border-color: var(--border);
+	background-color: var(--background-foreground);
 }
 
 .arkynInput.outline.errored {
-	border-color: rgba(var(--spotlight-danger), 1);
-	outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
+	outline-color: rgb(var(--spotlight-danger));
 }
 
 .arkynInput:not(.opacity).outline.focused {
-	border-color: rgba(var(--spotlight-primary), 1);
-	outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
+	outline-color: rgb(var(--spotlight-primary));
 }
 
 .arkynInput.underline {
@@ -142,19 +143,19 @@
 }
 
 .arkynInput.underline.errored {
-	border-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
 }
 
 .arkynInput.underline.errored::before {
-	background: rgba(var(--spotlight-danger), 1);
+	background: rgb(var(--spotlight-danger));
 }
 
 .arkynInput:not(.opacity).underline.focused {
-	border-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
 }
 
 .arkynInput:not(.opacity).underline.focused::before {
-	background: rgba(var(--spotlight-primary), 1);
+	background: rgb(var(--spotlight-primary));
 }
 
 /* SIZE */
