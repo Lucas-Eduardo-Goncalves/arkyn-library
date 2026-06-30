@@ -16,7 +16,7 @@ type AlertContainerProps = {
 	 * - `warning`: yellow — caution required.
 	 * - `info`: blue — informational message.
 	 */
-	schema: "success" | "danger" | "warning" | "info";
+	scheme: "success" | "danger" | "warning" | "info";
 } & HTMLAttributes<HTMLDivElement>;
 
 const AlertContainerContext = createContext({} as AlertContainerProps);
@@ -32,7 +32,7 @@ function useAlertContainer(): AlertContainerProps {
  * Automatically detects whether an `AlertTitle` is present among children and adjusts layout:
  * centered when no title, left-aligned when a title is present.
  *
- * @param props.schema - Visual style variant. Required.
+ * @param props.scheme - Visual style variant. Required.
  * @param props.children - Alert sub-components: `AlertIcon`, `AlertContent`, `AlertTitle`, `AlertDescription`.
  *
  * **...Other valid HTML properties for `<div>`**
@@ -42,13 +42,13 @@ function useAlertContainer(): AlertContainerProps {
  * @example
  * ```tsx
  * // Inline alert — no title, centered layout
- * <AlertContainer schema="success">
+ * <AlertContainer scheme="success">
  *   <AlertIcon />
  *   <AlertContent>Your subscription has been activated.</AlertContent>
  * </AlertContainer>
  *
  * // Full alert with title and description — left-aligned layout
- * <AlertContainer schema="danger">
+ * <AlertContainer scheme="danger">
  *   <AlertIcon />
  *   <AlertContent>
  *     <AlertTitle>Payment failed</AlertTitle>
@@ -59,7 +59,7 @@ function useAlertContainer(): AlertContainerProps {
  */
 
 function AlertContainer(props: AlertContainerProps): JSX.Element {
-	const { schema, children, className: baseClassName, ...rest } = props;
+	const { scheme, children, className: baseClassName, ...rest } = props;
 
 	const hasAlertTitle = (children: ReactNode): boolean => {
 		let found = false;
@@ -89,7 +89,7 @@ function AlertContainer(props: AlertContainerProps): JSX.Element {
 		? "nonExistsAlertTitle"
 		: "existsAlertTitle";
 
-	const className = `arkynAlertContainer ${schema} ${finalClassName} ${baseClassName}`;
+	const className = `arkynAlertContainer ${scheme} ${finalClassName} ${baseClassName}`;
 
 	return (
 		<AlertContainerContext.Provider value={props}>

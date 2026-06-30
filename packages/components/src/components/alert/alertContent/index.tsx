@@ -12,7 +12,7 @@ type AlertContentProps = HTMLAttributes<HTMLDivElement>;
  *
  * @example
  * ```tsx
- * <AlertContainer schema="warning">
+ * <AlertContainer scheme="warning">
  *   <AlertIcon />
  *   <AlertContent>
  *     <AlertTitle>Session expiring</AlertTitle>

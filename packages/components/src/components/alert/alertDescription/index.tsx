@@ -12,7 +12,7 @@ type AlertDescriptionProps = HTMLAttributes<HTMLDivElement>;
  *
  * @example
  * ```tsx
- * <AlertContainer schema="info">
+ * <AlertContainer scheme="info">
  *   <AlertContent>
  *     <AlertTitle>Maintenance scheduled</AlertTitle>
  *     <AlertDescription>The service will be unavailable on Sunday from 2–4 AM UTC.</AlertDescription>

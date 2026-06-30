@@ -25,6 +25,10 @@
 		gap: 1rem;
 		padding: 1rem;
 	}
+
+	body .exampleContainer.row {
+		flex-direction: row;
+	}
 }
 
 html:not(.dark):root {
@@ -48,14 +52,14 @@ html:not(.dark):root {
 
 	/* spotlight */
 	--spotlight-primary: 17, 109, 220; /* #116ddc */
-	--spotlight-secondary: 248, 250, 252; /* #f8fafc */
+	--spotlight-secondary: 100, 116, 139; /* #64748B */
 	--spotlight-success: 16, 185, 129; /* #10b981 */
 	--spotlight-danger: 244, 63, 94; /* #f43f5e */
 	--spotlight-info: 14, 165, 233; /* #0ea5e9 */
 	--spotlight-warning: 249, 115, 22; /* #f97316 */
 
 	--spotlight-primary-foreground: 231, 240, 252; /* #E7F0FC */
-	--spotlight-secondary-foreground: 254, 255, 255; /* #FEFFFF */
+	--spotlight-secondary-foreground: 226, 232, 240; /* #E2E8F0 */
 	--spotlight-success-foreground: 231, 248, 242; /* #E7F8F2 */
 	--spotlight-danger-foreground: 254, 236, 239; /* #FEECEF */
 	--spotlight-info-foreground: 231, 246, 253; /* #E7F6FD */
@@ -84,14 +88,14 @@ html.dark:root {
 
 	/* spotlight */
 	--spotlight-primary: 15, 98, 204; /* #0F62CC */
-	--spotlight-secondary: 241, 245, 249; /* #F1F5F9 */
+	--spotlight-secondary: 100, 116, 139; /* #64748B */
 	--spotlight-success: 14, 165, 115; /* #0EA573 */
 	--spotlight-danger: 225, 55, 85; /* #E13755 */
 	--spotlight-info: 12, 148, 210; /* #0C94D2 */
 	--spotlight-warning: 234, 102, 18; /* #EA6612 */
 
-	--spotlight-primary-foreground: 3, 28, 61; /* #031C3D */
-	--spotlight-secondary-foreground: 15, 23, 42; /* #0F172A */
+	--spotlight-primary-foreground: 3, 28, 61; /* #475569 */
+	--spotlight-secondary-foreground: 32, 42, 58; /* #202A3A */
 	--spotlight-success-foreground: 2, 44, 34; /* #022C22 */
 	--spotlight-danger-foreground: 76, 5, 25; /* #4C0519 */
 	--spotlight-info-foreground: 8, 47, 73; /* #082F49 */

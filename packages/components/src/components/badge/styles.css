@@ -18,8 +18,8 @@
 }
 
 .arkynBadge.lg p {
-	line-height: 100%;
 	font-weight: 400;
+	line-height: 12px;
 	font-size: 12px;
 }
 
@@ -30,8 +30,8 @@
 }
 
 .arkynBadge.md p {
-	line-height: 100%;
 	font-weight: 400;
+	line-height: 10px;
 	font-size: 10px;
 }
 
@@ -40,106 +40,106 @@
 	color: #fff;
 }
 .arkynBadge.solid.primary {
-	background-color: rgba(var(--spotlight-primary), 1);
+	background-color: rgb(var(--spotlight-primary));
 }
 .arkynBadge.solid.secondary {
-	background-color: var(--text-muted);
+	background-color: rgb(var(--spotlight-secondary));
 }
 .arkynBadge.solid.danger {
-	background-color: rgba(var(--spotlight-danger), 1);
+	background-color: rgb(var(--spotlight-danger));
 }
 .arkynBadge.solid.success {
-	background-color: rgba(var(--spotlight-success), 1);
+	background-color: rgb(var(--spotlight-success));
 }
 .arkynBadge.solid.warning {
-	background-color: rgba(var(--spotlight-warning), 1);
+	background-color: rgb(var(--spotlight-warning));
 }
 .arkynBadge.solid.info {
-	background-color: rgba(var(--spotlight-info), 1);
+	background-color: rgb(var(--spotlight-info));
 }
 
 .arkynBadge.outline.primary {
-	border-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
 }
 .arkynBadge.outline.primary p,
 .arkynBadge.outline.primary svg {
-	color: rgba(var(--spotlight-primary), 1);
+	color: rgb(var(--spotlight-primary));
 }
 .arkynBadge.outline.secondary {
-	border-color: var(--text-muted);
+	border-color: rgb(var(--spotlight-secondary));
 }
 .arkynBadge.outline.secondary p,
 .arkynBadge.outline.secondary svg {
-	color: var(--text-muted);
+	color: rgb(var(--spotlight-secondary));
 }
 .arkynBadge.outline.danger {
-	border-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
 }
 .arkynBadge.outline.danger p,
 .arkynBadge.outline.danger svg {
-	color: rgba(var(--spotlight-danger), 1);
+	color: rgb(var(--spotlight-danger));
 }
 .arkynBadge.outline.success {
-	border-color: rgba(var(--spotlight-success), 1);
+	border-color: rgb(var(--spotlight-success));
 }
 .arkynBadge.outline.success p,
 .arkynBadge.outline.success svg {
-	color: rgba(var(--spotlight-success), 1);
+	color: rgb(var(--spotlight-success));
 }
 .arkynBadge.outline.warning {
-	border-color: rgba(var(--spotlight-warning), 1);
+	border-color: rgb(var(--spotlight-warning));
 }
 .arkynBadge.outline.warning p,
 .arkynBadge.outline.warning svg {
-	color: rgba(var(--spotlight-warning), 1);
+	color: rgb(var(--spotlight-warning));
 }
 .arkynBadge.outline.info {
-	border-color: rgba(var(--spotlight-info), 1);
+	border-color: rgb(var(--spotlight-info));
 }
 .arkynBadge.outline.info p,
 .arkynBadge.outline.info svg {
-	color: rgba(var(--spotlight-info), 1);
+	color: rgb(var(--spotlight-info));
 }
 
 .arkynBadge.ghost.primary {
-	background-color: rgba(var(--spotlight-primary), 0.2);
+	background-color: rgb(var(--spotlight-primary-foreground));
 }
 .arkynBadge.ghost.primary p,
 .arkynBadge.ghost.primary svg {
-	color: rgba(var(--spotlight-primary), 1);
+	color: rgb(var(--spotlight-primary));
 }
 .arkynBadge.ghost.secondary {
-	background-color: rgba(var(--spotlight-secondary), 1);
+	background-color: rgb(var(--spotlight-secondary-foreground));
 }
 .arkynBadge.ghost.secondary p,
 .arkynBadge.ghost.secondary svg {
-	color: var(--text-muted);
+	color: rgb(var(--spotlight-secondary));
 }
 .arkynBadge.ghost.danger {
-	background-color: rgba(var(--spotlight-danger), 0.2);
+	background-color: rgb(var(--spotlight-danger-foreground));
 }
 .arkynBadge.ghost.danger p,
 .arkynBadge.ghost.danger svg {
-	color: rgba(var(--spotlight-danger), 1);
+	color: rgb(var(--spotlight-danger));
 }
 .arkynBadge.ghost.success {
-	background-color: rgba(var(--spotlight-success), 0.2);
+	background-color: rgb(var(--spotlight-success-foreground));
 }
 .arkynBadge.ghost.success p,
 .arkynBadge.ghost.success svg {
-	color: rgba(var(--spotlight-success), 1);
+	color: rgb(var(--spotlight-success));
 }
 .arkynBadge.ghost.warning {
-	background-color: rgba(var(--spotlight-warning), 0.2);
+	background-color: rgb(var(--spotlight-warning-foreground));
 }
 .arkynBadge.ghost.warning p,
 .arkynBadge.ghost.warning svg {
-	color: rgba(var(--spotlight-warning), 1);
+	color: rgb(var(--spotlight-warning));
 }
 .arkynBadge.ghost.info {
-	background-color: rgba(var(--spotlight-info), 0.2);
+	background-color: rgb(var(--spotlight-info-foreground));
 }
 .arkynBadge.ghost.info p,
 .arkynBadge.ghost.info svg {
-	color: rgba(var(--spotlight-info), 1);
+	color: rgb(var(--spotlight-info));
 }

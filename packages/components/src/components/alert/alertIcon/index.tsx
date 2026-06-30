@@ -13,7 +13,7 @@ import "./styles.css";
 type AlertIconProps = LucideProps;
 
 /**
- * AlertIcon — renders a schema-appropriate icon from `AlertContainer` context.
+ * AlertIcon — renders a scheme-appropriate icon from `AlertContainer` context.
  *
  * - `success` → `CheckCircle2`
  * - `danger` → `XCircle`
@@ -22,11 +22,11 @@ type AlertIconProps = LucideProps;
  *
  * Must be placed inside an `AlertContainer`. Accepts all Lucide icon props.
  *
- * @returns The schema-matched Lucide icon element.
+ * @returns The scheme-matched Lucide icon element.
  *
  * @example
  * ```tsx
- * <AlertContainer schema="danger">
+ * <AlertContainer scheme="danger">
  *   <AlertIcon />
  *   <AlertContent>
  *     <AlertTitle>Payment failed</AlertTitle>
@@ -37,11 +37,11 @@ type AlertIconProps = LucideProps;
  */
 function AlertIcon(props: AlertIconProps): JSX.Element {
 	const { className: baseClassName, ...rest } = props;
-	const { schema } = useAlertContainer();
+	const { scheme } = useAlertContainer();
 
-	const className = `arkynAlertIcon ${schema} ${baseClassName}`;
+	const className = `arkynAlertIcon ${scheme} ${baseClassName}`;
 
-	switch (schema) {
+	switch (scheme) {
 		case "success":
 			return <CheckCircle2 className={className} {...rest} />;
 		case "danger":

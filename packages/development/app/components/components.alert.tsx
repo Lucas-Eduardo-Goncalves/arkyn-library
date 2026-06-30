@@ -7,7 +7,7 @@ import { AlertTitle } from "@arkyn/components/alertTitle";
 export default function AlertRoute() {
 	return (
 		<div className="exampleContainer">
-			<AlertContainer schema="danger">
+			<AlertContainer scheme="danger">
 				<AlertIcon />
 				<AlertContent>
 					<AlertTitle>Title</AlertTitle>
@@ -20,7 +20,7 @@ export default function AlertRoute() {
 				</AlertContent>
 			</AlertContainer>
 
-			<AlertContainer schema="info">
+			<AlertContainer scheme="info">
 				<AlertIcon />
 				<AlertContent>
 					<AlertTitle>Title</AlertTitle>
@@ -33,7 +33,7 @@ export default function AlertRoute() {
 				</AlertContent>
 			</AlertContainer>
 
-			<AlertContainer schema="success">
+			<AlertContainer scheme="success">
 				<AlertIcon />
 				<AlertContent>
 					<AlertTitle>Title</AlertTitle>
@@ -46,7 +46,7 @@ export default function AlertRoute() {
 				</AlertContent>
 			</AlertContainer>
 
-			<AlertContainer schema="warning">
+			<AlertContainer scheme="warning">
 				<AlertIcon />
 				<AlertContent>
 					<AlertTitle>Title</AlertTitle>

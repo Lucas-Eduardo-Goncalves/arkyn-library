@@ -13,7 +13,7 @@ type AlertTitleProps = HTMLAttributes<HTMLDivElement>;
  *
  * @example
  * ```tsx
- * <AlertContainer schema="danger">
+ * <AlertContainer scheme="danger">
  *   <AlertIcon />
  *   <AlertContent>
  *     <AlertTitle>Access denied</AlertTitle>
