@@ -1,0 +1,99 @@
+@layer reset, arkyn;
+
+@layer reset {
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	*,
+	input,
+	textarea,
+	button {
+		font-family: "Open Sans", sans-serif;
+		font-optical-sizing: auto;
+	}
+
+	body {
+		background: var(--background);
+	}
+
+	body .exampleContainer {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		padding: 1rem;
+	}
+}
+
+html:not(.dark):root {
+	--white: #ffffff;
+
+	/* background */
+	--background: #fafafa;
+	--background-foreground: #ffffff;
+
+	/* text */
+	--text-heading: #18181b;
+	--text-body: #52525b;
+	--text-muted: #a1a1aa;
+
+	/* border */
+	--border: #e2e8f0;
+
+	/* tooltip */
+	--tooltip-text: #f1f5f9;
+	--tooltip-background: #0f172a;
+
+	/* spotlight */
+	--spotlight-primary: 17, 109, 220; /* #116ddc */
+	--spotlight-secondary: 248, 250, 252; /* #f8fafc */
+	--spotlight-success: 16, 185, 129; /* #10b981 */
+	--spotlight-danger: 244, 63, 94; /* #f43f5e */
+	--spotlight-info: 14, 165, 233; /* #0ea5e9 */
+	--spotlight-warning: 249, 115, 22; /* #f97316 */
+
+	--spotlight-primary-foreground: 231, 240, 252; /* #E7F0FC */
+	--spotlight-secondary-foreground: 254, 255, 255; /* #FEFFFF */
+	--spotlight-success-foreground: 231, 248, 242; /* #E7F8F2 */
+	--spotlight-danger-foreground: 254, 236, 239; /* #FEECEF */
+	--spotlight-info-foreground: 231, 246, 253; /* #E7F6FD */
+	--spotlight-warning-foreground: 254, 241, 232; /* #FEF1E8 */
+}
+
+html.dark:root {
+	--white: #ffffff;
+
+	/* background */
+	--background: #18181b;
+	--background-foreground: #1f1f1f;
+	--background-underground: #111827;
+
+	/* text */
+	--text-heading: #f1f5f9;
+	--text-body: #d1d5db;
+	--text-muted: #9ca3af;
+
+	/* border */
+	--border: #374151;
+
+	/* tooltip */
+	--tooltip-text: #f1f5f9;
+	--tooltip-background: #0f172a;
+
+	/* spotlight */
+	--spotlight-primary: 15, 98, 204; /* #0F62CC */
+	--spotlight-secondary: 241, 245, 249; /* #F1F5F9 */
+	--spotlight-success: 14, 165, 115; /* #0EA573 */
+	--spotlight-danger: 225, 55, 85; /* #E13755 */
+	--spotlight-info: 12, 148, 210; /* #0C94D2 */
+	--spotlight-warning: 234, 102, 18; /* #EA6612 */
+
+	--spotlight-primary-foreground: 3, 28, 61; /* #031C3D */
+	--spotlight-secondary-foreground: 15, 23, 42; /* #0F172A */
+	--spotlight-success-foreground: 2, 44, 34; /* #022C22 */
+	--spotlight-danger-foreground: 76, 5, 25; /* #4C0519 */
+	--spotlight-info-foreground: 8, 47, 73; /* #082F49 */
+	--spotlight-warning-foreground: 69, 26, 3; /* #451A03 */
+}

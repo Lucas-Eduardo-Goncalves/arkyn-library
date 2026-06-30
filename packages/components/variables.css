@@ -2,18 +2,8 @@
 	--white: #ffffff;
 
 	/* background */
-	--background: #f4f4f5;
+	--background: #fafafa;
 	--background-foreground: #ffffff;
-
-	/* modal, drawer, popover... */
-	--card: #ffffff;
-	--card-foreground-primary: #fafafa;
-	--card-foreground-secondary: #f1f5f9;
-	--card-foreground-third: #e2e8f0;
-
-	/* skeleton */
-	--skeleton: #f8fafc;
-	--skeleton-foreground: #f1f5f9;
 
 	/* text */
 	--text-heading: #18181b;
@@ -35,17 +25,10 @@
 	--spotlight-info: 14, 165, 233; /* #0ea5e9 */
 	--spotlight-warning: 249, 115, 22; /* #f97316 */
 
-	/* spotlight light (10% about white) */
-	--spotlight-primary-light: 231, 240, 252; /* #E7F0FC */
-	--spotlight-secondary-light: 254, 255, 255; /* #FEFFFF */
-	--spotlight-success-light: 231, 248, 242; /* #E7F8F2 */
-	--spotlight-danger-light: 254, 236, 239; /* #FEECEF */
-	--spotlight-info-light: 231, 246, 253; /* #E7F6FD */
-	--spotlight-warning-light: 254, 241, 232; /* #FEF1E8 */
-
-	/* toast */
-	--toast-success: 16, 185, 129; /* #10B981 */
-	--toast-danger: 225, 29, 72; /* #E11D48 */
-	--toast-info: 14, 165, 233; /* #0EA5E9 */
-	--toast-warning: 251, 146, 60; /* #FB923C */
+	--spotlight-primary-foreground: 231, 240, 252; /* #E7F0FC */
+	--spotlight-secondary-foreground: 254, 255, 255; /* #FEFFFF */
+	--spotlight-success-foreground: 231, 248, 242; /* #E7F8F2 */
+	--spotlight-danger-foreground: 254, 236, 239; /* #FEECEF */
+	--spotlight-info-foreground: 231, 246, 253; /* #E7F6FD */
+	--spotlight-warning-foreground: 254, 241, 232; /* #FEF1E8 */
 }

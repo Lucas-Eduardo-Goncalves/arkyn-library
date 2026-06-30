@@ -16,6 +16,7 @@
 	],
 	"devDependencies": {
 		"@arkyn/components": "workspace:*",
+		"@arkyn/development": "workspace:*",
 		"@arkyn/server": "workspace:*",
 		"@arkyn/shared": "workspace:*",
 		"@arkyn/templates": "workspace:*",
@@ -26,6 +27,7 @@
 		"@types/bun": "^1.3.14",
 		"@types/node": "^26.0.1",
 		"libphonenumber-js": "^1.13.7",
+    "lucide-react": ">=1.14.0",
 		"vite": "^8.1.0",
 		"vitest": "^4.1.9"
 	},
@@ -52,6 +54,8 @@
 		"components:test": "cd packages/components && bun run test",
 		"components:test:watch": "cd packages/components && bun run test:watch",
 		"components:typecheck": "cd packages/components && bun run typecheck",
+    "development:dev": "cd packages/development && bun run dev",
+    "development:typecheck": "cd packages/development && bun run typecheck",
 		"server:audit": "cd packages/server && bun run audit",
 		"server:build": "cd packages/server && bun run build",
 		"server:publish:beta": "cd packages/server && bun run publish:beta",
