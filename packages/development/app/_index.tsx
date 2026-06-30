@@ -6,6 +6,7 @@ export default function IndexRoute() {
 			<Link to="/alert">Alert</Link>
 			<Link to="/badge">Badge</Link>
 			<Link to="/button">Button</Link>
+			<Link to="/card-tab">Card Tab</Link>
 		</div>
 	);
 }

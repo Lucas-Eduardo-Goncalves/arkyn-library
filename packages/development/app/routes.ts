@@ -5,4 +5,5 @@ export default [
 	route("/alert", "./components/components.alert.tsx"),
 	route("/badge", "./components/components.badge.tsx"),
 	route("/button", "./components/components.button.tsx"),
+	route("/card-tab", "./components/components.cardTab.tsx"),
 ] satisfies RouteConfig;

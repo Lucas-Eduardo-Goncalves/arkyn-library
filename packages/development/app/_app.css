@@ -35,7 +35,8 @@ html:not(.dark):root {
 	--white: #ffffff;
 
 	/* background */
-	--background: #fafafa;
+	--background: #f4f4f5;
+	--background-underground: #fafafa;
 	--background-foreground: #ffffff;
 
 	/* text */
@@ -71,8 +72,8 @@ html.dark:root {
 
 	/* background */
 	--background: #18181b;
-	--background-foreground: #1f1f1f;
-	--background-underground: #111827;
+	--background-underground: #202024;
+	--background-foreground: #27272a;
 
 	/* text */
 	--text-heading: #f1f5f9;
@@ -80,7 +81,7 @@ html.dark:root {
 	--text-muted: #9ca3af;
 
 	/* border */
-	--border: #374151;
+	--border: #3f3f46;
 
 	/* tooltip */
 	--tooltip-text: #f1f5f9;

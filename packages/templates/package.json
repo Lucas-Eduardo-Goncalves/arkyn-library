@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/templates",
-  "version": "3.0.1-beta.175",
+  "version": "3.0.1-beta.176",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "type": "module",

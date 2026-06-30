@@ -3,6 +3,7 @@
 
 	/* background */
 	--background: #fafafa;
+	--background-underground: #f1f5f9;
 	--background-foreground: #ffffff;
 
 	/* text */
@@ -19,14 +20,14 @@
 
 	/* spotlight */
 	--spotlight-primary: 17, 109, 220; /* #116ddc */
-	--spotlight-secondary: 248, 250, 252; /* #f8fafc */
+	--spotlight-secondary: 100, 116, 139; /* #64748B */
 	--spotlight-success: 16, 185, 129; /* #10b981 */
 	--spotlight-danger: 244, 63, 94; /* #f43f5e */
 	--spotlight-info: 14, 165, 233; /* #0ea5e9 */
 	--spotlight-warning: 249, 115, 22; /* #f97316 */
 
 	--spotlight-primary-foreground: 231, 240, 252; /* #E7F0FC */
-	--spotlight-secondary-foreground: 254, 255, 255; /* #FEFFFF */
+	--spotlight-secondary-foreground: 226, 232, 240; /* #E2E8F0 */
 	--spotlight-success-foreground: 231, 248, 242; /* #E7F8F2 */
 	--spotlight-danger-foreground: 254, 236, 239; /* #FEECEF */
 	--spotlight-info-foreground: 231, 246, 253; /* #E7F6FD */

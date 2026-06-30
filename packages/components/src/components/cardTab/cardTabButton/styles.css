@@ -23,11 +23,11 @@
 }
 
 .arkynCardTabButton:hover:not(:disabled) {
-	background-color: var(--white);
+	background-color: var(--background-foreground);
 	border-color: var(--border);
 }
 
 .arkynCardTabButton.isActive {
-	background-color: var(--white);
+	background-color: var(--background-foreground);
 	border-color: var(--border);
 }
