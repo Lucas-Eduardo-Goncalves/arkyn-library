@@ -101,6 +101,7 @@
 
 .arkynMaskedInput.outline {
 	border-color: var(--border);
+	background-color: var(--background-foreground);
 }
 
 .arkynMaskedInput.outline.errored {

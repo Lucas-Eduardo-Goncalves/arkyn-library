@@ -7,6 +7,7 @@
 	line-height: 21.79px;
 
 	color: var(--text-body);
+	background-color: inherit;
 	user-select: none;
 }
 .arkynSelectOption.md {
@@ -21,17 +22,25 @@
 	display: none;
 	height: 20px;
 	width: 20px;
-	color: rgba(var(--spotlight-primary), 1);
+	color: rgb(var(--spotlight-primary));
 }
 .arkynSelectOption:hover {
 	cursor: pointer;
-	background-color: var(--card-foreground-primary);
+	filter: brightness(0.98);
 }
 .arkynSelectOption.active {
 	font-weight: 600;
 	color: var(--text-heading);
-	background-color: var(--card-foreground-primary);
+	filter: brightness(0.95);
 }
 .arkynSelectOption.active svg {
 	display: unset;
+}
+
+html.dark .arkynSelectOption:hover {
+	filter: brightness(1.2);
+}
+
+html.dark .arkynSelectOption.active {
+	filter: brightness(1.2);
 }

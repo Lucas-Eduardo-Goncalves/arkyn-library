@@ -45,35 +45,36 @@
 	color: var(--text-muted);
 }
 .arkynSelectContainer.errored > svg {
-	color: rgba(var(--spotlight-danger), 1);
+	color: rgb(var(--spotlight-danger));
 }
 .arkynSelectContainer:not(.opacity).focused > svg {
-	color: rgba(var(--spotlight-primary), 1);
+	color: rgb(var(--spotlight-primary));
 }
 
 /* VARIANTS */
 .arkynSelectContainer.solid {
 	border-color: var(--border);
-	background-color: rgba(var(--spotlight-secondary), 1);
+	background-color: var(--input-background);
 }
 .arkynSelectContainer.solid.errored {
-	border-color: rgba(var(--spotlight-danger), 1);
-	outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
+	outline-color: rgb(var(--spotlight-danger));
 }
 .arkynSelectContainer:not(.opacity).solid.focused {
-	border-color: rgba(var(--spotlight-primary), 1);
-	outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
+	outline-color: rgb(var(--spotlight-primary));
 }
 .arkynSelectContainer.outline {
 	border-color: var(--border);
+	background-color: var(--background-foreground);
 }
 .arkynSelectContainer.outline.errored {
-	border-color: rgba(var(--spotlight-danger), 1);
-	outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
+	outline-color: rgb(var(--spotlight-danger));
 }
 .arkynSelectContainer:not(.opacity).outline.focused {
-	border-color: rgba(var(--spotlight-primary), 1);
-	outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
+	outline-color: rgb(var(--spotlight-primary));
 }
 .arkynSelectContainer.underline {
 	border-radius: 0;
@@ -96,22 +97,21 @@
 	background: transparent;
 }
 .arkynSelectContainer.underline.errored {
-	border-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgba(var(--spotlight-danger));
 }
 .arkynSelectContainer.underline.errored::before {
-	background: rgba(var(--spotlight-danger), 1);
+	background: rgba(var(--spotlight-danger));
 }
 .arkynSelectContainer:not(.opacity).underline.focused {
-	border-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgba(var(--spotlight-primary));
 }
 .arkynSelectContainer:not(.opacity).underline.focused::before {
-	background: rgba(var(--spotlight-primary), 1);
+	background: rgba(var(--spotlight-primary));
 }
 
 /* SIZE */
 .arkynSelectContainer.md {
 	min-height: 40px;
-	/* max-height: 40px; */
 }
 .arkynSelectContainer.md.hasPrefix {
 	padding-left: 60px;
@@ -123,7 +123,6 @@
 }
 .arkynSelectContainer.lg {
 	min-height: 44px;
-	/* max-height: 44px; */
 }
 .arkynSelectContainer.lg .prefix {
 	height: 44px;

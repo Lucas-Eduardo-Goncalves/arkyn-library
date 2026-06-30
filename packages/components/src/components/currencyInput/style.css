@@ -101,6 +101,7 @@
 
 .arkynCurrencyInput.outline {
 	border-color: var(--border);
+	background-color: var(--background-foreground);
 }
 
 .arkynCurrencyInput.outline.errored {
