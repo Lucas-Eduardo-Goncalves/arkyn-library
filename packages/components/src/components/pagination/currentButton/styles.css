@@ -1,6 +1,6 @@
 .arkynPaginationCurrentButton {
-	background-color: rgba(var(--spotlight-primary), 1);
-	color: #ffffff;
+	background-color: rgb(var(--spotlight-primary));
+	color: var(--white);
 	border: none;
 
 	min-height: 28px;
