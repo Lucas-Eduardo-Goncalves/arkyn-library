@@ -10,4 +10,5 @@ export default [
 	route("/checkbox", "./components/components.checkbox.tsx"),
 	route("/input", "./components/components.input.tsx"),
 	route("/currency-input", "./components/components.currencyInput.tsx"),
+	route("/masked-input", "./components/components.maskedInput.tsx"),
 ] satisfies RouteConfig;
