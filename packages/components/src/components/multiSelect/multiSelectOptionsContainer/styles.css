@@ -17,7 +17,7 @@
 	height: max-content;
 
 	border: 1px solid var(--border);
-	background-color: var(--card);
+	background-color: var(--background-foreground);
 
 	max-height: 300px;
 	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);

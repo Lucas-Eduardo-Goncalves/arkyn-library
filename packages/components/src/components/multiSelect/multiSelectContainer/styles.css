@@ -45,35 +45,36 @@
 	color: var(--text-muted);
 }
 .arkynMultiSelectContainer.errored > svg {
-	color: rgba(var(--spotlight-danger), 1);
+	color: rgb(var(--spotlight-danger));
 }
 .arkynMultiSelectContainer:not(.opacity).focused > svg {
-	color: rgba(var(--spotlight-primary), 1);
+	color: rgb(var(--spotlight-primary));
 }
 
 /* VARIANTS */
 .arkynMultiSelectContainer.solid {
 	border-color: var(--border);
-	background-color: rgba(var(--spotlight-secondary), 1);
+	background-color: var(--input-background);
 }
 .arkynMultiSelectContainer.solid.errored {
-	border-color: rgba(var(--spotlight-danger), 1);
-	outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
+	outline-color: rgb(var(--spotlight-danger));
 }
 .arkynMultiSelectContainer:not(.opacity).solid.focused {
-	border-color: rgba(var(--spotlight-primary), 1);
-	outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
+	outline-color: rgb(var(--spotlight-primary));
 }
 .arkynMultiSelectContainer.outline {
 	border-color: var(--border);
+	background-color: var(--background-foreground);
 }
 .arkynMultiSelectContainer.outline.errored {
-	border-color: rgba(var(--spotlight-danger), 1);
-	outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
+	outline-color: rgb(var(--spotlight-danger));
 }
 .arkynMultiSelectContainer:not(.opacity).outline.focused {
-	border-color: rgba(var(--spotlight-primary), 1);
-	outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
+	outline-color: rgb(var(--spotlight-primary));
 }
 .arkynMultiSelectContainer.underline {
 	border-radius: 0;
@@ -96,16 +97,16 @@
 	background: transparent;
 }
 .arkynMultiSelectContainer.underline.errored {
-	border-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
 }
 .arkynMultiSelectContainer.underline.errored::before {
-	background: rgba(var(--spotlight-danger), 1);
+	background: rgb(var(--spotlight-danger));
 }
 .arkynMultiSelectContainer:not(.opacity).underline.focused {
-	border-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
 }
 .arkynMultiSelectContainer:not(.opacity).underline.focused::before {
-	background: rgba(var(--spotlight-primary), 1);
+	background: rgb(var(--spotlight-primary));
 }
 
 /* SIZE */

@@ -8,6 +8,7 @@
 
 	color: var(--text-body);
 	user-select: none;
+	background-color: var(--background-foreground);
 }
 .arkynMultiSelectOption.md {
 	font-size: 14px;
@@ -21,16 +22,16 @@
 	display: none;
 	height: 20px;
 	width: 20px;
-	color: rgba(var(--spotlight-primary), 1);
+	color: rgb(var(--spotlight-primary));
 }
 .arkynMultiSelectOption:hover {
 	cursor: pointer;
-	background-color: var(--card-foreground-primary);
+	filter: brightness(0.95);
 }
 .arkynMultiSelectOption.active {
 	font-weight: 600;
 	color: var(--text-heading);
-	background-color: var(--card-foreground-primary);
+	filter: brightness(0.95);
 }
 .arkynMultiSelectOption.active svg {
 	display: unset;
