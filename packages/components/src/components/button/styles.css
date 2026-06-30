@@ -4,12 +4,12 @@
 	border: 1px solid transparent;
 	outline: 1px solid transparent;
 	position: relative;
-	transition: 0.15s all ease-out;
 }
 
 .arkynButton:hover {
 	cursor: pointer;
-	filter: brightness(0.9);
+	filter: brightness(0.95);
+	transition: 0.15s all ease-out;
 }
 
 html.dark .arkynButton:hover {
@@ -41,82 +41,79 @@ html.dark .arkynButton:hover {
 
 /* variants */
 .arkynButton.solid {
-	color: #fff;
+	color: var(--white);
 }
 .arkynButton.solid.primary {
-	background-color: rgba(var(--spotlight-primary), 1);
+	background-color: rgb(var(--spotlight-primary));
 }
 .arkynButton.solid.danger {
-	background-color: rgba(var(--spotlight-danger), 1);
+	background-color: rgb(var(--spotlight-danger));
 }
 .arkynButton.solid.success {
-	background-color: rgba(var(--spotlight-success), 1);
+	background-color: rgb(var(--spotlight-success));
 }
 .arkynButton.solid.warning {
-	background-color: rgba(var(--spotlight-warning), 1);
+	background-color: rgb(var(--spotlight-warning));
 }
 .arkynButton.solid.info {
-	background-color: rgba(var(--spotlight-info), 1);
+	background-color: rgb(var(--spotlight-info));
 }
 
 .arkynButton.outline {
-	background-color: var(--card);
+	background-color: var(--background-foreground);
 	border-color: var(--border);
 }
 .arkynButton.outline.primary {
-	color: rgba(var(--spotlight-primary), 1);
+	color: rgb(var(--spotlight-primary));
 }
 .arkynButton.outline.danger {
-	color: rgba(var(--spotlight-danger), 1);
+	color: rgb(var(--spotlight-danger));
 }
 .arkynButton.outline.success {
-	color: rgba(var(--spotlight-success), 1);
+	color: rgb(var(--spotlight-success));
 }
 .arkynButton.outline.warning {
-	color: rgba(var(--spotlight-warning), 1);
+	color: rgb(var(--spotlight-warning));
 }
 .arkynButton.outline.info {
-	color: rgba(var(--spotlight-info), 1);
+	color: rgb(var(--spotlight-info));
 }
 
-.arkynButton.ghost:hover {
-	filter: brightness(0.8);
-}
 .arkynButton.ghost.primary {
-	color: rgba(var(--spotlight-primary), 1);
-	background-color: rgba(var(--spotlight-primary), 0.2);
+	color: rgb(var(--spotlight-primary));
+	background-color: rgb(var(--spotlight-primary-foreground));
 }
 .arkynButton.ghost.danger {
-	color: rgba(var(--spotlight-danger), 1);
-	background-color: rgba(var(--spotlight-danger), 0.2);
+	color: rgb(var(--spotlight-danger));
+	background-color: rgb(var(--spotlight-danger-foreground));
 }
 .arkynButton.ghost.success {
-	color: rgba(var(--spotlight-success), 1);
-	background-color: rgba(var(--spotlight-success), 0.2);
+	color: rgb(var(--spotlight-success));
+	background-color: rgb(var(--spotlight-success-foreground));
 }
 .arkynButton.ghost.warning {
-	color: rgba(var(--spotlight-warning), 1);
-	background-color: rgba(var(--spotlight-warning), 0.2);
+	color: rgb(var(--spotlight-warning));
+	background-color: rgb(var(--spotlight-warning-foreground));
 }
 .arkynButton.ghost.info {
-	color: rgba(var(--spotlight-info), 1);
-	background-color: rgba(var(--spotlight-info), 0.2);
+	color: rgb(var(--spotlight-info));
+	background-color: rgb(var(--spotlight-info-foreground));
 }
 
 .arkynButton.invisible.primary {
-	color: rgba(var(--spotlight-primary), 1);
+	color: rgb(var(--spotlight-primary));
 }
 .arkynButton.invisible.danger {
-	color: rgba(var(--spotlight-danger), 1);
+	color: rgb(var(--spotlight-danger));
 }
 .arkynButton.invisible.success {
-	color: rgba(var(--spotlight-success), 1);
+	color: rgb(var(--spotlight-success));
 }
 .arkynButton.invisible.warning {
-	color: rgba(var(--spotlight-warning), 1);
+	color: rgb(var(--spotlight-warning));
 }
 .arkynButton.invisible.info {
-	color: rgba(var(--spotlight-info), 1);
+	color: rgb(var(--spotlight-info));
 }
 
 /* sizes */

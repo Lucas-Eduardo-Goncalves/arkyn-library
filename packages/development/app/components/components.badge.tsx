@@ -1,7 +1,7 @@
 import { Badge } from "@arkyn/components/badge";
 import { CircleDashed } from "lucide-react";
 
-export default function AlertRoute() {
+export default function BadgeRoute() {
 	return (
 		<>
 			<div className="exampleContainer row">

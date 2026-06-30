@@ -5,6 +5,7 @@ export default function IndexRoute() {
 		<div className="exampleContainer">
 			<Link to="/alert">Alert</Link>
 			<Link to="/badge">Badge</Link>
+			<Link to="/button">Button</Link>
 		</div>
 	);
 }
