@@ -34,7 +34,7 @@
 .arkynCalendarTableTd.today:not(.checkedDay) p {
 	color: var(--text-body);
 	font-weight: 500;
-	background-color: rgb(var(--spotlight-secondary));
+	background-color: var(--background-underground);
 	filter: brightness(0.97);
 }
 
@@ -77,7 +77,7 @@
 	content: " ";
 
 	position: absolute;
-	background-color: rgb(var(--spotlight-secondary));
+	background-color: var(--background-underground);
 	filter: brightness(0.95);
 
 	top: 0;

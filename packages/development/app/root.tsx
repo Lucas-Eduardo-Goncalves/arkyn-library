@@ -12,6 +12,9 @@ import type { Route } from "./+types/root";
 
 import "./_app.css";
 import "@arkyn/components/styles";
+import { DrawerProvider } from "@arkyn/components/drawerProvider";
+import { ModalProvider } from "@arkyn/components/modalProvider";
+import { ToastProvider } from "@arkyn/components/toastProvider";
 
 export const links: Route.LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -50,7 +53,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 					<Link to="/">Back</Link>
 				</div>
 
-				{children}
+				<DrawerProvider>
+					<ModalProvider>
+						<ToastProvider>{children}</ToastProvider>
+					</ModalProvider>
+				</DrawerProvider>
 				<ScrollRestoration />
 				<Scripts />
 			</body>

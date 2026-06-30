@@ -9,10 +9,10 @@ function CalendarTableBody() {
 		<tbody className="arkynCalendarTableBody">
 			{calendar.listMatrix.map((week, weekIndex) => (
 				// biome-ignore lint/suspicious/noArrayIndexKey: week position is stable in monthly matrix
-				<tr key={weekIndex}>
+				<tr key={`week-${weekIndex}`}>
 					{week.map((props, dayIndex) => (
 						// biome-ignore lint/suspicious/noArrayIndexKey: day position is stable in week
-						<CalendarTableTd key={dayIndex} {...props} />
+						<CalendarTableTd key={`day-${weekIndex}-${dayIndex}`} {...props} />
 					))}
 				</tr>
 			))}

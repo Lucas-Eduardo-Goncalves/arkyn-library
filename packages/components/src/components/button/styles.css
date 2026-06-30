@@ -9,7 +9,7 @@
 .arkynButton:hover {
 	cursor: pointer;
 	filter: brightness(0.95);
-	transition: 0.15s all ease-out;
+	transition: all 0.3s ease;
 }
 
 html.dark .arkynButton:hover {

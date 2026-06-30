@@ -10,7 +10,7 @@
 	height: 137px;
 	max-width: 475px;
 
-	background: rgba(var(--spotlight-secondary), 1);
+	background: var(--input-background);
 }
 
 .arkynAudioUpload.hasAudio {

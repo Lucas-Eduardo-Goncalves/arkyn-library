@@ -2,6 +2,8 @@
 	display: flex;
 	align-items: center;
 	gap: 8px;
+
+	min-width: 280px;
 }
 
 .arkynAudioPlayer button {
@@ -17,12 +19,13 @@
 	max-height: 40px;
 	max-width: 40px;
 
-	background-color: rgba(var(--spotlight-primary), 1);
+	background-color: rgb(var(--spotlight-primary));
 }
 
 .arkynAudioPlayer button:hover:not(:disabled) {
 	cursor: pointer;
-	background-color: rgba(var(--spotlight-primary), 0.8);
+	transition: all 0.3s ease;
+	filter: brightness(0.95);
 }
 
 .arkynAudioPlayer button:disabled {
@@ -31,8 +34,8 @@
 }
 
 .arkynAudioPlayer button svg {
-	fill: #fff;
-	stroke: #fff;
+	fill: var(--white);
+	stroke: var(--white);
 
 	min-height: 20px;
 	min-width: 20px;

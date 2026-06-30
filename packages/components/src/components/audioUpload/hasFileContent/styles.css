@@ -24,22 +24,7 @@
 	max-height: 40px;
 	max-width: 40px;
 
-	background-color: rgba(var(--spotlight-primary), 1);
-}
-
-.arkynAudioUploadAudioPlayer button:hover {
-	cursor: pointer;
-	background-color: rgba(var(--spotlight-primary), 0.8);
-}
-
-.arkynAudioUploadAudioPlayer button svg {
-	fill: #fff;
-	stroke: #fff;
-
-	min-height: 20px;
-	min-width: 20px;
-	max-height: 20px;
-	max-width: 20px;
+	background-color: rgb(var(--spotlight-primary));
 }
 
 .arkynAudioUploadAudioPlayer p {
