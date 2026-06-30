@@ -1,0 +1,140 @@
+import { IconButton } from "@arkyn/components/iconButton";
+import { CircleDashed } from "lucide-react";
+
+export default function IconButtonRoute() {
+	return (
+		<>
+			<div className="exampleContainer row">
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="danger"
+					variant="ghost"
+				/>
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="info"
+					variant="ghost"
+				/>
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="success"
+					variant="ghost"
+				/>
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="warning"
+					variant="ghost"
+				/>
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="primary"
+					variant="ghost"
+				/>
+			</div>
+
+			<div className="exampleContainer row">
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="danger"
+					variant="outline"
+				/>
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="info"
+					variant="outline"
+				/>
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="success"
+					variant="outline"
+				/>
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="warning"
+					variant="outline"
+				/>
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="primary"
+					variant="outline"
+				/>
+			</div>
+
+			<div className="exampleContainer row">
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="danger"
+					variant="solid"
+				/>
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="info"
+					variant="solid"
+				/>
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="success"
+					variant="solid"
+				/>
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="warning"
+					variant="solid"
+				/>
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="primary"
+					variant="solid"
+				/>
+			</div>
+
+			<div className="exampleContainer row">
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="danger"
+					variant="invisible"
+				/>
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="info"
+					variant="invisible"
+				/>
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="success"
+					variant="invisible"
+				/>
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="warning"
+					variant="invisible"
+				/>
+				<IconButton
+					aria-label="Danger"
+					icon={CircleDashed}
+					scheme="primary"
+					variant="invisible"
+				/>
+			</div>
+		</>
+	);
+}

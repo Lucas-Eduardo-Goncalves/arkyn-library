@@ -4,12 +4,12 @@
 	border: 1px solid transparent;
 	outline: 1px solid transparent;
 	position: relative;
-	transition: 0.15s all ease-out;
 }
 
 .arkynIconButton:hover {
 	cursor: pointer;
 	filter: brightness(0.9);
+	transition: 0.15s all ease-out;
 }
 
 html.dark .arkynIconButton:hover {
@@ -30,82 +30,82 @@ html.dark .arkynIconButton:hover {
 
 /* VARIANTS */
 .arkynIconButton.solid {
-	color: #fff;
+	color: var(--white);
 }
 .arkynIconButton.solid.primary {
-	background-color: rgba(var(--spotlight-primary), 1);
+	background-color: rgb(var(--spotlight-primary));
 }
 .arkynIconButton.solid.danger {
-	background-color: rgba(var(--spotlight-danger), 1);
+	background-color: rgb(var(--spotlight-danger));
 }
 .arkynIconButton.solid.success {
-	background-color: rgba(var(--spotlight-success), 1);
+	background-color: rgb(var(--spotlight-success));
 }
 .arkynIconButton.solid.warning {
-	background-color: rgba(var(--spotlight-warning), 1);
+	background-color: rgb(var(--spotlight-warning));
 }
 .arkynIconButton.solid.info {
-	background-color: rgba(var(--spotlight-info), 1);
+	background-color: rgb(var(--spotlight-info));
 }
 
 .arkynIconButton.outline {
-	background-color: var(--card);
+	background-color: var(--background-foreground);
 	border-color: var(--border);
 }
 .arkynIconButton.outline.primary {
-	color: rgba(var(--spotlight-primary), 1);
+	color: rgb(var(--spotlight-primary));
 }
 .arkynIconButton.outline.danger {
-	color: rgba(var(--spotlight-danger), 1);
+	color: rgba(var(--spotlight-danger));
 }
 .arkynIconButton.outline.success {
-	color: rgba(var(--spotlight-success), 1);
+	color: rgba(var(--spotlight-success));
 }
 .arkynIconButton.outline.warning {
-	color: rgba(var(--spotlight-warning), 1);
+	color: rgba(var(--spotlight-warning));
 }
 .arkynIconButton.outline.info {
-	color: rgba(var(--spotlight-info), 1);
+	color: rgba(var(--spotlight-info));
 }
 
 .arkynIconButton.ghost:hover {
 	filter: brightness(0.8);
 }
 .arkynIconButton.ghost.primary {
-	color: rgba(var(--spotlight-primary), 1);
-	background-color: rgba(var(--spotlight-primary), 0.2);
+	color: rgb(var(--spotlight-primary));
+	background-color: rgb(var(--spotlight-primary-foreground));
 }
 .arkynIconButton.ghost.danger {
-	color: rgba(var(--spotlight-danger), 1);
-	background-color: rgba(var(--spotlight-danger), 0.2);
+	color: rgb(var(--spotlight-danger));
+	background-color: rgb(var(--spotlight-danger-foreground));
 }
 .arkynIconButton.ghost.success {
-	color: rgba(var(--spotlight-success), 1);
-	background-color: rgba(var(--spotlight-success), 0.2);
+	color: rgb(var(--spotlight-success));
+	background-color: rgb(var(--spotlight-success-foreground));
 }
 .arkynIconButton.ghost.warning {
-	color: rgba(var(--spotlight-warning), 1);
-	background-color: rgba(var(--spotlight-warning), 0.2);
+	color: rgb(var(--spotlight-warning));
+	background-color: rgb(var(--spotlight-warning-foreground));
 }
 .arkynIconButton.ghost.info {
-	color: rgba(var(--spotlight-info), 1);
-	background-color: rgba(var(--spotlight-info), 0.2);
+	color: rgb(var(--spotlight-info));
+	background-color: rgb(var(--spotlight-info-foreground));
 }
 
 .arkynIconButton.invisible.primary {
-	color: rgba(var(--spotlight-primary), 1);
+	color: rgb(var(--spotlight-primary));
 }
 .arkynIconButton.invisible.danger {
-	color: rgba(var(--spotlight-danger), 1);
+	color: rgb(var(--spotlight-danger));
 }
 .arkynIconButton.invisible.success {
-	color: rgba(var(--spotlight-success), 1);
+	color: rgb(var(--spotlight-success));
 }
 .arkynIconButton.invisible.warning {
-	color: rgba(var(--spotlight-warning), 1);
+	color: rgb(var(--spotlight-warning));
 }
 .arkynIconButton.invisible.info {
-	color: rgba(var(--spotlight-info), 1);
+	color: rgb(var(--spotlight-info));
 }
 
 /* SIZE */
