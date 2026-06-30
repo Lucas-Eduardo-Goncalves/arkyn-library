@@ -10,7 +10,7 @@ function WeekCalendarTableHeader() {
 		<thead className="arkynWeekCalendarTableHeader">
 			<tr>
 				<th />
-				{listWeek.map((day) => (
+				{listWeek.map((day, index) => (
 					<th key={day}>
 						<div className="arkynWeekCalendarTableHeaderContent">
 							<span>{formatToCapitalizeFirstWordLetter(day)}</span>
