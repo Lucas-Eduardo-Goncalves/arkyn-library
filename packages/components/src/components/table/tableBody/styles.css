@@ -1,5 +1,5 @@
 .arkynTableBodyEmptyLine > td {
-	background-color: var(--card-foreground-primary);
+	background-color: var(--background-underground);
 	height: 64px;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .arkynTableBody > tr:nth-child(odd) > td {
-	background-color: var(--card-foreground-primary);
+	background-color: var(--background-underground);
 }
 
 .arkynTableBody > tr:nth-child(odd):hover > td {
@@ -48,7 +48,7 @@
 }
 
 .arkynTableBody > tr:nth-child(even):hover > td {
-	background-color: var(--card-foreground-primary);
+	background-color: var(--background-underground);
 	filter: brightness(0.98);
 }
 
@@ -57,6 +57,6 @@ html.dark .arkynTableBody > tr:nth-child(odd):hover > td {
 }
 
 html.dark .arkynTableBody > tr:nth-child(even):hover > td {
-	background-color: var(--card-foreground-primary);
+	background-color: var(--background-underground);
 	filter: brightness(1.2);
 }
