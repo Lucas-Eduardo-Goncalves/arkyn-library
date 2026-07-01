@@ -52,12 +52,12 @@ html:not(.dark):root {
 	/* border */
 	--border: #e2e8f0;
 
-	/* inputs, textarea, select, checkbox */
+	/* inputs, textarea, select, checkbox, etc. */
 	--input-background: #fafafa;
 
 	/* tooltip */
-	--tooltip-text: #f1f5f9;
-	--tooltip-background: #0f172a;
+	--tooltip-text: #fafafa;
+	--tooltip-background: #27272a;
 
 	/* spotlight */
 	--spotlight-primary: 17, 109, 220; /* #116ddc */
@@ -91,12 +91,12 @@ html.dark:root {
 	/* border */
 	--border: #3f3f46;
 
-	/* inputs, textarea, select, checkbox */
+	/* inputs, textarea, select, checkbox, etc. */
 	--input-background: #1f1f22;
 
 	/* tooltip */
-	--tooltip-text: #f1f5f9;
-	--tooltip-background: #0f172a;
+	--tooltip-text: #fafafa;
+	--tooltip-background: #3f3f46;
 
 	/* spotlight */
 	--spotlight-primary: 15, 98, 204; /* #0F62CC */

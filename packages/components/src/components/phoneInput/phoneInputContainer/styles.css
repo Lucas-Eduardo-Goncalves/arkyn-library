@@ -27,26 +27,26 @@
 /* VARIANTS */
 .arkynPhoneInputContainer.solid {
 	border-color: var(--border);
-	background-color: rgba(var(--spotlight-secondary), 1);
+	background-color: var(--input-background);
 }
 .arkynPhoneInputContainer.solid.errored {
-	border-color: rgba(var(--spotlight-danger), 1);
-	outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
+	outline-color: rgb(var(--spotlight-danger));
 }
 .arkynPhoneInputContainer:not(.opacity).solid.focused {
-	border-color: rgba(var(--spotlight-primary), 1);
-	outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
+	outline-color: rgb(var(--spotlight-primary));
 }
 .arkynPhoneInputContainer.outline {
 	border-color: var(--border);
 }
 .arkynPhoneInputContainer.outline.errored {
-	border-color: rgba(var(--spotlight-danger), 1);
-	outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
+	outline-color: rgb(var(--spotlight-danger));
 }
 .arkynPhoneInputContainer:not(.opacity).outline.focused {
-	border-color: rgba(var(--spotlight-primary), 1);
-	outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
+	outline-color: rgb(var(--spotlight-primary));
 }
 
 /* SIZE */

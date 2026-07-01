@@ -16,7 +16,7 @@
 	height: max-content;
 
 	border: 1px solid var(--border);
-	background-color: var(--card);
+	background-color: var(--background-foreground);
 
 	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 
@@ -50,6 +50,7 @@
 	outline: none;
 	color: var(--text-heading);
 	font-size: 14px;
+	background-color: var(--background-foreground);
 }
 
 .arkynPhoneInputCountryOptionsContainerSearchSelect::placeholder {

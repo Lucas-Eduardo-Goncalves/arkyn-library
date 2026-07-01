@@ -20,6 +20,9 @@ export default function ButtonRoute() {
 				<Button leftIcon={CircleDashed} scheme="primary" variant="ghost">
 					Primary
 				</Button>
+				<Button leftIcon={CircleDashed} scheme="secondary" variant="ghost">
+					Secondary
+				</Button>
 			</div>
 
 			<div className="exampleContainer row">
@@ -37,6 +40,9 @@ export default function ButtonRoute() {
 				</Button>
 				<Button leftIcon={CircleDashed} scheme="primary" variant="outline">
 					Primary
+				</Button>
+				<Button leftIcon={CircleDashed} scheme="secondary" variant="outline">
+					Secondary
 				</Button>
 			</div>
 
@@ -56,6 +62,9 @@ export default function ButtonRoute() {
 				<Button leftIcon={CircleDashed} scheme="primary" variant="solid">
 					Primary
 				</Button>
+				<Button leftIcon={CircleDashed} scheme="secondary" variant="solid">
+					Secondary
+				</Button>
 			</div>
 
 			<div className="exampleContainer row">
@@ -73,6 +82,9 @@ export default function ButtonRoute() {
 				</Button>
 				<Button leftIcon={CircleDashed} scheme="primary" variant="invisible">
 					Primary
+				</Button>
+				<Button leftIcon={CircleDashed} scheme="secondary" variant="invisible">
+					Secondary
 				</Button>
 			</div>
 

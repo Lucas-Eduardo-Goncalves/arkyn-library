@@ -31,7 +31,7 @@ type IconButtonProps = Omit<
 	 * Color scheme applied to the button.
 	 * @default "primary"
 	 */
-	scheme?: "primary" | "success" | "warning" | "danger" | "info";
+	scheme?: "primary" | "secondary" | "success" | "warning" | "danger" | "info";
 };
 
 /**

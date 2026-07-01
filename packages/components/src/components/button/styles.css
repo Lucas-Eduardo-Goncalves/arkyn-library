@@ -46,6 +46,9 @@ html.dark .arkynButton:hover {
 .arkynButton.solid.primary {
 	background-color: rgb(var(--spotlight-primary));
 }
+.arkynButton.solid.secondary {
+	background-color: rgb(var(--spotlight-secondary));
+}
 .arkynButton.solid.danger {
 	background-color: rgb(var(--spotlight-danger));
 }
@@ -66,6 +69,9 @@ html.dark .arkynButton:hover {
 .arkynButton.outline.primary {
 	color: rgb(var(--spotlight-primary));
 }
+.arkynButton.outline.secondary {
+	color: rgb(var(--spotlight-secondary));
+}
 .arkynButton.outline.danger {
 	color: rgb(var(--spotlight-danger));
 }
@@ -82,6 +88,10 @@ html.dark .arkynButton:hover {
 .arkynButton.ghost.primary {
 	color: rgb(var(--spotlight-primary));
 	background-color: rgb(var(--spotlight-primary-foreground));
+}
+.arkynButton.ghost.secondary {
+	color: rgb(var(--spotlight-secondary));
+	background-color: rgb(var(--spotlight-secondary-foreground));
 }
 .arkynButton.ghost.danger {
 	color: rgb(var(--spotlight-danger));
@@ -102,6 +112,9 @@ html.dark .arkynButton:hover {
 
 .arkynButton.invisible.primary {
 	color: rgb(var(--spotlight-primary));
+}
+.arkynButton.invisible.secondary {
+	color: rgb(var(--spotlight-secondary));
 }
 .arkynButton.invisible.danger {
 	color: rgb(var(--spotlight-danger));

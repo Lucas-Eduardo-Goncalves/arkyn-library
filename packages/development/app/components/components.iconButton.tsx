@@ -35,6 +35,12 @@ export default function IconButtonRoute() {
 					scheme="primary"
 					variant="ghost"
 				/>
+				<IconButton
+					aria-label="ghost secondary"
+					icon={CircleDashed}
+					scheme="secondary"
+					variant="ghost"
+				/>
 			</div>
 
 			<div className="exampleContainer row">
@@ -66,6 +72,12 @@ export default function IconButtonRoute() {
 					aria-label="outline primary"
 					icon={CircleDashed}
 					scheme="primary"
+					variant="outline"
+				/>
+				<IconButton
+					aria-label="outline secondary"
+					icon={CircleDashed}
+					scheme="secondary"
 					variant="outline"
 				/>
 			</div>
@@ -101,6 +113,12 @@ export default function IconButtonRoute() {
 					scheme="primary"
 					variant="solid"
 				/>
+				<IconButton
+					aria-label="solid secondary"
+					icon={CircleDashed}
+					scheme="secondary"
+					variant="solid"
+				/>
 			</div>
 
 			<div className="exampleContainer row">
@@ -132,6 +150,12 @@ export default function IconButtonRoute() {
 					aria-label="invisible primary"
 					icon={CircleDashed}
 					scheme="primary"
+					variant="invisible"
+				/>
+				<IconButton
+					aria-label="invisible secondary"
+					icon={CircleDashed}
+					scheme="secondary"
 					variant="invisible"
 				/>
 			</div>

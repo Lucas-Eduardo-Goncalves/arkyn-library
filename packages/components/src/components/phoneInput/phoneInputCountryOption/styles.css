@@ -8,6 +8,7 @@
 	color: var(--text-body);
 	user-select: none;
 	gap: 10px;
+	background-color: var(--background-foreground);
 }
 .arkynPhoneInputCountryOption > span {
 	font-size: 14px;
@@ -33,16 +34,16 @@
 	display: none;
 	height: 20px;
 	width: 20px;
-	color: rgba(var(--spotlight-primary), 1);
+	color: rgb(var(--spotlight-primary));
 }
 .arkynPhoneInputCountryOption:hover {
 	cursor: pointer;
-	background-color: var(--card-foreground-primary);
+	filter: brightness(0.95);
 }
 .arkynPhoneInputCountryOption.active {
 	font-weight: 600;
 	color: var(--text-heading);
-	background-color: var(--card-foreground-primary);
+	filter: brightness(0.95);
 }
 .arkynPhoneInputCountryOption.active svg {
 	display: unset;

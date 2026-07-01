@@ -4,7 +4,7 @@ import {
 	forwardRef,
 	type InputHTMLAttributes,
 	useEffect,
-	useState,
+	useRef,
 } from "react";
 
 import {
@@ -58,7 +58,9 @@ const PhoneInputMask = forwardRef<HTMLInputElement, PhoneInputMaskProps>(
 			id,
 		} = props;
 
-		const [isMounted, setIsMounted] = useState(false);
+		const isFirstRender = useRef(true);
+		const onChangeRef = useRef(onChange);
+		onChangeRef.current = onChange;
 
 		const mask =
 			typeof currentCountry.mask === "string"
@@ -66,9 +68,12 @@ const PhoneInputMask = forwardRef<HTMLInputElement, PhoneInputMaskProps>(
 				: currentCountry.mask[0];
 
 		useEffect(() => {
-			if (isMounted) onChange(mask);
-			else setIsMounted(true);
-		}, [onChange, mask, isMounted]);
+			if (isFirstRender.current) {
+				isFirstRender.current = false;
+				return;
+			}
+			onChangeRef.current(mask);
+		}, [mask]);
 
 		const className = `phoneInputMask ${size}`;
 

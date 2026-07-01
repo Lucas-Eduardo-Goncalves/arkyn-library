@@ -1,10 +1,10 @@
-// import { RichText } from "@arkyn/components/richText";
+// import { RichText } from "@arkyn/components";
 
 export default function RichTextRoute() {
 	return (
 		<>
-			<h1>opa</h1>
-			<h1>opa</h1>
+			<div>aaa</div>
+			<div>aaa</div>
 			{/* <div className="exampleContainer foreground">
 				<RichText name="content1" label="Content:" showAsterisk />
 			</div>

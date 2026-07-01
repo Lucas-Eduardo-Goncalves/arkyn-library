@@ -27,7 +27,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 	 * Color scheme applied to the button.
 	 * @default "primary"
 	 */
-	scheme?: "primary" | "success" | "warning" | "danger" | "info";
+	scheme?: "primary" | "secondary" | "success" | "warning" | "danger" | "info";
 	/** Lucide icon rendered to the left of the label. */
 	leftIcon?: LucideIcon;
 	/** Lucide icon rendered to the right of the label. */
