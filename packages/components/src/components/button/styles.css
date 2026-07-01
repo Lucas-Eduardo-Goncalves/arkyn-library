@@ -63,7 +63,7 @@ html.dark .arkynButton:hover {
 }
 
 .arkynButton.outline {
-	background-color: var(--background-foreground);
+	background-color: var(--background-underground);
 	border-color: var(--border);
 }
 .arkynButton.outline.primary {

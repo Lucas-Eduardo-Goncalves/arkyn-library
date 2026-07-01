@@ -52,7 +52,7 @@ html.dark .arkynIconButton:hover {
 }
 
 .arkynIconButton.outline {
-	background-color: var(--background-foreground);
+	background-color: var(--background-underground);
 	border-color: var(--border);
 }
 .arkynIconButton.outline.primary {
