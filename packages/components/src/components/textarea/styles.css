@@ -42,31 +42,32 @@
 /* VARIANTS */
 .arkynTextarea.solid {
 	border-color: var(--border);
-	background-color: rgba(var(--spotlight-secondary), 1);
+	background-color: var(--input-background);
 }
 
 .arkynTextarea.solid.errorTrue {
-	border-color: rgba(var(--spotlight-danger), 1);
-	outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
+	outline-color: rgb(var(--spotlight-danger));
 }
 
 .arkynTextarea:not(.opacityTrue).solid.focusedTrue {
-	border-color: rgba(var(--spotlight-primary), 1);
-	outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
+	outline-color: rgb(var(--spotlight-primary));
 }
 
 .arkynTextarea.outline {
 	border-color: var(--border);
+	background-color: var(--background-foreground);
 }
 
 .arkynTextarea.outline.errorTrue {
-	border-color: rgba(var(--spotlight-danger), 1);
-	outline-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
+	outline-color: rgb(var(--spotlight-danger));
 }
 
 .arkynTextarea:not(.opacityTrue).outline.focusedTrue {
-	border-color: rgba(var(--spotlight-primary), 1);
-	outline-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
+	outline-color: rgb(var(--spotlight-primary));
 }
 
 /* SIZE */
