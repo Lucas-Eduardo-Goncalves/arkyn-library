@@ -10,7 +10,7 @@
 
 .arkynRadioBox > button {
 	position: relative;
-	background-color: rgba(var(--spotlight-secondary), 1);
+	background-color: var(--input-background);
 
 	border: 2px solid var(--border);
 	border-radius: 99999px;
@@ -21,11 +21,11 @@
 }
 
 .arkynRadioBox.checkedTrue > button {
-	border-color: rgba(var(--spotlight-primary), 1);
+	border-color: rgb(var(--spotlight-primary));
 }
 
 .arkynRadioBox.errorTrue > button {
-	border-color: rgba(var(--spotlight-danger), 1);
+	border-color: rgb(var(--spotlight-danger));
 }
 
 .arkynRadioBox.checkedTrue > button::before {
@@ -35,7 +35,7 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	border-radius: 99999px;
-	background-color: rgba(var(--spotlight-primary), 1);
+	background-color: rgb(var(--spotlight-primary));
 }
 
 .arkynRadioBox.sm > button {
