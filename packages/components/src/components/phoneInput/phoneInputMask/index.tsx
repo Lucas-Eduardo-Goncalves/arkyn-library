@@ -100,6 +100,7 @@ const PhoneInputMask = forwardRef<HTMLInputElement, PhoneInputMaskProps>(
 					onFocus={onFocus}
 					onBlur={onBlur}
 					disabled={disabled}
+					readOnly={readonly}
 					ref={ref}
 				/>
 			);
