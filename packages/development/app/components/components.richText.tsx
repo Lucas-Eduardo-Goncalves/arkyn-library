@@ -1,11 +1,9 @@
-// import { RichText } from "@arkyn/components";
+import { RichText } from "@arkyn/components/richText";
 
 export default function RichTextRoute() {
 	return (
 		<>
-			<div>aaa</div>
-			<div>aaa</div>
-			{/* <div className="exampleContainer foreground">
+			<div className="exampleContainer foreground">
 				<RichText name="content1" label="Content:" showAsterisk />
 			</div>
 
@@ -28,7 +26,7 @@ export default function RichTextRoute() {
 
 			<div className="exampleContainer">
 				<RichText name="content4" label="Dark mode:" />
-			</div> */}
+			</div>
 		</>
 	);
 }

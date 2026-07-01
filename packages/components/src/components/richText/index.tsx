@@ -13,7 +13,7 @@ import {
 	Underline,
 } from "lucide-react";
 import { useCallback, useId, useMemo, useRef, useState } from "react";
-import { createEditor, type Descendant, Transforms } from "slate";
+import { createEditor, type Descendant } from "slate";
 import { withHistory } from "slate-history";
 import { Editable, Slate, withReact } from "slate-react";
 import { useForm } from "../../hooks/useForm";
@@ -109,11 +109,12 @@ function RichText(props: RichTextProps) {
 
 	const { fieldErrors } = useForm();
 
-	function getDefaultNodes(): Descendant[] {
+	const defaultNodes = useMemo((): Descendant[] => {
 		try {
 			const parsedNodes = JSON.parse(defaultValue);
-			if (!Array.isArray(parsedNodes)) return initialValue;
-			if (parsedNodes.length <= 0) return initialValue;
+			if (!Array.isArray(parsedNodes) || parsedNodes.length === 0) {
+				return structuredClone(initialValue);
+			}
 
 			const isValidNodes = parsedNodes.every(
 				(node) =>
@@ -123,17 +124,17 @@ function RichText(props: RichTextProps) {
 					"children" in node,
 			);
 
-			return isValidNodes ? parsedNodes : initialValue;
+			return isValidNodes ? parsedNodes : structuredClone(initialValue);
 		} catch (_error) {
-			return initialValue;
+			return structuredClone(initialValue);
 		}
-	}
+	}, [defaultValue]);
 
-	const textFromNodes = extractTextFromNode(getDefaultNodes());
+	const textFromNodes = extractTextFromNode(defaultNodes);
 
 	const [charactersCount, setCharactersCount] = useState(textFromNodes.length);
 	const [inputValue, setInputValue] = useState(
-		JSON.stringify(getDefaultNodes()) || "[]",
+		JSON.stringify(defaultNodes) || "[]",
 	);
 
 	const [onFocus, setOnFocus] = useState(false);
@@ -156,13 +157,10 @@ function RichText(props: RichTextProps) {
 
 		if (enforceCharacterLimit && text.length >= maxLimit) {
 			return;
-		} else {
-			setInputValue(JSON.stringify(value));
-			onChange?.(value);
-
-			editor.children = value;
-			Transforms.setNodes(editor, { children: value });
 		}
+
+		setInputValue(JSON.stringify(value));
+		onChange?.(value);
 	}
 
 	const focusClass = onFocus ? "focusTrue" : "focusFalse";
@@ -192,7 +190,7 @@ function RichText(props: RichTextProps) {
 		>
 			<Slate
 				editor={editor}
-				initialValue={getDefaultNodes()}
+				initialValue={defaultNodes}
 				onChange={handleChange}
 				onValueChange={handleChange}
 			>

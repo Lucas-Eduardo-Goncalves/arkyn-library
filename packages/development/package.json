@@ -15,10 +15,14 @@
     "@arkyn/templates": "workspace:*",
     "@react-router/node": "8.0.0",
     "@react-router/serve": "8.0.0",
+    "is-hotkey": "^0.2.0",
     "isbot": "^5.1.36",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-router": "8.0.0"
+    "react-router": "8.0.0",
+    "slate": "^0.124.1",
+    "slate-history": "^0.113.1",
+    "slate-react": "^0.125.1"
   },
   "devDependencies": {
     "@react-router/dev": "8.0.0",
