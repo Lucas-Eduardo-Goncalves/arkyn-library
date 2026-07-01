@@ -11,5 +11,5 @@
 	font-weight: 600;
 	line-height: 16.34px;
 	text-align: left;
-	color: rgb(var(--spotlight-danger), 1);
+	color: rgb(var(--spotlight-danger));
 }
