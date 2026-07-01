@@ -39,7 +39,7 @@
 		"all:release:major": "bun run components:release:major && bun run server:release:major && bun run shared:release:major && bun run templates:release:major",
 		"all:release:minor": "bun run components:release:minor && bun run server:release:minor && bun run shared:release:minor && bun run templates:release:minor",
 		"all:release:patch": "bun run components:release:patch && bun run server:release:patch && bun run shared:release:patch && bun run templates:release:patch",
-		"all:test": "bun run server:test && bun run shared:test",
+		"all:test": "bun run components:test && bun run server:test && bun run shared:test",
 		"all:typecheck": "bun run components:typecheck && bun run server:typecheck && bun run shared:typecheck && bun run templates:typecheck",
 		"biome:format": "biome format --write .",
 		"biome:check": "biome check . --max-diagnostics=10000",
