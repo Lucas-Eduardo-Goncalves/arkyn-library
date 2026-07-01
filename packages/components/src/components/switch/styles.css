@@ -3,7 +3,10 @@
 
 	border: 1px solid transparent;
 	border-radius: 999999px;
+}
 
+.arkynSwitch:hover {
+	cursor: pointer;
 	transition: all 0.3s ease-in-out;
 }
 
@@ -18,13 +21,13 @@
 	top: 2px;
 	bottom: 2px;
 	border-radius: 50%;
-	background-color: white;
+	background-color: var(--white);
 	transition: all 0.2s;
 	transform: translateX(-2px);
 }
 
 .arkynSwitch.checkedTrue {
-	background-color: rgba(var(--spotlight-primary), 1);
+	background-color: rgb(var(--spotlight-primary));
 }
 
 .arkynSwitch.checkedFalse {
