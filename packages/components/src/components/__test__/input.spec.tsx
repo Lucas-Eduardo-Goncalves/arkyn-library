@@ -2,8 +2,8 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Search, User } from "lucide-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { FormProvider } from "../../../providers/formProvider";
-import { Input } from "../index";
+import { FormProvider } from "../../providers/formProvider";
+import { Input } from "../input";
 
 // vitest globals are off in this repo, so RTL's auto-cleanup (which only
 // registers when it detects a global afterEach) never fires; clean up

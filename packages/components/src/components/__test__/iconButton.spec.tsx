@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { Plus, Save, Trash2 } from "lucide-react";
 import { createRef } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { IconButton } from "../index";
+import { IconButton } from "../iconButton";
 
 describe("IconButton", () => {
 	afterEach(() => {

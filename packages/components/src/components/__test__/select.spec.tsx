@@ -2,8 +2,8 @@ import { cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Search, User } from "lucide-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { FormProvider } from "../../../providers/formProvider";
-import { Select } from "../index";
+import { FormProvider } from "../../providers/formProvider";
+import { Select } from "../select";
 
 afterEach(cleanup);
 

@@ -2,8 +2,8 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { TabButton } from "../../tabButton";
-import { TabContainer } from "../index";
+import { TabButton } from "../tab/tabButton";
+import { TabContainer } from "../tab/tabContainer";
 
 describe("TabContainer", () => {
 	afterEach(() => {

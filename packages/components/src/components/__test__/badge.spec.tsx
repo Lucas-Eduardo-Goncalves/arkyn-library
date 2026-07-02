@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { Check, X } from "lucide-react";
 import { describe, expect, it } from "vitest";
-import { Badge } from "../index";
+import { Badge } from "../badge";
 
 describe("Badge", () => {
 	it("should render without errors", () => {

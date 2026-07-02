@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { Divider } from "../index";
+import { Divider } from "../divider";
 
 describe("Divider", () => {
 	it("should render without errors", () => {

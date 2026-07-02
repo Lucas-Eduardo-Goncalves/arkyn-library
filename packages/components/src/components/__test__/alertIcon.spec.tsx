@@ -1,7 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { AlertContainer } from "../../alertContainer";
-import { AlertIcon } from "../index";
+import { AlertContainer } from "../alert/alertContainer";
+import { AlertIcon } from "../alert/alertIcon";
 
 describe("AlertIcon", () => {
 	// RTL's auto-cleanup relies on a global afterEach, which isn't registered

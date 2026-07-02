@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { TableBody } from "../index";
+import { TableBody } from "../table/tableBody";
 
 afterEach(cleanup);
 

@@ -2,8 +2,8 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { FormProvider } from "../../../providers/formProvider";
-import { RichText } from "../index";
+import { FormProvider } from "../../providers/formProvider";
+import { RichText } from "../richText";
 
 function getHiddenInput(container: HTMLElement, name: string) {
 	return container.querySelector(

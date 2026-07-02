@@ -1,8 +1,10 @@
 import { render } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { GoogleAnalytics } from "../index";
+import { GoogleAnalytics } from "../googleAnalytics";
 
-const googleAnalyticsClientMock = vi.fn(() => null);
+const googleAnalyticsClientMock = vi.fn(
+	(_props: { measurementId: string }) => null,
+);
 
 vi.mock("../googleAnalytics.client", () => ({
 	GoogleAnalyticsClient: (props: { measurementId: string }) =>

@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { Switch } from "../index";
+import { Switch } from "../switch";
 
 describe("Switch", () => {
 	afterEach(() => {

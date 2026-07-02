@@ -3,8 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { CreditCard } from "lucide-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { FormProvider } from "../../../providers/formProvider";
-import { MaskedInput } from "../index";
+import { FormProvider } from "../../providers/formProvider";
+import { MaskedInput } from "../maskedInput";
 
 describe("MaskedInput", () => {
 	afterEach(() => {

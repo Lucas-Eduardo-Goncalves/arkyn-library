@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { GoogleTagManager } from "../index";
+import { GoogleTagManager } from "../googleTagManager";
 
 const googleTagManagerClientMock = vi.fn();
 

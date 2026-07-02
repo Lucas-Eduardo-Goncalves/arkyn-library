@@ -2,7 +2,7 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { ModalContainer } from "../index";
+import { ModalContainer } from "../modal/modalContainer";
 
 /**
  * jsdom exposes `WebkitAnimation` (but not the unprefixed `animation`) on

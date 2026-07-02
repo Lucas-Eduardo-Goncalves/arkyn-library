@@ -1,9 +1,8 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-
-import { RadioGroup } from "../../radioGroup";
-import { RadioBox } from "../index";
+import { RadioBox } from "../radio/radioBox";
+import { RadioGroup } from "../radio/radioGroup";
 
 describe("RadioBox", () => {
 	afterEach(() => {

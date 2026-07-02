@@ -1,8 +1,8 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { DrawerContainer } from "../../drawerContainer";
-import { DrawerHeader } from "../index";
+import { DrawerContainer } from "../drawer/drawerContainer";
+import { DrawerHeader } from "../drawer/drawerHeader";
 
 afterEach(() => {
 	cleanup();

@@ -2,8 +2,8 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { FormProvider } from "../../../providers/formProvider";
-import { PhoneInput } from "../index";
+import { FormProvider } from "../../providers/formProvider";
+import { PhoneInput } from "../phoneInput";
 
 describe("PhoneInput", () => {
 	afterEach(() => {

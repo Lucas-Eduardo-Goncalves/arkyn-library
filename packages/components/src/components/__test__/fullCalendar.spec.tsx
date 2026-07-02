@@ -1,7 +1,7 @@
 import { cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { FullCalendar } from "../index";
+import { FullCalendar } from "../fullCalendar";
 
 function getMonthlyDayCell(
 	container: HTMLElement,

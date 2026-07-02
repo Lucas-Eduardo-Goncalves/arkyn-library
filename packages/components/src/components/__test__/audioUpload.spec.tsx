@@ -8,8 +8,8 @@ import {
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { FormProvider } from "../../../providers/formProvider";
-import { AudioUpload } from "../index";
+import { FormProvider } from "../../providers/formProvider";
+import { AudioUpload } from "../audioUpload";
 
 const originalCreateElement = document.createElement.bind(document);
 

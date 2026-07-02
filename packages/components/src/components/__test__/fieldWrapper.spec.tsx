@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { FieldWrapper } from "../index";
+import { FieldWrapper } from "../fieldWrapper";
 
 describe("FieldWrapper", () => {
 	it("should render without errors", () => {

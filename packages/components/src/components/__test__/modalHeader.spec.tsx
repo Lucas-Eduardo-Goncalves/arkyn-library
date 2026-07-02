@@ -2,8 +2,8 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { ModalContainer } from "../../modalContainer/index";
-import { ModalHeader } from "../index";
+import { ModalContainer } from "../modal/modalContainer";
+import { ModalHeader } from "../modal/modalHeader";
 
 describe("ModalHeader", () => {
 	afterEach(() => {
@@ -302,7 +302,9 @@ describe("ModalHeader", () => {
 				</ModalContainer>,
 			);
 
-			const element = container.querySelector(".arkynModalHeader") as HTMLElement;
+			const element = container.querySelector(
+				".arkynModalHeader",
+			) as HTMLElement;
 			expect(element).toHaveClass("arkynModalHeader");
 		});
 
@@ -313,7 +315,9 @@ describe("ModalHeader", () => {
 				</ModalContainer>,
 			);
 
-			const element = container.querySelector(".arkynModalHeader") as HTMLElement;
+			const element = container.querySelector(
+				".arkynModalHeader",
+			) as HTMLElement;
 			expect(element).toHaveClass("arkynModalHeader");
 			expect(element).toHaveClass("custom-class");
 		});

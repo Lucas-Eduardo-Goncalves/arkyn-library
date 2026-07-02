@@ -3,8 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { DollarSign } from "lucide-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { FormProvider } from "../../../providers/formProvider";
-import { CurrencyInput } from "../index";
+import { FormProvider } from "../../providers/formProvider";
+import { CurrencyInput } from "../currencyInput";
 
 describe("CurrencyInput", () => {
 	afterEach(() => {
