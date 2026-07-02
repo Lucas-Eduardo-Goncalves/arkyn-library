@@ -99,7 +99,9 @@
   "devDependencies": {
     "@react-google-maps/api": "^2.20.8",
     "@react-input/mask": "^2.0.4",
+    "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/bun": "catalog:",
     "@types/is-hotkey": "^0.1.10",
     "@types/node": "catalog:",

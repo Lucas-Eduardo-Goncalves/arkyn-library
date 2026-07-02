@@ -31,7 +31,7 @@
 		"skipLibCheck": true,
 		"jsx": "react-jsx",
 		"lib": ["DOM", "DOM.Iterable", "ES2022"],
-		"types": ["node"],
+		"types": ["node", "@testing-library/jest-dom"],
 		"module": "ESNext",
 		"target": "ESNext"
 	}

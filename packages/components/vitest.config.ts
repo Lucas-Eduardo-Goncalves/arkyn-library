@@ -6,6 +6,7 @@ export default defineConfig({
 	resolve: { mainFields: ["module"] },
 	test: {
 		environment: "jsdom",
+		setupFiles: ["./vitest.setup.ts"],
 		testTimeout: 10000,
 		hookTimeout: 10000,
 		teardownTimeout: 5000,
