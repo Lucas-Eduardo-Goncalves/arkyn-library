@@ -1,8 +1,8 @@
-import { deleteRequest } from "../http/api/deleteRequest";
-import { getRequest } from "../http/api/getRequest";
-import { patchRequest } from "../http/api/patchRequest";
-import { postRequest } from "../http/api/postRequest";
-import { putRequest } from "../http/api/putRequest";
+import { deleteRequest } from "../http/api/_deleteRequest";
+import { getRequest } from "../http/api/_getRequest";
+import { patchRequest } from "../http/api/_patchRequest";
+import { postRequest } from "../http/api/_postRequest";
+import { putRequest } from "../http/api/_putRequest";
 import { flushDebugLogs } from "../utilities/flushDebugLogs";
 
 type ApiServiceConstructorProps = {

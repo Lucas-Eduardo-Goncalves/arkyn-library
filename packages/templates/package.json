@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/templates",
-  "version": "3.0.1-beta.201",
+  "version": "3.0.1-beta.202",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "type": "module",
@@ -18,9 +18,12 @@
     "internationalization",
     "typescript"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
-    "node": ">=24.16.0",
-    "bun": ">=1.3.14"
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
   },
   "homepage": "https://docs.arkyn.dev/docs/templates/introduction",
   "repository": {
@@ -36,7 +39,7 @@
   ],
   "scripts": {
     "audit": "bun audit --workspace packages/templates",
-    "build": "bunx vite build && bunx tsc --project tsconfig.json --emitDeclarationOnly && bun ./generate-exports.ts",
+    "build": "bunx vite build && bunx tsc --project tsconfig.json --emitDeclarationOnly && bun ./generate-exports.ts && rm -f dist/modules/index.js dist/modules/style.css",
     "prebuild": "rm -rf dist",
     "publish:beta": "npm publish --tag beta",
     "publish:latest": "npm publish --tag latest",
@@ -80,6 +83,22 @@
       "import": "./dist/modules/maximumFractionDigits.js",
       "types": "./dist/maximumFractionDigits.d.ts",
       "default": "./dist/modules/maximumFractionDigits.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "brazilianStates": [
+        "./dist/brazilianStates.d.ts"
+      ],
+      "countries": [
+        "./dist/countries.d.ts"
+      ],
+      "countryCurrencies": [
+        "./dist/countryCurrencies.d.ts"
+      ],
+      "maximumFractionDigits": [
+        "./dist/maximumFractionDigits.d.ts"
+      ]
     }
   }
 }

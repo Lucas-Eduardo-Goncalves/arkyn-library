@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/shared",
-  "version": "3.0.1-beta.201",
+  "version": "3.0.1-beta.202",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "type": "module",
@@ -19,9 +19,12 @@
     "typescript",
     "generators"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
-    "node": ">=24.16.0",
-    "bun": ">=1.3.14"
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
   },
   "homepage": "https://docs.arkyn.dev/docs/shared/introduction",
   "repository": {
@@ -37,7 +40,7 @@
   "sideEffects": false,
   "scripts": {
     "audit": "bun audit --workspace packages/shared",
-    "build": "bunx vite build && bunx tsc --project tsconfig.json --emitDeclarationOnly && bun ./generate-exports.ts",
+    "build": "bunx vite build && bunx tsc --project tsconfig.json --emitDeclarationOnly && bun ./generate-exports.ts && rm -f dist/modules/index.js dist/modules/style.css",
     "prebuild": "rm -rf dist",
     "publish:beta": "npm publish --tag beta",
     "publish:latest": "npm publish --tag latest",
@@ -190,6 +193,85 @@
       "import": "./dist/modules/services/validateDateService.js",
       "types": "./dist/services/validateDateService.d.ts",
       "default": "./dist/modules/services/validateDateService.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "calculateCardInstallment": [
+        "./dist/utilities/calculateCardInstallment.d.ts"
+      ],
+      "ensureQuotes": [
+        "./dist/utilities/ensureQuotes.d.ts"
+      ],
+      "findCountryMask": [
+        "./dist/utilities/findCountryMask.d.ts"
+      ],
+      "formatDate": [
+        "./dist/formats/formatDate.d.ts"
+      ],
+      "formatJsonObject": [
+        "./dist/formats/formatJsonObject.d.ts"
+      ],
+      "formatJsonString": [
+        "./dist/formats/formatJsonString.d.ts"
+      ],
+      "formatToCapitalizeFirstWordLetter": [
+        "./dist/formats/formatToCapitalizeFirstWordLetter.d.ts"
+      ],
+      "formatToCep": [
+        "./dist/formats/formatToCep.d.ts"
+      ],
+      "formatToCnpj": [
+        "./dist/formats/formatToCnpj.d.ts"
+      ],
+      "formatToCpf": [
+        "./dist/formats/formatToCpf.d.ts"
+      ],
+      "formatToCurrency": [
+        "./dist/formats/formatToCurrency.d.ts"
+      ],
+      "formatToEllipsis": [
+        "./dist/formats/formatToEllipsis.d.ts"
+      ],
+      "formatToHiddenDigits": [
+        "./dist/formats/formatToHiddenDigits.d.ts"
+      ],
+      "formatToPhone": [
+        "./dist/formats/formatToPhone.d.ts"
+      ],
+      "generateColorByString": [
+        "./dist/generators/generateColorByString.d.ts"
+      ],
+      "generateId": [
+        "./dist/generators/generateId.d.ts"
+      ],
+      "generateSlug": [
+        "./dist/generators/generateSlug.d.ts"
+      ],
+      "isHtml": [
+        "./dist/utilities/isHtml.d.ts"
+      ],
+      "parseLargeFields": [
+        "./dist/parsers/parseLargeFields.d.ts"
+      ],
+      "parseSensitiveData": [
+        "./dist/parsers/parseSensitiveData.d.ts"
+      ],
+      "parseToDate": [
+        "./dist/parsers/parseToDate.d.ts"
+      ],
+      "removeCurrencySymbols": [
+        "./dist/utilities/removeCurrencySymbols.d.ts"
+      ],
+      "removeNonNumeric": [
+        "./dist/utilities/removeNonNumeric.d.ts"
+      ],
+      "stripHtmlTags": [
+        "./dist/utilities/stripHtmlTags.d.ts"
+      ],
+      "validateDateService": [
+        "./dist/services/validateDateService.d.ts"
+      ]
     }
   }
 }

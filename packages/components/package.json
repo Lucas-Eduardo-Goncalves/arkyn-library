@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/components",
-  "version": "3.0.1-beta.201",
+  "version": "3.0.1-beta.202",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -22,9 +22,12 @@
     "forms",
     "design-system"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
-    "node": ">=24.16.0",
-    "bun": ">=1.3.14"
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
   },
   "homepage": "https://docs.arkyn.dev",
   "repository": {
@@ -40,7 +43,7 @@
   ],
   "scripts": {
     "audit": "bun audit --workspace packages/components",
-    "build": "bunx vite build && bunx tsc --project tsconfig.json --emitDeclarationOnly && bun ./generate-exports.ts",
+    "build": "bunx vite build && bunx tsc --project tsconfig.json --emitDeclarationOnly && bun ./generate-exports.ts && rm -f dist/modules/index.js dist/modules/style.css",
     "prebuild": "rm -rf dist",
     "publish:beta": "npm publish --tag beta",
     "publish:latest": "npm publish --tag latest",
@@ -487,6 +490,226 @@
       "import": "./dist/modules/hooks/useToast.js",
       "types": "./dist/hooks/useToast.d.ts",
       "default": "./dist/modules/hooks/useToast.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "alertContainer": [
+        "./dist/components/alert/alertContainer/index.d.ts"
+      ],
+      "alertContent": [
+        "./dist/components/alert/alertContent/index.d.ts"
+      ],
+      "alertDescription": [
+        "./dist/components/alert/alertDescription/index.d.ts"
+      ],
+      "alertIcon": [
+        "./dist/components/alert/alertIcon/index.d.ts"
+      ],
+      "alertTitle": [
+        "./dist/components/alert/alertTitle/index.d.ts"
+      ],
+      "audioPlayer": [
+        "./dist/components/audioPlayer/index.d.ts"
+      ],
+      "audioUpload": [
+        "./dist/components/audioUpload/index.d.ts"
+      ],
+      "badge": [
+        "./dist/components/badge/index.d.ts"
+      ],
+      "button": [
+        "./dist/components/button/index.d.ts"
+      ],
+      "calendar": [
+        "./dist/components/calendar/index.d.ts"
+      ],
+      "cardTabButton": [
+        "./dist/components/cardTab/cardTabButton/index.d.ts"
+      ],
+      "cardTabContainer": [
+        "./dist/components/cardTab/cardTabContainer/index.d.ts"
+      ],
+      "checkbox": [
+        "./dist/components/checkbox/index.d.ts"
+      ],
+      "clientOnly": [
+        "./dist/components/clientOnly.d.ts"
+      ],
+      "currencyInput": [
+        "./dist/components/currencyInput/index.d.ts"
+      ],
+      "divider": [
+        "./dist/components/divider/index.d.ts"
+      ],
+      "drawerContainer": [
+        "./dist/components/drawer/drawerContainer/index.d.ts"
+      ],
+      "drawerHeader": [
+        "./dist/components/drawer/drawerHeader/index.d.ts"
+      ],
+      "drawerProvider": [
+        "./dist/providers/drawerProvider.d.ts"
+      ],
+      "facebookPixel": [
+        "./dist/components/facebookPixel/index.d.ts"
+      ],
+      "fieldError": [
+        "./dist/components/fieldError/index.d.ts"
+      ],
+      "fieldLabel": [
+        "./dist/components/fieldLabel/index.d.ts"
+      ],
+      "fieldWrapper": [
+        "./dist/components/fieldWrapper/index.d.ts"
+      ],
+      "fileUpload": [
+        "./dist/components/fileUpload/index.d.ts"
+      ],
+      "formProvider": [
+        "./dist/providers/formProvider.d.ts"
+      ],
+      "fullCalendar": [
+        "./dist/components/fullCalendar/index.d.ts"
+      ],
+      "googleAnalytics": [
+        "./dist/components/googleAnalytics/index.d.ts"
+      ],
+      "googleTagManager": [
+        "./dist/components/googleTagManager/index.d.ts"
+      ],
+      "iconButton": [
+        "./dist/components/iconButton/index.d.ts"
+      ],
+      "imageUpload": [
+        "./dist/components/imageUpload/index.d.ts"
+      ],
+      "input": [
+        "./dist/components/input/index.d.ts"
+      ],
+      "mapView": [
+        "./dist/components/mapView/index.d.ts"
+      ],
+      "maskedInput": [
+        "./dist/components/maskedInput/index.d.ts"
+      ],
+      "modalContainer": [
+        "./dist/components/modal/modalContainer/index.d.ts"
+      ],
+      "modalFooter": [
+        "./dist/components/modal/modalFooter/index.d.ts"
+      ],
+      "modalHeader": [
+        "./dist/components/modal/modalHeader/index.d.ts"
+      ],
+      "modalProvider": [
+        "./dist/providers/modalProvider.d.ts"
+      ],
+      "multiSelect": [
+        "./dist/components/multiSelect/index.d.ts"
+      ],
+      "pagination": [
+        "./dist/components/pagination/index.d.ts"
+      ],
+      "phoneInput": [
+        "./dist/components/phoneInput/index.d.ts"
+      ],
+      "placesProvider": [
+        "./dist/providers/placesProvider.d.ts"
+      ],
+      "popover": [
+        "./dist/components/popover/index.d.ts"
+      ],
+      "radioBox": [
+        "./dist/components/radio/radioBox/index.d.ts"
+      ],
+      "radioGroup": [
+        "./dist/components/radio/radioGroup/index.d.ts"
+      ],
+      "richText": [
+        "./dist/components/richText/index.d.ts"
+      ],
+      "searchPlaces": [
+        "./dist/components/searchPlaces.d.ts"
+      ],
+      "select": [
+        "./dist/components/select/index.d.ts"
+      ],
+      "slider": [
+        "./dist/components/slider/index.d.ts"
+      ],
+      "styles": [
+        "./styles.d.ts"
+      ],
+      "switch": [
+        "./dist/components/switch/index.d.ts"
+      ],
+      "tabButton": [
+        "./dist/components/tab/tabButton/index.d.ts"
+      ],
+      "tabContainer": [
+        "./dist/components/tab/tabContainer/index.d.ts"
+      ],
+      "tableBody": [
+        "./dist/components/table/tableBody/index.d.ts"
+      ],
+      "tableCaption": [
+        "./dist/components/table/tableCaption/index.d.ts"
+      ],
+      "tableContainer": [
+        "./dist/components/table/tableContainer/index.d.ts"
+      ],
+      "tableFooter": [
+        "./dist/components/table/tableFooter/index.d.ts"
+      ],
+      "tableHeader": [
+        "./dist/components/table/tableHeader/index.d.ts"
+      ],
+      "textarea": [
+        "./dist/components/textarea/index.d.ts"
+      ],
+      "toastProvider": [
+        "./dist/providers/toastProvider.d.ts"
+      ],
+      "toHtml": [
+        "./dist/services/toHtml.d.ts"
+      ],
+      "tooltip": [
+        "./dist/components/tooltip/index.d.ts"
+      ],
+      "toRichTextValue": [
+        "./dist/services/toRichTextValue.d.ts"
+      ],
+      "useAutomation": [
+        "./dist/hooks/useAutomation.d.ts"
+      ],
+      "useDrawer": [
+        "./dist/hooks/useDrawer.d.ts"
+      ],
+      "useForm": [
+        "./dist/hooks/useForm.d.ts"
+      ],
+      "useHydrated": [
+        "./dist/hooks/useHydrated.d.ts"
+      ],
+      "useModal": [
+        "./dist/hooks/useModal.d.ts"
+      ],
+      "useScopedParams": [
+        "./dist/hooks/useScopedParams.d.ts"
+      ],
+      "useScrollLock": [
+        "./dist/hooks/useScrollLock.d.ts"
+      ],
+      "useSearchAutomation": [
+        "./dist/hooks/useSearchAutomation.d.ts"
+      ],
+      "useSlider": [
+        "./dist/hooks/useSlider.d.ts"
+      ],
+      "useToast": [
+        "./dist/hooks/useToast.d.ts"
+      ]
     }
   }
 }

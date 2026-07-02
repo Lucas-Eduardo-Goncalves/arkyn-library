@@ -1,0 +1,126 @@
+# ==========================================================
+# Nome exibido na aba "Actions" do GitHub
+# ==========================================================
+name: Pull request
+
+# ==========================================================
+# Eventos que disparam este workflow
+# ==========================================================
+on:
+  # Sempre que um pull request for aberto, atualizado ou reaberto...
+  pull_request:
+    # ...tendo a branch develop como destino
+    branches:
+      - develop
+
+# ==========================================================
+# Lista de trabalhos
+# ==========================================================
+jobs:
+  # Nome interno do trabalho
+  pull-request:
+    # Máquina virtual utilizada pelo GitHub
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    # Impede que duas execuções do mesmo pull request rodem ao mesmo tempo,
+    # sem cancelar a execução de outros pull requests em paralelo.
+    concurrency:
+      group: pull-request-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+
+    # Lista de etapas executadas em sequência.
+    steps:
+      # ------------------------------------------------------
+      # Faz o clone do repositório.
+      # Equivalente ao comando:
+      #
+      # git clone ...
+      # ------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      # ------------------------------------------------------
+      # Garante o ambiente Node.js limpo na máquina.
+      # ------------------------------------------------------
+      - name: Setup Node.js (NPM Registry Auth)
+        uses: actions/setup-node@v5
+        with:
+          node-version: 26
+          registry-url: https://registry.npmjs.org
+
+      # ------------------------------------------------------
+      # Instala o Bun.
+      # ------------------------------------------------------
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          # Sempre utiliza a versão mais recente.
+          bun-version: latest
+
+      # ------------------------------------------------------
+      # Instala todas as dependências.
+      # O --frozen-lockfile garante que o bun.lock esteja
+      # sincronizado com o package.json.
+      # ------------------------------------------------------
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # ------------------------------------------------------
+      # Verifica vulnerabilidades.
+      # ------------------------------------------------------
+      - name: Security audit
+        run: bun run all:audit
+
+      # ------------------------------------------------------
+      # Garante que nenhum pacote @types/* esteja listado
+      # em "dependencies". Eles devem ficar apenas em
+      # "devDependencies".
+      # ------------------------------------------------------
+      - name: Verify @types dependencies
+        shell: bash
+        run: |
+          found=0
+
+          while IFS= read -r file; do
+            if jq -e '.dependencies // {} | keys[] | startswith("@types/")' "$file" > /dev/null; then
+              echo "❌ $file possui @types em dependencies"
+              jq '.dependencies' "$file"
+              found=1
+            fi
+          done < <(find packages -name package.json)
+
+          if [ "$found" -eq 1 ]; then
+            echo ""
+            echo "Erro: pacotes @types devem estar em devDependencies."
+            exit 1
+          fi
+
+          echo "✅ Nenhum @types encontrado em dependencies."
+
+      # ------------------------------------------------------
+      # Verifica vulnerabilidades de código com o Biome.
+      # ------------------------------------------------------
+      - name: Biome check
+        run: bun run biome:check:ci
+
+      # ------------------------------------------------------
+      # Compila todos os pacotes.
+      # ------------------------------------------------------
+      - name: Build packages
+        run: bun run all:build
+
+      # ------------------------------------------------------
+      # Executa a verificação de tipos.
+      # ------------------------------------------------------
+      - name: Run typecheck
+        run: bun run all:typecheck
+
+      # ------------------------------------------------------
+      # Executa todos os testes.
+      # Caso algum falhe, o workflow para aqui.
+      # ------------------------------------------------------
+      - name: Run tests
+        run: bun run all:test

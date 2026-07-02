@@ -22,7 +22,7 @@ Backend code — Remix/React Router loaders and actions, or any fetch-based serv
 
 ## 📋 Prerequisites
 
-- **Node.js** `>=24.16.0` or **Bun** `>=1.3.14`
+- **Node.js** `>=18.0.0` or **Bun** `>=1.0.0`
 - Peer dependencies (install alongside `@arkyn/server`):
   - `zod >=4.4.3` — required by `SchemaValidator`, `formParse`, and `formAsyncParse`.
   - `libphonenumber-js >=1.13.7` — required by `validatePhone`.

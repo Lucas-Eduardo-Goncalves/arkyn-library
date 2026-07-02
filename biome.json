@@ -66,12 +66,6 @@
 					}
 				}
 			}
-		},
-		{
-			"includes": ["**/package.json"],
-			"formatter": {
-				"enabled": false
-			}
 		}
 	]
 }

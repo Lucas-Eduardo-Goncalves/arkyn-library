@@ -106,7 +106,7 @@
         "libphonenumber-js": "catalog:",
         "vite": "catalog:",
         "vitest": "catalog:",
-        "zod": "^4.4.3",
+        "zod": "catalog:",
       },
       "peerDependencies": {
         "libphonenumber-js": ">=1.13.7",
@@ -147,6 +147,7 @@
     "lucide-react": ">=1.14.0",
     "vite": "^8.1.0",
     "vitest": "^4.1.9",
+    "zod": "^4.4.3",
   },
   "packages": {
     "@adobe/css-tools": ["@adobe/css-tools@4.5.0", "", {}, "sha512-6OzddxPio9UiWTCemp4N8cYLV2ZN1ncRnV1cVGtve7dhPOtRkleRyx32GQCYSwDYgaHU3USMm84tNsvKzRCa1Q=="],

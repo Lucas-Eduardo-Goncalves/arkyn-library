@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { LogMapperService } from "../logMapperService";
+import { LogMapperService } from "../../api/_logMapperService";
 
 describe("LogMapperService", () => {
 	describe("handle", () => {

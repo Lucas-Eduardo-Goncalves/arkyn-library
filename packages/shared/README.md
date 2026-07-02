@@ -25,8 +25,8 @@ Comprehensive collection of reusable utilities for data formatting, validation, 
 
 ## 📋 Prerequisites
 
-- **Node.js** `>=24.16.0`
-- **Bun** `>=1.3.14`
+- **Node.js** `>=18.0.0`
+- **Bun** `>=1.0.0`
 - **`libphonenumber-js`** `>=1.13.7` — optional peer dependency, required only if you use `formatToPhone` or `findCountryMask`
 
 ## 📦 Installation

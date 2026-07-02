@@ -27,7 +27,7 @@ Every React/Remix/React Router/Next app ends up rebuilding the same UI primitive
 
 ## 📋 Prerequisites
 
-- **Node.js** `>=24.16.0` or **Bun** `>=1.3.14`
+- **Node.js** `>=18.0.0` or **Bun** `>=1.0.0`
 - Always-required peer dependencies:
   - `react >=18.0.0`
   - `react-dom >=18.0.0`

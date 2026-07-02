@@ -9,6 +9,7 @@ interface ExportEntry {
 
 interface PackageJson {
 	exports?: Record<string, ExportEntry>;
+	typesVersions?: Record<string, Record<string, string[]>>;
 	[key: string]: unknown;
 }
 
@@ -22,6 +23,9 @@ const packageJson = (await Bun.file(
 ).json()) as PackageJson;
 
 const exportsMap: Record<string, ExportEntry> = {};
+const typesVersionsMap: Record<string, string[]> = {
+	styles: ["./styles.d.ts"],
+};
 
 const regex =
 	/export\s+(?:\*|\{[\s\S]*?\}|type\s+\{[\s\S]*?\})\s+from\s+["'](.+)["']/g;
@@ -53,6 +57,8 @@ for (const match of indexContent.matchAll(regex)) {
 		types: distTypes,
 		default: distImport,
 	};
+
+	typesVersionsMap[exportName] = [distTypes];
 }
 
 packageJson.exports = {
@@ -71,9 +77,18 @@ packageJson.exports = {
 	),
 };
 
+packageJson.typesVersions = {
+	"*": Object.fromEntries(
+		Object.entries(typesVersionsMap).sort(([a], [b]) => a.localeCompare(b)),
+	),
+};
+
 await Bun.write(
 	resolve(root, "package.json"),
 	`${JSON.stringify(packageJson, null, 2)}\n`,
 );
 
 console.log(`Added ${Object.keys(exportsMap).length + 2} exports.`);
+console.log(
+	`Added ${Object.keys(typesVersionsMap).length} typesVersions fallbacks.`,
+);

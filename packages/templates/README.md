@@ -21,8 +21,8 @@ Building phone inputs, address forms, or currency formatters usually means sourc
 
 ## 📋 Prerequisites
 
-- Node.js `>=24.16.0`
-- Bun `>=1.3.14` (only if building/developing the monorepo itself)
+- Node.js `>=18.0.0`
+- Bun `>=1.0.0` (only if building/developing the monorepo itself)
 
 This package has no runtime dependencies and no peer dependencies — it can be installed standalone.
 

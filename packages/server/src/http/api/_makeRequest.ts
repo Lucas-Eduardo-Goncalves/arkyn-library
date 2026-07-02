@@ -1,5 +1,5 @@
 import { flushDebugLogs } from "../..";
-import { LogMapperService } from "../../services/logMapperService";
+import { LogMapperService } from "./_logMapperService";
 import { logRequest } from "./_logRequest";
 
 type InputProps = {

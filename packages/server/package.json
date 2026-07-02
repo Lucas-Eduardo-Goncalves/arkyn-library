@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/server",
-  "version": "3.0.1-beta.201",
+  "version": "3.0.1-beta.202",
   "author": "Arkyn | Lucas Gonçalves",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -19,9 +19,12 @@
     "typescript",
     "zod"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
-    "node": ">=24.16.0",
-    "bun": ">=1.3.14"
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
   },
   "homepage": "https://docs.arkyn.dev/docs/server/introduction",
   "repository": {
@@ -37,7 +40,7 @@
   "sideEffects": false,
   "scripts": {
     "audit": "bun audit --workspace packages/server",
-    "build": "bunx vite build && bunx tsc --project tsconfig.json --emitDeclarationOnly && bun ./generate-exports.ts",
+    "build": "bunx vite build && bunx tsc --project tsconfig.json --emitDeclarationOnly && bun ./generate-exports.ts && rm -f dist/modules/index.js dist/modules/style.css",
     "prebuild": "rm -rf dist",
     "publish:beta": "npm publish --tag beta",
     "publish:latest": "npm publish --tag latest",
@@ -59,7 +62,7 @@
     "libphonenumber-js": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:",
-    "zod": "^4.4.3"
+    "zod": "catalog:"
   },
   "exports": {
     ".": {
@@ -231,6 +234,109 @@
       "import": "./dist/modules/validations/validateRg.js",
       "types": "./dist/validations/validateRg.d.ts",
       "default": "./dist/modules/validations/validateRg.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "apiService": [
+        "./dist/services/apiService.d.ts"
+      ],
+      "badGateway": [
+        "./dist/http/badResponses/badGateway.d.ts"
+      ],
+      "badRequest": [
+        "./dist/http/badResponses/badRequest.d.ts"
+      ],
+      "conflict": [
+        "./dist/http/badResponses/conflict.d.ts"
+      ],
+      "created": [
+        "./dist/http/successResponses/created.d.ts"
+      ],
+      "debugService": [
+        "./dist/services/debugService.d.ts"
+      ],
+      "decodeRequestBody": [
+        "./dist/utilities/decodeRequestBody.d.ts"
+      ],
+      "decodeRequestErrorMessage": [
+        "./dist/utilities/decodeRequestErrorMessage.d.ts"
+      ],
+      "errorHandler": [
+        "./dist/utilities/errorHandler.d.ts"
+      ],
+      "flushDebugLogs": [
+        "./dist/utilities/flushDebugLogs.d.ts"
+      ],
+      "forbidden": [
+        "./dist/http/badResponses/forbidden.d.ts"
+      ],
+      "formAsyncParse": [
+        "./dist/utilities/formAsyncParse.d.ts"
+      ],
+      "formParse": [
+        "./dist/utilities/formParse.d.ts"
+      ],
+      "found": [
+        "./dist/http/successResponses/found.d.ts"
+      ],
+      "getScopedParams": [
+        "./dist/utilities/getScopedParams.d.ts"
+      ],
+      "logService": [
+        "./dist/services/logService.d.ts"
+      ],
+      "noContent": [
+        "./dist/http/successResponses/noContent.d.ts"
+      ],
+      "notFound": [
+        "./dist/http/badResponses/notFound.d.ts"
+      ],
+      "notImplemented": [
+        "./dist/http/badResponses/notImplemented.d.ts"
+      ],
+      "schemaValidator": [
+        "./dist/utilities/schemaValidator.d.ts"
+      ],
+      "serverError": [
+        "./dist/http/badResponses/serverError.d.ts"
+      ],
+      "success": [
+        "./dist/http/successResponses/success.d.ts"
+      ],
+      "unauthorized": [
+        "./dist/http/badResponses/unauthorized.d.ts"
+      ],
+      "unprocessableEntity": [
+        "./dist/http/badResponses/unprocessableEntity.d.ts"
+      ],
+      "updated": [
+        "./dist/http/successResponses/updated.d.ts"
+      ],
+      "validateCep": [
+        "./dist/validations/validateCep.d.ts"
+      ],
+      "validateCnpj": [
+        "./dist/validations/validateCnpj.d.ts"
+      ],
+      "validateCpf": [
+        "./dist/validations/validateCpf.d.ts"
+      ],
+      "validateDate": [
+        "./dist/validations/validateDate.d.ts"
+      ],
+      "validateEmail": [
+        "./dist/validations/validateEmail.d.ts"
+      ],
+      "validatePassword": [
+        "./dist/validations/validatePassword.d.ts"
+      ],
+      "validatePhone": [
+        "./dist/validations/validatePhone.d.ts"
+      ],
+      "validateRg": [
+        "./dist/validations/validateRg.d.ts"
+      ]
     }
   }
 }

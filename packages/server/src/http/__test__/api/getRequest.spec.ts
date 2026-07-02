@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { getRequest } from "../../api/_getRequest";
 import { makeRequest } from "../../api/_makeRequest";
-import { getRequest } from "../../api/getRequest";
 
 vi.mock("../../api/_makeRequest", () => ({
 	makeRequest: vi.fn(),

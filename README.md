@@ -116,8 +116,8 @@ This monorepo uses [Bun](https://bun.sh/) as the package manager, workspace runn
 
 ### Prerequisites
 
-- [Bun](https://bun.sh/) `>=1.3.14`
-- Node.js `>=24.16.0`
+- [Bun](https://bun.sh/) `>=1.0.0`
+- Node.js `>=18.0.0`
 
 ### Setup
 

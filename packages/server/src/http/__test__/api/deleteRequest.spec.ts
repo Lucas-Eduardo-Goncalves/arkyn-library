@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { deleteRequest } from "../../api/_deleteRequest";
 import { makeRequest } from "../../api/_makeRequest";
-import { deleteRequest } from "../../api/deleteRequest";
 
 vi.mock("../../api/_makeRequest", () => ({
 	makeRequest: vi.fn(),
