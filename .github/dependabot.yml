@@ -82,12 +82,8 @@ updates:
         dependency-type: production
 
     # ------------------------------------------------------
-    # Permite apenas atualizações de versão estáveis.
-    #
-    # Impede que versões alpha, beta ou rc sejam abertas
-    # automaticamente pelo Dependabot.
+    # Nenhuma dependência é ignorada por padrão: atualizações
+    # major também geram PR (revisão manual antes de merge),
+    # para não perder visibilidade sobre bumps que podem
+    # trazer correções de segurança relevantes.
     # ------------------------------------------------------
-    ignore:
-      - dependency-name: "*"
-        update-types:
-          - "version-update:semver-major"

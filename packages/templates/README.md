@@ -28,6 +28,8 @@ This package has no runtime dependencies and no peer dependencies — it can be 
 
 ## 📦 Installation
 
+> **ESM only.** This package ships as native ES modules with no CommonJS build — use `import`, not `require()`.
+
 ```bash
 npm install @arkyn/templates
 ```

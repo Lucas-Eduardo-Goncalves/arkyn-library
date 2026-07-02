@@ -48,6 +48,8 @@ Only install these if you use the specific component/hook that needs them:
 
 ## 📦 Installation
 
+> **ESM only.** This package ships as native ES modules with no CommonJS build — use `import`, not `require()`.
+
 ```bash
 npm install @arkyn/components react react-dom lucide-react
 ```

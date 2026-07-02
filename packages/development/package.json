@@ -10,9 +10,6 @@
   },
   "dependencies": {
     "@arkyn/components": "workspace:*",
-    "@arkyn/server": "workspace:*",
-    "@arkyn/shared": "workspace:*",
-    "@arkyn/templates": "workspace:*",
     "@react-router/node": "8.0.0",
     "@react-router/serve": "8.0.0",
     "is-hotkey": "^0.2.0",

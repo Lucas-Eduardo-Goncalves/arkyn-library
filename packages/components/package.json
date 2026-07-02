@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/components",
-  "version": "3.0.1-beta.200",
+  "version": "3.0.1-beta.201",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -53,8 +53,7 @@
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
   "sideEffects": [
-    "*.css",
-    "dist/components.css"
+    "*.css"
   ],
   "peerDependencies": {
     "@react-google-maps/api": ">=2.0.0",

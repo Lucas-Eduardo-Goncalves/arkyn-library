@@ -29,6 +29,8 @@ Backend code — Remix/React Router loaders and actions, or any fetch-based serv
 
 ## 📦 Installation
 
+> **ESM only.** This package ships as native ES modules with no CommonJS build — use `import`, not `require()`.
+
 ```bash
 npm install @arkyn/server zod libphonenumber-js
 ```

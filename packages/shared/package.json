@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/shared",
-  "version": "3.0.1-beta.200",
+  "version": "3.0.1-beta.201",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "type": "module",
@@ -27,7 +27,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lucas-Eduardo-Goncalves/arkyn-library.git",
-    "directory": "packages/components"
+    "directory": "packages/shared"
   },
   "files": [
     "dist",

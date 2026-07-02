@@ -31,6 +31,8 @@ Comprehensive collection of reusable utilities for data formatting, validation, 
 
 ## 📦 Installation
 
+> **ESM only.** This package ships as native ES modules with no CommonJS build — use `import`, not `require()`.
+
 ```bash
 npm install @arkyn/shared
 ```
