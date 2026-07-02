@@ -56,8 +56,8 @@
 		"components:test": "cd packages/components && bun run test",
 		"components:test:watch": "cd packages/components && bun run test:watch",
 		"components:typecheck": "cd packages/components && bun run typecheck",
-    "development:dev": "cd packages/development && bun run dev",
-    "development:typecheck": "cd packages/development && bun run typecheck",
+    "development:dev": "cd apps/development && bun run dev",
+    "development:typecheck": "cd apps/development && bun run typecheck",
 		"server:audit": "cd packages/server && bun run audit",
 		"server:build": "cd packages/server && bun run build",
 		"server:publish:beta": "cd packages/server && bun run publish:beta",
@@ -91,6 +91,7 @@
 	},
 	"type": "module",
 	"workspaces": [
-		"packages/*"
+		"packages/*",
+    "apps/*"
 	]
 }
