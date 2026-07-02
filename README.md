@@ -1,71 +1,65 @@
 # Arkyn
 
-A comprehensive TypeScript ecosystem for building modern web applications with React and Remix. Arkyn provides a complete set of tools, components, and utilities to accelerate your development workflow.
+A TypeScript ecosystem of independent, framework-friendly packages for building React/Remix/React Router applications — UI components, server-side utilities, framework-agnostic helpers, and reference data — designed so each package can be adopted on its own or combined across the stack.
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-blue.svg)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-18.3.1+-blue.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
 ## 📦 Packages
 
-Arkyn is organized as a monorepo containing four main packages:
+Arkyn is a monorepo of four published packages, plus an internal development app used to preview and test them.
 
 ### [@arkyn/components](./packages/components)
 
-A modern React component library designed specifically for Remix applications, featuring:
+A complete, accessible, TypeScript-first React UI kit — 51 components, 10 hooks, 5 context providers, and 2 services — so teams stop rebuilding the same buttons, inputs, modals, drawers, and tables on every project.
 
-- 🎨 **40+ UI Components** - Buttons, inputs, modals, tables, and more
-- 🎭 **Smooth Animations** - Powered by Framer Motion
-- 🪝 **Custom Hooks** - Form handling, modals, drawers, and utilities
-- 🎯 **TypeScript First** - Full type safety and IntelliSense support
-- 📱 **Responsive Design** - Mobile-first approach with modern CSS
+- 🧱 **Forms & inputs** - `Input`, `Select`, `MultiSelect`, `Checkbox`, `Switch`, `RadioGroup`, `CurrencyInput`, `MaskedInput`, `PhoneInput`, `Slider`, and more, all wired into a shared form-validation context
+- 🪟 **Overlays** - Modals, drawers, popovers, and tooltips with their own providers/hooks
+- 📁 **Uploads, tables, calendars, rich text** - `FileUpload`/`ImageUpload`/`AudioUpload`, a full table set, `Calendar`/`FullCalendar`, and a Slate.js-based `RichText` editor
+- 🗺️ **Integrations** - Google Places/Maps, Mapbox, Google Analytics, Google Tag Manager, Facebook Pixel
 
 ### [@arkyn/server](./packages/server)
 
-Server-side utilities and configurations for backend development:
+Server-side building blocks for Remix/React Router loaders and actions (or any fetch-based backend): typed HTTP responses, request parsing, Zod-based schema validation, and validators for Brazilian documents and common fields.
 
-- 🌐 **HTTP Utilities** - Pre-configured responses and error handlers
-- ⚙️ **API Instances** - Ready-to-use configurations for external services
-- 🔍 **Request Helpers** - Body parsing, parameter extraction, and debugging
-- ☁️ **AWS Integration** - S3 file upload utilities
-- 🛡️ **Schema Validation** - Data validation with Zod integration
+- 🌐 **HTTP responses** - 5 success classes (`Success`, `Created`, `Updated`, `Found`, `NoContent`) and 9 error classes (`BadRequest`, `Unauthorized`, `Forbidden`, `NotFound`, `Conflict`, `UnprocessableEntity`, `ServerError`, `BadGateway`, `NotImplemented`)
+- 🧵 **Request utilities** - `decodeRequestBody`, `formParse`/`formAsyncParse`, `getScopedParams`, `errorHandler`
+- 🇧🇷 **Validators** - `validateCpf`, `validateCnpj`, `validateCep`, `validateRg`, plus `validateEmail`, `validatePassword`, `validatePhone`, `validateDate`
+- 🛠️ **Services** - `ApiService` (typed fetch client), `SchemaValidator` (Zod wrapper), `DebugService`/`LogService`
 
 ### [@arkyn/shared](./packages/shared)
 
-Reusable utilities for consistent data handling across your application:
+A dependency-light, framework-agnostic toolkit for formatting, validating, generating, and parsing data — the shared foundation consumed by both `@arkyn/components` and `@arkyn/server`, and safe to use directly in your own client or server code.
 
-- 📅 **Date Formatting** - Flexible date manipulation and timezone support
-- 🏦 **Financial Utilities** - Currency formatting and installment calculations
-- 🔒 **Data Validation** - CPF, CNPJ, CEP, phone number validators
-- 🎨 **String Utilities** - Slug generation, masking, and formatting
-- 🔧 **General Helpers** - ID generation, color utilities, and more
+- 📅 **Formatting** - dates, currency, CPF/CNPJ/CEP, phone numbers, text capitalization/ellipsis/digit-hiding
+- 🔧 **Generators** - UUID (v4/v7) ids, URL slugs, deterministic colors from strings
+- 🧩 **Parsers & utilities** - JSON pretty-printing, large-field truncation, sensitive-data masking, HTML stripping
 
 ### [@arkyn/templates](./packages/templates)
 
-Ready-to-use data templates and constants:
+Ready-to-use static reference data — country lists with phone masks, Brazilian states, and currency/locale metadata — so you don't have to source and maintain it yourself. Zero dependencies.
 
-- 🌍 **Countries Data** - Complete list with flags, codes, and phone masks
-- 🇧🇷 **Brazilian States** - State codes and names
-- 💱 **Currency Information** - Country currencies and formatting rules
-- 📊 **Locale Data** - Maximum fraction digits for different currencies
+- 🌍 **`countries`** - 245 countries with ISO code, dialing code, flag, and phone mask(s)
+- 🇧🇷 **`brazilianStates`** - all 26 states plus the Federal District
+- 💱 **`countryCurrencies`** / **`maximumFractionDigits`** - locale/currency pairs for `Intl.NumberFormat`, used internally by `@arkyn/shared`'s `formatToCurrency`
 
 ## 🚀 Quick Start
 
 ### Installation
 
-Install the packages you need for your project:
+Install only the packages you need — each one works standalone:
 
 ```bash
-# For React applications
+# UI components (also needs its peer deps — see the package README)
 npm install @arkyn/components
 
-# For server-side development
-npm install @arkyn/server
+# Server-side utilities (needs zod + libphonenumber-js)
+npm install @arkyn/server zod libphonenumber-js
 
-# For shared utilities
+# Framework-agnostic utilities
 npm install @arkyn/shared
 
-# For data templates
+# Static reference data
 npm install @arkyn/templates
 ```
 
@@ -73,14 +67,16 @@ npm install @arkyn/templates
 
 ```tsx
 // Using components
-import { Button, Input, Modal } from "@arkyn/components";
+import { Button, FieldWrapper, FieldLabel, Input } from "@arkyn/components";
+import "@arkyn/components/styles";
 
-function App() {
+function LoginForm() {
   return (
-    <div>
-      <Input placeholder="Enter your name" />
-      <Button variant="primary">Submit</Button>
-    </div>
+    <FieldWrapper>
+      <FieldLabel>Email</FieldLabel>
+      <Input name="email" type="email" placeholder="you@example.com" />
+      <Button type="submit">Sign in</Button>
+    </FieldWrapper>
   );
 }
 ```
@@ -92,7 +88,7 @@ import { Success, errorHandler } from "@arkyn/server";
 export async function loader() {
   try {
     const data = await fetchData();
-    return Success(data);
+    return new Success("Data fetched", data).toJson();
   } catch (error) {
     return errorHandler(error);
   }
@@ -101,10 +97,9 @@ export async function loader() {
 
 ```ts
 // Using shared utilities
-import { formatToCpf, validateCpf } from "@arkyn/shared";
+import { formatToCpf } from "@arkyn/shared";
 
-const cpf = formatToCpf("12345678901"); // 123.456.789-01
-const isValid = validateCpf(cpf); // true
+const cpf = formatToCpf("12345678909"); // "123.456.789-09"
 ```
 
 ```ts
@@ -112,32 +107,32 @@ const isValid = validateCpf(cpf); // true
 import { countries, brazilianStates } from "@arkyn/templates";
 
 const brazil = countries.find((country) => country.iso === "BR");
-const saoPaulo = brazilianStates.find((state) => state.code === "SP");
+const saoPaulo = brazilianStates.find((state) => state.value === "SP");
 ```
 
 ## 🛠️ Development
 
-This project uses Bun as the package manager and build tool.
+This monorepo uses [Bun](https://bun.sh/) as the package manager, workspace runner, and build tool.
 
 ### Prerequisites
 
-- [Bun](https://bun.sh/) (latest version)
-- Node.js 18.3.1 or higher
+- [Bun](https://bun.sh/) `>=1.3.14`
+- Node.js `>=24.16.0`
 
 ### Setup
 
 ```bash
 # Clone the repository
-git clone https://github.com/Lucas-Eduardo-Goncalves/arkyn.git
-cd arkyn
+git clone https://github.com/Lucas-Eduardo-Goncalves/arkyn-library.git
+cd arkyn-library
 
 # Install dependencies
 bun install
 
-# Build all packages
+# Build all publishable packages (templates → shared → components → server)
 bun run all:build
 
-# Run tests
+# Run tests across all packages
 bun run all:test
 
 # Type check all packages
@@ -146,47 +141,33 @@ bun run all:typecheck
 
 ### Available Scripts
 
-- `bun run all:build` - Build all packages
-- `bun run all:test` - Run tests for all packages
-- `bun run all:typecheck` - Type check all packages
-- `bun run dev:components` - Start components development server
-- `bun run all:beta` - Publish beta versions
-- `bun run all:prod` - Publish production versions
+- `bun run all:build` - Build `templates`, `shared`, `components`, and `server` in dependency order
+- `bun run all:test` - Run tests for `components`, `server`, and `shared`
+- `bun run all:typecheck` - Type check every package
+- `bun run all:audit` - Run `bun audit` across every package
+- `bun run development:dev` - Start the internal preview app (`packages/development`) used to test components locally
+- `bun run all:release:beta` / `all:release:patch` / `all:release:minor` / `all:release:major` - Bump versions across all packages
+- `bun run all:publish:beta` - Publish beta versions of all packages to npm
+- `bun run biome:check` / `bun run biome:format` - Lint/format the codebase with Biome
 
 ## 📖 Documentation
 
-Each package has its own documentation:
+Full guides, live previews, and prop tables live at [docs.arkyn.dev](https://docs.arkyn.dev). Each package also has its own README with a complete API reference:
 
 - [Components Documentation](./packages/components/README.md)
 - [Server Documentation](./packages/server/README.md)
 - [Shared Documentation](./packages/shared/README.md)
 - [Templates Documentation](./packages/templates/README.md)
 
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for more details.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
 ## 📄 License
 
-This project is licensed under the Apache 2.0 License - see the [LICENSE](./LICENSE) file for details.
+This project is licensed under the Apache 2.0 License — see each package's `LICENSE.txt` (e.g. [packages/components/LICENSE.txt](./packages/components/LICENSE.txt)) for details.
 
 ## 👨‍💻 Author
 
 **Arkyn | Lucas Gonçalves**
 
 - GitHub: [@Lucas-Eduardo-Goncalves](https://github.com/Lucas-Eduardo-Goncalves)
-
-## 🙏 Acknowledgments
-
-- Built with [React](https://reactjs.org/) and [Remix](https://remix.run/)
-- Styled with modern CSS and [Framer Motion](https://www.framer.com/motion/)
-- Powered by [TypeScript](https://www.typescriptlang.org/) and [Bun](https://bun.sh/)
 
 ---
 

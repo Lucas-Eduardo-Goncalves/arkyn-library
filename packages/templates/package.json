@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/templates",
-  "version": "3.0.1-beta.199",
+  "version": "3.0.1-beta.200",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "type": "module",
@@ -22,7 +22,7 @@
     "node": ">=24.16.0",
     "bun": ">=1.3.14"
   },
-  "homepage": "https://docs.arkyn.dev/en/templates/introduction",
+  "homepage": "https://docs.arkyn.dev/docs/templates/introduction",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lucas-Eduardo-Goncalves/arkyn-library.git",
