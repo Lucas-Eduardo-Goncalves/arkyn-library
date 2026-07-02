@@ -6,7 +6,7 @@
 	position: absolute;
 	z-index: 3;
 
-	background-color: var(--card);
+	background-color: var(--background-foreground);
 	border-radius: 8px;
 	box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
 }

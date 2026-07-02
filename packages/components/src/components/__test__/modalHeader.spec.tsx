@@ -1,9 +1,22 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { ModalContainer } from "../modal/modalContainer";
 import { ModalHeader } from "../modal/modalHeader";
+
+// ModalContainer only calls `makeInvisible` once its exit-animation
+// finishes (`animationend` on the overlay). jsdom exposes `WebkitAnimation`
+// (but not the unprefixed `animation`) on CSSStyleDeclaration, so React's
+// animation-event plugin resolves the onAnimationEnd DOM listener to the
+// prefixed `webkitAnimationEnd` name — same workaround as
+// modalContainer.spec.tsx's `fireAnimationEnd` helper.
+function settleExitAnimation(container: HTMLElement) {
+	const overlay = container.querySelector(".arkynModalContainerOverlay");
+	if (overlay) {
+		fireEvent(overlay, new Event("webkitAnimationEnd", { bubbles: true }));
+	}
+}
 
 describe("ModalHeader", () => {
 	afterEach(() => {
@@ -172,7 +185,7 @@ describe("ModalHeader", () => {
 		it("should call makeInvisible from context when clicked", async () => {
 			const makeInvisible = vi.fn();
 			const user = userEvent.setup();
-			render(
+			const { container } = render(
 				<ModalContainer isVisible makeInvisible={makeInvisible}>
 					<ModalHeader>Title</ModalHeader>
 				</ModalContainer>,
@@ -181,6 +194,7 @@ describe("ModalHeader", () => {
 			await user.click(
 				screen.getByRole("button", { name: "Close modal button" }),
 			);
+			settleExitAnimation(container);
 
 			expect(makeInvisible).toHaveBeenCalledTimes(1);
 		});
@@ -188,17 +202,23 @@ describe("ModalHeader", () => {
 		it("should call makeInvisible only once per click", async () => {
 			const makeInvisible = vi.fn();
 			const user = userEvent.setup();
-			render(
+			const { container } = render(
 				<ModalContainer isVisible makeInvisible={makeInvisible}>
 					<ModalHeader>Title</ModalHeader>
 				</ModalContainer>,
 			);
 
-			const closeButton = screen.getByRole("button", {
-				name: "Close modal button",
-			});
-			await user.click(closeButton);
-			await user.click(closeButton);
+			await user.click(
+				screen.getByRole("button", { name: "Close modal button" }),
+			);
+			settleExitAnimation(container);
+			// The mock `makeInvisible` never flips `isVisible` to false, so
+			// ModalContainer's effect remounts itself — query again for the
+			// fresh close button instance instead of reusing the detached one.
+			await user.click(
+				screen.getByRole("button", { name: "Close modal button" }),
+			);
+			settleExitAnimation(container);
 
 			expect(makeInvisible).toHaveBeenCalledTimes(2);
 		});
@@ -263,7 +283,7 @@ describe("ModalHeader", () => {
 		it("should be reachable via keyboard and activatable with Enter", async () => {
 			const makeInvisible = vi.fn();
 			const user = userEvent.setup();
-			render(
+			const { container } = render(
 				<ModalContainer isVisible makeInvisible={makeInvisible}>
 					<ModalHeader>Title</ModalHeader>
 				</ModalContainer>,
@@ -276,6 +296,7 @@ describe("ModalHeader", () => {
 			expect(closeButton).toHaveFocus();
 
 			await user.keyboard("{Enter}");
+			settleExitAnimation(container);
 
 			expect(makeInvisible).toHaveBeenCalledTimes(1);
 		});

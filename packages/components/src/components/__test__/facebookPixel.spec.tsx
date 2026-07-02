@@ -4,7 +4,7 @@ import { FacebookPixel } from "../facebookPixel";
 
 const facebookPixelClientMock = vi.fn();
 
-vi.mock("../facebookPixel.client", () => ({
+vi.mock("../facebookPixel/facebookPixel.client", () => ({
 	FacebookPixelClient: (props: Record<string, unknown>) => {
 		facebookPixelClientMock(props);
 		return <div data-testid="facebook-pixel-client" />;

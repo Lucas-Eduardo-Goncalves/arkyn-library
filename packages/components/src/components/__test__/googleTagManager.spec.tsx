@@ -4,7 +4,7 @@ import { GoogleTagManager } from "../googleTagManager";
 
 const googleTagManagerClientMock = vi.fn();
 
-vi.mock("../googleTagManager.client", () => ({
+vi.mock("../googleTagManager/googleTagManager.client", () => ({
 	GoogleTagManagerClient: (props: Record<string, unknown>) => {
 		googleTagManagerClientMock(props);
 		return <div data-testid="google-tag-manager-client" />;

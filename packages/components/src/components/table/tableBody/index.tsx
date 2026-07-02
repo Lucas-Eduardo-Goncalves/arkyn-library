@@ -40,7 +40,8 @@ function TableBody(props: TableBodyProps) {
 	} = props;
 
 	const className = `arkynTableBody ${baseClassName}`;
-	const isEmpty = Children.count(children) === 0;
+	const childArray = Children.toArray(children).filter(Boolean);
+	const isEmpty = childArray.length === 0;
 
 	return (
 		<tbody className={className.trim()} {...rest}>
@@ -51,7 +52,7 @@ function TableBody(props: TableBodyProps) {
 					</td>
 				</tr>
 			) : (
-				children
+				childArray
 			)}
 		</tbody>
 	);

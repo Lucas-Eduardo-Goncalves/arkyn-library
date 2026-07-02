@@ -8,6 +8,14 @@ import { MaskedInput } from "../maskedInput";
 
 describe("MaskedInput", () => {
 	afterEach(() => {
+		// @react-input/core starts a self-rescheduling `window.setTimeout` poll
+		// loop on focus and only stops it on blur. Its own `unregister` (run on
+		// unmount) strips the blur listener without ever clearing that pending
+		// timeout, so any test that leaves the input focused permanently leaks
+		// it. Blur before `cleanup()` unmounts, while the listener still exists.
+		if (document.activeElement instanceof HTMLElement) {
+			document.activeElement.blur();
+		}
 		cleanup();
 	});
 
@@ -51,7 +59,7 @@ describe("MaskedInput", () => {
 				showAsterisk
 				leftIcon={CreditCard}
 				rightIcon={CreditCard}
-				defaultValue="11987654321"
+				defaultValue="(11) 98765-4321"
 				className="custom-class"
 				separate
 				showMask

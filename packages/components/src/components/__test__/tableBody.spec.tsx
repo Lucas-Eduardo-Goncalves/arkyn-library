@@ -344,8 +344,12 @@ describe("TableBody", () => {
 				</table>,
 			);
 
+			// jest-dom@6.9.1's `toHaveStyle` compares the raw expected value
+			// against jsdom's computed style, which serializes named colors as
+			// rgb() — asserting the keyword "red" mismatches even though the
+			// style is applied correctly. Assert with the serialized form.
 			const element = container.querySelector("tbody");
-			expect(element).toHaveStyle({ backgroundColor: "red" });
+			expect(element).toHaveStyle({ backgroundColor: "rgb(255, 0, 0)" });
 		});
 	});
 });

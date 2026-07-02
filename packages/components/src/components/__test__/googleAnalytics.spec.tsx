@@ -6,7 +6,7 @@ const googleAnalyticsClientMock = vi.fn(
 	(_props: { measurementId: string }) => null,
 );
 
-vi.mock("../googleAnalytics.client", () => ({
+vi.mock("../googleAnalytics/googleAnalytics.client", () => ({
 	GoogleAnalyticsClient: (props: { measurementId: string }) =>
 		googleAnalyticsClientMock(props),
 }));

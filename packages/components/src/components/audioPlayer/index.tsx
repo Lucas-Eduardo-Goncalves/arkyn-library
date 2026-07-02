@@ -157,7 +157,7 @@ function AudioPlayer(props: AudioPlayerProps): JSX.Element {
 			<audio
 				{...rest}
 				ref={audioReference}
-				src={props.src}
+				src={props.src || undefined}
 				onEnded={handlePauseAudio}
 			/>
 

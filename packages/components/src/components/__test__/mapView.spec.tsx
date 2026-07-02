@@ -4,7 +4,7 @@ import { MapView } from "../mapView";
 
 const clientMapViewMock = vi.fn();
 
-vi.mock("../mapView.client", () => ({
+vi.mock("../mapView/mapView.client", () => ({
 	ClientMapView: (props: Record<string, unknown>) => {
 		clientMapViewMock(props);
 		return <div data-testid="client-map-view" />;

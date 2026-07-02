@@ -9,7 +9,6 @@ A modern and comprehensive React component library. Built with TypeScript, featu
 ## ✨ Features
 
 - 🎨 **40+ UI Components** - Complete set of modern, accessible components
-- 🎭 **Smooth Animations** - Powered by Framer Motion for fluid interactions
 - 🪝 **Custom Hooks** - Powerful hooks for form handling, modals, drawers, and more
 - 🎯 **TypeScript First** - Full type safety and excellent IntelliSense support
 - 📱 **Responsive Design** - Mobile-first approach with modern CSS

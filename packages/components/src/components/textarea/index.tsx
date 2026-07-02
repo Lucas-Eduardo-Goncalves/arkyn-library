@@ -121,6 +121,7 @@ function Textarea(props: TextareaProps) {
 	const focusedClass = isFocused ? "focusedTrue" : "focusedFalse";
 
 	const className = `arkynTextarea ${variant} ${size} ${opacityClass} ${errorClass} ${focusedClass}`;
+	const domValue = disabled ? undefined : value;
 
 	function handleSectionClick() {
 		if (disabled || !textareaRef?.current) return;
@@ -160,9 +161,9 @@ function Textarea(props: TextareaProps) {
 					name={name}
 					onFocus={handleFocus}
 					onBlur={handleBlur}
-					defaultValue={defaultValue || ""}
+					defaultValue={domValue === undefined ? defaultValue || "" : undefined}
 					placeholder={disabled ? value || placeholder : placeholder}
-					value={disabled ? undefined : value}
+					value={domValue}
 					{...rest}
 				/>
 			</section>

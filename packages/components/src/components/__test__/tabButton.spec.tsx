@@ -505,12 +505,24 @@ describe("TabButton", () => {
 		});
 
 		it("should throw when clicked without a TabContainer ancestor", async () => {
+			// Per the DOM spec, exceptions thrown inside an event listener are
+			// reported to the global scope instead of propagating to whoever
+			// called `dispatchEvent` — so `user.click(...)` always resolves,
+			// even when the click handler throws. Assert on the global `error`
+			// event instead of expecting the click promise to reject.
 			const user = userEvent.setup();
 			render(<TabButton value="one">One</TabButton>);
 
-			await expect(
-				user.click(screen.getByRole("button", { name: "One" })),
-			).rejects.toThrow();
+			const onError = vi.fn((event: ErrorEvent) => {
+				event.preventDefault();
+			});
+			window.addEventListener("error", onError);
+
+			await user.click(screen.getByRole("button", { name: "One" }));
+
+			window.removeEventListener("error", onError);
+			expect(onError).toHaveBeenCalledTimes(1);
+			expect(onError.mock.calls[0]?.[0]?.error).toBeInstanceOf(TypeError);
 		});
 	});
 });

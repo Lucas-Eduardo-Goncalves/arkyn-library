@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { type ReactNode, useState } from "react";
 
 import { useScrollLock } from "../../hooks/useScrollLock";
@@ -99,17 +98,13 @@ function Popover(props: PopoverProps) {
 		<div className={className} onClick={handleOpenPopover}>
 			{button}
 
-			<motion.div
+			<div
 				style={{ visibility: isOpen ? "visible" : "hidden" }}
-				transition={{ ease: "easeOut", duration: 0 }}
-				initial={{ opacity: 0 }}
-				animate={{ opacity: isOpen ? 1 : 0 }}
-				exit={{ opacity: 0 }}
 				onClick={() => closeOnClick && setIsOpen(false)}
 				className="arkynPopoverContent"
 			>
 				{children}
-			</motion.div>
+			</div>
 
 			{isOpen && (
 				<div onClick={() => setIsOpen(false)} className="arkynPopoverOverlay" />
