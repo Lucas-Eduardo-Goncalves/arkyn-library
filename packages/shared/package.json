@@ -42,8 +42,8 @@
     "audit": "bun audit --workspace packages/shared",
     "build": "bunx vite build && bunx tsc --project tsconfig.json --emitDeclarationOnly && bun ./generate-exports.ts && rm -f dist/modules/index.js dist/modules/style.css",
     "prebuild": "rm -rf dist",
-    "publish:beta": "npm publish --tag beta",
-    "publish:latest": "npm publish --tag latest",
+    "publish:beta": "bun publish --tag beta",
+    "publish:latest": "bun publish --tag latest",
     "release:beta": "bun ./generate-version.ts beta",
     "release:patch": "bun ./generate-version.ts patch",
     "release:minor": "bun ./generate-version.ts minor",
@@ -52,9 +52,16 @@
     "test:watch": "bunx vitest --config vitest.config.ts --watch",
     "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@arkyn/templates": "workspace:*"
+  },
   "peerDependencies": {
     "libphonenumber-js": ">=1.13.7"
+  },
+  "peerDependenciesMeta": {
+    "libphonenumber-js": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@types/bun": "catalog:",

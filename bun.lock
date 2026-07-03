@@ -42,7 +42,11 @@
     },
     "packages/components": {
       "name": "@arkyn/components",
-      "version": "3.0.1-beta.201",
+      "version": "3.0.1-beta.202",
+      "dependencies": {
+        "@arkyn/shared": "workspace:*",
+        "@arkyn/templates": "workspace:*",
+      },
       "devDependencies": {
         "@react-google-maps/api": "^2.20.8",
         "@react-input/mask": "^2.0.4",
@@ -89,8 +93,11 @@
       },
       "optionalPeers": [
         "@react-google-maps/api",
+        "@react-input/mask",
+        "html-react-parser",
         "is-hotkey",
         "mapbox-gl",
+        "react-hot-toast",
         "react-scroll",
         "slate",
         "slate-history",
@@ -99,7 +106,11 @@
     },
     "packages/server": {
       "name": "@arkyn/server",
-      "version": "3.0.1-beta.201",
+      "version": "3.0.1-beta.202",
+      "dependencies": {
+        "@arkyn/shared": "workspace:*",
+        "@arkyn/templates": "workspace:*",
+      },
       "devDependencies": {
         "@types/bun": "catalog:",
         "@types/node": "catalog:",
@@ -115,7 +126,10 @@
     },
     "packages/shared": {
       "name": "@arkyn/shared",
-      "version": "3.0.1-beta.201",
+      "version": "3.0.1-beta.202",
+      "dependencies": {
+        "@arkyn/templates": "workspace:*",
+      },
       "devDependencies": {
         "@types/bun": "catalog:",
         "@types/node": "catalog:",
@@ -126,10 +140,13 @@
       "peerDependencies": {
         "libphonenumber-js": ">=1.13.7",
       },
+      "optionalPeers": [
+        "libphonenumber-js",
+      ],
     },
     "packages/templates": {
       "name": "@arkyn/templates",
-      "version": "3.0.1-beta.201",
+      "version": "3.0.1-beta.202",
       "devDependencies": {
         "@types/bun": "catalog:",
         "@types/node": "catalog:",
