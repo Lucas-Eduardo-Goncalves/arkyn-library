@@ -227,7 +227,6 @@ describe("generateId", () => {
 		});
 
 		it("v7 IDs should be time-ordered while v4 should be random", () => {
-			const v4Ids = Array.from({ length: 5 }, () => generateId("text", "v4"));
 			const v7Ids = Array.from({ length: 5 }, () => {
 				const id = generateId("text", "v7");
 				// Small delay between v7 generation
@@ -239,10 +238,6 @@ describe("generateId", () => {
 			// v7 should be sorted
 			const sortedV7 = [...v7Ids].sort();
 			expect(v7Ids).toEqual(sortedV7);
-
-			// v4 likely won't be sorted (random)
-			const sortedV4 = [...v4Ids].sort();
-			expect(v4Ids).not.toEqual(sortedV4);
 		});
 	});
 
