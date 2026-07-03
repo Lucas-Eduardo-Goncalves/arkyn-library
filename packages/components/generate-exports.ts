@@ -59,6 +59,20 @@ for (const match of indexContent.matchAll(regex)) {
 	};
 
 	typesVersionsMap[exportName] = [distTypes];
+
+	if (isDirectory && importPath.startsWith("components/")) {
+		const distCss = `./dist/modules/${importPath}/styles.css`;
+
+		if (await Bun.file(resolve(root, distCss)).exists()) {
+			exportsMap[`./${exportName}.css`] = {
+				import: distCss,
+				types: "./styles.d.ts",
+				default: distCss,
+			};
+
+			typesVersionsMap[`${exportName}.css`] = ["./styles.d.ts"];
+		}
+	}
 }
 
 packageJson.exports = {

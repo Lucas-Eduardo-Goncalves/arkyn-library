@@ -75,6 +75,17 @@ This package ships its own stylesheet, which must be imported once (e.g. in your
 import "@arkyn/components/styles";
 ```
 
+### Per-component styles
+
+If you only use a handful of components, importing the full stylesheet above pulls in CSS for all 40+ components. Every component subpath also exports a matching `.css` file containing just that component's styles (and those of any component it renders internally), so you can import only what you use instead:
+
+```tsx
+import { Button } from "@arkyn/components/button";
+import "@arkyn/components/button.css";
+```
+
+Each `<name>.css` file is self-contained — safe to import on its own without the aggregate `@arkyn/components/styles`. If you use several components, importing the aggregate stylesheet once is usually simpler and avoids any duplicate CSS between per-component files that share internals (e.g. `FileUpload` and `Button`).
+
 ## 🚀 Quick Start
 
 ```tsx

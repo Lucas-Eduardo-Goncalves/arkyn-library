@@ -30,6 +30,7 @@ export default defineConfig({
 	build: {
 		minify: true,
 		outDir: "./dist",
+		cssCodeSplit: true,
 		lib: {
 			entry: resolve(__dirname, "src/index.ts"),
 			name: "@arkyn/components",
@@ -42,6 +43,7 @@ export default defineConfig({
 				{
 					dir: "./dist",
 					entryFileNames: "index.js",
+					assetFileNames: "style.css",
 				},
 				{
 					dir: "./dist/modules",
