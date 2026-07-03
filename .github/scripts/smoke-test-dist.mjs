@@ -5,7 +5,12 @@
 // tooling itself on Node 18.
 import assert from "node:assert/strict";
 
-const packages = ["@arkyn/templates", "@arkyn/shared", "@arkyn/server", "@arkyn/components"];
+const packages = [
+	"@arkyn/templates",
+	"@arkyn/shared",
+	"@arkyn/server",
+	"@arkyn/components",
+];
 
 const results = [];
 
@@ -32,7 +37,9 @@ for (const result of results) {
 const failed = results.filter((result) => !result.ok);
 
 if (failed.length > 0) {
-	console.error(`\n${failed.length} package(s) failed to load under Node ${process.version}`);
+	console.error(
+		`\n${failed.length} package(s) failed to load under Node ${process.version}`,
+	);
 	process.exit(1);
 }
 
