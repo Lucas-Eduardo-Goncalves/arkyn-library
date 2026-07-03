@@ -1,6 +1,6 @@
 {
 	"name": "@arkyn/server",
-	"version": "3.0.1-beta.204",
+	"version": "3.0.1-beta.205",
 	"author": "Arkyn | Lucas Gonçalves",
 	"main": "./dist/index.js",
 	"module": "./dist/index.js",
@@ -39,8 +39,8 @@
 	],
 	"sideEffects": false,
 	"dependencies": {
-		"@arkyn/shared": "workspace:*",
-		"@arkyn/templates": "workspace:*"
+		"@arkyn/shared": ">=3.0.1-beta.205",
+		"@arkyn/templates": ">=3.0.1-beta.205"
 	},
 	"scripts": {
 		"audit": "bun audit --workspace packages/server",
