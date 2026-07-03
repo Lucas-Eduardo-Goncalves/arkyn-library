@@ -4,6 +4,7 @@ import {
 	type JSX,
 	type ReactNode,
 	useContext,
+	useMemo,
 } from "react";
 import { AlertTitle } from "../alertTitle";
 import "./styles.css";
@@ -91,8 +92,10 @@ function AlertContainer(props: AlertContainerProps): JSX.Element {
 
 	const className = `arkynAlertContainer ${scheme} ${finalClassName} ${baseClassName}`;
 
+	const value = useMemo(() => ({ scheme }), [scheme]);
+
 	return (
-		<AlertContainerContext.Provider value={props}>
+		<AlertContainerContext.Provider value={value}>
 			<div className={className.trim()} {...rest}>
 				{children}
 			</div>

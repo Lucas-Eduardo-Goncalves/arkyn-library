@@ -1,4 +1,4 @@
-import { createContext, type ReactNode, useContext } from "react";
+import { createContext, type ReactNode, useContext, useMemo } from "react";
 
 type ModalContextProps = {
 	makeInvisible: () => void;
@@ -12,8 +12,13 @@ type ModalProviderProps = {
 const modalContext = createContext({} as ModalContextProps);
 
 function ModalProvider(props: ModalProviderProps) {
+	const value = useMemo(
+		() => ({ makeInvisible: props.makeInvisible }),
+		[props.makeInvisible],
+	);
+
 	return (
-		<modalContext.Provider value={{ makeInvisible: props.makeInvisible }}>
+		<modalContext.Provider value={value}>
 			{props.children}
 		</modalContext.Provider>
 	);

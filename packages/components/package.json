@@ -132,9 +132,10 @@
     "react-dom": "^19.2.7",
     "react-hot-toast": "^2.6.0",
     "react-scroll": "^1.9.3",
-    "slate": "^0.124.1",
-    "slate-history": "^0.113.1",
-    "slate-react": "^0.124.2",
+    "slate": "catalog:",
+    "slate-history": "catalog:",
+    "slate-react": "catalog:",
+    "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
   },

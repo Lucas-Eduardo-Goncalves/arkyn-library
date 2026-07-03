@@ -1,4 +1,4 @@
-import { createContext, type ReactNode } from "react";
+import { createContext, type ReactNode, useMemo } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 type ToastProps = {
@@ -15,6 +15,39 @@ type ToastProviderProps = {
 };
 
 const toastContext = createContext({} as ToastContextProps);
+
+function showToast(props: ToastProps) {
+	switch (props.type) {
+		case "success":
+			return toast.success(props.message, {
+				style: {
+					background: "#10B981",
+					color: "#ffffff",
+					padding: "12px 16px",
+					fontSize: "14px",
+					fontWeight: 600,
+				},
+				iconTheme: {
+					primary: "#059669",
+					secondary: "#ffffff",
+				},
+			});
+		case "danger":
+			return toast.error(props.message, {
+				style: {
+					background: "#E11D48",
+					color: "#ffffff",
+					padding: "12px 16px",
+					fontSize: "14px",
+					fontWeight: 600,
+				},
+				iconTheme: {
+					primary: "#BE123C",
+					secondary: "#ffffff",
+				},
+			});
+	}
+}
 
 /**
  * ToastProvider — mounts a `react-hot-toast` `<Toaster>` and exposes `showToast` via context.
@@ -40,41 +73,10 @@ const toastContext = createContext({} as ToastContextProps);
  */
 
 function ToastProvider({ children }: ToastProviderProps) {
-	function showToast(props: ToastProps) {
-		switch (props.type) {
-			case "success":
-				return toast.success(props.message, {
-					style: {
-						background: "#10B981",
-						color: "#ffffff",
-						padding: "12px 16px",
-						fontSize: "14px",
-						fontWeight: 600,
-					},
-					iconTheme: {
-						primary: "#059669",
-						secondary: "#ffffff",
-					},
-				});
-			case "danger":
-				return toast.error(props.message, {
-					style: {
-						background: "#E11D48",
-						color: "#ffffff",
-						padding: "12px 16px",
-						fontSize: "14px",
-						fontWeight: 600,
-					},
-					iconTheme: {
-						primary: "#BE123C",
-						secondary: "#ffffff",
-					},
-				});
-		}
-	}
+	const value = useMemo(() => ({ showToast }), []);
 
 	return (
-		<toastContext.Provider value={{ showToast }}>
+		<toastContext.Provider value={value}>
 			<Toaster
 				position="top-right"
 				containerStyle={{ zIndex: 999999999999999 }}

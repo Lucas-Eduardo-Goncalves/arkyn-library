@@ -31,6 +31,7 @@ export default defineConfig({
 		minify: true,
 		outDir: "./dist",
 		cssCodeSplit: true,
+		sourcemap: true,
 		lib: {
 			entry: resolve(__dirname, "src/index.ts"),
 			name: "@arkyn/components",

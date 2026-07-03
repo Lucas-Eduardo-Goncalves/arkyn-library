@@ -1,4 +1,4 @@
-import { createContext, type ReactNode, useContext } from "react";
+import { createContext, type ReactNode, useContext, useMemo } from "react";
 
 type DrawerContextProps = {
 	makeInvisible: () => void;
@@ -12,8 +12,13 @@ type DrawerProviderProps = {
 const drawerContext = createContext({} as DrawerContextProps);
 
 function DrawerProvider(props: DrawerProviderProps) {
+	const value = useMemo(
+		() => ({ makeInvisible: props.makeInvisible }),
+		[props.makeInvisible],
+	);
+
 	return (
-		<drawerContext.Provider value={{ makeInvisible: props.makeInvisible }}>
+		<drawerContext.Provider value={value}>
 			{props.children}
 		</drawerContext.Provider>
 	);

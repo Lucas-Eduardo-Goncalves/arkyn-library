@@ -1,4 +1,4 @@
-import { createContext, type ReactNode, useContext } from "react";
+import { createContext, type ReactNode, useContext, useMemo } from "react";
 
 type CardTabContextProps = {
 	disabled: boolean;
@@ -20,8 +20,15 @@ function useCardTab() {
 }
 
 function CardTabProvider(props: CardTabProviderProps) {
+	const { disabled, currentTab, changeCurrentTab } = props;
+
+	const value = useMemo(
+		() => ({ disabled, currentTab, changeCurrentTab }),
+		[disabled, currentTab, changeCurrentTab],
+	);
+
 	return (
-		<CardTabContext.Provider value={props}>
+		<CardTabContext.Provider value={value}>
 			{props.children}
 		</CardTabContext.Provider>
 	);

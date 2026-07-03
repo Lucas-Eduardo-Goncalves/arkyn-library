@@ -6,6 +6,7 @@ export default defineConfig({
 	build: {
 		minify: true,
 		outDir: "./dist",
+		sourcemap: true,
 		lib: {
 			entry: resolve(__dirname, "src/index.ts"),
 			name: "@arkyn/shared",

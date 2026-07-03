@@ -17,9 +17,9 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router": "8.0.0",
-    "slate": "^0.124.1",
-    "slate-history": "^0.113.1",
-    "slate-react": "^0.125.1"
+    "slate": "catalog:",
+    "slate-history": "catalog:",
+    "slate-react": "catalog:"
   },
   "devDependencies": {
     "@react-router/dev": "8.0.0",
@@ -28,7 +28,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "lucide-react": "catalog:",
-    "typescript": "^5.9.3",
+    "typescript": "catalog:",
     "vite": "catalog:"
   }
 }

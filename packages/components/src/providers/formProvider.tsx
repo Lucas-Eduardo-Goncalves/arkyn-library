@@ -1,4 +1,4 @@
-import { cloneElement, createContext, type ReactNode } from "react";
+import { cloneElement, createContext, type ReactNode, useMemo } from "react";
 
 type FormContextProps = {
 	// biome-ignore lint/suspicious/noExplicitAny: intentional
@@ -43,8 +43,10 @@ const formContext = createContext({} as FormContextProps);
 function FormProvider(props: FormProviderProps) {
 	const { children, fieldErrors, form } = props;
 
+	const value = useMemo(() => ({ fieldErrors }), [fieldErrors]);
+
 	return (
-		<formContext.Provider value={{ fieldErrors }}>
+		<formContext.Provider value={value}>
 			{!form && children}
 			{form &&
 				cloneElement(

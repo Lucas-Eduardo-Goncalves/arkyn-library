@@ -64,6 +64,7 @@
     "@types/bun": "catalog:",
     "@types/node": "catalog:",
     "libphonenumber-js": "catalog:",
+    "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:",
     "zod": "catalog:"

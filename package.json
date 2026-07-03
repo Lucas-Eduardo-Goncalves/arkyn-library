@@ -30,6 +30,10 @@
 		"concurrently": "^9.2.1",
 		"libphonenumber-js": "^1.13.7",
 		"lucide-react": ">=1.14.0",
+		"slate": "^0.124.1",
+		"slate-history": "^0.113.1",
+		"slate-react": "^0.125.1",
+		"typescript": "^5.9.3",
 		"vite": "^8.1.0",
 		"vitest": "^4.1.9",
 		"zod": "^4.4.3"

@@ -1,4 +1,4 @@
-import { createContext, type ReactNode, useContext } from "react";
+import { createContext, type ReactNode, useContext, useMemo } from "react";
 
 type TabContextProps = {
 	disabled: boolean;
@@ -20,8 +20,15 @@ function useTab() {
 }
 
 function TabProvider(props: TabProviderProps) {
+	const { disabled, currentTab, changeCurrentTab } = props;
+
+	const value = useMemo(
+		() => ({ disabled, currentTab, changeCurrentTab }),
+		[disabled, currentTab, changeCurrentTab],
+	);
+
 	return (
-		<TabContext.Provider value={props}>{props.children}</TabContext.Provider>
+		<TabContext.Provider value={value}>{props.children}</TabContext.Provider>
 	);
 }
 
