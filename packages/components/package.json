@@ -1,6 +1,6 @@
 {
   "name": "@arkyn/components",
-  "version": "3.0.1-beta.202",
+  "version": "3.0.1-beta.203",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -122,8 +122,8 @@
     "@types/react-dom": "^19.2.3",
     "@types/react-scroll": "^1.8.10",
     "@vitejs/plugin-react": "^6.0.3",
+    "html-react-parser": "5.2.17",
     "is-hotkey": "^0.2.0",
-    "html-react-parser": "^6.1.3",
     "jsdom": "^29.1.1",
     "lucide-react": "catalog:",
     "mapbox-gl": "^3.25.0",

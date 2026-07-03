@@ -1,29 +1,29 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { deleteRequest } from "../../http/api/deleteRequest";
-import { getRequest } from "../../http/api/getRequest";
-import { patchRequest } from "../../http/api/patchRequest";
-import { postRequest } from "../../http/api/postRequest";
-import { putRequest } from "../../http/api/putRequest";
+import { deleteRequest } from "../../http/api/_deleteRequest";
+import { getRequest } from "../../http/api/_getRequest";
+import { patchRequest } from "../../http/api/_patchRequest";
+import { postRequest } from "../../http/api/_postRequest";
+import { putRequest } from "../../http/api/_putRequest";
 import { flushDebugLogs } from "../../utilities/flushDebugLogs";
 import { ApiService } from "../apiService";
 
-vi.mock("../../http/api/getRequest", () => ({
+vi.mock("../../http/api/_getRequest", () => ({
 	getRequest: vi.fn(),
 }));
 
-vi.mock("../../http/api/postRequest", () => ({
+vi.mock("../../http/api/_postRequest", () => ({
 	postRequest: vi.fn(),
 }));
 
-vi.mock("../../http/api/putRequest", () => ({
+vi.mock("../../http/api/_putRequest", () => ({
 	putRequest: vi.fn(),
 }));
 
-vi.mock("../../http/api/patchRequest", () => ({
+vi.mock("../../http/api/_patchRequest", () => ({
 	patchRequest: vi.fn(),
 }));
 
-vi.mock("../../http/api/deleteRequest", () => ({
+vi.mock("../../http/api/_deleteRequest", () => ({
 	deleteRequest: vi.fn(),
 }));
 

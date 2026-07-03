@@ -30,7 +30,7 @@ function ClientMapView({
 	accessToken,
 	...rest
 }: ClientMapViewProps) {
-	const mapRef = useRef<MapboxMap>(null);
+	const mapRef = useRef<MapboxMap | null>(null);
 	const mapContainerRef = useRef<HTMLDivElement>(null);
 
 	const center = rawCenter ? rawCenter : coordinates[0];

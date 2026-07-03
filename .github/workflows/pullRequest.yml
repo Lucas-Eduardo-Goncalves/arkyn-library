@@ -124,3 +124,136 @@ jobs:
       # ------------------------------------------------------
       - name: Run tests
         run: bun run all:test
+
+  # ==========================================================
+  # @arkyn/components declara suporte a React 18 e 19 via
+  # peerDependencies, mas as devDependencies (e portanto os
+  # testes acima) só exercitam a 19. Esta matriz reinstala
+  # react/react-dom em cada versão suportada e roda a suíte de
+  # novo, para que uma API exclusiva do React 19 não quebre
+  # silenciosamente consumidores em React 18.
+  # ==========================================================
+  components-react-compat:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    concurrency:
+      group: pull-request-react-compat-${{ github.event.pull_request.number }}-${{ matrix.react-version }}
+      cancel-in-progress: true
+
+    strategy:
+      fail-fast: false
+      matrix:
+        react-version: ["18", "19"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 26
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # ------------------------------------------------------
+      # @arkyn/components depende do dist/ compilado de
+      # @arkyn/shared e @arkyn/templates (não do código-fonte).
+      # ------------------------------------------------------
+      - name: Build workspace dependencies
+        run: bun run templates:build && bun run shared:build
+
+      # ------------------------------------------------------
+      # Sobrescreve react/react-dom (e seus @types) apenas em
+      # @arkyn/components, só para esta execução do runner.
+      # Nada aqui é commitado de volta ao repositório.
+      # ------------------------------------------------------
+      - name: Pin React ${{ matrix.react-version }}
+        working-directory: packages/components
+        run: |
+          bun add --dev \
+            react@${{ matrix.react-version }} \
+            react-dom@${{ matrix.react-version }} \
+            @types/react@${{ matrix.react-version }} \
+            @types/react-dom@${{ matrix.react-version }}
+
+      - name: Typecheck components against React ${{ matrix.react-version }}
+        run: bun run components:typecheck
+
+      - name: Test components against React ${{ matrix.react-version }}
+        run: bun run components:test
+
+  # ==========================================================
+  # Todos os pacotes declaram "engines.node": ">=18.0.0", mas
+  # todo o pipeline acima roda via Bun, que nunca de fato
+  # invoca o Node.js do sistema para nada além da autenticação
+  # de publicação. Este job verifica o piso real em duas etapas:
+  #
+  # 1. Node 18 (o piso declarado): a toolchain de build/test
+  #    (Vite 8, Vitest 4) exige Node >=20 e não roda em 18, então
+  #    só é possível validar o que "engines.node" de fato promete
+  #    a um consumidor — que o dist/ publicado carregue sem erro.
+  # 2. Node 20 LTS (o piso mínimo que a própria toolchain suporta):
+  #    aqui a suíte de testes completa roda sob o runtime Node
+  #    real via npx (bunx sempre usaria o runtime do Bun,
+  #    independente da versão do Node ativa).
+  # ==========================================================
+  node-engine-floor:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    concurrency:
+      group: pull-request-node-floor-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # ------------------------------------------------------
+      # O build em si roda via Bun (independente da versão do
+      # Node do sistema); só a execução exercita o piso.
+      # ------------------------------------------------------
+      - name: Build packages
+        run: bun run all:build
+
+      - name: Setup Node.js 18 (declared floor)
+        uses: actions/setup-node@v5
+        with:
+          node-version: "18"
+
+      - name: Smoke-test published dist/ on Node 18
+        run: node .github/scripts/smoke-test-dist.mjs
+
+      - name: Setup Node.js 20 LTS
+        uses: actions/setup-node@v5
+        with:
+          node-version: "20"
+
+      - name: Run full test suite on Node 20
+        shell: bash
+        run: |
+          for pkg in components server shared templates; do
+            echo "::group::@arkyn/$pkg on Node $(node --version)"
+            (cd "packages/$pkg" && npx vitest --config vitest.config.ts --run)
+            echo "::endgroup::"
+          done

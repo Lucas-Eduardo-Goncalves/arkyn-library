@@ -510,6 +510,10 @@ describe("TabButton", () => {
 			// called `dispatchEvent` — so `user.click(...)` always resolves,
 			// even when the click handler throws. Assert on the global `error`
 			// event instead of expecting the click promise to reject.
+			//
+			// React 18's dev-mode error reporting re-dispatches the error a
+			// second time to preserve component stack traces (removed in 19),
+			// so assert it fired rather than pinning an exact call count.
 			const user = userEvent.setup();
 			render(<TabButton value="one">One</TabButton>);
 
@@ -521,7 +525,7 @@ describe("TabButton", () => {
 			await user.click(screen.getByRole("button", { name: "One" }));
 
 			window.removeEventListener("error", onError);
-			expect(onError).toHaveBeenCalledTimes(1);
+			expect(onError).toHaveBeenCalled();
 			expect(onError.mock.calls[0]?.[0]?.error).toBeInstanceOf(TypeError);
 		});
 	});
