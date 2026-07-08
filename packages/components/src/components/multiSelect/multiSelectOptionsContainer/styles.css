@@ -16,8 +16,8 @@
 	overflow: auto;
 	height: max-content;
 
-	border: 1px solid var(--border);
-	background-color: var(--background-foreground);
+	border: 1px solid var(--border, #e2e8f0);
+	background-color: var(--background-foreground, #ffffff);
 
 	max-height: 300px;
 	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -41,5 +41,5 @@
 	text-align: center;
 	line-height: 21.79px;
 
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 }

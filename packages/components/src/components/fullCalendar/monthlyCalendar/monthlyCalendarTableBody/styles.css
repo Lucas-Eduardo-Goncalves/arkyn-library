@@ -5,9 +5,9 @@
 }
 
 .arkynMonthlyCalendarTableBody tr {
-	border-top: 1px solid var(--border);
+	border-top: 1px solid var(--border, #e2e8f0);
 }
 
 .arkynMonthlyCalendarTableBody tr td:not(:first-child) {
-	border-left: 1px solid var(--border);
+	border-left: 1px solid var(--border, #e2e8f0);
 }

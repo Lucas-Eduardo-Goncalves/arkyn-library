@@ -7,17 +7,17 @@
 }
 
 .arkynAlertIcon.danger {
-	color: rgb(var(--spotlight-danger));
+	color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 
 .arkynAlertIcon.success {
-	color: rgb(var(--spotlight-success));
+	color: rgb(var(--spotlight-success, 16, 185, 129));
 }
 
 .arkynAlertIcon.info {
-	color: rgb(var(--spotlight-info));
+	color: rgb(var(--spotlight-info, 14, 165, 233));
 }
 
 .arkynAlertIcon.warning {
-	color: rgb(var(--spotlight-warning));
+	color: rgb(var(--spotlight-warning, 249, 115, 22));
 }

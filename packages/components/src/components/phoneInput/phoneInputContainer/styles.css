@@ -26,27 +26,27 @@
 
 /* VARIANTS */
 .arkynPhoneInputContainer.solid {
-	border-color: var(--border);
-	background-color: var(--input-background);
+	border-color: var(--border, #e2e8f0);
+	background-color: var(--input-background, #fafafa);
 }
 .arkynPhoneInputContainer.solid.errored {
-	border-color: rgb(var(--spotlight-danger));
-	outline-color: rgb(var(--spotlight-danger));
+	border-color: rgb(var(--spotlight-danger, 244, 63, 94));
+	outline-color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 .arkynPhoneInputContainer:not(.opacity).solid.focused {
-	border-color: rgb(var(--spotlight-primary));
-	outline-color: rgb(var(--spotlight-primary));
+	border-color: rgb(var(--spotlight-primary, 17, 109, 220));
+	outline-color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 .arkynPhoneInputContainer.outline {
-	border-color: var(--border);
+	border-color: var(--border, #e2e8f0);
 }
 .arkynPhoneInputContainer.outline.errored {
-	border-color: rgb(var(--spotlight-danger));
-	outline-color: rgb(var(--spotlight-danger));
+	border-color: rgb(var(--spotlight-danger, 244, 63, 94));
+	outline-color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 .arkynPhoneInputContainer:not(.opacity).outline.focused {
-	border-color: rgb(var(--spotlight-primary));
-	outline-color: rgb(var(--spotlight-primary));
+	border-color: rgb(var(--spotlight-primary, 17, 109, 220));
+	outline-color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 /* SIZE */

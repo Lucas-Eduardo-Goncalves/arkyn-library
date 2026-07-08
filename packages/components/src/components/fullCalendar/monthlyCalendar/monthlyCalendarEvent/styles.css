@@ -20,55 +20,55 @@
 }
 
 .arkynMonthlyCalendarEvent.primary {
-	background-color: rgb(var(--spotlight-primary-foreground));
+	background-color: rgb(var(--spotlight-primary-foreground, 231, 240, 252));
 }
 
 .arkynMonthlyCalendarEvent.primary::before {
-	background-color: rgb(var(--spotlight-primary));
+	background-color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 .arkynMonthlyCalendarEvent.danger {
-	background-color: rgb(var(--spotlight-danger-foreground));
+	background-color: rgb(var(--spotlight-danger-foreground, 254, 236, 239));
 }
 
 .arkynMonthlyCalendarEvent.danger::before {
-	background-color: rgb(var(--spotlight-danger));
+	background-color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 
 .arkynMonthlyCalendarEvent.warning {
-	background-color: rgb(var(--spotlight-warning-foreground));
+	background-color: rgb(var(--spotlight-warning-foreground, 254, 241, 232));
 }
 
 .arkynMonthlyCalendarEvent.warning::before {
-	background-color: rgb(var(--spotlight-warning));
+	background-color: rgb(var(--spotlight-warning, 249, 115, 22));
 }
 
 .arkynMonthlyCalendarEvent.info {
-	background-color: rgb(var(--spotlight-info-foreground));
+	background-color: rgb(var(--spotlight-info-foreground, 231, 246, 253));
 }
 
 .arkynMonthlyCalendarEvent.info::before {
-	background-color: rgb(var(--spotlight-info));
+	background-color: rgb(var(--spotlight-info, 14, 165, 233));
 }
 
 .arkynMonthlyCalendarEvent.success {
-	background-color: rgb(var(--spotlight-success-foreground));
+	background-color: rgb(var(--spotlight-success-foreground, 231, 248, 242));
 }
 
 .arkynMonthlyCalendarEvent.success::before {
-	background-color: rgb(var(--spotlight-success));
+	background-color: rgb(var(--spotlight-success, 16, 185, 129));
 }
 
 .arkynMonthlyCalendarEvent > strong {
 	font-weight: 600;
 	font-size: 14px;
 	letter-spacing: 0%;
-	color: var(--text-heading);
+	color: var(--text-heading, #09090b);
 }
 
 .arkynMonthlyCalendarEvent > p {
 	font-weight: 400;
 	font-size: 12px;
 	letter-spacing: 0%;
-	color: var(--text-heading);
+	color: var(--text-heading, #09090b);
 }

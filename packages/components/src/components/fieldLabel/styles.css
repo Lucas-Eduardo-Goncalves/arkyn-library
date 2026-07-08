@@ -1,5 +1,5 @@
 .arkynFieldLabel {
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 	font-size: 14px;
 	font-weight: 600;
 	line-height: 19.07px;
@@ -11,5 +11,5 @@
 	font-weight: 600;
 	line-height: 16.34px;
 	text-align: left;
-	color: rgb(var(--spotlight-danger));
+	color: rgb(var(--spotlight-danger, 244, 63, 94));
 }

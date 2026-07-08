@@ -19,7 +19,7 @@
 	max-height: 40px;
 	max-width: 40px;
 
-	background-color: rgb(var(--spotlight-primary));
+	background-color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 .arkynAudioPlayer button:hover:not(:disabled) {
@@ -34,8 +34,8 @@
 }
 
 .arkynAudioPlayer button svg {
-	fill: var(--white);
-	stroke: var(--white);
+	fill: var(--white, #ffffff);
+	stroke: var(--white, #ffffff);
 
 	min-height: 20px;
 	min-width: 20px;
@@ -48,6 +48,6 @@
 	font-weight: 400;
 	line-height: 12px;
 	text-align: left;
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 	user-select: none;
 }

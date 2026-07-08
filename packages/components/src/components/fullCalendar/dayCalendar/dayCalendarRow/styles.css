@@ -13,7 +13,7 @@
 }
 
 .arkynDayCalendarRow.blocked {
-	background-color: rgb(var(--spotlight-danger-foreground));
+	background-color: rgb(var(--spotlight-danger-foreground, 254, 236, 239));
 }
 
 .arkynDayCalendarRow.blocked:before {
@@ -23,7 +23,7 @@
 	left: 0px;
 	bottom: 0px;
 	width: 4px;
-	background-color: rgb(var(--spotlight-danger));
+	background-color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 
 .arkynDayCalendarRow:first-child:before {
@@ -35,7 +35,7 @@
 }
 
 .arkynDayCalendarRow:not(:first-child) {
-	border-top: 1px solid var(--border);
+	border-top: 1px solid var(--border, #e2e8f0);
 }
 
 .arkynDayCalendarRow > p {
@@ -43,7 +43,7 @@
 	font-size: 14px;
 	line-height: 24px;
 	letter-spacing: 0%;
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 	padding: 24px 20px;
 
 	display: flex;

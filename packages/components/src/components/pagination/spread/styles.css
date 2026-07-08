@@ -1,6 +1,6 @@
 .arkynPaginationSpread {
 	background-color: transparent;
-	color: var(--text-muted);
+	color: var(--text-muted, #a1a1aa);
 	border: none;
 
 	max-height: 28px;
@@ -15,7 +15,7 @@
 }
 
 .arkynPaginationSpread > svg {
-	color: var(--text-muted);
+	color: var(--text-muted, #a1a1aa);
 	height: 16px;
 	width: 16px;
 }

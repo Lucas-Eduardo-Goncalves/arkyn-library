@@ -5,8 +5,8 @@
 	border-radius: 8px;
 	padding: 16px;
 	gap: 32px;
-	border: 1px solid var(--border);
+	border: 1px solid var(--border, #e2e8f0);
 
-	background-color: var(--background-foreground);
+	background-color: var(--background-foreground, #ffffff);
 	max-width: 400px;
 }

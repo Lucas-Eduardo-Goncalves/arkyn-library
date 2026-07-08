@@ -3,8 +3,8 @@
 	max-width: 400px;
 
 	height: 6px;
-	border: 1px solid var(--border);
-	background: var(--input-background);
+	border: 1px solid var(--border, #e2e8f0);
+	background: var(--input-background, #fafafa);
 	border-radius: 5px;
 	position: relative;
 	cursor: pointer;
@@ -21,14 +21,14 @@
 
 .arkynSliderFill {
 	height: 100%;
-	background: rgb(var(--spotlight-primary));
+	background: rgb(var(--spotlight-primary, 17, 109, 220));
 	border-radius: 5px;
 }
 
 .arkynSliderThumb {
 	width: 12px;
 	height: 12px;
-	background: rgb(var(--spotlight-primary));
+	background: rgb(var(--spotlight-primary, 17, 109, 220));
 	border-radius: 50%;
 	position: absolute;
 	top: 50%;

@@ -24,7 +24,7 @@
 	max-height: 40px;
 	max-width: 40px;
 
-	background-color: rgb(var(--spotlight-primary));
+	background-color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 .arkynAudioUploadAudioPlayer p {
@@ -32,7 +32,7 @@
 	font-weight: 400;
 	line-height: 12px;
 	text-align: left;
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 	user-select: none;
 }
 

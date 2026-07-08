@@ -3,5 +3,5 @@
 	line-height: 130%;
 	font-weight: 600;
 	text-align: left;
-	color: var(--text-heading);
+	color: var(--text-heading, #09090b);
 }

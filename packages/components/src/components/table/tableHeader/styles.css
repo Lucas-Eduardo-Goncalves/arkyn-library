@@ -1,10 +1,10 @@
 .arkynTableHeader th {
 	text-align: left;
-	background-color: var(--background-underground);
+	background-color: var(--background-underground, #fafafa);
 	padding-left: 16px;
 	height: 44px;
 
-	color: var(--text-heading);
+	color: var(--text-heading, #09090b);
 	font-weight: 600;
 	font-size: 14px;
 

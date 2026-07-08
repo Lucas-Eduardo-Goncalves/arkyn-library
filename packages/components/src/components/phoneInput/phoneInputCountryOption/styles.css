@@ -5,15 +5,15 @@
 	font-weight: 400;
 	line-height: 21.79px;
 
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 	user-select: none;
 	gap: 10px;
-	background-color: var(--background-foreground);
+	background-color: var(--background-foreground, #ffffff);
 }
 .arkynPhoneInputCountryOption > span {
 	font-size: 14px;
 	line-height: 21.79px;
-	color: var(--text-muted);
+	color: var(--text-muted, #a1a1aa);
 	font-weight: 300;
 }
 .arkynPhoneInputCountryOption.md {
@@ -34,7 +34,7 @@
 	display: none;
 	height: 20px;
 	width: 20px;
-	color: rgb(var(--spotlight-primary));
+	color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 .arkynPhoneInputCountryOption:hover {
 	cursor: pointer;
@@ -42,7 +42,7 @@
 }
 .arkynPhoneInputCountryOption.active {
 	font-weight: 600;
-	color: var(--text-heading);
+	color: var(--text-heading, #09090b);
 	filter: brightness(0.95);
 }
 .arkynPhoneInputCountryOption.active svg {

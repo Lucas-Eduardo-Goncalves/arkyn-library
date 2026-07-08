@@ -7,7 +7,7 @@
 .arkynFullCalendarHeader > p {
 	font-size: 14px;
 	font-weight: 500;
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 }
 
 .arkynFullCalendarHeader .arkynFullCalendarButton {
@@ -17,12 +17,12 @@
 
 	border: unset;
 	background-color: unset;
-	color: var(--text-muted);
+	color: var(--text-muted, #a1a1aa);
 	cursor: pointer;
 }
 
 .arkynFullCalendarHeader .arkynFullCalendarButton:hover svg {
-	color: rgb(var(--spotlight-primary));
+	color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 .arkynFullCalendarHeader > div {
@@ -40,7 +40,7 @@
 	width: max-content;
 	overflow: hidden;
 
-	background-color: var(--background-underground);
+	background-color: var(--background-underground, #fafafa);
 	padding: 4px;
 }
 
@@ -49,5 +49,5 @@
 	font-size: 14px;
 	line-height: 24px;
 	letter-spacing: 0%;
-	color: var(--text-heading);
+	color: var(--text-heading, #09090b);
 }

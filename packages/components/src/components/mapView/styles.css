@@ -3,9 +3,9 @@
 	align-items: center;
 	justify-content: center;
 
-	border: 2px dashed var(--border);
+	border: 2px dashed var(--border, #e2e8f0);
 	border-radius: 8px;
-	background-color: rgba(var(--spotlight-secondary), 1);
+	background-color: rgba(var(--spotlight-secondary, 100, 116, 139), 1);
 
 	height: 100%;
 	width: 100%;
@@ -14,7 +14,7 @@
 .arkynMapViewPinnedEmpty > svg {
 	height: 64px;
 	width: 64px;
-	color: var(--text-muted);
+	color: var(--text-muted, #a1a1aa);
 	stroke-width: 1px;
 }
 

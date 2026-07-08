@@ -5,11 +5,11 @@
 }
 
 .arkynWeekCalendarTableBody tr {
-	border-top: 1px solid var(--border);
+	border-top: 1px solid var(--border, #e2e8f0);
 }
 
 .arkynWeekCalendarTableBody tr td:not(:first-child) {
-	border-left: 1px solid var(--border);
+	border-left: 1px solid var(--border, #e2e8f0);
 }
 
 .arkynWeekCalendarTableBody .hourTd > p {
@@ -21,5 +21,5 @@
 	letter-spacing: 0%;
 	text-align: center;
 
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 }

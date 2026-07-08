@@ -7,5 +7,5 @@
 
 	gap: 4px;
 
-	border-bottom: 1px solid var(--border);
+	border-bottom: 1px solid var(--border, #e2e8f0);
 }

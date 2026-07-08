@@ -9,12 +9,12 @@
 
 .arkynSelectContent > p {
 	font-weight: 400;
-	color: var(--text-muted);
+	color: var(--text-muted, #a1a1aa);
 	user-select: none;
 }
 
 .arkynSelectContent > p.hasValue {
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 }
 
 .arkynSelectContent.md > p {

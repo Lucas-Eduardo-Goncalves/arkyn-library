@@ -16,7 +16,7 @@
 }
 
 .arkynChevronPageButton > svg {
-	color: var(--text-muted);
+	color: var(--text-muted, #a1a1aa);
 	height: 20px;
 	width: 20px;
 }

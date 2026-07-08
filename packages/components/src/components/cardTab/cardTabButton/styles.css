@@ -8,7 +8,7 @@
 
 	font-weight: 600;
 	letter-spacing: 0%;
-	color: var(--text-heading);
+	color: var(--text-heading, #09090b);
 	cursor: pointer;
 
 	height: 40px;
@@ -23,11 +23,11 @@
 }
 
 .arkynCardTabButton:hover:not(:disabled) {
-	background-color: var(--background-foreground);
-	border-color: var(--border);
+	background-color: var(--background-foreground, #ffffff);
+	border-color: var(--border, #e2e8f0);
 }
 
 .arkynCardTabButton.isActive {
-	background-color: var(--background-foreground);
-	border-color: var(--border);
+	background-color: var(--background-foreground, #ffffff);
+	border-color: var(--border, #e2e8f0);
 }

@@ -27,11 +27,11 @@
 }
 
 .arkynTextarea textarea {
-	color: var(--text-heading);
+	color: var(--text-heading, #09090b);
 }
 
 .arkynTextarea textarea::placeholder {
-	color: var(--text-muted);
+	color: var(--text-muted, #a1a1aa);
 	line-height: 130%;
 }
 
@@ -41,33 +41,33 @@
 
 /* VARIANTS */
 .arkynTextarea.solid {
-	border-color: var(--border);
-	background-color: var(--input-background);
+	border-color: var(--border, #e2e8f0);
+	background-color: var(--input-background, #fafafa);
 }
 
 .arkynTextarea.solid.errorTrue {
-	border-color: rgb(var(--spotlight-danger));
-	outline-color: rgb(var(--spotlight-danger));
+	border-color: rgb(var(--spotlight-danger, 244, 63, 94));
+	outline-color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 
 .arkynTextarea:not(.opacityTrue).solid.focusedTrue {
-	border-color: rgb(var(--spotlight-primary));
-	outline-color: rgb(var(--spotlight-primary));
+	border-color: rgb(var(--spotlight-primary, 17, 109, 220));
+	outline-color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 .arkynTextarea.outline {
-	border-color: var(--border);
-	background-color: var(--background-foreground);
+	border-color: var(--border, #e2e8f0);
+	background-color: var(--background-foreground, #ffffff);
 }
 
 .arkynTextarea.outline.errorTrue {
-	border-color: rgb(var(--spotlight-danger));
-	outline-color: rgb(var(--spotlight-danger));
+	border-color: rgb(var(--spotlight-danger, 244, 63, 94));
+	outline-color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 
 .arkynTextarea:not(.opacityTrue).outline.focusedTrue {
-	border-color: rgb(var(--spotlight-primary));
-	outline-color: rgb(var(--spotlight-primary));
+	border-color: rgb(var(--spotlight-primary, 17, 109, 220));
+	outline-color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 /* SIZE */

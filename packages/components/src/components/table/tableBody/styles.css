@@ -1,5 +1,5 @@
 .arkynTableBodyEmptyLine > td {
-	background-color: var(--background-underground);
+	background-color: var(--background-underground, #fafafa);
 	height: 64px;
 }
 
@@ -14,7 +14,7 @@
 	font-weight: 400;
 	font-size: 14px;
 
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 }
 
 .arkynTableBody > tr > td {
@@ -24,7 +24,7 @@
 	font-weight: 400;
 	font-size: 14px;
 
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 }
 
 .arkynTableBody > tr > td:first-child {
@@ -40,7 +40,7 @@
 }
 
 .arkynTableBody > tr:nth-child(odd) > td {
-	background-color: var(--background-underground);
+	background-color: var(--background-underground, #fafafa);
 }
 
 .arkynTableBody > tr:nth-child(odd):hover > td {
@@ -48,7 +48,7 @@
 }
 
 .arkynTableBody > tr:nth-child(even):hover > td {
-	background-color: var(--background-underground);
+	background-color: var(--background-underground, #fafafa);
 	filter: brightness(0.98);
 }
 
@@ -57,6 +57,6 @@ html.dark .arkynTableBody > tr:nth-child(odd):hover > td {
 }
 
 html.dark .arkynTableBody > tr:nth-child(even):hover > td {
-	background-color: var(--background-underground);
+	background-color: var(--background-underground, #fafafa);
 	filter: brightness(1.2);
 }

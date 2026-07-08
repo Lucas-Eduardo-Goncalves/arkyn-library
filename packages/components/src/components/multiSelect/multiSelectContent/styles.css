@@ -9,7 +9,7 @@
 
 .arkynMultiSelectContent > p {
 	font-weight: 400;
-	color: var(--text-muted);
+	color: var(--text-muted, #a1a1aa);
 	user-select: none;
 }
 

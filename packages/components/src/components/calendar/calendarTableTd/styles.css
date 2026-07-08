@@ -20,21 +20,21 @@
 
 .arkynCalendarTableTd.previous p,
 .arkynCalendarTableTd.next p {
-	color: var(--text-muted);
+	color: var(--text-muted, #a1a1aa);
 }
 
 .arkynCalendarTableTd.current p {
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 }
 
 .arkynCalendarTableTd:hover p {
-	color: rgb(var(--spotlight-primary));
+	color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 .arkynCalendarTableTd.today:not(.checkedDay) p {
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 	font-weight: 500;
-	background-color: var(--background-underground);
+	background-color: var(--background-underground, #fafafa);
 	filter: brightness(0.97);
 }
 
@@ -50,7 +50,7 @@
 	content: " ";
 
 	position: absolute;
-	background-color: rgb(var(--spotlight-primary));
+	background-color: rgb(var(--spotlight-primary, 17, 109, 220));
 
 	border-radius: 8px;
 	top: 0;
@@ -63,7 +63,7 @@
 
 .arkynCalendarTableTd.checkedDay .textGroup p {
 	position: absolute;
-	color: var(--white);
+	color: var(--white, #ffffff);
 	font-weight: 600;
 
 	top: 50%;
@@ -77,7 +77,7 @@
 	content: " ";
 
 	position: absolute;
-	background-color: var(--background-underground);
+	background-color: var(--background-underground, #fafafa);
 	filter: brightness(0.95);
 
 	top: 0;
@@ -106,7 +106,7 @@
 
 .arkynCalendarTableTd.middleDay .textGroup p {
 	position: absolute;
-	color: var(--text-muted);
+	color: var(--text-muted, #a1a1aa);
 
 	top: 50%;
 	left: 50%;
@@ -116,5 +116,5 @@
 }
 
 .arkynCalendarTableTd.current.middleDay .textGroup p {
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 }

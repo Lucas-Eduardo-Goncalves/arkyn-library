@@ -16,9 +16,13 @@ function SelectOption(props: SelectOptionProps) {
 	const className = `arkynSelectOption ${size} ${hasActive}`;
 
 	return (
-		<div onClick={() => handleChangeValue(value)} className={className}>
+		<button
+			type="button"
+			onClick={() => handleChangeValue(value)}
+			className={className}
+		>
 			{label} <Check />
-		</div>
+		</button>
 	);
 }
 

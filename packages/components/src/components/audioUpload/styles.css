@@ -3,14 +3,14 @@
 
 	outline: 1px solid transparent;
 
-	border-color: var(--border);
+	border-color: var(--border, #e2e8f0);
 	border-radius: 8px;
 
 	width: 100%;
 	height: 137px;
 	max-width: 475px;
 
-	background: var(--input-background);
+	background: var(--input-background, #fafafa);
 }
 
 .arkynAudioUpload.hasAudio {
@@ -22,6 +22,6 @@
 }
 
 .arkynAudioUpload.hasError {
-	border-color: rgb(var(--spotlight-danger));
-	outline-color: rgb(var(--spotlight-danger));
+	border-color: rgb(var(--spotlight-danger, 244, 63, 94));
+	outline-color: rgb(var(--spotlight-danger, 244, 63, 94));
 }

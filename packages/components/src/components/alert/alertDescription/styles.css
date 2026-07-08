@@ -3,5 +3,5 @@
 	line-height: 130%;
 	font-weight: 400;
 	text-align: left;
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 }

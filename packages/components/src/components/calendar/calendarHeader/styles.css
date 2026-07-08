@@ -9,7 +9,7 @@
 .arkynCalendarHeader > p {
 	font-size: 14px;
 	font-weight: 500;
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 }
 
 .arkynCalendarHeader .arkynCalendarButton {
@@ -19,12 +19,12 @@
 
 	border: unset;
 	background-color: unset;
-	color: var(--text-muted);
+	color: var(--text-muted, #a1a1aa);
 	cursor: pointer;
 }
 
 .arkynCalendarHeader .arkynCalendarButton:hover svg {
-	color: rgb(var(--spotlight-primary));
+	color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 .arkynCalendarHeader > div {

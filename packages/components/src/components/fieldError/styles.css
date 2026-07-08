@@ -2,5 +2,5 @@
 	font-size: 12px;
 	line-height: 12px;
 	font-weight: 600;
-	color: rgb(var(--spotlight-danger));
+	color: rgb(var(--spotlight-danger, 244, 63, 94));
 }

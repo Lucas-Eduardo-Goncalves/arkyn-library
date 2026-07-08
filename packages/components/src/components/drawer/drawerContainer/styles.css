@@ -31,7 +31,7 @@
 	top: 0;
 	bottom: 0;
 	width: max-content;
-	background: var(--background-foreground);
+	background: var(--background-foreground, #ffffff);
 
 	display: flex;
 	flex-direction: column;

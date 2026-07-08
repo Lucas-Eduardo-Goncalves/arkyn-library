@@ -3,16 +3,16 @@
 	align-items: center;
 	gap: 8px;
 
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 	font-size: 14px;
 	line-height: 19.07px;
 }
 
 .arkynRadioBox > button {
 	position: relative;
-	background-color: var(--input-background);
+	background-color: var(--input-background, #fafafa);
 
-	border: 2px solid var(--border);
+	border: 2px solid var(--border, #e2e8f0);
 	border-radius: 99999px;
 }
 
@@ -21,11 +21,11 @@
 }
 
 .arkynRadioBox.checkedTrue > button {
-	border-color: rgb(var(--spotlight-primary));
+	border-color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 .arkynRadioBox.errorTrue > button {
-	border-color: rgb(var(--spotlight-danger));
+	border-color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 
 .arkynRadioBox.checkedTrue > button::before {
@@ -35,7 +35,7 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	border-radius: 99999px;
-	background-color: rgb(var(--spotlight-primary));
+	background-color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 .arkynRadioBox.sm > button {

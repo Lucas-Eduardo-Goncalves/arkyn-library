@@ -189,7 +189,7 @@ describe("Select", () => {
 			) as HTMLElement;
 			const techOption = within(reopenedOptionsContainer)
 				.getByText("Technology")
-				.closest("div");
+				.closest("button");
 			expect(techOption).toHaveClass("active");
 		});
 

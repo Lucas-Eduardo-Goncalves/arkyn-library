@@ -9,6 +9,6 @@
 	column-gap: 24px;
 	row-gap: 12px;
 
-	background-color: var(--card-foreground-secondary);
-	border-bottom: 1px solid var(--border);
+	background-color: var(--background-underground, #fafafa);
+	border-bottom: 1px solid var(--border, #e2e8f0);
 }

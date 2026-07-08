@@ -9,9 +9,9 @@
 	font-weight: 600;
 	line-height: 20px;
 
-	color: var(--text-heading);
+	color: var(--text-heading, #09090b);
 
-	border-bottom: 1px solid var(--border);
+	border-bottom: 1px solid var(--border, #e2e8f0);
 }
 
 .arkynDrawerHeaderCloseButton {
@@ -27,8 +27,8 @@
 	border: none;
 	background: none;
 
-	color: var(--text-body);
-	background-color: var(--background-foreground);
+	color: var(--text-body, #52525b);
+	background-color: var(--background-foreground, #ffffff);
 }
 
 .arkynDrawerHeaderCloseButton:hover {

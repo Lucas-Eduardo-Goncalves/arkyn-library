@@ -17,7 +17,7 @@
 	max-height: 12px;
 	min-width: 12px;
 	max-width: 12px;
-	color: var(--text-muted);
+	color: var(--text-muted, #a1a1aa);
 }
 
 .phoneInputSelectCountry > .arkynDivider {

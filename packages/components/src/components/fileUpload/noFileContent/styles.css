@@ -15,6 +15,6 @@
 	line-height: 12px;
 	text-align: center;
 	white-space: nowrap;
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 	padding: 0 24px;
 }

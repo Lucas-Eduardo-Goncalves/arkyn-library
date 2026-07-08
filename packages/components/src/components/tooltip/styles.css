@@ -19,8 +19,8 @@
 	justify-content: center;
 
 	font-weight: 400;
-	color: var(--tooltip-text);
-	background-color: var(--tooltip-background);
+	color: var(--tooltip-text, #fafafa);
+	background-color: var(--tooltip-background, #27272a);
 
 	z-index: 9999;
 }
@@ -52,7 +52,7 @@
 	content: "";
 	top: 100%;
 	border-style: solid;
-	border-color: var(--tooltip-background) transparent;
+	border-color: var(--tooltip-background, #27272a) transparent;
 	border-width: 6px 6px 0 6px;
 	bottom: 20px;
 	position: absolute;
@@ -70,7 +70,7 @@
 	content: "";
 	top: 50%;
 	border-style: solid;
-	border-color: transparent var(--tooltip-background);
+	border-color: transparent var(--tooltip-background, #27272a);
 	border-width: 6px 0 6px 6px;
 	left: 100%;
 	position: absolute;
@@ -86,7 +86,7 @@
 .arkynTooltip.right .arkynTooltipText::before {
 	content: "";
 	border-style: solid;
-	border-color: transparent var(--tooltip-background);
+	border-color: transparent var(--tooltip-background, #27272a);
 	border-width: 6px 6px 6px 0;
 	top: 50%;
 	left: 0;
@@ -103,7 +103,7 @@
 .arkynTooltip.bottom .arkynTooltipText::before {
 	content: "";
 	border-style: solid;
-	border-color: var(--tooltip-background) transparent;
+	border-color: var(--tooltip-background, #27272a) transparent;
 	border-width: 0 6px 6px 6px;
 	top: 0;
 	left: 50%;

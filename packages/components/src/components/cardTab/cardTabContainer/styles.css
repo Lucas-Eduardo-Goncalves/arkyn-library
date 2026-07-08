@@ -7,6 +7,6 @@
 	width: max-content;
 	overflow: hidden;
 
-	background-color: var(--background-underground);
+	background-color: var(--background-underground, #fafafa);
 	padding: 4px;
 }

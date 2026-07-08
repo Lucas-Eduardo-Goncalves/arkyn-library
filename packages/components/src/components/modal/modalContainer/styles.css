@@ -39,7 +39,7 @@
 	z-index: 9999;
 
 	border-radius: 8px;
-	background: var(--background-foreground);
+	background: var(--background-foreground, #ffffff);
 
 	animation: modalContentIn 0.24s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 

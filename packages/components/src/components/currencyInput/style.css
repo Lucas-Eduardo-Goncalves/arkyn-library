@@ -28,13 +28,13 @@
 }
 
 .arkynCurrencyInput input {
-	color: var(--text-heading);
+	color: var(--text-heading, #09090b);
 }
 
 .arkynCurrencyInput .prefix,
 .arkynCurrencyInput .suffix {
-	color: var(--text-body);
-	background: var(--border);
+	color: var(--text-body, #52525b);
+	background: var(--border, #e2e8f0);
 	font-weight: 400;
 
 	display: flex;
@@ -51,7 +51,7 @@
 	top: 0;
 	bottom: 0;
 	border-radius: calc(8px - 1px) 0 0 calc(8px - 1px);
-	border-right: 1px solid var(--border);
+	border-right: 1px solid var(--border, #e2e8f0);
 }
 
 .arkynCurrencyInput .suffix {
@@ -59,24 +59,24 @@
 	top: 0;
 	bottom: 0;
 	border-radius: 0 calc(8px - 1px) calc(8px - 1px) 0;
-	border-left: 1px solid var(--border);
+	border-left: 1px solid var(--border, #e2e8f0);
 }
 
 .arkynCurrencyInput input::placeholder {
-	color: var(--text-muted);
+	color: var(--text-muted, #a1a1aa);
 	line-height: 100%;
 }
 
 .arkynCurrencyInput svg {
-	color: var(--text-muted);
+	color: var(--text-muted, #a1a1aa);
 }
 
 .arkynCurrencyInput.errored svg {
-	color: rgb(var(--spotlight-danger));
+	color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 
 .arkynCurrencyInput:not(.opacity).focused svg {
-	color: rgb(var(--spotlight-primary));
+	color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 .arkynCurrencyInput.opacity {
@@ -85,33 +85,33 @@
 
 /* VARIANTS */
 .arkynCurrencyInput.solid {
-	border-color: var(--border);
-	background-color: var(--input-background);
+	border-color: var(--border, #e2e8f0);
+	background-color: var(--input-background, #fafafa);
 }
 
 .arkynCurrencyInput.solid.errored {
-	border-color: rgb(var(--spotlight-danger));
-	outline-color: rgb(var(--spotlight-danger));
+	border-color: rgb(var(--spotlight-danger, 244, 63, 94));
+	outline-color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 
 .arkynCurrencyInput:not(.opacity).solid.focused {
-	border-color: rgb(var(--spotlight-primary));
-	outline-color: rgb(var(--spotlight-primary));
+	border-color: rgb(var(--spotlight-primary, 17, 109, 220));
+	outline-color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 .arkynCurrencyInput.outline {
-	border-color: var(--border);
-	background-color: var(--background-foreground);
+	border-color: var(--border, #e2e8f0);
+	background-color: var(--background-foreground, #ffffff);
 }
 
 .arkynCurrencyInput.outline.errored {
-	border-color: rgb(var(--spotlight-danger));
-	outline-color: rgb(var(--spotlight-danger));
+	border-color: rgb(var(--spotlight-danger, 244, 63, 94));
+	outline-color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 
 .arkynCurrencyInput:not(.opacity).outline.focused {
-	border-color: rgb(var(--spotlight-primary));
-	outline-color: rgb(var(--spotlight-primary));
+	border-color: rgb(var(--spotlight-primary, 17, 109, 220));
+	outline-color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 .arkynCurrencyInput.underline {
@@ -120,7 +120,7 @@
 	border-left: none;
 	border-right: none;
 	outline: none;
-	border-color: var(--border);
+	border-color: var(--border, #e2e8f0);
 }
 
 .arkynCurrencyInput.underline .suffix,
@@ -139,19 +139,19 @@
 }
 
 .arkynCurrencyInput.underline.errored {
-	border-color: rgb(var(--spotlight-danger));
+	border-color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 
 .arkynCurrencyInput.underline.errored::before {
-	background: rgb(var(--spotlight-danger));
+	background: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 
 .arkynCurrencyInput:not(.opacity).underline.focused {
-	border-color: rgb(var(--spotlight-primary));
+	border-color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 .arkynCurrencyInput:not(.opacity).underline.focused::before {
-	background: rgb(var(--spotlight-primary));
+	background: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 /* SIZE */

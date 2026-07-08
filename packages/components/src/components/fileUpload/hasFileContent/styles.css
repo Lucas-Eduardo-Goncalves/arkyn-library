@@ -18,7 +18,7 @@
 	min-width: 26px;
 	min-height: 26px;
 
-	color: var(--text-heading);
+	color: var(--text-heading, #09090b);
 }
 
 .arkynFileUploadFileContainer p {
@@ -29,7 +29,7 @@
 	font-size: 14px;
 	font-weight: 400;
 	text-align: left;
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 }
 
 .arkynFileUploadButtonsContainer {

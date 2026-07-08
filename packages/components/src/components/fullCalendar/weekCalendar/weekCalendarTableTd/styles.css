@@ -7,7 +7,7 @@
 }
 
 .arkynWeekCalendarTableTd.blocked {
-	background-color: rgb(var(--spotlight-danger-light));
+	background-color: rgb(var(--spotlight-danger-foreground, 254, 226, 226));
 }
 
 .arkynWeekCalendarTableTd.blocked:before {
@@ -17,7 +17,7 @@
 	left: 0px;
 	bottom: 0px;
 	width: 4px;
-	background-color: rgb(var(--spotlight-danger));
+	background-color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 
 .arkynWeekCalendarTableTd.blocked:hover {
@@ -39,12 +39,12 @@
 
 .arkynWeekCalendarTableTd.previous,
 .arkynWeekCalendarTableTd.next {
-	color: var(--text-muted);
-	background-color: var(--card-foreground-primary);
+	color: var(--text-muted, #a1a1aa);
+	background-color: var(--background-foreground, #ffffff);
 }
 
 .arkynWeekCalendarTableTd.current > p {
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 }
 
 .arkynWeekCalendarTableTd .arkynWeekCalendarTableTdContent {

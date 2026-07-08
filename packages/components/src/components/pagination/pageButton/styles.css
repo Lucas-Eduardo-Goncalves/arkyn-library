@@ -14,7 +14,7 @@
 
 	border-radius: 8px;
 
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 	font-size: 14px;
 	font-weight: 600;
 }

@@ -22,8 +22,8 @@
 
 /* PREFIX */
 .arkynSelectContainer .prefix {
-	color: var(--text-body);
-	background: var(--border);
+	color: var(--text-body, #52525b);
+	background: var(--border, #e2e8f0);
 	font-weight: 400;
 
 	display: flex;
@@ -37,44 +37,44 @@
 	top: 0;
 	bottom: 0;
 	border-radius: 5px 0 0 5px;
-	border-right: 1px solid var(--border);
+	border-right: 1px solid var(--border, #e2e8f0);
 }
 
 /* LEFT ICON */
 .arkynSelectContainer > svg {
-	color: var(--text-muted);
+	color: var(--text-muted, #a1a1aa);
 }
 .arkynSelectContainer.errored > svg {
-	color: rgb(var(--spotlight-danger));
+	color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 .arkynSelectContainer:not(.opacity).focused > svg {
-	color: rgb(var(--spotlight-primary));
+	color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 
 /* VARIANTS */
 .arkynSelectContainer.solid {
-	border-color: var(--border);
-	background-color: var(--input-background);
+	border-color: var(--border, #e2e8f0);
+	background-color: var(--input-background, #fafafa);
 }
 .arkynSelectContainer.solid.errored {
-	border-color: rgb(var(--spotlight-danger));
-	outline-color: rgb(var(--spotlight-danger));
+	border-color: rgb(var(--spotlight-danger, 244, 63, 94));
+	outline-color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 .arkynSelectContainer:not(.opacity).solid.focused {
-	border-color: rgb(var(--spotlight-primary));
-	outline-color: rgb(var(--spotlight-primary));
+	border-color: rgb(var(--spotlight-primary, 17, 109, 220));
+	outline-color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 .arkynSelectContainer.outline {
-	border-color: var(--border);
-	background-color: var(--background-foreground);
+	border-color: var(--border, #e2e8f0);
+	background-color: var(--background-foreground, #ffffff);
 }
 .arkynSelectContainer.outline.errored {
-	border-color: rgb(var(--spotlight-danger));
-	outline-color: rgb(var(--spotlight-danger));
+	border-color: rgb(var(--spotlight-danger, 244, 63, 94));
+	outline-color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 .arkynSelectContainer:not(.opacity).outline.focused {
-	border-color: rgb(var(--spotlight-primary));
-	outline-color: rgb(var(--spotlight-primary));
+	border-color: rgb(var(--spotlight-primary, 17, 109, 220));
+	outline-color: rgb(var(--spotlight-primary, 17, 109, 220));
 }
 .arkynSelectContainer.underline {
 	border-radius: 0;
@@ -82,7 +82,7 @@
 	border-left: none;
 	border-right: none;
 	outline: none;
-	border-color: var(--border);
+	border-color: var(--border, #e2e8f0);
 }
 .arkynSelectContainer.underline .prefix {
 	display: none;
@@ -97,16 +97,16 @@
 	background: transparent;
 }
 .arkynSelectContainer.underline.errored {
-	border-color: rgba(var(--spotlight-danger));
+	border-color: rgba(var(--spotlight-danger, 244, 63, 94));
 }
 .arkynSelectContainer.underline.errored::before {
-	background: rgba(var(--spotlight-danger));
+	background: rgba(var(--spotlight-danger, 244, 63, 94));
 }
 .arkynSelectContainer:not(.opacity).underline.focused {
-	border-color: rgba(var(--spotlight-primary));
+	border-color: rgba(var(--spotlight-primary, 17, 109, 220));
 }
 .arkynSelectContainer:not(.opacity).underline.focused::before {
-	background: rgba(var(--spotlight-primary));
+	background: rgba(var(--spotlight-primary, 17, 109, 220));
 }
 
 /* SIZE */

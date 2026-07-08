@@ -7,7 +7,7 @@
 }
 
 .arkynMonthlyCalendarTableTd.blocked {
-	background-color: rgb(var(--spotlight-danger-foreground));
+	background-color: rgb(var(--spotlight-danger-foreground, 254, 236, 239));
 }
 
 .arkynMonthlyCalendarTableTd.blocked:before {
@@ -17,7 +17,7 @@
 	left: 0px;
 	bottom: 0px;
 	width: 4px;
-	background-color: rgb(var(--spotlight-danger));
+	background-color: rgb(var(--spotlight-danger, 244, 63, 94));
 }
 
 .arkynMonthlyCalendarTableTd.blocked:hover {
@@ -39,17 +39,17 @@
 
 .arkynMonthlyCalendarTableTd.previous,
 .arkynMonthlyCalendarTableTd.next {
-	color: var(--text-muted);
-	background-color: var(--card-foreground-primary);
+	color: var(--text-muted, #a1a1aa);
+	background-color: var(--background-foreground, #ffffff);
 }
 
 .arkynMonthlyCalendarTableTd > p {
-	color: var(--text-body);
+	color: var(--text-body, #52525b);
 }
 
 .arkynMonthlyCalendarTableTd > p.today {
 	font-weight: 700;
-	color: var(--text-heading);
+	color: var(--text-heading, #09090b);
 }
 
 .arkynMonthlyCalendarTableTd .arkynMonthlyCalendarEventContainer {
