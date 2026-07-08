@@ -101,6 +101,12 @@ jobs:
           echo "✅ Nenhum @types encontrado em dependencies."
 
       # ------------------------------------------------------
+      # Formata o código com o Biome.
+      # ------------------------------------------------------
+      - name: Biome format
+        run: bun run biome:format
+
+      # ------------------------------------------------------
       # Verifica vulnerabilidades de código com o Biome.
       # ------------------------------------------------------
       - name: Biome check
