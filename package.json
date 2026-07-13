@@ -42,6 +42,7 @@
 		"all:audit": "concurrently \"bun run components:audit\" \"bun run server:audit\" \"bun run shared:audit\" \"bun run templates:audit\"",
 		"all:build": "bun run templates:build && bun run shared:build && bun run components:build && bun run server:build",
 		"all:publish:beta": "bun run templates:publish:beta && bun run shared:publish:beta && bun run components:publish:beta && bun run server:publish:beta",
+		"all:publish:latest": "bun run templates:publish:latest && bun run shared:publish:latest && bun run components:publish:latest && bun run server:publish:latest",
 		"all:release:beta": "bun run templates:release:beta && bun run shared:release:beta && bun run components:release:beta && bun run server:release:beta",
 		"all:release:major": "bun run templates:release:major && bun run shared:release:major && bun run components:release:major && bun run server:release:major",
 		"all:release:minor": "bun run templates:release:minor && bun run shared:release:minor && bun run components:release:minor && bun run server:release:minor",

@@ -1,0 +1,140 @@
+# ==========================================================
+# Nome exibido na aba "Actions" do GitHub
+# ==========================================================
+name: Latest Release
+
+# ==========================================================
+# Eventos que disparam este workflow
+# ==========================================================
+on:
+  # Sempre que houver um push...
+  push:
+    # ...na branch develop
+    branches:
+      - main
+
+# ==========================================================
+# Lista de trabalhos
+# ==========================================================
+jobs:
+  # Nome interno do trabalho
+  publish-latest:
+    # Máquina virtual utilizada pelo GitHub
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    # Impede que dois deploys latest aconteçam ao mesmo tempo.
+    concurrency:
+      group: latest-release
+      cancel-in-progress: true
+
+    # Lista de etapas executadas em sequência.
+    steps:
+      # ------------------------------------------------------
+      # Faz o clone do repositório.
+      # Equivalente ao comando:
+      #
+      # git clone ...
+      # ------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      # ------------------------------------------------------
+      # Garante o ambiente Node.js limpo na máquina.
+      # ------------------------------------------------------
+      - name: Setup Node.js (NPM Registry Auth)
+        uses: actions/setup-node@v5
+        with:
+          node-version: 26
+          registry-url: https://registry.npmjs.org
+
+      # ------------------------------------------------------
+      # Instala o Bun.
+      # ------------------------------------------------------
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          # Sempre utiliza a versão mais recente.
+          bun-version: latest
+
+      # ------------------------------------------------------
+      # Instala todas as dependências.
+      # O --frozen-lockfile garante que o bun.lock esteja
+      # sincronizado com o package.json.
+      # ------------------------------------------------------
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # ------------------------------------------------------
+      # Verifica vulnerabilidades.
+      # ------------------------------------------------------
+      - name: Security audit
+        run: bun run all:audit
+
+      # ------------------------------------------------------
+      # Garante que nenhum pacote @types/* esteja listado
+      # em "dependencies". Eles devem ficar apenas em
+      # "devDependencies".
+      # ------------------------------------------------------
+      - name: Verify @types dependencies
+        shell: bash
+        run: |
+          found=0
+
+          while IFS= read -r file; do
+            if jq -e '.dependencies // {} | keys[] | startswith("@types/")' "$file" > /dev/null; then
+              echo "❌ $file possui @types em dependencies"
+              jq '.dependencies' "$file"
+              found=1
+            fi
+          done < <(find packages -name package.json)
+
+          if [ "$found" -eq 1 ]; then
+            echo ""
+            echo "Erro: pacotes @types devem estar em devDependencies."
+            exit 1
+          fi
+
+          echo "✅ Nenhum @types encontrado em dependencies."
+
+      # ------------------------------------------------------
+      # Formata o código com o Biome.
+      # ------------------------------------------------------
+      - name: Biome format
+        run: bun run biome:format
+
+      # ------------------------------------------------------
+      # Verifica vulnerabilidades de código com o Biome.
+      # ------------------------------------------------------
+      - name: Biome check
+        run: bun run biome:check:ci
+
+      # ------------------------------------------------------
+      # Compila todos os pacotes.
+      # ------------------------------------------------------
+      - name: Build packages
+        run: bun run all:build
+
+      # ------------------------------------------------------
+      # Executa a verificação de tipos.
+      # ------------------------------------------------------
+      - name: Run typecheck
+        run: bun run all:typecheck
+
+      # ------------------------------------------------------
+      # Executa todos os testes.
+      # Caso algum falhe, o workflow para aqui.
+      # ------------------------------------------------------
+      - name: Run tests
+        run: bun run all:test
+
+      # ------------------------------------------------------
+      # Publica todos os pacotes utilizando a tag latest.
+      # O 'setup-node' configurado acima exige estritamente
+      # o nome 'NODE_AUTH_TOKEN' para injetar a secret.
+      # ------------------------------------------------------
+      - name: Publish latest
+        run: bun run all:publish:latest
