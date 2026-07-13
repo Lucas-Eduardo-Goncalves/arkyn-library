@@ -59,8 +59,8 @@
 		"*.css"
 	],
 	"dependencies": {
-		"@arkyn/shared": ">=3.0.1-beta.205",
-		"@arkyn/templates": ">=3.0.1-beta.205"
+		"@arkyn/shared": ">=3.0.2",
+		"@arkyn/templates": ">=3.0.2"
 	},
 	"peerDependencies": {
 		"@react-google-maps/api": ">=2.0.0",
