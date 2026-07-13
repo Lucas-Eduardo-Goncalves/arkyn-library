@@ -1,7 +1,7 @@
 # ==========================================================
 # Nome exibido na aba "Actions" do GitHub
 # ==========================================================
-name: Beta Release
+name: Release
 
 # ==========================================================
 # Eventos que disparam este workflow
@@ -9,16 +9,17 @@ name: Beta Release
 on:
   # Sempre que houver um push...
   push:
-    # ...na branch develop
+    # ...na branch develop (beta) ou main (latest)
     branches:
       - develop
+      - main
 
 # ==========================================================
 # Lista de trabalhos
 # ==========================================================
 jobs:
   # Nome interno do trabalho
-  publish-beta:
+  publish:
     # Máquina virtual utilizada pelo GitHub
     runs-on: ubuntu-latest
 
@@ -26,9 +27,10 @@ jobs:
       id-token: write
       contents: read
 
-    # Impede que dois deploys beta aconteçam ao mesmo tempo.
+    # Impede que dois deploys da mesma branch aconteçam ao mesmo tempo.
+    # O group inclui o nome da branch para não travar beta e latest entre si.
     concurrency:
-      group: beta-release
+      group: release-${{ github.ref_name }}
       cancel-in-progress: true
 
     # Lista de etapas executadas em sequência.
@@ -132,9 +134,26 @@ jobs:
         run: bun run all:test
 
       # ------------------------------------------------------
-      # Publica todos os pacotes utilizando a tag beta.
+      # Define qual tag/script de publish usar conforme a
+      # branch que disparou o workflow.
+      # ------------------------------------------------------
+      - name: Determine release channel
+        id: channel
+        shell: bash
+        run: |
+          if [ "${{ github.ref_name }}" = "develop" ]; then
+            echo "script=all:publish:beta" >> "$GITHUB_OUTPUT"
+            echo "tag=beta" >> "$GITHUB_OUTPUT"
+          else
+            echo "script=all:publish:latest" >> "$GITHUB_OUTPUT"
+            echo "tag=latest" >> "$GITHUB_OUTPUT"
+          fi
+
+      # ------------------------------------------------------
+      # Publica todos os pacotes utilizando a tag definida
+      # na etapa anterior.
       # O 'setup-node' configurado acima exige estritamente
       # o nome 'NODE_AUTH_TOKEN' para injetar a secret.
       # ------------------------------------------------------
-      - name: Publish beta
-        run: bun run all:publish:beta
+      - name: Publish (${{ steps.channel.outputs.tag }})
+        run: bun run ${{ steps.channel.outputs.script }}

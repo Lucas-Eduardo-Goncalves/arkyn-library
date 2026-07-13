@@ -7,11 +7,11 @@ A TypeScript ecosystem of independent, framework-friendly packages for building 
 
 ## 📦 Packages
 
-Arkyn is a monorepo of four published packages, plus an internal development app used to preview and test them.
+Arkyn is a monorepo of four published packages, plus an internal development app used to preview and test them. Each package solves one layer of the same problem — teams reinventing UI primitives, response boilerplate, formatting/validation helpers, and reference data on every project — and can be adopted standalone or combined.
 
 ### [@arkyn/components](./packages/components)
 
-A complete, accessible, TypeScript-first React UI kit — 51 components, 10 hooks, 5 context providers, and 2 services — so teams stop rebuilding the same buttons, inputs, modals, drawers, and tables on every project.
+A complete, accessible, TypeScript-first React UI kit — 54 components, 10 hooks, 5 context providers, and 2 services — so teams stop rebuilding the same buttons, inputs, modals, drawers, and tables on every project.
 
 - 🧱 **Forms & inputs** - `Input`, `Select`, `MultiSelect`, `Checkbox`, `Switch`, `RadioGroup`, `CurrencyInput`, `MaskedInput`, `PhoneInput`, `Slider`, and more, all wired into a shared form-validation context
 - 🪟 **Overlays** - Modals, drawers, popovers, and tooltips with their own providers/hooks
@@ -47,7 +47,9 @@ Ready-to-use static reference data — country lists with phone masks, Brazilian
 
 ### Installation
 
-Install only the packages you need — each one works standalone:
+Install only the packages you need — each one works standalone.
+
+> **ESM only.** Every package ships as native ES modules with no CommonJS build — use `import`, not `require()`.
 
 ```bash
 # UI components (also needs its peer deps — see the package README)
