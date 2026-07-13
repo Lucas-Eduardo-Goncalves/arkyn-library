@@ -155,5 +155,5 @@ jobs:
       # O 'setup-node' configurado acima exige estritamente
       # o nome 'NODE_AUTH_TOKEN' para injetar a secret.
       # ------------------------------------------------------
-      - name: Publish (${{ steps.channel.outputs.tag }})
+      - name: Publish NPM
         run: bun run ${{ steps.channel.outputs.script }}
