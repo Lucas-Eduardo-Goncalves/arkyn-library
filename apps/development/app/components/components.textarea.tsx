@@ -1,6 +1,9 @@
 import { Textarea } from "@arkyn/components/textarea";
+import { useState } from "react";
 
 export default function TextareaRoute() {
+	const [controlledValue, setControlledValue] = useState("");
+
 	return (
 		<>
 			<div className="exampleContainer row foreground">
@@ -56,6 +59,18 @@ export default function TextareaRoute() {
 					label="Read only:"
 					readOnly
 					defaultValue="Read only content"
+				/>
+			</div>
+
+			<div className="exampleContainer foreground">
+				<p>Controlled value: {JSON.stringify(controlledValue)}</p>
+				<Textarea
+					name="ta10"
+					variant="solid"
+					label="Controlled:"
+					value={controlledValue}
+					onChange={(e) => setControlledValue(e.target.value)}
+					placeholder="Enter text..."
 				/>
 			</div>
 

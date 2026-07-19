@@ -1,17 +1,18 @@
 import { Button } from "@arkyn/components/button";
 import { DrawerContainer } from "@arkyn/components/drawerContainer";
 import { DrawerHeader } from "@arkyn/components/drawerHeader";
+import { useDrawer } from "@arkyn/components/useDrawer";
 import { useState } from "react";
 
 export default function DrawerRoute() {
-	const [isLeftOpen, setIsLeftOpen] = useState(false);
 	const [isRightOpen, setIsRightOpen] = useState(false);
+	const { openDrawer, closeDrawer, drawerIsOpen } = useDrawer("example");
 
 	return (
 		<>
 			<DrawerContainer
-				isVisible={isLeftOpen}
-				makeInvisible={() => setIsLeftOpen(false)}
+				isVisible={drawerIsOpen}
+				makeInvisible={closeDrawer}
 				orientation="left"
 			>
 				<DrawerHeader>Left Drawer</DrawerHeader>
@@ -37,7 +38,7 @@ export default function DrawerRoute() {
 			</DrawerContainer>
 
 			<div className="exampleContainer row">
-				<Button onClick={() => setIsLeftOpen(true)}>Open Left Drawer</Button>
+				<Button onClick={openDrawer}>Open Left Drawer</Button>
 				<Button onClick={() => setIsRightOpen(true)}>Open Right Drawer</Button>
 			</div>
 		</>

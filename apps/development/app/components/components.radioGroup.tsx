@@ -1,7 +1,10 @@
 import { RadioBox } from "@arkyn/components/radioBox";
 import { RadioGroup } from "@arkyn/components/radioGroup";
+import { useState } from "react";
 
 export default function RadioGroupRoute() {
+	const [controlledValue, setControlledValue] = useState("a");
+
 	return (
 		<>
 			<div className="exampleContainer row foreground">
@@ -45,6 +48,21 @@ export default function RadioGroupRoute() {
 					<RadioBox value="c" disabled>
 						Gamma (disabled)
 					</RadioBox>
+				</RadioGroup>
+			</div>
+
+			<div className="exampleContainer foreground">
+				<p>Controlled value: {controlledValue}</p>
+				<RadioGroup
+					name="rg8"
+					label="Controlled:"
+					size="md"
+					value={controlledValue}
+					onChange={setControlledValue}
+				>
+					<RadioBox value="a">Option A</RadioBox>
+					<RadioBox value="b">Option B</RadioBox>
+					<RadioBox value="c">Option C</RadioBox>
 				</RadioGroup>
 			</div>
 

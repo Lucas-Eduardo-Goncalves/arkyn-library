@@ -1,5 +1,6 @@
 import { Select } from "@arkyn/components/select";
 import { Circle } from "lucide-react";
+import { useState } from "react";
 
 export default function SelectRoute() {
 	const options = [
@@ -7,6 +8,8 @@ export default function SelectRoute() {
 		{ value: "option2", label: "Option 2" },
 		{ value: "option3", label: "Option 3" },
 	];
+
+	const [controlledValue, setControlledValue] = useState("");
 
 	return (
 		<>
@@ -132,6 +135,19 @@ export default function SelectRoute() {
 					readOnly
 					defaultValue="option1"
 					placeholder="Select..."
+				/>
+			</div>
+
+			<div className="exampleContainer foreground">
+				<p>Controlled value: {JSON.stringify(controlledValue)}</p>
+				<Select
+					name="s18"
+					variant="solid"
+					label="Controlled:"
+					placeholder="Select..."
+					options={options}
+					value={controlledValue}
+					onChange={setControlledValue}
 				/>
 			</div>
 

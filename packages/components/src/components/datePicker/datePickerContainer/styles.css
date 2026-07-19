@@ -1,0 +1,134 @@
+/* BASE CSS */
+.arkynDatePickerContainer {
+	position: relative;
+	display: flex;
+	align-items: center;
+
+	width: 100%;
+
+	padding: 0 16px;
+	gap: 8px;
+	border-radius: 8px;
+
+	border: 1px solid transparent;
+	outline: 1px solid transparent;
+}
+.arkynDatePickerContainer:hover {
+	cursor: pointer;
+}
+.arkynDatePickerContainer.opacity {
+	opacity: 0.5;
+}
+
+/* PREFIX */
+.arkynDatePickerContainer .prefix {
+	color: var(--text-body, #52525b);
+	background: var(--border, #e2e8f0);
+	font-weight: 400;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	position: absolute;
+}
+.arkynDatePickerContainer .prefix {
+	left: 0;
+	top: 0;
+	bottom: 0;
+	border-radius: 5px 0 0 5px;
+	border-right: 1px solid var(--border, #e2e8f0);
+}
+
+/* LEFT ICON */
+.arkynDatePickerContainer > svg {
+	color: var(--text-muted, #a1a1aa);
+}
+.arkynDatePickerContainer.errored > svg {
+	color: rgb(var(--spotlight-danger, 244, 63, 94));
+}
+.arkynDatePickerContainer:not(.opacity).focused > svg {
+	color: rgb(var(--spotlight-primary, 17, 109, 220));
+}
+
+/* VARIANTS */
+.arkynDatePickerContainer.solid {
+	border-color: var(--border, #e2e8f0);
+	background-color: var(--input-background, #fafafa);
+}
+.arkynDatePickerContainer.solid.errored {
+	border-color: rgb(var(--spotlight-danger, 244, 63, 94));
+	outline-color: rgb(var(--spotlight-danger, 244, 63, 94));
+}
+.arkynDatePickerContainer:not(.opacity).solid.focused {
+	border-color: rgb(var(--spotlight-primary, 17, 109, 220));
+	outline-color: rgb(var(--spotlight-primary, 17, 109, 220));
+}
+.arkynDatePickerContainer.outline {
+	border-color: var(--border, #e2e8f0);
+	background-color: var(--background-foreground, #ffffff);
+}
+.arkynDatePickerContainer.outline.errored {
+	border-color: rgb(var(--spotlight-danger, 244, 63, 94));
+	outline-color: rgb(var(--spotlight-danger, 244, 63, 94));
+}
+.arkynDatePickerContainer:not(.opacity).outline.focused {
+	border-color: rgb(var(--spotlight-primary, 17, 109, 220));
+	outline-color: rgb(var(--spotlight-primary, 17, 109, 220));
+}
+.arkynDatePickerContainer.underline {
+	border-radius: 0;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	outline: none;
+	border-color: var(--border, #e2e8f0);
+}
+.arkynDatePickerContainer.underline .prefix {
+	display: none;
+}
+.arkynDatePickerContainer.underline::before {
+	content: " ";
+	position: absolute;
+	height: 1px;
+	left: 0;
+	right: 0;
+	bottom: -2px;
+	background: transparent;
+}
+.arkynDatePickerContainer.underline.errored {
+	border-color: rgba(var(--spotlight-danger, 244, 63, 94));
+}
+.arkynDatePickerContainer.underline.errored::before {
+	background: rgba(var(--spotlight-danger, 244, 63, 94));
+}
+.arkynDatePickerContainer:not(.opacity).underline.focused {
+	border-color: rgba(var(--spotlight-primary, 17, 109, 220));
+}
+.arkynDatePickerContainer:not(.opacity).underline.focused::before {
+	background: rgba(var(--spotlight-primary, 17, 109, 220));
+}
+
+/* SIZE */
+.arkynDatePickerContainer.md {
+	min-height: 40px;
+}
+.arkynDatePickerContainer.md.hasPrefix {
+	padding-left: 60px;
+}
+.arkynDatePickerContainer.md .prefix {
+	height: 40px;
+	width: 44px;
+	font-size: 14px;
+}
+.arkynDatePickerContainer.lg {
+	min-height: 44px;
+}
+.arkynDatePickerContainer.lg .prefix {
+	height: 44px;
+	width: 48px;
+	font-size: 16px;
+}
+.arkynDatePickerContainer.lg.hasPrefix {
+	padding-left: 64px;
+}

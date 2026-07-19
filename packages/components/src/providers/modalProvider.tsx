@@ -1,4 +1,10 @@
-import { createContext, type ReactNode, useState } from "react";
+import {
+	createContext,
+	type ReactNode,
+	useCallback,
+	useMemo,
+	useState,
+} from "react";
 
 // biome-ignore lint/suspicious/noExplicitAny: intentional
 type ModalContextProps<T = any> = {
@@ -53,39 +59,42 @@ function ModalProvider(args: ModalProviderProps) {
 	const { children = false } = args;
 	const [openedModals, setOpenedModals] = useState<OpenedModals>([]);
 
-	function modalIsOpen(key: string) {
-		return !!openedModals.some((modal) => modal.key === key);
-	}
+	const modalIsOpen = useCallback(
+		(key: string) => openedModals.some((modal) => modal.key === key),
+		[openedModals],
+	);
 
-	function modalData(key: string) {
-		return openedModals.find((modal) => modal.key === key)?.data;
-	}
+	const modalData = useCallback(
+		(key: string) => openedModals.find((modal) => modal.key === key)?.data,
+		[openedModals],
+	);
 
-	// biome-ignore lint/suspicious/noExplicitAny: intentional
-	function openModal(key: string, data?: any) {
-		const alreadyExist = modalIsOpen(key);
-		if (alreadyExist) {
+	const openModal = useCallback(
+		// biome-ignore lint/suspicious/noExplicitAny: intentional
+		(key: string, data?: any) => {
 			setOpenedModals((old) => {
 				const filtered = old.filter((modal) => modal.key !== key);
 				return [...filtered, { key, data }];
 			});
-		} else setOpenedModals([...openedModals, { key, data }]);
-	}
+		},
+		[],
+	);
 
-	function closeModal(key: string) {
-		setOpenedModals(openedModals.filter((modal) => modal.key !== key));
-	}
+	const closeModal = useCallback((key: string) => {
+		setOpenedModals((old) => old.filter((modal) => modal.key !== key));
+	}, []);
 
-	function closeAll() {
+	const closeAll = useCallback(() => {
 		setOpenedModals([]);
-	}
+	}, []);
+
+	const value = useMemo(
+		() => ({ modalIsOpen, modalData, openModal, closeModal, closeAll }),
+		[modalIsOpen, modalData, openModal, closeModal, closeAll],
+	);
 
 	return (
-		<modalContext.Provider
-			value={{ modalIsOpen, modalData, openModal, closeModal, closeAll }}
-		>
-			{children}
-		</modalContext.Provider>
+		<modalContext.Provider value={value}>{children}</modalContext.Provider>
 	);
 }
 

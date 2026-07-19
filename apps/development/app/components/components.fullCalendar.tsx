@@ -1,6 +1,8 @@
 import { FullCalendar } from "@arkyn/components/fullCalendar";
+import { useState } from "react";
 
 export default function FullCalendarRoute() {
+	const [controlledView, setControlledView] = useState(new Date(2026, 5, 30));
 	const events = [
 		{
 			title: "Team standup",
@@ -34,8 +36,22 @@ export default function FullCalendarRoute() {
 	];
 
 	return (
-		<div className="exampleContainer">
-			<FullCalendar events={events} defaultViewValue={new Date(2026, 5, 30)} />
-		</div>
+		<>
+			<div className="exampleContainer">
+				<FullCalendar
+					events={events}
+					defaultViewValue={new Date(2026, 5, 30)}
+				/>
+			</div>
+
+			<div className="exampleContainer">
+				<p>Controlled view: {controlledView.toLocaleDateString("pt-BR")}</p>
+				<FullCalendar
+					events={events}
+					viewValue={controlledView}
+					onChangeView={setControlledView}
+				/>
+			</div>
+		</>
 	);
 }

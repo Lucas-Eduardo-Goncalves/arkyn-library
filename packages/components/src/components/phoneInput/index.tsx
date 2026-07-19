@@ -8,6 +8,7 @@ import { useId, useRef, useState } from "react";
 
 import { useForm } from "../../hooks/useForm";
 import { FieldTemplate } from "../../services/fieldTemplate";
+import { applyMask, getMask, TYPES } from "../../utils/phoneInputUtilities";
 
 import { PhoneInputContainer } from "./phoneInputContainer";
 import { PhoneInputCountriesOverlay } from "./phoneInputCountriesOverlay";
@@ -75,6 +76,18 @@ type PhoneInputProps = {
 	 */
 	orientation?: "horizontal" | "vertical" | "horizontalReverse";
 };
+
+function formatLocalValue(rawValue: string, country: CountryType) {
+	const digits = removeNonNumeric(rawValue);
+
+	if (country.code === "+55") {
+		return applyMask(digits, TYPES[getMask(digits)]);
+	}
+
+	const mask =
+		typeof country.mask === "string" ? country.mask : country.mask[0];
+	return applyMask(digits, mask, "_");
+}
 
 /**
  * PhoneInput — phone number field with an integrated country selector and automatic mask formatting.
@@ -161,9 +174,13 @@ function PhoneInput(props: PhoneInputProps) {
 	const [search, setSearch] = useState("");
 	const [showCountryOptions, setShowCountryOptions] = useState(false);
 	const [internalValue, setValue] = useState(defaultData);
-	const value = rawValue !== undefined ? rawValue : internalValue;
 
 	const [currentCountry, setCurrentCountry] = useState(defaultCountry);
+
+	const value =
+		rawValue !== undefined
+			? formatLocalValue(rawValue, currentCountry)
+			: internalValue;
 
 	const { fieldErrors } = useForm();
 

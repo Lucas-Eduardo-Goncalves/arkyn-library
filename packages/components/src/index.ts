@@ -14,6 +14,7 @@ export { CardTabContainer } from "./components/cardTab/cardTabContainer";
 export { Checkbox } from "./components/checkbox";
 export { ClientOnly } from "./components/clientOnly";
 export { CurrencyInput } from "./components/currencyInput";
+export { DatePicker } from "./components/datePicker";
 export { Divider } from "./components/divider";
 export { DrawerContainer } from "./components/drawer/drawerContainer";
 export { DrawerHeader } from "./components/drawer/drawerHeader";

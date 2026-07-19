@@ -1,0 +1,28 @@
+.arkynDatePickerContent {
+	display: flex;
+	align-items: start;
+	gap: 4px;
+	flex-wrap: wrap;
+
+	flex: 1;
+}
+
+.arkynDatePickerContent > p {
+	font-weight: 400;
+	color: var(--text-muted, #a1a1aa);
+	user-select: none;
+}
+
+.arkynDatePickerContent > p.hasValue {
+	color: var(--text-body, #52525b);
+}
+
+.arkynDatePickerContent.md > p {
+	font-size: 14px;
+	line-height: 14px;
+}
+
+.arkynDatePickerContent.lg > p {
+	font-size: 16px;
+	line-height: 16px;
+}

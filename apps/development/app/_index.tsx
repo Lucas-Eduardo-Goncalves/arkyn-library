@@ -6,6 +6,7 @@ export default function IndexRoute() {
 			<Link to="/alert">Alert</Link>
 			<Link to="/audio-player">Audio Player</Link>
 			<Link to="/audio-upload">Audio Upload</Link>
+			<Link to="/automation">Automation</Link>
 			<Link to="/badge">Badge</Link>
 			<Link to="/button">Button</Link>
 			<Link to="/calendar">Calendar</Link>
@@ -13,6 +14,7 @@ export default function IndexRoute() {
 			<Link to="/checkbox">Checkbox</Link>
 			<Link to="/client-only">Client Only</Link>
 			<Link to="/currency-input">Currency Input</Link>
+			<Link to="/date-picker">Date Picker</Link>
 			<Link to="/divider">Divider</Link>
 			<Link to="/drawer">Drawer</Link>
 			<Link to="/file-upload">File Upload</Link>

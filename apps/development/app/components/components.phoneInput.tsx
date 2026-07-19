@@ -1,6 +1,9 @@
 import { PhoneInput } from "@arkyn/components/phoneInput";
+import { useState } from "react";
 
 export default function PhoneInputRoute() {
+	const [controlledValue, setControlledValue] = useState("");
+
 	return (
 		<>
 			<div className="exampleContainer row foreground">
@@ -37,6 +40,17 @@ export default function PhoneInputRoute() {
 					errorMessage="Phone is required"
 				/>
 				<PhoneInput name="phone9" variant="solid" label="Read only:" readOnly />
+			</div>
+
+			<div className="exampleContainer foreground">
+				<p>Controlled value: {controlledValue}</p>
+				<PhoneInput
+					name="phone12"
+					variant="solid"
+					label="Controlled:"
+					value={controlledValue}
+					onChange={setControlledValue}
+				/>
 			</div>
 
 			<div className="exampleContainer row">

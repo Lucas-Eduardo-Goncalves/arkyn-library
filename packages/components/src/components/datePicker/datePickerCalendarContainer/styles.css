@@ -1,0 +1,26 @@
+/* BASE CSS */
+.arkynDatePickerCalendarContainer {
+	position: absolute;
+	z-index: 7;
+
+	left: 0;
+	width: max-content;
+	max-width: calc(100vw - 32px);
+
+	border-radius: 8px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* BOTTOM POSITION (DEFAULT) */
+.arkynDatePickerCalendarContainer.bottom {
+	top: calc(100% + 5px);
+}
+
+/* TOP POSITION */
+.arkynDatePickerCalendarContainer.top {
+	bottom: calc(100% + 5px);
+}
+
+.arkynDatePickerCalendarContainer .arkynCalendarContainer {
+	max-width: 100%;
+}

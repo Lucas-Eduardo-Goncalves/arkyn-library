@@ -31,7 +31,12 @@ function FieldTemplate(props: FormRendererProps) {
 
 	return (
 		<FieldWrapper id={name} className={className} orientation={orientation}>
-			{label && <FieldLabel showAsterisk={showAsterisk}>{label}</FieldLabel>}
+			{label && (
+				<FieldLabel htmlFor={name} showAsterisk={showAsterisk}>
+					{label}
+				</FieldLabel>
+			)}
+
 			{children}
 			{errorMessage && <FieldError>{errorMessage}</FieldError>}
 		</FieldWrapper>

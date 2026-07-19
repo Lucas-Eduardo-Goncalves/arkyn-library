@@ -1,6 +1,9 @@
 import { Checkbox } from "@arkyn/components/checkbox";
+import { useState } from "react";
 
 export default function CheckboxRoute() {
+	const [checked, setChecked] = useState(false);
+
 	return (
 		<>
 			<div className="exampleContainer row foreground">
@@ -39,6 +42,17 @@ export default function CheckboxRoute() {
 				/>
 				<Checkbox name="cb11" label="Horizontal" orientation="horizontal" />
 				<Checkbox name="cb12" label="Vertical" orientation="vertical" />
+			</div>
+
+			<div className="exampleContainer foreground">
+				<p>Controlled checked: {String(checked)}</p>
+				<Checkbox
+					name="cb15"
+					label="Controlled"
+					size="md"
+					checked={checked}
+					onCheck={(value) => setChecked(!!value)}
+				/>
 			</div>
 
 			<div className="exampleContainer row">

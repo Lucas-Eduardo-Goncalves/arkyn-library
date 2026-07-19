@@ -1,7 +1,10 @@
 import { CurrencyInput } from "@arkyn/components/currencyInput";
 import { Circle } from "lucide-react";
+import { useState } from "react";
 
 export default function CurrencyInputRoute() {
+	const [controlledValue, setControlledValue] = useState(0);
+
 	return (
 		<>
 			<div className="exampleContainer row foreground">
@@ -113,6 +116,20 @@ export default function CurrencyInputRoute() {
 					locale="BRL"
 					readOnly
 					defaultValue={1500}
+				/>
+			</div>
+
+			<div className="exampleContainer foreground">
+				<p>Controlled value: {controlledValue}</p>
+				<CurrencyInput
+					name="ci20"
+					variant="solid"
+					label="Controlled:"
+					locale="BRL"
+					value={controlledValue}
+					onChange={(_e, originalValue) =>
+						setControlledValue(Number(originalValue))
+					}
 				/>
 			</div>
 

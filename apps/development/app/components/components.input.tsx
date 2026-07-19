@@ -1,7 +1,10 @@
 import { Input } from "@arkyn/components/input";
 import { Circle } from "lucide-react";
+import { useState } from "react";
 
 export default function InputRoute() {
+	const [controlledValue, setControlledValue] = useState("");
+
 	return (
 		<>
 			<div className="exampleContainer row foreground">
@@ -118,6 +121,18 @@ export default function InputRoute() {
 					label="Password:"
 					type="password"
 					placeholder="••••••••"
+				/>
+			</div>
+
+			<div className="exampleContainer foreground">
+				<p>Controlled value: {JSON.stringify(controlledValue)}</p>
+				<Input
+					name="i19"
+					variant="solid"
+					label="Controlled:"
+					value={controlledValue}
+					onChange={(e) => setControlledValue(e.target.value)}
+					placeholder="Digite algo..."
 				/>
 			</div>
 

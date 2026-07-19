@@ -7,12 +7,12 @@ const TYPES = {
 	NINE: "(99) 99999-9999",
 };
 
-function applyMask(value: string, maskPattern: string) {
+function applyMask(value: string, maskPattern: string, placeholder = "9") {
 	let result = "";
 	let digitIndex = 0;
 
 	for (let i = 0; i < maskPattern.length; i++) {
-		if (maskPattern[i] === "9") {
+		if (maskPattern[i] === placeholder) {
 			if (digitIndex < value.length) {
 				result += value[digitIndex];
 				digitIndex++;

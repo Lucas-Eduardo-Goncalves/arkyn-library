@@ -1,0 +1,7 @@
+.arkynDatePickerChevron {
+	transition: 0.15s all ease-in-out;
+	color: var(--text-muted, #a1a1aa);
+}
+.arkynDatePickerChevron:not(.notAnimate).focused {
+	transform: rotate(180deg);
+}

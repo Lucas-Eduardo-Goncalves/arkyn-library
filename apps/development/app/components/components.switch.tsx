@@ -1,6 +1,9 @@
 import { Switch } from "@arkyn/components/switch";
+import { useState } from "react";
 
 export default function SwitchRoute() {
+	const [checked, setChecked] = useState(false);
+
 	return (
 		<>
 			<div className="exampleContainer row foreground">
@@ -39,6 +42,17 @@ export default function SwitchRoute() {
 					value="active"
 					unCheckedValue="inactive"
 					size="lg"
+				/>
+			</div>
+
+			<div className="exampleContainer foreground">
+				<p>Controlled checked: {String(checked)}</p>
+				<Switch
+					name="sw14"
+					label="Controlled:"
+					size="lg"
+					checked={checked}
+					onCheck={(value) => setChecked(!!value)}
 				/>
 			</div>
 

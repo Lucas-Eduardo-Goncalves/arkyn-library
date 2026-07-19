@@ -1,7 +1,10 @@
 import { MaskedInput } from "@arkyn/components/maskedInput";
 import { Circle, CreditCard, Phone } from "lucide-react";
+import { useState } from "react";
 
 export default function MaskedInputRoute() {
+	const [controlledValue, setControlledValue] = useState("");
+
 	return (
 		<>
 			<div className="exampleContainer row foreground">
@@ -160,6 +163,20 @@ export default function MaskedInputRoute() {
 					variant="solid"
 					label="Disabled:"
 					disabled
+				/>
+			</div>
+
+			<div className="exampleContainer foreground">
+				<p>Controlled value: {controlledValue}</p>
+				<MaskedInput
+					mask="___.___.___-__"
+					replacement={{ _: /\d/ }}
+					name="mi20"
+					variant="solid"
+					label="Controlled:"
+					placeholder="000.000.000-00"
+					value={controlledValue}
+					onChange={(e) => setControlledValue(e.target.value)}
 				/>
 			</div>
 

@@ -166,11 +166,11 @@ describe("PhoneInput", () => {
 	});
 
 	describe("value prop (controlled)", () => {
-		it("should reflect a controlled value", () => {
+		it("should reflect a controlled value formatted with the country mask", () => {
 			render(<PhoneInput name="phone" value="34999998888" />);
 
 			const input = screen.getByRole("textbox") as HTMLInputElement;
-			expect(input.value).toBe("34999998888");
+			expect(input.value).toBe("(34) 99999-8888");
 		});
 
 		it("should update the displayed value when the controlled value prop changes", () => {
@@ -181,7 +181,17 @@ describe("PhoneInput", () => {
 			rerender(<PhoneInput name="phone" value="34988887777" />);
 
 			const input = screen.getByRole("textbox") as HTMLInputElement;
-			expect(input.value).toBe("34988887777");
+			expect(input.value).toBe("(34) 98888-7777");
+		});
+
+		it("should not let the user change the value while controlled", async () => {
+			const user = userEvent.setup();
+			render(<PhoneInput name="phone" value="34999998888" />);
+
+			const input = screen.getByRole("textbox") as HTMLInputElement;
+			await user.type(input, "1");
+
+			expect(input.value).toBe("(34) 99999-8888");
 		});
 	});
 

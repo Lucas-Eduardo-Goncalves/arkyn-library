@@ -1,5 +1,6 @@
 import { MultiSelect } from "@arkyn/components/multiSelect";
 import { Circle } from "lucide-react";
+import { useState } from "react";
 
 export default function MultiSelectRoute() {
 	const options = [
@@ -9,6 +10,8 @@ export default function MultiSelectRoute() {
 		{ value: "rb", label: "Ruby" },
 		{ value: "go", label: "Go" },
 	];
+
+	const [controlledValue, setControlledValue] = useState<string[]>([]);
 
 	return (
 		<>
@@ -81,6 +84,19 @@ export default function MultiSelectRoute() {
 					label="Size lg:"
 					options={options}
 					size="lg"
+				/>
+			</div>
+
+			<div className="exampleContainer foreground">
+				<p>Controlled value: {JSON.stringify(controlledValue)}</p>
+				<MultiSelect
+					name="ms12"
+					variant="solid"
+					label="Controlled:"
+					options={options}
+					placeholder="Selecione..."
+					value={controlledValue}
+					onChange={setControlledValue}
 				/>
 			</div>
 
