@@ -1,7 +1,7 @@
 import { BadResponse } from "./_badResponse";
 
 /**
- * HTTP 409 Conflict — the request conflicts with the current state of the server (e.g. duplicate record).
+ * HTTP 409 Conflict, the request conflicts with the current state of the server (e.g. duplicate record).
  *
  * @example
  * ```typescript

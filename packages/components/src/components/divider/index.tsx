@@ -10,7 +10,7 @@ type DividerProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 /**
- * Divider — visually separates content sections.
+ * Divider, visually separates content sections.
  *
  * @param props.orientation - Line direction (`horizontal` | `vertical`). Default: "horizontal"
  *

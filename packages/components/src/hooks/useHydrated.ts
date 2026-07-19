@@ -5,7 +5,7 @@ function subscribe() {
 }
 
 /**
- * useHydrated — returns `true` once the component has hydrated on the client, `false` during SSR.
+ * useHydrated, returns `true` once the component has hydrated on the client, `false` during SSR.
  *
  * Built on `useSyncExternalStore` so it is safe with React 18 concurrent rendering.
  * Use this when you need to defer client-only rendering (e.g. browser APIs, `window`, `navigator`)

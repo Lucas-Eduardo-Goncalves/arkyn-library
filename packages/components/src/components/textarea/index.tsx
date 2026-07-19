@@ -43,7 +43,7 @@ type TextareaProps = Omit<
 };
 
 /**
- * Textarea — multi-line text input with label, validation, and form integration.
+ * Textarea, multi-line text input with label, validation, and form integration.
  *
  * Integrates with `useForm` to display validation errors by field name.
  *

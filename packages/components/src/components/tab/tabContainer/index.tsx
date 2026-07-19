@@ -18,7 +18,7 @@ type TabContainerProps = Omit<
 };
 
 /**
- * TabContainer — wrapper that manages active state for a group of `TabButton` components.
+ * TabContainer, wrapper that manages active state for a group of `TabButton` components.
  *
  * Renders as a `<nav>` element. Provides context consumed by each `TabButton`.
  *

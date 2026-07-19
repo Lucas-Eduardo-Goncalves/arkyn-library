@@ -4,7 +4,7 @@ import type { ParseElement, RichTextValue } from "../types/richTextTypes";
 import { deserialize } from "../utils/richTextUtilities";
 
 /**
- * toRichTextValue — converts an HTML string to a `RichTextValue` (Slate.js Descendant array).
+ * toRichTextValue, converts an HTML string to a `RichTextValue` (Slate.js Descendant array).
  *
  * Use this to populate a `RichText` editor with content previously stored as HTML
  * (e.g. loaded from a database).

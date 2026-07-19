@@ -83,7 +83,7 @@ type SelectProps = {
 };
 
 /**
- * Select — single-option dropdown with optional search, label, validation, and form integration.
+ * Select, single-option dropdown with optional search, label, validation, and form integration.
  *
  * Integrates with `useForm` to display validation errors by field name.
  *

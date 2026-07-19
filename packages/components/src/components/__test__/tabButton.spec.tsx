@@ -507,7 +507,7 @@ describe("TabButton", () => {
 		it("should throw when clicked without a TabContainer ancestor", async () => {
 			// Per the DOM spec, exceptions thrown inside an event listener are
 			// reported to the global scope instead of propagating to whoever
-			// called `dispatchEvent` — so `user.click(...)` always resolves,
+			// called `dispatchEvent`, so `user.click(...)` always resolves,
 			// even when the click handler throws. Assert on the global `error`
 			// event instead of expecting the click promise to reject.
 			//

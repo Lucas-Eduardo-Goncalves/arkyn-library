@@ -1,7 +1,7 @@
 import { BadResponse } from "./_badResponse";
 
 /**
- * HTTP 502 Bad Gateway — the upstream server returned an invalid or unexpected response.
+ * HTTP 502 Bad Gateway, the upstream server returned an invalid or unexpected response.
  *
  * Throw inside a server action/loader and catch with `errorHandler`, or call `.toJson()` directly.
  *

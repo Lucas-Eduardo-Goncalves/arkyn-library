@@ -20,7 +20,7 @@ type SliderProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> & {
 };
 
 /**
- * Slider — interactive track for selecting a numeric value between 0 and 100.
+ * Slider, interactive track for selecting a numeric value between 0 and 100.
  *
  * Pair with `useSlider` for managed state.
  *

@@ -8,11 +8,11 @@ import {
 type OpenModalProps<T = any> = (data?: T) => void;
 
 /**
- * useModal — accesses the nearest `ModalProvider` context.
+ * useModal, accesses the nearest `ModalProvider` context.
  *
  * Two call signatures:
- * - **Without `key`** — returns the raw context object (manage any modal by name).
- * - **With `key`** — returns a scoped object bound to one named modal.
+ * - **Without `key`**, returns the raw context object (manage any modal by name).
+ * - **With `key`**, returns a scoped object bound to one named modal.
  *
  * @param key - Modal identifier registered in `ModalProvider`.
  *
@@ -22,7 +22,7 @@ type OpenModalProps<T = any> = (data?: T) => void;
  *
  * @example
  * ```tsx
- * // Scoped to one modal — the most common pattern
+ * // Scoped to one modal, the most common pattern
  * const { modalIsOpen, modalData, openModal, closeModal } = useModal<{ id: number }>('confirm-delete');
  *
  * openModal({ id: user.id });
@@ -30,7 +30,7 @@ type OpenModalProps<T = any> = (data?: T) => void;
  *
  * @example
  * ```tsx
- * // Full context — useful when triggering multiple different modals from one place
+ * // Full context, useful when triggering multiple different modals from one place
  * const { openModal } = useModal();
  *
  * openModal('confirm-delete', { id: user.id });

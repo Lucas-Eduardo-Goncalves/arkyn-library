@@ -1,7 +1,7 @@
 import { BadResponse } from "./_badResponse";
 
 /**
- * HTTP 401 Unauthorized — the request lacks valid authentication credentials.
+ * HTTP 401 Unauthorized, the request lacks valid authentication credentials.
  *
  * @example
  * ```typescript

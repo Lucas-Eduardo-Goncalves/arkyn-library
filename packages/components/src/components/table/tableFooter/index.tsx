@@ -4,7 +4,7 @@ import "./styles.css";
 type TableFooterProps = HTMLAttributes<HTMLTableSectionElement>;
 
 /**
- * TableFooter — `<tfoot>` section with an automatic spacing row above the content.
+ * TableFooter, `<tfoot>` section with an automatic spacing row above the content.
  *
  * Children span all columns via `colSpan={100}`. Commonly used for `Pagination`.
  * Accepts all standard HTML `<tfoot>` attributes.

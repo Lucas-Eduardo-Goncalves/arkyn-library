@@ -1,7 +1,7 @@
 import { BadResponse } from "./_badResponse";
 
 /**
- * HTTP 501 Not Implemented — the server does not support the functionality required to fulfill the request.
+ * HTTP 501 Not Implemented, the server does not support the functionality required to fulfill the request.
  *
  * @example
  * ```typescript

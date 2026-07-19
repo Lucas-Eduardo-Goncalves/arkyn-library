@@ -30,7 +30,7 @@ type BadgeProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 /**
- * Badge — displays labels, statuses, and categorization tags.
+ * Badge, displays labels, statuses, and categorization tags.
  *
  * @param props.size - Badge size (`md` | `lg`). Default: "lg"
  * @param props.variant - Visual style variant. Default: "ghost"

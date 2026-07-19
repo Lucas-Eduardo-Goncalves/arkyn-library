@@ -1,7 +1,7 @@
 import { BadResponse } from "./_badResponse";
 
 /**
- * HTTP 422 Unprocessable Entity — the request is well-formed but contains semantic validation errors.
+ * HTTP 422 Unprocessable Entity, the request is well-formed but contains semantic validation errors.
  * Typically used for form field validation failures.
  *
  * @example

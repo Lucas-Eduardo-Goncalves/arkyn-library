@@ -7,7 +7,7 @@ type TableBodyProps = HTMLAttributes<HTMLTableSectionElement> & {
 };
 
 /**
- * TableBody — `<tbody>` section with built-in empty state handling.
+ * TableBody, `<tbody>` section with built-in empty state handling.
  *
  * When `children` is empty, renders a full-width row with `emptyMessage`.
  * Accepts all standard HTML `<tbody>` attributes.

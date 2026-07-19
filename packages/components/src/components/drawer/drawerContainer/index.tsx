@@ -19,7 +19,7 @@ type DrawerContainerProps = HTMLAttributes<HTMLElement> & {
 };
 
 /**
- * DrawerContainer — animated slide-in panel rendered over an overlay backdrop.
+ * DrawerContainer, animated slide-in panel rendered over an overlay backdrop.
  *
  * Locks body scroll while open. Closes when the overlay is clicked.
  * Provides context consumed by `DrawerHeader` (close button).

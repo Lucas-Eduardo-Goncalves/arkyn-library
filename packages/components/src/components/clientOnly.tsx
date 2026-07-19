@@ -1,14 +1,14 @@
 import { useHydrated } from "../hooks/useHydrated";
 
 type ClientOnlyProps = {
-	/** Render function — called after hydration on the client. Required. */
+	/** Render function, called after hydration on the client. Required. */
 	children(): React.ReactNode;
 	/** Content rendered during SSR or before hydration. @default null */
 	fallback?: React.ReactNode;
 };
 
 /**
- * ClientOnly — renders its children only after client-side hydration.
+ * ClientOnly, renders its children only after client-side hydration.
  *
  * Prevents React hydration mismatches for components that rely on browser-only APIs
  * (e.g. `window`, `navigator`, `document`). Uses `useHydrated` internally.

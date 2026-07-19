@@ -27,7 +27,7 @@ type TooltipProps = Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
 };
 
 /**
- * Tooltip — shows a contextual text bubble on hover with smart viewport-aware positioning.
+ * Tooltip, shows a contextual text bubble on hover with smart viewport-aware positioning.
  *
  * The tooltip automatically flips to the opposite side when it would overflow the viewport.
  *

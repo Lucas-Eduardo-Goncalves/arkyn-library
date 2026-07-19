@@ -62,7 +62,7 @@ type InputProps = Omit<
 };
 
 /**
- * Input — text input field with label, validation, icons, prefix/suffix, and loading state.
+ * Input, text input field with label, validation, icons, prefix/suffix, and loading state.
  *
  * Integrates with `useForm` to display validation errors by field name.
  *

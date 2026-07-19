@@ -5,8 +5,8 @@
  * @example
  * ```typescript
  * const service = new ValidateDateService();
- * service.validateDateParts(2024, 2, 29); // OK — leap year
- * service.validateDateParts(2023, 2, 29); // throws — not a leap year
+ * service.validateDateParts(2024, 2, 29); // OK, leap year
+ * service.validateDateParts(2023, 2, 29); // throws, not a leap year
  * service.validateInputFormat("brazilianDate"); // OK
  * service.validateInputFormat("custom"); // throws
  * ```

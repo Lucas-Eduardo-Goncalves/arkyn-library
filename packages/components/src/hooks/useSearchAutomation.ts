@@ -6,14 +6,14 @@ import { useScopedParams } from "./useScopedParams";
 import { useToast } from "./useToast";
 
 /**
- * useSearchAutomation — URL-driven version of `useAutomation`. Reads automation params from a
+ * useSearchAutomation, URL-driven version of `useAutomation`. Reads automation params from a
  * URL search string and executes the same side-effects (close modals, toast) on every change.
  *
  * Reads the following params (optionally prefixed by `scope:`):
- * - `closeModal=true` — closes all open modals.
- * - `message` — text for the toast notification.
- * - `type` — `"success"` or `"danger"` toast style.
- * - `name` — response identifier matched against `successResponses`/`badResponses` lists.
+ * - `closeModal=true`, closes all open modals.
+ * - `message`, text for the toast notification.
+ * - `type`, `"success"` or `"danger"` toast style.
+ * - `name`, response identifier matched against `successResponses`/`badResponses` lists.
  *
  * @param searchString - Raw URL search string (e.g. `location.search`).
  * @param scope - Optional prefix for all params. Default: `""` (no prefix).
@@ -28,7 +28,7 @@ import { useToast } from "./useToast";
  *
  * @example
  * ```tsx
- * // Scoped params — avoids collisions when multiple features share the URL
+ * // Scoped params, avoids collisions when multiple features share the URL
  * // redirect("?filters:closeModal=true&filters:message=Applied!&filters:type=success")
  * useSearchAutomation(location.search, "filters");
  * ```

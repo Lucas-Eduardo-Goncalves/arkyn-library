@@ -25,7 +25,7 @@ export default function TooltipRoute() {
 				<Tooltip text="Size md" size="md" orientation="top">
 					<Button>Size md</Button>
 				</Tooltip>
-				<Tooltip text="Size lg — default" size="lg" orientation="top">
+				<Tooltip text="Size lg, default" size="lg" orientation="top">
 					<Button>Size lg</Button>
 				</Tooltip>
 			</div>

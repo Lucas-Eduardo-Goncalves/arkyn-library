@@ -17,7 +17,7 @@ type ModalContainerProps = HTMLAttributes<HTMLElement> & {
 };
 
 /**
- * ModalContainer — animated centered modal rendered over a backdrop overlay.
+ * ModalContainer, animated centered modal rendered over a backdrop overlay.
  *
  * Locks body scroll while open. Closes when the overlay is clicked.
  * Provides context consumed by `ModalHeader` (close button).

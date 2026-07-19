@@ -16,10 +16,10 @@ function formatErrorMessage(error: z.ZodError) {
 
 /**
  * Wraps a Zod schema with convenience validation methods suited for server-side use:
- * - `isValid` — boolean check, no throws
- * - `safeValidate` — raw Zod result, no throws
- * - `validate` — throws `ServerError` on failure (for trusted/internal data)
- * - `formValidate` / `formAsyncValidate` — throws `UnprocessableEntity` on failure (for user-submitted forms)
+ * - `isValid`, boolean check, no throws
+ * - `safeValidate`, raw Zod result, no throws
+ * - `validate`, throws `ServerError` on failure (for trusted/internal data)
+ * - `formValidate` / `formAsyncValidate`, throws `UnprocessableEntity` on failure (for user-submitted forms)
  *
  * @example
  * ```typescript

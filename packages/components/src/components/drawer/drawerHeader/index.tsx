@@ -10,7 +10,7 @@ type DrawerHeaderProps = HTMLAttributes<HTMLElement> & {
 };
 
 /**
- * DrawerHeader — header section for a `DrawerContainer`, with an optional close button.
+ * DrawerHeader, header section for a `DrawerContainer`, with an optional close button.
  *
  * The close button calls `makeInvisible` from the nearest `DrawerContainer` context.
  * Must be rendered inside a `DrawerContainer`.

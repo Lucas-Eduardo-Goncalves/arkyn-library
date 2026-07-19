@@ -48,9 +48,9 @@ const within = (range: [number, number], value: number): boolean =>
  *
  * @param value - The input string to mask.
  * @param options.range - Which digits to hide:
- *   - Positive number `n` — hides the first `n` digits.
- *   - Negative number `-n` — hides the last `n` digits.
- *   - Tuple `[start, end]` — hides digits from position `start` to `end` (inclusive, 1-indexed).
+ *   - Positive number `n`, hides the first `n` digits.
+ *   - Negative number `-n`, hides the last `n` digits.
+ *   - Tuple `[start, end]`, hides digits from position `start` to `end` (inclusive, 1-indexed).
  *   - Defaults to `3`.
  * @param options.hider - The masking character. Defaults to `"*"`.
  * @returns The string with the specified digit positions replaced.

@@ -79,18 +79,24 @@ type PhoneInputProps = {
 
 function formatLocalValue(rawValue: string, country: CountryType) {
 	const digits = removeNonNumeric(rawValue);
+	const codeDigits = removeNonNumeric(country.code);
+	const hasCountryCode = rawValue.trim().startsWith("+");
+	const localDigits =
+		hasCountryCode && digits.startsWith(codeDigits)
+			? digits.slice(codeDigits.length)
+			: digits;
 
 	if (country.code === "+55") {
-		return applyMask(digits, TYPES[getMask(digits)]);
+		return applyMask(localDigits, TYPES[getMask(localDigits)]);
 	}
 
 	const mask =
 		typeof country.mask === "string" ? country.mask : country.mask[0];
-	return applyMask(digits, mask, "_");
+	return applyMask(localDigits, mask, "_");
 }
 
 /**
- * PhoneInput — phone number field with an integrated country selector and automatic mask formatting.
+ * PhoneInput, phone number field with an integrated country selector and automatic mask formatting.
  *
  * The visible input is masked according to the selected country's phone format.
  * The hidden `<input>` stores a numeric string prefixed with the country dial code for form submission.
@@ -107,7 +113,7 @@ function formatLocalValue(rawValue: string, country: CountryType) {
  * @param props.isLoading - Shows loading state and disables interactions. Default: false
  * @param props.defaultValue - Uncontrolled default phone value.
  * @param props.value - Controlled phone value (without country code).
- * @param props.onChange - Callback fired on change — receives numeric string with country code.
+ * @param props.onChange - Callback fired on change, receives numeric string with country code.
  * @param props.defaultCountryIso - ISO code of the initially selected country. Default: "BR"
  * @param props.searchCountryPlaceholder - Placeholder for country search. Default: "Pesquisar país"
  * @param props.notFoundCountryText - Text shown when no country matches. Default: "Nenhum país encontrado"

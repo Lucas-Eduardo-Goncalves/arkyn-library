@@ -119,7 +119,7 @@ type CurrencyInputProps = Omit<
 };
 
 /**
- * CurrencyInput — numeric input that automatically formats the displayed value according to a currency locale.
+ * CurrencyInput, numeric input that automatically formats the displayed value according to a currency locale.
  *
  * The raw numeric value is stored in a hidden `<input>` for form submission.
  * Integrates with `useForm` to display validation errors by field name.
@@ -134,7 +134,7 @@ type CurrencyInputProps = Omit<
  * @param props.max - Maximum numeric value allowed. Default: 1_000_000_000
  * @param props.value - Controlled numeric value.
  * @param props.defaultValue - Uncontrolled default numeric value.
- * @param props.onChange - Callback fired on change — receives the event, the raw numeric string, and the formatted string.
+ * @param props.onChange - Callback fired on change, receives the event, the raw numeric string, and the formatted string.
  * @param props.prefix - Text or icon at the far left.
  * @param props.suffix - Text or icon at the far right.
  * @param props.leftIcon - Lucide icon inside the input on the left.

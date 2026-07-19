@@ -1,7 +1,7 @@
 import { SuccessResponse } from "./_successResponse";
 
 /**
- * HTTP 204 No Content — the request succeeded but there is no content to return.
+ * HTTP 204 No Content, the request succeeded but there is no content to return.
  * Typically used for delete or update operations where a body is not needed.
  *
  * @example

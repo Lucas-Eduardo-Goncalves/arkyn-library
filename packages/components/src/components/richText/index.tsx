@@ -35,7 +35,7 @@ import { Toolbar } from "./toolbar";
 import "./styles.css";
 
 /**
- * RichText — WYSIWYG rich-text editor built on Slate.js with a configurable toolbar.
+ * RichText, WYSIWYG rich-text editor built on Slate.js with a configurable toolbar.
  *
  * **Toolbar features:** bold, italic, underline, code, H1/H2, block quote, alignment (left/center/right/justify), image and video insertion.
  *
@@ -49,8 +49,8 @@ import "./styles.css";
  * @param props.defaultValue - Initial editor content as a Slate JSON string. Default: "[]"
  * @param props.maxLimit - Maximum character count. Default: 10000
  * @param props.enforceCharacterLimit - Prevents typing past `maxLimit`. Default: false
- * @param props.onChangeCharactersCount - Callback fired on every keystroke — receives the current character count.
- * @param props.onChange - Callback fired when editor content changes — receives the Slate `Descendant[]`.
+ * @param props.onChangeCharactersCount - Callback fired on every keystroke, receives the current character count.
+ * @param props.onChange - Callback fired when editor content changes, receives the Slate `Descendant[]`.
  * @param props.baseErrorMessage - Custom error message (overrides `useForm` context error).
  * @param props.isError - Forces the error visual state.
  * @param props.id - Custom id for the editable area element.

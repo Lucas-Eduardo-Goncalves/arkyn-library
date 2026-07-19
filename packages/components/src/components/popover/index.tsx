@@ -16,7 +16,7 @@ type OrientationProps =
 type PopoverProps = {
 	/** Content rendered inside the floating panel. Required. */
 	children: ReactNode;
-	/** Trigger element — clicking it opens the popover. Required. */
+	/** Trigger element, clicking it opens the popover. Required. */
 	button: ReactNode;
 	/** When true, clicking the popover content also closes it. @default false */
 	closeOnClick?: boolean;
@@ -31,7 +31,7 @@ type PopoverProps = {
 };
 
 /**
- * Popover — floating panel that appears relative to a trigger element.
+ * Popover, floating panel that appears relative to a trigger element.
  *
  * Clicking outside the popover (or clicking the content when `closeOnClick` is set)
  * dismisses it. Locks body scroll while open.

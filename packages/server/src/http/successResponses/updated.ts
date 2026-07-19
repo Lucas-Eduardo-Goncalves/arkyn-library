@@ -1,7 +1,7 @@
 import { SuccessResponse } from "./_successResponse";
 
 /**
- * HTTP 200 OK — the request succeeded and the resource was updated.
+ * HTTP 200 OK, the request succeeded and the resource was updated.
  * Semantically equivalent to `Success` but signals an update operation to consumers.
  *
  * @example

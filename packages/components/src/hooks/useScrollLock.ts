@@ -6,13 +6,13 @@ function getScrollbarWidth(): number {
 }
 
 /**
- * useScrollLock — locks `document.body` scroll while an overlay is open.
+ * useScrollLock, locks `document.body` scroll while an overlay is open.
  *
  * Compensates for the scrollbar width by adding equivalent `paddingRight`,
  * preventing layout shift when the scrollbar disappears.
  * Restores the original `overflow` and `paddingRight` when `isLocked` becomes `false`.
  *
- * Used internally by `Modal` and `Drawer` — you usually don't need this directly
+ * Used internally by `Modal` and `Drawer`, you usually don't need this directly
  * unless building a custom overlay.
  *
  * @param isLocked - When `true`, body scroll is disabled.

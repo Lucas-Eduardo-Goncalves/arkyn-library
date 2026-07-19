@@ -2,7 +2,7 @@ import type { RichTextValue } from "../types/richTextTypes";
 import { serialize } from "../utils/richTextUtilities";
 
 /**
- * toHtml — converts a `RichTextValue` (Slate.js Descendant array) to an HTML string.
+ * toHtml, converts a `RichTextValue` (Slate.js Descendant array) to an HTML string.
  *
  * Use this to persist or display the editor's content as plain HTML.
  *

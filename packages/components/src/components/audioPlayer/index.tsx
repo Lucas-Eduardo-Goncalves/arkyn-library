@@ -38,7 +38,7 @@ type AudioPlayerProps = Omit<
 };
 
 /**
- * AudioPlayer — play/pause controls, a scrubable progress bar, and elapsed/total time display.
+ * AudioPlayer, play/pause controls, a scrubable progress bar, and elapsed/total time display.
  *
  * @param props.src - Audio file URL. Required.
  * @param props.disabled - Disables controls. Default: false

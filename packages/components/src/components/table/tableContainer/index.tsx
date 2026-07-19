@@ -4,7 +4,7 @@ import "./styles.css";
 type TableContainerProps = TableHTMLAttributes<HTMLTableElement>;
 
 /**
- * TableContainer — root wrapper for the Table component set. Renders a responsive scrollable container around a `<table>`.
+ * TableContainer, root wrapper for the Table component set. Renders a responsive scrollable container around a `<table>`.
  *
  * Accepts all standard HTML `<table>` attributes.
  *

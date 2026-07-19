@@ -28,11 +28,11 @@ describe("TableCaption", () => {
 	it("should render string children", () => {
 		render(
 			<table>
-				<TableCaption>Orders — Q2 2025</TableCaption>
+				<TableCaption>Orders, Q2 2025</TableCaption>
 			</table>,
 		);
 
-		expect(screen.getByText("Orders — Q2 2025")).toBeInTheDocument();
+		expect(screen.getByText("Orders, Q2 2025")).toBeInTheDocument();
 	});
 
 	it("should render JSX children", () => {

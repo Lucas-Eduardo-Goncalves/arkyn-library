@@ -35,7 +35,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 /**
- * Button — used for user interactions and form submissions.
+ * Button, used for user interactions and form submissions.
  *
  * @param props.isLoading - Shows a spinner and disables the button. Default: false
  * @param props.loadingText - Text displayed beside the spinner when loading.

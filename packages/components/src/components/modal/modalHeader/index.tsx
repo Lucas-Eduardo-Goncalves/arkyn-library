@@ -10,7 +10,7 @@ type ModalHeaderProps = HTMLAttributes<HTMLElement> & {
 };
 
 /**
- * ModalHeader — header section for a `ModalContainer`, with an optional close button.
+ * ModalHeader, header section for a `ModalContainer`, with an optional close button.
  *
  * The close button calls `makeInvisible` from the nearest `ModalContainer` context.
  * Must be rendered inside a `ModalContainer`.

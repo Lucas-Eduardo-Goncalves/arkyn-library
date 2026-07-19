@@ -4,9 +4,9 @@ import "./styles.css";
 type TableHeaderProps = HTMLAttributes<HTMLTableSectionElement>;
 
 /**
- * TableHeader — `<thead>` section with an automatic spacing row below the header row.
+ * TableHeader, `<thead>` section with an automatic spacing row below the header row.
  *
- * Pass `<th>` elements as children — they are wrapped in a `<tr>` automatically.
+ * Pass `<th>` elements as children, they are wrapped in a `<tr>` automatically.
  * Accepts all standard HTML `<thead>` attributes.
  *
  * @returns TableHeader JSX element.

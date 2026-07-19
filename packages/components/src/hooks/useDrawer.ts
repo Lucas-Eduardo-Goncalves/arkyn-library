@@ -8,11 +8,11 @@ import {
 type OpenDrawerProps<T = any> = (data?: T) => void;
 
 /**
- * useDrawer — accesses the nearest `DrawerProvider` context.
+ * useDrawer, accesses the nearest `DrawerProvider` context.
  *
  * Two call signatures:
- * - **Without `key`** — returns the raw context object (manage any drawer by name).
- * - **With `key`** — returns a scoped object bound to one named drawer.
+ * - **Without `key`**, returns the raw context object (manage any drawer by name).
+ * - **With `key`**, returns a scoped object bound to one named drawer.
  *
  * @param key - Drawer identifier registered in `DrawerProvider`.
  *
@@ -22,7 +22,7 @@ type OpenDrawerProps<T = any> = (data?: T) => void;
  *
  * @example
  * ```tsx
- * // Scoped to one drawer — the most common pattern
+ * // Scoped to one drawer, the most common pattern
  * const { drawerIsOpen, drawerData, openDrawer, closeDrawer } = useDrawer<{ section: string }>('navigation');
  *
  * openDrawer({ section: 'products' });
@@ -30,7 +30,7 @@ type OpenDrawerProps<T = any> = (data?: T) => void;
  *
  * @example
  * ```tsx
- * // Full context — useful when triggering multiple different drawers from one place
+ * // Full context, useful when triggering multiple different drawers from one place
  * const { openDrawer } = useDrawer();
  *
  * openDrawer('navigation', { section: 'main' });

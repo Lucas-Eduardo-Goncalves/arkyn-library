@@ -35,7 +35,7 @@ type IconButtonProps = Omit<
 };
 
 /**
- * IconButton — compact button that renders a single icon without a text label.
+ * IconButton, compact button that renders a single icon without a text label.
  *
  * Always requires `aria-label` for accessibility.
  *

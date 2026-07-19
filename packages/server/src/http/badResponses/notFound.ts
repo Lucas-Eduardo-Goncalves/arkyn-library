@@ -1,7 +1,7 @@
 import { BadResponse } from "./_badResponse";
 
 /**
- * HTTP 404 Not Found — the requested resource does not exist.
+ * HTTP 404 Not Found, the requested resource does not exist.
  *
  * @example
  * ```typescript

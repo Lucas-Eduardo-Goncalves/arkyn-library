@@ -8,30 +8,30 @@ Comprehensive collection of reusable utilities for data formatting, validation, 
 
 ## 🎯 What it solves
 
-`@arkyn/shared` is a dependency-light, framework-agnostic toolkit for formatting, validating, generating, and parsing common data types in JavaScript/TypeScript applications. It has strong support for Brazilian documents (CPF, CNPJ, CEP) and locale-aware financial formatting, alongside general-purpose helpers for dates, JSON, strings, IDs, and sensitive-data masking. Because it has no framework assumptions, the same functions run identically on the client and the server — it's the shared foundation used by both `@arkyn/components` and `@arkyn/server`.
+`@arkyn/shared` is a dependency-light, framework-agnostic toolkit for formatting, validating, generating, and parsing common data types in JavaScript/TypeScript applications. It has strong support for Brazilian documents (CPF, CNPJ, CEP) and locale-aware financial formatting, alongside general-purpose helpers for dates, JSON, strings, IDs, and sensitive-data masking. Because it has no framework assumptions, the same functions run identically on the client and the server, it's the shared foundation used by both `@arkyn/components` and `@arkyn/server`.
 
 ## ✨ Features
 
-- 📅 **Date formatting & parsing** — configurable input/output formats with timezone shifting
-- 💰 **Currency & financial formatting** — locale-aware currency strings and card installment math
-- 📝 **Text formatting** — capitalization, ellipsis truncation, digit masking
-- 🇧🇷 **Brazilian document formatting** — CPF, CNPJ, CEP
-- 📞 **Phone formatting** — country-mask-aware phone number formatting via `libphonenumber-js`
-- 🔧 **Generators** — UUID (v4/v7) IDs, URL-friendly slugs, deterministic colors from strings
-- 🧩 **JSON parsers** — pretty-printing, large-field truncation, sensitive-key masking
-- 🛡️ **Sensitive-data masking** — hide digits/fields in strings and JSON payloads
-- 🌐 **HTML utilities** — detect and strip HTML markup
-- 🧹 **String/number utilities** — strip non-numeric characters, strip currency symbols, ensure quoting
+- 📅 **Date formatting & parsing**, configurable input/output formats with timezone shifting
+- 💰 **Currency & financial formatting**, locale-aware currency strings and card installment math
+- 📝 **Text formatting**, capitalization, ellipsis truncation, digit masking
+- 🇧🇷 **Brazilian document formatting**, CPF, CNPJ, CEP
+- 📞 **Phone formatting**, country-mask-aware phone number formatting via `libphonenumber-js`
+- 🔧 **Generators**, UUID (v4/v7) IDs, URL-friendly slugs, deterministic colors from strings
+- 🧩 **JSON parsers**, pretty-printing, large-field truncation, sensitive-key masking
+- 🛡️ **Sensitive-data masking**, hide digits/fields in strings and JSON payloads
+- 🌐 **HTML utilities**, detect and strip HTML markup
+- 🧹 **String/number utilities**, strip non-numeric characters, strip currency symbols, ensure quoting
 
 ## 📋 Prerequisites
 
 - **Node.js** `>=18.0.0`
 - **Bun** `>=1.0.0`
-- **`libphonenumber-js`** `>=1.13.7` — optional peer dependency, required only if you use `formatToPhone` or `findCountryMask`
+- **`libphonenumber-js`** `>=1.13.7`, optional peer dependency, required only if you use `formatToPhone` or `findCountryMask`
 
 ## 📦 Installation
 
-> **ESM only.** This package ships as native ES modules with no CommonJS build — use `import`, not `require()`.
+> **ESM only.** This package ships as native ES modules with no CommonJS build, use `import`, not `require()`.
 
 ```bash
 npm install @arkyn/shared
@@ -212,7 +212,7 @@ formatToPhone("+12125550199"); // "(212) 555-0199"
 
 #### generateColorByString
 
-Generates a deterministic hexadecimal color code from a hash of the input string — the same input always produces the same color.
+Generates a deterministic hexadecimal color code from a hash of the input string, the same input always produces the same color.
 
 ```typescript
 import { generateColorByString } from "@arkyn/shared";
@@ -295,14 +295,14 @@ parseToDate(["2023-12-25"], "timestamp");
 
 #### ValidateDateService
 
-Class used internally by `formatDate` and `parseToDate` to validate date components and input-format strings — enforces 4-digit years, month/day ranges, month-specific day counts, and leap-year rules. `validateDateParts` and `validateInputFormat` both throw `Error` on invalid input.
+Class used internally by `formatDate` and `parseToDate` to validate date components and input-format strings, enforces 4-digit years, month/day ranges, month-specific day counts, and leap-year rules. `validateDateParts` and `validateInputFormat` both throw `Error` on invalid input.
 
 ```typescript
 import { ValidateDateService } from "@arkyn/shared";
 
 const service = new ValidateDateService();
-service.validateDateParts(2024, 2, 29); // OK — leap year
-service.validateDateParts(2023, 2, 29); // throws — not a leap year
+service.validateDateParts(2024, 2, 29); // OK, leap year
+service.validateDateParts(2023, 2, 29); // throws, not a leap year
 service.validateInputFormat("brazilianDate"); // OK
 service.validateInputFormat("custom"); // throws
 ```

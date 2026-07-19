@@ -1,7 +1,7 @@
 import { BadResponse } from "./_badResponse";
 
 /**
- * HTTP 500 Internal Server Error — an unexpected condition prevented the server from fulfilling the request.
+ * HTTP 500 Internal Server Error, an unexpected condition prevented the server from fulfilling the request.
  *
  * @example
  * ```typescript

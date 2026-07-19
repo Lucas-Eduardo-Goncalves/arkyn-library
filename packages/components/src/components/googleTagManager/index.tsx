@@ -19,7 +19,7 @@ type GoogleTagManagerProps = {
 };
 
 /**
- * GoogleTagManager — injects the GTM `<script>` and `<noscript>` snippets into the page client-side.
+ * GoogleTagManager, injects the GTM `<script>` and `<noscript>` snippets into the page client-side.
  *
  * Renders nothing in development mode unless `showInDevMode` is `true`.
  * Wrapped in `ClientOnly` to avoid SSR errors.

@@ -14,7 +14,7 @@ type TabButtonProps = Omit<
 };
 
 /**
- * TabButton — individual tab button inside a `TabContainer`.
+ * TabButton, individual tab button inside a `TabContainer`.
  *
  * Reads active state and disabled state from `TabContainer` context.
  * The button's own `disabled` prop is ORed with the container's `disabled`.

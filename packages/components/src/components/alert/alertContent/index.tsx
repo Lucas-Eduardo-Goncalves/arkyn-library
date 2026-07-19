@@ -4,7 +4,7 @@ import "./styles.css";
 type AlertContentProps = HTMLAttributes<HTMLDivElement>;
 
 /**
- * AlertContent — text/content area inside an `AlertContainer`. Wraps `AlertTitle` and `AlertDescription`.
+ * AlertContent, text/content area inside an `AlertContainer`. Wraps `AlertTitle` and `AlertDescription`.
  *
  * Accepts all standard `<div>` HTML attributes.
  *

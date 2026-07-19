@@ -10,7 +10,7 @@ type GoogleAnalyticsProps = {
 };
 
 /**
- * GoogleAnalytics — injects the Google Analytics 4 script into the page client-side.
+ * GoogleAnalytics, injects the Google Analytics 4 script into the page client-side.
  *
  * Renders nothing in development mode unless `showInDevMode` is `true`.
  * Wrapped in `ClientOnly` to avoid SSR errors.

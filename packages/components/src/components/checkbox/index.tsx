@@ -39,7 +39,7 @@ type CheckboxProps = Omit<
 	checked?: boolean;
 	/** Uncontrolled initial checked state. @default false */
 	defaultChecked?: boolean;
-	/** Callback fired on toggle — receives the value string (or `""` when unchecked). */
+	/** Callback fired on toggle, receives the value string (or `""` when unchecked). */
 	onCheck?: (value: string) => void;
 	/**
 	 * Layout direction forwarded to `FieldTemplate`.
@@ -49,7 +49,7 @@ type CheckboxProps = Omit<
 };
 
 /**
- * Checkbox — interactive checkbox input with label, validation, and form integration.
+ * Checkbox, interactive checkbox input with label, validation, and form integration.
  *
  * Stores value in a hidden `<input>` for native form submission.
  * Integrates with `useForm` to display validation errors by field name.
@@ -60,7 +60,7 @@ type CheckboxProps = Omit<
  * @param props.value - Value stored when checked. Default: "checked"
  * @param props.checked - Controlled checked state.
  * @param props.defaultChecked - Uncontrolled initial checked state. Default: false
- * @param props.onCheck - Callback fired on toggle — receives value or `""` when unchecked.
+ * @param props.onCheck - Callback fired on toggle, receives value or `""` when unchecked.
  * @param props.errorMessage - Validation error message.
  * @param props.showAsterisk - Appends `*` to the label.
  * @param props.orientation - Layout direction (`horizontal` | `vertical` | `horizontalReverse`). Default: "horizontalReverse"

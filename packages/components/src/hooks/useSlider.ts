@@ -3,11 +3,11 @@ import { useState } from "react";
 type UseSliderReturnProps = [number, (number: number) => void];
 
 /**
- * useSlider — state manager for the `Slider` component. Clamps values to `[0, 100]`.
+ * useSlider, state manager for the `Slider` component. Clamps values to `[0, 100]`.
  *
  * @param defaultValue - Initial percentage value (0–100). Default: 0
  *
- * @returns `[value, setValue]` — current percentage and a setter that clamps at the boundaries.
+ * @returns `[value, setValue]`, current percentage and a setter that clamps at the boundaries.
  *
  * @example
  * ```tsx

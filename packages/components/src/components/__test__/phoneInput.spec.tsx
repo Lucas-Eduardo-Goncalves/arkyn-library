@@ -1,5 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { useState } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { FormProvider } from "../../providers/formProvider";
@@ -190,6 +191,22 @@ describe("PhoneInput", () => {
 
 			const input = screen.getByRole("textbox") as HTMLInputElement;
 			await user.type(input, "1");
+
+			expect(input.value).toBe("(34) 99999-8888");
+		});
+
+		it("should not duplicate the dial code digits when round-tripping the onChange value back as the controlled value", async () => {
+			const user = userEvent.setup();
+
+			function ControlledPhoneInput() {
+				const [value, setValue] = useState("");
+				return <PhoneInput name="phone" value={value} onChange={setValue} />;
+			}
+
+			render(<ControlledPhoneInput />);
+
+			const input = screen.getByRole("textbox") as HTMLInputElement;
+			await user.type(input, "34999998888");
 
 			expect(input.value).toBe("(34) 99999-8888");
 		});

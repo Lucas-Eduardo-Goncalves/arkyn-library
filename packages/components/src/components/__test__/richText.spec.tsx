@@ -147,7 +147,7 @@ describe("RichText", () => {
 		// APIs, including `InputEvent.getTargetRanges()`, which jsdom also
 		// lacks) to turn keystrokes into document changes. `user.type()` ends
 		// up inserting raw text as a stray DOM node outside Slate's own tree,
-		// so `onChange` is never invoked — confirmed by inspecting the
+		// so `onChange` is never invoked, confirmed by inspecting the
 		// resulting DOM and the mock call count directly. These 4 scenarios
 		// need real-browser coverage (e.g. Playwright) instead of jsdom.
 		it.skip("should fire onChange with the updated Slate value when typing", async () => {
@@ -276,7 +276,7 @@ describe("RichText", () => {
 		});
 
 		// Same jsdom/Slate contenteditable limitation as the "typing behaviour"
-		// tests above — `user.keyboard()` never reaches Slate's onChange.
+		// tests above, `user.keyboard()` never reaches Slate's onChange.
 		it.skip("should still call onChangeCharactersCount even when the character limit is enforced", async () => {
 			const user = userEvent.setup();
 			const handleCount = vi.fn();

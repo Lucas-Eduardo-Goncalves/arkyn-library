@@ -19,7 +19,7 @@ export default function SliderRoute() {
 			</div>
 
 			<div className="exampleContainer foreground">
-				<p>Disabled — Value: {Math.round(value3)}%</p>
+				<p>Disabled, Value: {Math.round(value3)}%</p>
 				<Slider value={value3} onChange={setValue3} disabled />
 			</div>
 

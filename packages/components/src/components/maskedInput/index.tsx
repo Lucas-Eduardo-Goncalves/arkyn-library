@@ -32,8 +32,8 @@ type MaskedInputProps = Omit<
 	mask: string;
 	/**
 	 * Character or replacement map that marks editable positions in the mask.
-	 * - String: `"_"` — every `_` in the mask becomes editable.
-	 * - Object: `{ _: /\d/ }` — only accepts digits in those positions.
+	 * - String: `"_"`, every `_` in the mask becomes editable.
+	 * - Object: `{ _: /\d/ }`, only accepts digits in those positions.
 	 * Required.
 	 */
 	replacement: string | Replacement;
@@ -87,7 +87,7 @@ const BaseInput = forwardRef<
 });
 
 /**
- * MaskedInput — text input with a configurable mask for structured values (phones, CPF, credit cards, etc.).
+ * MaskedInput, text input with a configurable mask for structured values (phones, CPF, credit cards, etc.).
  *
  * Built on `@react-input/mask`. Integrates with `useForm` to display validation errors by field name.
  *

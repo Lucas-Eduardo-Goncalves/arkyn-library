@@ -41,7 +41,7 @@ type AudioUploadProps = {
 };
 
 /**
- * AudioUpload — drag-and-drop audio file uploader with server upload and playback preview.
+ * AudioUpload, drag-and-drop audio file uploader with server upload and playback preview.
  *
  * Sends the file via `fetch` as `multipart/form-data` and stores the returned URL
  * in a hidden `<input>` for form submission.
@@ -52,7 +52,7 @@ type AudioUploadProps = {
  * @param props.fileName - Form-data field name for the file. Default: "file"
  * @param props.method - HTTP method. Default: "POST"
  * @param props.acceptAudio - Accepted MIME types / extensions. Default: "audio/*"
- * @param props.onChange - Callback fired after a successful upload — receives the audio URL.
+ * @param props.onChange - Callback fired after a successful upload, receives the audio URL.
  * @param props.fileResponseName - Server response property containing the URL. Default: "url"
  * @param props.label - Label text displayed above the upload area.
  * @param props.showAsterisk - Appends `*` to the label. Default: false

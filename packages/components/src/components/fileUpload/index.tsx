@@ -39,7 +39,7 @@ type FileUploadProps = {
 };
 
 /**
- * FileUpload — drag-and-drop file uploader with server upload and file-name preview.
+ * FileUpload, drag-and-drop file uploader with server upload and file-name preview.
  *
  * Sends the file via `fetch` as `multipart/form-data` and stores the returned URL
  * in a hidden `<input>` for form submission.
@@ -54,7 +54,7 @@ type FileUploadProps = {
  * @param props.method - HTTP method. Default: "POST"
  * @param props.fileName - Form-data field name for the file. Default: "file"
  * @param props.fileResponseName - Server response property containing the URL. Default: "url"
- * @param props.onChange - Callback fired after a successful upload — receives the file URL.
+ * @param props.onChange - Callback fired after a successful upload, receives the file URL.
  *
  * @returns FileUpload JSX element wrapped in `FieldWrapper`.
  *

@@ -42,14 +42,14 @@ type SearchPlacesProps = {
 } & Omit<InputProps, "onLoad" | "onChange" | "type">;
 
 /**
- * SearchPlaces — text input with Google Places autocomplete that returns structured address data.
+ * SearchPlaces, text input with Google Places autocomplete that returns structured address data.
  *
  * Requires the Google Maps JavaScript API with the Places library to be loaded.
  * Built on `@react-google-maps/api`'s `StandaloneSearchBox`.
  *
  * @param props.options - Google Maps search box options (e.g. restrict by country).
- * @param props.onChange - Fires on every keystroke — receives the current text value.
- * @param props.onPlaceChanged - Fires when the user selects a suggestion — receives structured address data.
+ * @param props.onChange - Fires on every keystroke, receives the current text value.
+ * @param props.onPlaceChanged - Fires when the user selects a suggestion, receives structured address data.
  *
  * **...Other valid `Input` properties (except `onLoad`, `onChange`, `type`)**
  *

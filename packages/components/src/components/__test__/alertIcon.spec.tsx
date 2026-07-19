@@ -5,7 +5,7 @@ import { AlertIcon } from "../alert/alertIcon";
 
 describe("AlertIcon", () => {
 	// RTL's auto-cleanup relies on a global afterEach, which isn't registered
-	// since this project doesn't enable vitest "globals" — clean up manually
+	// since this project doesn't enable vitest "globals", clean up manually
 	// so repeated data-testid queries across tests don't collide.
 	afterEach(() => {
 		cleanup();

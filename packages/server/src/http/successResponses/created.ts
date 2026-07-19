@@ -1,7 +1,7 @@
 import { SuccessResponse } from "./_successResponse";
 
 /**
- * HTTP 201 Created — the request succeeded and a new resource was created.
+ * HTTP 201 Created, the request succeeded and a new resource was created.
  *
  * @example
  * ```typescript

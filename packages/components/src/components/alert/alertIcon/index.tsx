@@ -13,7 +13,7 @@ import "./styles.css";
 type AlertIconProps = LucideProps;
 
 /**
- * AlertIcon — renders a scheme-appropriate icon from `AlertContainer` context.
+ * AlertIcon, renders a scheme-appropriate icon from `AlertContainer` context.
  *
  * - `success` → `CheckCircle2`
  * - `danger` → `XCircle`

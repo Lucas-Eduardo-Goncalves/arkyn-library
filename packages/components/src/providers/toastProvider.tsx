@@ -50,7 +50,7 @@ function showToast(props: ToastProps) {
 }
 
 /**
- * ToastProvider — mounts a `react-hot-toast` `<Toaster>` and exposes `showToast` via context.
+ * ToastProvider, mounts a `react-hot-toast` `<Toaster>` and exposes `showToast` via context.
  *
  * Wrap your app once. Then call `useToast()` anywhere in the tree to show notifications.
  * Supports two types: `"success"` (green) and `"danger"` (red).

@@ -34,7 +34,7 @@ type FacebookPixelProps = {
 };
 
 /**
- * FacebookPixel — injects the Facebook Pixel tracking script client-side.
+ * FacebookPixel, injects the Facebook Pixel tracking script client-side.
  *
  * Renders nothing in development mode unless `showInDevMode` is `true`.
  * Wrapped in `ClientOnly` to avoid SSR errors.

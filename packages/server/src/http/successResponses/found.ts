@@ -1,7 +1,7 @@
 import { SuccessResponse } from "./_successResponse";
 
 /**
- * HTTP 302 Found — the resource was located and the response includes it in the body.
+ * HTTP 302 Found, the resource was located and the response includes it in the body.
  *
  * @example
  * ```typescript

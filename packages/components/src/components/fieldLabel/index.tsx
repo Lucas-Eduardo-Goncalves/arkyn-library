@@ -7,7 +7,7 @@ type FieldLabelProps = LabelHTMLAttributes<HTMLLabelElement> & {
 };
 
 /**
- * FieldLabel — label for form fields, with an optional required-field asterisk.
+ * FieldLabel, label for form fields, with an optional required-field asterisk.
  *
  * @param props.showAsterisk - Appends `*` to the label. Default: false
  *

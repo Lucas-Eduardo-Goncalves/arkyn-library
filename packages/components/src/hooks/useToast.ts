@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { toastContext } from "../providers/toastProvider";
 
 /**
- * useToast — reads `ToastProvider` context to display toast notifications.
+ * useToast, reads `ToastProvider` context to display toast notifications.
  *
  * @returns Context containing `showToast(options)`.
  *

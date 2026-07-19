@@ -19,7 +19,7 @@ type FormParseReturnType<T extends FormParseProps> =
 	| ErrorResponse;
 
 /**
- * Async variant of `formParse` — uses `safeParseAsync` to support Zod schemas with async refinements.
+ * Async variant of `formParse`, uses `safeParseAsync` to support Zod schemas with async refinements.
  * Returns `{ success: true, data }` on success or `{ success: false, fieldErrors, fields }` on failure.
  *
  * @param formData - The raw form data object to validate.

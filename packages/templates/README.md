@@ -1,6 +1,6 @@
 # @arkyn/templates
 
-Ready-to-use static data for international and Brazilian applications — country lists, phone masks, Brazilian states, and currency/locale metadata — so you don't have to source and maintain this data yourself.
+Ready-to-use static data for international and Brazilian applications, country lists, phone masks, Brazilian states, and currency/locale metadata, so you don't have to source and maintain this data yourself.
 
 [![npm version](https://img.shields.io/npm/v/@arkyn/templates.svg)](https://www.npmjs.com/package/@arkyn/templates)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -8,7 +8,7 @@ Ready-to-use static data for international and Brazilian applications — countr
 
 ## 🎯 What it solves
 
-Building phone inputs, address forms, or currency formatters usually means sourcing and hand-maintaining reference data: every country's dialing code and phone mask, all Brazilian states, and locale/currency pairs for `Intl.NumberFormat`. `@arkyn/templates` ships that data as typed, ready-to-import constants, so `@arkyn/components` (phone/currency inputs, address selects) and `@arkyn/shared` (currency formatting) — or your own app — can consume it directly without any setup, network calls, or extra dependencies.
+Building phone inputs, address forms, or currency formatters usually means sourcing and hand-maintaining reference data: every country's dialing code and phone mask, all Brazilian states, and locale/currency pairs for `Intl.NumberFormat`. `@arkyn/templates` ships that data as typed, ready-to-import constants, so `@arkyn/components` (phone/currency inputs, address selects) and `@arkyn/shared` (currency formatting), or your own app, can consume it directly without any setup, network calls, or extra dependencies.
 
 ## ✨ Features
 
@@ -24,11 +24,11 @@ Building phone inputs, address forms, or currency formatters usually means sourc
 - Node.js `>=18.0.0`
 - Bun `>=1.0.0` (only if building/developing the monorepo itself)
 
-This package has no runtime dependencies and no peer dependencies — it can be installed standalone.
+This package has no runtime dependencies and no peer dependencies, it can be installed standalone.
 
 ## 📦 Installation
 
-> **ESM only.** This package ships as native ES modules with no CommonJS build — use `import`, not `require()`.
+> **ESM only.** This package ships as native ES modules with no CommonJS build, use `import`, not `require()`.
 
 ```bash
 npm install @arkyn/templates
@@ -150,4 +150,4 @@ For more context on how this data is consumed across the ecosystem, see the [ful
 
 ## 📄 License
 
-This project is licensed under the Apache 2.0 License — see the [LICENSE](./LICENSE.txt) file for details.
+This project is licensed under the Apache 2.0 License, see the [LICENSE](./LICENSE.txt) file for details.

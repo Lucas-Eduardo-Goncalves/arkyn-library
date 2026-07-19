@@ -12,7 +12,7 @@ type FieldWrapperProps = HTMLAttributes<HTMLElement> & {
 };
 
 /**
- * FieldWrapper — `<section>` container that groups a form field with its label and error message.
+ * FieldWrapper, `<section>` container that groups a form field with its label and error message.
  *
  * @param props.children - Field elements (label, input, error, etc.).
  * @param props.orientation - Layout direction. Default: "vertical"

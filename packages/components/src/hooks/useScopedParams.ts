@@ -1,7 +1,7 @@
 type ParamsType = Record<string, string | number | boolean | undefined>;
 
 /**
- * useScopedParams — reads and writes URL search parameters with an optional namespace prefix.
+ * useScopedParams, reads and writes URL search parameters with an optional namespace prefix.
  *
  * When `scope` is provided, every key is namespaced as `scope:key`, so multiple features
  * can share the same URL without collisions (e.g. `filters:status` and `table:page`).
@@ -10,13 +10,13 @@ type ParamsType = Record<string, string | number | boolean | undefined>;
  * @param scope - Namespace prefix. Default: `""` (no prefix).
  *
  * @returns
- * - `getParam(key)` — returns the (scoped) param value, or `null` if absent.
- * - `getScopedSearch(params)` — merges `params` into the existing search string and returns the result.
+ * - `getParam(key)`, returns the (scoped) param value, or `null` if absent.
+ * - `getScopedSearch(params)`, merges `params` into the existing search string and returns the result.
  *   Pass `undefined` as a value to delete that param.
  *
  * @example
  * ```tsx
- * // Without scope — plain key/value params
+ * // Without scope, plain key/value params
  * const { getParam, getScopedSearch } = useScopedParams(location.search);
  * getParam('page');                          // "1"
  * getScopedSearch({ page: 2, sort: 'name' }); // "?page=2&sort=name"
@@ -24,7 +24,7 @@ type ParamsType = Record<string, string | number | boolean | undefined>;
  *
  * @example
  * ```tsx
- * // With scope — all keys prefixed as "filters:key"
+ * // With scope, all keys prefixed as "filters:key"
  * const { getParam, getScopedSearch } = useScopedParams(location.search, 'filters');
  * getParam('status');                                       // reads "filters:status"
  * getScopedSearch({ status: 'active', category: undefined }); // removes "filters:category"

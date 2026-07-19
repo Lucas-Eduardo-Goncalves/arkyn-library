@@ -1,7 +1,7 @@
 import { BadResponse } from "./_badResponse";
 
 /**
- * HTTP 400 Bad Request — the request is malformed or contains invalid data.
+ * HTTP 400 Bad Request, the request is malformed or contains invalid data.
  *
  * @example
  * ```typescript

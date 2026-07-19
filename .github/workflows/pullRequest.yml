@@ -201,7 +201,7 @@ jobs:
   # 1. Node 18 (o piso declarado): a toolchain de build/test
   #    (Vite 8, Vitest 4) exige Node >=20 e não roda em 18, então
   #    só é possível validar o que "engines.node" de fato promete
-  #    a um consumidor — que o dist/ publicado carregue sem erro.
+  #    a um consumidor, que o dist/ publicado carregue sem erro.
   # 2. Node 20 LTS (o piso mínimo que a própria toolchain suporta):
   #    aqui a suíte de testes completa roda sob o runtime Node
   #    real via npx (bunx sempre usaria o runtime do Bun,

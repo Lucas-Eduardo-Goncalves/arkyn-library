@@ -4,7 +4,7 @@ import "./styles.css";
 type TableCaptionProps = HTMLAttributes<HTMLElement>;
 
 /**
- * TableCaption — title / description placed above a table. Renders as a `<caption>` element.
+ * TableCaption, title / description placed above a table. Renders as a `<caption>` element.
  *
  * Accepts all standard HTML element attributes.
  *
@@ -13,7 +13,7 @@ type TableCaptionProps = HTMLAttributes<HTMLElement>;
  * @example
  * ```tsx
  * <TableContainer>
- *   <TableCaption>Orders — Q2 2025</TableCaption>
+ *   <TableCaption>Orders, Q2 2025</TableCaption>
  *   <TableHeader>...</TableHeader>
  *   <TableBody>...</TableBody>
  * </TableContainer>

@@ -11,7 +11,7 @@ type Coordinate = {
 	lat: number;
 	/** Longitude of the marker position. */
 	lng: number;
-	/** Arbitrary data attached to the marker — available in `onMarkerClick`. */
+	/** Arbitrary data attached to the marker, available in `onMarkerClick`. */
 	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	data?: any;
 	/** Custom React node rendered inside the marker popup on click. */
@@ -42,7 +42,7 @@ function EmptyMap({ className }: EmptyMapProps) {
 }
 
 /**
- * MapView — interactive Mapbox map with optional click-able markers.
+ * MapView, interactive Mapbox map with optional click-able markers.
  *
  * Renders client-side only (via `ClientOnly`). Displays a placeholder icon
  * when `coordinates` is absent or empty, or before the component hydrates.

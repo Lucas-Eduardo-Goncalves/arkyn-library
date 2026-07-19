@@ -13,7 +13,7 @@ type RadioBoxProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 /**
- * RadioBox — individual option inside a `RadioGroup`. Renders as a `<label>` + hidden `<button>` pair.
+ * RadioBox, individual option inside a `RadioGroup`. Renders as a `<label>` + hidden `<button>` pair.
  *
  * Reads active value, size, error state, and disabled state from `RadioGroup` context.
  * Must be used as a direct child of `RadioGroup`.
@@ -30,9 +30,9 @@ type RadioBoxProps = ButtonHTMLAttributes<HTMLButtonElement> & {
  * @example
  * ```tsx
  * <RadioGroup name="plan" label="Choose a plan" onChange={setPlan}>
- *   <RadioBox value="basic">Basic — $9/mo</RadioBox>
- *   <RadioBox value="pro">Pro — $29/mo</RadioBox>
- *   <RadioBox value="enterprise" disabled>Enterprise — contact us</RadioBox>
+ *   <RadioBox value="basic">Basic, $9/mo</RadioBox>
+ *   <RadioBox value="pro">Pro, $29/mo</RadioBox>
+ *   <RadioBox value="enterprise" disabled>Enterprise, contact us</RadioBox>
  * </RadioGroup>
  * ```
  */

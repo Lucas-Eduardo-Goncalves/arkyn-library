@@ -22,7 +22,7 @@ type DrawerProviderProps = {
 const drawerContext = createContext({} as DrawerContextProps);
 
 /**
- * DrawerProvider — context provider that manages open/close state and data for named drawers.
+ * DrawerProvider, context provider that manages open/close state and data for named drawers.
  *
  * Wrap your app (or a subtree) with this once. Any component in the tree can then call
  * `useDrawer(key)` to open, close, or read data for a specific drawer.

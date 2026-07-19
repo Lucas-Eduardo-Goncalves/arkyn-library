@@ -18,7 +18,7 @@ type CardTabContainerProps = Omit<
 };
 
 /**
- * CardTabContainer — wrapper that manages active state for a group of `CardTabButton` components.
+ * CardTabContainer, wrapper that manages active state for a group of `CardTabButton` components.
  *
  * Renders as a `<nav>` element. Provides context consumed by each `CardTabButton`.
  *

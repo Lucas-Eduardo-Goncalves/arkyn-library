@@ -15,7 +15,7 @@ type FormProviderProps = {
 const formContext = createContext({} as FormContextProps);
 
 /**
- * FormProvider — distributes field-level validation errors to all form input components in its subtree.
+ * FormProvider, distributes field-level validation errors to all form input components in its subtree.
  *
  * All inputs (`Input`, `Select`, `Checkbox`, etc.) read `fieldErrors[name]` automatically,
  * so you don't need to pass errors manually to each field. Use the `form` prop to also wrap

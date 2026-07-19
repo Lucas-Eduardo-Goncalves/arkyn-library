@@ -7,9 +7,9 @@ import { defineConfig, type Rollup } from "vite";
  * Both outputs below share this exact function reference so Vite doesn't warn
  * about divergent assetFileNames patterns across build.rollupOptions.output.
  *
- * The single CSS asset tied to the `src/index.ts` entry — the aggregate
+ * The single CSS asset tied to the `src/index.ts` entry, the aggregate
  * bundle in "./dist" and the (unused, later deleted) barrel file that
- * preserveModules also produces in "./dist/modules" — becomes "style.css".
+ * preserveModules also produces in "./dist/modules", becomes "style.css".
  * Every other asset is a single component's own stylesheet and keeps its
  * default name, which preserveModules already mirrors from its source path.
  */

@@ -25,7 +25,7 @@ type SwitchProps = Omit<
 	unCheckedValue?: string;
 	/** Field name for form submission. Required. */
 	name: string;
-	/** Callback fired on toggle — receives the current value string. */
+	/** Callback fired on toggle, receives the current value string. */
 	onCheck?: (value: string) => void;
 	/**
 	 * Layout direction forwarded to `FieldTemplate`.
@@ -41,7 +41,7 @@ type SwitchProps = Omit<
 };
 
 /**
- * Switch — toggle input for binary on/off states.
+ * Switch, toggle input for binary on/off states.
  *
  * Stores value in a hidden `<input>` for native form submission.
  * Integrates with `useForm` to display validation errors by field name.
@@ -53,7 +53,7 @@ type SwitchProps = Omit<
  * @param props.checked - Controlled checked state.
  * @param props.value - Value emitted when on. Default: "checked"
  * @param props.unCheckedValue - Value emitted when off. Default: ""
- * @param props.onCheck - Callback fired on toggle — receives the current value string.
+ * @param props.onCheck - Callback fired on toggle, receives the current value string.
  * @param props.orientation - Layout direction (`horizontal` | `vertical` | `horizontalReverse`). Default: "horizontalReverse"
  * @param props.unShowFieldTemplate - Skips wrapper, label, and error rendering. Default: false
  * @param props.showAsterisk - Appends `*` to the label.

@@ -132,7 +132,7 @@ type RangeDatePickerProps = BaseDatePickerProps & {
 type DatePickerProps = SingleDatePickerProps | RangeDatePickerProps;
 
 /**
- * DatePicker — date input field with a popover `Calendar`, supporting single-date
+ * DatePicker, date input field with a popover `Calendar`, supporting single-date
  * (`single`) and range (`range`) selection modes.
  *
  * Opens the calendar on click, the same way `Select` opens its options list, flipping

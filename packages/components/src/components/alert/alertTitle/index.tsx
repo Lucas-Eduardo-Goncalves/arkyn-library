@@ -4,7 +4,7 @@ import "./styles.css";
 type AlertTitleProps = HTMLAttributes<HTMLDivElement>;
 
 /**
- * AlertTitle — bold heading for an alert. Place inside `AlertContent`.
+ * AlertTitle, bold heading for an alert. Place inside `AlertContent`.
  *
  * Its presence is detected by `AlertContainer` to switch the layout from centered to left-aligned.
  * Accepts all standard `<div>` HTML attributes.

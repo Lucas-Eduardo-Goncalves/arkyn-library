@@ -9,7 +9,7 @@ import { ModalHeader } from "../modal/modalHeader";
 // finishes (`animationend` on the overlay). jsdom exposes `WebkitAnimation`
 // (but not the unprefixed `animation`) on CSSStyleDeclaration, so React's
 // animation-event plugin resolves the onAnimationEnd DOM listener to the
-// prefixed `webkitAnimationEnd` name — same workaround as
+// prefixed `webkitAnimationEnd` name, same workaround as
 // modalContainer.spec.tsx's `fireAnimationEnd` helper.
 function settleExitAnimation(container: HTMLElement) {
 	const overlay = container.querySelector(".arkynModalContainerOverlay");
@@ -213,7 +213,7 @@ describe("ModalHeader", () => {
 			);
 			settleExitAnimation(container);
 			// The mock `makeInvisible` never flips `isVisible` to false, so
-			// ModalContainer's effect remounts itself — query again for the
+			// ModalContainer's effect remounts itself, query again for the
 			// fresh close button instance instead of reusing the detached one.
 			await user.click(
 				screen.getByRole("button", { name: "Close modal button" }),

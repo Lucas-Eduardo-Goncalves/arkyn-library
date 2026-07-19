@@ -36,7 +36,7 @@ class DebugService {
 	 * Resolves the file path and function name of the code that triggered the current debug call,
 	 * skipping internal node modules and any files registered with `setIgnoreFile`.
 	 *
-	 * @returns `{ functionName, callerInfo }` — caller function name and file path relative to `process.cwd()`.
+	 * @returns `{ functionName, callerInfo }`, caller function name and file path relative to `process.cwd()`.
 	 */
 	static getCaller() {
 		const projectRoot = process.cwd();

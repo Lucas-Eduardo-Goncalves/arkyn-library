@@ -29,7 +29,7 @@ type ModalProviderProps = {
 const modalContext = createContext({} as ModalContextProps);
 
 /**
- * ModalProvider — context provider that manages open/close state and data for named modals.
+ * ModalProvider, context provider that manages open/close state and data for named modals.
  *
  * Wrap your app (or a subtree) with this once. Any component in the tree can then call
  * `useModal(key)` to open, close, or read data for a specific modal. `closeAll()` is also

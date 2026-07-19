@@ -48,7 +48,7 @@ type ImageUploadProps = {
 };
 
 /**
- * ImageUpload — drag-and-drop image uploader with server upload and image preview.
+ * ImageUpload, drag-and-drop image uploader with server upload and image preview.
  *
  * Sends the file via `fetch` as `multipart/form-data` and stores the returned URL
  * in a hidden `<input>` for form submission.
@@ -64,7 +64,7 @@ type ImageUploadProps = {
  * @param props.method - HTTP method. Default: "POST"
  * @param props.fileName - Form-data field name for the file. Default: "file"
  * @param props.fileResponseName - Server response property containing the URL. Default: "url"
- * @param props.onChange - Callback fired after a successful upload — receives the image URL.
+ * @param props.onChange - Callback fired after a successful upload, receives the image URL.
  * @param props.orientation - Layout direction. Default: "horizontal"
  * @param props.unShowFieldTemplate - Skips wrapper, label, and error rendering. Default: false
  *

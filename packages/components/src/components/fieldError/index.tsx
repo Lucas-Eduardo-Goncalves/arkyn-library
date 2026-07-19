@@ -4,7 +4,7 @@ import "./styles.css";
 type FieldErrorProps = HTMLAttributes<HTMLElement>;
 
 /**
- * FieldError — displays a validation error message below a form field.
+ * FieldError, displays a validation error message below a form field.
  *
  * Renders nothing when `children` is empty or falsy.
  *

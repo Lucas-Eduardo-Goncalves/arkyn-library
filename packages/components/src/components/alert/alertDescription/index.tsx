@@ -4,7 +4,7 @@ import "./styles.css";
 type AlertDescriptionProps = HTMLAttributes<HTMLDivElement>;
 
 /**
- * AlertDescription — body text for an alert. Place inside `AlertContent`.
+ * AlertDescription, body text for an alert. Place inside `AlertContent`.
  *
  * Accepts all standard `<div>` HTML attributes.
  *

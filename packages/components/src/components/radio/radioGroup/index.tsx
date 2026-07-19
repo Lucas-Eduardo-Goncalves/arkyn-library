@@ -32,7 +32,7 @@ type RadioGroupProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> & {
 };
 
 /**
- * RadioGroup — managed group of `RadioBox` options with form integration.
+ * RadioGroup, managed group of `RadioBox` options with form integration.
  *
  * Renders a hidden `<input>` for native form submission. Reads `fieldErrors[name]` from
  * the nearest `FormProvider` when no `errorMessage` is explicitly provided.
@@ -63,8 +63,8 @@ type RadioGroupProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> & {
  *
  * // Controlled with change handler
  * <RadioGroup name="plan" label="Subscription plan" value={plan} onChange={setPlan}>
- *   <RadioBox value="basic">Basic — $9/mo</RadioBox>
- *   <RadioBox value="pro">Pro — $29/mo</RadioBox>
+ *   <RadioBox value="basic">Basic, $9/mo</RadioBox>
+ *   <RadioBox value="pro">Pro, $29/mo</RadioBox>
  * </RadioGroup>
  * ```
  */

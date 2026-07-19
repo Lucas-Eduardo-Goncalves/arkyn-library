@@ -5,7 +5,7 @@
  * @param props.cashPrice - The base price of the item.
  * @param props.numberInstallments - Number of installments (must be > 0).
  * @param props.fees - Monthly interest rate (defaults to `0.0349`).
- * @returns `{ totalPrice, installmentPrice }` — both rounded to 2 decimal places.
+ * @returns `{ totalPrice, installmentPrice }`, both rounded to 2 decimal places.
  *
  * @example
  * ```typescript

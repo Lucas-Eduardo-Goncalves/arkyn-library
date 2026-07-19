@@ -6,7 +6,7 @@ import { useModal } from "./useModal";
 import { useToast } from "./useToast";
 
 /**
- * useAutomation — runs UI side-effects (close modals, scroll, toast) in response to a server action payload.
+ * useAutomation, runs UI side-effects (close modals, scroll, toast) in response to a server action payload.
  *
  * Pass the raw response from a form submission. On every change the hook:
  * 1. Closes all open modals if `closeModal` is `true`.

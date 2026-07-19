@@ -12,10 +12,10 @@ import "./styles.css";
 type AlertContainerProps = {
 	/**
 	 * Visual style and semantic meaning.
-	 * - `success`: green — operation completed.
-	 * - `danger`: red — error or destructive action.
-	 * - `warning`: yellow — caution required.
-	 * - `info`: blue — informational message.
+	 * - `success`: green, operation completed.
+	 * - `danger`: red, error or destructive action.
+	 * - `warning`: yellow, caution required.
+	 * - `info`: blue, informational message.
 	 */
 	scheme: "success" | "danger" | "warning" | "info";
 } & HTMLAttributes<HTMLDivElement>;
@@ -28,7 +28,7 @@ function useAlertContainer(): AlertContainerProps {
 }
 
 /**
- * AlertContainer — root wrapper for the Alert component set. Provides schema context to child components.
+ * AlertContainer, root wrapper for the Alert component set. Provides schema context to child components.
  *
  * Automatically detects whether an `AlertTitle` is present among children and adjusts layout:
  * centered when no title, left-aligned when a title is present.
@@ -42,13 +42,13 @@ function useAlertContainer(): AlertContainerProps {
  *
  * @example
  * ```tsx
- * // Inline alert — no title, centered layout
+ * // Inline alert, no title, centered layout
  * <AlertContainer scheme="success">
  *   <AlertIcon />
  *   <AlertContent>Your subscription has been activated.</AlertContent>
  * </AlertContainer>
  *
- * // Full alert with title and description — left-aligned layout
+ * // Full alert with title and description, left-aligned layout
  * <AlertContainer scheme="danger">
  *   <AlertIcon />
  *   <AlertContent>

@@ -14,7 +14,7 @@ type CardTabButtonProps = Omit<
 };
 
 /**
- * CardTabButton — individual tab button inside a `CardTabContainer`.
+ * CardTabButton, individual tab button inside a `CardTabContainer`.
  *
  * Reads active state and disabled state from `CardTabContainer` context.
  * The button's own `disabled` prop is ORed with the container's `disabled`.

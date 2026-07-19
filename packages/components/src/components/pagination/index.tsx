@@ -38,7 +38,7 @@ type PaginationProps = {
 } & Omit<HTMLAttributes<HTMLDivElement>, "onChange">;
 
 /**
- * Pagination — navigation control for paginated data sets.
+ * Pagination, navigation control for paginated data sets.
  *
  * Renders page number buttons, prev/next arrows, and spread indicators (…)
  * when the page count exceeds the visible range.

@@ -1,7 +1,7 @@
 import { SuccessResponse } from "./_successResponse";
 
 /**
- * HTTP 200 OK — the request succeeded and the response body contains the result.
+ * HTTP 200 OK, the request succeeded and the response body contains the result.
  *
  * @example
  * ```typescript

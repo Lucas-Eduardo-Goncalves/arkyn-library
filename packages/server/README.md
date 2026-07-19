@@ -8,7 +8,7 @@ Comprehensive server-side utilities for building robust backend applications, fe
 
 ## 🎯 What it solves
 
-Backend code — Remix/React Router loaders and actions, or any fetch-based server — tends to reinvent the same plumbing on every project: consistent success/error response shapes, centralized error handling, request body/form parsing, schema validation, and validation of Brazilian documents (CPF/CNPJ/CEP/RG) plus generic fields (email/password/phone/date). `@arkyn/server` packages all of that into small, well-typed primitives so route handlers stay focused on business logic instead of response boilerplate.
+Backend code, Remix/React Router loaders and actions, or any fetch-based server, tends to reinvent the same plumbing on every project: consistent success/error response shapes, centralized error handling, request body/form parsing, schema validation, and validation of Brazilian documents (CPF/CNPJ/CEP/RG) plus generic fields (email/password/phone/date). `@arkyn/server` packages all of that into small, well-typed primitives so route handlers stay focused on business logic instead of response boilerplate.
 
 ## ✨ Features
 
@@ -24,12 +24,12 @@ Backend code — Remix/React Router loaders and actions, or any fetch-based serv
 
 - **Node.js** `>=18.0.0` or **Bun** `>=1.0.0`
 - Peer dependencies (install alongside `@arkyn/server`):
-  - `zod >=4.4.3` — required by `SchemaValidator`, `formParse`, and `formAsyncParse`.
-  - `libphonenumber-js >=1.13.7` — required by `validatePhone`.
+  - `zod >=4.4.3`, required by `SchemaValidator`, `formParse`, and `formAsyncParse`.
+  - `libphonenumber-js >=1.13.7`, required by `validatePhone`.
 
 ## 📦 Installation
 
-> **ESM only.** This package ships as native ES modules with no CommonJS build — use `import`, not `require()`.
+> **ESM only.** This package ships as native ES modules with no CommonJS build, use `import`, not `require()`.
 
 ```bash
 npm install @arkyn/server zod libphonenumber-js
@@ -58,11 +58,11 @@ export async function action({ request }: ActionFunctionArgs) {
 
 ### HTTP Responses
 
-Every response class extends a base with `.toResponse()` (returns a `Response` with a `Content-Type: application/json` header) and `.toJson()` (built on `Response.json()`). Both produce an equivalent JSON body — pick whichever reads better at the call site. `NoContent` only exposes `.toResponse()`, since it always returns a `null` body.
+Every response class extends a base with `.toResponse()` (returns a `Response` with a `Content-Type: application/json` header) and `.toJson()` (built on `Response.json()`). Both produce an equivalent JSON body, pick whichever reads better at the call site. `NoContent` only exposes `.toResponse()`, since it always returns a `null` body.
 
 #### BadGateway
 
-HTTP 502 — the upstream server returned an invalid or unexpected response.
+HTTP 502, the upstream server returned an invalid or unexpected response.
 
 ```typescript
 throw new BadGateway("Payment gateway unavailable");
@@ -70,7 +70,7 @@ throw new BadGateway("Payment gateway unavailable");
 
 #### BadRequest
 
-HTTP 400 — the request is malformed or contains invalid data.
+HTTP 400, the request is malformed or contains invalid data.
 
 ```typescript
 throw new BadRequest("Invalid request body");
@@ -78,7 +78,7 @@ throw new BadRequest("Invalid request body");
 
 #### Conflict
 
-HTTP 409 — the request conflicts with the current state of the server (e.g. duplicate record).
+HTTP 409, the request conflicts with the current state of the server (e.g. duplicate record).
 
 ```typescript
 throw new Conflict("Email already in use");
@@ -86,7 +86,7 @@ throw new Conflict("Email already in use");
 
 #### Forbidden
 
-HTTP 403 — authenticated but not authorized to access this resource.
+HTTP 403, authenticated but not authorized to access this resource.
 
 ```typescript
 throw new Forbidden("You don't have permission to delete this resource");
@@ -94,7 +94,7 @@ throw new Forbidden("You don't have permission to delete this resource");
 
 #### NotFound
 
-HTTP 404 — the requested resource does not exist.
+HTTP 404, the requested resource does not exist.
 
 ```typescript
 throw new NotFound("Product not found");
@@ -102,7 +102,7 @@ throw new NotFound("Product not found");
 
 #### NotImplemented
 
-HTTP 501 — the server does not support the functionality required to fulfill the request.
+HTTP 501, the server does not support the functionality required to fulfill the request.
 
 ```typescript
 throw new NotImplemented("Webhook delivery is not yet implemented");
@@ -110,7 +110,7 @@ throw new NotImplemented("Webhook delivery is not yet implemented");
 
 #### ServerError
 
-HTTP 500 — an unexpected condition prevented the server from fulfilling the request.
+HTTP 500, an unexpected condition prevented the server from fulfilling the request.
 
 ```typescript
 throw new ServerError("Failed to connect to the database");
@@ -118,7 +118,7 @@ throw new ServerError("Failed to connect to the database");
 
 #### Unauthorized
 
-HTTP 401 — the request lacks valid authentication credentials.
+HTTP 401, the request lacks valid authentication credentials.
 
 ```typescript
 throw new Unauthorized("Invalid or expired token");
@@ -126,7 +126,7 @@ throw new Unauthorized("Invalid or expired token");
 
 #### UnprocessableEntity
 
-HTTP 422 — the request is well-formed but contains semantic validation errors. Typically used for form field validation failures.
+HTTP 422, the request is well-formed but contains semantic validation errors. Typically used for form field validation failures.
 
 ```typescript
 throw new UnprocessableEntity({
@@ -138,7 +138,7 @@ throw new UnprocessableEntity({
 
 #### Created
 
-HTTP 201 — the request succeeded and a new resource was created.
+HTTP 201, the request succeeded and a new resource was created.
 
 ```typescript
 return new Created("User created successfully", { id: user.id }).toJson();
@@ -146,7 +146,7 @@ return new Created("User created successfully", { id: user.id }).toJson();
 
 #### Found
 
-HTTP 302 — the resource was located and the response includes it in the body.
+HTTP 302, the resource was located and the response includes it in the body.
 
 ```typescript
 return new Found("Products retrieved", { products }).toJson();
@@ -154,7 +154,7 @@ return new Found("Products retrieved", { products }).toJson();
 
 #### NoContent
 
-HTTP 204 — the request succeeded but there is no content to return. Typically used for delete or update operations where a body is not needed.
+HTTP 204, the request succeeded but there is no content to return. Typically used for delete or update operations where a body is not needed.
 
 ```typescript
 return new NoContent("Record deleted").toResponse();
@@ -162,7 +162,7 @@ return new NoContent("Record deleted").toResponse();
 
 #### Success
 
-HTTP 200 — the request succeeded and the response body contains the result.
+HTTP 200, the request succeeded and the response body contains the result.
 
 ```typescript
 return new Success("Order fetched", { order }).toJson();
@@ -170,7 +170,7 @@ return new Success("Order fetched", { order }).toJson();
 
 #### Updated
 
-HTTP 200 — the request succeeded and the resource was updated. Semantically equivalent to `Success` but signals an update operation to consumers.
+HTTP 200, the request succeeded and the resource was updated. Semantically equivalent to `Success` but signals an update operation to consumers.
 
 ```typescript
 return new Updated("Profile updated", { user }).toJson();
@@ -268,7 +268,7 @@ flushDebugLogs({
 
 #### formAsyncParse
 
-Async variant of `formParse` — uses `safeParseAsync` to support Zod schemas with async refinements. Returns `{ success: true, data }` on success or `{ success: false, fieldErrors, fields }` on failure.
+Async variant of `formParse`, uses `safeParseAsync` to support Zod schemas with async refinements. Returns `{ success: true, data }` on success or `{ success: false, fieldErrors, fields }` on failure.
 
 ```typescript
 const schema = z.object({ email: z.string().email() });

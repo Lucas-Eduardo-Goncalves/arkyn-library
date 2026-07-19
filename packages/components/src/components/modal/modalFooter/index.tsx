@@ -13,7 +13,7 @@ type ModalFooterProps = HTMLAttributes<HTMLElement> & {
 };
 
 /**
- * ModalFooter — action bar at the bottom of a modal dialog.
+ * ModalFooter, action bar at the bottom of a modal dialog.
  *
  * @param props.alignment - Horizontal alignment of children. Default: `"right"`
  *

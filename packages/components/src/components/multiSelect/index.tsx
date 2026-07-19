@@ -84,7 +84,7 @@ type MultiSelectProps = {
 };
 
 /**
- * MultiSelect — multi-option dropdown with optional search, label, validation, and form integration.
+ * MultiSelect, multi-option dropdown with optional search, label, validation, and form integration.
  *
  * Selected values are stored as a JSON array in a hidden `<input>` for form submission.
  * Integrates with `useForm` to display validation errors by field name.

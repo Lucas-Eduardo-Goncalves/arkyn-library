@@ -14,7 +14,7 @@ type PlacesProviderProps = {
 };
 
 /**
- * PlacesProvider — loads the Google Maps JS API with `places`, `marker`, and `maps` libraries.
+ * PlacesProvider, loads the Google Maps JS API with `places`, `marker`, and `maps` libraries.
  *
  * Uses a render-prop pattern: `children` receives `isLoaded` so you can defer rendering
  * `SearchPlaces` or `MapView` until the script is ready.

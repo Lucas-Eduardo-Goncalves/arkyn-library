@@ -1,17 +1,17 @@
 # Arkyn
 
-A TypeScript ecosystem of independent, framework-friendly packages for building React/Remix/React Router applications — UI components, server-side utilities, framework-agnostic helpers, and reference data — designed so each package can be adopted on its own or combined across the stack.
+A TypeScript ecosystem of independent, framework-friendly packages for building React/Remix/React Router applications, UI components, server-side utilities, framework-agnostic helpers, and reference data, designed so each package can be adopted on its own or combined across the stack.
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
 ## 📦 Packages
 
-Arkyn is a monorepo of four published packages, plus an internal development app used to preview and test them. Each package solves one layer of the same problem — teams reinventing UI primitives, response boilerplate, formatting/validation helpers, and reference data on every project — and can be adopted standalone or combined.
+Arkyn is a monorepo of four published packages, plus an internal development app used to preview and test them. Each package solves one layer of the same problem, teams reinventing UI primitives, response boilerplate, formatting/validation helpers, and reference data on every project, and can be adopted standalone or combined.
 
 ### [@arkyn/components](./packages/components)
 
-A complete, accessible, TypeScript-first React UI kit — 54 components, 10 hooks, 5 context providers, and 2 services — so teams stop rebuilding the same buttons, inputs, modals, drawers, and tables on every project.
+A complete, accessible, TypeScript-first React UI kit, 54 components, 10 hooks, 5 context providers, and 2 services, so teams stop rebuilding the same buttons, inputs, modals, drawers, and tables on every project.
 
 - 🧱 **Forms & inputs** - `Input`, `Select`, `MultiSelect`, `Checkbox`, `Switch`, `RadioGroup`, `CurrencyInput`, `MaskedInput`, `PhoneInput`, `Slider`, and more, all wired into a shared form-validation context
 - 🪟 **Overlays** - Modals, drawers, popovers, and tooltips with their own providers/hooks
@@ -29,7 +29,7 @@ Server-side building blocks for Remix/React Router loaders and actions (or any f
 
 ### [@arkyn/shared](./packages/shared)
 
-A dependency-light, framework-agnostic toolkit for formatting, validating, generating, and parsing data — the shared foundation consumed by both `@arkyn/components` and `@arkyn/server`, and safe to use directly in your own client or server code.
+A dependency-light, framework-agnostic toolkit for formatting, validating, generating, and parsing data, the shared foundation consumed by both `@arkyn/components` and `@arkyn/server`, and safe to use directly in your own client or server code.
 
 - 📅 **Formatting** - dates, currency, CPF/CNPJ/CEP, phone numbers, text capitalization/ellipsis/digit-hiding
 - 🔧 **Generators** - UUID (v4/v7) ids, URL slugs, deterministic colors from strings
@@ -37,7 +37,7 @@ A dependency-light, framework-agnostic toolkit for formatting, validating, gener
 
 ### [@arkyn/templates](./packages/templates)
 
-Ready-to-use static reference data — country lists with phone masks, Brazilian states, and currency/locale metadata — so you don't have to source and maintain it yourself. Zero dependencies.
+Ready-to-use static reference data, country lists with phone masks, Brazilian states, and currency/locale metadata, so you don't have to source and maintain it yourself. Zero dependencies.
 
 - 🌍 **`countries`** - 245 countries with ISO code, dialing code, flag, and phone mask(s)
 - 🇧🇷 **`brazilianStates`** - all 26 states plus the Federal District
@@ -47,12 +47,12 @@ Ready-to-use static reference data — country lists with phone masks, Brazilian
 
 ### Installation
 
-Install only the packages you need — each one works standalone.
+Install only the packages you need, each one works standalone.
 
-> **ESM only.** Every package ships as native ES modules with no CommonJS build — use `import`, not `require()`.
+> **ESM only.** Every package ships as native ES modules with no CommonJS build, use `import`, not `require()`.
 
 ```bash
-# UI components (also needs its peer deps — see the package README)
+# UI components (also needs its peer deps, see the package README)
 npm install @arkyn/components
 
 # Server-side utilities (needs zod + libphonenumber-js)
@@ -163,7 +163,7 @@ Full guides, live previews, and prop tables live at [docs.arkyn.dev](https://doc
 
 ## 📄 License
 
-This project is licensed under the Apache 2.0 License — see each package's `LICENSE.txt` (e.g. [packages/components/LICENSE.txt](./packages/components/LICENSE.txt)) for details.
+This project is licensed under the Apache 2.0 License, see each package's `LICENSE.txt` (e.g. [packages/components/LICENSE.txt](./packages/components/LICENSE.txt)) for details.
 
 ## 👨‍💻 Author
 

@@ -1,7 +1,7 @@
 import { BadResponse } from "./_badResponse";
 
 /**
- * HTTP 403 Forbidden — authenticated but not authorized to access this resource.
+ * HTTP 403 Forbidden, authenticated but not authorized to access this resource.
  *
  * @example
  * ```typescript
