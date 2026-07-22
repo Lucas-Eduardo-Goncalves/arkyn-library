@@ -17,6 +17,7 @@ import { createEditor, type Descendant } from "slate";
 import { withHistory } from "slate-history";
 import { Editable, Slate, withReact } from "slate-react";
 import { useForm } from "../../hooks/useForm";
+import { clearLinkMarkAtBoundary } from "../../services/clearLinkMarkAtBoundary";
 import { extractTextFromNode } from "../../services/extractTextFromNode";
 import { FieldTemplate } from "../../services/fieldTemplate";
 import { toggleMark } from "../../services/toggleMark";
@@ -39,6 +40,7 @@ import "./styles.css";
  * RichText, WYSIWYG rich-text editor built on Slate.js with a configurable toolbar.
  *
  * **Toolbar features:** bold, italic, underline, code, H1/H2, block quote, alignment (left/center/right/justify), image, video, and link insertion.
+ * Pressing Space or Enter right after a link automatically stops new text from continuing to be part of that link.
  *
  * Editor content is stored as a Slate JSON string in a hidden `<input>` for form submission.
  * Integrates with `useForm` to display validation errors by field name.
@@ -270,6 +272,10 @@ function RichText(props: RichTextProps) {
 						onFocus={() => setOnFocus(true)}
 						onBlur={() => setOnFocus(false)}
 						onKeyDown={(event) => {
+							if (event.key === " " || event.key === "Enter") {
+								clearLinkMarkAtBoundary(editor);
+							}
+
 							for (const hotkey in hotKeys) {
 								// biome-ignore lint/suspicious/noExplicitAny: intentional
 								if (isHotkey(hotkey, event as any)) {
