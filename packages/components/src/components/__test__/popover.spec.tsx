@@ -259,19 +259,22 @@ describe("Popover", () => {
 			"left",
 			"bottom",
 			"right",
-		] as const)("should reflect orientation %s in the className", (orientation) => {
-			const { container } = render(
-				<Popover
-					button={<button type="button">Open</button>}
-					orientation={orientation}
-				>
-					Content
-				</Popover>,
-			);
+		] as const)(
+			"should reflect orientation %s in the className",
+			(orientation) => {
+				const { container } = render(
+					<Popover
+						button={<button type="button">Open</button>}
+						orientation={orientation}
+					>
+						Content
+					</Popover>,
+				);
 
-			const element = container.firstChild as HTMLElement;
-			expect(element).toHaveClass(orientation);
-		});
+				const element = container.firstChild as HTMLElement;
+				expect(element).toHaveClass(orientation);
+			},
+		);
 
 		it("should not keep the old orientation class after switching orientation", () => {
 			const { container, rerender } = render(

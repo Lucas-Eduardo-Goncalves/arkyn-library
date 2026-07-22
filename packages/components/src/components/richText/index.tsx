@@ -28,6 +28,7 @@ import type {
 import { BlockButton } from "./blockButton";
 import { Element } from "./element";
 import { InsertImage } from "./insertImage";
+import { InsertLink } from "./insertLink";
 import { InsertVideo } from "./insertVideo";
 import { Leaf } from "./leaf";
 import { MarkButton } from "./markButton";
@@ -37,7 +38,7 @@ import "./styles.css";
 /**
  * RichText, WYSIWYG rich-text editor built on Slate.js with a configurable toolbar.
  *
- * **Toolbar features:** bold, italic, underline, code, H1/H2, block quote, alignment (left/center/right/justify), image and video insertion.
+ * **Toolbar features:** bold, italic, underline, code, H1/H2, block quote, alignment (left/center/right/justify), image, video, and link insertion.
  *
  * Editor content is stored as a Slate JSON string in a hidden `<input>` for form submission.
  * Integrates with `useForm` to display validation errors by field name.
@@ -46,6 +47,8 @@ import "./styles.css";
  * @param props.label - Label text displayed above the editor.
  * @param props.hiddenButtons - Toolbar button keys to hide (e.g. `["image", "code"]`).
  * @param props.imageConfig - Enables image insertion; contains the upload endpoint and modal labels.
+ * @param props.videoConfig - Customizes the video insertion modal labels.
+ * @param props.linkConfig - Customizes the link insertion modal labels.
  * @param props.defaultValue - Initial editor content as a Slate JSON string. Default: "[]"
  * @param props.maxLimit - Maximum character count. Default: 10000
  * @param props.enforceCharacterLimit - Prevents typing past `maxLimit`. Default: false
@@ -81,6 +84,13 @@ import "./styles.css";
  *   label="Article Body"
  *   imageConfig={{ action: "/api/upload" }}
  * />
+ *
+ * // With custom link insertion modal labels
+ * <RichText
+ *   name="article"
+ *   label="Article Body"
+ *   linkConfig={{ modalTitle: "Add a link" }}
+ * />
  * ```
  */
 
@@ -90,6 +100,7 @@ function RichText(props: RichTextProps) {
 		hiddenButtons,
 		imageConfig,
 		videoConfig,
+		linkConfig,
 		className: wrapperClassName = "",
 		defaultValue = "[]",
 		enforceCharacterLimit = false,
@@ -245,6 +256,8 @@ function RichText(props: RichTextProps) {
 						)}
 
 						{buttonIsNotHidden("video") && <InsertVideo {...videoConfig} />}
+
+						{buttonIsNotHidden("link") && <InsertLink {...linkConfig} />}
 					</Toolbar>
 
 					<Editable

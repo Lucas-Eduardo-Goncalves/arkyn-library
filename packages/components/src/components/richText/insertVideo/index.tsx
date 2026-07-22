@@ -2,6 +2,7 @@ import { Video } from "lucide-react";
 import { type MouseEvent, useEffect, useState } from "react";
 import { useSlate } from "slate-react";
 
+import { isValidHttpsUrl } from "../../../services/isValidHttpsUrl";
 import type { RichTextInsertVideoProps } from "../../../types/richTextTypes";
 
 import { Button } from "../../button";
@@ -48,6 +49,11 @@ function InsertVideo(props: RichTextInsertVideoProps) {
 
 		setVideoId("");
 		setErrorMessage("");
+
+		if (!isValidHttpsUrl(videoRawURL)) {
+			setErrorMessage(invalidUrlMessage);
+			return;
+		}
 
 		const searchParams = new URLSearchParams(videoRawURL.split("?")[1]);
 		const vParam = searchParams.get("v");

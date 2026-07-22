@@ -1,0 +1,38 @@
+.arkynRichTextInsertLink {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	height: 36px;
+	width: 36px;
+
+	background-color: var(--background-underground, #fafafa);
+	border: none;
+	border-radius: 4px;
+}
+
+.arkynRichTextInsertLink svg {
+	height: 20px;
+	width: 20px;
+
+	color: var(--text-heading, #09090b);
+}
+
+.arkynRichTextInsertLink:hover {
+	cursor: pointer;
+	filter: brightness(0.98);
+}
+
+.arkynRichTextInsertLinkModalContent {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding: 16px;
+
+	width: 500px;
+}
+
+html.dark .arkynRichTextInsertLink:hover {
+	cursor: pointer;
+	filter: brightness(0.9);
+}

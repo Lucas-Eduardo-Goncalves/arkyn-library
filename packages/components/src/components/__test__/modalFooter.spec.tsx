@@ -88,17 +88,16 @@ describe("ModalFooter", () => {
 			expect(screen.getByTestId("modal-footer")).toHaveClass("right");
 		});
 
-		it.each([
-			"left",
-			"center",
-			"right",
-			"between",
-			"around",
-		] as const)("should apply the '%s' alignment class", (alignment) => {
-			render(<ModalFooter data-testid="modal-footer" alignment={alignment} />);
+		it.each(["left", "center", "right", "between", "around"] as const)(
+			"should apply the '%s' alignment class",
+			(alignment) => {
+				render(
+					<ModalFooter data-testid="modal-footer" alignment={alignment} />,
+				);
 
-			expect(screen.getByTestId("modal-footer")).toHaveClass(alignment);
-		});
+				expect(screen.getByTestId("modal-footer")).toHaveClass(alignment);
+			},
+		);
 
 		it("should replace the alignment class when changed", () => {
 			const { rerender } = render(

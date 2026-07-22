@@ -17,6 +17,8 @@ type RichTextCustomText = {
   italic?: boolean;
   code?: boolean;
   underline?: boolean;
+  link?: boolean;
+  href?: string;
 };
 
 type Fbq = {

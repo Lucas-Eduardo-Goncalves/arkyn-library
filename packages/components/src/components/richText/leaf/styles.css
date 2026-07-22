@@ -1,0 +1,4 @@
+.arkynLeafLink {
+	color: var(--text-link, #2563eb);
+	text-decoration: underline;
+}

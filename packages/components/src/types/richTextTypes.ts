@@ -11,7 +11,8 @@ type RichTextHiddenButtonKey =
 	| "center"
 	| "justify"
 	| "image"
-	| "video";
+	| "video"
+	| "link";
 
 type RichTextElementFormatType =
 	| "blockQuote"
@@ -46,6 +47,14 @@ type RichTextInsertVideoProps = {
 	invalidUrlMessage?: string;
 };
 
+type RichTextInsertLinkProps = {
+	modalTitle?: string;
+	modalInputUrlLabel?: string;
+	modalCancelButton?: string;
+	modalConfirmButton?: string;
+	invalidUrlMessage?: string;
+};
+
 type RichTextCustomElement = {
 	type: RichTextElementFormatType;
 	align?: RichTextAlignFormatType;
@@ -59,6 +68,8 @@ type RichTextCustomText = {
 	italic?: boolean;
 	code?: boolean;
 	underline?: boolean;
+	link?: boolean;
+	href?: string;
 };
 
 type Descendant = RichTextCustomElement | RichTextCustomText;
@@ -79,6 +90,7 @@ type RichTextProps = {
 	showAsterisk?: boolean;
 	imageConfig?: RichTextInsertImageProps;
 	videoConfig?: RichTextInsertVideoProps;
+	linkConfig?: RichTextInsertLinkProps;
 	onChangeCharactersCount?: (e: number) => void;
 	onChange?: (value: Descendant[]) => void;
 };
@@ -89,6 +101,7 @@ type ParseElement = {
 	type: string;
 	props: {
 		src?: string;
+		href?: string;
 		children: ParseElement[] | string;
 		className?: string;
 	};
@@ -103,6 +116,7 @@ export type {
 	RichTextElementFormatType,
 	RichTextHiddenButtonKey,
 	RichTextInsertImageProps,
+	RichTextInsertLinkProps,
 	RichTextInsertVideoProps,
 	RichTextMarkFormatType,
 	RichTextProps,

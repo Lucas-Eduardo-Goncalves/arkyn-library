@@ -138,16 +138,15 @@ describe("Badge", () => {
 			expect(element).toHaveClass("ghost");
 		});
 
-		it.each([
-			"solid",
-			"outline",
-			"ghost",
-		] as const)("should apply the '%s' variant class", (variant) => {
-			const { container } = render(<Badge variant={variant}>New</Badge>);
+		it.each(["solid", "outline", "ghost"] as const)(
+			"should apply the '%s' variant class",
+			(variant) => {
+				const { container } = render(<Badge variant={variant}>New</Badge>);
 
-			const element = container.firstChild as HTMLElement;
-			expect(element).toHaveClass(variant);
-		});
+				const element = container.firstChild as HTMLElement;
+				expect(element).toHaveClass(variant);
+			},
+		);
 
 		it("should not apply classes from other variants", () => {
 			const { container } = render(<Badge variant="solid">New</Badge>);

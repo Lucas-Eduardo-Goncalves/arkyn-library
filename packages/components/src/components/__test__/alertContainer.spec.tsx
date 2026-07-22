@@ -45,19 +45,17 @@ describe("AlertContainer", () => {
 		expect(container.querySelector(".arkynAlertContainer")).toBeInTheDocument();
 	});
 
-	it.each([
-		"success",
-		"danger",
-		"warning",
-		"info",
-	] as const)("should apply the '%s' scheme class", (scheme) => {
-		const { container } = render(
-			<AlertContainer scheme={scheme}>Content</AlertContainer>,
-		);
+	it.each(["success", "danger", "warning", "info"] as const)(
+		"should apply the '%s' scheme class",
+		(scheme) => {
+			const { container } = render(
+				<AlertContainer scheme={scheme}>Content</AlertContainer>,
+			);
 
-		const element = container.firstChild as HTMLElement;
-		expect(element).toHaveClass(scheme);
-	});
+			const element = container.firstChild as HTMLElement;
+			expect(element).toHaveClass(scheme);
+		},
+	);
 
 	it("should not apply classes from other schemes", () => {
 		const { container } = render(

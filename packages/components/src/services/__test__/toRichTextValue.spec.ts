@@ -76,12 +76,12 @@ describe("toRichTextValue", () => {
 		]);
 	});
 
-	it("should not deserialize a lone list item when it is the list's only child", () => {
+	it("should deserialize a lone list item when it is the list's only child", () => {
 		const [result] = toRichTextValue("<ol><li>First</li></ol>");
 		const { children } = result as { children: unknown[] };
 
 		expect(children).toHaveLength(1);
-		expect(children[0]).not.toEqual({
+		expect(children[0]).toEqual({
 			type: "listItem",
 			align: undefined,
 			children: [{ text: "First" }],
@@ -101,6 +101,18 @@ describe("toRichTextValue", () => {
 		]);
 		expect(toRichTextValue("<blockquote>Quote</blockquote>")).toEqual([
 			{ type: "blockQuote", align: undefined, children: [{ text: "Quote" }] },
+		]);
+	});
+
+	it("should convert an anchor tag into a link text node with its href", () => {
+		expect(
+			toRichTextValue('<p><a href="https://arkyn.dev">Arkyn</a></p>'),
+		).toEqual([
+			{
+				type: "paragraph",
+				align: undefined,
+				children: [{ text: "Arkyn", link: true, href: "https://arkyn.dev" }],
+			},
 		]);
 	});
 

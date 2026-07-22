@@ -24,8 +24,21 @@ export default function RichTextRoute() {
 				/>
 			</div>
 
+			<div className="exampleContainer foreground">
+				<RichText
+					name="content4"
+					label="With link insertion:"
+					linkConfig={{
+						modalTitle: "Inserir link",
+						modalInputUrlLabel: "URL do link:",
+						modalCancelButton: "Cancelar",
+						modalConfirmButton: "Confirmar",
+					}}
+				/>
+			</div>
+
 			<div className="exampleContainer">
-				<RichText name="content4" label="Dark mode:" />
+				<RichText name="content5" label="Dark mode:" />
 			</div>
 		</>
 	);

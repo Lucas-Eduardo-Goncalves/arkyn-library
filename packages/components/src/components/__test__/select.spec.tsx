@@ -811,20 +811,19 @@ describe("Select", () => {
 			expect(section).toHaveClass("solid");
 		});
 
-		it.each([
-			"solid",
-			"outline",
-			"underline",
-		] as const)("should apply the '%s' variant class", (variant) => {
-			const { container } = render(
-				<Select name="category" options={options} variant={variant} />,
-			);
+		it.each(["solid", "outline", "underline"] as const)(
+			"should apply the '%s' variant class",
+			(variant) => {
+				const { container } = render(
+					<Select name="category" options={options} variant={variant} />,
+				);
 
-			const section = container.querySelector(
-				".arkynSelectContainer",
-			) as HTMLElement;
-			expect(section).toHaveClass(variant);
-		});
+				const section = container.querySelector(
+					".arkynSelectContainer",
+				) as HTMLElement;
+				expect(section).toHaveClass(variant);
+			},
+		);
 
 		it("should replace the variant class when changed", () => {
 			const { container, rerender } = render(

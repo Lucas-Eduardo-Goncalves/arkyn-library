@@ -235,11 +235,10 @@ describe("MaskedInput", () => {
 			const input = screen.getByRole("textbox");
 			await user.type(input, "119");
 
-			const lastCallArgs = handleChange.mock.calls.at(-1);
-			expect(lastCallArgs?.[0]).toHaveProperty("target");
-			expect((lastCallArgs?.[0].target as HTMLInputElement).value).toBe(
-				"(11) 9",
-			);
+			const [event] = handleChange.mock.calls.at(-1) ?? [];
+			expect(event).toHaveProperty("target");
+			const target = (event as { target: HTMLInputElement }).target;
+			expect(target.value).toBe("(11) 9");
 		});
 
 		it("should not be called when the component is disabled", async () => {
@@ -810,22 +809,23 @@ describe("MaskedInput", () => {
 			expect(container.querySelector(".arkynMaskedInput")).toHaveClass("solid");
 		});
 
-		it.each([
-			"solid",
-			"outline",
-			"underline",
-		] as const)("should apply the '%s' variant class", (variant) => {
-			const { container } = render(
-				<MaskedInput
-					name="phone"
-					mask="(__) _____-____"
-					replacement={{ _: /\d/ }}
-					variant={variant}
-				/>,
-			);
+		it.each(["solid", "outline", "underline"] as const)(
+			"should apply the '%s' variant class",
+			(variant) => {
+				const { container } = render(
+					<MaskedInput
+						name="phone"
+						mask="(__) _____-____"
+						replacement={{ _: /\d/ }}
+						variant={variant}
+					/>,
+				);
 
-			expect(container.querySelector(".arkynMaskedInput")).toHaveClass(variant);
-		});
+				expect(container.querySelector(".arkynMaskedInput")).toHaveClass(
+					variant,
+				);
+			},
+		);
 
 		it("should not apply classes from other variants", () => {
 			const { container } = render(

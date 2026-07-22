@@ -36,16 +36,19 @@ describe("AlertIcon", () => {
 		["danger", "lucide-circle-x"],
 		["warning", "lucide-triangle-alert"],
 		["info", "lucide-info"],
-	] as const)("should render the '%s' scheme default icon", (scheme, lucideClass) => {
-		const { container } = render(
-			<AlertContainer scheme={scheme}>
-				<AlertIcon />
-			</AlertContainer>,
-		);
+	] as const)(
+		"should render the '%s' scheme default icon",
+		(scheme, lucideClass) => {
+			const { container } = render(
+				<AlertContainer scheme={scheme}>
+					<AlertIcon />
+				</AlertContainer>,
+			);
 
-		const svg = container.querySelector("svg");
-		expect(svg).toHaveClass(lucideClass);
-	});
+			const svg = container.querySelector("svg");
+			expect(svg).toHaveClass(lucideClass);
+		},
+	);
 
 	it("should not render icons from other schemes", () => {
 		const { container } = render(

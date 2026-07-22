@@ -100,16 +100,14 @@ describe("Button", () => {
 		expect(screen.getByText("Delete")).toBeInTheDocument();
 	});
 
-	it.each([
-		"xs",
-		"sm",
-		"md",
-		"lg",
-	] as const)("should apply the '%s' size class", (size) => {
-		render(<Button size={size}>Click me</Button>);
+	it.each(["xs", "sm", "md", "lg"] as const)(
+		"should apply the '%s' size class",
+		(size) => {
+			render(<Button size={size}>Click me</Button>);
 
-		expect(screen.getByRole("button")).toHaveClass(size);
-	});
+			expect(screen.getByRole("button")).toHaveClass(size);
+		},
+	);
 
 	it("should default to 'md' size when size is omitted", () => {
 		render(<Button>Click me</Button>);
@@ -117,16 +115,14 @@ describe("Button", () => {
 		expect(screen.getByRole("button")).toHaveClass("md");
 	});
 
-	it.each([
-		"solid",
-		"outline",
-		"ghost",
-		"invisible",
-	] as const)("should apply the '%s' variant class", (variant) => {
-		render(<Button variant={variant}>Click me</Button>);
+	it.each(["solid", "outline", "ghost", "invisible"] as const)(
+		"should apply the '%s' variant class",
+		(variant) => {
+			render(<Button variant={variant}>Click me</Button>);
 
-		expect(screen.getByRole("button")).toHaveClass(variant);
-	});
+			expect(screen.getByRole("button")).toHaveClass(variant);
+		},
+	);
 
 	it("should default to 'solid' variant when variant is omitted", () => {
 		render(<Button>Click me</Button>);

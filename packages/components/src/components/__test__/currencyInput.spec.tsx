@@ -574,19 +574,18 @@ describe("CurrencyInput", () => {
 			);
 		});
 
-		it.each([
-			"solid",
-			"outline",
-			"underline",
-		] as const)("should apply the '%s' variant class", (variant) => {
-			const { container } = render(
-				<CurrencyInput name="price" locale="USD" variant={variant} />,
-			);
+		it.each(["solid", "outline", "underline"] as const)(
+			"should apply the '%s' variant class",
+			(variant) => {
+				const { container } = render(
+					<CurrencyInput name="price" locale="USD" variant={variant} />,
+				);
 
-			expect(container.querySelector(".arkynCurrencyInput")).toHaveClass(
-				variant,
-			);
-		});
+				expect(container.querySelector(".arkynCurrencyInput")).toHaveClass(
+					variant,
+				);
+			},
+		);
 
 		it("should not apply classes from other variants", () => {
 			const { container } = render(

@@ -390,6 +390,24 @@ describe("RichText", () => {
 			).not.toBeInTheDocument();
 		});
 
+		it("should render the link button by default", () => {
+			const { container } = render(<RichText name="content" />);
+
+			expect(
+				container.querySelector(".arkynRichTextInsertLink"),
+			).toBeInTheDocument();
+		});
+
+		it("should hide the link button when hiddenButtons includes link", () => {
+			const { container } = render(
+				<RichText name="content" hiddenButtons={["link"]} />,
+			);
+
+			expect(
+				container.querySelector(".arkynRichTextInsertLink"),
+			).not.toBeInTheDocument();
+		});
+
 		it("should hide the bold button when hiddenButtons includes bold", () => {
 			const { container } = render(
 				<RichText name="content" hiddenButtons={["bold"]} />,
@@ -418,6 +436,7 @@ describe("RichText", () => {
 						"center",
 						"justify",
 						"video",
+						"link",
 					]}
 				/>,
 			);
@@ -431,6 +450,147 @@ describe("RichText", () => {
 			expect(
 				container.querySelector(".arkynRichTextInsertVideo"),
 			).not.toBeInTheDocument();
+			expect(
+				container.querySelector(".arkynRichTextInsertLink"),
+			).not.toBeInTheDocument();
+		});
+	});
+
+	describe("link insertion URL validation", () => {
+		function openLinkModal(container: HTMLElement) {
+			const button = container.querySelector(
+				".arkynRichTextInsertLink",
+			) as HTMLButtonElement;
+			fireEvent.mouseDown(button);
+		}
+
+		function getLinkUrlInput(container: HTMLElement) {
+			return container.querySelector(
+				'input[name="richTextLinkURL"]',
+			) as HTMLInputElement;
+		}
+
+		function getConfirmButton() {
+			return screen.getByText("Confirmar").closest("button") as HTMLElement;
+		}
+
+		it("should disable the confirm button until a URL is entered", () => {
+			const { container } = render(<RichText name="content" />);
+			openLinkModal(container);
+
+			expect(getConfirmButton()).toBeDisabled();
+		});
+
+		it("should show the invalid URL message and keep confirm disabled for a non-https URL", () => {
+			const { container } = render(<RichText name="content" />);
+			openLinkModal(container);
+
+			const input = getLinkUrlInput(container);
+			fireEvent.change(input, { target: { value: "http://arkyn.dev" } });
+
+			expect(screen.getByText("URL inválida")).toBeInTheDocument();
+			expect(getConfirmButton()).toBeDisabled();
+		});
+
+		it("should show the invalid URL message for a malformed string", () => {
+			const { container } = render(<RichText name="content" />);
+			openLinkModal(container);
+
+			const input = getLinkUrlInput(container);
+			fireEvent.change(input, { target: { value: "not-a-url" } });
+
+			expect(screen.getByText("URL inválida")).toBeInTheDocument();
+			expect(getConfirmButton()).toBeDisabled();
+		});
+
+		it("should clear the error and enable confirm for a valid https URL", () => {
+			const { container } = render(<RichText name="content" />);
+			openLinkModal(container);
+
+			const input = getLinkUrlInput(container);
+			fireEvent.change(input, { target: { value: "https://arkyn.dev" } });
+
+			expect(screen.queryByText("URL inválida")).not.toBeInTheDocument();
+			expect(getConfirmButton()).not.toBeDisabled();
+		});
+
+		it("should use a custom invalidUrlMessage from linkConfig", () => {
+			const { container } = render(
+				<RichText
+					name="content"
+					linkConfig={{ invalidUrlMessage: "Link inválido" }}
+				/>,
+			);
+			openLinkModal(container);
+
+			const input = getLinkUrlInput(container);
+			fireEvent.change(input, { target: { value: "http://arkyn.dev" } });
+
+			expect(screen.getByText("Link inválido")).toBeInTheDocument();
+		});
+	});
+
+	describe("video insertion URL validation", () => {
+		function openVideoModal(container: HTMLElement) {
+			const button = container.querySelector(
+				".arkynRichTextInsertVideo",
+			) as HTMLButtonElement;
+			fireEvent.mouseDown(button);
+		}
+
+		function getVideoUrlInput(container: HTMLElement) {
+			return container.querySelector(
+				'input[name="richTextVideoURL"]',
+			) as HTMLInputElement;
+		}
+
+		it("should show the invalid URL message for a non-https URL", () => {
+			const { container } = render(<RichText name="content" />);
+			openVideoModal(container);
+
+			const input = getVideoUrlInput(container);
+			fireEvent.change(input, {
+				target: { value: "http://www.youtube.com/watch?v=abc123" },
+			});
+
+			expect(screen.getByText("URL inválida")).toBeInTheDocument();
+		});
+
+		it("should show the invalid URL message for a malformed string", () => {
+			const { container } = render(<RichText name="content" />);
+			openVideoModal(container);
+
+			const input = getVideoUrlInput(container);
+			fireEvent.change(input, { target: { value: "not-a-url" } });
+
+			expect(screen.getByText("URL inválida")).toBeInTheDocument();
+		});
+
+		it("should accept a valid https YouTube URL and not show an error", () => {
+			const { container } = render(<RichText name="content" />);
+			openVideoModal(container);
+
+			const input = getVideoUrlInput(container);
+			fireEvent.change(input, {
+				target: { value: "https://www.youtube.com/watch?v=abc123" },
+			});
+
+			expect(screen.queryByText("URL inválida")).not.toBeInTheDocument();
+		});
+
+		it("should use a custom invalidUrlMessage from videoConfig", () => {
+			const { container } = render(
+				<RichText
+					name="content"
+					videoConfig={{ invalidUrlMessage: "Vídeo inválido" }}
+				/>,
+			);
+			openVideoModal(container);
+
+			const input = getVideoUrlInput(container);
+			fireEvent.change(input, { target: { value: "http://youtube.com" } });
+
+			expect(screen.getByText("Vídeo inválido")).toBeInTheDocument();
 		});
 	});
 
@@ -708,6 +868,10 @@ describe("RichText", () => {
 		});
 
 		it("should not throw when videoConfig is omitted while the video button is shown", () => {
+			expect(() => render(<RichText name="content" />)).not.toThrow();
+		});
+
+		it("should not throw when linkConfig is omitted while the link button is shown", () => {
 			expect(() => render(<RichText name="content" />)).not.toThrow();
 		});
 	});

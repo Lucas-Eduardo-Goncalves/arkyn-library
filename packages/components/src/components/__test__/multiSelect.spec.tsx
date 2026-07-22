@@ -837,23 +837,23 @@ describe("MultiSelect", () => {
 			expect(getContainer()).toHaveClass("md");
 		});
 
-		it.each([
-			"md",
-			"lg",
-		] as const)("should apply the '%s' size class", (size) => {
-			render(
-				<MultiSelect
-					name={`categories-${size}`}
-					options={options}
-					size={size}
-				/>,
-			);
+		it.each(["md", "lg"] as const)(
+			"should apply the '%s' size class",
+			(size) => {
+				render(
+					<MultiSelect
+						name={`categories-${size}`}
+						options={options}
+						size={size}
+					/>,
+				);
 
-			const containers = document.querySelectorAll(
-				".arkynMultiSelectContainer",
-			);
-			expect(containers[containers.length - 1]).toHaveClass(size);
-		});
+				const containers = document.querySelectorAll(
+					".arkynMultiSelectContainer",
+				);
+				expect(containers[containers.length - 1]).toHaveClass(size);
+			},
+		);
 
 		it("should not apply the other size class", () => {
 			render(<MultiSelect name="categories" options={options} size="lg" />);
@@ -869,24 +869,23 @@ describe("MultiSelect", () => {
 			expect(getContainer()).toHaveClass("solid");
 		});
 
-		it.each([
-			"solid",
-			"outline",
-			"underline",
-		] as const)("should apply the '%s' variant class", (variant) => {
-			render(
-				<MultiSelect
-					name={`categories-${variant}`}
-					options={options}
-					variant={variant}
-				/>,
-			);
+		it.each(["solid", "outline", "underline"] as const)(
+			"should apply the '%s' variant class",
+			(variant) => {
+				render(
+					<MultiSelect
+						name={`categories-${variant}`}
+						options={options}
+						variant={variant}
+					/>,
+				);
 
-			const containers = document.querySelectorAll(
-				".arkynMultiSelectContainer",
-			);
-			expect(containers[containers.length - 1]).toHaveClass(variant);
-		});
+				const containers = document.querySelectorAll(
+					".arkynMultiSelectContainer",
+				);
+				expect(containers[containers.length - 1]).toHaveClass(variant);
+			},
+		);
 
 		it("should replace the variant class when changed", () => {
 			const { rerender } = render(
@@ -1024,26 +1023,25 @@ describe("MultiSelect", () => {
 	});
 
 	describe("orientation prop", () => {
-		it.each([
-			"horizontal",
-			"vertical",
-			"horizontalReverse",
-		] as const)("should apply the '%s' orientation class to the wrapper", (orientation) => {
-			render(
-				<MultiSelect
-					name={`categories-${orientation}`}
-					options={options}
-					label="Label"
-					orientation={orientation}
-				/>,
-			);
+		it.each(["horizontal", "vertical", "horizontalReverse"] as const)(
+			"should apply the '%s' orientation class to the wrapper",
+			(orientation) => {
+				render(
+					<MultiSelect
+						name={`categories-${orientation}`}
+						options={options}
+						label="Label"
+						orientation={orientation}
+					/>,
+				);
 
-			const labels = screen.getAllByText("Label");
-			const wrapper = labels[labels.length - 1].closest(
-				"section",
-			) as HTMLElement;
-			expect(wrapper).toHaveClass(orientation);
-		});
+				const labels = screen.getAllByText("Label");
+				const wrapper = labels[labels.length - 1].closest(
+					"section",
+				) as HTMLElement;
+				expect(wrapper).toHaveClass(orientation);
+			},
+		);
 	});
 
 	describe("className merge (wrapper)", () => {

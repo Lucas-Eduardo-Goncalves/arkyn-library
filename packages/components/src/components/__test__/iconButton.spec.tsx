@@ -109,17 +109,20 @@ describe("IconButton", () => {
 			["sm", "16"],
 			["md", "20"],
 			["lg", "24"],
-		] as const)("should render icon with size %s as %spx", (size, expectedPx) => {
-			const { container } = render(
-				<IconButton icon={Plus} aria-label="Add item" size={size} />,
-			);
+		] as const)(
+			"should render icon with size %s as %spx",
+			(size, expectedPx) => {
+				const { container } = render(
+					<IconButton icon={Plus} aria-label="Add item" size={size} />,
+				);
 
-			const contentIcon = container.querySelector(
-				".arkynIconButtonContent svg",
-			);
-			expect(contentIcon).toHaveAttribute("width", expectedPx);
-			expect(contentIcon).toHaveAttribute("height", expectedPx);
-		});
+				const contentIcon = container.querySelector(
+					".arkynIconButtonContent svg",
+				);
+				expect(contentIcon).toHaveAttribute("width", expectedPx);
+				expect(contentIcon).toHaveAttribute("height", expectedPx);
+			},
+		);
 
 		it("should render icon with strokeWidth 2.5", () => {
 			const { container } = render(
@@ -165,17 +168,15 @@ describe("IconButton", () => {
 			expect(button).toHaveClass("md");
 		});
 
-		it.each([
-			"xs",
-			"sm",
-			"md",
-			"lg",
-		] as const)("should apply the '%s' size class", (size) => {
-			render(<IconButton icon={Plus} aria-label="Add item" size={size} />);
+		it.each(["xs", "sm", "md", "lg"] as const)(
+			"should apply the '%s' size class",
+			(size) => {
+				render(<IconButton icon={Plus} aria-label="Add item" size={size} />);
 
-			const button = screen.getByRole("button", { name: "Add item" });
-			expect(button).toHaveClass(size);
-		});
+				const button = screen.getByRole("button", { name: "Add item" });
+				expect(button).toHaveClass(size);
+			},
+		);
 
 		it("should not apply classes from other sizes", () => {
 			render(<IconButton icon={Plus} aria-label="Add item" size="sm" />);
@@ -209,19 +210,17 @@ describe("IconButton", () => {
 			expect(button).toHaveClass("solid");
 		});
 
-		it.each([
-			"solid",
-			"outline",
-			"ghost",
-			"invisible",
-		] as const)("should apply the '%s' variant class", (variant) => {
-			render(
-				<IconButton icon={Plus} aria-label="Add item" variant={variant} />,
-			);
+		it.each(["solid", "outline", "ghost", "invisible"] as const)(
+			"should apply the '%s' variant class",
+			(variant) => {
+				render(
+					<IconButton icon={Plus} aria-label="Add item" variant={variant} />,
+				);
 
-			const button = screen.getByRole("button", { name: "Add item" });
-			expect(button).toHaveClass(variant);
-		});
+				const button = screen.getByRole("button", { name: "Add item" });
+				expect(button).toHaveClass(variant);
+			},
+		);
 
 		it("should not apply classes from other variants", () => {
 			render(<IconButton icon={Plus} aria-label="Add item" variant="ghost" />);

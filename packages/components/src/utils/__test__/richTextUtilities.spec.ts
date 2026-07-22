@@ -27,6 +27,23 @@ describe("serialize", () => {
 		);
 	});
 
+	it("should wrap linked text in an anchor tag with its href", () => {
+		expect(
+			serialize({ text: "Arkyn", link: true, href: "https://arkyn.dev" }),
+		).toBe('<a href="https://arkyn.dev">Arkyn</a>');
+	});
+
+	it("should nest the anchor tag around other marks on the same text node", () => {
+		expect(
+			serialize({
+				text: "Arkyn",
+				bold: true,
+				link: true,
+				href: "https://arkyn.dev",
+			}),
+		).toBe('<a href="https://arkyn.dev"><strong>Arkyn</strong></a>');
+	});
+
 	it("should serialize a paragraph element with its children", () => {
 		expect(
 			serialize({ type: "paragraph", children: [{ text: "Hello" }] }),
@@ -115,6 +132,32 @@ describe("deserialize", () => {
 		expect(deserialize({ type: "code", props: { children: "c" } })).toEqual({
 			text: "c",
 			code: true,
+		});
+	});
+
+	it("should deserialize an element that is the sole, non-text child of its parent", () => {
+		const el = {
+			type: "p",
+			props: { children: { type: "strong", props: { children: "Only" } } },
+		} as unknown as ParseElement;
+
+		expect(deserialize(el)).toEqual({
+			type: "paragraph",
+			align: undefined,
+			children: [{ text: "Only", bold: true }],
+		});
+	});
+
+	it("should convert an <a> element into a link text node with its href", () => {
+		const el: ParseElement = {
+			type: "a",
+			props: { children: "Arkyn", href: "https://arkyn.dev" },
+		};
+
+		expect(deserialize(el)).toEqual({
+			text: "Arkyn",
+			link: true,
+			href: "https://arkyn.dev",
 		});
 	});
 

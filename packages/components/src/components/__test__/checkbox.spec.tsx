@@ -140,17 +140,16 @@ describe("Checkbox", () => {
 			expect(button).toHaveClass("md");
 		});
 
-		it.each([
-			"sm",
-			"md",
-			"lg",
-		] as const)("should apply the '%s' size class", (size) => {
-			render(<Checkbox name={`terms-${size}`} size={size} />);
+		it.each(["sm", "md", "lg"] as const)(
+			"should apply the '%s' size class",
+			(size) => {
+				render(<Checkbox name={`terms-${size}`} size={size} />);
 
-			const buttons = document.querySelectorAll(".arkynCheckbox");
-			const button = buttons[buttons.length - 1];
-			expect(button).toHaveClass(size);
-		});
+				const buttons = document.querySelectorAll(".arkynCheckbox");
+				const button = buttons[buttons.length - 1];
+				expect(button).toHaveClass(size);
+			},
+		);
 
 		it("should not apply classes from other sizes", () => {
 			render(<Checkbox name="terms" size="sm" />);
@@ -458,25 +457,24 @@ describe("Checkbox", () => {
 			expect(wrapper).toHaveClass("horizontalReverse");
 		});
 
-		it.each([
-			"horizontal",
-			"vertical",
-			"horizontalReverse",
-		] as const)("should apply the '%s' orientation class to the wrapper", (orientation) => {
-			render(
-				<Checkbox
-					name={`terms-${orientation}`}
-					label="Label"
-					orientation={orientation}
-				/>,
-			);
+		it.each(["horizontal", "vertical", "horizontalReverse"] as const)(
+			"should apply the '%s' orientation class to the wrapper",
+			(orientation) => {
+				render(
+					<Checkbox
+						name={`terms-${orientation}`}
+						label="Label"
+						orientation={orientation}
+					/>,
+				);
 
-			const labels = screen.getAllByText("Label");
-			const wrapper = labels[labels.length - 1].closest(
-				"section",
-			) as HTMLElement;
-			expect(wrapper).toHaveClass(orientation);
-		});
+				const labels = screen.getAllByText("Label");
+				const wrapper = labels[labels.length - 1].closest(
+					"section",
+				) as HTMLElement;
+				expect(wrapper).toHaveClass(orientation);
+			},
+		);
 	});
 
 	describe("className merge (wrapper)", () => {

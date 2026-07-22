@@ -17,6 +17,9 @@ function serialize(node: any): string {
 		if (node?.underline) {
 			text = `<u>${text}</u>`;
 		}
+		if (node?.link) {
+			text = `<a href="${node.href}">${text}</a>`;
+		}
 		return text;
 	}
 
@@ -58,9 +61,17 @@ function deserialize(el: ParseElement): any {
 		return { text: el };
 	}
 
-	const children = Array.isArray(el.props.children)
-		? el.props.children.map((child) => deserialize(child))
-		: [{ text: el.props.children || "" }];
+	const rawChildren = el.props.children;
+
+	// biome-ignore lint/suspicious/noExplicitAny: intentional
+	let children: any[];
+	if (Array.isArray(rawChildren)) {
+		children = rawChildren.map((child) => deserialize(child));
+	} else if (typeof rawChildren === "string" || !rawChildren) {
+		children = [{ text: rawChildren || "" }];
+	} else {
+		children = [deserialize(rawChildren)];
+	}
 
 	const align = el.props.className?.replace("align_", "") as
 		| "left"
@@ -98,6 +109,8 @@ function deserialize(el: ParseElement): any {
 			return { text: el.props.children, italic: true };
 		case "u":
 			return { text: el.props.children, underline: true };
+		case "a":
+			return { text: el.props.children, link: true, href: el.props.href };
 		default:
 			return { text: el.props.children || "" };
 	}

@@ -441,17 +441,19 @@ describe("Textarea", () => {
 			expect(section).toHaveClass("solid");
 		});
 
-		it.each([
-			"solid",
-			"outline",
-		] as const)("should apply the '%s' variant class", (variant) => {
-			const { container } = render(
-				<Textarea name="description" variant={variant} />,
-			);
+		it.each(["solid", "outline"] as const)(
+			"should apply the '%s' variant class",
+			(variant) => {
+				const { container } = render(
+					<Textarea name="description" variant={variant} />,
+				);
 
-			const section = container.querySelector(".arkynTextarea") as HTMLElement;
-			expect(section).toHaveClass(variant);
-		});
+				const section = container.querySelector(
+					".arkynTextarea",
+				) as HTMLElement;
+				expect(section).toHaveClass(variant);
+			},
+		);
 
 		it("should replace the variant class when changed", () => {
 			const { container, rerender } = render(

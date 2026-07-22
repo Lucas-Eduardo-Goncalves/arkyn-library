@@ -148,17 +148,16 @@ describe("Switch", () => {
 			expect(button).toHaveClass("lg");
 		});
 
-		it.each([
-			"sm",
-			"md",
-			"lg",
-		] as const)("should apply the '%s' size class", (size) => {
-			render(<Switch name={`notifications-${size}`} size={size} />);
+		it.each(["sm", "md", "lg"] as const)(
+			"should apply the '%s' size class",
+			(size) => {
+				render(<Switch name={`notifications-${size}`} size={size} />);
 
-			const buttons = document.querySelectorAll(".arkynSwitch");
-			const button = buttons[buttons.length - 1];
-			expect(button).toHaveClass(size);
-		});
+				const buttons = document.querySelectorAll(".arkynSwitch");
+				const button = buttons[buttons.length - 1];
+				expect(button).toHaveClass(size);
+			},
+		);
 
 		it("should not apply classes from other sizes", () => {
 			render(<Switch name="notifications" size="sm" />);
@@ -477,25 +476,24 @@ describe("Switch", () => {
 			expect(wrapper).toHaveClass("horizontalReverse");
 		});
 
-		it.each([
-			"horizontal",
-			"vertical",
-			"horizontalReverse",
-		] as const)("should apply the '%s' orientation class to the wrapper", (orientation) => {
-			render(
-				<Switch
-					name={`notifications-${orientation}`}
-					label="Label"
-					orientation={orientation}
-				/>,
-			);
+		it.each(["horizontal", "vertical", "horizontalReverse"] as const)(
+			"should apply the '%s' orientation class to the wrapper",
+			(orientation) => {
+				render(
+					<Switch
+						name={`notifications-${orientation}`}
+						label="Label"
+						orientation={orientation}
+					/>,
+				);
 
-			const labels = screen.getAllByText("Label");
-			const wrapper = labels[labels.length - 1].closest(
-				"section",
-			) as HTMLElement;
-			expect(wrapper).toHaveClass(orientation);
-		});
+				const labels = screen.getAllByText("Label");
+				const wrapper = labels[labels.length - 1].closest(
+					"section",
+				) as HTMLElement;
+				expect(wrapper).toHaveClass(orientation);
+			},
+		);
 	});
 
 	describe("className merge", () => {

@@ -51,6 +51,19 @@ describe("toHtml", () => {
 		);
 	});
 
+	it("should wrap linked text in an anchor tag with its href", () => {
+		const value: RichTextValue = [
+			{
+				type: "paragraph",
+				children: [{ text: "Arkyn", link: true, href: "https://arkyn.dev" }],
+			},
+		];
+
+		expect(toHtml(value)).toBe(
+			'<p class="align_left"><a href="https://arkyn.dev">Arkyn</a></p>',
+		);
+	});
+
 	it("should apply the align class from the node's align property", () => {
 		const value: RichTextValue = [
 			{ type: "paragraph", align: "center", children: [{ text: "Hi" }] },

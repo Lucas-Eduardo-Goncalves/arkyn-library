@@ -123,20 +123,18 @@ describe("Tooltip", () => {
 			expect(container.firstChild).toHaveClass("top");
 		});
 
-		it.each([
-			"top",
-			"right",
-			"bottom",
-			"left",
-		] as const)("should apply the '%s' orientation class", (orientation) => {
-			const { container } = render(
-				<Tooltip text="Info" orientation={orientation}>
-					<button type="button">Trigger</button>
-				</Tooltip>,
-			);
+		it.each(["top", "right", "bottom", "left"] as const)(
+			"should apply the '%s' orientation class",
+			(orientation) => {
+				const { container } = render(
+					<Tooltip text="Info" orientation={orientation}>
+						<button type="button">Trigger</button>
+					</Tooltip>,
+				);
 
-			expect(container.firstChild).toHaveClass(orientation);
-		});
+				expect(container.firstChild).toHaveClass(orientation);
+			},
+		);
 	});
 
 	describe("size prop", () => {
