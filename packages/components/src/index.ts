@@ -57,6 +57,7 @@ export { Tooltip } from "./components/tooltip";
 
 // hooks
 export { useAutomation } from "./hooks/useAutomation";
+export { useCopyToClipboard } from "./hooks/useCopyToClipboard";
 export { useDrawer } from "./hooks/useDrawer";
 export { useForm } from "./hooks/useForm";
 export { useHydrated } from "./hooks/useHydrated";
