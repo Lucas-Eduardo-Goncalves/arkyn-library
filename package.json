@@ -20,8 +20,8 @@
 		"@arkyn/server": "workspace:*",
 		"@arkyn/shared": "workspace:*",
 		"@arkyn/templates": "workspace:*",
-		"@biomejs/biome": "^2.5.5",
-		"concurrently": "^10.0.3"
+		"@biomejs/biome": "^2.5.7",
+		"concurrently": "^10.0.4"
 	},
 	"overrides": {
 		"shell-quote": "^1.9.0"
