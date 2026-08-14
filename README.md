@@ -7,7 +7,13 @@ A TypeScript ecosystem of independent, framework-friendly packages for building 
 
 ## 📦 Packages
 
-Arkyn is a monorepo of four published packages, plus an internal development app used to preview and test them. Each package solves one layer of the same problem, teams reinventing UI primitives, response boilerplate, formatting/validation helpers, and reference data on every project, and can be adopted standalone or combined.
+Arkyn is a monorepo of five published packages, plus an internal development app used to preview and test them. Each package solves one layer of the same problem, teams reinventing UI primitives, response boilerplate, formatting/validation helpers, and reference data on every project, and can be adopted standalone or combined.
+
+### [@arkyn/cli](./packages/cli)
+
+Command-line tool for the Arkyn ecosystem, wires up an `AGENTS.md` in your project pointing at the docs shipped by your installed `@arkyn/*` packages, so AI coding assistants know how to use them. Zero install, run with `npx`/`bunx`.
+
+- 🔍 **`arkyn init --agents`** - detects installed `@arkyn/*` packages and links their `AGENTS.md` docs into your project's own `AGENTS.md`
 
 ### [@arkyn/components](./packages/components)
 
@@ -63,6 +69,9 @@ npm install @arkyn/shared
 
 # Static reference data
 npm install @arkyn/templates
+
+# CLI, no install needed
+npx @arkyn/cli init --agents
 ```
 
 ### Basic Usage
@@ -131,7 +140,7 @@ cd arkyn-library
 # Install dependencies
 bun install
 
-# Build all publishable packages (templates → shared → components → server)
+# Build all publishable packages (templates → shared → components → server → cli)
 bun run all:build
 
 # Run tests across all packages
@@ -143,8 +152,8 @@ bun run all:typecheck
 
 ### Available Scripts
 
-- `bun run all:build` - Build `templates`, `shared`, `components`, and `server` in dependency order
-- `bun run all:test` - Run tests for `components`, `server`, and `shared`
+- `bun run all:build` - Build `templates`, `shared`, `components`, `server`, and `cli` in dependency order
+- `bun run all:test` - Run tests for `cli`, `components`, `server`, and `shared`
 - `bun run all:typecheck` - Type check every package
 - `bun run all:audit` - Run `bun audit` across every package
 - `bun run development:dev` - Start the internal preview app (`packages/development`) used to test components locally
@@ -156,6 +165,7 @@ bun run all:typecheck
 
 Full guides, live previews, and prop tables live at [docs.arkyn.dev](https://docs.arkyn.dev). Each package also has its own README with a complete API reference:
 
+- [CLI Documentation](./packages/cli/README.md)
 - [Components Documentation](./packages/components/README.md)
 - [Server Documentation](./packages/server/README.md)
 - [Shared Documentation](./packages/shared/README.md)

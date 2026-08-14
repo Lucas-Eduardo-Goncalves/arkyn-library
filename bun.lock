@@ -5,6 +5,7 @@
     "": {
       "name": "arkyn",
       "devDependencies": {
+        "@arkyn/cli": "workspace:*",
         "@arkyn/components": "workspace:*",
         "@arkyn/development": "workspace:*",
         "@arkyn/server": "workspace:*",
@@ -38,6 +39,20 @@
         "lucide-react": "catalog:",
         "typescript": "catalog:",
         "vite": "catalog:",
+      },
+    },
+    "packages/cli": {
+      "name": "@arkyn/cli",
+      "version": "3.0.7",
+      "bin": {
+        "arkyn": "./dist/bundle.js",
+      },
+      "devDependencies": {
+        "@types/bun": "catalog:",
+        "@types/node": "catalog:",
+        "typescript": "catalog:",
+        "vite": "catalog:",
+        "vitest": "catalog:",
       },
     },
     "packages/components": {
@@ -182,6 +197,8 @@
   },
   "packages": {
     "@adobe/css-tools": ["@adobe/css-tools@4.5.0", "", {}, "sha512-6OzddxPio9UiWTCemp4N8cYLV2ZN1ncRnV1cVGtve7dhPOtRkleRyx32GQCYSwDYgaHU3USMm84tNsvKzRCa1Q=="],
+
+    "@arkyn/cli": ["@arkyn/cli@workspace:packages/cli"],
 
     "@arkyn/components": ["@arkyn/components@workspace:packages/components"],
 
