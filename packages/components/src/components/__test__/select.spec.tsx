@@ -318,6 +318,35 @@ describe("Select", () => {
 
 			expect(screen.getByText("Technology")).toHaveClass("hasValue");
 		});
+
+		it("should clear the displayed value when a controlled value is reset to an empty string", async () => {
+			const user = userEvent.setup();
+			const { container, rerender } = render(
+				<Select
+					name="category"
+					options={options}
+					value="tech"
+					onChange={() => {}}
+				/>,
+			);
+
+			const section = container.querySelector(
+				".arkynSelectContainer",
+			) as HTMLElement;
+			await user.click(section);
+			await user.click(screen.getByText("Design"));
+
+			rerender(
+				<Select
+					name="category"
+					options={options}
+					value=""
+					onChange={() => {}}
+				/>,
+			);
+
+			expect(screen.getByText("Selecione...")).toBeInTheDocument();
+		});
 	});
 
 	describe("placeholder prop", () => {
@@ -1156,6 +1185,258 @@ describe("Select", () => {
 			await user.click(section);
 
 			expect(screen.getByText("Technology").closest("div")).toBeInTheDocument();
+		});
+
+		it("should expose combobox role and haspopup/expanded state on the container", async () => {
+			const user = userEvent.setup();
+			const { container } = render(
+				<Select name="category" options={options} />,
+			);
+
+			const section = container.querySelector(
+				".arkynSelectContainer",
+			) as HTMLElement;
+			expect(section).toHaveAttribute("role", "combobox");
+			expect(section).toHaveAttribute("aria-haspopup", "listbox");
+			expect(section).toHaveAttribute("aria-expanded", "false");
+
+			await user.click(section);
+
+			expect(section).toHaveAttribute("aria-expanded", "true");
+		});
+
+		it("should be tabbable and expose a tabIndex of 0 when not disabled", () => {
+			const { container } = render(
+				<Select name="category" options={options} />,
+			);
+
+			const section = container.querySelector(
+				".arkynSelectContainer",
+			) as HTMLElement;
+			expect(section).toHaveAttribute("tabIndex", "0");
+		});
+
+		it("should not be tabbable when disabled", () => {
+			const { container } = render(
+				<Select name="category" options={options} disabled />,
+			);
+
+			const section = container.querySelector(
+				".arkynSelectContainer",
+			) as HTMLElement;
+			expect(section).toHaveAttribute("tabIndex", "-1");
+		});
+
+		it("should mark options with role='option' and aria-selected", async () => {
+			const user = userEvent.setup();
+			const { container } = render(
+				<Select name="category" options={options} defaultValue="tech" />,
+			);
+
+			const section = container.querySelector(
+				".arkynSelectContainer",
+			) as HTMLElement;
+			await user.click(section);
+
+			const optionsContainer = document.querySelector(
+				".arkynSelectOptionsContainer",
+			) as HTMLElement;
+			const techOption = within(optionsContainer)
+				.getByText("Technology")
+				.closest("button");
+			const designOption = within(optionsContainer)
+				.getByText("Design")
+				.closest("button");
+			expect(techOption).toHaveAttribute("role", "option");
+			expect(techOption).toHaveAttribute("aria-selected", "true");
+			expect(designOption).toHaveAttribute("aria-selected", "false");
+		});
+	});
+
+	describe("keyboard navigation", () => {
+		it("should open the dropdown when Enter is pressed on the focused container", async () => {
+			const user = userEvent.setup();
+			const { container } = render(
+				<Select name="category" options={options} />,
+			);
+
+			const section = container.querySelector(
+				".arkynSelectContainer",
+			) as HTMLElement;
+			section.focus();
+			await user.keyboard("{Enter}");
+
+			expect(screen.getByText("Technology")).toBeInTheDocument();
+		});
+
+		it("should open the dropdown when Space is pressed on the focused container", async () => {
+			const user = userEvent.setup();
+			const { container } = render(
+				<Select name="category" options={options} />,
+			);
+
+			const section = container.querySelector(
+				".arkynSelectContainer",
+			) as HTMLElement;
+			section.focus();
+			await user.keyboard(" ");
+
+			expect(screen.getByText("Technology")).toBeInTheDocument();
+		});
+
+		it("should open the dropdown when ArrowDown is pressed on the focused container", async () => {
+			const user = userEvent.setup();
+			const { container } = render(
+				<Select name="category" options={options} />,
+			);
+
+			const section = container.querySelector(
+				".arkynSelectContainer",
+			) as HTMLElement;
+			section.focus();
+			await user.keyboard("{ArrowDown}");
+
+			expect(screen.getByText("Technology")).toBeInTheDocument();
+		});
+
+		it("should not open the dropdown via keyboard when disabled", async () => {
+			const user = userEvent.setup();
+			const { container } = render(
+				<Select name="category" options={options} disabled />,
+			);
+
+			const section = container.querySelector(
+				".arkynSelectContainer",
+			) as HTMLElement;
+			section.focus();
+			await user.keyboard("{Enter}");
+
+			expect(screen.queryByText("Technology")).not.toBeInTheDocument();
+		});
+
+		it("should move the highlighted option with ArrowDown and expose it via aria-activedescendant", async () => {
+			const user = userEvent.setup();
+			const { container } = render(
+				<Select name="category" options={options} />,
+			);
+
+			const section = container.querySelector(
+				".arkynSelectContainer",
+			) as HTMLElement;
+			section.focus();
+			await user.keyboard("{ArrowDown}");
+
+			const techOption = screen.getByText("Technology").closest("button");
+			expect(techOption).toHaveClass("highlighted");
+			expect(section.getAttribute("aria-activedescendant")).toBe(
+				techOption?.id,
+			);
+
+			await user.keyboard("{ArrowDown}");
+
+			const designOption = screen.getByText("Design").closest("button");
+			expect(designOption).toHaveClass("highlighted");
+			expect(techOption).not.toHaveClass("highlighted");
+		});
+
+		it("should wrap to the first option when ArrowDown moves past the last option", async () => {
+			const user = userEvent.setup();
+			const { container } = render(
+				<Select name="category" options={options} />,
+			);
+
+			const section = container.querySelector(
+				".arkynSelectContainer",
+			) as HTMLElement;
+			section.focus();
+			await user.keyboard("{ArrowDown}{ArrowDown}{ArrowDown}{ArrowDown}");
+
+			const techOption = screen.getByText("Technology").closest("button");
+			expect(techOption).toHaveClass("highlighted");
+		});
+
+		it("should wrap to the last option when ArrowUp is pressed with nothing highlighted", async () => {
+			const user = userEvent.setup();
+			const { container } = render(
+				<Select name="category" options={options} />,
+			);
+
+			const section = container.querySelector(
+				".arkynSelectContainer",
+			) as HTMLElement;
+			await user.click(section);
+			await user.keyboard("{ArrowUp}");
+
+			const marketingOption = screen.getByText("Marketing").closest("button");
+			expect(marketingOption).toHaveClass("highlighted");
+		});
+
+		it("should select the highlighted option when Enter is pressed", async () => {
+			const user = userEvent.setup();
+			const handleChange = vi.fn();
+			const { container } = render(
+				<Select name="category" options={options} onChange={handleChange} />,
+			);
+
+			const section = container.querySelector(
+				".arkynSelectContainer",
+			) as HTMLElement;
+			section.focus();
+			await user.keyboard("{ArrowDown}{Enter}");
+
+			expect(handleChange).toHaveBeenCalledWith("tech");
+			expect(screen.getByText("Technology")).toHaveClass("hasValue");
+		});
+
+		it("should select the highlighted option when Space is pressed", async () => {
+			const user = userEvent.setup();
+			const handleChange = vi.fn();
+			const { container } = render(
+				<Select name="category" options={options} onChange={handleChange} />,
+			);
+
+			const section = container.querySelector(
+				".arkynSelectContainer",
+			) as HTMLElement;
+			section.focus();
+			await user.keyboard("{ArrowDown}{ArrowDown} ");
+
+			expect(handleChange).toHaveBeenCalledWith("design");
+		});
+
+		it("should close the dropdown on Escape and return focus to the container", async () => {
+			const user = userEvent.setup();
+			const { container } = render(
+				<Select name="category" options={options} />,
+			);
+
+			const section = container.querySelector(
+				".arkynSelectContainer",
+			) as HTMLElement;
+			section.focus();
+			await user.keyboard("{Enter}");
+			expect(screen.getByText("Technology")).toBeInTheDocument();
+
+			await user.keyboard("{Escape}");
+
+			expect(screen.queryByText("Technology")).not.toBeInTheDocument();
+			expect(document.activeElement).toBe(section);
+		});
+
+		it("should still allow opening and selecting via mouse click after keyboard support was added", async () => {
+			const user = userEvent.setup();
+			const handleChange = vi.fn();
+			const { container } = render(
+				<Select name="category" options={options} onChange={handleChange} />,
+			);
+
+			const section = container.querySelector(
+				".arkynSelectContainer",
+			) as HTMLElement;
+			await user.click(section);
+			await user.click(screen.getByText("Marketing"));
+
+			expect(handleChange).toHaveBeenCalledWith("marketing");
 		});
 	});
 });

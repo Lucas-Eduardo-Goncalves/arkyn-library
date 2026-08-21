@@ -1,7 +1,10 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { buildAgentsBlock, mergeAgentsBlock } from "../utils/agentsBlock";
-import { findInstalledArkynPackages } from "../utils/findInstalledArkynPackages";
+import {
+	findInstalledArkynPackages,
+	type PackageJson,
+} from "../utils/findInstalledArkynPackages";
 import { resolveAgentsDocs } from "../utils/resolveAgentsDocs";
 
 export function runInit(cwd: string): void {
@@ -15,7 +18,18 @@ export function runInit(cwd: string): void {
 		return;
 	}
 
-	const pkg = JSON.parse(readFileSync(packageJsonPath, "utf8"));
+	const rawPackageJson = readFileSync(packageJsonPath, "utf8");
+
+	let pkg: PackageJson;
+	try {
+		pkg = JSON.parse(rawPackageJson) as PackageJson;
+	} catch (error) {
+		const reason = error instanceof Error ? error.message : String(error);
+		console.error(`Failed to parse ${packageJsonPath}: ${reason}`);
+		process.exitCode = 1;
+		return;
+	}
+
 	const packageNames = findInstalledArkynPackages(pkg);
 
 	if (packageNames.length === 0) {

@@ -37,11 +37,18 @@
 .arkynSelectOption.active svg {
 	display: unset;
 }
+.arkynSelectOption.highlighted {
+	filter: brightness(0.98);
+}
 
 html.dark .arkynSelectOption:hover {
 	filter: brightness(1.2);
 }
 
 html.dark .arkynSelectOption.active {
+	filter: brightness(1.2);
+}
+
+html.dark .arkynSelectOption.highlighted {
 	filter: brightness(1.2);
 }

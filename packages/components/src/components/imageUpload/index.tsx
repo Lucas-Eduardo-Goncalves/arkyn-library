@@ -65,7 +65,7 @@ type ImageUploadProps = {
  * @param props.fileName - Form-data field name for the file. Default: "file"
  * @param props.fileResponseName - Server response property containing the URL. Default: "url"
  * @param props.onChange - Callback fired after a successful upload, receives the image URL.
- * @param props.orientation - Layout direction. Default: "horizontal"
+ * @param props.orientation - Layout direction. Default: "vertical"
  * @param props.unShowFieldTemplate - Skips wrapper, label, and error rendering. Default: false
  *
  * @returns ImageUpload JSX element wrapped in `FieldTemplate`.

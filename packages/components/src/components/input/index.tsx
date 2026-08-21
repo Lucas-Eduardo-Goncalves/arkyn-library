@@ -77,7 +77,7 @@ type InputProps = Omit<
  * @param props.leftIcon - Lucide icon inside the input on the left.
  * @param props.rightIcon - Lucide icon inside the input on the right.
  * @param props.showAsterisk - Appends `*` to the label.
- * @param props.orientation - Layout direction (`horizontal` | `vertical` | `horizontalReverse`). Default: "horizontal"
+ * @param props.orientation - Layout direction (`horizontal` | `vertical` | `horizontalReverse`). Default: "vertical"
  * @param props.unShowFieldTemplate - Skips wrapper, label, and error rendering. Default: false
  *
  * **...Other valid HTML properties for `<input>`**

@@ -2,13 +2,18 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	width: 100%;
 
 	font-weight: 400;
+	font-family: inherit;
 	line-height: 21.79px;
+	text-align: left;
 
 	color: var(--text-body, #52525b);
 	user-select: none;
 	background-color: var(--background-foreground, #ffffff);
+	border: none;
+	margin: 0;
 }
 .arkynMultiSelectOption.md {
 	font-size: 14px;
@@ -35,4 +40,7 @@
 }
 .arkynMultiSelectOption.active svg {
 	display: unset;
+}
+.arkynMultiSelectOption.highlighted {
+	filter: brightness(0.95);
 }

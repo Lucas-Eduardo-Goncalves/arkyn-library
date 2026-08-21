@@ -13,6 +13,7 @@ import { Input } from "../../input";
 import "./styles.css";
 
 type MultiSelectOptionsContainerProps = {
+	id?: string;
 	isFocused: boolean;
 	isSearchable: boolean;
 	children: ReactNode;
@@ -21,7 +22,7 @@ type MultiSelectOptionsContainerProps = {
 };
 
 function MultiSelectOptionsContainer(props: MultiSelectOptionsContainerProps) {
-	const { children, isFocused, isSearchable, search, onSearch } = props;
+	const { children, id, isFocused, isSearchable, search, onSearch } = props;
 
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [position, setPosition] = useState<"bottom" | "top">("bottom");
@@ -66,6 +67,9 @@ function MultiSelectOptionsContainer(props: MultiSelectOptionsContainerProps) {
 	return (
 		<div
 			ref={containerRef}
+			id={id}
+			role="listbox"
+			aria-multiselectable="true"
 			className={`arkynMultiSelectOptionsContainer ${position}`}
 		>
 			{isSearchable && (

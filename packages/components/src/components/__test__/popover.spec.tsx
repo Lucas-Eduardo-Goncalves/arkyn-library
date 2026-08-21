@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it } from "vitest";
 
@@ -422,6 +422,124 @@ describe("Popover", () => {
 
 			expect(screen.getByText("Icon")).toBeInTheDocument();
 			expect(screen.getByText("Label")).toBeInTheDocument();
+		});
+	});
+
+	describe("accessibility", () => {
+		it("should render role=dialog and aria-modal on the panel content", () => {
+			const { container } = render(
+				<Popover button={<button type="button">Open</button>}>Content</Popover>,
+			);
+
+			const content = container.querySelector(
+				".arkynPopoverContent",
+			) as HTMLElement;
+
+			expect(content).toHaveAttribute("role", "dialog");
+			expect(content).toHaveAttribute("aria-modal", "true");
+		});
+
+		it("should move focus into the panel when opened", async () => {
+			const user = userEvent.setup();
+			const { container } = render(
+				<Popover button={<button type="button">Open</button>}>
+					<button type="button">Inside</button>
+				</Popover>,
+			);
+
+			await user.click(screen.getByRole("button", { name: "Open" }));
+
+			const content = container.querySelector(
+				".arkynPopoverContent",
+			) as HTMLElement;
+			expect(content).toContainElement(document.activeElement as HTMLElement);
+		});
+
+		it("should close when Escape is pressed while open", async () => {
+			const user = userEvent.setup();
+			const { container } = render(
+				<Popover button={<button type="button">Open</button>}>Content</Popover>,
+			);
+
+			await user.click(screen.getByRole("button", { name: "Open" }));
+			const element = container.firstChild as HTMLElement;
+			expect(element).toHaveClass("visibleTrue");
+
+			fireEvent.keyDown(document, { key: "Escape" });
+
+			expect(element).toHaveClass("visibleFalse");
+			expect(
+				container.querySelector(".arkynPopoverOverlay"),
+			).not.toBeInTheDocument();
+		});
+
+		it("should not react to Escape while closed", () => {
+			const { container } = render(
+				<Popover button={<button type="button">Open</button>}>Content</Popover>,
+			);
+
+			fireEvent.keyDown(document, { key: "Escape" });
+
+			const element = container.firstChild as HTMLElement;
+			expect(element).toHaveClass("visibleFalse");
+		});
+
+		it("should return focus to the trigger button after closing via Escape", async () => {
+			const user = userEvent.setup();
+			render(
+				<Popover button={<button type="button">Open</button>}>
+					<button type="button">Inside</button>
+				</Popover>,
+			);
+
+			const trigger = screen.getByRole("button", { name: "Open" });
+			await user.click(trigger);
+			expect(trigger).not.toHaveFocus();
+
+			fireEvent.keyDown(document, { key: "Escape" });
+
+			expect(trigger).toHaveFocus();
+		});
+
+		it("should trap Tab so it wraps from the last focusable element to the first", async () => {
+			const user = userEvent.setup();
+			render(
+				<Popover button={<button type="button">Open</button>}>
+					<button type="button">First</button>
+					<button type="button">Last</button>
+				</Popover>,
+			);
+
+			await user.click(screen.getByRole("button", { name: "Open" }));
+
+			const first = screen.getByRole("button", { name: "First" });
+			const last = screen.getByRole("button", { name: "Last" });
+			expect(first).toHaveFocus();
+
+			last.focus();
+			await user.tab();
+
+			expect(first).toHaveFocus();
+		});
+
+		it("should trap Shift+Tab so it wraps from the first focusable element to the last", async () => {
+			const user = userEvent.setup();
+			render(
+				<Popover button={<button type="button">Open</button>}>
+					<button type="button">First</button>
+					<button type="button">Last</button>
+				</Popover>,
+			);
+
+			await user.click(screen.getByRole("button", { name: "Open" }));
+
+			const first = screen.getByRole("button", { name: "First" });
+			const last = screen.getByRole("button", { name: "Last" });
+			expect(first).toHaveFocus();
+
+			await user.tab({ shift: true });
+
+			expect(last).toHaveFocus();
 		});
 	});
 });

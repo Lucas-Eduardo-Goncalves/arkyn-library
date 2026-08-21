@@ -1,5 +1,11 @@
 import type { LucideIcon } from "lucide-react";
-import { type FocusEvent, useId, useRef, useState } from "react";
+import {
+	type FocusEvent,
+	type KeyboardEvent,
+	useId,
+	useRef,
+	useState,
+} from "react";
 
 import { useForm } from "../../hooks/useForm";
 import { FieldTemplate } from "../../services/fieldTemplate";
@@ -206,8 +212,10 @@ function DatePicker(props: DatePickerProps) {
 	const { fieldErrors } = useForm();
 
 	const datePickerRef = useRef<HTMLInputElement>(null);
+	const containerRef = useRef<HTMLDivElement>(null);
 	const generatedId = useId();
 	const datePickerId = id || generatedId;
+	const calendarId = `${datePickerId}-calendar`;
 
 	const errorMessage = baseErrorMessage || fieldErrors?.[name];
 	const isError = !!errorMessage;
@@ -234,6 +242,24 @@ function DatePicker(props: DatePickerProps) {
 	function handleBlur() {
 		setIsFocused(false);
 		if (onBlur && datePickerRef.current) datePickerRef.current.blur();
+	}
+
+	function handleContainerKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+		if (disabled) return;
+
+		if (!isFocused) {
+			if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+				e.preventDefault();
+				handleContainerFocus();
+			}
+			return;
+		}
+
+		if (e.key === "Escape") {
+			e.preventDefault();
+			handleBlur();
+			containerRef.current?.focus();
+		}
 	}
 
 	function handleChangeSingleDate(date: Date) {
@@ -281,6 +307,10 @@ function DatePicker(props: DatePickerProps) {
 					variant={variant}
 					prefixExists={!!prefix}
 					id={datePickerId}
+					containerRef={containerRef}
+					onContainerKeyDown={handleContainerKeyDown}
+					tabIndex={disabled ? -1 : 0}
+					ariaControls={calendarId}
 				>
 					<input
 						ref={datePickerRef}
@@ -305,7 +335,7 @@ function DatePicker(props: DatePickerProps) {
 						)}
 					</DatePickerContent>
 
-					<DatePickerCalendarContainer isFocused={isFocused}>
+					<DatePickerCalendarContainer id={calendarId} isFocused={isFocused}>
 						<Calendar
 							type="range"
 							variant={calendarVariant}
@@ -358,6 +388,10 @@ function DatePicker(props: DatePickerProps) {
 				variant={variant}
 				prefixExists={!!prefix}
 				id={datePickerId}
+				containerRef={containerRef}
+				onContainerKeyDown={handleContainerKeyDown}
+				tabIndex={disabled ? -1 : 0}
+				ariaControls={calendarId}
 			>
 				<input
 					ref={datePickerRef}
@@ -378,7 +412,7 @@ function DatePicker(props: DatePickerProps) {
 					)}
 				</DatePickerContent>
 
-				<DatePickerCalendarContainer isFocused={isFocused}>
+				<DatePickerCalendarContainer id={calendarId} isFocused={isFocused}>
 					<Calendar
 						type="single"
 						variant={calendarVariant}

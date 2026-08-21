@@ -1,6 +1,7 @@
-import { formatJsonObject } from "@arkyn/shared";
+import { formatJsonObject, parseSensitiveData } from "@arkyn/shared";
 import { flushDebugLogs } from "../..";
 import { LogService } from "../../services/logService";
+import { SENSITIVE_DATA_KEYS } from "../../utilities/sensitiveDataKeys";
 
 type ConfigProps = {
 	rawUrl: string;
@@ -65,6 +66,10 @@ async function logRequest(config: ConfigProps): Promise<void> {
 
 	const { userToken, apiUrl, trafficSourceId } = arkynService;
 
+	// No endpoint was configured (missing, invalid, or rejected as insecure by
+	// `LogService.setConfig`) — never fall back to a hardcoded/default destination.
+	if (!apiUrl) return;
+
 	const {
 		elapsedTime,
 		method,
@@ -94,11 +99,22 @@ async function logRequest(config: ConfigProps): Promise<void> {
 			method: method.toLowerCase(),
 			trafficUserId: null,
 			elapsedTime,
-			requestHeaders: JSON.stringify(requestHeaders),
-			requestBody: JSON.stringify(requestBody),
+			// Sensitive fields (Authorization/Cookie headers, password/token/secret
+			// body fields, etc.) are masked before this payload ever leaves the
+			// process — see `SENSITIVE_DATA_KEYS`.
+			requestHeaders: parseSensitiveData(JSON.stringify(requestHeaders), [
+				...SENSITIVE_DATA_KEYS,
+			]),
+			requestBody: parseSensitiveData(JSON.stringify(requestBody), [
+				...SENSITIVE_DATA_KEYS,
+			]),
 			queryParams: JSON.stringify(queryParams),
-			responseHeaders: JSON.stringify(responseHeaders),
-			responseBody: JSON.stringify(responseBody),
+			responseHeaders: parseSensitiveData(JSON.stringify(responseHeaders), [
+				...SENSITIVE_DATA_KEYS,
+			]),
+			responseBody: parseSensitiveData(JSON.stringify(responseBody), [
+				...SENSITIVE_DATA_KEYS,
+			]),
 		});
 
 		const headers = {

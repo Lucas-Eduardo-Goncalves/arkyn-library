@@ -5,12 +5,13 @@ import { useScrollLock } from "../../../hooks/useScrollLock";
 import "./styles.css";
 
 type DatePickerCalendarContainerProps = {
+	id?: string;
 	isFocused: boolean;
 	children: ReactNode;
 };
 
 function DatePickerCalendarContainer(props: DatePickerCalendarContainerProps) {
-	const { children, isFocused } = props;
+	const { children, id, isFocused } = props;
 
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [position, setPosition] = useState<"bottom" | "top">("bottom");
@@ -50,6 +51,9 @@ function DatePickerCalendarContainer(props: DatePickerCalendarContainerProps) {
 	return (
 		<div
 			ref={containerRef}
+			id={id}
+			role="dialog"
+			aria-modal="false"
 			className={`arkynDatePickerCalendarContainer ${position}`}
 		>
 			{children}

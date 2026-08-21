@@ -51,6 +51,122 @@ describe("logRequest", () => {
 
 			expect(mockFetch).not.toHaveBeenCalled();
 		});
+
+		it("should never fall back to the insecure hardcoded endpoint when no logBaseApiUrl is configured", async () => {
+			vi.stubEnv("NODE_ENV", "production");
+			LogService.setConfig({
+				trafficSourceId: "source-123",
+				userToken: "user-token",
+			});
+
+			await logRequest(defaultConfig);
+
+			expect(mockFetch).not.toHaveBeenCalled();
+		});
+
+		it("should not send the request when the configured logBaseApiUrl was rejected as insecure", async () => {
+			vi.stubEnv("NODE_ENV", "production");
+			LogService.setConfig({
+				trafficSourceId: "source-123",
+				userToken: "user-token",
+				logBaseApiUrl: "http://62.238.8.44:8081",
+			});
+
+			await logRequest(defaultConfig);
+
+			expect(mockFetch).not.toHaveBeenCalled();
+		});
+	});
+
+	describe("sensitive data redaction", () => {
+		beforeEach(() => {
+			vi.stubEnv("NODE_ENV", "production");
+			LogService.setConfig({
+				trafficSourceId: "source-123",
+				userToken: "user-token",
+				logBaseApiUrl: "https://log-api.example.com",
+			});
+		});
+
+		it("should never send the request Authorization header value in cleartext", async () => {
+			await logRequest({
+				...defaultConfig,
+				requestHeaders: {
+					Accept: "application/json",
+					Authorization: "Bearer super-secret-request-token",
+				},
+			});
+
+			const [, fetchOptions] = mockFetch.mock.calls[0];
+			const body = JSON.parse(fetchOptions.body);
+
+			expect(body.requestHeaders).not.toContain("super-secret-request-token");
+			expect(JSON.parse(body.requestHeaders)).toEqual({
+				Accept: "application/json",
+				Authorization: "****",
+			});
+		});
+
+		it("should never send the response Authorization/Set-Cookie header values in cleartext", async () => {
+			await logRequest({
+				...defaultConfig,
+				responseHeaders: {
+					"Content-Type": "application/json",
+					Authorization: "Bearer super-secret-response-token",
+					"Set-Cookie": "session=super-secret-session-value",
+				},
+			});
+
+			const [, fetchOptions] = mockFetch.mock.calls[0];
+			const body = JSON.parse(fetchOptions.body);
+
+			expect(body.responseHeaders).not.toContain("super-secret-response-token");
+			expect(body.responseHeaders).not.toContain("super-secret-session-value");
+		});
+
+		it("should never send a password/secret field from the request or response body in cleartext", async () => {
+			await logRequest({
+				...defaultConfig,
+				// biome-ignore lint/suspicious/noExplicitAny: test fixture
+				requestBody: { email: "user@example.com", password: "hunter2" } as any,
+				// biome-ignore lint/suspicious/noExplicitAny: test fixture
+				responseBody: { id: 123, secret: "top-secret-value" } as any,
+			});
+
+			const [, fetchOptions] = mockFetch.mock.calls[0];
+			const body = JSON.parse(fetchOptions.body);
+
+			expect(body.requestBody).not.toContain("hunter2");
+			expect(body.responseBody).not.toContain("top-secret-value");
+			expect(JSON.parse(body.requestBody)).toEqual({
+				email: "user@example.com",
+				password: "****",
+			});
+			expect(JSON.parse(body.responseBody)).toEqual({
+				id: 123,
+				secret: "****",
+			});
+		});
+
+		it("should still include non-sensitive fields after redaction", async () => {
+			await logRequest({
+				...defaultConfig,
+				requestHeaders: {
+					Accept: "application/json",
+					Authorization: "Bearer secret-token",
+				},
+				// biome-ignore lint/suspicious/noExplicitAny: test fixture
+				requestBody: { id: 123, password: "secret" } as any,
+			});
+
+			const [, fetchOptions] = mockFetch.mock.calls[0];
+			const body = JSON.parse(fetchOptions.body);
+
+			expect(body.status).toBe(200);
+			expect(body.domainUrl).toBe("https://example.com");
+			expect(JSON.parse(body.requestHeaders).Accept).toBe("application/json");
+			expect(JSON.parse(body.requestBody).id).toBe(123);
+		});
 	});
 
 	describe("successful request", () => {

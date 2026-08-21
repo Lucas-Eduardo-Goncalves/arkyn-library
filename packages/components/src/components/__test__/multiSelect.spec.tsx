@@ -125,7 +125,7 @@ describe("MultiSelect", () => {
 			) as HTMLElement;
 			const techOption = within(optionsContainer)
 				.getByText("Technology")
-				.closest("div");
+				.closest("button");
 			expect(techOption).toHaveClass("active");
 		});
 	});
@@ -1125,6 +1125,218 @@ describe("MultiSelect", () => {
 				".arkynMultiSelectMark",
 			) as HTMLElement;
 			expect(within(mark).getByRole("button")).toBeInTheDocument();
+		});
+
+		it("should expose combobox role and haspopup/expanded state on the container", async () => {
+			const user = userEvent.setup();
+			render(<MultiSelect name="categories" options={options} />);
+
+			expect(getContainer()).toHaveAttribute("role", "combobox");
+			expect(getContainer()).toHaveAttribute("aria-haspopup", "listbox");
+			expect(getContainer()).toHaveAttribute("aria-expanded", "false");
+
+			await user.click(getContainer());
+
+			expect(getContainer()).toHaveAttribute("aria-expanded", "true");
+		});
+
+		it("should be tabbable and expose a tabIndex of 0 when not disabled", () => {
+			render(<MultiSelect name="categories" options={options} />);
+
+			expect(getContainer()).toHaveAttribute("tabIndex", "0");
+		});
+
+		it("should not be tabbable when disabled", () => {
+			render(<MultiSelect name="categories" options={options} disabled />);
+
+			expect(getContainer()).toHaveAttribute("tabIndex", "-1");
+		});
+
+		it("should render options as real buttons in the tab order with role='option'", async () => {
+			const user = userEvent.setup();
+			render(
+				<MultiSelect
+					name="categories"
+					options={options}
+					defaultValue={["tech"]}
+				/>,
+			);
+
+			await user.click(getContainer());
+
+			const optionsContainer = document.querySelector(
+				".arkynMultiSelectOptionsContainer",
+			) as HTMLElement;
+			const techOption = within(optionsContainer)
+				.getByText("Technology")
+				.closest("button") as HTMLButtonElement;
+			const designOption = within(optionsContainer)
+				.getByText("Design")
+				.closest("button") as HTMLButtonElement;
+
+			expect(techOption.tagName).toBe("BUTTON");
+			expect(techOption).toHaveAttribute("role", "option");
+			expect(techOption).toHaveAttribute("aria-selected", "true");
+			expect(designOption).toHaveAttribute("aria-selected", "false");
+		});
+	});
+
+	describe("keyboard navigation", () => {
+		it("should open the dropdown when Enter is pressed on the focused container", async () => {
+			const user = userEvent.setup();
+			render(<MultiSelect name="categories" options={options} />);
+
+			getContainer().focus();
+			await user.keyboard("{Enter}");
+
+			expect(screen.getByText("Technology")).toBeInTheDocument();
+		});
+
+		it("should open the dropdown when ArrowDown is pressed on the focused container", async () => {
+			const user = userEvent.setup();
+			render(<MultiSelect name="categories" options={options} />);
+
+			getContainer().focus();
+			await user.keyboard("{ArrowDown}");
+
+			expect(screen.getByText("Technology")).toBeInTheDocument();
+		});
+
+		it("should not open the dropdown via keyboard when disabled", async () => {
+			const user = userEvent.setup();
+			render(<MultiSelect name="categories" options={options} disabled />);
+
+			getContainer().focus();
+			await user.keyboard("{Enter}");
+
+			expect(screen.queryByText("Technology")).not.toBeInTheDocument();
+		});
+
+		it("should move the highlighted option with ArrowDown and expose it via aria-activedescendant", async () => {
+			const user = userEvent.setup();
+			render(<MultiSelect name="categories" options={options} />);
+
+			getContainer().focus();
+			await user.keyboard("{ArrowDown}");
+
+			const optionsContainer = document.querySelector(
+				".arkynMultiSelectOptionsContainer",
+			) as HTMLElement;
+			const techOption = within(optionsContainer)
+				.getByText("Technology")
+				.closest("button");
+			expect(techOption).toHaveClass("highlighted");
+			expect(getContainer().getAttribute("aria-activedescendant")).toBe(
+				techOption?.id,
+			);
+
+			await user.keyboard("{ArrowDown}");
+
+			const designOption = within(optionsContainer)
+				.getByText("Design")
+				.closest("button");
+			expect(designOption).toHaveClass("highlighted");
+			expect(techOption).not.toHaveClass("highlighted");
+		});
+
+		it("should select the highlighted option with Enter via keyboard alone (button is now tabbable)", async () => {
+			const user = userEvent.setup();
+			const handleChange = vi.fn();
+			render(
+				<MultiSelect
+					name="categories"
+					options={options}
+					onChange={handleChange}
+				/>,
+			);
+
+			getContainer().focus();
+			await user.keyboard("{ArrowDown}{Enter}");
+
+			expect(handleChange).toHaveBeenCalledWith(["tech"]);
+		});
+
+		it("should toggle option selection when Tab-ing directly to the option button and pressing Enter", async () => {
+			const user = userEvent.setup();
+			const handleChange = vi.fn();
+			render(
+				<MultiSelect
+					name="categories"
+					options={options}
+					onChange={handleChange}
+				/>,
+			);
+
+			await user.click(getContainer());
+			const optionsContainer = document.querySelector(
+				".arkynMultiSelectOptionsContainer",
+			) as HTMLElement;
+			const techOption = within(optionsContainer)
+				.getByText("Technology")
+				.closest("button") as HTMLButtonElement;
+
+			techOption.focus();
+			await user.keyboard("{Enter}");
+
+			expect(handleChange).toHaveBeenCalledWith(["tech"]);
+		});
+
+		it("should toggle option selection with Space when the option button is focused", async () => {
+			const user = userEvent.setup();
+			const handleChange = vi.fn();
+			render(
+				<MultiSelect
+					name="categories"
+					options={options}
+					onChange={handleChange}
+				/>,
+			);
+
+			await user.click(getContainer());
+			const optionsContainer = document.querySelector(
+				".arkynMultiSelectOptionsContainer",
+			) as HTMLElement;
+			const techOption = within(optionsContainer)
+				.getByText("Technology")
+				.closest("button") as HTMLButtonElement;
+
+			techOption.focus();
+			await user.keyboard(" ");
+
+			expect(handleChange).toHaveBeenCalledWith(["tech"]);
+		});
+
+		it("should close the dropdown on Escape and return focus to the container", async () => {
+			const user = userEvent.setup();
+			render(<MultiSelect name="categories" options={options} />);
+
+			getContainer().focus();
+			await user.keyboard("{Enter}");
+			expect(screen.getByText("Technology")).toBeInTheDocument();
+
+			await user.keyboard("{Escape}");
+
+			expect(
+				document.querySelector(".arkynMultiSelectOptionsContainer"),
+			).not.toBeInTheDocument();
+			expect(document.activeElement).toBe(getContainer());
+		});
+
+		it("should still allow opening and selecting via mouse click after keyboard support was added", async () => {
+			const user = userEvent.setup();
+			const handleChange = vi.fn();
+			render(
+				<MultiSelect
+					name="categories"
+					options={options}
+					onChange={handleChange}
+				/>,
+			);
+
+			await user.click(getContainer());
+			await user.click(screen.getByText("Marketing"));
+
+			expect(handleChange).toHaveBeenCalledWith(["marketing"]);
 		});
 	});
 

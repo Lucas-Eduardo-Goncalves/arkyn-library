@@ -5,20 +5,39 @@ type MultiSelectOptionProps = {
 	value: string;
 	label: string;
 	size: "md" | "lg";
+	id?: string;
+	isHighlighted?: boolean;
 	optionHasSelected: (value: string) => boolean;
 	handleChangeValue: (value: string) => void;
 };
 
 function MultiSelectOption(props: MultiSelectOptionProps) {
-	const { label, optionHasSelected, handleChangeValue, value, size } = props;
+	const {
+		label,
+		optionHasSelected,
+		handleChangeValue,
+		value,
+		size,
+		id,
+		isHighlighted = false,
+	} = props;
 
-	const hasActive = optionHasSelected(value) ? "active" : "";
-	const className = `arkynMultiSelectOption ${size} ${hasActive}`;
+	const isSelected = optionHasSelected(value);
+	const hasActive = isSelected ? "active" : "";
+	const highlighted = isHighlighted ? "highlighted" : "";
+	const className = `arkynMultiSelectOption ${size} ${hasActive} ${highlighted}`;
 
 	return (
-		<div onClick={() => handleChangeValue(value)} className={className}>
+		<button
+			type="button"
+			id={id}
+			role="option"
+			aria-selected={isSelected}
+			onClick={() => handleChangeValue(value)}
+			className={className}
+		>
 			{label} <Check />
-		</div>
+		</button>
 	);
 }
 

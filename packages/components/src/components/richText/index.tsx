@@ -60,7 +60,7 @@ import "./styles.css";
  * @param props.isError - Forces the error visual state.
  * @param props.id - Custom id for the editable area element.
  * @param props.showAsterisk - Appends `*` to the label.
- * @param props.orientation - Layout direction. Default: "horizontal"
+ * @param props.orientation - Layout direction. Default: "vertical"
  * @param props.unShowFieldTemplate - Skips wrapper, label, and error rendering. Default: false
  *
  * @returns RichText JSX element wrapped in `FieldTemplate`.

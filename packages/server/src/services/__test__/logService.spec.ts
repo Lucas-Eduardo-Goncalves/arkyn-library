@@ -21,7 +21,7 @@ describe("LogService", () => {
 			expect(config?.userToken).toBe("token-456");
 		});
 
-		it("should use default apiUrl when logBaseApiUrl is not provided", () => {
+		it("should not configure a fallback apiUrl when logBaseApiUrl is not provided", () => {
 			LogService.setConfig({
 				trafficSourceId: "source-123",
 				userToken: "token-456",
@@ -29,7 +29,55 @@ describe("LogService", () => {
 
 			const config = LogService.getConfig();
 
-			expect(config?.apiUrl).toBe("http://62.238.8.44:8081/ingest-log");
+			expect(config?.apiUrl).toBeNull();
+		});
+
+		it("should reject an insecure http endpoint that is not localhost", () => {
+			LogService.setConfig({
+				trafficSourceId: "source-123",
+				userToken: "token-456",
+				logBaseApiUrl: "http://62.238.8.44:8081",
+			});
+
+			const config = LogService.getConfig();
+
+			expect(config?.apiUrl).toBeNull();
+		});
+
+		it("should reject an invalid logBaseApiUrl", () => {
+			LogService.setConfig({
+				trafficSourceId: "source-123",
+				userToken: "token-456",
+				logBaseApiUrl: "not-a-valid-url",
+			});
+
+			const config = LogService.getConfig();
+
+			expect(config?.apiUrl).toBeNull();
+		});
+
+		it("should accept an insecure http endpoint for localhost", () => {
+			LogService.setConfig({
+				trafficSourceId: "source-123",
+				userToken: "token-456",
+				logBaseApiUrl: "http://localhost:4000",
+			});
+
+			const config = LogService.getConfig();
+
+			expect(config?.apiUrl).toBe("http://localhost:4000/ingest-log");
+		});
+
+		it("should accept an insecure http endpoint for 127.0.0.1", () => {
+			LogService.setConfig({
+				trafficSourceId: "source-123",
+				userToken: "token-456",
+				logBaseApiUrl: "http://127.0.0.1:4000",
+			});
+
+			const config = LogService.getConfig();
+
+			expect(config?.apiUrl).toBe("http://127.0.0.1:4000/ingest-log");
 		});
 
 		it("should use custom logBaseApiUrl when provided", () => {
@@ -100,7 +148,7 @@ describe("LogService", () => {
 
 			const config = LogService.getConfig();
 
-			expect(config?.apiUrl).toBe("http://62.238.8.44:8081/ingest-log");
+			expect(config?.apiUrl).toBeNull();
 		});
 	});
 
@@ -122,7 +170,7 @@ describe("LogService", () => {
 			expect(config).toEqual({
 				trafficSourceId: "source-123",
 				userToken: "token-456",
-				apiUrl: "http://62.238.8.44:8081/ingest-log",
+				apiUrl: null,
 			});
 		});
 

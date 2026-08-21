@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { KeyboardEvent, ReactNode, RefObject } from "react";
 import "./styles.css";
 
 type DatePickerContainerProps = {
@@ -14,6 +14,10 @@ type DatePickerContainerProps = {
 	id: string;
 	variant: "solid" | "outline" | "underline";
 	size: "md" | "lg";
+	containerRef?: RefObject<HTMLDivElement | null>;
+	onContainerKeyDown?: (e: KeyboardEvent<HTMLDivElement>) => void;
+	tabIndex?: number;
+	ariaControls?: string;
 };
 
 function DatePickerContainer(props: DatePickerContainerProps) {
@@ -30,6 +34,10 @@ function DatePickerContainer(props: DatePickerContainerProps) {
 		size,
 		id,
 		prefixExists,
+		containerRef,
+		onContainerKeyDown,
+		tabIndex,
+		ariaControls,
 	} = props;
 
 	const hasPrefix = prefixExists ? "hasPrefix" : "";
@@ -38,13 +46,20 @@ function DatePickerContainer(props: DatePickerContainerProps) {
 	const focused = isFocused ? "focused" : "";
 
 	return (
-		<section
+		<div
+			ref={containerRef}
 			id={id}
+			tabIndex={tabIndex}
+			role="combobox"
+			aria-haspopup="dialog"
+			aria-expanded={isFocused}
+			aria-controls={ariaControls}
 			className={`arkynDatePickerContainer ${hasPrefix} ${variant} ${size} ${opacity} ${errored} ${focused} ${className}`}
 			onClick={handleContainerFocus}
+			onKeyDown={onContainerKeyDown}
 		>
 			{children}
-		</section>
+		</div>
 	);
 }
 

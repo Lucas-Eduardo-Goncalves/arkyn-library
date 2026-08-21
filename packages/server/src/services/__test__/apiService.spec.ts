@@ -1129,6 +1129,120 @@ describe("ApiService", () => {
 		});
 	});
 
+	describe("debug mode redaction", () => {
+		function getDebugCallArg() {
+			return vi.mocked(flushDebugLogs).mock.calls[0][0];
+		}
+
+		it("should never include the Authorization header value in cleartext when using baseToken", async () => {
+			vi.mocked(getRequest).mockResolvedValue({
+				success: true,
+				status: 200,
+				message: "Success",
+				response: {},
+				cause: null,
+			});
+
+			const api = new ApiService({
+				baseUrl: "https://api.example.com",
+				baseToken: "super-secret-token",
+				enableDebug: true,
+			});
+
+			await api.get("/users");
+
+			const { debugs } = getDebugCallArg();
+			const headersLine = debugs.find((line) => line.startsWith("Headers:"));
+
+			expect(headersLine).toBeDefined();
+			expect(headersLine).not.toContain("super-secret-token");
+			expect(headersLine).toContain('"authorization":"****"');
+		});
+
+		it("should never include the Authorization header value in cleartext when using a per-request token", async () => {
+			vi.mocked(postRequest).mockResolvedValue({
+				success: true,
+				status: 201,
+				message: "Created",
+				response: {},
+				cause: null,
+			});
+
+			const api = new ApiService({
+				baseUrl: "https://api.example.com",
+				enableDebug: true,
+			});
+
+			await api.post("/users", {
+				token: "super-secret-request-token",
+				body: { name: "John" },
+			});
+
+			const { debugs } = getDebugCallArg();
+			const headersLine = debugs.find((line) => line.startsWith("Headers:"));
+
+			expect(headersLine).not.toContain("super-secret-request-token");
+		});
+
+		it("should never include a password field from the request body in cleartext", async () => {
+			vi.mocked(postRequest).mockResolvedValue({
+				success: true,
+				status: 201,
+				message: "Created",
+				response: {},
+				cause: null,
+			});
+
+			const api = new ApiService({
+				baseUrl: "https://api.example.com",
+				enableDebug: true,
+			});
+
+			await api.post("/auth/login", {
+				body: { email: "user@example.com", password: "hunter2" },
+			});
+
+			const { debugs } = getDebugCallArg();
+			const bodyLine = debugs.find((line) => line.startsWith("Body:"));
+
+			expect(bodyLine).toBeDefined();
+			expect(bodyLine).not.toContain("hunter2");
+			expect(bodyLine).toContain('"password":"****"');
+			expect(bodyLine).toContain('"email":"user@example.com"');
+		});
+
+		it("should still surface non-sensitive headers and body fields for debugging", async () => {
+			vi.mocked(postRequest).mockResolvedValue({
+				success: true,
+				status: 201,
+				message: "Created",
+				response: {},
+				cause: null,
+			});
+
+			const api = new ApiService({
+				baseUrl: "https://api.example.com",
+				baseToken: "secret-token",
+				enableDebug: true,
+			});
+
+			await api.post("/users", {
+				headers: { "X-Request-Id": "req-123" },
+				body: { id: 123, name: "John" },
+			});
+
+			const { debugs } = getDebugCallArg();
+			const headersLine = debugs.find((line) => line.startsWith("Headers:"));
+			const bodyLine = debugs.find((line) => line.startsWith("Body:"));
+
+			expect(headersLine).toContain("req-123");
+			expect(bodyLine).toContain('"id":123');
+			expect(bodyLine).toContain('"name":"John"');
+			expect(debugs).toContain("Status/Method: post => 201");
+			expect(debugs).toContain("Base URL: https://api.example.com");
+		});
+	});
+
 	describe("common use cases", () => {
 		it("should handle CRUD operations on a resource", async () => {
 			const api = new ApiService({

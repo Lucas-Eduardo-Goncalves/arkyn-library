@@ -12,7 +12,7 @@ class FacebookPixel {
 
 	constructor(pixelId: string, options?: Options) {
 		this.pixelId = pixelId;
-		this.autoConfig = options?.autoConfig || true;
+		this.autoConfig = options?.autoConfig ?? true;
 		this.initialized = false;
 	}
 

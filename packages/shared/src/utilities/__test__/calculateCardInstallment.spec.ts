@@ -72,6 +72,36 @@ describe("calculateCardInstallment", () => {
 		).toThrow("Fees must be greater than or equal to 0");
 	});
 
+	it("should throw error when numberInstallments is 0 even if fees is 0", () => {
+		expect(() =>
+			calculateCardInstallment({
+				cashPrice: 1000,
+				numberInstallments: 0,
+				fees: 0,
+			}),
+		).toThrow("Number of installments must be greater than 0");
+	});
+
+	it("should throw error when numberInstallments is negative even if fees is 0", () => {
+		expect(() =>
+			calculateCardInstallment({
+				cashPrice: 1000,
+				numberInstallments: -3,
+				fees: 0,
+			}),
+		).toThrow("Number of installments must be greater than 0");
+	});
+
+	it("should throw error when fees is less than 0 even if numberInstallments is 1", () => {
+		expect(() =>
+			calculateCardInstallment({
+				cashPrice: 1000,
+				numberInstallments: 1,
+				fees: -0.01,
+			}),
+		).toThrow("Fees must be greater than or equal to 0");
+	});
+
 	it("should calculate with 2 installments", () => {
 		const result = calculateCardInstallment({
 			cashPrice: 1000,

@@ -22,15 +22,23 @@ function CalendarTableTd(props: CalendarTableTdProps) {
 		);
 	}
 
+	function handleSelectDay() {
+		changeDay(day, month, year);
+	}
+
 	return (
 		<td
-			onClick={() => changeDay(day, month, year)}
 			className={`arkynCalendarTableTd ${dayOwner} ${dayType} ${isToday() ? "today" : ""}`}
 		>
-			<div className="textGroup">
+			<button
+				type="button"
+				className="textGroup"
+				aria-pressed={dayType === "checkedDay"}
+				onClick={handleSelectDay}
+			>
 				<span />
 				<p>{day}</p>
-			</div>
+			</button>
 		</td>
 	);
 }

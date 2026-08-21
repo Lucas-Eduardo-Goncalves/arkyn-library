@@ -87,3 +87,52 @@ updates:
     # para não perder visibilidade sobre bumps que podem
     # trazer correções de segurança relevantes.
     # ------------------------------------------------------
+
+  # --------------------------------------------------------
+  # Monitora as versões das GitHub Actions utilizadas nos
+  # workflows em .github/workflows/ (ex.: actions/checkout,
+  # actions/setup-node, oven-sh/setup-bun).
+  #
+  # Sem esta entrada, o Dependabot não abre PRs quando essas
+  # actions lançam novas versões.
+  # --------------------------------------------------------
+  - package-ecosystem: "github-actions"
+
+    # Diretório raiz do repositório, onde o Dependabot
+    # procura por arquivos de workflow (.github/workflows/).
+    directory: "/"
+
+    # ------------------------------------------------------
+    # Agenda de verificações.
+    #
+    # Mesma cadência utilizada para as demais dependências
+    # do monorepo.
+    # ------------------------------------------------------
+    schedule:
+      interval: weekly
+      day: monday
+      time: "03:00"
+      timezone: America/Sao_Paulo
+
+    # ------------------------------------------------------
+    # Limita a quantidade máxima de Pull Requests abertos
+    # simultaneamente pelo Dependabot para este ecossistema.
+    # ------------------------------------------------------
+    open-pull-requests-limit: 10
+
+    # ------------------------------------------------------
+    # Todos os PRs criados receberão automaticamente
+    # esta label.
+    # ------------------------------------------------------
+    labels:
+      - dependencies
+
+    # ------------------------------------------------------
+    # Prefixo utilizado nas mensagens de commit.
+    #
+    # Exemplo:
+    #
+    # chore(ci): bump actions/checkout from 5 to 6
+    # ------------------------------------------------------
+    commit-message:
+      prefix: "chore(ci)"

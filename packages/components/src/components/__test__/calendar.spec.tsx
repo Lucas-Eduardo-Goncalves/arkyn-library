@@ -404,7 +404,7 @@ describe("Calendar", () => {
 			);
 
 			const dayCell = getDayCell(container, 10) as HTMLElement;
-			await user.click(dayCell);
+			await user.click(within(dayCell).getByRole("button"));
 
 			expect(onChange).toHaveBeenCalledTimes(1);
 			const calledDate = onChange.mock.calls[0][0] as Date;
@@ -420,7 +420,7 @@ describe("Calendar", () => {
 			);
 
 			const dayCell = getDayCell(container, 20) as HTMLElement;
-			await user.click(dayCell);
+			await user.click(within(dayCell).getByRole("button"));
 
 			expect(dayCell).toHaveClass("checkedDay");
 		});
@@ -438,7 +438,7 @@ describe("Calendar", () => {
 			);
 
 			const dayCell = getDayCell(container, 20) as HTMLElement;
-			await user.click(dayCell);
+			await user.click(within(dayCell).getByRole("button"));
 
 			expect(onChange).toHaveBeenCalledTimes(1);
 			expect(dayCell).not.toHaveClass("checkedDay");
@@ -460,7 +460,7 @@ describe("Calendar", () => {
 			);
 
 			const nextMonthCell = container.querySelector("td.next") as HTMLElement;
-			await user.click(nextMonthCell);
+			await user.click(within(nextMonthCell).getByRole("button"));
 
 			expect(onChange).toHaveBeenCalledTimes(1);
 			expect(onChangeView).toHaveBeenCalledTimes(1);
@@ -481,7 +481,7 @@ describe("Calendar", () => {
 			);
 
 			const dayCell = getDayCell(container, 15) as HTMLElement;
-			await user.click(dayCell);
+			await user.click(within(dayCell).getByRole("button"));
 
 			expect(onChange).toHaveBeenCalledTimes(1);
 			const [start, end] = onChange.mock.calls[0][0] as [Date, Date];
@@ -502,7 +502,7 @@ describe("Calendar", () => {
 			);
 
 			const dayCell = getDayCell(container, 5) as HTMLElement;
-			await user.click(dayCell);
+			await user.click(within(dayCell).getByRole("button"));
 
 			expect(onChange).toHaveBeenCalledTimes(1);
 			const [start, end] = onChange.mock.calls[0][0] as [Date, Date];
@@ -523,7 +523,7 @@ describe("Calendar", () => {
 			);
 
 			const dayCell = getDayCell(container, 1) as HTMLElement;
-			await user.click(dayCell);
+			await user.click(within(dayCell).getByRole("button"));
 
 			expect(onChange).toHaveBeenCalledTimes(1);
 			const [start, end] = onChange.mock.calls[0][0] as [Date, Date];
@@ -643,7 +643,9 @@ describe("Calendar", () => {
 			);
 
 			const dayCell = getDayCell(container, 10) as HTMLElement;
-			await expect(user.click(dayCell)).resolves.not.toThrow();
+			await expect(
+				user.click(within(dayCell).getByRole("button")),
+			).resolves.not.toThrow();
 		});
 
 		it("should handle leap-year February correctly", () => {
@@ -722,7 +724,7 @@ describe("Calendar", () => {
 			).not.toBeInTheDocument();
 
 			const dayCell = getDayCell(container, 15) as HTMLElement;
-			await user.click(dayCell);
+			await user.click(within(dayCell).getByRole("button"));
 
 			expect(onChange).toHaveBeenCalledTimes(1);
 			expect(Array.isArray(onChange.mock.calls[0][0])).toBe(true);

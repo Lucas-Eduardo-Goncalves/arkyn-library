@@ -181,4 +181,49 @@ describe("parseSensitiveData", () => {
 		const result = parseSensitiveData(json, []);
 		expect(result).toBe(json);
 	});
+
+	it("should mask sensitive keys regardless of case", () => {
+		const json = JSON.stringify({
+			password: "secret1",
+			Password: "secret2",
+			PASSWORD: "secret3",
+			authorization: "token1",
+			Authorization: "token2",
+			AUTHORIZATION: "token3",
+		});
+		const result = parseSensitiveData(json, [
+			"password",
+			"authorization",
+			"creditCard",
+		]);
+		const parsed = JSON.parse(result);
+		expect(parsed.password).toBe("****");
+		expect(parsed.Password).toBe("****");
+		expect(parsed.PASSWORD).toBe("****");
+		expect(parsed.authorization).toBe("****");
+		expect(parsed.Authorization).toBe("****");
+		expect(parsed.AUTHORIZATION).toBe("****");
+	});
+
+	it("should preserve original key casing while masking case-insensitively", () => {
+		const json = JSON.stringify({
+			Authorization: "Bearer abc123",
+		});
+		const result = parseSensitiveData(json, ["authorization"]);
+		const parsed = JSON.parse(result);
+		expect(Object.keys(parsed)).toEqual(["Authorization"]);
+		expect(parsed.Authorization).toBe("****");
+		expect(parsed.authorization).toBeUndefined();
+	});
+
+	it("should not mask non-sensitive keys with mixed casing", () => {
+		const json = JSON.stringify({
+			UserName: "john_doe",
+			password: "secret",
+		});
+		const result = parseSensitiveData(json);
+		const parsed = JSON.parse(result);
+		expect(parsed.UserName).toBe("john_doe");
+		expect(parsed.password).toBe("****");
+	});
 });

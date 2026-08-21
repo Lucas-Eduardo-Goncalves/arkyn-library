@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { KeyboardEvent, ReactNode, RefObject } from "react";
 import "./styles.css";
 
 type SelectContainerProps = {
@@ -14,6 +14,11 @@ type SelectContainerProps = {
 	id: string;
 	variant: "solid" | "outline" | "underline";
 	size: "md" | "lg";
+	containerRef?: RefObject<HTMLDivElement | null>;
+	onContainerKeyDown?: (e: KeyboardEvent<HTMLDivElement>) => void;
+	tabIndex?: number;
+	ariaControls?: string;
+	ariaActiveDescendant?: string;
 };
 
 function SelectContainer(props: SelectContainerProps) {
@@ -30,6 +35,11 @@ function SelectContainer(props: SelectContainerProps) {
 		size,
 		id,
 		prefixExists,
+		containerRef,
+		onContainerKeyDown,
+		tabIndex,
+		ariaControls,
+		ariaActiveDescendant,
 	} = props;
 
 	const hasPrefix = prefixExists ? "hasPrefix" : "";
@@ -38,13 +48,21 @@ function SelectContainer(props: SelectContainerProps) {
 	const focused = isFocused ? "focused" : "";
 
 	return (
-		<section
+		<div
+			ref={containerRef}
 			id={id}
+			tabIndex={tabIndex}
+			role="combobox"
+			aria-haspopup="listbox"
+			aria-expanded={isFocused}
+			aria-controls={ariaControls}
+			aria-activedescendant={ariaActiveDescendant}
 			className={`arkynSelectContainer ${hasPrefix} ${variant} ${size} ${opacity} ${errored} ${focused} ${className}`}
 			onClick={handleContainerFocus}
+			onKeyDown={onContainerKeyDown}
 		>
 			{children}
-		</section>
+		</div>
 	);
 }
 

@@ -22,9 +22,13 @@ function parseSensitiveData(
 	jsonString: string,
 	sensitiveKeys: string[] = ["password", "confirmPassword", "creditCard"],
 ): string {
+	const lowerCasedSensitiveKeys = sensitiveKeys.map((sensitiveKey) =>
+		sensitiveKey.toLowerCase(),
+	);
+
 	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	function maskValue(key: string, value: any): any {
-		if (sensitiveKeys.includes(key)) return "****";
+		if (lowerCasedSensitiveKeys.includes(key.toLowerCase())) return "****";
 		return value;
 	}
 

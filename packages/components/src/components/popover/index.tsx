@@ -1,5 +1,7 @@
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useRef, useState } from "react";
 
+import { useEscapeKey } from "../../hooks/useEscapeKey";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
 import { useScrollLock } from "../../hooks/useScrollLock";
 import "./styles.css";
 
@@ -84,6 +86,7 @@ function Popover(props: PopoverProps) {
 		orientation = "bottomLeft",
 	} = props;
 	const [isOpen, setIsOpen] = useState(false);
+	const contentRef = useRef<HTMLDivElement>(null);
 
 	const visible = isOpen ? "visibleTrue" : "visibleFalse";
 	const className = `arkynPopover ${orientation} ${visible} ${baseClassName}`;
@@ -93,12 +96,18 @@ function Popover(props: PopoverProps) {
 	}
 
 	useScrollLock(isOpen);
+	useEscapeKey(isOpen, () => setIsOpen(false));
+	useFocusTrap(isOpen, contentRef);
 
 	return (
 		<div className={className} onClick={handleOpenPopover}>
 			{button}
 
 			<div
+				ref={contentRef}
+				role="dialog"
+				aria-modal="true"
+				tabIndex={-1}
 				style={{ visibility: isOpen ? "visible" : "hidden" }}
 				onClick={() => closeOnClick && setIsOpen(false)}
 				className="arkynPopoverContent"

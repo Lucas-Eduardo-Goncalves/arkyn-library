@@ -1,5 +1,12 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import {
+	cleanup,
+	fireEvent,
+	render,
+	screen,
+	waitFor,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { useState } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { ModalContainer } from "../modal/modalContainer";
@@ -499,6 +506,184 @@ describe("ModalContainer", () => {
 			expect(
 				container.querySelector(".arkynModalContainer"),
 			).toBeInTheDocument();
+		});
+	});
+
+	describe("accessibility", () => {
+		it("should render role=dialog and aria-modal on the content wrapper while open", () => {
+			const { container } = render(
+				<ModalContainer isVisible makeInvisible={vi.fn()}>
+					Content
+				</ModalContainer>,
+			);
+
+			const content = container.querySelector(
+				".arkynModalContainerContent",
+			) as HTMLElement;
+
+			expect(content).toHaveAttribute("role", "dialog");
+			expect(content).toHaveAttribute("aria-modal", "true");
+		});
+
+		it("should move focus into the content wrapper when opened", () => {
+			const { container } = render(
+				<ModalContainer isVisible makeInvisible={vi.fn()}>
+					<button type="button">Inside</button>
+				</ModalContainer>,
+			);
+
+			const content = container.querySelector(
+				".arkynModalContainerContent",
+			) as HTMLElement;
+
+			expect(content).toContainElement(document.activeElement as HTMLElement);
+		});
+
+		it("should focus the content wrapper itself when it has no focusable children", () => {
+			const { container } = render(
+				<ModalContainer isVisible makeInvisible={vi.fn()}>
+					Plain text
+				</ModalContainer>,
+			);
+
+			const content = container.querySelector(
+				".arkynModalContainerContent",
+			) as HTMLElement;
+
+			expect(content).toHaveFocus();
+		});
+
+		it("should start the exit transition when Escape is pressed", () => {
+			const { container } = render(
+				<ModalContainer isVisible makeInvisible={vi.fn()}>
+					Content
+				</ModalContainer>,
+			);
+
+			fireEvent.keyDown(document, { key: "Escape" });
+
+			const element = container.querySelector(
+				".arkynModalContainer",
+			) as HTMLElement;
+			expect(element).toHaveClass("exiting");
+		});
+
+		it("should call makeInvisible once the Escape-triggered exit animation ends", () => {
+			const makeInvisible = vi.fn();
+			const { container } = render(
+				<ModalContainer isVisible makeInvisible={makeInvisible}>
+					Content
+				</ModalContainer>,
+			);
+
+			fireEvent.keyDown(document, { key: "Escape" });
+
+			const overlay = container.querySelector(
+				".arkynModalContainerOverlay",
+			) as HTMLElement;
+			fireAnimationEnd(overlay);
+
+			expect(makeInvisible).toHaveBeenCalledTimes(1);
+		});
+
+		it("should not react to Escape once the modal is not visible", () => {
+			const { container, rerender } = render(
+				<ModalContainer isVisible makeInvisible={vi.fn()}>
+					Content
+				</ModalContainer>,
+			);
+
+			rerender(
+				<ModalContainer isVisible={false} makeInvisible={vi.fn()}>
+					Content
+				</ModalContainer>,
+			);
+
+			const element = container.querySelector(
+				".arkynModalContainer",
+			) as HTMLElement;
+			// Pressing Escape after the container already started exiting via the
+			// isVisible prop should not throw or double up the "exiting" class.
+			fireEvent.keyDown(document, { key: "Escape" });
+			expect(element).toHaveClass("exiting");
+		});
+
+		it("should trap Tab so it wraps from the last focusable element to the first", async () => {
+			const user = userEvent.setup();
+			render(
+				<ModalContainer isVisible makeInvisible={vi.fn()}>
+					<button type="button">First</button>
+					<button type="button">Last</button>
+				</ModalContainer>,
+			);
+
+			const first = screen.getByRole("button", { name: "First" });
+			const last = screen.getByRole("button", { name: "Last" });
+
+			expect(first).toHaveFocus();
+
+			last.focus();
+			await user.tab();
+
+			expect(first).toHaveFocus();
+		});
+
+		it("should trap Shift+Tab so it wraps from the first focusable element to the last", async () => {
+			const user = userEvent.setup();
+			render(
+				<ModalContainer isVisible makeInvisible={vi.fn()}>
+					<button type="button">First</button>
+					<button type="button">Last</button>
+				</ModalContainer>,
+			);
+
+			const first = screen.getByRole("button", { name: "First" });
+			const last = screen.getByRole("button", { name: "Last" });
+
+			expect(first).toHaveFocus();
+
+			await user.tab({ shift: true });
+
+			expect(last).toHaveFocus();
+		});
+
+		it("should return focus to the trigger element after the modal fully closes", async () => {
+			const user = userEvent.setup();
+
+			function Wrapper() {
+				const [isOpen, setIsOpen] = useState(false);
+
+				return (
+					<>
+						<button type="button" onClick={() => setIsOpen(true)}>
+							Open modal
+						</button>
+						<ModalContainer
+							isVisible={isOpen}
+							makeInvisible={() => setIsOpen(false)}
+						>
+							<button type="button">Inside</button>
+						</ModalContainer>
+					</>
+				);
+			}
+
+			const { container } = render(<Wrapper />);
+			const trigger = screen.getByRole("button", { name: "Open modal" });
+
+			await user.click(trigger);
+			// The container mounts one render after `isVisible` flips (an internal
+			// `mounted` state toggle), so focus moves into the dialog on the
+			// following effect flush rather than synchronously with the click.
+			await waitFor(() => expect(trigger).not.toHaveFocus());
+
+			const overlay = container.querySelector(
+				".arkynModalContainerOverlay",
+			) as HTMLElement;
+			await user.click(overlay);
+			fireAnimationEnd(overlay);
+
+			expect(trigger).toHaveFocus();
 		});
 	});
 });

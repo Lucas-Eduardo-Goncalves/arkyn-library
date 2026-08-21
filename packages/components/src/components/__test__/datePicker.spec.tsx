@@ -10,9 +10,12 @@ function getDayCell(container: HTMLElement, day: number, owner = "current") {
 	const cells = Array.from(
 		container.querySelectorAll(`td.${owner}`),
 	) as HTMLElement[];
-	return cells.find(
+	const cell = cells.find(
 		(cell) => cell.querySelector("p")?.textContent === String(day),
-	) as HTMLElement;
+	);
+	// Day selection is triggered by the focusable/keyboard-activatable button
+	// nested inside each day cell (see CalendarTableTd), not the <td> itself.
+	return cell?.querySelector("button") as HTMLElement;
 }
 
 const fixedViewValue = new Date(2026, 5, 1);
@@ -403,6 +406,191 @@ describe("DatePicker", () => {
 			);
 
 			expect(screen.queryByText("Should not render")).not.toBeInTheDocument();
+		});
+	});
+
+	describe("keyboard navigation and accessibility", () => {
+		it("should expose combobox role and haspopup/expanded state on the container", async () => {
+			const user = userEvent.setup();
+			const { container } = render(<DatePicker type="single" name="date" />);
+
+			const section = container.querySelector(
+				".arkynDatePickerContainer",
+			) as HTMLElement;
+			expect(section).toHaveAttribute("role", "combobox");
+			expect(section).toHaveAttribute("aria-haspopup", "dialog");
+			expect(section).toHaveAttribute("aria-expanded", "false");
+
+			await user.click(section);
+
+			expect(section).toHaveAttribute("aria-expanded", "true");
+		});
+
+		it("should be tabbable and expose a tabIndex of 0 when not disabled", () => {
+			const { container } = render(<DatePicker type="single" name="date" />);
+
+			const section = container.querySelector(
+				".arkynDatePickerContainer",
+			) as HTMLElement;
+			expect(section).toHaveAttribute("tabIndex", "0");
+		});
+
+		it("should not be tabbable when disabled", () => {
+			const { container } = render(
+				<DatePicker type="single" name="date" disabled />,
+			);
+
+			const section = container.querySelector(
+				".arkynDatePickerContainer",
+			) as HTMLElement;
+			expect(section).toHaveAttribute("tabIndex", "-1");
+		});
+
+		it("should open the calendar when Enter is pressed on the focused container", async () => {
+			const user = userEvent.setup();
+			const { container } = render(
+				<DatePicker type="single" name="date" viewValue={fixedViewValue} />,
+			);
+
+			const section = container.querySelector(
+				".arkynDatePickerContainer",
+			) as HTMLElement;
+			section.focus();
+			await user.keyboard("{Enter}");
+
+			expect(
+				document.querySelector(".arkynDatePickerCalendarContainer"),
+			).toBeInTheDocument();
+		});
+
+		it("should open the calendar when ArrowDown is pressed on the focused container", async () => {
+			const user = userEvent.setup();
+			const { container } = render(
+				<DatePicker type="single" name="date" viewValue={fixedViewValue} />,
+			);
+
+			const section = container.querySelector(
+				".arkynDatePickerContainer",
+			) as HTMLElement;
+			section.focus();
+			await user.keyboard("{ArrowDown}");
+
+			expect(
+				document.querySelector(".arkynDatePickerCalendarContainer"),
+			).toBeInTheDocument();
+		});
+
+		it("should not open the calendar via keyboard when disabled", async () => {
+			const user = userEvent.setup();
+			const { container } = render(
+				<DatePicker type="single" name="date" disabled />,
+			);
+
+			const section = container.querySelector(
+				".arkynDatePickerContainer",
+			) as HTMLElement;
+			section.focus();
+			await user.keyboard("{Enter}");
+
+			expect(
+				document.querySelector(".arkynDatePickerCalendarContainer"),
+			).not.toBeInTheDocument();
+		});
+
+		it("should close the calendar on Escape and return focus to the container", async () => {
+			const user = userEvent.setup();
+			const { container } = render(
+				<DatePicker type="single" name="date" viewValue={fixedViewValue} />,
+			);
+
+			const section = container.querySelector(
+				".arkynDatePickerContainer",
+			) as HTMLElement;
+			section.focus();
+			await user.keyboard("{Enter}");
+			expect(
+				document.querySelector(".arkynDatePickerCalendarContainer"),
+			).toBeInTheDocument();
+
+			await user.keyboard("{Escape}");
+
+			expect(
+				document.querySelector(".arkynDatePickerCalendarContainer"),
+			).not.toBeInTheDocument();
+			expect(document.activeElement).toBe(section);
+		});
+
+		it("should make day cells keyboard-focusable and activatable with Enter", async () => {
+			const user = userEvent.setup();
+			const handleChange = vi.fn();
+			const { container } = render(
+				<DatePicker
+					type="single"
+					name="date"
+					viewValue={fixedViewValue}
+					onChange={handleChange}
+				/>,
+			);
+
+			const section = container.querySelector(
+				".arkynDatePickerContainer",
+			) as HTMLElement;
+			await user.click(section);
+
+			const dayCell = getDayCell(container, 10);
+			dayCell.focus();
+			await user.keyboard("{Enter}");
+
+			expect(handleChange).toHaveBeenCalledTimes(1);
+			const calledDate = handleChange.mock.calls[0][0] as Date;
+			expect(calledDate.getDate()).toBe(10);
+		});
+
+		it("should make day cells activatable with Space", async () => {
+			const user = userEvent.setup();
+			const handleChange = vi.fn();
+			const { container } = render(
+				<DatePicker
+					type="single"
+					name="date"
+					viewValue={fixedViewValue}
+					onChange={handleChange}
+				/>,
+			);
+
+			const section = container.querySelector(
+				".arkynDatePickerContainer",
+			) as HTMLElement;
+			await user.click(section);
+
+			const dayCell = getDayCell(container, 10);
+			dayCell.focus();
+			await user.keyboard(" ");
+
+			expect(handleChange).toHaveBeenCalledTimes(1);
+		});
+
+		it("should still allow opening and picking a date via mouse click after keyboard support was added", async () => {
+			const user = userEvent.setup();
+			const handleChange = vi.fn();
+			const { container } = render(
+				<DatePicker
+					type="single"
+					name="date"
+					viewValue={fixedViewValue}
+					onChange={handleChange}
+				/>,
+			);
+
+			const section = container.querySelector(
+				".arkynDatePickerContainer",
+			) as HTMLElement;
+			await user.click(section);
+			await user.click(getDayCell(container, 12));
+
+			expect(handleChange).toHaveBeenCalledTimes(1);
+			const calledDate = handleChange.mock.calls[0][0] as Date;
+			expect(calledDate.getDate()).toBe(12);
 		});
 	});
 });

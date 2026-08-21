@@ -1,9 +1,11 @@
+import { parseSensitiveData } from "@arkyn/shared";
 import { deleteRequest } from "../http/api/_deleteRequest";
 import { getRequest } from "../http/api/_getRequest";
 import { patchRequest } from "../http/api/_patchRequest";
 import { postRequest } from "../http/api/_postRequest";
 import { putRequest } from "../http/api/_putRequest";
 import { flushDebugLogs } from "../utilities/flushDebugLogs";
+import { SENSITIVE_DATA_KEYS } from "../utilities/sensitiveDataKeys";
 
 type ApiServiceConstructorProps = {
 	/** Base URL prepended to every request path (e.g. `"https://api.example.com"`). */
@@ -67,18 +69,41 @@ class ApiService {
 		this.enableDebug = props.enableDebug || false;
 	}
 
+	/**
+	 * Converts a `HeadersInit` value into a plain object so it can be safely
+	 * JSON-serialized and redacted, regardless of whether it was provided as a
+	 * `Headers` instance, a plain object, or an array of tuples.
+	 */
+	private static toPlainHeaders(headers: HeadersInit): Record<string, string> {
+		if (headers instanceof Headers)
+			return Object.fromEntries(headers.entries());
+		return Object.fromEntries(new Headers(headers).entries());
+	}
+
+	/**
+	 * Serializes a value to JSON and masks sensitive fields (e.g. `Authorization`
+	 * headers, `password`/`token`/`secret` body fields) before it is written to the
+	 * debug output. See `SENSITIVE_DATA_KEYS`.
+	 */
+	private static toRedactedJson(value: unknown): string {
+		return parseSensitiveData(JSON.stringify(value), [...SENSITIVE_DATA_KEYS]);
+	}
+
 	private onDebug(endpoint: string, method: string, data: DebugConfig) {
 		if (this.enableDebug) {
 			const debugs: string[] = [];
-			const json = (data: unknown) => JSON.stringify(data, null, 2);
 
 			debugs.push(`Base URL: ${this.baseUrl}`);
 			debugs.push(`Endpoint: ${endpoint}`);
 			debugs.push(`Status/Method: ${method} => ${data.status}`);
 			debugs.push(`Message: ${data.message}`);
 
-			if (data.headers) debugs.push(`Headers: ${json(data.headers)}`);
-			if (data.body) debugs.push(`Body: ${json(data.body)}`);
+			if (data.headers) {
+				const plainHeaders = ApiService.toPlainHeaders(data.headers);
+				debugs.push(`Headers: ${ApiService.toRedactedJson(plainHeaders)}`);
+			}
+			if (data.body)
+				debugs.push(`Body: ${ApiService.toRedactedJson(data.body)}`);
 
 			flushDebugLogs({ debugs, name: "ApiDebug", scheme: "yellow" });
 		}

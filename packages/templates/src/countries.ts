@@ -82,7 +82,7 @@ const countries: CountryType[] = [
 		code: "+54",
 		iso: "AR",
 		flag: "https://cdn.kcak11.com/CountryFlags/countries/ar.svg",
-		mask: "(___) ___-____",
+		mask: ["_ __ ____-____", "__ ____-____"],
 	},
 	{
 		name: "Armenia",
@@ -320,7 +320,7 @@ const countries: CountryType[] = [
 		code: "+86",
 		iso: "CN",
 		flag: "https://cdn.kcak11.com/CountryFlags/countries/cn.svg",
-		mask: "__-_____-_____",
+		mask: "___ ____ ____",
 	},
 	{
 		name: "Christmas Island",
@@ -705,7 +705,7 @@ const countries: CountryType[] = [
 		code: "+62",
 		iso: "ID",
 		flag: "https://cdn.kcak11.com/CountryFlags/countries/id.svg",
-		mask: "(___) ___-__-___",
+		mask: ["___ ____ ____", "___ ____ ___", "___ ___ ___"],
 	},
 	{
 		name: "Iran",
@@ -817,7 +817,7 @@ const countries: CountryType[] = [
 		code: "+82",
 		iso: "KR",
 		flag: "https://cdn.kcak11.com/CountryFlags/countries/kr.svg",
-		mask: "__-___-____",
+		mask: "__-____-____",
 	},
 	{
 		name: "Kosovo",
@@ -1671,7 +1671,7 @@ const countries: CountryType[] = [
 		code: "+84",
 		iso: "VN",
 		flag: "https://cdn.kcak11.com/CountryFlags/countries/vn.svg",
-		mask: "(___) ____-___",
+		mask: "___ ___ ___",
 	},
 	{
 		name: "Virgin Islands, British",

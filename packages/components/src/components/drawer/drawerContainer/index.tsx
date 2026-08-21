@@ -2,9 +2,12 @@ import {
 	type AnimationEvent,
 	type HTMLAttributes,
 	useEffect,
+	useRef,
 	useState,
 } from "react";
 
+import { useEscapeKey } from "../../../hooks/useEscapeKey";
+import { useFocusTrap } from "../../../hooks/useFocusTrap";
 import { useScrollLock } from "../../../hooks/useScrollLock";
 import { DrawerProvider } from "../drawerContext";
 import "./styles.css";
@@ -55,6 +58,7 @@ function DrawerContainer(props: DrawerContainerProps) {
 
 	const [mounted, setMounted] = useState(isVisible);
 	const [isExiting, setIsExiting] = useState(false);
+	const contentRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		if (isVisible) {
@@ -66,6 +70,10 @@ function DrawerContainer(props: DrawerContainerProps) {
 	}, [isVisible, mounted]);
 
 	useScrollLock(isVisible);
+
+	const isDialogActive = mounted && !isExiting;
+	useEscapeKey(isDialogActive, () => setIsExiting(true));
+	useFocusTrap(isDialogActive, contentRef);
 
 	function handleOverlayAnimationEnd(e: AnimationEvent<HTMLDivElement>) {
 		if (e.target === e.currentTarget && isExiting) {
@@ -94,7 +102,15 @@ function DrawerContainer(props: DrawerContainerProps) {
 					onClick={() => setIsExiting(true)}
 					onAnimationEnd={handleOverlayAnimationEnd}
 				/>
-				<div className="arkynDrawerContainerContent">{children}</div>
+				<div
+					ref={contentRef}
+					role="dialog"
+					aria-modal="true"
+					tabIndex={-1}
+					className="arkynDrawerContainerContent"
+				>
+					{children}
+				</div>
 			</aside>
 		</DrawerProvider>
 	);

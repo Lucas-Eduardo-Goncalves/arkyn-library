@@ -1,5 +1,11 @@
 import type { LucideIcon } from "lucide-react";
-import { type FocusEvent, useId, useRef, useState } from "react";
+import {
+	type FocusEvent,
+	type KeyboardEvent,
+	useId,
+	useRef,
+	useState,
+} from "react";
 
 import { useForm } from "../../hooks/useForm";
 import { FieldTemplate } from "../../services/fieldTemplate";
@@ -101,7 +107,7 @@ type SelectProps = {
  * @param props.onSearch - Callback fired when the search query changes.
  * @param props.size - Select size (`md` | `lg`). Default: "md"
  * @param props.variant - Visual style variant. Default: "solid"
- * @param props.orientation - Layout direction. Default: "horizontal"
+ * @param props.orientation - Layout direction. Default: "vertical"
  * @param props.unShowFieldTemplate - Skips wrapper, label, and error rendering. Default: false
  *
  * @returns Select JSX element wrapped in `FieldTemplate`.
@@ -174,8 +180,10 @@ function Select(props: SelectProps) {
 	const { fieldErrors } = useForm();
 
 	const selectRef = useRef<HTMLInputElement>(null);
+	const containerRef = useRef<HTMLDivElement>(null);
 	const generatedId = useId();
 	const selectId = id || generatedId;
+	const listboxId = `${selectId}-listbox`;
 
 	const errorMessage = baseErrorMessage || fieldErrors?.[name];
 	const isError = !!errorMessage;
@@ -187,8 +195,9 @@ function Select(props: SelectProps) {
 	const [search, setSearch] = useState("");
 	const [isFocused, setIsFocused] = useState(false);
 	const [selectedOption, setSelectedOption] = useState(defaultValue);
+	const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
-	const forceSelectedOptions = value || selectedOption;
+	const forceSelectedOptions = value !== undefined ? value : selectedOption;
 
 	function optionHasSelected(value: string) {
 		return forceSelectedOptions === value;
@@ -199,20 +208,29 @@ function Select(props: SelectProps) {
 		return option?.label || "";
 	}
 
+	function getOptionId(value: string) {
+		return `${listboxId}-option-${value.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
+	}
+
 	function handleContainerFocus() {
 		if (disabled || !selectRef?.current || isFocused) return;
 		setIsFocused(true);
+		setHighlightedIndex(-1);
 		selectRef.current.focus();
 		onFocus?.();
 	}
 
 	function handleBlur() {
 		setIsFocused(false);
+		setHighlightedIndex(-1);
 		if (onBlur && selectRef.current) selectRef.current.blur();
 	}
 
 	function handleSearch(value: string) {
 		setSearch(value);
+		// The visible option list is about to change, so drop the current
+		// highlight instead of letting it point at a filtered-out option.
+		setHighlightedIndex(-1);
 		if (onSearch) onSearch(value);
 	}
 
@@ -235,6 +253,70 @@ function Select(props: SelectProps) {
 		return false;
 	});
 
+	function handleContainerKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+		if (disabled) return;
+
+		if (!isFocused) {
+			if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+				e.preventDefault();
+				handleContainerFocus();
+				if (e.key === "ArrowDown") setHighlightedIndex(0);
+			}
+			return;
+		}
+
+		const isTypingTarget = (e.target as HTMLElement)?.tagName === "INPUT";
+		// When focus has moved onto an option/button directly (e.g. via Tab),
+		// let that element handle its own native Enter/Space activation instead
+		// of double-handling it here through the highlighted-index shortcut.
+		const isButtonTarget = (e.target as HTMLElement)?.tagName === "BUTTON";
+
+		switch (e.key) {
+			case "Escape":
+				e.preventDefault();
+				handleBlur();
+				containerRef.current?.focus();
+				break;
+			case "ArrowDown":
+				e.preventDefault();
+				setHighlightedIndex((prev) => {
+					if (mappedOptions.length === 0) return -1;
+					if (prev < 0) return 0;
+					return prev + 1 >= mappedOptions.length ? 0 : prev + 1;
+				});
+				break;
+			case "ArrowUp":
+				e.preventDefault();
+				setHighlightedIndex((prev) => {
+					if (mappedOptions.length === 0) return -1;
+					if (prev < 0) return mappedOptions.length - 1;
+					return prev - 1 < 0 ? mappedOptions.length - 1 : prev - 1;
+				});
+				break;
+			case " ":
+				if (isTypingTarget || isButtonTarget) return;
+				e.preventDefault();
+				if (highlightedIndex >= 0 && highlightedIndex < mappedOptions.length) {
+					handleChangeValue(mappedOptions[highlightedIndex].value);
+				}
+				break;
+			case "Enter":
+				if (isButtonTarget) return;
+				e.preventDefault();
+				if (highlightedIndex >= 0 && highlightedIndex < mappedOptions.length) {
+					handleChangeValue(mappedOptions[highlightedIndex].value);
+				}
+				break;
+			default:
+				break;
+		}
+	}
+
+	const activeDescendantId =
+		highlightedIndex >= 0 && highlightedIndex < mappedOptions.length
+			? getOptionId(mappedOptions[highlightedIndex].value)
+			: undefined;
+
 	return (
 		<FieldTemplate
 			name={name}
@@ -256,6 +338,11 @@ function Select(props: SelectProps) {
 				variant={variant}
 				prefixExists={!!prefix}
 				id={selectId}
+				containerRef={containerRef}
+				onContainerKeyDown={handleContainerKeyDown}
+				tabIndex={disabled ? -1 : 0}
+				ariaControls={listboxId}
+				ariaActiveDescendant={activeDescendantId}
 			>
 				<input
 					ref={selectRef}
@@ -276,17 +363,20 @@ function Select(props: SelectProps) {
 				</SelectContent>
 
 				<SelectOptionsContainer
+					id={listboxId}
 					isFocused={isFocused}
 					isSearchable={isSearchable}
 					search={search}
 					onSearch={handleSearch}
 				>
-					{mappedOptions.map(({ label, value }) => (
+					{mappedOptions.map(({ label, value }, index) => (
 						<SelectOption
 							key={value}
+							id={getOptionId(value)}
 							label={label}
 							value={value}
 							size={size}
+							isHighlighted={index === highlightedIndex}
 							handleChangeValue={handleChangeValue}
 							optionHasSelected={optionHasSelected}
 						/>

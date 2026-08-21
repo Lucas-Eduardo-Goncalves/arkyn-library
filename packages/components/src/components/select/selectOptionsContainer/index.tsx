@@ -13,6 +13,7 @@ import { Input } from "../../input";
 import "./styles.css";
 
 type SelectOptionsContainerProps = {
+	id?: string;
 	isFocused: boolean;
 	isSearchable: boolean;
 	children: ReactNode;
@@ -21,7 +22,7 @@ type SelectOptionsContainerProps = {
 };
 
 function SelectOptionsContainer(props: SelectOptionsContainerProps) {
-	const { children, isFocused, isSearchable, search, onSearch } = props;
+	const { children, id, isFocused, isSearchable, search, onSearch } = props;
 
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [position, setPosition] = useState<"bottom" | "top">("bottom");
@@ -66,6 +67,8 @@ function SelectOptionsContainer(props: SelectOptionsContainerProps) {
 	return (
 		<div
 			ref={containerRef}
+			id={id}
+			role="listbox"
 			className={`arkynSelectOptionsContainer ${position}`}
 		>
 			{isSearchable && (

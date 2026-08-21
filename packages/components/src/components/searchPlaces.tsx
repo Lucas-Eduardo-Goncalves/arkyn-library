@@ -88,8 +88,8 @@ function SearchPlaces(props: SearchPlacesProps): JSX.Element {
 		const places = searchBox?.getPlaces();
 		const place = places ? places[0] : null;
 
-		const address_components =
-			place?.address_components as AddressComponentsType;
+		const address_components = (place?.address_components ??
+			[]) as AddressComponentsType;
 
 		function findData(key: string) {
 			const data = address_components.find((item) => item.types[0] === key);
