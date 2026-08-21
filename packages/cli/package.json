@@ -37,7 +37,7 @@
     "LICENSE.txt"
   ],
   "scripts": {
-    "audit": "bun audit --workspace packages/cli",
+    "audit": "bun audit",
     "build": "bunx vite build",
     "postbuild": "chmod +x dist/bundle.js",
     "prebuild": "rm -rf dist",

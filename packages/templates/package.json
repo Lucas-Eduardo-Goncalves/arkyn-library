@@ -39,7 +39,7 @@
     "LICENSE.txt"
   ],
   "scripts": {
-    "audit": "bun audit --workspace packages/templates",
+    "audit": "bun audit",
     "build": "bunx vite build && bunx tsc --project tsconfig.json --emitDeclarationOnly && bun ./generate-exports.ts && rm -f dist/modules/index.js dist/modules/style.css",
     "prebuild": "rm -rf dist",
     "publish:beta": "bash ../../scripts/publish-idempotent.sh beta",
