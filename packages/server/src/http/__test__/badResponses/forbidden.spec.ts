@@ -34,7 +34,7 @@ describe("Forbidden", () => {
 			const cause = { requiredRole: "admin", userRole: "user" };
 			const error = new Forbidden("Admin access required", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should not set cause when not provided", () => {
@@ -52,7 +52,7 @@ describe("Forbidden", () => {
 			};
 			const error = new Forbidden("Permission denied", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should call onDebug on instantiation", () => {
@@ -82,7 +82,7 @@ describe("Forbidden", () => {
 			expect(body).toEqual({
 				name: "Forbidden",
 				message: "Access denied",
-				cause: JSON.stringify(cause),
+				cause: cause,
 			});
 		});
 	});
@@ -134,7 +134,7 @@ describe("Forbidden", () => {
 			const response = error.toResponse();
 			const body = await response.json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should return valid JSON string", async () => {
@@ -186,7 +186,7 @@ describe("Forbidden", () => {
 			const response = error.toJson();
 			const body = await response.json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should automatically set Content-Type to application/json", () => {
@@ -212,7 +212,7 @@ describe("Forbidden", () => {
 
 			expect(response.status).toBe(403);
 			expect(body.message).toBe("Admin privileges required");
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should handle missing permissions scenario", async () => {
@@ -246,7 +246,7 @@ describe("Forbidden", () => {
 			const body = await response.json();
 
 			expect(response.status).toBe(403);
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should handle IP restriction scenario", async () => {
@@ -330,7 +330,7 @@ describe("Forbidden", () => {
 		it("should handle null cause", () => {
 			const error = new Forbidden("Access denied", null);
 
-			expect(error.cause).toBeUndefined();
+			expect(error.cause).toBeNull();
 		});
 
 		it("should handle undefined cause explicitly", () => {
@@ -343,7 +343,7 @@ describe("Forbidden", () => {
 			const cause = ["permission1", "permission2", "permission3"];
 			const error = new Forbidden("Multiple permissions required", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should handle nested object as cause", () => {
@@ -359,7 +359,7 @@ describe("Forbidden", () => {
 			};
 			const error = new Forbidden("Insufficient access level", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should handle special characters in message", () => {
@@ -379,19 +379,19 @@ describe("Forbidden", () => {
 		it("should handle number as cause", () => {
 			const error = new Forbidden("Access denied", 403);
 
-			expect(error.cause).toBe("403");
+			expect(error.cause).toBe(403);
 		});
 
 		it("should handle empty object as cause", () => {
 			const error = new Forbidden("Access denied", {});
 
-			expect(error.cause).toBe("{}");
+			expect(error.cause).toEqual({});
 		});
 
 		it("should handle empty array as cause", () => {
 			const error = new Forbidden("Access denied", []);
 
-			expect(error.cause).toBe("[]");
+			expect(error.cause).toEqual([]);
 		});
 	});
 });

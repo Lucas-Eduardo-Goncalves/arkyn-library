@@ -275,7 +275,7 @@ describe("RadioGroup", () => {
 			</RadioGroup>,
 		);
 
-		const button = screen.getByRole("button");
+		const button = screen.getByRole("radio");
 		expect(button).toBeDisabled();
 
 		const label = screen.getByText("Male").closest("label");
@@ -289,7 +289,7 @@ describe("RadioGroup", () => {
 			</RadioGroup>,
 		);
 
-		const button = screen.getByRole("button");
+		const button = screen.getByRole("radio");
 		expect(button).not.toBeDisabled();
 
 		const label = screen.getByText("Male").closest("label");
@@ -306,7 +306,7 @@ describe("RadioGroup", () => {
 			</RadioGroup>,
 		);
 
-		await user.click(screen.getByRole("button"));
+		await user.click(screen.getByRole("radio"));
 
 		expect(handleChange).not.toHaveBeenCalled();
 	});
@@ -422,5 +422,17 @@ describe("RadioGroup", () => {
 		const { container } = render(<RadioGroup name="gender" />);
 
 		expect(container.querySelector(".arkynRadioGroup")).toBeEmptyDOMElement();
+	});
+
+	describe("accessibility (A11Y-04)", () => {
+		it("should expose role='radiogroup' on the options container", () => {
+			render(
+				<RadioGroup name="plan">
+					<RadioBox value="basic">Basic</RadioBox>
+				</RadioGroup>,
+			);
+
+			expect(screen.getByRole("radiogroup")).toBeInTheDocument();
+		});
 	});
 });

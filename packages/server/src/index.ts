@@ -28,6 +28,7 @@ export { formAsyncParse } from "./utilities/formAsyncParse";
 export { formParse } from "./utilities/formParse";
 export { getScopedParams } from "./utilities/getScopedParams";
 export { SchemaValidator } from "./utilities/schemaValidator";
+export { withSecurityHeaders } from "./utilities/withSecurityHeaders";
 
 // validates
 export { validateCep } from "./validations/validateCep";

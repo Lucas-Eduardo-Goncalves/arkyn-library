@@ -34,7 +34,7 @@ describe("ServerError", () => {
 			const cause = { error: "ECONNREFUSED", host: "localhost", port: 5432 };
 			const error = new ServerError("Database connection failed", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should not set cause when not provided", () => {
@@ -52,7 +52,7 @@ describe("ServerError", () => {
 			};
 			const error = new ServerError("Unexpected error occurred", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should call onDebug on instantiation", () => {
@@ -82,7 +82,7 @@ describe("ServerError", () => {
 			expect(body).toEqual({
 				name: "ServerError",
 				message: "Internal server error",
-				cause: JSON.stringify(cause),
+				cause: cause,
 			});
 		});
 	});
@@ -134,7 +134,7 @@ describe("ServerError", () => {
 			const response = error.toResponse();
 			const body = await response.json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should return valid JSON string", async () => {
@@ -186,7 +186,7 @@ describe("ServerError", () => {
 			const response = error.toJson();
 			const body = await response.json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should automatically set Content-Type to application/json", () => {
@@ -213,7 +213,7 @@ describe("ServerError", () => {
 
 			expect(response.status).toBe(500);
 			expect(body.message).toBe("Database connection failed");
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should handle unhandled exception", async () => {
@@ -243,7 +243,7 @@ describe("ServerError", () => {
 			const body = await response.json();
 
 			expect(response.status).toBe(500);
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should handle file system error", async () => {
@@ -298,7 +298,7 @@ describe("ServerError", () => {
 			const body = await response.json();
 
 			expect(response.status).toBe(500);
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 	});
 
@@ -358,7 +358,7 @@ describe("ServerError", () => {
 			const error = new ServerError("Internal server error", cause);
 			const body = await error.toResponse().json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 	});
 
@@ -380,7 +380,7 @@ describe("ServerError", () => {
 		it("should handle null cause", () => {
 			const error = new ServerError("Internal server error", null);
 
-			expect(error.cause).toBeUndefined();
+			expect(error.cause).toBeNull();
 		});
 
 		it("should handle undefined cause explicitly", () => {
@@ -393,7 +393,7 @@ describe("ServerError", () => {
 			const cause = ["error1", "error2", "error3"];
 			const error = new ServerError("Multiple errors occurred", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should handle nested object as cause", () => {
@@ -410,7 +410,7 @@ describe("ServerError", () => {
 			};
 			const error = new ServerError("Multiple service failures", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should handle special characters in message", () => {
@@ -430,25 +430,25 @@ describe("ServerError", () => {
 		it("should handle boolean as cause", () => {
 			const error = new ServerError("Internal server error", true);
 
-			expect(error.cause).toBe("true");
+			expect(error.cause).toBe(true);
 		});
 
 		it("should handle number as cause", () => {
 			const error = new ServerError("Internal server error", 500);
 
-			expect(error.cause).toBe("500");
+			expect(error.cause).toBe(500);
 		});
 
 		it("should handle empty object as cause", () => {
 			const error = new ServerError("Internal server error", {});
 
-			expect(error.cause).toBe("{}");
+			expect(error.cause).toEqual({});
 		});
 
 		it("should handle empty array as cause", () => {
 			const error = new ServerError("Internal server error", []);
 
-			expect(error.cause).toBe("[]");
+			expect(error.cause).toEqual([]);
 		});
 
 		it("should handle error object as cause", () => {
@@ -460,15 +460,15 @@ describe("ServerError", () => {
 			};
 			const error = new ServerError("Wrapped error", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
-		it("should handle circular reference prevention", () => {
+		it("should store the cause object as-is, still JSON-serializable for the response body", () => {
 			const cause = { id: 1, name: "test" };
 			const error = new ServerError("Internal server error", cause);
 
-			// biome-ignore lint/style/noNonNullAssertion: intentional
-			expect(() => JSON.parse(error.cause!)).not.toThrow();
+			expect(error.cause).toBe(cause);
+			expect(() => JSON.stringify(error.cause)).not.toThrow();
 		});
 	});
 });

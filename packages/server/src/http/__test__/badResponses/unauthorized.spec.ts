@@ -37,7 +37,7 @@ describe("Unauthorized", () => {
 			};
 			const error = new Unauthorized("Token expired", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should not set cause when not provided", () => {
@@ -54,7 +54,7 @@ describe("Unauthorized", () => {
 			};
 			const error = new Unauthorized("Invalid token", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should call onDebug on instantiation", () => {
@@ -84,7 +84,7 @@ describe("Unauthorized", () => {
 			expect(body).toEqual({
 				name: "Unauthorized",
 				message: "No token provided",
-				cause: JSON.stringify(cause),
+				cause: cause,
 			});
 		});
 	});
@@ -136,7 +136,7 @@ describe("Unauthorized", () => {
 			const response = error.toResponse();
 			const body = await response.json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should return valid JSON string", async () => {
@@ -188,7 +188,7 @@ describe("Unauthorized", () => {
 			const response = error.toJson();
 			const body = await response.json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should automatically set Content-Type to application/json", () => {
@@ -213,7 +213,7 @@ describe("Unauthorized", () => {
 
 			expect(response.status).toBe(401);
 			expect(body.message).toBe("No authentication token provided");
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should handle expired token scenario", async () => {
@@ -242,7 +242,7 @@ describe("Unauthorized", () => {
 			const body = await response.json();
 
 			expect(response.status).toBe(401);
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should handle invalid API key scenario", async () => {
@@ -289,7 +289,7 @@ describe("Unauthorized", () => {
 			const body = await response.json();
 
 			expect(response.status).toBe(401);
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should handle OAuth error scenario", async () => {
@@ -352,7 +352,7 @@ describe("Unauthorized", () => {
 		it("should handle null cause", () => {
 			const error = new Unauthorized("Authentication required", null);
 
-			expect(error.cause).toBeUndefined();
+			expect(error.cause).toBeNull();
 		});
 
 		it("should handle undefined cause explicitly", () => {
@@ -365,7 +365,7 @@ describe("Unauthorized", () => {
 			const cause = ["missing_token", "invalid_format", "expired"];
 			const error = new Unauthorized("Multiple authentication errors", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should handle nested object as cause", () => {
@@ -384,7 +384,7 @@ describe("Unauthorized", () => {
 			};
 			const error = new Unauthorized("Token validation failed", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should handle special characters in message", () => {
@@ -404,19 +404,19 @@ describe("Unauthorized", () => {
 		it("should handle number as cause", () => {
 			const error = new Unauthorized("Authentication required", 401);
 
-			expect(error.cause).toBe("401");
+			expect(error.cause).toBe(401);
 		});
 
 		it("should handle empty object as cause", () => {
 			const error = new Unauthorized("Authentication required", {});
 
-			expect(error.cause).toBe("{}");
+			expect(error.cause).toEqual({});
 		});
 
 		it("should handle empty array as cause", () => {
 			const error = new Unauthorized("Authentication required", []);
 
-			expect(error.cause).toBe("[]");
+			expect(error.cause).toEqual([]);
 		});
 
 		it("should handle JWT claims as cause", () => {
@@ -429,7 +429,7 @@ describe("Unauthorized", () => {
 			};
 			const error = new Unauthorized("Invalid JWT claims", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should handle authentication header info as cause", () => {
@@ -441,7 +441,7 @@ describe("Unauthorized", () => {
 			};
 			const error = new Unauthorized("Bearer authentication failed", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 	});
 });

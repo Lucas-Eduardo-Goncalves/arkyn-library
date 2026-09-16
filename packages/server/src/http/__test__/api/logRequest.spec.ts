@@ -44,7 +44,7 @@ describe("logRequest", () => {
 			vi.stubEnv("NODE_ENV", "development");
 			LogService.setConfig({
 				trafficSourceId: "source-123",
-				userToken: "user-token",
+				serviceToken: "service-token",
 			});
 
 			await logRequest(defaultConfig);
@@ -56,7 +56,7 @@ describe("logRequest", () => {
 			vi.stubEnv("NODE_ENV", "production");
 			LogService.setConfig({
 				trafficSourceId: "source-123",
-				userToken: "user-token",
+				serviceToken: "service-token",
 			});
 
 			await logRequest(defaultConfig);
@@ -68,7 +68,7 @@ describe("logRequest", () => {
 			vi.stubEnv("NODE_ENV", "production");
 			LogService.setConfig({
 				trafficSourceId: "source-123",
-				userToken: "user-token",
+				serviceToken: "service-token",
 				logBaseApiUrl: "http://62.238.8.44:8081",
 			});
 
@@ -83,7 +83,7 @@ describe("logRequest", () => {
 			vi.stubEnv("NODE_ENV", "production");
 			LogService.setConfig({
 				trafficSourceId: "source-123",
-				userToken: "user-token",
+				serviceToken: "service-token",
 				logBaseApiUrl: "https://log-api.example.com",
 			});
 		});
@@ -174,7 +174,7 @@ describe("logRequest", () => {
 			vi.stubEnv("NODE_ENV", "production");
 			LogService.setConfig({
 				trafficSourceId: "source-123",
-				userToken: "user-token",
+				serviceToken: "service-token",
 				logBaseApiUrl: "https://log-api.example.com",
 			});
 		});
@@ -199,7 +199,7 @@ describe("logRequest", () => {
 				expect.objectContaining({
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: "Bearer user-token",
+						Authorization: "Bearer service-token",
 					},
 				}),
 			);
@@ -365,7 +365,7 @@ describe("logRequest", () => {
 			vi.stubEnv("NODE_ENV", "production");
 			LogService.setConfig({
 				trafficSourceId: "source-123",
-				userToken: "user-token",
+				serviceToken: "service-token",
 				logBaseApiUrl: "https://log-api.example.com",
 			});
 		});
@@ -419,7 +419,7 @@ describe("logRequest", () => {
 			vi.stubEnv("NODE_ENV", "development");
 			LogService.setConfig({
 				trafficSourceId: "source-123",
-				userToken: "user-token",
+				serviceToken: "service-token",
 			});
 
 			await logRequest(defaultConfig);
@@ -431,7 +431,7 @@ describe("logRequest", () => {
 			vi.stubEnv("NODE_ENV", "production");
 			LogService.setConfig({
 				trafficSourceId: "source-123",
-				userToken: "user-token",
+				serviceToken: "service-token",
 				logBaseApiUrl: "https://log-api.example.com",
 			});
 
@@ -444,7 +444,7 @@ describe("logRequest", () => {
 			vi.stubEnv("NODE_ENV", "test");
 			LogService.setConfig({
 				trafficSourceId: "source-123",
-				userToken: "user-token",
+				serviceToken: "service-token",
 				logBaseApiUrl: "https://log-api.example.com",
 			});
 
@@ -462,7 +462,7 @@ describe("logRequest", () => {
 		it("should use trafficSourceId from LogService config", async () => {
 			LogService.setConfig({
 				trafficSourceId: "custom-source-id",
-				userToken: "user-token",
+				serviceToken: "service-token",
 				logBaseApiUrl: "https://log-api.example.com",
 			});
 
@@ -474,10 +474,10 @@ describe("logRequest", () => {
 			expect(body.trafficSourceId).toBe("custom-source-id");
 		});
 
-		it("should use userToken for authorization header", async () => {
+		it("should use serviceToken for authorization header", async () => {
 			LogService.setConfig({
 				trafficSourceId: "source-123",
-				userToken: "custom-user-token",
+				serviceToken: "custom-service-token",
 				logBaseApiUrl: "https://log-api.example.com",
 			});
 
@@ -487,7 +487,7 @@ describe("logRequest", () => {
 				expect.any(String),
 				expect.objectContaining({
 					headers: expect.objectContaining({
-						Authorization: "Bearer custom-user-token",
+						Authorization: "Bearer custom-service-token",
 					}),
 				}),
 			);
@@ -496,7 +496,7 @@ describe("logRequest", () => {
 		it("should use apiUrl from LogService config", async () => {
 			LogService.setConfig({
 				trafficSourceId: "source-123",
-				userToken: "user-token",
+				serviceToken: "service-token",
 				logBaseApiUrl: "https://custom-log-api.example.com",
 			});
 

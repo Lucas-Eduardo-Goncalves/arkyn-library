@@ -204,16 +204,20 @@ DebugService.setIgnoreFile("httpAdapter.ts");
 
 #### LogService
 
-Static service for log endpoint configuration. Stores a singleton configuration containing the traffic source identifier, user token, and log ingestion URL; `setConfig` only applies on the first call, `getConfig` reads it back, and `resetConfig` clears it.
+Static service for log endpoint configuration. Stores a singleton configuration containing the traffic source identifier, service token, and log ingestion URL; `setConfig` only applies on the first call, `getConfig` reads it back, and `resetConfig` clears it.
+
+`serviceToken` authenticates *this application* to the Arkyn log ingestion API. It must be a static, application-level credential (e.g. an environment variable) — the same value for every request. Call `setConfig` once at application boot, **not** inside a request handler/loader: because it's a singleton that only applies on its first call, passing a per-request value (like a session token) would leak whichever request got there first to every other request's outbound telemetry for the lifetime of the process.
 
 ```typescript
 LogService.setConfig({
   trafficSourceId: "my-app",
-  userToken: session.token,
+  serviceToken: process.env.ARKYN_LOG_SERVICE_TOKEN,
 });
 
-LogService.getConfig(); // { trafficSourceId, userToken, apiUrl }
+LogService.getConfig(); // { trafficSourceId, serviceToken, apiUrl }
 ```
+
+> `userToken` is still accepted as a deprecated alias for `serviceToken` for backward compatibility, but a warning is logged in development. Migrate to `serviceToken`.
 
 ### Utilities
 
@@ -312,6 +316,24 @@ const validator = new SchemaValidator(z.object({ email: z.string().email() }));
 
 // Inside a Remix action:
 const body = validator.formValidate(await decodeRequestBody(request));
+```
+
+#### withSecurityHeaders
+
+Adds a small set of standard security headers to a `Response` (`X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin`), mutating and returning the same instance. Opt-in only — nothing in `@arkyn/server` calls this automatically. `Content-Security-Policy` and `Strict-Transport-Security` are intentionally not included by default (too app-specific to guess safely); pass them yourself via the second argument, which also lets you replace or remove (`null`) any default.
+
+```typescript
+import { Success, withSecurityHeaders } from "@arkyn/server";
+
+export async function loader() {
+  return withSecurityHeaders(new Success("OK", { data }).toResponse());
+}
+
+// Disable one default, add a CSP
+withSecurityHeaders(response, {
+  "X-Frame-Options": null,
+  "Content-Security-Policy": "default-src 'self'",
+});
 ```
 
 ### Validators

@@ -58,61 +58,61 @@ describe("formatToCnpj", () => {
 		it("should throw error for CNPJ with less than 14 digits", () => {
 			expect(() => {
 				formatToCnpj("1234567800019");
-			}).toThrow("CNPJ must be contain 14 numeric digits: 1234567800019");
+			}).toThrow("CNPJ must contain 14 numeric digits: 1234567800019");
 		});
 
 		it("should throw error for CNPJ with more than 14 digits", () => {
 			expect(() => {
 				formatToCnpj("123456780001955");
-			}).toThrow("CNPJ must be contain 14 numeric digits: 123456780001955");
+			}).toThrow("CNPJ must contain 14 numeric digits: 123456780001955");
 		});
 
 		it("should throw error for empty string", () => {
 			expect(() => {
 				formatToCnpj("");
-			}).toThrow("CNPJ must be contain 14 numeric digits: ");
+			}).toThrow("CNPJ must contain 14 numeric digits: ");
 		});
 
 		it("should throw error for only special characters", () => {
 			expect(() => {
 				formatToCnpj("...///---");
-			}).toThrow("CNPJ must be contain 14 numeric digits: ...///---");
+			}).toThrow("CNPJ must contain 14 numeric digits: ...///---");
 		});
 
 		it("should throw error for letters only", () => {
 			expect(() => {
 				formatToCnpj("abcdefghijklmn");
-			}).toThrow("CNPJ must be contain 14 numeric digits: abcdefghijklmn");
+			}).toThrow("CNPJ must contain 14 numeric digits: abcdefghijklmn");
 		});
 
 		it("should throw error for mixed letters and numbers", () => {
 			expect(() => {
 				formatToCnpj("12345678abc195");
-			}).toThrow("CNPJ must be contain 14 numeric digits: 12345678abc195");
+			}).toThrow("CNPJ must contain 14 numeric digits: 12345678abc195");
 		});
 
 		it("should throw error for CNPJ with only 1 digit", () => {
 			expect(() => {
 				formatToCnpj("1");
-			}).toThrow("CNPJ must be contain 14 numeric digits: 1");
+			}).toThrow("CNPJ must contain 14 numeric digits: 1");
 		});
 
 		it("should throw error for CNPJ with only 10 digits", () => {
 			expect(() => {
 				formatToCnpj("1234567890");
-			}).toThrow("CNPJ must be contain 14 numeric digits: 1234567890");
+			}).toThrow("CNPJ must contain 14 numeric digits: 1234567890");
 		});
 
 		it("should throw error for CNPJ with 13 digits", () => {
 			expect(() => {
 				formatToCnpj("1234567800019");
-			}).toThrow("CNPJ must be contain 14 numeric digits: 1234567800019");
+			}).toThrow("CNPJ must contain 14 numeric digits: 1234567800019");
 		});
 
 		it("should throw error for CNPJ with 15 digits", () => {
 			expect(() => {
 				formatToCnpj("123456780001951");
-			}).toThrow("CNPJ must be contain 14 numeric digits: 123456780001951");
+			}).toThrow("CNPJ must contain 14 numeric digits: 123456780001951");
 		});
 	});
 

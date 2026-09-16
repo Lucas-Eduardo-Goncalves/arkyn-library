@@ -58,49 +58,49 @@ describe("formatToCep", () => {
 		it("should throw error for CEP with less than 8 digits", () => {
 			expect(() => {
 				formatToCep("1234567");
-			}).toThrow("CEP must be contain 8 numeric digits: 1234567");
+			}).toThrow("CEP must contain 8 numeric digits: 1234567");
 		});
 
 		it("should throw error for CEP with more than 8 numeric digits", () => {
 			expect(() => {
 				formatToCep("123456789");
-			}).toThrow("CEP must be contain 8 numeric digits: 123456789");
+			}).toThrow("CEP must contain 8 numeric digits: 123456789");
 		});
 
 		it("should throw error for empty string", () => {
 			expect(() => {
 				formatToCep("");
-			}).toThrow("CEP must be contain 8 numeric digits: ");
+			}).toThrow("CEP must contain 8 numeric digits: ");
 		});
 
 		it("should throw error for only special characters", () => {
 			expect(() => {
 				formatToCep("---...///");
-			}).toThrow("CEP must be contain 8 numeric digits: ---...///");
+			}).toThrow("CEP must contain 8 numeric digits: ---...///");
 		});
 
 		it("should throw error for letters only", () => {
 			expect(() => {
 				formatToCep("abcdefgh");
-			}).toThrow("CEP must be contain 8 numeric digits: abcdefgh");
+			}).toThrow("CEP must contain 8 numeric digits: abcdefgh");
 		});
 
 		it("should throw error for mixed letters and numbers", () => {
 			expect(() => {
 				formatToCep("12345abc");
-			}).toThrow("CEP must be contain 8 numeric digits: 12345abc");
+			}).toThrow("CEP must contain 8 numeric digits: 12345abc");
 		});
 
 		it("should throw error for CEP with only 1 digit", () => {
 			expect(() => {
 				formatToCep("1");
-			}).toThrow("CEP must be contain 8 numeric digits: 1");
+			}).toThrow("CEP must contain 8 numeric digits: 1");
 		});
 
 		it("should throw error for CEP with only 5 digits", () => {
 			expect(() => {
 				formatToCep("12345");
-			}).toThrow("CEP must be contain 8 numeric digits: 12345");
+			}).toThrow("CEP must contain 8 numeric digits: 12345");
 		});
 	});
 

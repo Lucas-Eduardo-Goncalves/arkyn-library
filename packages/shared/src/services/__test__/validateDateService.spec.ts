@@ -187,6 +187,10 @@ describe("ValidateDateService", () => {
 			expect(() => service.validateInputFormat("isoDate")).not.toThrow();
 		});
 
+		it("should validate 'usDate' format", () => {
+			expect(() => service.validateInputFormat("usDate")).not.toThrow();
+		});
+
 		it("should validate 'timestamp' format", () => {
 			expect(() => service.validateInputFormat("timestamp")).not.toThrow();
 		});
@@ -235,6 +239,46 @@ describe("ValidateDateService", () => {
 			for (let day = 1; day <= 28; day++) {
 				expect(() => service.validateDateParts(2023, 2, day)).not.toThrow();
 			}
+		});
+	});
+
+	describe("parseDateParts (BUG-05)", () => {
+		it("should order parts as [day, month, year] for 'brazilianDate'", () => {
+			expect(service.parseDateParts([25, 12, 2023], "brazilianDate")).toEqual({
+				day: 25,
+				month: 12,
+				year: 2023,
+			});
+		});
+
+		it("should order parts as [month, day, year] for 'usDate'", () => {
+			expect(service.parseDateParts([12, 25, 2023], "usDate")).toEqual({
+				day: 25,
+				month: 12,
+				year: 2023,
+			});
+		});
+
+		it("should order parts as [year, month, day] for 'timestamp' (the actual ISO 8601 order)", () => {
+			expect(service.parseDateParts([2023, 12, 25], "timestamp")).toEqual({
+				day: 25,
+				month: 12,
+				year: 2023,
+			});
+		});
+
+		it("'isoDate' (deprecated) should parse identically to 'usDate', not to real ISO 8601 order", () => {
+			const isoDateResult = service.parseDateParts([12, 25, 2023], "isoDate");
+			const usDateResult = service.parseDateParts([12, 25, 2023], "usDate");
+
+			expect(isoDateResult).toEqual(usDateResult);
+			expect(isoDateResult).toEqual({ day: 25, month: 12, year: 2023 });
+		});
+
+		it("should validate the resulting date parts and throw for an invalid date", () => {
+			expect(() =>
+				service.parseDateParts([30, 2, 2023], "brazilianDate"),
+			).toThrow("Day 30 is not valid for February");
 		});
 	});
 });

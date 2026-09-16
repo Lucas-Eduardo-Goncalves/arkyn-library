@@ -13,16 +13,16 @@ import { BadResponse } from "./_badResponse";
 class BadGateway extends BadResponse {
 	/**
 	 * @param message - Error description sent in the response body and logged for debugging.
-	 * @param cause - Optional extra context (serialized to JSON in the response).
+	 * @param cause - Optional extra context.
 	 */
 	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	constructor(message: string, cause?: any) {
-		super();
+		super(message);
 
 		this.name = "BadGateway";
 		this.status = 502;
 		this.statusText = message;
-		this.cause = cause ? JSON.stringify(cause) : undefined;
+		this.cause = cause;
 
 		this.onDebug();
 	}

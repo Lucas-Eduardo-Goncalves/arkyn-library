@@ -23,7 +23,10 @@ function formatToCurrency(
 	config?: { showPrefix?: boolean },
 ): string {
 	if (!countryCurrencies?.[currency]) {
-		throw new Error("Unsupported currency code");
+		const supported = Object.keys(countryCurrencies).join(", ");
+		throw new Error(
+			`Unsupported currency code: ${currency}. Supported codes: ${supported}.`,
+		);
 	}
 
 	const showPrefix = config?.showPrefix ?? true;

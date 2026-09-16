@@ -34,7 +34,7 @@ describe("BadGateway", () => {
 			const cause = { error: "Upstream service unavailable" };
 			const error = new BadGateway("Gateway error", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should not set cause when not provided", () => {
@@ -51,7 +51,7 @@ describe("BadGateway", () => {
 			};
 			const error = new BadGateway("Gateway error", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should call onDebug on instantiation", () => {
@@ -80,7 +80,7 @@ describe("BadGateway", () => {
 			expect(body).toEqual({
 				name: "BadGateway",
 				message: "Gateway error",
-				cause: JSON.stringify(cause),
+				cause: cause,
 			});
 		});
 	});
@@ -132,7 +132,7 @@ describe("BadGateway", () => {
 			const response = error.toResponse();
 			const body = await response.json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should return valid JSON string", async () => {
@@ -184,7 +184,7 @@ describe("BadGateway", () => {
 			const response = error.toJson();
 			const body = await response.json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should automatically set Content-Type to application/json", () => {
@@ -210,7 +210,7 @@ describe("BadGateway", () => {
 
 			expect(response.status).toBe(502);
 			expect(body.message).toBe("Upstream service timeout");
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should handle invalid upstream response", async () => {
@@ -277,7 +277,7 @@ describe("BadGateway", () => {
 
 		it("should handle null cause", () => {
 			const error = new BadGateway("Gateway error", null);
-			expect(error.cause).toBeUndefined();
+			expect(error.cause).toBeNull();
 		});
 
 		it("should handle undefined cause explicitly", () => {
@@ -288,7 +288,7 @@ describe("BadGateway", () => {
 		it("should handle array as cause", () => {
 			const cause = ["error1", "error2", "error3"];
 			const error = new BadGateway("Gateway error", cause);
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should handle nested object as cause", () => {
@@ -298,7 +298,7 @@ describe("BadGateway", () => {
 			};
 
 			const error = new BadGateway("Gateway error", cause);
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 	});
 });

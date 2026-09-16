@@ -72,16 +72,67 @@ class ValidateDateService {
 	}
 
 	/**
-	 * Throws if `format` is not one of `"brazilianDate"`, `"isoDate"`, or `"timestamp"`.
+	 * Throws if `format` is not one of `"brazilianDate"`, `"isoDate"`, `"usDate"`, or `"timestamp"`.
 	 *
 	 * @param format - The format string to check.
 	 */
 	validateInputFormat(format: string): void {
-		const validFormats = ["brazilianDate", "isoDate", "timestamp"];
+		const validFormats = ["brazilianDate", "isoDate", "usDate", "timestamp"];
 		if (!validFormats.includes(format)) {
 			throw new Error(`Invalid input format: ${format}`);
 		}
 	}
+
+	/**
+	 * Splits `[year, month, day]` out of already-split numeric date parts
+	 * according to `inputFormat`, and validates them via {@link validateDateParts}.
+	 *
+	 * Centralizes the date-part ordering shared by `parseToDate`, `formatDate`,
+	 * and `validateDate` so it isn't duplicated (and can't drift) across packages.
+	 *
+	 * @param dateParts - The numeric date components in their format-specific order
+	 * (e.g. `date.split(/[-/]/).map(Number)`).
+	 * @param inputFormat - `"brazilianDate"` (DD/MM/YYYY), `"isoDate"`/`"usDate"`
+	 * (MM-DD-YYYY — `"isoDate"` is a deprecated alias for `"usDate"`, see
+	 * `DateInputFormat`), or `"timestamp"` (YYYY-MM-DD, the actual ISO 8601 date format).
+	 * @returns `{ year, month, day }`.
+	 */
+	parseDateParts(
+		dateParts: number[],
+		inputFormat: DateInputFormat,
+	): { year: number; month: number; day: number } {
+		let day: number;
+		let month: number;
+		let year: number;
+
+		switch (inputFormat) {
+			case "brazilianDate":
+				[day, month, year] = dateParts;
+				break;
+			case "isoDate":
+			case "usDate":
+				[month, day, year] = dateParts;
+				break;
+			case "timestamp":
+				[year, month, day] = dateParts;
+				break;
+		}
+
+		this.validateDateParts(year, month, day);
+
+		return { year, month, day };
+	}
 }
 
-export { ValidateDateService };
+/**
+ * Parsing format accepted by `parseToDate`, `formatDate`, and `validateDate`:
+ * - `"brazilianDate"`: DD/MM/YYYY
+ * - `"usDate"`: MM-DD-YYYY
+ * - `"isoDate"`: deprecated. Misnamed alias for `"usDate"` (MM-DD-YYYY) — despite
+ *   the name, this is **not** ISO 8601. Kept for backward compatibility; use
+ *   `"usDate"` instead. For real ISO 8601 dates (YYYY-MM-DD), use `"timestamp"`.
+ * - `"timestamp"`: YYYY-MM-DD — the actual ISO 8601 date format.
+ */
+type DateInputFormat = "brazilianDate" | "isoDate" | "usDate" | "timestamp";
+
+export { type DateInputFormat, ValidateDateService };

@@ -4,6 +4,7 @@ type InputProps = {
 	url: string;
 	urlParams?: Record<string, string>;
 	headers?: HeadersInit;
+	timeoutMs?: number;
 };
 
 /**
@@ -23,6 +24,7 @@ async function getRequest<T = any>(
 		url: input.url,
 		urlParams: input.urlParams,
 		headers: input.headers,
+		timeoutMs: input.timeoutMs,
 	});
 }
 

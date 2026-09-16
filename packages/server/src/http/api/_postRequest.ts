@@ -6,6 +6,7 @@ type InputProps = {
 	headers?: HeadersInit;
 	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	body?: any;
+	timeoutMs?: number;
 };
 
 /**
@@ -26,6 +27,7 @@ async function postRequest<T = any>(
 		urlParams: input.urlParams,
 		headers: input.headers,
 		body: input.body,
+		timeoutMs: input.timeoutMs,
 	});
 }
 

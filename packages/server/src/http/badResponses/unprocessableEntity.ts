@@ -47,7 +47,7 @@ class UnprocessableEntity extends BadResponse {
 		fields?: Record<string, string>;
 		message?: string;
 	}) {
-		super();
+		super(props.message || "Unprocessable entity");
 
 		this.name = "UnprocessableEntity";
 		this.status = 422;

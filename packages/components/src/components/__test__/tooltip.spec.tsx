@@ -347,6 +347,108 @@ describe("Tooltip", () => {
 		});
 	});
 
+	describe("XSS sanitization", () => {
+		it("should strip <script> tags and never execute their contents", () => {
+			const { container } = render(
+				<Tooltip text="<script>window.__xss = true;</script>Hello">
+					<button type="button">Trigger</button>
+				</Tooltip>,
+			);
+
+			const bubble = container.querySelector(".arkynTooltipText");
+			expect(bubble?.querySelector("script")).not.toBeInTheDocument();
+			expect(bubble).toHaveTextContent("Hello");
+			expect((window as unknown as { __xss?: boolean }).__xss).toBeUndefined();
+		});
+
+		it("should strip onerror attributes from img tags", () => {
+			const { container } = render(
+				<Tooltip text='<img src="x" onerror="window.__xss = true;" />'>
+					<button type="button">Trigger</button>
+				</Tooltip>,
+			);
+
+			const bubble = container.querySelector(".arkynTooltipText");
+			expect(bubble?.querySelector("img")).not.toBeInTheDocument();
+			expect((window as unknown as { __xss?: boolean }).__xss).toBeUndefined();
+		});
+
+		it("should strip onclick attributes from allowed tags", () => {
+			const { container } = render(
+				<Tooltip text='<span onclick="window.__xss = true;">Click me</span>'>
+					<button type="button">Trigger</button>
+				</Tooltip>,
+			);
+
+			const bubble = container.querySelector(".arkynTooltipText");
+			const span = bubble?.querySelector("span");
+			expect(span).toBeInTheDocument();
+			expect(span).not.toHaveAttribute("onclick");
+			expect(span?.getAttribute("onclick")).toBeNull();
+		});
+
+		it("should strip javascript: URLs from anchor tags (anchor tag itself is not allowlisted)", () => {
+			const { container } = render(
+				<Tooltip text='<a href="javascript:window.__xss = true;">Link</a>'>
+					<button type="button">Trigger</button>
+				</Tooltip>,
+			);
+
+			const bubble = container.querySelector(".arkynTooltipText");
+			expect(bubble?.querySelector("a")).not.toBeInTheDocument();
+			expect(bubble).toHaveTextContent("Link");
+		});
+
+		it("should strip iframe tags", () => {
+			const { container } = render(
+				<Tooltip text='<iframe src="javascript:window.__xss = true;"></iframe>Safe'>
+					<button type="button">Trigger</button>
+				</Tooltip>,
+			);
+
+			const bubble = container.querySelector(".arkynTooltipText");
+			expect(bubble?.querySelector("iframe")).not.toBeInTheDocument();
+			expect(bubble).toHaveTextContent("Safe");
+		});
+
+		it("should strip svg/onload payloads", () => {
+			const { container } = render(
+				<Tooltip text='<svg onload="window.__xss = true;"></svg>Safe'>
+					<button type="button">Trigger</button>
+				</Tooltip>,
+			);
+
+			const bubble = container.querySelector(".arkynTooltipText");
+			expect(bubble?.querySelector("svg")).not.toBeInTheDocument();
+			expect((window as unknown as { __xss?: boolean }).__xss).toBeUndefined();
+		});
+
+		it("should still allow the small inline-formatting allowlist", () => {
+			const { container } = render(
+				<Tooltip text="<b>Bold</b> <i>Italic</i> <u>Underline</u> <span>Span</span>">
+					<button type="button">Trigger</button>
+				</Tooltip>,
+			);
+
+			const bubble = container.querySelector(".arkynTooltipText");
+			expect(bubble?.querySelector("b")).toBeInTheDocument();
+			expect(bubble?.querySelector("i")).toBeInTheDocument();
+			expect(bubble?.querySelector("u")).toBeInTheDocument();
+			expect(bubble?.querySelector("span")).toBeInTheDocument();
+		});
+
+		it("should render plain text without alteration", () => {
+			const { container } = render(
+				<Tooltip text="Just plain text, no markup">
+					<button type="button">Trigger</button>
+				</Tooltip>,
+			);
+
+			const bubble = container.querySelector(".arkynTooltipText");
+			expect(bubble).toHaveTextContent("Just plain text, no markup");
+		});
+	});
+
 	describe("edge cases", () => {
 		it("should handle an empty text string without throwing", () => {
 			const { container } = render(

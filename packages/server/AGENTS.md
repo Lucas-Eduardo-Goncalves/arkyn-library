@@ -152,6 +152,11 @@ All `(value: string) => boolean`, never throw:
 - Signature: `decodeRequestErrorMessage(data: any, response: Response): string`
 - Extracts a human message from an API error payload, checking in order: `data.message`, `data.operator_erro_message`, `data.error`, `data.error.message`, `response.statusText`, falling back to `"Missing error message"`.
 
+#### withSecurityHeaders
+- Import: `import { withSecurityHeaders } from "@arkyn/server/withSecurityHeaders";`
+- Signature: `withSecurityHeaders(response: Response, overrides?: Record<string, string | null>): Response`
+- Sets `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin` on `response` (mutated in place, same instance returned). Opt-in — never called automatically by any response class. Not included by default: `Content-Security-Policy`, `Strict-Transport-Security` (too app-specific). `overrides`: a string replaces/adds a header, `null` removes a default.
+
 #### errorHandler
 - Import: `import { errorHandler } from "@arkyn/server/errorHandler";`
 - Signature: `errorHandler(error: any): Response`
@@ -190,8 +195,8 @@ Every method returns whatever the underlying request helper resolves (an object 
 
 #### LogService (static)
 - Import: `import { LogService } from "@arkyn/server/logService";`
-- `LogService.setConfig(config: { trafficSourceId: string; userToken: string; logBaseApiUrl?: string }): void` — only applies on the **first** call; later calls are silently ignored until `resetConfig()`.
-- `LogService.getConfig(): { trafficSourceId; userToken; apiUrl } | undefined`
+- `LogService.setConfig(config: { trafficSourceId: string; serviceToken: string; logBaseApiUrl?: string }): void` — only applies on the **first** call; later calls are ignored (logs a dev-mode warning) until `resetConfig()`. `serviceToken` must be a static, application-level credential (e.g. an env var) — never a per-request/session value, since only the first call's value is ever kept. Call once at app boot, not inside a request handler. `userToken` is accepted as a deprecated alias.
+- `LogService.getConfig(): { trafficSourceId; serviceToken; apiUrl } | undefined`
 - `LogService.resetConfig(): void`
 
 ## Related packages

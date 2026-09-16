@@ -1,6 +1,6 @@
 # @arkyn/cli
 
-Command-line tool for the Arkyn ecosystem, generates and maintains an `AGENTS.md` file so AI coding assistants (Claude Code, Cursor, Copilot, and others that read `AGENTS.md`/`CLAUDE.md`) know how to use the `@arkyn/*` packages installed in your project.
+Command-line tool for the Arkyn ecosystem, generates and maintains an `AGENTS.md` file so AI coding assistants know how to use the `@arkyn/*` packages installed in your project. `AGENTS.md` is a cross-tool convention read by Claude Code, Cursor, Copilot, and others out of the box — this CLI only ever writes to `AGENTS.md`; it does not create or modify a tool-specific file like `CLAUDE.md`.
 
 [![npm version](https://img.shields.io/npm/v/@arkyn/cli.svg)](https://www.npmjs.com/package/@arkyn/cli)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -68,6 +68,10 @@ If no `@arkyn/*` package is installed, or none of them ship an `AGENTS.md` yet, 
 ### `arkyn --help`
 
 Prints usage information.
+
+### `arkyn --version` / `arkyn -v`
+
+Prints the installed `@arkyn/cli` version (read from its own `package.json`, e.g. `3.0.11`).
 
 ## 📚 Documentation
 

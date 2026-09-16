@@ -157,7 +157,7 @@ export function LoginForm() {
 | `ModalHeader` | Header section for a `ModalContainer`, with an optional close button. |
 | `MultiSelect` | Multi-option dropdown with optional search, label, validation, and form integration. |
 | `Pagination` | Navigation control for paginated data sets, rendering page buttons, prev/next arrows, and spread indicators. |
-| `PhoneInput` | Phone number field with an integrated country selector and automatic mask formatting. |
+| `PhoneInput` | Phone number field with an integrated country selector and automatic mask formatting. Country flag icons load from an external CDN — see `@arkyn/templates`'s README (`countries`/`flag`) for details and CSP/offline implications. |
 | `Popover` | Floating panel that appears relative to a trigger element and dismisses on outside click. |
 | `RadioBox` | Individual option inside a `RadioGroup`, rendered as a label/hidden-button pair. |
 | `RadioGroup` | Managed group of `RadioBox` options with form integration. |

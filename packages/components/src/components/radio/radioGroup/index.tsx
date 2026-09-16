@@ -123,7 +123,7 @@ function RadioGroup(props: RadioGroupProps) {
 					value={forceValue || value}
 				/>
 
-				<div className={className.trim()} {...rest} />
+				<div role="radiogroup" className={className.trim()} {...rest} />
 			</RadioProvider>
 		</FieldTemplate>
 	);

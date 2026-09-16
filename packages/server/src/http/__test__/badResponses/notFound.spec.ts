@@ -34,7 +34,7 @@ describe("NotFound", () => {
 			const cause = { resourceId: "123", resourceType: "user" };
 			const error = new NotFound("User not found", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should not set cause when not provided", () => {
@@ -54,7 +54,7 @@ describe("NotFound", () => {
 			};
 			const error = new NotFound("Document not found", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should call onDebug on instantiation", () => {
@@ -84,7 +84,7 @@ describe("NotFound", () => {
 			expect(body).toEqual({
 				name: "NotFound",
 				message: "User not found",
-				cause: JSON.stringify(cause),
+				cause: cause,
 			});
 		});
 	});
@@ -136,7 +136,7 @@ describe("NotFound", () => {
 			const response = error.toResponse();
 			const body = await response.json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should return valid JSON string", async () => {
@@ -188,7 +188,7 @@ describe("NotFound", () => {
 			const response = error.toJson();
 			const body = await response.json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should automatically set Content-Type to application/json", () => {
@@ -214,7 +214,7 @@ describe("NotFound", () => {
 
 			expect(response.status).toBe(404);
 			expect(body.message).toBe("User not found");
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should handle document not found scenario", async () => {
@@ -241,7 +241,7 @@ describe("NotFound", () => {
 			const body = await response.json();
 
 			expect(response.status).toBe(404);
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should handle file not found scenario", async () => {
@@ -322,7 +322,7 @@ describe("NotFound", () => {
 		it("should handle null cause", () => {
 			const error = new NotFound("Resource not found", null);
 
-			expect(error.cause).toBeUndefined();
+			expect(error.cause).toBeNull();
 		});
 
 		it("should handle undefined cause explicitly", () => {
@@ -335,7 +335,7 @@ describe("NotFound", () => {
 			const cause = ["id-1", "id-2", "id-3"];
 			const error = new NotFound("Multiple resources not found", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should handle nested object as cause", () => {
@@ -350,7 +350,7 @@ describe("NotFound", () => {
 			};
 			const error = new NotFound("No results found", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should handle special characters in message", () => {
@@ -370,19 +370,19 @@ describe("NotFound", () => {
 		it("should handle number as cause", () => {
 			const error = new NotFound("Resource not found", 404);
 
-			expect(error.cause).toBe("404");
+			expect(error.cause).toBe(404);
 		});
 
 		it("should handle empty object as cause", () => {
 			const error = new NotFound("Resource not found", {});
 
-			expect(error.cause).toBe("{}");
+			expect(error.cause).toEqual({});
 		});
 
 		it("should handle empty array as cause", () => {
 			const error = new NotFound("Resource not found", []);
 
-			expect(error.cause).toBe("[]");
+			expect(error.cause).toEqual([]);
 		});
 
 		it("should handle UUID as resource id in cause", () => {
@@ -392,7 +392,7 @@ describe("NotFound", () => {
 			};
 			const error = new NotFound("User not found", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 	});
 });

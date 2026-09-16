@@ -6,10 +6,17 @@ import {
 	useRef,
 	useState,
 } from "react";
+import { sanitizeTooltipHtml } from "../../utils/sanitizeTooltipHtml";
 import "./styles.css";
 
 type TooltipProps = Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
-	/** Text rendered inside the tooltip bubble. Supports inline HTML. Required. */
+	/**
+	 * Text rendered inside the tooltip bubble. Supports a small set of
+	 * inline formatting tags (`b`, `strong`, `i`, `em`, `u`, `br`, `span`,
+	 * `small`); anything else (including `<script>`, event handler
+	 * attributes and all other attributes) is stripped before rendering.
+	 * Required.
+	 */
 	text: string;
 	/** Element that triggers the tooltip on hover. Required. */
 	children: ReactNode;
@@ -31,7 +38,7 @@ type TooltipProps = Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
  *
  * The tooltip automatically flips to the opposite side when it would overflow the viewport.
  *
- * @param props.text - Text (or HTML) to display in the tooltip. Required.
+ * @param props.text - Text (or a small subset of inline HTML — see prop docs) to display in the tooltip. Sanitized before render. Required.
  * @param props.children - Trigger element. Required.
  * @param props.orientation - Preferred position relative to the trigger. Default: "top"
  * @param props.size - Tooltip size. Default: "lg"
@@ -138,7 +145,7 @@ function Tooltip(props: TooltipProps) {
 			<div
 				className="arkynTooltipText"
 				id={tooltipId}
-				dangerouslySetInnerHTML={{ __html: text }}
+				dangerouslySetInnerHTML={{ __html: sanitizeTooltipHtml(text) }}
 			/>
 		</div>
 	);

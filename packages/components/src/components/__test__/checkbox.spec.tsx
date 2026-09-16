@@ -590,7 +590,7 @@ describe("Checkbox", () => {
 			render(<Checkbox name="terms" aria-label="Accept the terms" />);
 
 			expect(
-				screen.getByRole("button", { name: "Accept the terms" }),
+				screen.getByRole("checkbox", { name: "Accept the terms" }),
 			).toBeInTheDocument();
 		});
 
@@ -600,6 +600,84 @@ describe("Checkbox", () => {
 			const label = screen.getByText("I agree");
 			const wrapper = label.closest("section") as HTMLElement;
 			expect(wrapper).toHaveAttribute("id", "terms");
+		});
+
+		it("should expose role='checkbox' (A11Y-04)", () => {
+			render(<Checkbox name="terms" />);
+
+			expect(screen.getByRole("checkbox")).toBeInTheDocument();
+		});
+
+		it("should reflect the unchecked state via aria-checked='false' (A11Y-04)", () => {
+			render(<Checkbox name="terms" />);
+
+			expect(screen.getByRole("checkbox")).toHaveAttribute(
+				"aria-checked",
+				"false",
+			);
+		});
+
+		it("should reflect the checked state via aria-checked='true' (A11Y-04)", () => {
+			render(<Checkbox name="terms" defaultChecked />);
+
+			expect(screen.getByRole("checkbox")).toHaveAttribute(
+				"aria-checked",
+				"true",
+			);
+		});
+
+		it("should update aria-checked on toggle (uncontrolled)", async () => {
+			const user = userEvent.setup();
+			render(<Checkbox name="terms" />);
+
+			const checkbox = screen.getByRole("checkbox");
+			await user.click(checkbox);
+
+			expect(checkbox).toHaveAttribute("aria-checked", "true");
+		});
+
+		it("should reflect the controlled checked prop via aria-checked", () => {
+			const { rerender } = render(<Checkbox name="terms" checked={false} />);
+			expect(screen.getByRole("checkbox")).toHaveAttribute(
+				"aria-checked",
+				"false",
+			);
+
+			rerender(<Checkbox name="terms" checked={true} />);
+			expect(screen.getByRole("checkbox")).toHaveAttribute(
+				"aria-checked",
+				"true",
+			);
+		});
+
+		it("should expose the disabled state to assistive technology", () => {
+			render(<Checkbox name="terms" disabled />);
+
+			expect(screen.getByRole("checkbox")).toBeDisabled();
+		});
+
+		it("should be toggleable with the keyboard (Space/Enter via native button semantics)", async () => {
+			const user = userEvent.setup();
+			render(<Checkbox name="terms" />);
+
+			await user.tab();
+			await user.keyboard("{ }");
+
+			expect(screen.getByRole("checkbox")).toHaveAttribute(
+				"aria-checked",
+				"true",
+			);
+		});
+
+		it("should not toggle via keyboard when disabled", async () => {
+			const user = userEvent.setup();
+			render(<Checkbox name="terms" disabled />);
+
+			const checkbox = screen.getByRole("checkbox");
+			checkbox.focus();
+			await user.keyboard("{ }");
+
+			expect(checkbox).toHaveAttribute("aria-checked", "false");
 		});
 	});
 

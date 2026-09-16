@@ -169,6 +169,20 @@ describe("formatToCurrency", () => {
 			}).toThrow("Unsupported currency code");
 		});
 
+		it("should name the invalid currency code in the error message (DX-03)", () => {
+			expect(() => {
+				// @ts-expect-error - Testing invalid currency
+				formatToCurrency(1234.56, "XXX");
+			}).toThrow("Unsupported currency code: XXX");
+		});
+
+		it("should list the supported currency codes in the error message (DX-03)", () => {
+			expect(() => {
+				// @ts-expect-error - Testing invalid currency
+				formatToCurrency(1234.56, "XXX");
+			}).toThrow(/Supported codes: .*USD.*BRL/);
+		});
+
 		it("should throw error for null currency", () => {
 			expect(() => {
 				// @ts-expect-error - Testing null currency

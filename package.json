@@ -22,16 +22,20 @@
 		"@arkyn/shared": "workspace:*",
 		"@arkyn/templates": "workspace:*",
 		"@arkyn/ui": "workspace:*",
-		"@biomejs/biome": "^2.5.7",
-		"@types/bun": "catalog:",
-		"@types/node": "catalog:",
-		"concurrently": "^10.0.4"
+		"@biomejs/biome": "^2.5.13",
+		"@types/bun": "^1.4.2",
+		"@types/node": "^22.20.3",
+		"concurrently": "^10.0.5"
 	},
 	"overrides": {
 		"shell-quote": "^1.9.0",
 		"nanoid": "^3.3.18",
 		"postcss": "^8.5.26",
-		"undici": "^7.29.0"
+		"undici": "^7.29.0",
+		"qs": "^6.16.0",
+		"morgan": "^1.12.1",
+		"browserslist": "^4.29.0",
+		"baseline-browser-mapping": "^2.11.24"
 	},
 	"catalog": {
 		"@biomejs/biome": "^2.5.1",

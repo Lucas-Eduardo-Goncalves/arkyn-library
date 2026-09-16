@@ -11,17 +11,17 @@ import { BadResponse } from "./_badResponse";
 class Unauthorized extends BadResponse {
 	/**
 	 * @param message - Error description.
-	 * @param cause - Optional extra context (serialized to JSON).
+	 * @param cause - Optional extra context.
 	 */
 	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	constructor(message: string, cause?: any) {
-		super();
+		super(message);
 
 		this.name = "Unauthorized";
 		this.status = 401;
 		this.statusText = message;
 		this.debugColor = "yellow";
-		this.cause = cause ? JSON.stringify(cause) : undefined;
+		this.cause = cause;
 
 		this.onDebug();
 	}

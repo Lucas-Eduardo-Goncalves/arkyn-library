@@ -1,6 +1,6 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { Slider } from "../slider";
 
 function mockTrackRect(element: HTMLElement) {
@@ -18,6 +18,10 @@ function mockTrackRect(element: HTMLElement) {
 }
 
 describe("Slider", () => {
+	afterEach(() => {
+		cleanup();
+	});
+
 	it("should render without errors", () => {
 		const { container } = render(<Slider value={50} onChange={vi.fn()} />);
 
@@ -472,6 +476,260 @@ describe("Slider", () => {
 			expect(() => {
 				fireEvent.click(track, { clientX: 10 });
 			}).not.toThrow();
+		});
+	});
+
+	describe("accessibility (A11Y-05)", () => {
+		it("should expose role='slider' with aria-valuemin/max/now", () => {
+			render(<Slider value={40} onChange={vi.fn()} />);
+
+			const slider = screen.getByRole("slider");
+			expect(slider).toHaveAttribute("aria-valuemin", "0");
+			expect(slider).toHaveAttribute("aria-valuemax", "100");
+			expect(slider).toHaveAttribute("aria-valuenow", "40");
+		});
+
+		it("should update aria-valuenow when the value prop changes", () => {
+			const { rerender } = render(<Slider value={10} onChange={vi.fn()} />);
+			expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "10");
+
+			rerender(<Slider value={90} onChange={vi.fn()} />);
+			expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "90");
+		});
+
+		it("should be focusable via tab", async () => {
+			const user = userEvent.setup();
+			render(<Slider value={0} onChange={vi.fn()} />);
+
+			await user.tab();
+
+			expect(screen.getByRole("slider")).toHaveFocus();
+		});
+
+		it("should not be focusable via tab when disabled", async () => {
+			const user = userEvent.setup();
+			render(<Slider value={0} onChange={vi.fn()} disabled />);
+
+			await user.tab();
+
+			expect(screen.getByRole("slider")).not.toHaveFocus();
+		});
+
+		it("should expose aria-disabled when disabled", () => {
+			render(<Slider value={0} onChange={vi.fn()} disabled />);
+
+			expect(screen.getByRole("slider")).toHaveAttribute(
+				"aria-disabled",
+				"true",
+			);
+		});
+
+		it("should not have aria-disabled when enabled", () => {
+			render(<Slider value={0} onChange={vi.fn()} />);
+
+			expect(screen.getByRole("slider")).not.toHaveAttribute("aria-disabled");
+		});
+
+		describe("keyboard navigation", () => {
+			it("should increase the value by step on ArrowRight", async () => {
+				const user = userEvent.setup();
+				const handleChange = vi.fn();
+				render(<Slider value={50} onChange={handleChange} />);
+
+				screen.getByRole("slider").focus();
+				await user.keyboard("{ArrowRight}");
+
+				expect(handleChange).toHaveBeenCalledWith(51);
+			});
+
+			it("should increase the value by step on ArrowUp", async () => {
+				const user = userEvent.setup();
+				const handleChange = vi.fn();
+				render(<Slider value={50} onChange={handleChange} />);
+
+				screen.getByRole("slider").focus();
+				await user.keyboard("{ArrowUp}");
+
+				expect(handleChange).toHaveBeenCalledWith(51);
+			});
+
+			it("should decrease the value by step on ArrowLeft", async () => {
+				const user = userEvent.setup();
+				const handleChange = vi.fn();
+				render(<Slider value={50} onChange={handleChange} />);
+
+				screen.getByRole("slider").focus();
+				await user.keyboard("{ArrowLeft}");
+
+				expect(handleChange).toHaveBeenCalledWith(49);
+			});
+
+			it("should decrease the value by step on ArrowDown", async () => {
+				const user = userEvent.setup();
+				const handleChange = vi.fn();
+				render(<Slider value={50} onChange={handleChange} />);
+
+				screen.getByRole("slider").focus();
+				await user.keyboard("{ArrowDown}");
+
+				expect(handleChange).toHaveBeenCalledWith(49);
+			});
+
+			it("should respect a custom step size", async () => {
+				const user = userEvent.setup();
+				const handleChange = vi.fn();
+				render(<Slider value={50} onChange={handleChange} step={5} />);
+
+				screen.getByRole("slider").focus();
+				await user.keyboard("{ArrowRight}");
+
+				expect(handleChange).toHaveBeenCalledWith(55);
+			});
+
+			it("should jump to 0 on Home", async () => {
+				const user = userEvent.setup();
+				const handleChange = vi.fn();
+				render(<Slider value={50} onChange={handleChange} />);
+
+				screen.getByRole("slider").focus();
+				await user.keyboard("{Home}");
+
+				expect(handleChange).toHaveBeenCalledWith(0);
+			});
+
+			it("should jump to 100 on End", async () => {
+				const user = userEvent.setup();
+				const handleChange = vi.fn();
+				render(<Slider value={50} onChange={handleChange} />);
+
+				screen.getByRole("slider").focus();
+				await user.keyboard("{End}");
+
+				expect(handleChange).toHaveBeenCalledWith(100);
+			});
+
+			it("should move by a larger increment on PageUp/PageDown", async () => {
+				const user = userEvent.setup();
+				const handleChange = vi.fn();
+				render(<Slider value={50} onChange={handleChange} />);
+
+				screen.getByRole("slider").focus();
+				await user.keyboard("{PageUp}");
+				expect(handleChange).toHaveBeenLastCalledWith(60);
+
+				await user.keyboard("{PageDown}");
+				expect(handleChange).toHaveBeenLastCalledWith(40);
+			});
+
+			it("should clamp keyboard movement at 0 and 100", async () => {
+				const user = userEvent.setup();
+				const handleChange = vi.fn();
+				render(<Slider value={0} onChange={handleChange} />);
+
+				screen.getByRole("slider").focus();
+				await user.keyboard("{ArrowLeft}");
+
+				expect(handleChange).toHaveBeenCalledWith(0);
+			});
+
+			it("should not respond to keyboard input when disabled", async () => {
+				const user = userEvent.setup();
+				const handleChange = vi.fn();
+				render(<Slider value={50} onChange={handleChange} disabled />);
+
+				const slider = screen.getByRole("slider");
+				slider.focus();
+				await user.keyboard("{ArrowRight}");
+
+				expect(handleChange).not.toHaveBeenCalled();
+			});
+
+			it("should ignore unrelated keys", async () => {
+				const user = userEvent.setup();
+				const handleChange = vi.fn();
+				render(<Slider value={50} onChange={handleChange} />);
+
+				screen.getByRole("slider").focus();
+				await user.keyboard("a");
+
+				expect(handleChange).not.toHaveBeenCalled();
+			});
+		});
+
+		describe("touch interaction", () => {
+			it("should call onChange on touch start at a given position", () => {
+				const handleChange = vi.fn();
+				const { container } = render(
+					<Slider value={0} onChange={handleChange} />,
+				);
+
+				const track = container.firstChild as HTMLElement;
+				mockTrackRect(track);
+
+				fireEvent.touchStart(track, {
+					touches: [{ clientX: 100 }],
+				});
+
+				expect(handleChange).toHaveBeenCalledWith(50);
+			});
+
+			it("should call onChange while dragging via touchmove", () => {
+				const handleChange = vi.fn();
+				const { container } = render(
+					<Slider value={0} onChange={handleChange} />,
+				);
+
+				const track = container.firstChild as HTMLElement;
+				mockTrackRect(track);
+
+				fireEvent.touchStart(track, { touches: [{ clientX: 0 }] });
+				fireEvent.touchMove(document, { touches: [{ clientX: 150 }] });
+
+				expect(handleChange).toHaveBeenLastCalledWith(75);
+			});
+
+			it("should stop calling onChange after touchend ends the drag", () => {
+				const handleChange = vi.fn();
+				const { container } = render(
+					<Slider value={0} onChange={handleChange} />,
+				);
+
+				const track = container.firstChild as HTMLElement;
+				mockTrackRect(track);
+
+				fireEvent.touchStart(track, { touches: [{ clientX: 0 }] });
+				fireEvent.touchEnd(document);
+				handleChange.mockClear();
+
+				fireEvent.touchMove(document, { touches: [{ clientX: 150 }] });
+
+				expect(handleChange).not.toHaveBeenCalled();
+			});
+
+			it("should not call onChange on touch start when disabled", () => {
+				const handleChange = vi.fn();
+				const { container } = render(
+					<Slider value={0} onChange={handleChange} disabled />,
+				);
+
+				const track = container.firstChild as HTMLElement;
+				mockTrackRect(track);
+
+				fireEvent.touchStart(track, { touches: [{ clientX: 100 }] });
+
+				expect(handleChange).not.toHaveBeenCalled();
+			});
+
+			it("should set isDragging state on touch start", () => {
+				const { container } = render(<Slider value={0} onChange={vi.fn()} />);
+
+				const track = container.firstChild as HTMLElement;
+				mockTrackRect(track);
+
+				fireEvent.touchStart(track, { touches: [{ clientX: 100 }] });
+
+				expect(track).toHaveClass("isDragging");
+			});
 		});
 	});
 

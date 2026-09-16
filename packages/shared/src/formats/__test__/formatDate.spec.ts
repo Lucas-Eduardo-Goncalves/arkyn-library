@@ -76,6 +76,36 @@ describe("formatDate", () => {
 		});
 	});
 
+	describe("usDate format (BUG-05: correctly-named replacement for 'isoDate')", () => {
+		it("should format a US date (MM-DD-YYYY) identically to 'isoDate'", () => {
+			const usDateResult = formatDate(
+				["12-25-2023", "15:30:00"],
+				"usDate",
+				"DD/MM/YYYY hh:mm:ss",
+			);
+			const isoDateResult = formatDate(
+				["12-25-2023", "15:30:00"],
+				"isoDate",
+				"DD/MM/YYYY hh:mm:ss",
+			);
+
+			expect(usDateResult).toBe(isoDateResult);
+			expect(usDateResult).toBe("25/12/2023 15:30:00");
+		});
+
+		it("should not be confused with real ISO 8601 order (YYYY-MM-DD, i.e. 'timestamp')", () => {
+			const usDateResult = formatDate(["01-05-2023"], "usDate", "YYYY-MM-DD");
+			const timestampResult = formatDate(
+				["2023-01-05"],
+				"timestamp",
+				"YYYY-MM-DD",
+			);
+
+			expect(usDateResult).toBe(timestampResult);
+			expect(usDateResult).toBe("2023-01-05");
+		});
+	});
+
 	describe("timestamp format", () => {
 		it("should format timestamp date to Brazilian format", () => {
 			const result = formatDate(

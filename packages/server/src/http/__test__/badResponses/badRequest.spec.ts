@@ -34,7 +34,7 @@ describe("BadRequest", () => {
 			const cause = { field: "email", error: "Invalid format" };
 			const error = new BadRequest("Validation error", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should not set cause when not provided", () => {
@@ -43,7 +43,7 @@ describe("BadRequest", () => {
 			expect(error.cause).toBeUndefined();
 		});
 
-		it("should stringify complex cause object", () => {
+		it("should preserve a complex cause object as-is (BUG-06: standardized, not double-JSON-encoded)", () => {
 			const cause = {
 				errors: [
 					{ field: "email", message: "Invalid email" },
@@ -52,13 +52,38 @@ describe("BadRequest", () => {
 			};
 			const error = new BadRequest("Validation failed", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			// Storing cause as a real object (rather than a pre-stringified JSON
+			// string) matches UnprocessableEntity's behavior, so a caller can read
+			// `error.cause.errors` directly instead of having to `JSON.parse` it.
+			expect(error.cause).toBe(cause);
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should call onDebug on instantiation", () => {
 			const _error = new BadRequest("Invalid request");
 
 			expect(consoleLogSpy).toHaveBeenCalled();
+		});
+
+		describe("falsy cause values (BUG-06)", () => {
+			// The previous `cause ? JSON.stringify(cause) : undefined` check
+			// silently dropped any falsy-but-meaningful cause (0, "", false),
+			// treating it the same as "no cause provided". Storing cause as-is
+			// fixes that data loss as a side effect of the standardization.
+			it("should preserve 0 as a cause", () => {
+				const error = new BadRequest("Invalid request", 0);
+				expect(error.cause).toBe(0);
+			});
+
+			it("should preserve an empty string as a cause", () => {
+				const error = new BadRequest("Invalid request", "");
+				expect(error.cause).toBe("");
+			});
+
+			it("should preserve false as a cause", () => {
+				const error = new BadRequest("Invalid request", false);
+				expect(error.cause).toBe(false);
+			});
 		});
 	});
 
@@ -82,7 +107,7 @@ describe("BadRequest", () => {
 			expect(body).toEqual({
 				name: "BadRequest",
 				message: "Validation error",
-				cause: JSON.stringify(cause),
+				cause: cause,
 			});
 		});
 	});
@@ -134,7 +159,7 @@ describe("BadRequest", () => {
 			const response = error.toResponse();
 			const body = await response.json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should return valid JSON string", async () => {
@@ -186,7 +211,7 @@ describe("BadRequest", () => {
 			const response = error.toJson();
 			const body = await response.json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should automatically set Content-Type to application/json", () => {
@@ -210,7 +235,7 @@ describe("BadRequest", () => {
 
 			expect(response.status).toBe(400);
 			expect(body.message).toBe("Missing required fields");
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should handle validation errors", async () => {
@@ -248,7 +273,7 @@ describe("BadRequest", () => {
 			const body = await response.json();
 
 			expect(response.status).toBe(400);
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 	});
 
@@ -294,7 +319,7 @@ describe("BadRequest", () => {
 
 		it("should handle null cause", () => {
 			const error = new BadRequest("Invalid request", null);
-			expect(error.cause).toBeUndefined();
+			expect(error.cause).toBeNull();
 		});
 
 		it("should handle undefined cause explicitly", () => {
@@ -307,7 +332,7 @@ describe("BadRequest", () => {
 			const cause = ["error1", "error2", "error3"];
 			const error = new BadRequest("Multiple errors", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should handle nested object as cause", () => {
@@ -317,7 +342,7 @@ describe("BadRequest", () => {
 				},
 			};
 			const error = new BadRequest("Validation failed", cause);
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should handle special characters in message", () => {

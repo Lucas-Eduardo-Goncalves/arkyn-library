@@ -1,10 +1,10 @@
-import { ValidateDateService } from "@arkyn/shared";
+import { type DateInputFormat, ValidateDateService } from "@arkyn/shared";
 
 /**
  * Validates a date string against a format and optional year bounds.
  *
  * @param date - The date string to validate.
- * @param config.inputFormat - Parsing format: `"brazilianDate"` (DD/MM/YYYY, default), `"isoDate"` (MM-DD-YYYY), or `"timestamp"` (YYYY-MM-DD).
+ * @param config.inputFormat - Parsing format: `"brazilianDate"` (DD/MM/YYYY, default), `"usDate"` (MM-DD-YYYY), `"isoDate"` (deprecated misnamed alias for `"usDate"` — not actually ISO 8601), or `"timestamp"` (YYYY-MM-DD, the actual ISO 8601 date format).
  * @param config.minYear - Minimum allowed year. Defaults to 1900.
  * @param config.maxYear - Maximum allowed year. Defaults to 3000.
  * @returns `true` if the date is valid according to the format and bounds, otherwise `false`.
@@ -20,7 +20,7 @@ import { ValidateDateService } from "@arkyn/shared";
 function validateDate(
 	date: string,
 	config?: {
-		inputFormat?: "brazilianDate" | "isoDate" | "timestamp";
+		inputFormat?: DateInputFormat;
 		minYear?: number;
 		maxYear?: number;
 	},
@@ -32,26 +32,12 @@ function validateDate(
 	const validateDateService = new ValidateDateService();
 	validateDateService.validateInputFormat(inputFormat);
 
-	let day: number, month: number, year: number;
 	const dateParts = date.split(/[-/]/).map(Number);
 
 	if (dateParts.length !== 3) return false;
 
 	try {
-		switch (inputFormat) {
-			case "brazilianDate":
-				[day, month, year] = dateParts;
-				validateDateService.validateDateParts(year, month, day);
-				break;
-			case "isoDate":
-				[month, day, year] = dateParts;
-				validateDateService.validateDateParts(year, month, day);
-				break;
-			case "timestamp":
-				[year, month, day] = dateParts;
-				validateDateService.validateDateParts(year, month, day);
-				break;
-		}
+		const { year } = validateDateService.parseDateParts(dateParts, inputFormat);
 		if (year < minYear || year > maxYear) return false;
 		return true;
 	} catch {

@@ -1,4 +1,7 @@
-import { ValidateDateService } from "../services/validateDateService";
+import {
+	type DateInputFormat,
+	ValidateDateService,
+} from "../services/validateDateService";
 
 function formatDateString(date: Date, format: string): string {
 	const pad = (num: number) => num.toString().padStart(2, "0");
@@ -27,8 +30,9 @@ function formatDateString(date: Date, format: string): string {
  * @param time - Optional time string `"HH:mm:ss"` (defaults to `"00:00:00"`).
  * @param inputFormat - Parsing format:
  *   - `"brazilianDate"`: DD/MM/YYYY
- *   - `"isoDate"`: MM-DD-YYYY
- *   - `"timestamp"`: YYYY-MM-DD
+ *   - `"usDate"`: MM-DD-YYYY
+ *   - `"isoDate"`: deprecated misnamed alias for `"usDate"` — not actually ISO 8601, kept for backward compatibility
+ *   - `"timestamp"`: YYYY-MM-DD (the actual ISO 8601 date format)
  * @param outputFormat - Output template using `YYYY`, `MM`, `DD`, `hh`, `mm`, `ss` placeholders.
  * @param timezone - UTC offset in hours (e.g. `-3` for UTC-3). Defaults to `0`.
  * @returns The formatted date string.
@@ -45,7 +49,7 @@ function formatDateString(date: Date, format: string): string {
 
 function formatDate(
 	[date, time = "00:00:00"]: string[],
-	inputFormat: "brazilianDate" | "isoDate" | "timestamp",
+	inputFormat: DateInputFormat,
 	outputFormat: string,
 	timezone: number = 0,
 ): string {
@@ -55,23 +59,11 @@ function formatDate(
 	const dateParts = date.split(/[-/]/).map(Number);
 	const timeParts = time.split(".")[0].split(":").map(Number);
 
-	let day: number, month: number, year: number;
 	const [hours = 0, minutes = 0, seconds = 0] = timeParts;
-
-	switch (inputFormat) {
-		case "brazilianDate":
-			[day, month, year] = dateParts;
-			validateDateService.validateDateParts(year, month, day);
-			break;
-		case "isoDate":
-			[month, day, year] = dateParts;
-			validateDateService.validateDateParts(year, month, day);
-			break;
-		case "timestamp":
-			[year, month, day] = dateParts;
-			validateDateService.validateDateParts(year, month, day);
-			break;
-	}
+	const { year, month, day } = validateDateService.parseDateParts(
+		dateParts,
+		inputFormat,
+	);
 
 	const formattedDate = new Date(
 		Date.UTC(year, month - 1, day, hours, minutes, seconds),

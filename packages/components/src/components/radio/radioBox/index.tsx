@@ -79,8 +79,11 @@ function RadioBox(props: RadioBoxProps) {
 
 	return (
 		<label className={className.trim()}>
+			{/* biome-ignore lint/a11y/useSemanticElements: intentional custom control — a native <input type="radio"> can't be styled to match this design; button + role="radio" + aria-checked is the standard accessible pattern for custom radio options. */}
 			<button
 				type="button"
+				role="radio"
+				aria-checked={isChecked}
 				disabled={isDisabled}
 				onClick={handleClick}
 				onFocus={handleFocus}

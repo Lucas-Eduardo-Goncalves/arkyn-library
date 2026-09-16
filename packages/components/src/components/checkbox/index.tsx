@@ -147,9 +147,12 @@ function Checkbox(props: CheckboxProps) {
 			unShowFieldTemplate={unShowFieldTemplate}
 			orientation={orientation}
 		>
+			{/* biome-ignore lint/a11y/useSemanticElements: intentional custom control — a native <input type="checkbox"> can't be styled to match this design; button + role="checkbox" + aria-checked is the standard accessible pattern for custom checkboxes. */}
 			<button
 				id={checkboxId}
 				type="button"
+				role="checkbox"
+				aria-checked={currentChecked}
 				className={className}
 				onClick={handleCheck}
 				{...rest}

@@ -137,6 +137,8 @@ function Switch(props: SwitchProps) {
 		>
 			<button
 				type="button"
+				role="switch"
+				aria-checked={currentChecked}
 				onClick={handleCheck}
 				className={className}
 				{...rest}

@@ -1,7 +1,45 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { BadResponse } from "../../badResponses/_badResponse";
+import { BadRequest } from "../../badResponses/badRequest";
 
 describe("BadResponse", () => {
+	describe("native Error inheritance", () => {
+		it("should be an instance of Error", () => {
+			expect(new BadRequest("x", 1) instanceof Error).toBe(true);
+		});
+
+		it("should be an instance of BadResponse", () => {
+			expect(new BadRequest("x", 1) instanceof BadResponse).toBe(true);
+		});
+
+		it("should expose the message via the native Error.message", () => {
+			const badRequest = new BadRequest("Invalid payload");
+
+			expect(badRequest.message).toBe("Invalid payload");
+			expect(badRequest.statusText).toBe("Invalid payload");
+		});
+
+		it("should set name to the subclass name", () => {
+			const badRequest = new BadRequest("Invalid payload");
+
+			expect(badRequest.name).toBe("BadRequest");
+		});
+
+		it("should expose a native stack trace", () => {
+			const badRequest = new BadRequest("Invalid payload");
+
+			expect(badRequest.stack).toBeDefined();
+			expect(typeof badRequest.stack).toBe("string");
+		});
+
+		it("should default to 'Unknown error' message when constructed without a message", () => {
+			const badResponse = new BadResponse();
+
+			expect(badResponse.message).toBe("Unknown error");
+			expect(badResponse instanceof Error).toBe(true);
+		});
+	});
+
 	describe("constructor and default values", () => {
 		it("should create instance with default values", () => {
 			const badResponse = new BadResponse();

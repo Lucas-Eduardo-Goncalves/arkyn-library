@@ -64,7 +64,7 @@ async function logRequest(config: ConfigProps): Promise<void> {
 	const arkynService = LogService.getConfig();
 	if (!arkynService) return;
 
-	const { userToken, apiUrl, trafficSourceId } = arkynService;
+	const { serviceToken, apiUrl, trafficSourceId } = arkynService;
 
 	// No endpoint was configured (missing, invalid, or rejected as insecure by
 	// `LogService.setConfig`) — never fall back to a hardcoded/default destination.
@@ -119,7 +119,7 @@ async function logRequest(config: ConfigProps): Promise<void> {
 
 		const headers = {
 			"Content-Type": "application/json",
-			Authorization: `Bearer ${userToken}`,
+			Authorization: `Bearer ${serviceToken}`,
 		};
 
 		const fetchResponse = await fetch(apiUrl, {

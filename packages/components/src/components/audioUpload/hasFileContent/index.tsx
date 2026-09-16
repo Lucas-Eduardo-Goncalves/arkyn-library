@@ -16,6 +16,7 @@ type HasFileContentProps = {
 	handleSelectFile: (file: File) => void;
 	reSendAudio?: () => void;
 	changeAudioButtonText: string;
+	resendAudioText: string;
 };
 
 function HasFileContent(props: HasFileContentProps) {
@@ -27,6 +28,7 @@ function HasFileContent(props: HasFileContentProps) {
 		isLoading,
 		reSendAudio,
 		changeAudioButtonText,
+		resendAudioText,
 	} = props;
 
 	function handleClick() {
@@ -52,10 +54,10 @@ function HasFileContent(props: HasFileContentProps) {
 
 			<div className="arkynAudioUploadButtonsContainer">
 				{!!reSendAudio && (
-					<Tooltip orientation="bottom" text="Reenviar áudio">
+					<Tooltip orientation="bottom" text={resendAudioText}>
 						<IconButton
 							type="button"
-							aria-label="resend image"
+							aria-label={resendAudioText}
 							variant="outline"
 							scheme="danger"
 							size="sm"

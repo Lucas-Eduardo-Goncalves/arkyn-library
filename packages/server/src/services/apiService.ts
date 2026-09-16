@@ -16,12 +16,15 @@ type ApiServiceConstructorProps = {
 	baseToken?: string | null;
 	/** When `true`, logs each request and response to the console in development. */
 	enableDebug?: boolean;
+	/** Default request timeout in ms; can be overridden per request via `data.timeoutMs`. */
+	timeoutMs?: number;
 };
 
 type ApiRequestDataWithoutBodyProps = {
 	headers?: HeadersInit;
 	token?: string;
 	urlParams?: Record<string, string>;
+	timeoutMs?: number;
 };
 
 type ApiRequestDataWithBodyProps = {
@@ -30,6 +33,7 @@ type ApiRequestDataWithBodyProps = {
 	headers?: HeadersInit;
 	token?: string;
 	urlParams?: Record<string, string>;
+	timeoutMs?: number;
 };
 
 type DebugConfig = {
@@ -61,12 +65,14 @@ class ApiService {
 	private baseHeaders?: HeadersInit;
 	private baseToken?: string;
 	private enableDebug?: boolean;
+	private timeoutMs?: number;
 
 	constructor(props: ApiServiceConstructorProps) {
 		this.baseUrl = props.baseUrl;
 		this.baseHeaders = props.baseHeaders || undefined;
 		this.baseToken = props.baseToken || undefined;
 		this.enableDebug = props.enableDebug || false;
+		this.timeoutMs = props.timeoutMs;
 	}
 
 	/**
@@ -137,6 +143,7 @@ class ApiService {
 			url: this.baseUrl + endpoint,
 			urlParams: data?.urlParams || {},
 			headers,
+			timeoutMs: data?.timeoutMs ?? this.timeoutMs,
 		});
 
 		this.onDebug(endpoint, "get", {
@@ -164,6 +171,7 @@ class ApiService {
 			urlParams: data?.urlParams || {},
 			headers,
 			body,
+			timeoutMs: data?.timeoutMs ?? this.timeoutMs,
 		});
 
 		this.onDebug(endpoint, "post", {
@@ -192,6 +200,7 @@ class ApiService {
 			urlParams: data?.urlParams || {},
 			headers,
 			body,
+			timeoutMs: data?.timeoutMs ?? this.timeoutMs,
 		});
 
 		this.onDebug(endpoint, "put", {
@@ -220,6 +229,7 @@ class ApiService {
 			urlParams: data?.urlParams || {},
 			headers,
 			body,
+			timeoutMs: data?.timeoutMs ?? this.timeoutMs,
 		});
 
 		this.onDebug(endpoint, "patch", {
@@ -248,6 +258,7 @@ class ApiService {
 			urlParams: data?.urlParams || {},
 			headers,
 			body,
+			timeoutMs: data?.timeoutMs ?? this.timeoutMs,
 		});
 
 		this.onDebug(endpoint, "delete", {

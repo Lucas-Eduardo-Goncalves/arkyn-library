@@ -91,6 +91,23 @@ const brazilianOptions = countries.filter((country) => country.code === "+55");
 
 Used internally by `@arkyn/components`' `PhoneInput` to render the country selector and apply the correct input mask.
 
+> **`flag` is an external CDN URL, not a vendored asset.** Every `flag` value points at
+> [`cdn.kcak11.com/CountryFlags`](https://cdn.kcak11.com/CountryFlags) (e.g.
+> `https://cdn.kcak11.com/CountryFlags/countries/br.svg`) — the 245 SVG flag icons are
+> **not** bundled into this package or `@arkyn/components`. This keeps package size small,
+> but means:
+> - Rendering a flag (e.g. in `PhoneInput`'s country selector) requires the end user's
+>   browser to have network access to that CDN. If it's unreachable — offline, blocked by
+>   a firewall/CSP, or the CDN itself is down — the `<img>` fails to load and the flag is
+>   shown broken/blank; the rest of `PhoneInput` (typing, masking, submission) is
+>   unaffected.
+> - If your app enforces a `Content-Security-Policy`, add `cdn.kcak11.com` to `img-src` (or
+>   `default-src`) or flags won't render.
+> - **Customization:** `PhoneInput` does not currently accept a `countries` prop or a
+>   flag-rendering override — `flag` always comes from this package's `countries` array.
+>   To use different flag assets (e.g. self-hosted, for strict offline/CSP requirements),
+>   fork or post-process `countries` yourself; there's no supported override hook today.
+
 ### 🇧🇷 `brazilianStates`
 
 An array of the 26 Brazilian states plus the Federal District:

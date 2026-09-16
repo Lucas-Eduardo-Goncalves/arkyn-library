@@ -47,7 +47,7 @@ describe("RadioBox", () => {
 		);
 
 		const label = screen.getByText("Male").closest("label");
-		const button = screen.getByRole("button");
+		const button = screen.getByRole("radio");
 
 		expect(label).toBeInTheDocument();
 		expect(label).toContainElement(button);
@@ -63,7 +63,7 @@ describe("RadioBox", () => {
 			</RadioGroup>,
 		);
 
-		expect(screen.getAllByRole("button")).toHaveLength(3);
+		expect(screen.getAllByRole("radio")).toHaveLength(3);
 	});
 
 	it("should be checked when its value matches the group's current value", () => {
@@ -162,7 +162,7 @@ describe("RadioBox", () => {
 			</RadioGroup>,
 		);
 
-		await user.click(screen.getByRole("button"));
+		await user.click(screen.getByRole("radio"));
 
 		expect(handleClick).toHaveBeenCalledTimes(1);
 	});
@@ -178,7 +178,7 @@ describe("RadioBox", () => {
 			</RadioGroup>,
 		);
 
-		screen.getByRole("button").focus();
+		screen.getByRole("radio").focus();
 
 		expect(handleFocus).toHaveBeenCalledTimes(1);
 	});
@@ -231,7 +231,7 @@ describe("RadioBox", () => {
 			</RadioGroup>,
 		);
 
-		const button = screen.getByRole("button");
+		const button = screen.getByRole("radio");
 		button.focus();
 		expect(button).toHaveFocus();
 
@@ -301,7 +301,7 @@ describe("RadioBox", () => {
 			</RadioGroup>,
 		);
 
-		const button = screen.getByRole("button");
+		const button = screen.getByRole("radio");
 		expect(button).toBeDisabled();
 		expect(screen.getByText("Male").closest("label")).toHaveClass(
 			"disabledTrue",
@@ -333,7 +333,7 @@ describe("RadioBox", () => {
 			</RadioGroup>,
 		);
 
-		expect(screen.getByRole("button")).not.toBeDisabled();
+		expect(screen.getByRole("radio")).not.toBeDisabled();
 		expect(screen.getByText("Male").closest("label")).toHaveClass(
 			"disabledFalse",
 		);
@@ -351,7 +351,7 @@ describe("RadioBox", () => {
 			</RadioGroup>,
 		);
 
-		await user.click(screen.getByRole("button"));
+		await user.click(screen.getByRole("radio"));
 
 		expect(handleChange).not.toHaveBeenCalled();
 	});
@@ -366,7 +366,7 @@ describe("RadioBox", () => {
 			</RadioGroup>,
 		);
 
-		await user.click(screen.getByRole("button"));
+		await user.click(screen.getByRole("radio"));
 
 		expect(handleChange).not.toHaveBeenCalled();
 	});
@@ -380,7 +380,7 @@ describe("RadioBox", () => {
 			</RadioGroup>,
 		);
 
-		expect(screen.getByRole("button")).not.toBeDisabled();
+		expect(screen.getByRole("radio")).not.toBeDisabled();
 	});
 
 	it("should preserve the base arkynRadioBox class and merge custom className", () => {
@@ -434,7 +434,7 @@ describe("RadioBox", () => {
 		);
 
 		expect(
-			screen.getByRole("button", { name: "Select male" }),
+			screen.getByRole("radio", { name: "Select male" }),
 		).toBeInTheDocument();
 	});
 
@@ -477,5 +477,93 @@ describe("RadioBox", () => {
 			'input[name="gender"]',
 		) as HTMLInputElement;
 		expect(input.value).toBe("male");
+	});
+
+	describe("accessibility (A11Y-04)", () => {
+		it("should expose role='radio' on each option", () => {
+			render(
+				<RadioGroup name="plan">
+					<RadioBox value="basic">Basic</RadioBox>
+					<RadioBox value="pro">Pro</RadioBox>
+				</RadioGroup>,
+			);
+
+			expect(screen.getAllByRole("radio")).toHaveLength(2);
+		});
+
+		it("should reflect the checked option via aria-checked='true' and others as 'false'", () => {
+			render(
+				<RadioGroup name="plan" value="pro">
+					<RadioBox value="basic">Basic</RadioBox>
+					<RadioBox value="pro">Pro</RadioBox>
+				</RadioGroup>,
+			);
+
+			expect(screen.getByRole("radio", { name: "Basic" })).toHaveAttribute(
+				"aria-checked",
+				"false",
+			);
+			expect(screen.getByRole("radio", { name: "Pro" })).toHaveAttribute(
+				"aria-checked",
+				"true",
+			);
+		});
+
+		it("should update aria-checked when a different option is selected", async () => {
+			const user = userEvent.setup();
+			render(
+				<RadioGroup name="plan">
+					<RadioBox value="basic">Basic</RadioBox>
+					<RadioBox value="pro">Pro</RadioBox>
+				</RadioGroup>,
+			);
+
+			await user.click(screen.getByRole("radio", { name: "Pro" }));
+
+			expect(screen.getByRole("radio", { name: "Basic" })).toHaveAttribute(
+				"aria-checked",
+				"false",
+			);
+			expect(screen.getByRole("radio", { name: "Pro" })).toHaveAttribute(
+				"aria-checked",
+				"true",
+			);
+		});
+
+		it("should expose the disabled state to assistive technology", () => {
+			render(
+				<RadioGroup name="plan" disabled>
+					<RadioBox value="basic">Basic</RadioBox>
+				</RadioGroup>,
+			);
+
+			expect(screen.getByRole("radio")).toBeDisabled();
+		});
+
+		it("should be selectable via the keyboard (Space/Enter via native button semantics)", async () => {
+			const user = userEvent.setup();
+			render(
+				<RadioGroup name="plan">
+					<RadioBox value="basic">Basic</RadioBox>
+				</RadioGroup>,
+			);
+
+			await user.tab();
+			await user.keyboard("{ }");
+
+			expect(screen.getByRole("radio")).toHaveAttribute("aria-checked", "true");
+		});
+
+		it("should give each option an accessible name from its label content", () => {
+			render(
+				<RadioGroup name="plan">
+					<RadioBox value="basic">Basic plan</RadioBox>
+				</RadioGroup>,
+			);
+
+			expect(
+				screen.getByRole("radio", { name: "Basic plan" }),
+			).toBeInTheDocument();
+		});
 	});
 });

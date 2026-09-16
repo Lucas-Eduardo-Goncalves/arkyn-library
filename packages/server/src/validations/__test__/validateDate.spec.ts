@@ -71,6 +71,23 @@ describe("validateDate", () => {
 		});
 	});
 
+	describe("valid usDate format (BUG-05: correctly-named replacement for 'isoDate')", () => {
+		it("should validate a US date (MM-DD-YYYY) identically to 'isoDate'", () => {
+			expect(validateDate("12-31-2023", { inputFormat: "usDate" })).toBe(
+				validateDate("12-31-2023", { inputFormat: "isoDate" }),
+			);
+			expect(validateDate("12-31-2023", { inputFormat: "usDate" })).toBe(true);
+		});
+
+		it("should reject an out-of-range month, proving it isn't parsed as real ISO 8601 (YYYY-MM-DD)", () => {
+			// "2023-01-05" read as usDate (MM-DD-YYYY) means month=2023 — invalid.
+			expect(validateDate("2023-01-05", { inputFormat: "usDate" })).toBe(false);
+			expect(validateDate("2023-01-05", { inputFormat: "timestamp" })).toBe(
+				true,
+			);
+		});
+	});
+
 	describe("valid timestamp format", () => {
 		it("should validate timestamp format", () => {
 			const result = validateDate("2023-12-31", { inputFormat: "timestamp" });

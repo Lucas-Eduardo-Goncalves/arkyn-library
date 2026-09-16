@@ -34,7 +34,7 @@ describe("Conflict", () => {
 			const cause = { field: "email", value: "user@example.com" };
 			const error = new Conflict("Duplicate email", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should not set cause when not provided", () => {
@@ -51,7 +51,7 @@ describe("Conflict", () => {
 			};
 			const error = new Conflict("Multiple conflicts detected", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should call onDebug on instantiation", () => {
@@ -81,7 +81,7 @@ describe("Conflict", () => {
 			expect(body).toEqual({
 				name: "Conflict",
 				message: "Username already taken",
-				cause: JSON.stringify(cause),
+				cause: cause,
 			});
 		});
 	});
@@ -133,7 +133,7 @@ describe("Conflict", () => {
 			const response = error.toResponse();
 			const body = await response.json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should return valid JSON string", async () => {
@@ -185,7 +185,7 @@ describe("Conflict", () => {
 			const response = error.toJson();
 			const body = await response.json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should automatically set Content-Type to application/json", () => {
@@ -211,7 +211,7 @@ describe("Conflict", () => {
 
 			expect(response.status).toBe(409);
 			expect(body.message).toBe("Email already registered");
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should handle duplicate username scenario", async () => {
@@ -241,7 +241,7 @@ describe("Conflict", () => {
 			const body = await response.json();
 
 			expect(response.status).toBe(409);
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should handle concurrent modification", async () => {
@@ -302,7 +302,7 @@ describe("Conflict", () => {
 		it("should handle null cause", () => {
 			const error = new Conflict("Resource conflict", null);
 
-			expect(error.cause).toBeUndefined();
+			expect(error.cause).toBeNull();
 		});
 
 		it("should handle undefined cause explicitly", () => {
@@ -315,7 +315,7 @@ describe("Conflict", () => {
 			const cause = ["field1", "field2", "field3"];
 			const error = new Conflict("Multiple conflicts", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should handle nested object as cause", () => {
@@ -327,7 +327,7 @@ describe("Conflict", () => {
 			};
 			const error = new Conflict("Multiple field conflicts", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should handle special characters in message", () => {
@@ -347,13 +347,13 @@ describe("Conflict", () => {
 		it("should handle boolean as cause", () => {
 			const error = new Conflict("Resource conflict", true);
 
-			expect(error.cause).toBe("true");
+			expect(error.cause).toBe(true);
 		});
 
 		it("should handle number as cause", () => {
 			const error = new Conflict("Resource conflict", 12345);
 
-			expect(error.cause).toBe("12345");
+			expect(error.cause).toBe(12345);
 		});
 	});
 });

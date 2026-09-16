@@ -58,61 +58,61 @@ describe("formatToCpf", () => {
 		it("should throw error for CPF with less than 11 digits", () => {
 			expect(() => {
 				formatToCpf("1234567890");
-			}).toThrow("CPF must be contain 11 numeric digits: 1234567890");
+			}).toThrow("CPF must contain 11 numeric digits: 1234567890");
 		});
 
 		it("should throw error for CPF with more than 11 digits", () => {
 			expect(() => {
 				formatToCpf("123456789012");
-			}).toThrow("CPF must be contain 11 numeric digits: 123456789012");
+			}).toThrow("CPF must contain 11 numeric digits: 123456789012");
 		});
 
 		it("should throw error for empty string", () => {
 			expect(() => {
 				formatToCpf("");
-			}).toThrow("CPF must be contain 11 numeric digits: ");
+			}).toThrow("CPF must contain 11 numeric digits: ");
 		});
 
 		it("should throw error for only special characters", () => {
 			expect(() => {
 				formatToCpf("...---///");
-			}).toThrow("CPF must be contain 11 numeric digits: ...---///");
+			}).toThrow("CPF must contain 11 numeric digits: ...---///");
 		});
 
 		it("should throw error for letters only", () => {
 			expect(() => {
 				formatToCpf("abcdefghijk");
-			}).toThrow("CPF must be contain 11 numeric digits: abcdefghijk");
+			}).toThrow("CPF must contain 11 numeric digits: abcdefghijk");
 		});
 
 		it("should throw error for mixed letters and numbers", () => {
 			expect(() => {
 				formatToCpf("123456abc09");
-			}).toThrow("CPF must be contain 11 numeric digits: 123456abc09");
+			}).toThrow("CPF must contain 11 numeric digits: 123456abc09");
 		});
 
 		it("should throw error for CPF with only 1 digit", () => {
 			expect(() => {
 				formatToCpf("1");
-			}).toThrow("CPF must be contain 11 numeric digits: 1");
+			}).toThrow("CPF must contain 11 numeric digits: 1");
 		});
 
 		it("should throw error for CPF with only 9 digits", () => {
 			expect(() => {
 				formatToCpf("123456789");
-			}).toThrow("CPF must be contain 11 numeric digits: 123456789");
+			}).toThrow("CPF must contain 11 numeric digits: 123456789");
 		});
 
 		it("should throw error for CPF with 10 digits", () => {
 			expect(() => {
 				formatToCpf("1234567890");
-			}).toThrow("CPF must be contain 11 numeric digits: 1234567890");
+			}).toThrow("CPF must contain 11 numeric digits: 1234567890");
 		});
 
 		it("should throw error for CPF with 12 digits", () => {
 			expect(() => {
 				formatToCpf("123456789012");
-			}).toThrow("CPF must be contain 11 numeric digits: 123456789012");
+			}).toThrow("CPF must contain 11 numeric digits: 123456789012");
 		});
 	});
 

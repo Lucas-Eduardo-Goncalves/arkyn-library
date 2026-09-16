@@ -730,6 +730,106 @@ describe("makeRequest", () => {
 		});
 	});
 
+	describe("timeout handling", () => {
+		it("should pass an AbortSignal to fetch", async () => {
+			mockFetch.mockResolvedValue({
+				ok: true,
+				status: 200,
+				statusText: "OK",
+				json: vi.fn().mockResolvedValue({}),
+				headers: new Headers(),
+			});
+
+			await makeRequest({
+				method: "GET",
+				url: "https://api.example.com/data",
+			});
+
+			expect(mockFetch).toHaveBeenCalledWith(
+				expect.any(String),
+				expect.objectContaining({ signal: expect.any(AbortSignal) }),
+			);
+		});
+
+		it("should default to a 10000ms timeout when timeoutMs is not provided", async () => {
+			const setTimeoutSpy = vi.spyOn(global, "setTimeout");
+
+			mockFetch.mockResolvedValue({
+				ok: true,
+				status: 200,
+				statusText: "OK",
+				json: vi.fn().mockResolvedValue({}),
+				headers: new Headers(),
+			});
+
+			await makeRequest({
+				method: "GET",
+				url: "https://api.example.com/data",
+			});
+
+			expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), 10_000);
+
+			setTimeoutSpy.mockRestore();
+		});
+
+		it("should use a custom timeoutMs when provided", async () => {
+			const setTimeoutSpy = vi.spyOn(global, "setTimeout");
+
+			mockFetch.mockResolvedValue({
+				ok: true,
+				status: 200,
+				statusText: "OK",
+				json: vi.fn().mockResolvedValue({}),
+				headers: new Headers(),
+			});
+
+			await makeRequest({
+				method: "GET",
+				url: "https://api.example.com/data",
+				timeoutMs: 5_000,
+			});
+
+			expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), 5_000);
+
+			setTimeoutSpy.mockRestore();
+		});
+
+		it("should return a dedicated 504 response when the request is aborted by the timeout", async () => {
+			mockFetch.mockImplementation((_url, options) => {
+				return new Promise((_resolve, reject) => {
+					options.signal.addEventListener("abort", () => {
+						reject(new DOMException("The operation was aborted", "AbortError"));
+					});
+				});
+			});
+
+			const result = await makeRequest({
+				method: "GET",
+				url: "https://api.example.com/data",
+				timeoutMs: 10,
+			});
+
+			expect(result.success).toBe(false);
+			expect(result.status).toBe(504);
+			expect(result.message).toBe("Request timed out after 10ms");
+			expect(result.response).toBeNull();
+			expect(result.cause).toBeInstanceOf(Error);
+		});
+
+		it("should not treat a regular network error as a timeout", async () => {
+			mockFetch.mockRejectedValue(new Error("Connection refused"));
+
+			const result = await makeRequest({
+				method: "GET",
+				url: "https://api.example.com/data",
+				timeoutMs: 10,
+			});
+
+			expect(result.status).not.toBe(504);
+			expect(result.message).toBe("Network error or request failed");
+		});
+	});
+
 	describe("with urlParams", () => {
 		it("should replace single url param in URL", async () => {
 			mockFetch.mockResolvedValue({

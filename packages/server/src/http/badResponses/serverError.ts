@@ -11,16 +11,16 @@ import { BadResponse } from "./_badResponse";
 class ServerError extends BadResponse {
 	/**
 	 * @param message - Error description.
-	 * @param cause - Optional extra context (serialized to JSON).
+	 * @param cause - Optional extra context.
 	 */
 	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	constructor(message: string, cause?: any) {
-		super();
+		super(message);
 
 		this.name = "ServerError";
 		this.status = 500;
 		this.statusText = message;
-		this.cause = cause ? JSON.stringify(cause) : undefined;
+		this.cause = cause;
 
 		this.onDebug();
 	}

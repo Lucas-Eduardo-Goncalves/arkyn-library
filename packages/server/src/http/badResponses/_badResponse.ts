@@ -3,7 +3,7 @@ import { formatJsonString } from "@arkyn/shared";
 import { DebugService } from "../../services/debugService";
 import { flushDebugLogs } from "../../utilities/flushDebugLogs";
 
-class BadResponse {
+class BadResponse extends Error {
 	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	private _cause?: any;
 	private _name: string = "BadResponse";
@@ -17,6 +17,15 @@ class BadResponse {
 	 * set this to `true`.
 	 */
 	protected exposeCauseInProduction = false;
+
+	constructor(message?: string) {
+		super(message || "Unknown error");
+
+		this.name = "BadResponse";
+		if (message) this._statusText = message;
+
+		Error.captureStackTrace?.(this, this.constructor);
+	}
 
 	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	get cause(): any {

@@ -26,6 +26,12 @@ type AudioUploadProps = {
 	selectAudioButtonText?: string;
 	/** Label for the file-picker button after a file is selected. @default "Trocar arquivo de áudio" */
 	changeAudioButtonText?: string;
+	/** Tooltip/label for the resend button shown after a failed upload. @default "Reenviar áudio" */
+	resendAudioText?: string;
+	/** Error message shown when the selected file isn't an audio file. @default "O arquivo selecionado não é um arquivo de áudio" */
+	invalidFileTypeText?: string;
+	/** Error message shown when the upload request fails. @default "Erro ao enviar áudio" */
+	uploadErrorText?: string;
 	/** Callback fired after a successful upload. Receives the URL returned by the server. */
 	onChange?: (url?: string) => void;
 	/** Property name in the server response that contains the file URL. @default "url" */
@@ -58,6 +64,9 @@ type AudioUploadProps = {
  * @param props.showAsterisk - Appends `*` to the label. Default: false
  * @param props.disabled - Disables file selection and upload. Default: false
  * @param props.defaultValue - Pre-populated audio URL.
+ * @param props.resendAudioText - Resend button tooltip after a failed upload. Default: "Reenviar áudio"
+ * @param props.invalidFileTypeText - Error shown for a non-audio file. Default: "O arquivo selecionado não é um arquivo de áudio"
+ * @param props.uploadErrorText - Error shown when the upload request fails. Default: "Erro ao enviar áudio"
  *
  * @returns AudioUpload JSX element wrapped in `FieldWrapper`.
  *
@@ -89,6 +98,9 @@ function AudioUpload(props: AudioUploadProps) {
 		selectAudioButtonText = "Selecionar arquivo de áudio",
 		dropAudioText = "Ou arraste e solte um arquivo de áudio aqui",
 		changeAudioButtonText = "Trocar arquivo de áudio",
+		resendAudioText = "Reenviar áudio",
+		invalidFileTypeText = "O arquivo selecionado não é um arquivo de áudio",
+		uploadErrorText = "Erro ao enviar áudio",
 		acceptAudio = "audio/*",
 		action,
 		defaultValue = "",
@@ -124,7 +136,7 @@ function AudioUpload(props: AudioUploadProps) {
 			})
 			.catch((error) => {
 				console.error(error);
-				setError("Erro ao enviar audio");
+				setError(uploadErrorText);
 			})
 			.finally(() => setIsLoading(false));
 	}
@@ -133,7 +145,7 @@ function AudioUpload(props: AudioUploadProps) {
 		if (disabled) return;
 
 		if (file.type.indexOf("audio") === -1) {
-			setError("O arquivo selecionado não é um arquivo de áudio");
+			setError(invalidFileTypeText);
 			return;
 		}
 
@@ -170,6 +182,7 @@ function AudioUpload(props: AudioUploadProps) {
 						filePath={filePath}
 						acceptAudio={acceptAudio}
 						changeAudioButtonText={changeAudioButtonText}
+						resendAudioText={resendAudioText}
 						disabled={disabled}
 						handleSelectFile={handleSelectFile}
 						isLoading={isLoading}

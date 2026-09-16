@@ -2,6 +2,8 @@ import { flushDebugLogs } from "../..";
 import { LogMapperService } from "./_logMapperService";
 import { logRequest } from "./_logRequest";
 
+const DEFAULT_TIMEOUT_MS = 10_000;
+
 type InputProps = {
 	url: string;
 	method: "POST" | "PUT" | "DELETE" | "PATCH" | "GET";
@@ -9,6 +11,8 @@ type InputProps = {
 	headers?: HeadersInit;
 	// biome-ignore lint/suspicious/noExplicitAny: intentional
 	body?: any;
+	/** Aborts the request after this many milliseconds. Defaults to 10,000ms. */
+	timeoutMs?: number;
 };
 
 // biome-ignore lint/suspicious/noExplicitAny: intentional
@@ -89,15 +93,25 @@ async function makeRequest<T = any>(
 		GET: "Request successful",
 	};
 
+	const timeoutMs = input.timeoutMs ?? DEFAULT_TIMEOUT_MS;
+	const controller = new AbortController();
+	const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
 	try {
 		const startTime = performance.now();
 
 		const headers = { ...input.headers, "Content-Type": "application/json" };
-		const response = await fetch(url, {
-			headers,
-			method: input.method,
-			body: input.body ? JSON.stringify(input.body) : undefined,
-		});
+		let response: Response;
+		try {
+			response = await fetch(url, {
+				headers,
+				method: input.method,
+				body: input.body ? JSON.stringify(input.body) : undefined,
+				signal: controller.signal,
+			});
+		} finally {
+			clearTimeout(timeoutId);
+		}
 
 		const elapsedTime = performance.now() - startTime;
 		const status = response.status;
@@ -143,6 +157,28 @@ async function makeRequest<T = any>(
 			cause: null,
 		};
 	} catch (err) {
+		clearTimeout(timeoutId);
+
+		const isAbortError =
+			(err instanceof DOMException && err.name === "AbortError") ||
+			(err instanceof Error && err.name === "AbortError");
+
+		if (isAbortError) {
+			flushDebugLogs({
+				debugs: [`Request timed out after ${timeoutMs}ms`],
+				name: "MakeRequestError",
+				scheme: "red",
+			});
+
+			return {
+				success: false,
+				status: 504,
+				message: `Request timed out after ${timeoutMs}ms`,
+				response: null,
+				cause: err instanceof Error ? err : new Error(String(err)),
+			};
+		}
+
 		flushDebugLogs({
 			debugs: [`Network error or request failed: ${err}`],
 			name: "MakeRequestError",

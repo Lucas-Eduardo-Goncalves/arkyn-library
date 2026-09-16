@@ -23,7 +23,7 @@ function formatToCpf(value: string): string {
 	const cleaned = removeNonNumeric(value);
 	const match = cleaned.match(/^(\d{3})(\d{3})(\d{3})(\d{2})$/);
 
-	const errorMessage = `CPF must be contain 11 numeric digits: ${value}`;
+	const errorMessage = `CPF must contain 11 numeric digits: ${value}`;
 	if (!match) throw new Error(errorMessage);
 
 	return `${match[1]}.${match[2]}.${match[3]}-${match[4]}`;

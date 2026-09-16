@@ -72,6 +72,30 @@ describe("parseToDate", () => {
 		});
 	});
 
+	describe("usDate format (BUG-05: correctly-named replacement for 'isoDate')", () => {
+		it("should parse a US date (MM-DD-YYYY) to Date object identically to 'isoDate'", () => {
+			const usDateResult = parseToDate(["12-25-2023", "15:30:00"], "usDate");
+			const isoDateResult = parseToDate(["12-25-2023", "15:30:00"], "isoDate");
+
+			expect(usDateResult).toEqual(isoDateResult);
+			expect(usDateResult.getUTCFullYear()).toBe(2023);
+			expect(usDateResult.getUTCMonth()).toBe(11);
+			expect(usDateResult.getUTCDate()).toBe(25);
+		});
+
+		it("should not be confused with real ISO 8601 order (YYYY-MM-DD, i.e. 'timestamp')", () => {
+			// "2023-01-05" as usDate means month=2023 (invalid) if misread as
+			// YYYY-MM-DD; parsed correctly as MM-DD-YYYY it's an invalid month too,
+			// so use an unambiguous case: 01-05-2023 (usDate) !== 2023-01-05 (timestamp).
+			const usDateResult = parseToDate(["01-05-2023"], "usDate");
+			const timestampResult = parseToDate(["2023-01-05"], "timestamp");
+
+			expect(usDateResult).toEqual(timestampResult);
+			expect(usDateResult.getUTCMonth()).toBe(0); // January
+			expect(usDateResult.getUTCDate()).toBe(5);
+		});
+	});
+
 	describe("timezone adjustments", () => {
 		it("should apply positive timezone offset", () => {
 			const result = parseToDate(

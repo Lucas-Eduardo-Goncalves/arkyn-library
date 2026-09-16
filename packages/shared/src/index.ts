@@ -22,7 +22,10 @@ export { parseSensitiveData } from "./parsers/parseSensitiveData";
 export { parseToDate } from "./parsers/parseToDate";
 
 // services
-export { ValidateDateService } from "./services/validateDateService";
+export {
+	type DateInputFormat,
+	ValidateDateService,
+} from "./services/validateDateService";
 
 // utilities
 export { calculateCardInstallment } from "./utilities/calculateCardInstallment";

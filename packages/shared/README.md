@@ -166,7 +166,9 @@ formatToCpf("12345678909"); // "123.456.789-09"
 
 #### formatToCurrency
 
-Formats a number into a locale-aware currency string using `Intl.NumberFormat`, based on a currency code from `@arkyn/templates`. Set `config.showPrefix` to `false` to omit the currency symbol. Throws `Error` for unsupported currency codes.
+Formats a number into a locale-aware currency string using `Intl.NumberFormat`, based on a currency code from `@arkyn/templates`. Set `config.showPrefix` to `false` to omit the currency symbol. Throws `Error` (naming the invalid code and listing the supported ones) for unsupported currency codes.
+
+Supported codes (22): `USD`, `EUR`, `JPY`, `GBP`, `AUD`, `CAD`, `CHF`, `CNY`, `SEK`, `NZD`, `BRL`, `INR`, `RUB`, `ZAR`, `MXN`, `SGD`, `HKD`, `NOK`, `KRW`, `TRY`, `IDR`, `THB` — see [`countryCurrencies`](../templates/src/countryCurrencies.ts) in `@arkyn/templates` for the authoritative list.
 
 ```typescript
 import { formatToCurrency } from "@arkyn/shared";

@@ -34,7 +34,7 @@ describe("NotImplemented", () => {
 			const cause = { feature: "export-pdf", expectedVersion: "2.0" };
 			const error = new NotImplemented("PDF export not implemented", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should not set cause when not provided", () => {
@@ -51,7 +51,7 @@ describe("NotImplemented", () => {
 			};
 			const error = new NotImplemented("Advanced search not available", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should call onDebug on instantiation", () => {
@@ -81,7 +81,7 @@ describe("NotImplemented", () => {
 			expect(body).toEqual({
 				name: "NotImplemented",
 				message: "Bulk delete not implemented",
-				cause: JSON.stringify(cause),
+				cause: cause,
 			});
 		});
 	});
@@ -133,7 +133,7 @@ describe("NotImplemented", () => {
 			const response = error.toResponse();
 			const body = await response.json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should return valid JSON string", async () => {
@@ -185,7 +185,7 @@ describe("NotImplemented", () => {
 			const response = error.toJson();
 			const body = await response.json();
 
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should automatically set Content-Type to application/json", () => {
@@ -210,7 +210,7 @@ describe("NotImplemented", () => {
 
 			expect(response.status).toBe(501);
 			expect(body.message).toBe("API version not available");
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should handle unimplemented HTTP method", async () => {
@@ -239,7 +239,7 @@ describe("NotImplemented", () => {
 			const body = await response.json();
 
 			expect(response.status).toBe(501);
-			expect(body.cause).toBe(JSON.stringify(cause));
+			expect(body.cause).toEqual(cause);
 		});
 
 		it("should handle deprecated endpoint replacement", async () => {
@@ -329,7 +329,7 @@ describe("NotImplemented", () => {
 		it("should handle null cause", () => {
 			const error = new NotImplemented("Feature not implemented", null);
 
-			expect(error.cause).toBeUndefined();
+			expect(error.cause).toBeNull();
 		});
 
 		it("should handle undefined cause explicitly", () => {
@@ -345,7 +345,7 @@ describe("NotImplemented", () => {
 				cause,
 			);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should handle nested object as cause", () => {
@@ -361,7 +361,7 @@ describe("NotImplemented", () => {
 			};
 			const error = new NotImplemented("Feature roadmap", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 
 		it("should handle special characters in message", () => {
@@ -381,26 +381,26 @@ describe("NotImplemented", () => {
 		it("should handle number as cause", () => {
 			const error = new NotImplemented("Feature not implemented", 501);
 
-			expect(error.cause).toBe("501");
+			expect(error.cause).toBe(501);
 		});
 
 		it("should handle empty object as cause", () => {
 			const error = new NotImplemented("Feature not implemented", {});
 
-			expect(error.cause).toBe("{}");
+			expect(error.cause).toEqual({});
 		});
 
 		it("should handle empty array as cause", () => {
 			const error = new NotImplemented("Feature not implemented", []);
 
-			expect(error.cause).toBe("[]");
+			expect(error.cause).toEqual([]);
 		});
 
 		it("should handle date object as cause", () => {
 			const cause = { plannedDate: new Date("2026-06-01").toISOString() };
 			const error = new NotImplemented("Feature coming soon", cause);
 
-			expect(error.cause).toBe(JSON.stringify(cause));
+			expect(error.cause).toEqual(cause);
 		});
 	});
 });

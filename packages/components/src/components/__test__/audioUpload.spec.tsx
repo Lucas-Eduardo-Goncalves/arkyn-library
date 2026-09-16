@@ -387,7 +387,7 @@ describe("AudioUpload", () => {
 		await selectFile("Selecionar arquivo de áudio", file);
 
 		await waitFor(() =>
-			expect(screen.getByText("Erro ao enviar audio")).toBeInTheDocument(),
+			expect(screen.getByText("Erro ao enviar áudio")).toBeInTheDocument(),
 		);
 
 		consoleErrorSpy.mockRestore();
@@ -411,7 +411,7 @@ describe("AudioUpload", () => {
 		await waitFor(() => expect(screen.getByText("Falhou")).toBeInTheDocument());
 
 		const resendButton = screen.getByRole("button", {
-			name: "resend image",
+			name: "Reenviar áudio",
 		});
 		expect(resendButton).toBeInTheDocument();
 
@@ -432,7 +432,7 @@ describe("AudioUpload", () => {
 
 		await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
 		expect(
-			screen.queryByRole("button", { name: "resend image" }),
+			screen.queryByRole("button", { name: "Reenviar áudio" }),
 		).not.toBeInTheDocument();
 	});
 
@@ -618,5 +618,82 @@ describe("AudioUpload", () => {
 		expect(
 			within(section as HTMLElement).getByText("Audio"),
 		).toBeInTheDocument();
+	});
+
+	describe("customizable text props (DX-07)", () => {
+		it("should use a custom invalidFileTypeText instead of the pt-BR default", async () => {
+			render(
+				<AudioUpload
+					name="audio"
+					action="/api/upload"
+					invalidFileTypeText="Not an audio file"
+				/>,
+			);
+
+			const notAudioFile = new File(["x"], "doc.txt", { type: "text/plain" });
+			await selectFile("Selecionar arquivo de áudio", notAudioFile);
+
+			expect(screen.getByText("Not an audio file")).toBeInTheDocument();
+			expect(
+				screen.queryByText("O arquivo selecionado não é um arquivo de áudio"),
+			).not.toBeInTheDocument();
+		});
+
+		it("should use a custom uploadErrorText instead of the pt-BR default", async () => {
+			const consoleErrorSpy = vi
+				.spyOn(console, "error")
+				.mockImplementation(() => {});
+			global.fetch = vi.fn().mockRejectedValue(new Error("Network error"));
+
+			render(
+				<AudioUpload
+					name="audio"
+					action="/api/upload"
+					uploadErrorText="Upload failed"
+				/>,
+			);
+
+			const file = createAudioFile();
+			await selectFile("Selecionar arquivo de áudio", file);
+
+			await waitFor(() =>
+				expect(screen.getByText("Upload failed")).toBeInTheDocument(),
+			);
+
+			consoleErrorSpy.mockRestore();
+		});
+
+		it("should use a custom resendAudioText for the resend button label", async () => {
+			global.fetch = vi
+				.fn()
+				.mockResolvedValueOnce({
+					json: () => Promise.resolve({ error: "Falhou" }),
+				})
+				.mockResolvedValueOnce({
+					json: () => Promise.resolve({ url: "https://cdn.test/retry.mp3" }),
+				});
+
+			render(
+				<AudioUpload
+					name="audio"
+					action="/api/upload"
+					resendAudioText="Try again"
+				/>,
+			);
+
+			const file = createAudioFile();
+			await selectFile("Selecionar arquivo de áudio", file);
+
+			await waitFor(() =>
+				expect(screen.getByText("Falhou")).toBeInTheDocument(),
+			);
+
+			expect(
+				screen.getByRole("button", { name: "Try again" }),
+			).toBeInTheDocument();
+			expect(
+				screen.queryByRole("button", { name: "Reenviar áudio" }),
+			).not.toBeInTheDocument();
+		});
 	});
 });

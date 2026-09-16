@@ -305,4 +305,31 @@ describe("AudioPlayer", () => {
 
 		expect(screen.getByRole("button")).toHaveAttribute("type", "button");
 	});
+
+	describe("seek slider accessibility (A11Y-05)", () => {
+		it("should expose the progress bar as a slider with aria-value*", () => {
+			render(<AudioPlayer src="/audio/episode.mp3" />);
+
+			const slider = screen.getByRole("slider");
+			expect(slider).toHaveAttribute("aria-valuemin", "0");
+			expect(slider).toHaveAttribute("aria-valuemax", "100");
+			expect(slider).toHaveAttribute("aria-valuenow");
+		});
+
+		it("should be keyboard-focusable when not disabled", async () => {
+			const user = userEvent.setup();
+			render(<AudioPlayer src="/audio/episode.mp3" />);
+
+			await user.tab(); // play/pause button
+			await user.tab(); // slider
+
+			expect(screen.getByRole("slider")).toHaveFocus();
+		});
+
+		it("should not be keyboard-focusable when disabled", () => {
+			render(<AudioPlayer src="/audio/episode.mp3" disabled />);
+
+			expect(screen.getByRole("slider")).toHaveAttribute("tabindex", "-1");
+		});
+	});
 });

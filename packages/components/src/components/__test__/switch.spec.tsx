@@ -611,7 +611,7 @@ describe("Switch", () => {
 			render(<Switch name="notifications" aria-label="Enable notifications" />);
 
 			expect(
-				screen.getByRole("button", { name: "Enable notifications" }),
+				screen.getByRole("switch", { name: "Enable notifications" }),
 			).toBeInTheDocument();
 		});
 
@@ -653,6 +653,57 @@ describe("Switch", () => {
 			const label = screen.getByText("Enable");
 			const wrapper = label.closest("section") as HTMLElement;
 			expect(wrapper).toHaveAttribute("id", "notifications");
+		});
+
+		it("should expose role='switch' by default, with no consumer override needed (A11Y-04)", () => {
+			render(<Switch name="notifications" />);
+
+			expect(screen.getByRole("switch")).toBeInTheDocument();
+		});
+
+		it("should reflect unchecked via aria-checked='false' by default", () => {
+			render(<Switch name="notifications" />);
+			expect(screen.getByRole("switch")).toHaveAttribute(
+				"aria-checked",
+				"false",
+			);
+		});
+
+		it("should reflect checked via aria-checked='true' when defaultChecked is set", () => {
+			render(<Switch name="notifications" defaultChecked />);
+			expect(screen.getByRole("switch")).toHaveAttribute(
+				"aria-checked",
+				"true",
+			);
+		});
+
+		it("should update aria-checked on toggle without any extra aria props from the consumer", async () => {
+			const user = userEvent.setup();
+			render(<Switch name="notifications" />);
+
+			const toggle = screen.getByRole("switch");
+			await user.click(toggle);
+
+			expect(toggle).toHaveAttribute("aria-checked", "true");
+		});
+
+		it("should be toggleable with the keyboard (Space/Enter via native button semantics)", async () => {
+			const user = userEvent.setup();
+			render(<Switch name="notifications" />);
+
+			await user.tab();
+			await user.keyboard("{ }");
+
+			expect(screen.getByRole("switch")).toHaveAttribute(
+				"aria-checked",
+				"true",
+			);
+		});
+
+		it("should expose the disabled state to assistive technology", () => {
+			render(<Switch name="notifications" disabled />);
+
+			expect(screen.getByRole("switch")).toBeDisabled();
 		});
 	});
 
