@@ -24,7 +24,7 @@
 		"@arkyn/ui": "workspace:*",
 		"@biomejs/biome": "^2.5.13",
 		"@types/bun": "^1.4.2",
-		"@types/node": "^22.20.3",
+		"@types/node": "^26.6.1",
 		"concurrently": "^10.0.5"
 	},
 	"overrides": {
