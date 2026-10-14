@@ -58,7 +58,6 @@ const PhoneInputMask = forwardRef<HTMLInputElement, PhoneInputMaskProps>(
 			id,
 		} = props;
 
-		const isFirstRender = useRef(true);
 		const onChangeRef = useRef(onChange);
 		onChangeRef.current = onChange;
 
@@ -67,11 +66,13 @@ const PhoneInputMask = forwardRef<HTMLInputElement, PhoneInputMaskProps>(
 				? currentCountry.mask
 				: currentCountry.mask[0];
 
+		// Compare against the previous mask instead of skipping the first run:
+		// StrictMode re-runs mount effects in dev, which would wipe the defaultValue.
+		const previousMask = useRef(mask);
+
 		useEffect(() => {
-			if (isFirstRender.current) {
-				isFirstRender.current = false;
-				return;
-			}
+			if (previousMask.current === mask) return;
+			previousMask.current = mask;
 			onChangeRef.current(mask);
 		}, [mask]);
 

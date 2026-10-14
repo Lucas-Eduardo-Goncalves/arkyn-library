@@ -7,7 +7,12 @@ export default function PhoneInputRoute() {
 	return (
 		<>
 			<div className="exampleContainer row foreground">
-				<PhoneInput name="phone1" variant="solid" label="Solid:" />
+				<PhoneInput
+					name="phone1"
+					variant="solid"
+					label="Solid:"
+					defaultValue="+5532998047162"
+				/>
 				<PhoneInput name="phone2" variant="outline" label="Outline:" />
 			</div>
 

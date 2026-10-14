@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { useState } from "react";
+import { StrictMode, useState } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { FormProvider } from "../../providers/formProvider";
@@ -99,6 +99,59 @@ describe("PhoneInput", () => {
 
 			const input = screen.getByRole("textbox") as HTMLInputElement;
 			expect(input.value).toBe("(34) 99999-8888");
+		});
+
+		it("should keep the defaultValue on mount under StrictMode", () => {
+			const onChange = vi.fn();
+			const { container } = render(
+				<StrictMode>
+					<PhoneInput
+						name="phone"
+						defaultValue="+5534999998888"
+						onChange={onChange}
+					/>
+				</StrictMode>,
+			);
+
+			const input = screen.getByRole("textbox") as HTMLInputElement;
+			const hiddenInput = container.querySelector(
+				'input[type="hidden"]',
+			) as HTMLInputElement;
+			expect(input.value).toBe("(34) 99999-8888");
+			expect(hiddenInput.value).toBe("+5534999998888");
+			expect(onChange).not.toHaveBeenCalled();
+		});
+
+		it("should still reset the value when the country changes under StrictMode", async () => {
+			const user = userEvent.setup();
+			const onChange = vi.fn();
+			const { container } = render(
+				<StrictMode>
+					<PhoneInput
+						name="phone"
+						defaultValue="+5534999998888"
+						onChange={onChange}
+					/>
+				</StrictMode>,
+			);
+
+			const selector = container.querySelector(
+				".phoneInputSelectCountry",
+			) as HTMLElement;
+			await user.click(selector);
+			await user.type(
+				screen.getByPlaceholderText("Pesquisar país"),
+				"United States",
+			);
+			await user.click(
+				container.querySelector(".arkynPhoneInputCountryOption") as HTMLElement,
+			);
+
+			const hiddenInput = container.querySelector(
+				'input[type="hidden"]',
+			) as HTMLInputElement;
+			expect(hiddenInput.value).toBe("+1");
+			expect(onChange).toHaveBeenLastCalledWith("+1");
 		});
 
 		it("should not exceed the maximum allowed digit length", async () => {
